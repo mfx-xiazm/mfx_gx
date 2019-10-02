@@ -8,6 +8,29 @@
 
 /* Begin PBXBuildFile section */
 		11AF349C58F7A342E9336E28 /* libPods-GX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E67F6C2F7D067769D4BA925 /* libPods-GX.a */; };
+		90067ECF2344356700628503 /* GXRegisterAuthVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 90067ECD2344356700628503 /* GXRegisterAuthVC.m */; };
+		90067ED02344356700628503 /* GXRegisterAuthVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90067ECE2344356700628503 /* GXRegisterAuthVC.xib */; };
+		90067ED3234435E300628503 /* GXRegisterAuthHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 90067ED2234435E300628503 /* GXRegisterAuthHeader.m */; };
+		90067ED5234435E900628503 /* GXRegisterAuthHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90067ED4234435E900628503 /* GXRegisterAuthHeader.xib */; };
+		90067ED923443A1300628503 /* GXRegisterAuthCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 90067ED723443A1300628503 /* GXRegisterAuthCell.m */; };
+		90067EDA23443A1300628503 /* GXRegisterAuthCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90067ED823443A1300628503 /* GXRegisterAuthCell.xib */; };
+		90067EDD23443ED900628503 /* GXRegisterAuthFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 90067EDC23443ED900628503 /* GXRegisterAuthFooter.m */; };
+		90067EDF23443EDF00628503 /* GXRegisterAuthFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90067EDE23443EDF00628503 /* GXRegisterAuthFooter.xib */; };
+		9069739B23444E8600D8A8FF /* SPPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9069739A23444E8600D8A8FF /* SPPickerView.m */; };
+		9069739E2344501100D8A8FF /* SPPageMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 9069739C2344501100D8A8FF /* SPPageMenu.m */; };
+		906973A12344504A00D8A8FF /* GXChooseAddressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 906973A02344504A00D8A8FF /* GXChooseAddressView.m */; };
+		906973AA234450C500D8A8FF /* SPDistrict.m in Sources */ = {isa = PBXBuildFile; fileRef = 906973A3234450C400D8A8FF /* SPDistrict.m */; };
+		906973AB234450C500D8A8FF /* SPLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 906973A4234450C400D8A8FF /* SPLocation.m */; };
+		906973AC234450C500D8A8FF /* SPCity.m in Sources */ = {isa = PBXBuildFile; fileRef = 906973A8234450C500D8A8FF /* SPCity.m */; };
+		906973AD234450C500D8A8FF /* SPProvince.m in Sources */ = {isa = PBXBuildFile; fileRef = 906973A9234450C500D8A8FF /* SPProvince.m */; };
+		906973B1234450F500D8A8FF /* GXAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 906973AF234450F500D8A8FF /* GXAddressCell.m */; };
+		906973B2234450F500D8A8FF /* GXAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 906973B0234450F500D8A8FF /* GXAddressCell.xib */; };
+		906973B42344525B00D8A8FF /* pcd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 906973B32344525A00D8A8FF /* pcd.plist */; };
+		906973B62344543B00D8A8FF /* GXChooseAddressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 906973B52344543B00D8A8FF /* GXChooseAddressView.xib */; };
+		907F2F8A234441D20067D16A /* GXRunCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 907F2F89234441D20067D16A /* GXRunCategoryView.m */; };
+		907F2F8C234441D80067D16A /* GXRunCategoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 907F2F8B234441D80067D16A /* GXRunCategoryView.xib */; };
+		907F2F90234443A80067D16A /* GXRunCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 907F2F8E234443A80067D16A /* GXRunCategoryCell.m */; };
+		907F2F91234443A80067D16A /* GXRunCategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 907F2F8F234443A80067D16A /* GXRunCategoryCell.xib */; };
 		90C0B2D22340B74900A8C55B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C0B2D12340B74900A8C55B /* AppDelegate.m */; };
 		90C0B2DA2340B74B00A8C55B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90C0B2D92340B74B00A8C55B /* Assets.xcassets */; };
 		90C0B2DD2340B74B00A8C55B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90C0B2DB2340B74B00A8C55B /* LaunchScreen.storyboard */; };
@@ -73,9 +96,6 @@
 		90C0B4342340D27200A8C55B /* HXTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C0B3F72340D27200A8C55B /* HXTabBarController.m */; };
 		90C0B4352340D27200A8C55B /* HXGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C0B3F82340D27200A8C55B /* HXGuideViewController.m */; };
 		90C0B4362340D27200A8C55B /* HXNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C0B3FA2340D27200A8C55B /* HXNavigationController.m */; };
-		90C0B4372340D27200A8C55B /* RCNavBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C0B3FF2340D27200A8C55B /* RCNavBarView.m */; };
-		90C0B4382340D27200A8C55B /* RCTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C0B4002340D27200A8C55B /* RCTabBar.m */; };
-		90C0B4392340D27200A8C55B /* RCNavBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90C0B4022340D27200A8C55B /* RCNavBarView.xib */; };
 		90C0B43D2340D9EF00A8C55B /* RCFilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C0B43B2340D9EE00A8C55B /* RCFilterCell.m */; };
 		90C0B43E2340D9EF00A8C55B /* RCFilterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90C0B43C2340D9EE00A8C55B /* RCFilterCell.xib */; };
 		90C0B4422340DA2F00A8C55B /* GXHomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C0B4402340DA2F00A8C55B /* GXHomeVC.m */; };
@@ -90,6 +110,12 @@
 		90C0B4572340DA9500A8C55B /* GXMyVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90C0B4552340DA9500A8C55B /* GXMyVC.xib */; };
 		90C0B45D2340DD1300A8C55B /* AppDelegate+MSAppService.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C0B45B2340DD1300A8C55B /* AppDelegate+MSAppService.m */; };
 		90C0B45E2340DD1300A8C55B /* AppDelegate+MSPushService.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C0B45C2340DD1300A8C55B /* AppDelegate+MSPushService.m */; };
+		90E7C8FD23418E1000D46E19 /* GXLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 90E7C8FB23418E1000D46E19 /* GXLoginVC.m */; };
+		90E7C8FE23418E1000D46E19 /* GXLoginVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90E7C8FC23418E1000D46E19 /* GXLoginVC.xib */; };
+		90E7C9022341934100D46E19 /* GXChangePwdVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 90E7C9002341934100D46E19 /* GXChangePwdVC.m */; };
+		90E7C9032341934100D46E19 /* GXChangePwdVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90E7C9012341934100D46E19 /* GXChangePwdVC.xib */; };
+		90E7C9072341A7EF00D46E19 /* GXRegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 90E7C9052341A7EF00D46E19 /* GXRegisterVC.m */; };
+		90E7C9082341A7EF00D46E19 /* GXRegisterVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90E7C9062341A7EF00D46E19 /* GXRegisterVC.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +139,43 @@
 		1330E51C61ADF8FC1AE77408 /* Pods-GX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GX.debug.xcconfig"; path = "Target Support Files/Pods-GX/Pods-GX.debug.xcconfig"; sourceTree = "<group>"; };
 		2975184EF33AC041D33915E0 /* Pods-GX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GX.release.xcconfig"; path = "Target Support Files/Pods-GX/Pods-GX.release.xcconfig"; sourceTree = "<group>"; };
 		7E67F6C2F7D067769D4BA925 /* libPods-GX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		90067ECC2344356700628503 /* GXRegisterAuthVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXRegisterAuthVC.h; sourceTree = "<group>"; };
+		90067ECD2344356700628503 /* GXRegisterAuthVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXRegisterAuthVC.m; sourceTree = "<group>"; };
+		90067ECE2344356700628503 /* GXRegisterAuthVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXRegisterAuthVC.xib; sourceTree = "<group>"; };
+		90067ED1234435E300628503 /* GXRegisterAuthHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXRegisterAuthHeader.h; sourceTree = "<group>"; };
+		90067ED2234435E300628503 /* GXRegisterAuthHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXRegisterAuthHeader.m; sourceTree = "<group>"; };
+		90067ED4234435E900628503 /* GXRegisterAuthHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXRegisterAuthHeader.xib; sourceTree = "<group>"; };
+		90067ED623443A1300628503 /* GXRegisterAuthCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXRegisterAuthCell.h; sourceTree = "<group>"; };
+		90067ED723443A1300628503 /* GXRegisterAuthCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXRegisterAuthCell.m; sourceTree = "<group>"; };
+		90067ED823443A1300628503 /* GXRegisterAuthCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXRegisterAuthCell.xib; sourceTree = "<group>"; };
+		90067EDB23443ED900628503 /* GXRegisterAuthFooter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXRegisterAuthFooter.h; sourceTree = "<group>"; };
+		90067EDC23443ED900628503 /* GXRegisterAuthFooter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXRegisterAuthFooter.m; sourceTree = "<group>"; };
+		90067EDE23443EDF00628503 /* GXRegisterAuthFooter.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXRegisterAuthFooter.xib; sourceTree = "<group>"; };
+		9069739923444E8600D8A8FF /* SPPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPPickerView.h; sourceTree = "<group>"; };
+		9069739A23444E8600D8A8FF /* SPPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPPickerView.m; sourceTree = "<group>"; };
+		9069739C2344501100D8A8FF /* SPPageMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPPageMenu.m; sourceTree = "<group>"; };
+		9069739D2344501100D8A8FF /* SPPageMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPPageMenu.h; sourceTree = "<group>"; };
+		9069739F2344504A00D8A8FF /* GXChooseAddressView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXChooseAddressView.h; sourceTree = "<group>"; };
+		906973A02344504A00D8A8FF /* GXChooseAddressView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXChooseAddressView.m; sourceTree = "<group>"; };
+		906973A2234450C300D8A8FF /* SPLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPLocation.h; sourceTree = "<group>"; };
+		906973A3234450C400D8A8FF /* SPDistrict.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPDistrict.m; sourceTree = "<group>"; };
+		906973A4234450C400D8A8FF /* SPLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPLocation.m; sourceTree = "<group>"; };
+		906973A5234450C500D8A8FF /* SPDistrict.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPDistrict.h; sourceTree = "<group>"; };
+		906973A6234450C500D8A8FF /* SPCity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCity.h; sourceTree = "<group>"; };
+		906973A7234450C500D8A8FF /* SPProvince.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPProvince.h; sourceTree = "<group>"; };
+		906973A8234450C500D8A8FF /* SPCity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCity.m; sourceTree = "<group>"; };
+		906973A9234450C500D8A8FF /* SPProvince.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPProvince.m; sourceTree = "<group>"; };
+		906973AE234450F500D8A8FF /* GXAddressCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXAddressCell.h; sourceTree = "<group>"; };
+		906973AF234450F500D8A8FF /* GXAddressCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXAddressCell.m; sourceTree = "<group>"; };
+		906973B0234450F500D8A8FF /* GXAddressCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXAddressCell.xib; sourceTree = "<group>"; };
+		906973B32344525A00D8A8FF /* pcd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = pcd.plist; sourceTree = "<group>"; };
+		906973B52344543B00D8A8FF /* GXChooseAddressView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXChooseAddressView.xib; sourceTree = "<group>"; };
+		907F2F88234441D20067D16A /* GXRunCategoryView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXRunCategoryView.h; sourceTree = "<group>"; };
+		907F2F89234441D20067D16A /* GXRunCategoryView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXRunCategoryView.m; sourceTree = "<group>"; };
+		907F2F8B234441D80067D16A /* GXRunCategoryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXRunCategoryView.xib; sourceTree = "<group>"; };
+		907F2F8D234443A80067D16A /* GXRunCategoryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXRunCategoryCell.h; sourceTree = "<group>"; };
+		907F2F8E234443A80067D16A /* GXRunCategoryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXRunCategoryCell.m; sourceTree = "<group>"; };
+		907F2F8F234443A80067D16A /* GXRunCategoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXRunCategoryCell.xib; sourceTree = "<group>"; };
 		90C0B2CD2340B74900A8C55B /* GX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90C0B2D02340B74900A8C55B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		90C0B2D12340B74900A8C55B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -244,11 +307,6 @@
 		90C0B3FA2340D27200A8C55B /* HXNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXNavigationController.m; sourceTree = "<group>"; };
 		90C0B3FB2340D27200A8C55B /* HXGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXGuideViewController.h; sourceTree = "<group>"; };
 		90C0B3FC2340D27200A8C55B /* HXTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXTabBarController.h; sourceTree = "<group>"; };
-		90C0B3FF2340D27200A8C55B /* RCNavBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCNavBarView.m; sourceTree = "<group>"; };
-		90C0B4002340D27200A8C55B /* RCTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTabBar.m; sourceTree = "<group>"; };
-		90C0B4012340D27200A8C55B /* RCNavBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCNavBarView.h; sourceTree = "<group>"; };
-		90C0B4022340D27200A8C55B /* RCNavBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RCNavBarView.xib; sourceTree = "<group>"; };
-		90C0B4032340D27200A8C55B /* RCTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTabBar.h; sourceTree = "<group>"; };
 		90C0B43A2340D9EE00A8C55B /* RCFilterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCFilterCell.h; sourceTree = "<group>"; };
 		90C0B43B2340D9EE00A8C55B /* RCFilterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCFilterCell.m; sourceTree = "<group>"; };
 		90C0B43C2340D9EE00A8C55B /* RCFilterCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RCFilterCell.xib; sourceTree = "<group>"; };
@@ -272,6 +330,15 @@
 		90C0B45A2340DD1200A8C55B /* AppDelegate+MSPushService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+MSPushService.h"; sourceTree = "<group>"; };
 		90C0B45B2340DD1300A8C55B /* AppDelegate+MSAppService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+MSAppService.m"; sourceTree = "<group>"; };
 		90C0B45C2340DD1300A8C55B /* AppDelegate+MSPushService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+MSPushService.m"; sourceTree = "<group>"; };
+		90E7C8FA23418E1000D46E19 /* GXLoginVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXLoginVC.h; sourceTree = "<group>"; };
+		90E7C8FB23418E1000D46E19 /* GXLoginVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXLoginVC.m; sourceTree = "<group>"; };
+		90E7C8FC23418E1000D46E19 /* GXLoginVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXLoginVC.xib; sourceTree = "<group>"; };
+		90E7C8FF2341934100D46E19 /* GXChangePwdVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXChangePwdVC.h; sourceTree = "<group>"; };
+		90E7C9002341934100D46E19 /* GXChangePwdVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXChangePwdVC.m; sourceTree = "<group>"; };
+		90E7C9012341934100D46E19 /* GXChangePwdVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXChangePwdVC.xib; sourceTree = "<group>"; };
+		90E7C9042341A7EF00D46E19 /* GXRegisterVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXRegisterVC.h; sourceTree = "<group>"; };
+		90E7C9052341A7EF00D46E19 /* GXRegisterVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXRegisterVC.m; sourceTree = "<group>"; };
+		90E7C9062341A7EF00D46E19 /* GXRegisterVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXRegisterVC.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -300,6 +367,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9069739823444E8600D8A8FF /* SPPickerView */ = {
+			isa = PBXGroup;
+			children = (
+				9069739923444E8600D8A8FF /* SPPickerView.h */,
+				9069739A23444E8600D8A8FF /* SPPickerView.m */,
+				9069739D2344501100D8A8FF /* SPPageMenu.h */,
+				9069739C2344501100D8A8FF /* SPPageMenu.m */,
+			);
+			path = SPPickerView;
+			sourceTree = "<group>";
+		};
 		90C0B2C42340B74900A8C55B = {
 			isa = PBXGroup;
 			children = (
@@ -456,6 +534,7 @@
 		90C0B33E2340CD7100A8C55B /* ThirdLib */ = {
 			isa = PBXGroup;
 			children = (
+				9069739823444E8600D8A8FF /* SPPickerView */,
 				90C0B33F2340CD7100A8C55B /* YCMenuView */,
 				90C0B3422340CD7100A8C55B /* HXDropMenu */,
 				90C0B3452340CD7100A8C55B /* JMNotifyView */,
@@ -691,6 +770,7 @@
 			isa = PBXGroup;
 			children = (
 				90C0B3F32340D27200A8C55B /* Base-基类 */,
+				90E7C8F623418DF800D46E19 /* Login-登录 */,
 				90C0B40D2340D27200A8C55B /* 母婴店 */,
 				90C0B4042340D27200A8C55B /* 供应商 */,
 				90C0B4222340D27200A8C55B /* 销售员 */,
@@ -733,11 +813,6 @@
 		90C0B3FE2340D27200A8C55B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				90C0B3FF2340D27200A8C55B /* RCNavBarView.m */,
-				90C0B4002340D27200A8C55B /* RCTabBar.m */,
-				90C0B4012340D27200A8C55B /* RCNavBarView.h */,
-				90C0B4022340D27200A8C55B /* RCNavBarView.xib */,
-				90C0B4032340D27200A8C55B /* RCTabBar.h */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1130,6 +1205,79 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		90E7C8F623418DF800D46E19 /* Login-登录 */ = {
+			isa = PBXGroup;
+			children = (
+				90E7C8F723418DF800D46E19 /* Controller */,
+				90E7C8F823418DF800D46E19 /* Model */,
+				90E7C8F923418DF800D46E19 /* View */,
+			);
+			path = "Login-登录";
+			sourceTree = "<group>";
+		};
+		90E7C8F723418DF800D46E19 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				90E7C8FA23418E1000D46E19 /* GXLoginVC.h */,
+				90E7C8FB23418E1000D46E19 /* GXLoginVC.m */,
+				90E7C8FC23418E1000D46E19 /* GXLoginVC.xib */,
+				90E7C9042341A7EF00D46E19 /* GXRegisterVC.h */,
+				90E7C9052341A7EF00D46E19 /* GXRegisterVC.m */,
+				90E7C9062341A7EF00D46E19 /* GXRegisterVC.xib */,
+				90067ECC2344356700628503 /* GXRegisterAuthVC.h */,
+				90067ECD2344356700628503 /* GXRegisterAuthVC.m */,
+				90067ECE2344356700628503 /* GXRegisterAuthVC.xib */,
+				90E7C8FF2341934100D46E19 /* GXChangePwdVC.h */,
+				90E7C9002341934100D46E19 /* GXChangePwdVC.m */,
+				90E7C9012341934100D46E19 /* GXChangePwdVC.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		90E7C8F823418DF800D46E19 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				906973A7234450C500D8A8FF /* SPProvince.h */,
+				906973A9234450C500D8A8FF /* SPProvince.m */,
+				906973A6234450C500D8A8FF /* SPCity.h */,
+				906973A8234450C500D8A8FF /* SPCity.m */,
+				906973A5234450C500D8A8FF /* SPDistrict.h */,
+				906973A3234450C400D8A8FF /* SPDistrict.m */,
+				906973A2234450C300D8A8FF /* SPLocation.h */,
+				906973A4234450C400D8A8FF /* SPLocation.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		90E7C8F923418DF800D46E19 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				90067ED1234435E300628503 /* GXRegisterAuthHeader.h */,
+				90067ED2234435E300628503 /* GXRegisterAuthHeader.m */,
+				90067ED4234435E900628503 /* GXRegisterAuthHeader.xib */,
+				90067ED623443A1300628503 /* GXRegisterAuthCell.h */,
+				90067ED723443A1300628503 /* GXRegisterAuthCell.m */,
+				90067ED823443A1300628503 /* GXRegisterAuthCell.xib */,
+				90067EDB23443ED900628503 /* GXRegisterAuthFooter.h */,
+				90067EDC23443ED900628503 /* GXRegisterAuthFooter.m */,
+				90067EDE23443EDF00628503 /* GXRegisterAuthFooter.xib */,
+				907F2F88234441D20067D16A /* GXRunCategoryView.h */,
+				907F2F89234441D20067D16A /* GXRunCategoryView.m */,
+				907F2F8B234441D80067D16A /* GXRunCategoryView.xib */,
+				907F2F8D234443A80067D16A /* GXRunCategoryCell.h */,
+				907F2F8E234443A80067D16A /* GXRunCategoryCell.m */,
+				907F2F8F234443A80067D16A /* GXRunCategoryCell.xib */,
+				9069739F2344504A00D8A8FF /* GXChooseAddressView.h */,
+				906973A02344504A00D8A8FF /* GXChooseAddressView.m */,
+				906973B52344543B00D8A8FF /* GXChooseAddressView.xib */,
+				906973AE234450F500D8A8FF /* GXAddressCell.h */,
+				906973AF234450F500D8A8FF /* GXAddressCell.m */,
+				906973B0234450F500D8A8FF /* GXAddressCell.xib */,
+				906973B32344525A00D8A8FF /* pcd.plist */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		A771BAC3BC0D20305F8CCC62 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1255,18 +1403,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				90C0B44D2340DA5700A8C55B /* GXRegionalVC.xib in Resources */,
+				906973B62344543B00D8A8FF /* GXChooseAddressView.xib in Resources */,
 				90C0B4572340DA9500A8C55B /* GXMyVC.xib in Resources */,
 				90C0B2DD2340B74B00A8C55B /* LaunchScreen.storyboard in Resources */,
+				907F2F91234443A80067D16A /* GXRunCategoryCell.xib in Resources */,
+				90E7C9082341A7EF00D46E19 /* GXRegisterVC.xib in Resources */,
+				90067ED02344356700628503 /* GXRegisterAuthVC.xib in Resources */,
 				90C0B4482340DA4600A8C55B /* GXCategoryVC.xib in Resources */,
 				90C0B4522340DA6B00A8C55B /* GXCartVC.xib in Resources */,
+				907F2F8C234441D80067D16A /* GXRunCategoryView.xib in Resources */,
 				90C0B2DA2340B74B00A8C55B /* Assets.xcassets in Resources */,
+				90067EDF23443EDF00628503 /* GXRegisterAuthFooter.xib in Resources */,
+				906973B42344525B00D8A8FF /* pcd.plist in Resources */,
 				90C0B3D92340CD7200A8C55B /* FSActionSheet_cancel@2x.png in Resources */,
+				90E7C9032341934100D46E19 /* GXChangePwdVC.xib in Resources */,
+				90E7C8FE23418E1000D46E19 /* GXLoginVC.xib in Resources */,
 				90C0B3D82340CD7200A8C55B /* FSActionSheet_cancel@3x.png in Resources */,
 				90C0B4432340DA2F00A8C55B /* GXHomeVC.xib in Resources */,
+				90067EDA23443A1300628503 /* GXRegisterAuthCell.xib in Resources */,
 				90C0B43E2340D9EF00A8C55B /* RCFilterCell.xib in Resources */,
 				90C0B3C92340CD7200A8C55B /* WSDatePickerView.xib in Resources */,
-				90C0B4392340D27200A8C55B /* RCNavBarView.xib in Resources */,
 				90C0B3DE2340CD7200A8C55B /* SGQRCode.bundle in Resources */,
+				90067ED5234435E900628503 /* GXRegisterAuthHeader.xib in Resources */,
+				906973B2234450F500D8A8FF /* GXAddressCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1361,6 +1520,8 @@
 				90C0B3C52340CD7200A8C55B /* HXCacheTool.m in Sources */,
 				90C0B4422340DA2F00A8C55B /* GXHomeVC.m in Sources */,
 				90C0B3BD2340CD7200A8C55B /* UIBarButtonItem+HXNExtension.m in Sources */,
+				906973AC234450C500D8A8FF /* SPCity.m in Sources */,
+				90067ED923443A1300628503 /* GXRegisterAuthCell.m in Sources */,
 				90C0B3C72340CD7200A8C55B /* HXDropMenuView.m in Sources */,
 				90C0B3C22340CD7200A8C55B /* HXTopWindow.m in Sources */,
 				90C0B3DC2340CD7200A8C55B /* FSActionSheetCell.m in Sources */,
@@ -1378,40 +1539,53 @@
 				90C0B2E02340B74B00A8C55B /* main.m in Sources */,
 				90C0B3E12340CD7200A8C55B /* SGQRCodeScanView.m in Sources */,
 				90C0B3ED2340CD7200A8C55B /* UIView+WZLBadge.m in Sources */,
-				90C0B4382340D27200A8C55B /* RCTabBar.m in Sources */,
 				90C0B2D22340B74900A8C55B /* AppDelegate.m in Sources */,
 				90C0B44C2340DA5700A8C55B /* GXRegionalVC.m in Sources */,
 				90C0B3C82340CD7200A8C55B /* JMNotifyView.m in Sources */,
+				906973A12344504A00D8A8FF /* GXChooseAddressView.m in Sources */,
 				90C0B3C62340CD7200A8C55B /* YCMenuView.m in Sources */,
 				90C0B3DD2340CD7200A8C55B /* FSActionSheetItem.m in Sources */,
 				90C0B3E22340CD7200A8C55B /* LYEmptyBaseView.m in Sources */,
 				90C0B4512340DA6B00A8C55B /* GXCartVC.m in Sources */,
 				90C0B3E32340CD7200A8C55B /* UIScrollView+Empty.m in Sources */,
+				90E7C9022341934100D46E19 /* GXChangePwdVC.m in Sources */,
 				90C0B3CC2340CD7200A8C55B /* UIView+Extension.m in Sources */,
+				90E7C9072341A7EF00D46E19 /* GXRegisterVC.m in Sources */,
 				90C0B3BC2340CD7200A8C55B /* ContactDataHelper.m in Sources */,
 				90C0B3DA2340CD7200A8C55B /* FSActionSheetConfig.m in Sources */,
+				907F2F8A234441D20067D16A /* GXRunCategoryView.m in Sources */,
+				90067ECF2344356700628503 /* GXRegisterAuthVC.m in Sources */,
 				90C0B3DF2340CD7200A8C55B /* SGQRCodeObtainConfigure.m in Sources */,
+				9069739B23444E8600D8A8FF /* SPPickerView.m in Sources */,
 				90C0B45E2340DD1300A8C55B /* AppDelegate+MSPushService.m in Sources */,
+				906973AA234450C500D8A8FF /* SPDistrict.m in Sources */,
+				907F2F90234443A80067D16A /* GXRunCategoryCell.m in Sources */,
 				90C0B4472340DA4600A8C55B /* GXCategoryVC.m in Sources */,
-				90C0B4372340D27200A8C55B /* RCNavBarView.m in Sources */,
 				90C0B3EC2340CD7200A8C55B /* CAAnimation+WAnimation.m in Sources */,
 				90C0B4562340DA9500A8C55B /* GXMyVC.m in Sources */,
 				90C0B3EF2340CD7200A8C55B /* NSObject+LMRuntime.m in Sources */,
 				90C0B3C02340CD7200A8C55B /* HXNetworkTool.m in Sources */,
 				90C0B3B42340CD7200A8C55B /* XTimer.m in Sources */,
 				90C0B43D2340D9EF00A8C55B /* RCFilterCell.m in Sources */,
+				906973AB234450C500D8A8FF /* SPLocation.m in Sources */,
 				90C0B3C42340CD7200A8C55B /* MSUserManager.m in Sources */,
 				90C0B4342340D27200A8C55B /* HXTabBarController.m in Sources */,
 				90C0B3BF2340CD7200A8C55B /* HXLocationTool_.m in Sources */,
 				90C0B3E72340CD7200A8C55B /* zhAlertView.m in Sources */,
 				90C0B3EA2340CD7200A8C55B /* UILabel+ForLMJVerticalScrollText.m in Sources */,
+				90067ED3234435E300628503 /* GXRegisterAuthHeader.m in Sources */,
 				90C0B45D2340DD1300A8C55B /* AppDelegate+MSAppService.m in Sources */,
+				906973AD234450C500D8A8FF /* SPProvince.m in Sources */,
 				90C0B3EE2340CD7200A8C55B /* ZJPickerView.m in Sources */,
+				90E7C8FD23418E1000D46E19 /* GXLoginVC.m in Sources */,
+				9069739E2344501100D8A8FF /* SPPageMenu.m in Sources */,
 				90C0B3B32340CD7200A8C55B /* UIButton+HXCode.m in Sources */,
 				90C0B3E82340CD7200A8C55B /* UIView+ForLMJVerticalScrollText.m in Sources */,
 				90C0B3E42340CD7200A8C55B /* UIView+LYExtension.m in Sources */,
 				90C0B3BA2340CD7200A8C55B /* UINavigationBar+ChangeColor.m in Sources */,
 				90C0B3E02340CD7200A8C55B /* SGQRCodeObtain.m in Sources */,
+				906973B1234450F500D8A8FF /* GXAddressCell.m in Sources */,
+				90067EDD23443ED900628503 /* GXRegisterAuthFooter.m in Sources */,
 				90C0B3D52340CD7200A8C55B /* FBShimmeringView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
