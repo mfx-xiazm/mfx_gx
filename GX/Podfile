@@ -11,6 +11,7 @@ target 'GX' do
     pod "JJFontFit"
     pod "YYCache"
     pod "YYModel"
+    pod "YYText"
     pod "JXCategoryView"
     pod "UMCCommon"
     pod "UMCSecurityPlugins"
