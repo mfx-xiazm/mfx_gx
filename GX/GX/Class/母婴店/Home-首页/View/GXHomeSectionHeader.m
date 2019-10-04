@@ -17,5 +17,10 @@
     [super awakeFromNib];
     // Initialization code
 }
+- (IBAction)moreClicked:(UIButton *)sender {
+    if (self.moreBtnClickedCall) {
+        self.moreBtnClickedCall();
+    }
+}
 
 @end

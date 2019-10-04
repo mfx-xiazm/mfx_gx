@@ -53,6 +53,9 @@
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QIf-RZ-K8t">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                            <connections>
+                                <action selector="moreClicked:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="QHn-Yq-pay"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

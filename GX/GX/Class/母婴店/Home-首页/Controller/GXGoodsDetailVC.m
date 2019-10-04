@@ -20,6 +20,7 @@
 #import <WebKit/WebKit.h>
 #import "GXChooseClassView.h"
 #import <zhPopupController.h>
+#import "GXSankPriceVC.h"
 
 static NSString *const GoodsInfoCell = @"GoodsInfoCell";
 @interface GXGoodsDetailVC ()<UITableViewDelegate,WKNavigationDelegate,UITableViewDataSource,GXGoodsMaterialCellDelegate,GXGoodsCommentCellDelegate>
@@ -200,6 +201,11 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
     wvc.navTitle = @"申请供货";
     [self.navigationController pushViewController:wvc animated:YES];
 }
+- (IBAction)sankPriceClicked:(SPButton *)sender {
+    GXSankPriceVC *pvc = [GXSankPriceVC new];
+    [self.navigationController pushViewController:pvc animated:YES];
+}
+
 - (IBAction)buyGoodsClicked:(UIButton *)sender {
     GXChooseClassView *cv = [GXChooseClassView loadXibView];
     cv.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 380);

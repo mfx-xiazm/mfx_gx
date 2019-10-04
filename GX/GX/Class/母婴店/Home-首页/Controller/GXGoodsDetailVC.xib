@@ -66,6 +66,9 @@
                                     <real key="value" value="2"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="sankPriceClicked:" destination="-1" eventType="touchUpInside" id="FSy-I5-6iC"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4KB-xH-ESk">
                             <rect key="frame" x="287" y="0.0" width="127" height="50"/>

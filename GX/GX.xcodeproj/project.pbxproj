@@ -184,6 +184,20 @@
 		90E57F052346DE5D00F49834 /* GXActivityChildVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90E57F032346DE5D00F49834 /* GXActivityChildVC.xib */; };
 		90E57F082346DEA100F49834 /* GXActivityBannerHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 90E57F072346DEA100F49834 /* GXActivityBannerHeader.m */; };
 		90E57F0A2346DEA900F49834 /* GXActivityBannerHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90E57F092346DEA900F49834 /* GXActivityBannerHeader.xib */; };
+		90E57F0F2346E59100F49834 /* GXDiscountVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 90E57F0D2346E59100F49834 /* GXDiscountVC.m */; };
+		90E57F102346E59100F49834 /* GXDiscountVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90E57F0E2346E59100F49834 /* GXDiscountVC.xib */; };
+		90E57F142346E5A700F49834 /* GXDiscountChildVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 90E57F122346E5A700F49834 /* GXDiscountChildVC.m */; };
+		90E57F152346E5A700F49834 /* GXDiscountChildVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90E57F132346E5A700F49834 /* GXDiscountChildVC.xib */; };
+		90E57F192346F27A00F49834 /* GXSankPriceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 90E57F172346F27A00F49834 /* GXSankPriceVC.m */; };
+		90E57F1A2346F27A00F49834 /* GXSankPriceVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90E57F182346F27A00F49834 /* GXSankPriceVC.xib */; };
+		90E57F1E2346F29C00F49834 /* GXSankPriceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 90E57F1C2346F29C00F49834 /* GXSankPriceCell.m */; };
+		90E57F1F2346F29D00F49834 /* GXSankPriceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90E57F1D2346F29C00F49834 /* GXSankPriceCell.xib */; };
+		90E57F222346F51600F49834 /* GXSankPriceSectionFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 90E57F212346F51600F49834 /* GXSankPriceSectionFooter.m */; };
+		90E57F242346F51E00F49834 /* GXSankPriceSectionFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90E57F232346F51E00F49834 /* GXSankPriceSectionFooter.xib */; };
+		90E57F3123471B2D00F49834 /* GXChooseValidAddressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90E57F3023471B2D00F49834 /* GXChooseValidAddressView.m */; };
+		90E57F3323471B3900F49834 /* GXChooseValidAddressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90E57F3223471B3900F49834 /* GXChooseValidAddressView.xib */; };
+		90E57F3723471C4200F49834 /* GXValidAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 90E57F3523471C4200F49834 /* GXValidAddressCell.m */; };
+		90E57F3823471C4200F49834 /* GXValidAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90E57F3623471C4200F49834 /* GXValidAddressCell.xib */; };
 		90E7C8FD23418E1000D46E19 /* GXLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 90E7C8FB23418E1000D46E19 /* GXLoginVC.m */; };
 		90E7C8FE23418E1000D46E19 /* GXLoginVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90E7C8FC23418E1000D46E19 /* GXLoginVC.xib */; };
 		90E7C9022341934100D46E19 /* GXChangePwdVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 90E7C9002341934100D46E19 /* GXChangePwdVC.m */; };
@@ -520,6 +534,27 @@
 		90E57F062346DEA100F49834 /* GXActivityBannerHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXActivityBannerHeader.h; sourceTree = "<group>"; };
 		90E57F072346DEA100F49834 /* GXActivityBannerHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXActivityBannerHeader.m; sourceTree = "<group>"; };
 		90E57F092346DEA900F49834 /* GXActivityBannerHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXActivityBannerHeader.xib; sourceTree = "<group>"; };
+		90E57F0C2346E59100F49834 /* GXDiscountVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXDiscountVC.h; sourceTree = "<group>"; };
+		90E57F0D2346E59100F49834 /* GXDiscountVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXDiscountVC.m; sourceTree = "<group>"; };
+		90E57F0E2346E59100F49834 /* GXDiscountVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXDiscountVC.xib; sourceTree = "<group>"; };
+		90E57F112346E5A700F49834 /* GXDiscountChildVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXDiscountChildVC.h; sourceTree = "<group>"; };
+		90E57F122346E5A700F49834 /* GXDiscountChildVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXDiscountChildVC.m; sourceTree = "<group>"; };
+		90E57F132346E5A700F49834 /* GXDiscountChildVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXDiscountChildVC.xib; sourceTree = "<group>"; };
+		90E57F162346F27900F49834 /* GXSankPriceVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXSankPriceVC.h; sourceTree = "<group>"; };
+		90E57F172346F27A00F49834 /* GXSankPriceVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXSankPriceVC.m; sourceTree = "<group>"; };
+		90E57F182346F27A00F49834 /* GXSankPriceVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXSankPriceVC.xib; sourceTree = "<group>"; };
+		90E57F1B2346F29C00F49834 /* GXSankPriceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXSankPriceCell.h; sourceTree = "<group>"; };
+		90E57F1C2346F29C00F49834 /* GXSankPriceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXSankPriceCell.m; sourceTree = "<group>"; };
+		90E57F1D2346F29C00F49834 /* GXSankPriceCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXSankPriceCell.xib; sourceTree = "<group>"; };
+		90E57F202346F51600F49834 /* GXSankPriceSectionFooter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXSankPriceSectionFooter.h; sourceTree = "<group>"; };
+		90E57F212346F51600F49834 /* GXSankPriceSectionFooter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXSankPriceSectionFooter.m; sourceTree = "<group>"; };
+		90E57F232346F51E00F49834 /* GXSankPriceSectionFooter.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXSankPriceSectionFooter.xib; sourceTree = "<group>"; };
+		90E57F2F23471B2D00F49834 /* GXChooseValidAddressView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXChooseValidAddressView.h; sourceTree = "<group>"; };
+		90E57F3023471B2D00F49834 /* GXChooseValidAddressView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXChooseValidAddressView.m; sourceTree = "<group>"; };
+		90E57F3223471B3900F49834 /* GXChooseValidAddressView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXChooseValidAddressView.xib; sourceTree = "<group>"; };
+		90E57F3423471C4200F49834 /* GXValidAddressCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXValidAddressCell.h; sourceTree = "<group>"; };
+		90E57F3523471C4200F49834 /* GXValidAddressCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXValidAddressCell.m; sourceTree = "<group>"; };
+		90E57F3623471C4200F49834 /* GXValidAddressCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXValidAddressCell.xib; sourceTree = "<group>"; };
 		90E7C8FA23418E1000D46E19 /* GXLoginVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXLoginVC.h; sourceTree = "<group>"; };
 		90E7C8FB23418E1000D46E19 /* GXLoginVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXLoginVC.m; sourceTree = "<group>"; };
 		90E7C8FC23418E1000D46E19 /* GXLoginVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXLoginVC.xib; sourceTree = "<group>"; };
@@ -563,6 +598,9 @@
 				905B3DEA2345900F00282515 /* GXGoodsDetailVC.h */,
 				905B3DEB2345900F00282515 /* GXGoodsDetailVC.m */,
 				905B3DEC2345900F00282515 /* GXGoodsDetailVC.xib */,
+				90E57F162346F27900F49834 /* GXSankPriceVC.h */,
+				90E57F172346F27A00F49834 /* GXSankPriceVC.m */,
+				90E57F182346F27A00F49834 /* GXSankPriceVC.xib */,
 				90BCED6C2345DB39007B0F19 /* GXAllMaterialVC.h */,
 				90BCED6D2345DB39007B0F19 /* GXAllMaterialVC.m */,
 				90BCED6E2345DB39007B0F19 /* GXAllMaterialVC.xib */,
@@ -598,6 +636,18 @@
 				90E57EE42346277900F49834 /* GXChooseClassFooter.h */,
 				90E57EE52346277900F49834 /* GXChooseClassFooter.m */,
 				90E57EE62346277900F49834 /* GXChooseClassFooter.xib */,
+				90E57F1B2346F29C00F49834 /* GXSankPriceCell.h */,
+				90E57F1C2346F29C00F49834 /* GXSankPriceCell.m */,
+				90E57F1D2346F29C00F49834 /* GXSankPriceCell.xib */,
+				90E57F202346F51600F49834 /* GXSankPriceSectionFooter.h */,
+				90E57F212346F51600F49834 /* GXSankPriceSectionFooter.m */,
+				90E57F232346F51E00F49834 /* GXSankPriceSectionFooter.xib */,
+				90E57F2F23471B2D00F49834 /* GXChooseValidAddressView.h */,
+				90E57F3023471B2D00F49834 /* GXChooseValidAddressView.m */,
+				90E57F3223471B3900F49834 /* GXChooseValidAddressView.xib */,
+				90E57F3423471C4200F49834 /* GXValidAddressCell.h */,
+				90E57F3523471C4200F49834 /* GXValidAddressCell.m */,
+				90E57F3623471C4200F49834 /* GXValidAddressCell.xib */,
 				905B3E072345A40600282515 /* GXAllCommentHeader.h */,
 				905B3E082345A40600282515 /* GXAllCommentHeader.m */,
 				905B3E0A2345A40E00282515 /* GXAllCommentHeader.xib */,
@@ -1297,6 +1347,7 @@
 				90C0B43F2340DA2F00A8C55B /* GXHomeVC.h */,
 				90C0B4402340DA2F00A8C55B /* GXHomeVC.m */,
 				90C0B4412340DA2F00A8C55B /* GXHomeVC.xib */,
+				90E57F0B2346E51F00F49834 /* 每日必抢 */,
 				90E57EF52346DC7800F49834 /* 促销神器 */,
 				90E57EE92346D23300F49834 /* 品牌优选 */,
 				905B3DE923458FF700282515 /* 商品详情 */,
@@ -1597,6 +1648,19 @@
 			name = "促销神器";
 			sourceTree = "<group>";
 		};
+		90E57F0B2346E51F00F49834 /* 每日必抢 */ = {
+			isa = PBXGroup;
+			children = (
+				90E57F0C2346E59100F49834 /* GXDiscountVC.h */,
+				90E57F0D2346E59100F49834 /* GXDiscountVC.m */,
+				90E57F0E2346E59100F49834 /* GXDiscountVC.xib */,
+				90E57F112346E5A700F49834 /* GXDiscountChildVC.h */,
+				90E57F122346E5A700F49834 /* GXDiscountChildVC.m */,
+				90E57F132346E5A700F49834 /* GXDiscountChildVC.xib */,
+			);
+			name = "每日必抢";
+			sourceTree = "<group>";
+		};
 		90E7C8F623418DF800D46E19 /* Login-登录 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1801,11 +1865,13 @@
 				906973D023448ED200D8A8FF /* GXDiscountGoodsCell2.xib in Resources */,
 				90E57EDE234622B200F49834 /* GXChooseClassView.xib in Resources */,
 				905B3E142345C3DD00282515 /* GXGoodsDetailSectionHeader.xib in Resources */,
+				90E57F102346E59100F49834 /* GXDiscountVC.xib in Resources */,
 				906973B62344543B00D8A8FF /* GXChooseAddressView.xib in Resources */,
 				90E57EEE2346D25900F49834 /* GXGoodBrandVC.xib in Resources */,
 				90C0B4572340DA9500A8C55B /* GXMyVC.xib in Resources */,
 				906974102344D37F00D8A8FF /* GXStoreGoodsChildVC.xib in Resources */,
 				90BCED702345DB39007B0F19 /* GXAllMaterialVC.xib in Resources */,
+				90E57F152346E5A700F49834 /* GXDiscountChildVC.xib in Resources */,
 				90E57EE32346276D00F49834 /* GXChooseClassHeader.xib in Resources */,
 				90C0B2DD2340B74B00A8C55B /* LaunchScreen.storyboard in Resources */,
 				906973F42344C2F000D8A8FF /* GXStoreCell.xib in Resources */,
@@ -1817,8 +1883,11 @@
 				906973BC2344781A00D8A8FF /* GXShopGoodsCell.xib in Resources */,
 				905B3E242345D33800282515 /* GXGoodsDetailHeader.xib in Resources */,
 				90067ED02344356700628503 /* GXRegisterAuthVC.xib in Resources */,
+				90E57F1F2346F29D00F49834 /* GXSankPriceCell.xib in Resources */,
 				90697415234588DE00D8A8FF /* GXStoreMsgVC.xib in Resources */,
+				90E57F3823471C4200F49834 /* GXValidAddressCell.xib in Resources */,
 				906973C62344817A00D8A8FF /* GXHomePushCell.xib in Resources */,
+				90E57F242346F51E00F49834 /* GXSankPriceSectionFooter.xib in Resources */,
 				906973C123447EFF00D8A8FF /* GXHomeSectionHeader.xib in Resources */,
 				90C0B4482340DA4600A8C55B /* GXCategoryVC.xib in Resources */,
 				90C0B4522340DA6B00A8C55B /* GXCartVC.xib in Resources */,
@@ -1830,6 +1899,7 @@
 				90C0B2DA2340B74B00A8C55B /* Assets.xcassets in Resources */,
 				90067EDF23443EDF00628503 /* GXRegisterAuthFooter.xib in Resources */,
 				906973B42344525B00D8A8FF /* pcd.plist in Resources */,
+				90E57F3323471B3900F49834 /* GXChooseValidAddressView.xib in Resources */,
 				90C0B3D92340CD7200A8C55B /* FSActionSheet_cancel@2x.png in Resources */,
 				906973FE2344CC1F00D8A8FF /* GXStoreCouponCell.xib in Resources */,
 				90E7C9032341934100D46E19 /* GXChangePwdVC.xib in Resources */,
@@ -1852,6 +1922,7 @@
 				906973B2234450F500D8A8FF /* GXAddressCell.xib in Resources */,
 				90E57EE82346277900F49834 /* GXChooseClassFooter.xib in Resources */,
 				906973F92344C7DA00D8A8FF /* GXGoodStoreChildVC.xib in Resources */,
+				90E57F1A2346F27A00F49834 /* GXSankPriceVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1936,11 +2007,13 @@
 				90C0B3B52340CD7200A8C55B /* UIImage+HXNExtension.m in Sources */,
 				90C0B3CB2340CD7200A8C55B /* NSDate+Extension.m in Sources */,
 				90E57EDC234622A600F49834 /* GXChooseClassView.m in Sources */,
+				90E57F142346E5A700F49834 /* GXDiscountChildVC.m in Sources */,
 				90C0B3B72340CD7200A8C55B /* Foundation+Log.m in Sources */,
 				90E57EF92346DD0300F49834 /* GXActivityVC.m in Sources */,
 				90C0B3B62340CD7200A8C55B /* NSString+HXNExtension.m in Sources */,
 				906973FD2344CC1F00D8A8FF /* GXStoreCouponCell.m in Sources */,
 				90C0B3C32340CD7200A8C55B /* MSUserInfo.m in Sources */,
+				90E57F192346F27A00F49834 /* GXSankPriceVC.m in Sources */,
 				90C0B4332340D27200A8C55B /* HXBaseViewController.m in Sources */,
 				90C0B4362340D27200A8C55B /* HXNavigationController.m in Sources */,
 				90C0B3DB2340CD7200A8C55B /* FSActionSheet.m in Sources */,
@@ -1963,6 +2036,7 @@
 				906973C023447EFF00D8A8FF /* GXHomeSectionHeader.m in Sources */,
 				90E57EE72346277900F49834 /* GXChooseClassFooter.m in Sources */,
 				90C0B3B92340CD7200A8C55B /* NSDate+HXNExtension.m in Sources */,
+				90E57F3123471B2D00F49834 /* GXChooseValidAddressView.m in Sources */,
 				90BCED742345DCA6007B0F19 /* GXGoodsInfoCell.m in Sources */,
 				90C0B3EB2340CD7200A8C55B /* LMJHorizontalScrollText.m in Sources */,
 				90C0B3C12340CD7200A8C55B /* HXNetworkCache.m in Sources */,
@@ -1986,7 +2060,9 @@
 				905B3E222345D32800282515 /* GXGoodsDetailHeader.m in Sources */,
 				906973A12344504A00D8A8FF /* GXChooseAddressView.m in Sources */,
 				90E57F082346DEA100F49834 /* GXActivityBannerHeader.m in Sources */,
+				90E57F3723471C4200F49834 /* GXValidAddressCell.m in Sources */,
 				906973ED2344C2AC00D8A8FF /* GXGoodStoreVC.m in Sources */,
+				90E57F0F2346E59100F49834 /* GXDiscountVC.m in Sources */,
 				90C0B3C62340CD7200A8C55B /* YCMenuView.m in Sources */,
 				90C0B3DD2340CD7200A8C55B /* FSActionSheetItem.m in Sources */,
 				90BCED782345DF95007B0F19 /* GXWebContentVC.m in Sources */,
@@ -2003,6 +2079,7 @@
 				905B3E122345C3D700282515 /* GXGoodsDetailSectionHeader.m in Sources */,
 				90C0B3DA2340CD7200A8C55B /* FSActionSheetConfig.m in Sources */,
 				907F2F8A234441D20067D16A /* GXRunCategoryView.m in Sources */,
+				90E57F1E2346F29C00F49834 /* GXSankPriceCell.m in Sources */,
 				90067ECF2344356700628503 /* GXRegisterAuthVC.m in Sources */,
 				906973F82344C7DA00D8A8FF /* GXGoodStoreChildVC.m in Sources */,
 				90C0B3DF2340CD7200A8C55B /* SGQRCodeObtainConfigure.m in Sources */,
@@ -2050,6 +2127,7 @@
 				906974062344D27F00D8A8FF /* GXStoreGoodsListHeader.m in Sources */,
 				90C0B3BA2340CD7200A8C55B /* UINavigationBar+ChangeColor.m in Sources */,
 				90C0B3E02340CD7200A8C55B /* SGQRCodeObtain.m in Sources */,
+				90E57F222346F51600F49834 /* GXSankPriceSectionFooter.m in Sources */,
 				906973B1234450F500D8A8FF /* GXAddressCell.m in Sources */,
 				906973F32344C2F000D8A8FF /* GXStoreCell.m in Sources */,
 				90067EDD23443ED900628503 /* GXRegisterAuthFooter.m in Sources */,

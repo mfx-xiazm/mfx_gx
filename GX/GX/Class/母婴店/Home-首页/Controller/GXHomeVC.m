@@ -24,6 +24,7 @@
 #import "GXGoodsDetailVC.h"
 #import "GXGoodBrandVC.h"
 #import "GXActivityVC.h"
+#import "GXDiscountVC.h"
 
 static NSString *const HomeCateCell = @"HomeCateCell";
 static NSString *const ShopGoodsCell = @"ShopGoodsCell";
@@ -232,6 +233,22 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
                     header.moreImg.image = HXGetImage(@"更多灰色");
                     header.titleImg.image = HXGetImage(@"精选活动");
                 }
+                hx_weakify(self);
+                header.moreBtnClickedCall = ^{
+                    hx_strongify(weakSelf);
+                    if (indexPath.section == 1) {//每日必抢
+                        GXDiscountVC *dvc = [GXDiscountVC new];
+                        [strongSelf.navigationController pushViewController:dvc animated:YES];
+                    }else if (indexPath.section == 2) {//控区控价
+                       
+                    }else if (indexPath.section == 3) {//通货行情
+                        
+                    }else if (indexPath.section == 4) {//品牌优选
+                        
+                    }else if (indexPath.section == 5) {//精选活动
+                        
+                    }
+                };
             }
             return header;
         }
