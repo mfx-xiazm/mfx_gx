@@ -48,6 +48,9 @@
                                     <real key="value" value="2"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="addCollectClicked:" destination="-1" eventType="touchUpInside" id="4bu-tk-kSn"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6vh-Lg-bqs" customClass="SPButton">
                             <rect key="frame" x="80" y="0.0" width="80" height="50"/>

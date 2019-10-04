@@ -21,6 +21,7 @@
 #import "GXChooseClassView.h"
 #import <zhPopupController.h>
 #import "GXSankPriceVC.h"
+#import "GXBrandDetailVC.h"
 
 static NSString *const GoodsInfoCell = @"GoodsInfoCell";
 @interface GXGoodsDetailVC ()<UITableViewDelegate,WKNavigationDelegate,UITableViewDataSource,GXGoodsMaterialCellDelegate,GXGoodsCommentCellDelegate>
@@ -183,7 +184,7 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
 #pragma mark -- 点击事件
 -(void)cartClicked
 {
-    
+
 }
 -(void)shareClicked
 {
@@ -201,6 +202,11 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
     wvc.navTitle = @"申请供货";
     [self.navigationController pushViewController:wvc animated:YES];
 }
+- (IBAction)addCollectClicked:(SPButton *)sender {
+    GXBrandDetailVC *dvc = [GXBrandDetailVC new];
+    [self.navigationController pushViewController:dvc animated:YES];
+}
+
 - (IBAction)sankPriceClicked:(SPButton *)sender {
     GXSankPriceVC *pvc = [GXSankPriceVC new];
     [self.navigationController pushViewController:pvc animated:YES];

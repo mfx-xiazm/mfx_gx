@@ -26,6 +26,7 @@
 #import "GXActivityVC.h"
 #import "GXDiscountVC.h"
 #import "GXMarketTrendVC.h"
+#import "GXMessageVC.h"
 
 static NSString *const HomeCateCell = @"HomeCateCell";
 static NSString *const ShopGoodsCell = @"ShopGoodsCell";
@@ -98,7 +99,8 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
 #pragma mark -- 点击事件
 -(void)msgClicked
 {
-    HXLog(@"消息");
+    GXMessageVC *mvc = [GXMessageVC new];
+    [self.navigationController pushViewController:mvc animated:YES];
 }
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
