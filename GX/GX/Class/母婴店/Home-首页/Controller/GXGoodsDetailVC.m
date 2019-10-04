@@ -226,6 +226,9 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
     @catch (NSException *exception) {
         HXLog(@"多次删除了");
     }
+    @finally {
+        HXLog(@"多次删除了");
+    }
 }
 -(void)dealloc
 {
@@ -233,6 +236,9 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
         [self.webView.scrollView removeObserver:self forKeyPath:@"contentSize"];
     }
     @catch (NSException *exception) {
+        HXLog(@"多次删除了");
+    }
+    @finally {
         HXLog(@"多次删除了");
     }
 }

@@ -10,20 +10,22 @@
 #import "GXGoodStoreChildVC.h"
 #import <JXCategoryTitleView.h>
 #import <JXCategoryIndicatorLineView.h>
+#import "HXSearchBar.h"
 
-@interface GXGoodStoreVC ()<JXCategoryViewDelegate,UIScrollViewDelegate>
+@interface GXGoodStoreVC ()<JXCategoryViewDelegate,UIScrollViewDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet JXCategoryTitleView *categoryView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 /** 子控制器数组 */
 @property (nonatomic,strong) NSArray *childVCs;
-
+/* 搜索条 */
+@property(nonatomic,strong) HXSearchBar *searchBar;
 @end
 
 @implementation GXGoodStoreVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.navigationItem setTitle:@"精选好店"];
+    [self setUpNavBar];
     [self setUpCategoryView];
 }
 - (void)viewWillDisappear:(BOOL)animated {
@@ -31,6 +33,7 @@
     //离开页面的时候，需要恢复屏幕边缘手势，不能影响其他页面
     //self.navigationController.interactivePopGestureRecognizer.enabled = YES;
 }
+
 -(NSArray *)childVCs
 {
     if (_childVCs == nil) {
@@ -43,6 +46,18 @@
         _childVCs = vcs;
     }
     return _childVCs;
+}
+-(void)setUpNavBar
+{
+    [self.navigationItem setTitle:nil];
+    
+    HXSearchBar *searchBar = [[HXSearchBar alloc] initWithFrame:CGRectMake(0, 0, HX_SCREEN_WIDTH - 70.f, 30.f)];
+    searchBar.backgroundColor = [UIColor whiteColor];
+    searchBar.layer.cornerRadius = 6;
+    searchBar.layer.masksToBounds = YES;
+    searchBar.delegate = self;
+    self.searchBar = searchBar;
+    self.navigationItem.titleView = searchBar;
 }
 -(void)setUpCategoryView
 {

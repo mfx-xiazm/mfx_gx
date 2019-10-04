@@ -22,6 +22,7 @@
 #import "GXHomeBannerHeader.h"
 #import "GXGoodStoreVC.h"
 #import "GXGoodsDetailVC.h"
+#import "GXGoodBrandVC.h"
 
 static NSString *const HomeCateCell = @"HomeCateCell";
 static NSString *const ShopGoodsCell = @"ShopGoodsCell";
@@ -96,7 +97,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
 {
     HXLog(@"消息");
 }
--(BOOL)textFieldShouldReturn:(UITextField *)textField
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
     HXLog(@"搜索条");
     return NO;
@@ -241,6 +242,9 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
         if (indexPath.item == 0) {
             GXGoodStoreVC *svc = [GXGoodStoreVC new];
             [self.navigationController pushViewController:svc animated:YES];
+        }else if (indexPath.item == 1) {
+            GXGoodBrandVC *bvc = [GXGoodBrandVC new];
+            [self.navigationController pushViewController:bvc animated:YES];
         }
     }else if (indexPath.section == 1) {//每日必抢,这个区间为填充式布局
         
@@ -290,7 +294,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
         return CGSizeMake(width, height);
     }else{//为你推荐
         CGFloat width = (HX_SCREEN_WIDTH-10*3)/2.0;
-        CGFloat height = width+60.f;
+        CGFloat height = width+70.f;
         return CGSizeMake(width, height);
     }
 }
