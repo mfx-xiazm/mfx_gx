@@ -25,6 +25,7 @@
 #import "GXGoodBrandVC.h"
 #import "GXActivityVC.h"
 #import "GXDiscountVC.h"
+#import "GXMarketTrendVC.h"
 
 static NSString *const HomeCateCell = @"HomeCateCell";
 static NSString *const ShopGoodsCell = @"ShopGoodsCell";
@@ -242,11 +243,14 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
                     }else if (indexPath.section == 2) {//控区控价
                        
                     }else if (indexPath.section == 3) {//通货行情
-                        
+                        GXMarketTrendVC *tvc = [GXMarketTrendVC new];
+                        [strongSelf.navigationController pushViewController:tvc animated:YES];
                     }else if (indexPath.section == 4) {//品牌优选
-                        
+                        GXGoodBrandVC *bvc = [GXGoodBrandVC new];
+                        [strongSelf.navigationController pushViewController:bvc animated:YES];
                     }else if (indexPath.section == 5) {//精选活动
-                        
+                        GXActivityVC *avc = [GXActivityVC new];
+                        [strongSelf.navigationController pushViewController:avc animated:YES];
                     }
                 };
             }
@@ -264,6 +268,8 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
             GXGoodBrandVC *bvc = [GXGoodBrandVC new];
             [self.navigationController pushViewController:bvc animated:YES];
         }else if (indexPath.item == 2) {
+            
+        }else if (indexPath.item == 3) {
             GXActivityVC *avc = [GXActivityVC new];
             [self.navigationController pushViewController:avc animated:YES];
         }
