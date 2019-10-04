@@ -23,6 +23,7 @@
 #import "GXGoodStoreVC.h"
 #import "GXGoodsDetailVC.h"
 #import "GXGoodBrandVC.h"
+#import "GXActivityVC.h"
 
 static NSString *const HomeCateCell = @"HomeCateCell";
 static NSString *const ShopGoodsCell = @"ShopGoodsCell";
@@ -245,6 +246,9 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
         }else if (indexPath.item == 1) {
             GXGoodBrandVC *bvc = [GXGoodBrandVC new];
             [self.navigationController pushViewController:bvc animated:YES];
+        }else if (indexPath.item == 2) {
+            GXActivityVC *avc = [GXActivityVC new];
+            [self.navigationController pushViewController:avc animated:YES];
         }
     }else if (indexPath.section == 1) {//每日必抢,这个区间为填充式布局
         
