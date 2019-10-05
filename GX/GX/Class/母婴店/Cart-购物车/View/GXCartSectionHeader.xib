@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR" customClass="GXCartSectionHeader">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3o2-Gl-3S8">
+                    <rect key="frame" x="10" y="0.0" width="300" height="50"/>
+                    <subviews>
+                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LvX-TS-8Na">
+                            <rect key="frame" x="10" y="16.5" width="17" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" image="协议未选">
+                                <color key="titleColor" red="0.074509803920000006" green="0.1137254902" blue="0.1764705882" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="cartClicked:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="iA0-2E-Ayb"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YQ8-UT-iQQ">
+                            <rect key="frame" x="37" y="11.5" width="99" height="27"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <state key="normal" title="贝思童品牌旗舰店">
+                                <color key="titleColor" red="0.074509803920000006" green="0.1137254902" blue="0.1764705882" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="cartClicked:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="z2F-SN-WEx"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T1x-tw-8kn">
+                            <rect key="frame" x="260" y="11.5" width="30" height="27"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <state key="normal" title="领券">
+                                <color key="titleColor" red="0.92549019610000005" green="0.078431372550000003" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="cartClicked:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="k6S-aO-EjH"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="va3-8c-tP2" userLabel="分割线">
+                            <rect key="frame" x="0.0" y="49" width="300" height="1"/>
+                            <color key="backgroundColor" red="0.96470588239999999" green="0.96862745100000003" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="pgQ-LP-1xN"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="LvX-TS-8Na" firstAttribute="centerY" secondItem="3o2-Gl-3S8" secondAttribute="centerY" id="DCH-JV-Mih"/>
+                        <constraint firstItem="YQ8-UT-iQQ" firstAttribute="leading" secondItem="LvX-TS-8Na" secondAttribute="trailing" constant="10" id="E63-bw-Wsk"/>
+                        <constraint firstItem="LvX-TS-8Na" firstAttribute="leading" secondItem="3o2-Gl-3S8" secondAttribute="leading" constant="10" id="Met-g8-I1w"/>
+                        <constraint firstAttribute="trailing" secondItem="va3-8c-tP2" secondAttribute="trailing" id="Pcg-5h-kQd"/>
+                        <constraint firstItem="va3-8c-tP2" firstAttribute="leading" secondItem="3o2-Gl-3S8" secondAttribute="leading" id="RSM-gP-qlI"/>
+                        <constraint firstItem="T1x-tw-8kn" firstAttribute="centerY" secondItem="3o2-Gl-3S8" secondAttribute="centerY" id="RXL-Z6-KoO"/>
+                        <constraint firstAttribute="trailing" secondItem="T1x-tw-8kn" secondAttribute="trailing" constant="10" id="hlB-8t-FNy"/>
+                        <constraint firstItem="YQ8-UT-iQQ" firstAttribute="centerY" secondItem="3o2-Gl-3S8" secondAttribute="centerY" id="ldC-JA-GRq"/>
+                        <constraint firstAttribute="bottom" secondItem="va3-8c-tP2" secondAttribute="bottom" id="tGg-7U-vaj"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="3o2-Gl-3S8" secondAttribute="bottom" id="5pE-WJ-qAL"/>
+                <constraint firstItem="3o2-Gl-3S8" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" constant="10" id="aCJ-b1-BuM"/>
+                <constraint firstItem="9Gg-ye-v9C" firstAttribute="trailing" secondItem="3o2-Gl-3S8" secondAttribute="trailing" constant="10" id="uo0-Rw-z1n"/>
+                <constraint firstItem="3o2-Gl-3S8" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="zxj-ne-qHJ"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="9Gg-ye-v9C"/>
+        </collectionReusableView>
+    </objects>
+    <resources>
+        <image name="协议未选" width="17" height="17"/>
+    </resources>
+</document>

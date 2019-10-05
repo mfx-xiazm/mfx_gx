@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="50" id="KGk-i7-Jjw" customClass="GXPayTypeCell">
+            <rect key="frame" x="0.0" y="0.0" width="376" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="376" height="49.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bsy-Uu-MVk">
+                        <rect key="frame" x="0.0" y="0.0" width="376" height="49.5"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="支付宝" translatesAutoresizingMaskIntoConstraints="NO" id="Ael-Iu-5uf">
+                                <rect key="frame" x="15" y="10" width="29.5" height="29.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Ael-Iu-5uf" secondAttribute="height" multiplier="1:1" id="SH2-gw-vla"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layerBoderCorner">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="支付宝" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MJo-98-2dd">
+                                <rect key="frame" x="54.5" y="17" width="40" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="协议未选" translatesAutoresizingMaskIntoConstraints="NO" id="a2D-SF-TpB">
+                                <rect key="frame" x="344" y="16.5" width="17" height="17"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wg3-MQ-hDE" userLabel="分割线">
+                                <rect key="frame" x="10" y="48.5" width="356" height="1"/>
+                                <color key="backgroundColor" red="0.96470588239999999" green="0.96862745100000003" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="moj-Or-jjh"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Ael-Iu-5uf" firstAttribute="top" secondItem="Bsy-Uu-MVk" secondAttribute="top" constant="10" id="3KJ-hY-H8b"/>
+                            <constraint firstItem="MJo-98-2dd" firstAttribute="leading" secondItem="Ael-Iu-5uf" secondAttribute="trailing" constant="10" id="4TZ-KX-Wsq"/>
+                            <constraint firstAttribute="bottom" secondItem="wg3-MQ-hDE" secondAttribute="bottom" id="PIv-rJ-2Zs"/>
+                            <constraint firstAttribute="trailing" secondItem="wg3-MQ-hDE" secondAttribute="trailing" constant="10" id="Unv-Ka-Q37"/>
+                            <constraint firstAttribute="trailing" secondItem="a2D-SF-TpB" secondAttribute="trailing" constant="15" id="YWx-sT-ftc"/>
+                            <constraint firstAttribute="bottom" secondItem="Ael-Iu-5uf" secondAttribute="bottom" constant="10" id="ikq-hS-gmk"/>
+                            <constraint firstItem="a2D-SF-TpB" firstAttribute="centerY" secondItem="Bsy-Uu-MVk" secondAttribute="centerY" id="jaO-5J-p6i"/>
+                            <constraint firstItem="Ael-Iu-5uf" firstAttribute="leading" secondItem="Bsy-Uu-MVk" secondAttribute="leading" constant="15" id="jnE-ok-Exz"/>
+                            <constraint firstItem="wg3-MQ-hDE" firstAttribute="leading" secondItem="Bsy-Uu-MVk" secondAttribute="leading" constant="10" id="vUt-E2-bsg"/>
+                            <constraint firstItem="MJo-98-2dd" firstAttribute="centerY" secondItem="Bsy-Uu-MVk" secondAttribute="centerY" id="wT3-n1-N1o"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="Bsy-Uu-MVk" secondAttribute="trailing" id="TE7-Ai-dd3"/>
+                    <constraint firstAttribute="bottom" secondItem="Bsy-Uu-MVk" secondAttribute="bottom" id="VRi-g3-nSs"/>
+                    <constraint firstItem="Bsy-Uu-MVk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Y30-aT-vMl"/>
+                    <constraint firstItem="Bsy-Uu-MVk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="nhb-f2-uYd"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <point key="canvasLocation" x="88.405797101449281" y="37.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="协议未选" width="17" height="17"/>
+        <image name="支付宝" width="25" height="25"/>
+    </resources>
+</document>
