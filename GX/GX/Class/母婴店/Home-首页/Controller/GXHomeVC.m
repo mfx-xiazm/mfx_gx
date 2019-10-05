@@ -26,6 +26,7 @@
 #import "GXActivityVC.h"
 #import "GXDiscountVC.h"
 #import "GXMarketTrendVC.h"
+#import "GXSaleMaterialVC.h"
 #import "GXMessageVC.h"
 
 static NSString *const HomeCateCell = @"HomeCateCell";
@@ -274,15 +275,20 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
         }else if (indexPath.item == 3) {
             GXActivityVC *avc = [GXActivityVC new];
             [self.navigationController pushViewController:avc animated:YES];
+        }else{
+            GXSaleMaterialVC *mvc = [GXSaleMaterialVC new];
+            [self.navigationController pushViewController:mvc animated:YES];
         }
     }else if (indexPath.section == 1) {//每日必抢,这个区间为填充式布局
-        
+        GXGoodsDetailVC *dvc = [GXGoodsDetailVC new];
+        [self.navigationController pushViewController:dvc animated:YES];
     }else if (indexPath.section == 2) {//控区控价
         
     }else if (indexPath.section == 3) {//通货行情
-        
+        GXMarketTrendVC *tvc = [GXMarketTrendVC new];
+        [self.navigationController pushViewController:tvc animated:YES];
     }else if (indexPath.section == 4) {//品牌优选
-      
+        
     }else if (indexPath.section == 5) {//精选活动
         
     }else{//为你推荐
