@@ -27,6 +27,10 @@
 #import "GXDiscountVC.h"
 #import "GXMarketTrendVC.h"
 #import "GXSaleMaterialVC.h"
+#import "GXRegionalVC.h"
+#import "GXBrandPartnerVC.h"
+#import "GXBrandDetailVC.h"
+#import "GXWebContentVC.h"
 #import "GXMessageVC.h"
 
 static NSString *const HomeCateCell = @"HomeCateCell";
@@ -244,7 +248,8 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
                         GXDiscountVC *dvc = [GXDiscountVC new];
                         [strongSelf.navigationController pushViewController:dvc animated:YES];
                     }else if (indexPath.section == 2) {//控区控价
-                       
+                        GXBrandPartnerVC *pvc = [GXBrandPartnerVC new];
+                        [strongSelf.navigationController pushViewController:pvc animated:YES];
                     }else if (indexPath.section == 3) {//通货行情
                         GXMarketTrendVC *tvc = [GXMarketTrendVC new];
                         [strongSelf.navigationController pushViewController:tvc animated:YES];
@@ -271,7 +276,8 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
             GXGoodBrandVC *bvc = [GXGoodBrandVC new];
             [self.navigationController pushViewController:bvc animated:YES];
         }else if (indexPath.item == 2) {
-            
+            GXRegionalVC *rvc = [GXRegionalVC new];
+            [self.navigationController pushViewController:rvc animated:YES];
         }else if (indexPath.item == 3) {
             GXActivityVC *avc = [GXActivityVC new];
             [self.navigationController pushViewController:avc animated:YES];
@@ -283,14 +289,19 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
         GXGoodsDetailVC *dvc = [GXGoodsDetailVC new];
         [self.navigationController pushViewController:dvc animated:YES];
     }else if (indexPath.section == 2) {//控区控价
-        
+        GXBrandDetailVC *dvc = [GXBrandDetailVC new];
+        [self.navigationController pushViewController:dvc animated:YES];
     }else if (indexPath.section == 3) {//通货行情
         GXMarketTrendVC *tvc = [GXMarketTrendVC new];
         [self.navigationController pushViewController:tvc animated:YES];
     }else if (indexPath.section == 4) {//品牌优选
-        
+        GXBrandDetailVC *dvc = [GXBrandDetailVC new];
+        [self.navigationController pushViewController:dvc animated:YES];
     }else if (indexPath.section == 5) {//精选活动
-        
+        GXWebContentVC *wvc = [GXWebContentVC new];
+        wvc.url = @"http://news.cctv.com/2019/10/03/ARTI2EUlwRGH3jMPI6cAVqti191003.shtml";
+        wvc.navTitle = @"活动方案";
+        [self.navigationController pushViewController:wvc animated:YES];
     }else{//为你推荐
         GXGoodsDetailVC *dvc = [GXGoodsDetailVC new];
         [self.navigationController pushViewController:dvc animated:YES];

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="GXPartnerDataSectionHeader">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="65"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I5z-bB-zpe">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="65"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BiP-aV-7yP">
+                            <rect key="frame" x="10" y="12" width="4" height="41"/>
+                            <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="4" id="cqo-d2-QFn"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="店铺简介" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t7B-RI-6nv">
+                            <rect key="frame" x="24" y="24" width="57.5" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="单位：元" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4D-Kk-Ku5">
+                            <rect key="frame" x="354.5" y="25" width="49.5" height="15"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="X4D-Kk-Ku5" firstAttribute="centerY" secondItem="I5z-bB-zpe" secondAttribute="centerY" id="2GE-bv-scm"/>
+                        <constraint firstItem="t7B-RI-6nv" firstAttribute="leading" secondItem="BiP-aV-7yP" secondAttribute="trailing" constant="10" id="2ln-w7-8Ay"/>
+                        <constraint firstItem="BiP-aV-7yP" firstAttribute="top" secondItem="I5z-bB-zpe" secondAttribute="top" constant="12" id="47U-J9-quG"/>
+                        <constraint firstAttribute="trailing" secondItem="X4D-Kk-Ku5" secondAttribute="trailing" constant="10" id="No5-LP-25g"/>
+                        <constraint firstItem="t7B-RI-6nv" firstAttribute="centerY" secondItem="I5z-bB-zpe" secondAttribute="centerY" id="bJs-X2-PSf"/>
+                        <constraint firstItem="BiP-aV-7yP" firstAttribute="leading" secondItem="I5z-bB-zpe" secondAttribute="leading" constant="10" id="hFX-eg-oZt"/>
+                        <constraint firstAttribute="bottom" secondItem="BiP-aV-7yP" secondAttribute="bottom" constant="12" id="uk6-ET-FPm"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="I5z-bB-zpe" secondAttribute="trailing" id="5Sf-sh-Irb"/>
+                <constraint firstItem="I5z-bB-zpe" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Kb7-jo-MQn"/>
+                <constraint firstAttribute="bottom" secondItem="I5z-bB-zpe" secondAttribute="bottom" id="rgX-7k-st2"/>
+                <constraint firstItem="I5z-bB-zpe" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="tca-gh-gqa"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="moreTitle" destination="X4D-Kk-Ku5" id="hed-Sr-GYT"/>
+                <outlet property="titleLabel" destination="t7B-RI-6nv" id="Alj-ou-uqe"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="391.40625"/>
+        </view>
+    </objects>
+</document>

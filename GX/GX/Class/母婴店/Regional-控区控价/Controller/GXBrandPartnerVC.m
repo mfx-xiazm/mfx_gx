@@ -1,27 +1,27 @@
 //
-//  GXGoodStoreVC.m
+//  GXBrandPartnerVC.m
 //  GX
 //
-//  Created by 夏增明 on 2019/10/2.
+//  Created by 夏增明 on 2019/10/5.
 //  Copyright © 2019 夏增明. All rights reserved.
 //
 
-#import "GXGoodStoreVC.h"
-#import "GXGoodStoreChildVC.h"
+#import "GXBrandPartnerVC.h"
+#import "GXBrandPartnerChildVC.h"
 #import <JXCategoryTitleView.h>
 #import <JXCategoryIndicatorLineView.h>
-#import "HXSearchBar.h"
+#import "GXGoodsFilterView.h"
+#import <zhPopupController.h>
 
-@interface GXGoodStoreVC ()<JXCategoryViewDelegate,UIScrollViewDelegate,UITextFieldDelegate>
+@interface GXBrandPartnerVC ()<JXCategoryViewDelegate,UIScrollViewDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet JXCategoryTitleView *categoryView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 /** 子控制器数组 */
 @property (nonatomic,strong) NSArray *childVCs;
-/* 搜索条 */
-@property(nonatomic,strong) HXSearchBar *searchBar;
+
 @end
 
-@implementation GXGoodStoreVC
+@implementation GXBrandPartnerVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -39,7 +39,8 @@
     if (_childVCs == nil) {
         NSMutableArray *vcs = [NSMutableArray array];
         for (int i=0;i<self.categoryView.titles.count;i++) {
-            GXGoodStoreChildVC *cvc0 = [GXGoodStoreChildVC new];
+            GXBrandPartnerChildVC *cvc0 = [GXBrandPartnerChildVC new];
+            cvc0.dataType = i;
             [self addChildViewController:cvc0];
             [vcs addObject:cvc0];
         }
@@ -49,21 +50,25 @@
 }
 -(void)setUpNavBar
 {
-    [self.navigationItem setTitle:nil];
+    [self.navigationItem setTitle:@"控区控价品牌"];
     
-    HXSearchBar *searchBar = [[HXSearchBar alloc] initWithFrame:CGRectMake(0, 0, HX_SCREEN_WIDTH - 70.f, 30.f)];
-    searchBar.backgroundColor = [UIColor whiteColor];
-    searchBar.layer.cornerRadius = 6;
-    searchBar.layer.masksToBounds = YES;
-    searchBar.delegate = self;
-    self.searchBar = searchBar;
-    self.navigationItem.titleView = searchBar;
+    SPButton *filter = [SPButton buttonWithType:UIButtonTypeCustom];
+    filter.imagePosition = SPButtonImagePositionRight;
+    filter.imageTitleSpace = 2.f;
+    filter.hxn_size = CGSizeMake(50, 40);
+    filter.titleLabel.font = [UIFont systemFontOfSize:13];
+    [filter setImage:HXGetImage(@"筛选白") forState:UIControlStateNormal];
+    [filter setTitle:@"筛选" forState:UIControlStateNormal];
+    [filter addTarget:self action:@selector(filterClicked) forControlEvents:UIControlEventTouchUpInside];
+    [filter setTitleColor:UIColorFromRGB(0XFFFFFF) forState:UIControlStateNormal];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:filter];
 }
 -(void)setUpCategoryView
 {
     _categoryView.backgroundColor = [UIColor whiteColor];
     _categoryView.titleLabelZoomEnabled = NO;
-    _categoryView.titles = @[@"奶粉", @"尿不湿 ", @"婴幼食品 ", @"孕童哺喂", @"婴童洗护"];
+    _categoryView.titles = @[@"已加盟", @"所有品牌"];
     _categoryView.titleFont = [UIFont systemFontOfSize:14 weight:UIFontWeightMedium];
     _categoryView.titleColor = [UIColor blackColor];
     _categoryView.titleSelectedColor = HXControlBg;
@@ -103,5 +108,14 @@
     
     [self.scrollView addSubview:targetViewController.view];
 }
-
+#pragma mark -- 点击事件
+-(void)filterClicked
+{
+    GXGoodsFilterView *fliter = [GXGoodsFilterView loadXibView];
+    fliter.hxn_size = CGSizeMake(HX_SCREEN_WIDTH-80, HX_SCREEN_HEIGHT);
+    
+    self.zh_popupController = [[zhPopupController alloc] init];
+    self.zh_popupController.layoutType = zhPopupLayoutTypeRight;
+    [self.zh_popupController presentContentView:fliter duration:0.25 springAnimated:NO];
+}
 @end

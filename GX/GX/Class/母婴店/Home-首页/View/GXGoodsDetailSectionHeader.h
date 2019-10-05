@@ -13,6 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void(^sectionClickCall)(void);
 @interface GXGoodsDetailSectionHeader : UIView
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *moreTitle;
+@property (weak, nonatomic) IBOutlet UIImageView *moreImg;
+
 /* 点击 */
 @property(nonatomic,copy) sectionClickCall sectionClickCall;
 @end
