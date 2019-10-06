@@ -13,6 +13,13 @@
 #import "GXMyCollectVC.h"
 #import "GXMyBusinessVC.h"
 #import "GXMyCouponVC.h"
+#import "GXInviteVC.h"
+#import "GXComplainVC.h"
+#import "GXMyAddressVC.h"
+#import "GXHelpVC.h"
+#import "GXReportVC.h"
+#import "GXMemberVC.h"
+#import "GXMyIdeaVC.h"
 
 @interface GXMyVC ()
 
@@ -39,7 +46,8 @@
 }
 /** 权益中心 */
 - (IBAction)memberBtnClicked:(UIButton *)sender {
-    
+    GXMemberVC *mvc = [GXMemberVC new];
+    [self.navigationController pushViewController:mvc animated:YES];
 }
 /** 设置 */
 - (IBAction)settingBtnClicked:(UIButton *)sender {
@@ -68,22 +76,32 @@
 /** 其他操作 */
 - (IBAction)myOtherBtnClicked:(UIButton *)sender {
     if (sender.tag == 0) {
-        
-    }else if (sender.tag == 0){
-        
-    }else if (sender.tag == 0){
-        
-    }else if (sender.tag == 0){
-        
-    }else if (sender.tag == 0){
-        
-    }else if (sender.tag == 0){
-        
-    }else if (sender.tag == 0){
-        
-    }else if (sender.tag == 0){
-        
-    }else if (sender.tag == 0){
+        GXInviteVC *ivc = [GXInviteVC new];
+        [self.navigationController pushViewController:ivc animated:YES];
+    }else if (sender.tag == 1){
+        GXMyAddressVC *avc = [GXMyAddressVC new];
+        [self.navigationController pushViewController:avc animated:YES];
+    }else if (sender.tag == 2){
+        GXWebContentVC *wvc = [GXWebContentVC new];
+        wvc.url = @"http://news.cctv.com/2019/10/03/ARTI2EUlwRGH3jMPI6cAVqti191003.shtml";
+        wvc.navTitle = @"售后标准";
+        [self.navigationController pushViewController:wvc animated:YES];
+    }else if (sender.tag == 3){
+        GXMemberVC *mvc = [GXMemberVC new];
+        [self.navigationController pushViewController:mvc animated:YES];
+    }else if (sender.tag == 4){
+        GXHelpVC *hvc = [GXHelpVC new];
+        [self.navigationController pushViewController:hvc animated:YES];
+    }else if (sender.tag == 5){
+        GXMyIdeaVC *cvc = [GXMyIdeaVC new];
+        [self.navigationController pushViewController:cvc animated:YES];
+    }else if (sender.tag == 6){
+        GXComplainVC *cvc = [GXComplainVC new];
+        [self.navigationController pushViewController:cvc animated:YES];
+    }else if (sender.tag == 7){
+        GXReportVC *rvc = [GXReportVC new];
+        [self.navigationController pushViewController:rvc animated:YES];
+    }else if (sender.tag == 8){
         FSActionSheet *as = [[FSActionSheet alloc] initWithTitle:@"客户经理" delegate:nil cancelButtonTitle:@"取消" highlightedButtonTitle:nil otherButtonTitles:@[@"13487655423(王鹏)"]];
         //        hx_weakify(self);
         [as showWithSelectedCompletion:^(NSInteger selectedIndex) {

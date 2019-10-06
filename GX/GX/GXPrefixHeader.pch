@@ -20,7 +20,6 @@
 #import <YYModel.h>
 #import "MSUserManager.h"
 #import "UIBarButtonItem+HXNExtension.h"
-#import "JMNotifyView.h"
 #import "UIButton+HXCode.h"
 #import "LYEmptyViewHeader.h"
 #import "SPButton.h"

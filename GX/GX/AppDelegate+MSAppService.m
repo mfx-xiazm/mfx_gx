@@ -97,7 +97,7 @@
             case HXNetworkStatusNotReachable: {
                 /// 无网络
                 HXLog(@"--无网络--");
-                [JMNotifyView showNotify:@"网络连接不可用，请检查网络设置"];
+                [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"网络连接不可用，请检查网络设置"];
             }
                 break;
             case HXNetworkStatusReachableViaWWAN: {
