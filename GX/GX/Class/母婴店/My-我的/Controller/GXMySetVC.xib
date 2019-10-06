@@ -24,17 +24,10 @@
                     <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9dT-X1-Qzf">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="500"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="490"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qcm-7V-Tv9" userLabel="分割线">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="10"/>
-                                    <color key="backgroundColor" red="0.96470588239999999" green="0.96862745100000003" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="10" id="9cj-RK-CYT"/>
-                                    </constraints>
-                                </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8ma-AY-96p">
-                                    <rect key="frame" x="0.0" y="10" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="账号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="epm-pU-mn5">
                                             <rect key="frame" x="10" y="18" width="25" height="14.5"/>
@@ -69,7 +62,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D5Y-j9-Bq6">
-                                    <rect key="frame" x="0.0" y="60" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="50" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="更换绑定手机号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wf6-pR-U6p">
                                             <rect key="frame" x="10" y="18" width="86" height="14.5"/>
@@ -119,7 +112,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="trz-hS-DeP">
-                                    <rect key="frame" x="0.0" y="110" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="100" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登录密码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gK1-00-t4C">
                                             <rect key="frame" x="10" y="18" width="49.5" height="14.5"/>
@@ -161,14 +154,14 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sdf-6O-r9n" userLabel="分割线">
-                                    <rect key="frame" x="0.0" y="160" width="414" height="10"/>
+                                    <rect key="frame" x="0.0" y="150" width="414" height="10"/>
                                     <color key="backgroundColor" red="0.96470588239999999" green="0.96862745100000003" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="10" id="IoX-H3-huO"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r3Q-L4-KJC">
-                                    <rect key="frame" x="0.0" y="170" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="160" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="资质信息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l86-ce-veB">
                                             <rect key="frame" x="10" y="18" width="49.5" height="14.5"/>
@@ -218,7 +211,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tJM-q7-76e">
-                                    <rect key="frame" x="0.0" y="220" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="210" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="食品经营许可证" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sKM-jp-Zb7">
                                             <rect key="frame" x="10" y="18" width="86" height="14.5"/>
@@ -260,14 +253,14 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cGN-dN-qqn" userLabel="分割线">
-                                    <rect key="frame" x="0.0" y="270" width="414" height="10"/>
+                                    <rect key="frame" x="0.0" y="260" width="414" height="10"/>
                                     <color key="backgroundColor" red="0.96470588239999999" green="0.96862745100000003" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="10" id="FL7-qI-nRC"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MIb-8K-m93">
-                                    <rect key="frame" x="0.0" y="280" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="270" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="关于呱选" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="14H-vA-CDE">
                                             <rect key="frame" x="10" y="18" width="49.5" height="14.5"/>
@@ -309,7 +302,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lSJ-AV-8fS">
-                                    <rect key="frame" x="0.0" y="330" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="320" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当前版本" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2NG-pn-TcU">
                                             <rect key="frame" x="10" y="18" width="49.5" height="14.5"/>
@@ -344,14 +337,14 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tRk-Wx-Jdb" userLabel="分割线">
-                                    <rect key="frame" x="0.0" y="380" width="414" height="10"/>
+                                    <rect key="frame" x="0.0" y="370" width="414" height="10"/>
                                     <color key="backgroundColor" red="0.96470588239999999" green="0.96862745100000003" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="10" id="QcU-FX-tJd"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zha-2J-a4y">
-                                    <rect key="frame" x="0.0" y="390" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="380" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="清除缓存" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NK6-h2-Trg">
                                             <rect key="frame" x="10" y="18" width="49.5" height="14.5"/>
@@ -401,7 +394,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HJE-Bz-k5H">
-                                    <rect key="frame" x="0.0" y="440" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="430" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="退出当前账号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zgt-cA-gXX">
                                             <rect key="frame" x="10" y="18" width="74" height="14.5"/>
@@ -453,7 +446,6 @@
                                 <constraint firstItem="lSJ-AV-8fS" firstAttribute="top" secondItem="MIb-8K-m93" secondAttribute="bottom" id="Dka-ir-U4T"/>
                                 <constraint firstItem="tJM-q7-76e" firstAttribute="top" secondItem="r3Q-L4-KJC" secondAttribute="bottom" id="Fca-UM-osz"/>
                                 <constraint firstItem="Zha-2J-a4y" firstAttribute="top" secondItem="tRk-Wx-Jdb" secondAttribute="bottom" id="GsQ-v5-uxc"/>
-                                <constraint firstAttribute="trailing" secondItem="qcm-7V-Tv9" secondAttribute="trailing" id="I5r-ir-DLB"/>
                                 <constraint firstItem="r3Q-L4-KJC" firstAttribute="top" secondItem="Sdf-6O-r9n" secondAttribute="bottom" id="IDe-C0-2fR"/>
                                 <constraint firstItem="Zha-2J-a4y" firstAttribute="leading" secondItem="9dT-X1-Qzf" secondAttribute="leading" id="Jac-73-KHb"/>
                                 <constraint firstAttribute="trailing" secondItem="tJM-q7-76e" secondAttribute="trailing" id="L4g-ea-V3Z"/>
@@ -462,6 +454,7 @@
                                 <constraint firstAttribute="trailing" secondItem="MIb-8K-m93" secondAttribute="trailing" id="Quk-l4-109"/>
                                 <constraint firstItem="tRk-Wx-Jdb" firstAttribute="top" secondItem="lSJ-AV-8fS" secondAttribute="bottom" id="SNN-fl-VPH"/>
                                 <constraint firstAttribute="trailing" secondItem="HJE-Bz-k5H" secondAttribute="trailing" id="UXY-7y-jib"/>
+                                <constraint firstItem="8ma-AY-96p" firstAttribute="top" secondItem="9dT-X1-Qzf" secondAttribute="top" id="XOZ-fC-fTp"/>
                                 <constraint firstAttribute="trailing" secondItem="cGN-dN-qqn" secondAttribute="trailing" id="bUf-VG-yPV"/>
                                 <constraint firstItem="MIb-8K-m93" firstAttribute="leading" secondItem="9dT-X1-Qzf" secondAttribute="leading" id="c41-cw-vU0"/>
                                 <constraint firstAttribute="bottom" secondItem="HJE-Bz-k5H" secondAttribute="bottom" constant="10" id="eaT-Gb-fzh"/>
@@ -471,11 +464,8 @@
                                 <constraint firstAttribute="trailing" secondItem="8ma-AY-96p" secondAttribute="trailing" id="gle-hZ-yLN"/>
                                 <constraint firstItem="D5Y-j9-Bq6" firstAttribute="leading" secondItem="9dT-X1-Qzf" secondAttribute="leading" id="h88-gp-5yt"/>
                                 <constraint firstItem="trz-hS-DeP" firstAttribute="top" secondItem="D5Y-j9-Bq6" secondAttribute="bottom" id="hdD-92-H1o"/>
-                                <constraint firstItem="8ma-AY-96p" firstAttribute="top" secondItem="qcm-7V-Tv9" secondAttribute="bottom" id="iZd-R6-1TZ"/>
-                                <constraint firstItem="qcm-7V-Tv9" firstAttribute="top" secondItem="9dT-X1-Qzf" secondAttribute="top" id="jDX-bw-8Ps"/>
                                 <constraint firstItem="HJE-Bz-k5H" firstAttribute="top" secondItem="Zha-2J-a4y" secondAttribute="bottom" id="kPa-Ye-pxj"/>
                                 <constraint firstAttribute="trailing" secondItem="r3Q-L4-KJC" secondAttribute="trailing" id="n61-zR-en1"/>
-                                <constraint firstItem="qcm-7V-Tv9" firstAttribute="leading" secondItem="9dT-X1-Qzf" secondAttribute="leading" id="nRY-iF-JkP"/>
                                 <constraint firstAttribute="trailing" secondItem="Sdf-6O-r9n" secondAttribute="trailing" id="nbn-LB-jdO"/>
                                 <constraint firstItem="MIb-8K-m93" firstAttribute="top" secondItem="cGN-dN-qqn" secondAttribute="bottom" id="pOR-H7-G62"/>
                                 <constraint firstItem="HJE-Bz-k5H" firstAttribute="leading" secondItem="9dT-X1-Qzf" secondAttribute="leading" id="pkr-oS-ATv"/>

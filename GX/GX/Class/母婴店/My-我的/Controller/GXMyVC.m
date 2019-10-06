@@ -20,6 +20,7 @@
 #import "GXReportVC.h"
 #import "GXMemberVC.h"
 #import "GXMyIdeaVC.h"
+#import "GXMyOrderVC.h"
 
 @interface GXMyVC ()
 
@@ -71,7 +72,9 @@
 }
 /** 我的订单 */
 - (IBAction)myOrderClicked:(UIButton *)sender {
-    
+    GXMyOrderVC *ovc = [GXMyOrderVC new];
+    ovc.selectIndex = sender.tag;
+    [self.navigationController pushViewController:ovc animated:YES];
 }
 /** 其他操作 */
 - (IBAction)myOtherBtnClicked:(UIButton *)sender {
