@@ -45,7 +45,6 @@ static NSString *const AccountManageCell = @"AccountManageCell";
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GXAccountManageCell class]) bundle:nil] forCellReuseIdentifier:AccountManageCell];
 }
 #pragma mark -- 点击事件
-
 - (IBAction)cashBtnClicked:(UIButton *)sender {
     GXCashVC *cvc = [GXCashVC new];
     [self.navigationController pushViewController:cvc animated:YES];

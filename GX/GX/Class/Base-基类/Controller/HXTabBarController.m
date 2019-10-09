@@ -18,6 +18,10 @@
 #import "GXOrderManageVC.h"
 #import "GXAccountManageVC.h"
 
+#import "GXClientManageVC.h"
+#import "GXSalerOrderManageVC.h"
+#import "GXSalerMyVC.h"
+
 @interface HXTabBarController ()<UITabBarControllerDelegate>
 
 @end
@@ -54,8 +58,15 @@
     [self setupChildVc:[[GXMyVC alloc] init] title:@"我的" image:@"我的图标" selectedImage:@"我的图标选中"];
      */
     // 添加供应商子控制器
+    /*
     [self setupChildVc:[[GXOrderManageVC alloc] init] title:@"订单管理" image:@"订单管理图标" selectedImage:@"订单管理图标选中"];
     [self setupChildVc:[[GXAccountManageVC alloc] init] title:@"账户管理" image:@"账户管理图标" selectedImage:@"账户管理图标选中"];
+     */
+    // 添加销售员子控制器
+    [self setupChildVc:[[GXClientManageVC alloc] init] title:@"客户管理" image:@"客户管理图标" selectedImage:@"客户管理图标选中"];
+    [self setupChildVc:[[GXSalerOrderManageVC alloc] init] title:@"订单管理" image:@"订单管理图标" selectedImage:@"订单管理图标选中"];
+    [self setupChildVc:[[GXAccountManageVC alloc] init] title:@"账户管理" image:@"账户管理图标" selectedImage:@"账户管理图标选中"];
+    [self setupChildVc:[[GXSalerMyVC alloc] init] title:@"个人中心" image:@"我的图标" selectedImage:@"我的图标选中"];
     
     self.delegate = self;
     

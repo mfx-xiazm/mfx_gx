@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h7M-sB-CI8">
-                        <rect key="frame" x="0.0" y="0.0" width="346" height="39.5"/>
+                        <rect key="frame" x="0.0" y="5" width="346" height="39.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="订单编号：HPC225697744352" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KDV-gs-spk">
                                 <rect key="frame" x="10" y="12" width="188" height="16"/>
@@ -54,7 +54,7 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JhW-Xi-znG">
-                        <rect key="frame" x="0.0" y="39.5" width="346" height="60"/>
+                        <rect key="frame" x="0.0" y="44.5" width="346" height="60"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="某某磨订单" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Sw-F0-6Vc">
                                 <rect key="frame" x="10" y="10" width="66.5" height="16"/>
@@ -99,8 +99,8 @@
                 <constraints>
                     <constraint firstItem="JhW-Xi-znG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="AvC-Gt-G52"/>
                     <constraint firstAttribute="trailing" secondItem="JhW-Xi-znG" secondAttribute="trailing" id="FMY-a3-Biq"/>
-                    <constraint firstAttribute="bottom" secondItem="JhW-Xi-znG" secondAttribute="bottom" constant="10" id="Ki3-m4-c0l"/>
-                    <constraint firstItem="h7M-sB-CI8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="PAw-dK-d2g"/>
+                    <constraint firstAttribute="bottom" secondItem="JhW-Xi-znG" secondAttribute="bottom" constant="5" id="Ki3-m4-c0l"/>
+                    <constraint firstItem="h7M-sB-CI8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="PAw-dK-d2g"/>
                     <constraint firstItem="h7M-sB-CI8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="YM8-NU-s0V"/>
                     <constraint firstAttribute="trailing" secondItem="h7M-sB-CI8" secondAttribute="trailing" id="cPP-Jf-aI3"/>
                     <constraint firstItem="JhW-Xi-znG" firstAttribute="top" secondItem="h7M-sB-CI8" secondAttribute="bottom" id="lRT-JY-3UN"/>
