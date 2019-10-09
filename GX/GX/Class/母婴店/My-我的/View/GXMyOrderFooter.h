@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface GXMyOrderFooter : UIView
+@property (weak, nonatomic) IBOutlet UIView *handleView;
 
 @end
 
