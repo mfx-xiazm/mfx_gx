@@ -22,7 +22,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F3y-ar-s1M">
                         <rect key="frame" x="0.0" y="0.0" width="295" height="100"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="J1Z-5n-7vC">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="J1Z-5n-7vC">
                                 <rect key="frame" x="10" y="10" width="80" height="80"/>
                                 <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -96,6 +96,11 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <size key="customSize" width="295" height="100"/>
+            <connections>
+                <outlet property="cover_img" destination="J1Z-5n-7vC" id="yad-8C-lPq"/>
+                <outlet property="good_name" destination="Plb-M4-Isi" id="K8F-jy-9f6"/>
+                <outlet property="price" destination="629-lC-K5t" id="K1V-sV-a89"/>
+            </connections>
             <point key="canvasLocation" x="-6.5217391304347831" y="125.89285714285714"/>
         </collectionViewCell>
     </objects>

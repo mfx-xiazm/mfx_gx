@@ -9,9 +9,9 @@
 #import "ZLCollectionReusableView.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
+@class GYHomeBanner;
 @interface GXHomeBannerHeader : ZLCollectionReusableView
-
+@property(nonatomic,strong) NSArray<GYHomeBanner *> *homeAdv;
 @end
 
 NS_ASSUME_NONNULL_END

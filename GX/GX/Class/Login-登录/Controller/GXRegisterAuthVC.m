@@ -133,7 +133,7 @@ static NSString *const RegisterAuthCell = @"RegisterAuthCell";
     hx_weakify(self);
     [HXNetworkTool POST:HXRC_M_URL action:@"getCatalogItem" parameters:@{} success:^(id responseObject) {
         hx_strongify(weakSelf);
-        if([[responseObject objectForKey:@"status"] boolValue]) {
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             strongSelf.catalogItem = [NSArray yy_modelArrayWithClass:[GXCatalogItem class] json:responseObject[@"data"]];
             dispatch_async(dispatch_get_main_queue(), ^{
                 strongSelf.header.catalogItem = strongSelf.catalogItem;
@@ -150,7 +150,7 @@ static NSString *const RegisterAuthCell = @"RegisterAuthCell";
     hx_weakify(self);
     [HXNetworkTool POST:HXRC_M_URL action:@"getAreaData" parameters:@{} success:^(id responseObject) {
         hx_strongify(weakSelf);
-        if([[responseObject objectForKey:@"status"] boolValue]) {
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             strongSelf.region = [[GXSelectRegion alloc] init];
             strongSelf.region.regions = [NSArray yy_modelArrayWithClass:[GXRegion class] json:responseObject[@"data"]];
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -271,7 +271,7 @@ static NSString *const RegisterAuthCell = @"RegisterAuthCell";
     hx_weakify(self);
     [HXNetworkTool POST:HXRC_M_URL action:@"register" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
-        if([[responseObject objectForKey:@"status"] boolValue]) {
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [strongSelf.navigationController popToRootViewControllerAnimated:YES];

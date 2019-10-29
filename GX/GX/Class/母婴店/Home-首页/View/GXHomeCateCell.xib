@@ -19,9 +19,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="96" height="124"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nOr-zX-FvF">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="精选好店" translatesAutoresizingMaskIntoConstraints="NO" id="nOr-zX-FvF">
                         <rect key="frame" x="0.0" y="0.0" width="96" height="96"/>
-                        <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="nOr-zX-FvF" secondAttribute="height" multiplier="1:1" id="WHg-g5-gjk"/>
                         </constraints>
@@ -50,7 +49,14 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <size key="customSize" width="96" height="124"/>
+            <connections>
+                <outlet property="cateImg" destination="nOr-zX-FvF" id="7xw-R6-Lgr"/>
+                <outlet property="cateName" destination="zfQ-kd-nXY" id="YHl-dl-RC7"/>
+            </connections>
             <point key="canvasLocation" x="-26.086956521739133" y="64.285714285714278"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="精选好店" width="56.5" height="56.5"/>
+    </resources>
 </document>

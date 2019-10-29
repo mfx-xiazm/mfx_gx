@@ -10,9 +10,19 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GYHomeBanner,GYHomeRegional,GYHomeMarketTrend,GYHomeBrand,GYHomeActivity;
 @interface GXHomePushCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *contentImage;
-
+/* banner */
+@property(nonatomic,strong) GYHomeBanner *banner;
+/* 控区控价 */
+@property(nonatomic,strong) GYHomeRegional *regional;
+/* 通货行情 */
+@property(nonatomic,strong) GYHomeMarketTrend *marketTrend;
+/* 品牌 */
+@property(nonatomic,strong) GYHomeBrand *brand;
+/* 活动 */
+@property(nonatomic,strong) GYHomeActivity *activity;
 @end
 
 NS_ASSUME_NONNULL_END

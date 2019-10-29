@@ -173,6 +173,7 @@
 		9094F585234A15F700106699 /* GXExpressDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9094F583234A15F700106699 /* GXExpressDetailCell.xib */; };
 		9094F589234A190000106699 /* GXEvaluateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9094F587234A190000106699 /* GXEvaluateVC.m */; };
 		9094F58A234A190000106699 /* GXEvaluateVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9094F588234A190000106699 /* GXEvaluateVC.xib */; };
+		9099EE6D2367D2510088D80C /* GXHomeData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099EE6C2367D2510088D80C /* GXHomeData.m */; };
 		909EAA302348295D00575FB8 /* GXRegionalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 909EAA2E2348295D00575FB8 /* GXRegionalCell.m */; };
 		909EAA312348295D00575FB8 /* GXRegionalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 909EAA2F2348295D00575FB8 /* GXRegionalCell.xib */; };
 		909EAA342348297500575FB8 /* GXRegionalHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 909EAA332348297500575FB8 /* GXRegionalHeader.m */; };
@@ -656,6 +657,8 @@
 		9094F586234A190000106699 /* GXEvaluateVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXEvaluateVC.h; sourceTree = "<group>"; };
 		9094F587234A190000106699 /* GXEvaluateVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXEvaluateVC.m; sourceTree = "<group>"; };
 		9094F588234A190000106699 /* GXEvaluateVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXEvaluateVC.xib; sourceTree = "<group>"; };
+		9099EE6B2367D2510088D80C /* GXHomeData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXHomeData.h; sourceTree = "<group>"; };
+		9099EE6C2367D2510088D80C /* GXHomeData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXHomeData.m; sourceTree = "<group>"; };
 		909EAA2D2348295D00575FB8 /* GXRegionalCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXRegionalCell.h; sourceTree = "<group>"; };
 		909EAA2E2348295D00575FB8 /* GXRegionalCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXRegionalCell.m; sourceTree = "<group>"; };
 		909EAA2F2348295D00575FB8 /* GXRegionalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXRegionalCell.xib; sourceTree = "<group>"; };
@@ -1455,6 +1458,15 @@
 			name = "我的订单";
 			sourceTree = "<group>";
 		};
+		9099EE6A2367D23B0088D80C /* 首页 */ = {
+			isa = PBXGroup;
+			children = (
+				9099EE6B2367D2510088D80C /* GXHomeData.h */,
+				9099EE6C2367D2510088D80C /* GXHomeData.m */,
+			);
+			name = "首页";
+			sourceTree = "<group>";
+		};
 		909EAA372348344F00575FB8 /* 控区控价 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1651,8 +1663,8 @@
 			isa = PBXGroup;
 			children = (
 				90C0B32F2340CD7100A8C55B /* HXNetworkTool.h */,
-				90C0B3302340CD7100A8C55B /* HXNetworkCache.h */,
 				90C0B3312340CD7100A8C55B /* HXNetworkTool.m */,
+				90C0B3302340CD7100A8C55B /* HXNetworkCache.h */,
 				90C0B3322340CD7100A8C55B /* HXNetworkCache.m */,
 			);
 			path = Network;
@@ -1672,8 +1684,8 @@
 			children = (
 				90C0B3392340CD7100A8C55B /* MSUserInfo.h */,
 				90C0B3372340CD7100A8C55B /* MSUserInfo.m */,
-				90C0B3382340CD7100A8C55B /* MSUserManager.m */,
 				90C0B33A2340CD7100A8C55B /* MSUserManager.h */,
+				90C0B3382340CD7100A8C55B /* MSUserManager.m */,
 			);
 			path = UserManager;
 			sourceTree = "<group>";
@@ -2133,6 +2145,7 @@
 		90C0B4142340D27200A8C55B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9099EE6A2367D23B0088D80C /* 首页 */,
 				905B3DF92345998500282515 /* 商品详情 */,
 			);
 			path = Model;
@@ -3211,6 +3224,7 @@
 				9069739B23444E8600D8A8FF /* SPPickerView.m in Sources */,
 				904F4A73234893C60056AF49 /* GXChooseCouponVC.m in Sources */,
 				90C0B45E2340DD1300A8C55B /* AppDelegate+MSPushService.m in Sources */,
+				9099EE6D2367D2510088D80C /* GXHomeData.m in Sources */,
 				906973D923449B5400D8A8FF /* GXHomeSectionBgReusableView.m in Sources */,
 				906973BB2344781A00D8A8FF /* GXShopGoodsCell.m in Sources */,
 				905B3DFF23459A0400282515 /* GXGoodsMaterialLayout.m in Sources */,

@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
+@class GYHomeTopCate;
 @interface GXHomeCateCell : UICollectionViewCell
-
+/* 分类 */
+@property(nonatomic,strong) GYHomeTopCate *topCate;
 @end
 
 NS_ASSUME_NONNULL_END

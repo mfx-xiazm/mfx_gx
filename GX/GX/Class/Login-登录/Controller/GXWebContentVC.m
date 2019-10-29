@@ -88,7 +88,7 @@
     hx_weakify(self);
     [HXNetworkTool POST:HXRC_M_URL action:action parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
-        if([[responseObject objectForKey:@"status"] boolValue]) {
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             if (strongSelf.requestType == 1) {
                 NSString *h5 = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"><style>img{width:100%%; height:auto;}body{margin:0 15px;}</style></head><body>%@</body></html>",responseObject[@"data"]];
                 [strongSelf.webView loadHTMLString:h5 baseURL:nil];

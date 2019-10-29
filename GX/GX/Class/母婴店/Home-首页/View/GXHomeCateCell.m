@@ -7,12 +7,23 @@
 //
 
 #import "GXHomeCateCell.h"
+#import "GXHomeData.h"
 
+@interface GXHomeCateCell ()
+@property (weak, nonatomic) IBOutlet UIImageView *cateImg;
+@property (weak, nonatomic) IBOutlet UILabel *cateName;
+
+@end
 @implementation GXHomeCateCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
 }
-
+-(void)setTopCate:(GYHomeTopCate *)topCate
+{
+    _topCate = topCate;
+    self.cateName.text = _topCate.cate_name;
+    self.cateImg.image = HXGetImage(_topCate.image_name);
+}
 @end

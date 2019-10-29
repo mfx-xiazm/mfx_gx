@@ -10,8 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GYHomePushGoods;
 @interface GXShopGoodsCell : UICollectionViewCell
-
+/* 商品 */
+@property(nonatomic,strong) GYHomePushGoods *goods;
 @end
 
 NS_ASSUME_NONNULL_END

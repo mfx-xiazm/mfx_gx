@@ -32,6 +32,7 @@
 #import "GXBrandDetailVC.h"
 #import "GXWebContentVC.h"
 #import "GXMessageVC.h"
+#import "GXHomeData.h"
 
 static NSString *const HomeCateCell = @"HomeCateCell";
 static NSString *const ShopGoodsCell = @"ShopGoodsCell";
@@ -47,6 +48,8 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
 @property(nonatomic,strong) HXSearchBar *searchBar;
 /* 消息 */
 @property(nonatomic,strong) SPButton *msgBtn;
+/* 首页数据 */
+@property(nonatomic,strong) GXHomeData *homeData;
 @end
 
 @implementation GXHomeVC
@@ -55,6 +58,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
     [super viewDidLoad];
     [self setUpNavBar];
     [self setUpCollectionView];
+    [self getHomeDataRequest];
 }
 -(void)setUpNavBar
 {
@@ -77,7 +81,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
     [msg setTitle:@"消息" forState:UIControlStateNormal];
     [msg addTarget:self action:@selector(msgClicked) forControlEvents:UIControlEventTouchUpInside];
     [msg setTitleColor:UIColorFromRGB(0XFFFFFF) forState:UIControlStateNormal];
-    
+    msg.badgeCenterOffset = CGPointMake(-10, 5);
     self.msgBtn = msg;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:msg];
@@ -112,6 +116,41 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
     HXLog(@"搜索条");
     return NO;
 }
+#pragma mark -- 接口请求
+-(void)getHomeDataRequest
+{
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"getHomeData" parameters:@{} success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
+        [strongSelf.collectionView.mj_header endRefreshing];
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            strongSelf.homeData = [GXHomeData yy_modelWithDictionary:responseObject[@"data"]];
+            NSArray *tempArr = @[@{@"cate_name":@"精选好店",@"image_name":@"精选好店"},
+                                 @{@"cate_name":@"品牌优选",@"image_name":@"品牌优选"},
+                                 @{@"cate_name":@"控区控价",@"image_name":@"控区控价"},
+                                 @{@"cate_name":@"促销神器",@"image_name":@"促销神器"},
+                                 @{@"cate_name":@"卖货素材",@"image_name":@"卖货素材"}
+                                 ];
+            strongSelf.homeData.homeTopCate = [NSArray yy_modelArrayWithClass:[GYHomeTopCate class] json:tempArr];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                strongSelf.collectionView.hidden = NO;
+                if (strongSelf.homeData.homeUnReadMsg) {
+                    [strongSelf.msgBtn showBadgeWithStyle:WBadgeStyleRedDot value:1 animationType:WBadgeAnimTypeNone];
+                }
+                [strongSelf.collectionView reloadData];
+            });
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
+        [strongSelf.collectionView.mj_header endRefreshing];
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
+}
+
 #pragma mark -- UICollectionView 数据源和代理
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -119,19 +158,19 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     if (section == 0) {//分类
-        return 5;
+        return self.homeData.homeTopCate.count;
     }else if (section == 1) {//每日必抢
         return 5;
     }else if (section == 2) {//控区控价
-        return 2;
+        return self.homeData.home_control_price_brand.count;
     }else if (section == 3) {//通货行情
-        return 2;
+        return self.homeData.currency_img.count;
     }else if (section == 4) {//品牌优选
-        return 3;
+        return self.homeData.home_brand_goods.count;
     }else if (section == 5) {//精选活动
-        return 3;
+        return self.homeData.home_select_material.count;
     }else{//为你推荐
-        return 8;
+        return self.homeData.home_recommend_goods.count;
     }
 }
 - (ZLLayoutType)collectionView:(UICollectionView *)collectionView layout:(ZLCollectionViewBaseFlowLayout *)collectionViewLayout typeOfLayout:(NSInteger)section {
@@ -172,6 +211,8 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {//分类
         GXHomeCateCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:HomeCateCell forIndexPath:indexPath];
+        GYHomeTopCate *topCate = self.homeData.homeTopCate[indexPath.item];
+        cell.topCate = topCate;
         return cell;
     }else if (indexPath.section == 1) {//每日必抢
         if (indexPath.item) {
@@ -179,22 +220,34 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
             return cell;
         }else{
             GXDiscountGoodsCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:DiscountGoodsCell forIndexPath:indexPath];
+            GYHomeDiscount *discount = self.homeData.home_rushbuy[indexPath.item];
+            cell.discount = discount;
             return cell;
         }
     }else if (indexPath.section == 2) {//控区控价
         GXHomePushCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:HomePushCell forIndexPath:indexPath];
+        GYHomeRegional *regional = self.homeData.home_control_price_brand[indexPath.item];
+        cell.regional = regional;
         return cell;
     }else if (indexPath.section == 3) {//通货行情
         GXHomePushCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:HomePushCell forIndexPath:indexPath];
+        GYHomeMarketTrend *marketTrend = self.homeData.currency_img[indexPath.item];
+        cell.marketTrend = marketTrend;
         return cell;
     }else if (indexPath.section == 4) {//品牌优选
         GXHomePushCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:HomePushCell forIndexPath:indexPath];
+        GYHomeBrand *brand = self.homeData.home_brand_goods[indexPath.item];
+        cell.brand = brand;
         return cell;
     }else if (indexPath.section == 5) {//精选活动
         GXHomePushCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:HomePushCell forIndexPath:indexPath];
+        GYHomeActivity *activity = self.homeData.home_select_material[indexPath.item];
+        cell.activity = activity;
         return cell;
     }else{//为你推荐
         GXShopGoodsCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:ShopGoodsCell forIndexPath:indexPath];
+        GYHomePushGoods *goods = self.homeData.home_recommend_goods[indexPath.item];
+        cell.goods = goods;
         return cell;
     }
 }
@@ -211,6 +264,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]){
         if (indexPath.section == 0) {
             GXHomeBannerHeader *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HomeBannerHeader forIndexPath:indexPath];
+            header.homeAdv = self.homeData.homeAdv;
             return header;
         }else{
             GXHomeSectionHeader *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HomeSectionHeader forIndexPath:indexPath];

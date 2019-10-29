@@ -10,8 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GYHomeDiscount;
 @interface GXDiscountGoodsCell : UICollectionViewCell
-
+/* 抢购 */
+@property(nonatomic,strong) GYHomeDiscount *discount;
 @end
 
 NS_ASSUME_NONNULL_END

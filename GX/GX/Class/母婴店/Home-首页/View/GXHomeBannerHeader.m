@@ -31,10 +31,8 @@
     pageControl.numberOfPages = 4;
     pageControl.currentPageIndicatorSize = CGSizeMake(6, 6);
     pageControl.pageIndicatorSize = CGSizeMake(6, 6);
-//    pageControl.pageIndicatorImage = HXGetImage(@"轮播点灰");
-//    pageControl.currentPageIndicatorImage = HXGetImage(@"轮播点黑");
-    pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
-    pageControl.currentPageIndicatorTintColor = HXControlBg;
+    pageControl.pageIndicatorImage = HXGetImage(@"灰色渐进器");
+    pageControl.currentPageIndicatorImage = HXGetImage(@"当前渐进器");
     pageControl.frame = CGRectMake(0, CGRectGetHeight(self.cyclePagerView.frame) - 20, CGRectGetWidth(self.cyclePagerView.frame), 20);
     self.pageControl = pageControl;
     [self.cyclePagerView addSubview:pageControl];
@@ -44,14 +42,21 @@
     [super layoutSubviews];
     self.pageControl.frame = CGRectMake(0, CGRectGetHeight(self.cyclePagerView.frame) - 20, CGRectGetWidth(self.cyclePagerView.frame), 20);
 }
+-(void)setHomeAdv:(NSArray<GYHomeBanner *> *)homeAdv
+{
+    _homeAdv = homeAdv;
+    self.pageControl.numberOfPages = _homeAdv.count;
+    [self.cyclePagerView reloadData];
+}
 #pragma mark -- TYCyclePagerView代理
 - (NSInteger)numberOfItemsInPagerView:(TYCyclePagerView *)pageView {
-    return 4;
+    return self.homeAdv.count;
 }
 
 - (UICollectionViewCell *)pagerView:(TYCyclePagerView *)pagerView cellForItemAtIndex:(NSInteger)index {
     GXHomePushCell *cell = [pagerView dequeueReusableCellWithReuseIdentifier:@"TopBannerCell" forIndex:index];
-                        
+    GYHomeBanner *banner = self.homeAdv[index];
+    cell.banner = banner;
     return cell;
 }
 

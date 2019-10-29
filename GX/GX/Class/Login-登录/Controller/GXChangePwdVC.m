@@ -69,7 +69,7 @@
     hx_weakify(self);
     [HXNetworkTool POST:HXRC_M_URL action:@"getCheckCode" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
-        if([[responseObject objectForKey:@"status"] boolValue]) {
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             [sender startWithTime:60 title:@"获取验证码" countDownTitle:@"s" mainColor:HXControlBg countColor:HXControlBg];
             strongSelf.sms_id = [NSString stringWithFormat:@"%@",responseObject[@"data"]];
         }else{
@@ -92,7 +92,7 @@
     [HXNetworkTool POST:HXRC_M_URL action:(self.dataType ==1)?@"forgetPassword":@"editPassword" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         [btn stopLoading:@"确定" image:nil textColor:nil backgroundColor:nil];
-        if([[responseObject objectForKey:@"status"] boolValue]) {
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
             [strongSelf.navigationController popViewControllerAnimated:YES];
         }else{

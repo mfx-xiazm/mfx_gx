@@ -7,12 +7,29 @@
 //
 
 #import "GXShopGoodsCell.h"
+#import "GXHomeData.h"
 
+@interface GXShopGoodsCell ()
+@property (weak, nonatomic) IBOutlet UIImageView *cover_img;
+@property (weak, nonatomic) IBOutlet UILabel *goods_name;
+@property (weak, nonatomic) IBOutlet UILabel *price;
+
+@end
 @implementation GXShopGoodsCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
 }
-
+-(void)setGoods:(GYHomePushGoods *)goods
+{
+    _goods = goods;
+    [self.cover_img sd_setImageWithURL:[NSURL URLWithString:_goods.cover_img]];
+    self.goods_name.text = _goods.goods_name;
+    if ([_goods.control_type isEqualToString:@"1"]) {
+        self.price.text = [NSString stringWithFormat:@"￥%@-￥%@",_goods.min_price,_goods.max_price];
+    }else{
+        self.price.text = [NSString stringWithFormat:@"￥%@",_goods.min_price];
+    }
+}
 @end

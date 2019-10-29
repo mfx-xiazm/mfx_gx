@@ -93,7 +93,7 @@
     hx_weakify(self);
     [HXNetworkTool POST:HXRC_M_URL action:@"getCheckCode" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
-        if([[responseObject objectForKey:@"status"] boolValue]) {
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             [sender startWithTime:60 title:@"获取验证码" countDownTitle:@"s" mainColor:HXControlBg countColor:HXControlBg];
             strongSelf.sms_id = [NSString stringWithFormat:@"%@",responseObject[@"data"]];
         }else{
@@ -116,7 +116,7 @@
     [HXNetworkTool POST:HXRC_M_URL action:@"checkCode" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         [sender stopLoading:@"下一步" image:nil textColor:nil backgroundColor:nil];
-        if([[responseObject objectForKey:@"status"] boolValue]) {
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if ([strongSelf.role_type isEqualToString:@"1"]) {// 终端店
                     GXRegisterAuthVC *svc = [GXRegisterAuthVC new];

@@ -22,7 +22,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SOK-CU-l7L">
                         <rect key="frame" x="5" y="5" width="140" height="201"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="w5n-xW-14q">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="w5n-xW-14q">
                                 <rect key="frame" x="10" y="10" width="120" height="120"/>
                                 <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -82,6 +82,11 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <size key="customSize" width="150" height="211"/>
+            <connections>
+                <outlet property="cover_img" destination="w5n-xW-14q" id="YmJ-Pu-auU"/>
+                <outlet property="goods_name" destination="Cjh-CU-tgh" id="hxf-9N-4h7"/>
+                <outlet property="price" destination="bVh-hT-b60" id="c4h-sS-cpq"/>
+            </connections>
             <point key="canvasLocation" x="16" y="95"/>
         </collectionViewCell>
     </objects>

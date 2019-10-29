@@ -48,7 +48,7 @@
     
     [HXNetworkTool POST:HXRC_M_URL action:@"userLogin" parameters:parameters success:^(id responseObject) {
         [sender stopLoading:@"登录" image:nil textColor:nil backgroundColor:nil];
-        if([[responseObject objectForKey:@"status"] boolValue]) {
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             MSUserInfo *info = [MSUserInfo yy_modelWithDictionary:responseObject[@"data"]];
             [MSUserManager sharedInstance].curUserInfo = info;
             [[MSUserManager sharedInstance] saveUserInfo];
