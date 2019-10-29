@@ -7,19 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SPProvince.h"
-#import "SPCity.h"
-#import "SPDistrict.h"
+#import "GXRegion.h"
 
 #define kScreenWidth [[UIScreen mainScreen] bounds].size.width
 #define kScreenHeight [[UIScreen mainScreen] bounds].size.height
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXSelectRegion;
 @interface GXChooseAddressView : UIView
-@property (nonatomic, strong) NSArray *datas;
+@property (nonatomic, strong) GXSelectRegion *region;
 
-@property (nonatomic, copy) void(^lastComponentClickedBlock)(SPProvince *selectedProvince,SPCity *selectedCity,SPDistrict *selectedDistrict);
+@property (nonatomic, copy) void(^lastComponentClickedBlock)(NSInteger type,GXSelectRegion * _Nullable region);
 @end
 
 NS_ASSUME_NONNULL_END

@@ -12,6 +12,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GXLoginVC">
             <connections>
+                <outlet property="loginBtn" destination="HrR-4o-0Bq" id="UF5-od-2nO"/>
+                <outlet property="phone" destination="CnZ-hH-uqy" id="MYt-iD-ZQi"/>
+                <outlet property="pwd" destination="ae6-0P-WWk" id="46v-nG-jtF"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -31,6 +34,7 @@
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手机号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S4Z-jx-EZN">
                                             <rect key="frame" x="0.0" y="13" width="60" height="18"/>
+                                            <color key="tintColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="60" id="xOt-f4-Ulh"/>
                                             </constraints>
@@ -40,6 +44,7 @@
                                         </label>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入您的账号" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="CnZ-hH-uqy">
                                             <rect key="frame" x="70" y="2" width="274" height="40"/>
+                                            <color key="tintColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="p52-7z-Yg4"/>
                                             </constraints>
@@ -81,6 +86,7 @@
                                         </label>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入您的密码" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ae6-0P-WWk">
                                             <rect key="frame" x="70" y="2" width="244" height="40"/>
+                                            <color key="tintColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="9OW-bH-eui"/>
                                             </constraints>
@@ -95,6 +101,9 @@
                                             </constraints>
                                             <state key="normal" image="隐藏"/>
                                             <state key="selected" image="显示"/>
+                                            <connections>
+                                                <action selector="pwdStatusClicked:" destination="-1" eventType="touchUpInside" id="oGa-Bx-eeK"/>
+                                            </connections>
                                         </button>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dae-Qa-0EO" userLabel="分割线">
                                             <rect key="frame" x="0.0" y="43" width="354" height="1"/>
@@ -120,7 +129,7 @@
                                     </constraints>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jXx-NB-hsD">
-                                    <rect key="frame" x="30" y="376" width="138" height="27"/>
+                                    <rect key="frame" x="15" y="376" width="138" height="27"/>
                                     <state key="normal">
                                         <attributedString key="attributedTitle">
                                             <fragment content="没有账号？">
@@ -142,7 +151,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HrR-4o-0Bq">
-                                    <rect key="frame" x="30" y="413" width="354" height="44"/>
+                                    <rect key="frame" x="15" y="413" width="384" height="44"/>
                                     <color key="backgroundColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="b38-fY-DMe"/>
@@ -156,12 +165,9 @@
                                             <real key="value" value="6"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
-                                    <connections>
-                                        <action selector="loginClicked:" destination="-1" eventType="touchUpInside" id="Kfd-bt-38G"/>
-                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zxo-0t-Kai">
-                                    <rect key="frame" x="315" y="467" width="69" height="30"/>
+                                    <rect key="frame" x="330" y="467" width="69" height="30"/>
                                     <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                     <state key="normal" title="忘记密码?">
                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -174,10 +180,10 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="jXx-NB-hsD" firstAttribute="leading" secondItem="HrR-4o-0Bq" secondAttribute="leading" id="BOI-Rs-UYc"/>
-                                <constraint firstItem="HrR-4o-0Bq" firstAttribute="leading" secondItem="8WX-sO-aD9" secondAttribute="leading" constant="30" id="Lz1-E6-QKT"/>
+                                <constraint firstItem="HrR-4o-0Bq" firstAttribute="leading" secondItem="8WX-sO-aD9" secondAttribute="leading" constant="15" id="Lz1-E6-QKT"/>
                                 <constraint firstItem="n0f-Sf-6Jg" firstAttribute="leading" secondItem="8WX-sO-aD9" secondAttribute="leading" constant="30" id="RBw-Oz-nfL"/>
                                 <constraint firstItem="zxo-0t-Kai" firstAttribute="top" secondItem="HrR-4o-0Bq" secondAttribute="bottom" constant="10" id="SU5-rR-Pkr"/>
-                                <constraint firstAttribute="trailing" secondItem="HrR-4o-0Bq" secondAttribute="trailing" constant="30" id="am1-0f-hz8"/>
+                                <constraint firstAttribute="trailing" secondItem="HrR-4o-0Bq" secondAttribute="trailing" constant="15" id="am1-0f-hz8"/>
                                 <constraint firstItem="buo-xU-q0v" firstAttribute="top" secondItem="8WX-sO-aD9" secondAttribute="top" constant="120" id="d8K-Dm-A24"/>
                                 <constraint firstItem="buo-xU-q0v" firstAttribute="leading" secondItem="8WX-sO-aD9" secondAttribute="leading" constant="30" id="ftJ-fz-2c8"/>
                                 <constraint firstItem="HrR-4o-0Bq" firstAttribute="top" secondItem="jXx-NB-hsD" secondAttribute="bottom" constant="10" id="lNK-3H-b57"/>

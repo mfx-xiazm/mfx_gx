@@ -13,6 +13,7 @@ target 'GX' do
     pod "YYModel"
     pod "YYText"
     pod "JXCategoryView"
+    pod "WechatOpenSDK"
     pod "UMCCommon"
     pod "UMCSecurityPlugins"
     pod "UMCShare/Social/ReducedWeChat"

@@ -29,17 +29,17 @@
     if (_addressView == nil) {
         _addressView = [GXChooseAddressView loadXibView];
         _addressView.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 360);
-        __weak __typeof(self) weakSelf = self;
-        // 最后一列的行被点击的回调
-        _addressView.lastComponentClickedBlock = ^(SPProvince *selectedProvince, SPCity *selectedCity, SPDistrict *selectedDistrict) {
-            
-            [weakSelf.zh_popupController dismissWithDuration:0.25 springAnimated:NO];
-        HXLog(@"选中的%@-%@-%@",selectedProvince.fullname,selectedCity.fullname,selectedDistrict.fullname);
-        };
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"pcd.plist" ofType:nil];
-        NSArray *dictArray = [NSArray arrayWithContentsOfFile:path];
-        // 给addressView传数据
-        _addressView.datas = dictArray;
+//        __weak __typeof(self) weakSelf = self;
+//        // 最后一列的行被点击的回调
+//        _addressView.lastComponentClickedBlock = ^(SPProvince *selectedProvince, SPCity *selectedCity, SPDistrict *selectedDistrict) {
+//            
+//            [weakSelf.zh_popupController dismissWithDuration:0.25 springAnimated:NO];
+//        HXLog(@"选中的%@-%@-%@",selectedProvince.fullname,selectedCity.fullname,selectedDistrict.fullname);
+//        };
+//        NSString *path = [[NSBundle mainBundle] pathForResource:@"pcd.plist" ofType:nil];
+//        NSArray *dictArray = [NSArray arrayWithContentsOfFile:path];
+//        // 给addressView传数据
+//        _addressView.datas = dictArray;
     }
     return _addressView;
 }

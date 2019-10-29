@@ -12,6 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface GXRegisterAuthVC : HXBaseViewController
 
+@property(nonatomic,copy) NSString *phone;
+@property(nonatomic,copy) NSString *pwd;
+@property(nonatomic,copy) NSString *username;
+
 @end
 
 NS_ASSUME_NONNULL_END

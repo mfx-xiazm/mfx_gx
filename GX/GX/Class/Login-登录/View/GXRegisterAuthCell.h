@@ -10,8 +10,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXRegisterStore,HXBaseViewController;
+typedef void(^cancelStoreCall)(void);
 @interface GXRegisterAuthCell : UITableViewCell
-
+/* 控制器 */
+@property(nonatomic,weak) HXBaseViewController *target;
+/* 店铺 */
+@property(nonatomic,strong) GXRegisterStore *store;
+/* 删除 */
+@property(nonatomic,copy) cancelStoreCall cancelStoreCall;
 @end
 
 NS_ASSUME_NONNULL_END

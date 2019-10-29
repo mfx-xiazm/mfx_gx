@@ -10,8 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXCatalogItem;
 @interface GXRunCategoryCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UILabel *contentText;
+/* 类目 */
+@property(nonatomic,strong) GXCatalogItem *caItem;
 @end
 
 NS_ASSUME_NONNULL_END

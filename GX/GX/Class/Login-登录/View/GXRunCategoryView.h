@@ -10,8 +10,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^runCateCall)(NSInteger index);
 @interface GXRunCategoryView : UIView
-
+/* 经营类目 */
+@property(nonatomic,strong) NSArray *catalogItem;
+/* 点击 */
+@property(nonatomic,copy) runCateCall runCateCall;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -51,6 +51,9 @@
                                             <constraint firstAttribute="height" constant="30" id="pqB-Me-baF"/>
                                         </constraints>
                                         <state key="normal" image="关闭灰"/>
+                                        <connections>
+                                            <action selector="cancelStoreClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="8vA-ls-3bD"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -79,6 +82,7 @@
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入门店名称" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="A1w-WL-JIy">
                                                 <rect key="frame" x="10" y="0.0" width="264" height="40"/>
+                                                <color key="tintColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -139,6 +143,9 @@
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Ii-em-kGd">
                                                 <rect key="frame" x="0.0" y="0.0" width="286" height="40"/>
+                                                <connections>
+                                                    <action selector="chooseAdressClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="8mr-XC-Nlc"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -195,6 +202,7 @@
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入详细地址" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="3vi-O6-q9h">
                                                 <rect key="frame" x="10" y="0.0" width="264" height="40"/>
+                                                <color key="tintColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -250,6 +258,9 @@
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T1q-FG-Pwi">
                                                 <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                                <connections>
+                                                    <action selector="chooseImgClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="nXc-OG-VHt"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -306,6 +317,12 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="business_license_img" destination="5ZH-tY-d8c" id="pft-6V-ckF"/>
+                <outlet property="shop_address" destination="3vi-O6-q9h" id="8A2-Xx-MOt"/>
+                <outlet property="shop_area" destination="6Dk-cV-hhV" id="agn-vP-gnB"/>
+                <outlet property="shop_name" destination="A1w-WL-JIy" id="8r7-uY-Aaa"/>
+            </connections>
             <point key="canvasLocation" x="179.71014492753625" y="206.25"/>
         </tableViewCell>
     </objects>

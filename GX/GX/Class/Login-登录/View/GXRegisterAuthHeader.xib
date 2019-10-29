@@ -40,6 +40,9 @@
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9mG-qa-EHV">
                                     <rect key="frame" x="0.0" y="0.0" width="340" height="40"/>
+                                    <connections>
+                                        <action selector="chooseStoreTypeClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="Ty5-eZ-x9i"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -96,6 +99,7 @@
                             <subviews>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入门店名称" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="hap-fp-mVw">
                                     <rect key="frame" x="10" y="0.0" width="318" height="40"/>
+                                    <color key="tintColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
@@ -215,6 +219,7 @@
                             <subviews>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入详细地址" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="a58-TL-FC0">
                                     <rect key="frame" x="10" y="0.0" width="318" height="40"/>
+                                    <color key="tintColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
@@ -334,8 +339,9 @@
                             <subviews>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入月营业额" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="kvg-xd-72B">
                                     <rect key="frame" x="10" y="0.0" width="318" height="40"/>
+                                    <color key="tintColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                 </textField>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -387,8 +393,11 @@
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="营业执照" translatesAutoresizingMaskIntoConstraints="NO" id="6b2-X9-UPF">
                                     <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                 </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iv8-LV-dTC">
+                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iv8-LV-dTC">
                                     <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                    <connections>
+                                        <action selector="chooseImgClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="hVm-Ro-79d"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -411,8 +420,11 @@
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="门店正面照" translatesAutoresizingMaskIntoConstraints="NO" id="XT9-v0-2sM">
                                     <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                 </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="06t-Li-iM9">
+                                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="06t-Li-iM9">
                                     <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                    <connections>
+                                        <action selector="chooseImgClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="EOC-bh-3YJ"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -435,8 +447,11 @@
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="门店内部照" translatesAutoresizingMaskIntoConstraints="NO" id="32q-3g-xcf">
                                     <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                 </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kos-9q-Gbc">
+                                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kos-9q-Gbc">
                                     <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                    <connections>
+                                        <action selector="chooseImgClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="v3D-5y-lUP"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -459,8 +474,11 @@
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="身份证正面照" translatesAutoresizingMaskIntoConstraints="NO" id="Uqf-jA-hHf">
                                     <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                 </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ipa-sL-eyg">
+                                <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ipa-sL-eyg">
                                     <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                    <connections>
+                                        <action selector="chooseImgClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="TY9-HK-EXz"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -483,8 +501,11 @@
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="身份证反面照" translatesAutoresizingMaskIntoConstraints="NO" id="LmB-zv-gs0">
                                     <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                 </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AlN-Fo-ae6">
+                                <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AlN-Fo-ae6">
                                     <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                    <connections>
+                                        <action selector="chooseImgClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="5fo-sx-V74"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -507,8 +528,11 @@
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="食品经营许可证" translatesAutoresizingMaskIntoConstraints="NO" id="wgj-oZ-LIy">
                                     <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                 </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Enq-P5-YXv">
+                                <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Enq-P5-YXv">
                                     <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                    <connections>
+                                        <action selector="chooseImgClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="46g-Ri-Ou4"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -571,6 +595,20 @@
                 <constraint firstItem="d8Q-yD-PMb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="zaF-y8-7lF"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="business_license_img" destination="6b2-X9-UPF" id="6Z6-fG-a0b"/>
+                <outlet property="card_back_img" destination="LmB-zv-gs0" id="5l6-oR-w6G"/>
+                <outlet property="card_front_img" destination="Uqf-jA-hHf" id="vJz-ph-6Uo"/>
+                <outlet property="catalogs" destination="Zrl-Mc-bmM" id="Rzs-Zz-9HR"/>
+                <outlet property="food_license_img" destination="wgj-oZ-LIy" id="S3n-vH-5yp"/>
+                <outlet property="month_turnover" destination="kvg-xd-72B" id="3qR-ZB-VxJ"/>
+                <outlet property="shop_address" destination="a58-TL-FC0" id="DjN-QV-KQF"/>
+                <outlet property="shop_area" destination="W5f-kW-shd" id="Ufs-6T-gaV"/>
+                <outlet property="shop_front_img" destination="XT9-v0-2sM" id="fWd-A9-HBq"/>
+                <outlet property="shop_inside_img" destination="32q-3g-xcf" id="2bv-fz-qkm"/>
+                <outlet property="shop_name" destination="hap-fp-mVw" id="P2a-sr-I1O"/>
+                <outlet property="shop_type" destination="VEc-52-WQy" id="Nle-O6-5Kf"/>
+            </connections>
             <point key="canvasLocation" x="250.72463768115944" y="352.23214285714283"/>
         </view>
     </objects>

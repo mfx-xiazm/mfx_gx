@@ -14,5 +14,20 @@
 {
     [super awakeFromNib];
 }
+- (IBAction)seletAgreeClicked:(UIButton *)sender {
+    self.agreeBtn.selected = !self.agreeBtn.selected;
+}
+- (IBAction)agreeMentClicked:(UIButton *)sender {
+    if (self.agreementCall) {
+        self.agreementCall();
+    }
+}
+- (IBAction)submitClicked:(UIButton *)sender {
+    if (self.submitStoreCall) {
+        self.submitStoreCall(sender);
+    }
+}
+
+
 
 @end

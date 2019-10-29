@@ -171,11 +171,6 @@ static NSArray *_filtrationCacheKey;
     
     NSString *appendUrl =  action?[NSString stringWithFormat:@"%@%@",URL,action]:URL;
     
-    [_sessionManager.requestSerializer setValue:[parameters isKindOfClass:[NSString class]]?parameters:[MSUserManager sharedInstance].curUserInfo.userAccessStr forHTTPHeaderField:@"UserAccessInfo"];//在选择角色时还未完成登录流程，特殊处理
-    [_sessionManager.requestSerializer setValue:[MSUserManager sharedInstance].curUserInfo.token forHTTPHeaderField:@"Authorization"];
-    
-    parameters = [parameters isKindOfClass:[NSString class]]?@{}:parameters;//在选择角色时还未完成登录流程，特殊处理
-    
     //读取缓存
     responseCache!=nil ? responseCache([HXNetworkCache httpCacheForURL:appendUrl parameters:parameters filtrationCacheKey:_filtrationCacheKey]) : nil;
     
@@ -379,8 +374,6 @@ static NSArray *_filtrationCacheKey;
 + (void)initialize {
     _sessionManager = [AFHTTPSessionManager manager];
     _sessionManager.requestSerializer.timeoutInterval = 30.f;
-    _sessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
-    [_sessionManager.requestSerializer setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     _sessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", @"text/json", @"text/plain", @"text/javascript", @"text/xml", @"image/*", nil];
     // 打开状态栏的等待菊花
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;

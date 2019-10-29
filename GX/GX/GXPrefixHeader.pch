@@ -31,7 +31,7 @@
  发布阶段，HXLog就不会打印
  */
 #ifdef DEBUG
-#define HXLog(...) NSLog(__VA_ARGS__)
+#define  HXLog(...) NSLog(@"%s 第%d行 \n %@\n",__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__])
 #else
 #define HXLog(...)
 #endif
@@ -70,10 +70,7 @@
 /**获取图片资源*/
 #define HXGetImage(imageName) [UIImage imageNamed:[NSString stringWithFormat:@"%@",imageName]]
 
-//msalesdev.sunac.com.cn/open/api/   http://192.168.200.42:9000
-#define HXRC_M_URL @"http://msalesdev.sunac.com.cn/open/api/"
-//#define HXRC_M_URL @"http://yiqibangtestapi.mfxapp.com/index/"
+#define HXRC_M_URL @"http://guaxuan.mfxapp.com/api/admin/"
 
-#define HXRC_URL_HEADER @"http://msalesdev.sunac.com.cn/open/api/"
-//#define HXRC_URL_HEADER @"http://yiqibangtestapi.mfxapp.com/"
+#define HXRC_URL_HEADER @"http://guaxuan.mfxapp.com/"
 #endif /* GXPrefixHeader_pch */

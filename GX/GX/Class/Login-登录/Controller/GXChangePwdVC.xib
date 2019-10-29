@@ -12,6 +12,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GXChangePwdVC">
             <connections>
+                <outlet property="code" destination="1Zx-3C-ci4" id="e0Q-Vn-ZkA"/>
+                <outlet property="confirmPwd" destination="Ztm-wD-wTy" id="yk1-f3-s8v"/>
+                <outlet property="phone" destination="HOs-qa-ngw" id="fjT-kU-57N"/>
+                <outlet property="pwd" destination="GlI-zq-yQ1" id="u3I-Ta-09J"/>
+                <outlet property="sureBtn" destination="E1B-o9-eWh" id="GC7-rD-9Fg"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -40,11 +45,12 @@
                                         </label>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入您的账号" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="HOs-qa-ngw">
                                             <rect key="frame" x="102" y="5" width="300" height="40"/>
+                                            <color key="tintColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="UUf-vU-npp"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                         </textField>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oca-aE-oJe" userLabel="分割线">
                                             <rect key="frame" x="0.0" y="49" width="414" height="1"/>
@@ -81,11 +87,12 @@
                                         </label>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入验证码" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="1Zx-3C-ci4">
                                             <rect key="frame" x="105" y="5" width="187" height="40"/>
+                                            <color key="tintColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="16R-db-pyg"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                         </textField>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AOZ-KH-zfX">
                                             <rect key="frame" x="302" y="10" width="100" height="30"/>
@@ -101,6 +108,9 @@
                                                     <real key="value" value="5"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="getCodeRequest:" destination="-1" eventType="touchUpInside" id="cbI-4t-kPA"/>
+                                            </connections>
                                         </button>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dBf-UR-dqx" userLabel="分割线">
                                             <rect key="frame" x="0.0" y="49" width="414" height="1"/>
@@ -139,6 +149,7 @@
                                         </label>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="6-12位数字和字母的组合" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="GlI-zq-yQ1">
                                             <rect key="frame" x="105" y="5" width="297" height="40"/>
+                                            <color key="tintColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="hHM-OP-El9"/>
                                             </constraints>
@@ -180,6 +191,7 @@
                                         </label>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="重新输入新密码" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Ztm-wD-wTy">
                                             <rect key="frame" x="105" y="5" width="297" height="40"/>
+                                            <color key="tintColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="yh0-Kx-xeV"/>
                                             </constraints>
