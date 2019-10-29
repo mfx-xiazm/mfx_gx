@@ -38,6 +38,7 @@
         NSMutableArray *vcs = [NSMutableArray array];
         for (int i=0;i<self.categoryView.titles.count;i++) {
             GXDiscountChildVC *cvc0 = [GXDiscountChildVC new];
+            cvc0.rushbuy_catalog = self.categoryView.titles[i];
             [self addChildViewController:cvc0];
             [vcs addObject:cvc0];
         }
@@ -49,7 +50,7 @@
 {
     _categoryView.backgroundColor = [UIColor whiteColor];
     _categoryView.titleLabelZoomEnabled = NO;
-    _categoryView.titles = @[@"推荐",@"奶粉", @"尿不湿 ", @"婴幼食品 ", @"孕童哺喂", @"婴童洗护"];
+    _categoryView.titles = @[@"推荐",@"喂养", @"辅食", @"奶粉", @"美妆", @"童装"];
     _categoryView.titleFont = [UIFont systemFontOfSize:14 weight:UIFontWeightMedium];
     _categoryView.titleColor = [UIColor blackColor];
     _categoryView.titleSelectedColor = HXControlBg;

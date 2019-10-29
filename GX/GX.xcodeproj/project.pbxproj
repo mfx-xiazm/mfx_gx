@@ -174,6 +174,7 @@
 		9094F589234A190000106699 /* GXEvaluateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9094F587234A190000106699 /* GXEvaluateVC.m */; };
 		9094F58A234A190000106699 /* GXEvaluateVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9094F588234A190000106699 /* GXEvaluateVC.xib */; };
 		9099EE6D2367D2510088D80C /* GXHomeData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099EE6C2367D2510088D80C /* GXHomeData.m */; };
+		9099EE7123680C280088D80C /* GXDayDiscount.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099EE7023680C280088D80C /* GXDayDiscount.m */; };
 		909EAA302348295D00575FB8 /* GXRegionalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 909EAA2E2348295D00575FB8 /* GXRegionalCell.m */; };
 		909EAA312348295D00575FB8 /* GXRegionalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 909EAA2F2348295D00575FB8 /* GXRegionalCell.xib */; };
 		909EAA342348297500575FB8 /* GXRegionalHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 909EAA332348297500575FB8 /* GXRegionalHeader.m */; };
@@ -659,6 +660,8 @@
 		9094F588234A190000106699 /* GXEvaluateVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXEvaluateVC.xib; sourceTree = "<group>"; };
 		9099EE6B2367D2510088D80C /* GXHomeData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXHomeData.h; sourceTree = "<group>"; };
 		9099EE6C2367D2510088D80C /* GXHomeData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXHomeData.m; sourceTree = "<group>"; };
+		9099EE6F23680C280088D80C /* GXDayDiscount.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXDayDiscount.h; sourceTree = "<group>"; };
+		9099EE7023680C280088D80C /* GXDayDiscount.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXDayDiscount.m; sourceTree = "<group>"; };
 		909EAA2D2348295D00575FB8 /* GXRegionalCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXRegionalCell.h; sourceTree = "<group>"; };
 		909EAA2E2348295D00575FB8 /* GXRegionalCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXRegionalCell.m; sourceTree = "<group>"; };
 		909EAA2F2348295D00575FB8 /* GXRegionalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXRegionalCell.xib; sourceTree = "<group>"; };
@@ -1467,6 +1470,15 @@
 			name = "首页";
 			sourceTree = "<group>";
 		};
+		9099EE6E23680C0A0088D80C /* 每日必抢 */ = {
+			isa = PBXGroup;
+			children = (
+				9099EE6F23680C280088D80C /* GXDayDiscount.h */,
+				9099EE7023680C280088D80C /* GXDayDiscount.m */,
+			);
+			name = "每日必抢";
+			sourceTree = "<group>";
+		};
 		909EAA372348344F00575FB8 /* 控区控价 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2145,6 +2157,7 @@
 		90C0B4142340D27200A8C55B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9099EE6E23680C0A0088D80C /* 每日必抢 */,
 				9099EE6A2367D23B0088D80C /* 首页 */,
 				905B3DF92345998500282515 /* 商品详情 */,
 			);
@@ -3298,6 +3311,7 @@
 				90FCDF442349C5F100729A97 /* GXHelpVC.m in Sources */,
 				909EAA642348693D00575FB8 /* GXPartnerDataSectionHeader.m in Sources */,
 				90FCDF16234994A900729A97 /* GXMyBusinessChildVC.m in Sources */,
+				9099EE7123680C280088D80C /* GXDayDiscount.m in Sources */,
 				906973F32344C2F000D8A8FF /* GXStoreCell.m in Sources */,
 				9094F551234A03F800106699 /* GXMyOrderVC.m in Sources */,
 				90067EDD23443ED900628503 /* GXRegisterAuthFooter.m in Sources */,

@@ -46,6 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *rush_cover_img;
 @property(nonatomic,copy) NSString *rushbuy_id;
 @property(nonatomic,copy) NSString *goods_id;
+/** 1未开始 2进行中 3已结束 4暂停 */
 @property(nonatomic,copy) NSString *rushbuy_status;
 @property(nonatomic,copy) NSString *begin_time;
 @property(nonatomic,copy) NSString *end_time;

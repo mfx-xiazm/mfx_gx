@@ -11,7 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface GXDiscountChildVC : HXBaseViewController
-
+/* 分类传中文 */
+@property(nonatomic,copy) NSString *rushbuy_catalog;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -13,14 +13,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="GXDiscountGoodsCell">
-            <rect key="frame" x="0.0" y="0.0" width="295" height="100"/>
+            <rect key="frame" x="0.0" y="0.0" width="315" height="100"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="295" height="100"/>
+                <rect key="frame" x="0.0" y="0.0" width="315" height="100"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F3y-ar-s1M">
-                        <rect key="frame" x="0.0" y="0.0" width="295" height="100"/>
+                        <rect key="frame" x="0.0" y="0.0" width="315" height="100"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="J1Z-5n-7vC">
                                 <rect key="frame" x="10" y="10" width="80" height="80"/>
@@ -35,7 +35,7 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="自己想象这里是商品名字自己想象这里是商品名字" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Plb-M4-Isi">
-                                <rect key="frame" x="100" y="10" width="185" height="33.5"/>
+                                <rect key="frame" x="100" y="10" width="205" height="33.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -46,8 +46,14 @@
                                 <color key="textColor" red="0.92549019610000005" green="0.078431372550000003" blue="0.1764705882" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥199.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sem-FX-BjQ">
+                                <rect key="frame" x="160.5" y="70.5" width="47" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bk6-3j-NVC">
-                                <rect key="frame" x="205" y="64" width="80" height="26"/>
+                                <rect key="frame" x="225" y="64" width="80" height="26"/>
                                 <color key="backgroundColor" red="1" green="0.62352941179999999" blue="0.031372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="26" id="Kw8-p0-Zag"/>
@@ -62,7 +68,7 @@
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OLD-w9-iIT" userLabel="分割线">
-                                <rect key="frame" x="10" y="99" width="275" height="1"/>
+                                <rect key="frame" x="10" y="99" width="295" height="1"/>
                                 <color key="backgroundColor" red="0.96470588239999999" green="0.96862745100000003" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="gIT-Ak-TtL"/>
@@ -81,7 +87,9 @@
                             <constraint firstAttribute="trailing" secondItem="Plb-M4-Isi" secondAttribute="trailing" constant="10" id="VQN-u4-39j"/>
                             <constraint firstItem="OLD-w9-iIT" firstAttribute="leading" secondItem="F3y-ar-s1M" secondAttribute="leading" constant="10" id="WQr-mt-bPv"/>
                             <constraint firstAttribute="trailing" secondItem="Bk6-3j-NVC" secondAttribute="trailing" constant="10" id="hOM-Ms-GKE"/>
+                            <constraint firstItem="Sem-FX-BjQ" firstAttribute="leading" secondItem="629-lC-K5t" secondAttribute="trailing" constant="10" id="hWP-9T-F63"/>
                             <constraint firstItem="J1Z-5n-7vC" firstAttribute="leading" secondItem="F3y-ar-s1M" secondAttribute="leading" constant="10" id="pz8-cC-TCd"/>
+                            <constraint firstItem="Sem-FX-BjQ" firstAttribute="centerY" secondItem="629-lC-K5t" secondAttribute="centerY" id="vYe-mp-i9A"/>
                             <constraint firstAttribute="bottom" secondItem="Bk6-3j-NVC" secondAttribute="bottom" constant="10" id="y2H-pR-9XC"/>
                             <constraint firstAttribute="trailing" secondItem="OLD-w9-iIT" secondAttribute="trailing" constant="10" id="zEQ-hW-uuG"/>
                         </constraints>
@@ -95,13 +103,15 @@
                 <constraint firstItem="F3y-ar-s1M" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="zZS-9S-yHn"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
-            <size key="customSize" width="295" height="100"/>
+            <size key="customSize" width="315" height="100"/>
             <connections>
                 <outlet property="cover_img" destination="J1Z-5n-7vC" id="yad-8C-lPq"/>
                 <outlet property="good_name" destination="Plb-M4-Isi" id="K8F-jy-9f6"/>
+                <outlet property="handleBtn" destination="Bk6-3j-NVC" id="Zgc-pb-YUU"/>
+                <outlet property="market_price" destination="Sem-FX-BjQ" id="UAz-ca-gfD"/>
                 <outlet property="price" destination="629-lC-K5t" id="K1V-sV-a89"/>
             </connections>
-            <point key="canvasLocation" x="-6.5217391304347831" y="125.89285714285714"/>
+            <point key="canvasLocation" x="-285" y="124"/>
         </collectionViewCell>
     </objects>
 </document>

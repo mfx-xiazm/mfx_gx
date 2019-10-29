@@ -419,7 +419,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
     if (section == 0) {//分类
         return 15.f;
     }else if (section == 1) {//每日必抢
-        return 1.f;//这个区间为填充式布局
+        return 0.f;//这个区间为填充式布局
     }else if (section == 2) {//控区控价
         return 0.f;
     }else if (section == 3) {//通货行情
