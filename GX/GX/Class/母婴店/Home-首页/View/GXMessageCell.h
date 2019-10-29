@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
+@class GXMessage;
 @interface GXMessageCell : UITableViewCell
-
+/* 消息 */
+@property(nonatomic,strong) GXMessage *msg;
 @end
 
 NS_ASSUME_NONNULL_END

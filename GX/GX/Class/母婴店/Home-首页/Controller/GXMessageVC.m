@@ -9,11 +9,15 @@
 #import "GXMessageVC.h"
 #import "GXMessageCell.h"
 #import "GXWebContentVC.h"
+#import "GXMessage.h"
 
 static NSString *const MessageCell = @"MessageCell";
 @interface GXMessageVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
+/** 页码 */
+@property(nonatomic,assign) NSInteger pagenum;
+/** 列表 */
+@property(nonatomic,strong) NSMutableArray *messages;
 @end
 
 @implementation GXMessageVC
@@ -22,10 +26,19 @@ static NSString *const MessageCell = @"MessageCell";
     [super viewDidLoad];
     [self.navigationItem setTitle:@"消息"];
     [self setUpTableView];
+    [self setUpRefresh];
+    [self getMessageDataRequest:YES];
 }
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
+}
+-(NSMutableArray *)messages
+{
+    if (_messages == nil) {
+        _messages = [NSMutableArray array];
+    }
+    return _messages;
 }
 #pragma mark -- 视图相关
 -(void)setUpTableView
@@ -55,15 +68,95 @@ static NSString *const MessageCell = @"MessageCell";
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GXMessageCell class]) bundle:nil] forCellReuseIdentifier:MessageCell];
 }
+/** 添加刷新控件 */
+-(void)setUpRefresh
+{
+    hx_weakify(self);
+    self.tableView.mj_header.automaticallyChangeAlpha = YES;
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        hx_strongify(weakSelf);
+        [strongSelf.tableView.mj_footer resetNoMoreData];
+        [strongSelf getMessageDataRequest:YES];
+    }];
+    //追加尾部刷新
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        hx_strongify(weakSelf);
+        [strongSelf getMessageDataRequest:NO];
+    }];
+}
+#pragma mark -- 数据请求
+-(void)getMessageDataRequest:(BOOL)isRefresh
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    if (isRefresh) {
+        parameters[@"page"] = @(1);//第几页
+    }else{
+        NSInteger page = self.pagenum+1;
+        parameters[@"page"] = @(page);//第几页
+    }
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"getMessageData" parameters:parameters success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            if (isRefresh) {
+                [strongSelf.tableView.mj_header endRefreshing];
+                strongSelf.pagenum = 1;
+                
+                [strongSelf.messages removeAllObjects];
+                NSArray *arrt = [NSArray yy_modelArrayWithClass:[GXMessage class] json:responseObject[@"data"]];
+                [strongSelf.messages addObjectsFromArray:arrt];
+            }else{
+                [strongSelf.tableView.mj_footer endRefreshing];
+                strongSelf.pagenum ++;
+                
+                if ([responseObject[@"data"] isKindOfClass:[NSArray class]] && ((NSArray *)responseObject[@"data"]).count){
+                    NSArray *arrt = [NSArray yy_modelArrayWithClass:[GXMessage class] json:responseObject[@"data"]];
+                    [strongSelf.messages addObjectsFromArray:arrt];
+                }else{// 提示没有更多数据
+                    [strongSelf.tableView.mj_footer endRefreshingWithNoMoreData];
+                }
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                strongSelf.tableView.hidden = NO;
+                [strongSelf.tableView reloadData];
+            });
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
+        [strongSelf.tableView.mj_header endRefreshing];
+        [strongSelf.tableView.mj_footer endRefreshing];
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
+}
+-(void)readMsgRequest:(NSString *)msg_id
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"msg_id"] = msg_id;
+    [HXNetworkTool POST:HXRC_M_URL action:@"readMsg" parameters:parameters success:^(id responseObject) {
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
+}
 #pragma mark -- UITableView数据源和代理
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return self.messages.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     GXMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:MessageCell forIndexPath:indexPath];
     //无色
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    GXMessage *msg = self.messages[indexPath.row];
+    cell.msg = msg;
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -73,6 +166,12 @@ static NSString *const MessageCell = @"MessageCell";
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    GXMessage *msg = self.messages[indexPath.row];
+    if ([msg.isRead isEqualToString:@"0"]) {
+        msg.isRead = @"1";
+        [self readMsgRequest:msg.msg_id];
+        [tableView reloadData];
+    }
     GXWebContentVC *wvc = [GXWebContentVC new];
     wvc.url = @"http://news.cctv.com/2019/10/03/ARTI2EUlwRGH3jMPI6cAVqti191003.shtml";
     wvc.navTitle = @"消息详情";

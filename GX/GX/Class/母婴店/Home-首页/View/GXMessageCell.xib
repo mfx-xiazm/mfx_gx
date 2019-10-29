@@ -93,6 +93,12 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="desc" destination="U9J-MR-Yyc" id="Fcy-8R-JSZ"/>
+                <outlet property="msgState" destination="9w3-WU-BCQ" id="Jgb-pH-qHu"/>
+                <outlet property="time" destination="G1P-ZE-zua" id="TTz-Z7-f2f"/>
+                <outlet property="title" destination="bub-Nk-C6Q" id="N2q-yq-sB4"/>
+            </connections>
             <point key="canvasLocation" x="139.13043478260872" y="127.90178571428571"/>
         </tableViewCell>
     </objects>

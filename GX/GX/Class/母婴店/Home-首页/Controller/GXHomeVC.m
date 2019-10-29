@@ -33,6 +33,7 @@
 #import "GXWebContentVC.h"
 #import "GXMessageVC.h"
 #import "GXHomeData.h"
+#import "GXSearchResultVC.h"
 
 static NSString *const HomeCateCell = @"HomeCateCell";
 static NSString *const ShopGoodsCell = @"ShopGoodsCell";
@@ -111,10 +112,18 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
     GXMessageVC *mvc = [GXMessageVC new];
     [self.navigationController pushViewController:mvc animated:YES];
 }
--(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    HXLog(@"搜索条");
-    return NO;
+    if ([textField hasText]) {
+        [textField resignFirstResponder];
+
+        GXSearchResultVC *gvc = [GXSearchResultVC new];
+        gvc.keyword = textField.text;
+        [self.navigationController pushViewController:gvc animated:YES];
+        return YES;
+    }else{
+        return NO;
+    }
 }
 #pragma mark -- 接口请求
 -(void)getHomeDataRequest
