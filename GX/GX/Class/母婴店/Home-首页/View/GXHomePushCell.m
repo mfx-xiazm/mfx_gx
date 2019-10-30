@@ -9,6 +9,7 @@
 #import "GXHomePushCell.h"
 #import "GXHomeData.h"
 #import "GXRegional.h"
+#import "GXActivityCataInfo.h"
 
 @implementation GXHomePushCell
 
@@ -45,5 +46,10 @@
 {
     _regionalBanner = regionalBanner;
     [self.contentImage sd_setImageWithURL:[NSURL URLWithString:_regionalBanner.adv_img]];
+}
+-(void)setActivityBanner:(GXActivityBanner *)activityBanner
+{
+    _activityBanner = activityBanner;
+    [self.contentImage sd_setImageWithURL:[NSURL URLWithString:_activityBanner.adv_img]];
 }
 @end

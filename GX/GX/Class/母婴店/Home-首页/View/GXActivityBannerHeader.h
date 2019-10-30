@@ -10,7 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXActivityBanner;
 @interface GXActivityBannerHeader : UIView
+@property(nonatomic,strong) NSArray<GXActivityBanner *> *adv;
 
 @end
 

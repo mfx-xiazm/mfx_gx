@@ -10,6 +10,7 @@
 #import <TYCyclePagerView.h>
 #import <TYPageControl.h>
 #import "GXHomePushCell.h"
+#import "GXActivityCataInfo.h"
 
 @interface GXActivityBannerHeader ()<TYCyclePagerViewDataSource, TYCyclePagerViewDelegate>
 @property (weak, nonatomic) IBOutlet TYCyclePagerView *cyclePagerView;
@@ -46,14 +47,21 @@
     [super layoutSubviews];
     self.pageControl.frame = CGRectMake(0, CGRectGetHeight(self.cyclePagerView.frame) - 20, CGRectGetWidth(self.cyclePagerView.frame), 20);
 }
+-(void)setAdv:(NSArray<GXActivityBanner *> *)adv
+{
+    _adv = adv;
+    self.pageControl.numberOfPages = _adv.count;
+    [self.cyclePagerView reloadData];
+}
 #pragma mark -- TYCyclePagerView代理
 - (NSInteger)numberOfItemsInPagerView:(TYCyclePagerView *)pageView {
-    return 4;
+    return self.adv.count;
 }
 
 - (UICollectionViewCell *)pagerView:(TYCyclePagerView *)pagerView cellForItemAtIndex:(NSInteger)index {
     GXHomePushCell *cell = [pagerView dequeueReusableCellWithReuseIdentifier:@"TopBannerCell" forIndex:index];
-    
+    GXActivityBanner *activityBanner = self.adv[index];
+    cell.activityBanner = activityBanner;
     return cell;
 }
 

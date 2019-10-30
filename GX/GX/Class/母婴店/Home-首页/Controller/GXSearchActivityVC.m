@@ -1,42 +1,37 @@
 //
-//  GXActivityChildVC.m
+//  GXSearchActivityVC.m
 //  GX
 //
-//  Created by 夏增明 on 2019/10/4.
+//  Created by 夏增明 on 2019/10/30.
 //  Copyright © 2019 夏增明. All rights reserved.
 //
 
-#import "GXActivityChildVC.h"
+#import "GXSearchActivityVC.h"
 #import "GXActivityCell.h"
 #import "GXWebContentVC.h"
+#import "HXSearchBar.h"
 #import "GXActivity.h"
 
 static NSString *const ActivityCell = @"ActivityCell";
-
-@interface GXActivityChildVC ()<UITableViewDelegate,UITableViewDataSource>
+@interface GXSearchActivityVC ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-/** 是否滑动 */
-@property(nonatomic,assign)BOOL isCanScroll;
+/* 搜索条 */
+@property(nonatomic,strong) HXSearchBar *searchBar;
 /** 页码 */
 @property(nonatomic,assign) NSInteger pagenum;
 /** 列表 */
 @property(nonatomic,strong) NSMutableArray *activitys;
+
 @end
 
-@implementation GXActivityChildVC
+@implementation GXSearchActivityVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(childScrollHandle:) name:@"childScrollCan" object:nil];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(childScrollHandle:) name:@"MainTableScroll" object:nil];
+    [self setUpNavBar];
     [self setUpTableView];
     [self setUpRefresh];
     [self getActivityListaRequest:YES];
-}
--(void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
-    self.view.hxn_width = HX_SCREEN_WIDTH;
 }
 -(NSMutableArray *)activitys
 {
@@ -46,6 +41,19 @@ static NSString *const ActivityCell = @"ActivityCell";
     return _activitys;
 }
 #pragma mark -- 视图相关
+-(void)setUpNavBar
+{
+    [self.navigationItem setTitle:nil];
+    
+    HXSearchBar *searchBar = [[HXSearchBar alloc] initWithFrame:CGRectMake(0, 0, HX_SCREEN_WIDTH - 70.f, 30.f)];
+    searchBar.backgroundColor = [UIColor whiteColor];
+    searchBar.layer.cornerRadius = 6;
+    searchBar.layer.masksToBounds = YES;
+    searchBar.delegate = self;
+    searchBar.text = self.keyword;
+    self.searchBar = searchBar;
+    self.navigationItem.titleView = searchBar;
+}
 -(void)setUpTableView
 {
     // 针对 11.0 以上的iOS系统进行处理
@@ -78,24 +86,31 @@ static NSString *const ActivityCell = @"ActivityCell";
 -(void)setUpRefresh
 {
     hx_weakify(self);
-    //    self.collectionView.mj_header.automaticallyChangeAlpha = YES;
-    //    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-    //        hx_strongify(weakSelf);
-    //        [strongSelf.collectionView.mj_footer resetNoMoreData];
-    //        [strongSelf getCatalogGoodsDataRequest:YES];
-    //    }];
+    self.tableView.mj_header.automaticallyChangeAlpha = YES;
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        hx_strongify(weakSelf);
+        [strongSelf.tableView.mj_footer resetNoMoreData];
+        [strongSelf getActivityListaRequest:YES];
+    }];
     //追加尾部刷新
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         hx_strongify(weakSelf);
         [strongSelf getActivityListaRequest:NO];
     }];
 }
+#pragma mark -- UITextField代理
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    self.keyword = [textField hasText]?textField.text:@"";
+    [self getActivityListaRequest:YES];
+    return YES;
+}
 #pragma mark -- 数据请求
 -(void)getActivityListaRequest:(BOOL)isRefresh
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    parameters[@"catalog_id"] = self.catalog_id;
-    parameters[@"material_title"] = @"";//活动素材标题搜索 没有则不传或者传""
+    parameters[@"catalog_id"] = @"";
+    parameters[@"material_title"] = self.keyword;//活动素材标题搜索 没有则不传或者传""
     if (isRefresh) {
         parameters[@"page"] = @(1);//第几页
     }else{
@@ -139,27 +154,6 @@ static NSString *const ActivityCell = @"ActivityCell";
         [strongSelf.tableView.mj_footer endRefreshing];
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
     }];
-}
-#pragma mark -- 通知处理
--(void)childScrollHandle:(NSNotification *)user{
-    if ([user.name isEqualToString:@"childScrollCan"]){
-        self.isCanScroll = YES;
-    }else if ([user.name isEqualToString:@"MainTableScroll"]){
-        self.isCanScroll = NO;
-        [self.tableView setContentOffset:CGPointZero];
-    }
-}
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    
-    if (!self.isCanScroll) {
-        [scrollView setContentOffset:CGPointZero];
-    }
-    if (scrollView.contentOffset.y<=0) {
-        [[NSNotificationCenter defaultCenter]postNotificationName:@"MainTableScroll" object:nil];
-    }
-}
--(void)dealloc{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 #pragma mark -- UITableView数据源和代理
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

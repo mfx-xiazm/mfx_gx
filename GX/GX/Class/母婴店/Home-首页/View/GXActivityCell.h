@@ -10,8 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXActivity;
 @interface GXActivityCell : UITableViewCell
-
+/* 活动 */
+@property(nonatomic,strong) GXActivity *activity;
 @end
 
 NS_ASSUME_NONNULL_END

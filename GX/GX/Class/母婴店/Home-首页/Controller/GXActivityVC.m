@@ -12,6 +12,9 @@
 #import "GXPageMainTable.h"
 #import <JXCategoryView.h>
 #import "HXSearchBar.h"
+#import "GXActivityCataInfo.h"
+#import "GXCatalogItem.h"
+#import "GXSearchActivityVC.h"
 
 @interface GXActivityVC ()<UITableViewDelegate,UITableViewDataSource,JXCategoryViewDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet GXPageMainTable *tableView;
@@ -27,6 +30,8 @@
 @property (strong, nonatomic) JXCategoryTitleView *categoryView;
 /* 搜索条 */
 @property(nonatomic,strong) HXSearchBar *searchBar;
+/* 活动 */
+@property(nonatomic,strong) GXActivityCataInfo *activityInfo;
 @end
 
 @implementation GXActivityVC
@@ -37,6 +42,8 @@
     self.isCanScroll = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(MainTableScroll:) name:@"MainTableScroll" object:nil];
     [self setUpMainTable];
+    
+    [self getCatalogRequest];
 }
 
 -(void)viewDidLayoutSubviews
@@ -58,7 +65,11 @@
         _categoryView = [[JXCategoryTitleView alloc] init];
         _categoryView.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, 44);
         _categoryView.backgroundColor = [UIColor whiteColor];
-        _categoryView.titles = @[@"奶粉", @"尿不湿 ", @"婴幼食品 ", @"孕童哺喂", @"婴童洗护"];
+        NSMutableArray *titles = [NSMutableArray array];
+        for (GXCatalogItem *item in self.activityInfo.catalog) {
+            [titles addObject:item.catalog_name];
+        }
+        _categoryView.titles = titles;
         _categoryView.titleFont = [UIFont systemFontOfSize:14 weight:UIFontWeightMedium];
         _categoryView.titleColor = [UIColor blackColor];
         _categoryView.titleSelectedColor = HXControlBg;
@@ -78,6 +89,8 @@
         
         for (int i=0; i<self.categoryView.titles.count; i++) {
             GXActivityChildVC *cvc = [GXActivityChildVC new];
+            GXCatalogItem *item = self.activityInfo.catalog[i];
+            cvc.catalog_id = item.catalog_id;
             [self addChildViewController:cvc];
             [vcs addObject:cvc];
         }
@@ -142,6 +155,32 @@
     
     [self.tableView addSubview:self.header];
 }
+#pragma mark -- 接口请求
+-(void)getCatalogRequest
+{
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"promoteGoods" parameters:@{} success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            strongSelf.activityInfo = [GXActivityCataInfo yy_modelWithDictionary:responseObject[@"data"]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [strongSelf handleStoreInfo];
+            });
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
+}
+-(void)handleStoreInfo
+{
+    self.tableView.hidden = NO;
+    
+    self.header.adv = self.activityInfo.adv;
+    
+    [self.tableView reloadData];
+}
 #pragma mark -- 主视图滑动通知处理
 -(void)MainTableScroll:(NSNotification *)user{
     self.isCanScroll = YES;
@@ -165,10 +204,18 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 #pragma mark -- UITextFieldDelegate
--(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    HXLog(@"搜索条");
-    return NO;
+    if ([textField hasText]) {
+        [textField resignFirstResponder];
+        
+        GXSearchActivityVC *gvc = [GXSearchActivityVC new];
+        gvc.keyword = textField.text;
+        [self.navigationController pushViewController:gvc animated:YES];
+        return YES;
+    }else{
+        return NO;
+    }
 }
 #pragma mark -- JXCategoryViewDelegate
 // 滚动和点击选中
@@ -186,7 +233,7 @@
 }
 #pragma mark -- UITableView数据源和代理
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 1;
+    return self.activityInfo?1:0;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return tableView.hxn_height;
