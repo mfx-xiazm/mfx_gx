@@ -18,6 +18,7 @@
                 <outlet property="cateImg" destination="4J7-8V-7d0" id="W84-sT-S0O"/>
                 <outlet property="cateLabel" destination="UPq-Ss-Ro9" id="o0I-YO-xxR"/>
                 <outlet property="collectionView" destination="XCp-kl-gyk" id="iio-Nd-7CJ"/>
+                <outlet property="saleImg" destination="qoa-vK-C7n" id="mMl-4h-SjH"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *navTitle;
 /** 是否需要请求 */
 @property(nonatomic,assign) BOOL isNeedRequest;
-/** 1注册协议*/
+/** 1注册协议 2申请供货 */
 @property(nonatomic,assign) NSInteger requestType;
 
 @end

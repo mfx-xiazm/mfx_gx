@@ -229,8 +229,8 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
             return cell;
         }else{
             GXDiscountGoodsCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:DiscountGoodsCell forIndexPath:indexPath];
-            GYHomeDiscount *discount = self.homeData.home_rushbuy[indexPath.item];
-            cell.discount = discount;
+//            GYHomeDiscount *discount = self.homeData.home_rushbuy[indexPath.item];
+//            cell.discount = discount;
             return cell;
         }
     }else if (indexPath.section == 2) {//控区控价

@@ -83,6 +83,8 @@
     NSString *action = nil;
     if (self.requestType == 1) {
         action = @"getShopRegAgreement";
+    }else if (self.requestType == 2) {
+        action = @"getSupplyIntroData";
     }
     
     hx_weakify(self);
@@ -91,6 +93,9 @@
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             if (strongSelf.requestType == 1) {
                 NSString *h5 = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"><style>img{width:100%%; height:auto;}body{margin:0 15px;}</style></head><body>%@</body></html>",responseObject[@"data"]];
+                [strongSelf.webView loadHTMLString:h5 baseURL:nil];
+            }else if (strongSelf.requestType == 2) {
+                NSString *h5 = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"><style>img{width:100%%; height:auto;}body{margin:0 15px;}</style></head><body>%@</body></html>",responseObject[@"data"][@"apply_supply_desc"]];
                 [strongSelf.webView loadHTMLString:h5 baseURL:nil];
             }
         }else{

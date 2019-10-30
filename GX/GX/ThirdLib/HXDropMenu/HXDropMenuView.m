@@ -104,7 +104,7 @@ static NSString *const FilterCell = @"FilterCell";
         strongSelf.show = !strongSelf.show;
     }];
     
-    self.titleLabel.textColor = UIColorFromRGB(0xFF9F08);
+    self.titleLabel.textColor = HXControlBg;
     
     [self reloadData];
 }

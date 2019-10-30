@@ -173,6 +173,8 @@
 		9094F585234A15F700106699 /* GXExpressDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9094F583234A15F700106699 /* GXExpressDetailCell.xib */; };
 		9094F589234A190000106699 /* GXEvaluateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9094F587234A190000106699 /* GXEvaluateVC.m */; };
 		9094F58A234A190000106699 /* GXEvaluateVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9094F588234A190000106699 /* GXEvaluateVC.xib */; };
+		9096CC1423692BA600D213DD /* GXGoodBrand.m in Sources */ = {isa = PBXBuildFile; fileRef = 9096CC1323692BA600D213DD /* GXGoodBrand.m */; };
+		9096CC1723692F5600D213DD /* GXBrandGoods.m in Sources */ = {isa = PBXBuildFile; fileRef = 9096CC1623692F5600D213DD /* GXBrandGoods.m */; };
 		9099EE6D2367D2510088D80C /* GXHomeData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099EE6C2367D2510088D80C /* GXHomeData.m */; };
 		9099EE7123680C280088D80C /* GXDayDiscount.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099EE7023680C280088D80C /* GXDayDiscount.m */; };
 		9099EE76236814E70088D80C /* GXSearchResultVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099EE74236814E70088D80C /* GXSearchResultVC.m */; };
@@ -666,6 +668,10 @@
 		9094F586234A190000106699 /* GXEvaluateVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXEvaluateVC.h; sourceTree = "<group>"; };
 		9094F587234A190000106699 /* GXEvaluateVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXEvaluateVC.m; sourceTree = "<group>"; };
 		9094F588234A190000106699 /* GXEvaluateVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXEvaluateVC.xib; sourceTree = "<group>"; };
+		9096CC1223692BA600D213DD /* GXGoodBrand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXGoodBrand.h; sourceTree = "<group>"; };
+		9096CC1323692BA600D213DD /* GXGoodBrand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXGoodBrand.m; sourceTree = "<group>"; };
+		9096CC1523692F5600D213DD /* GXBrandGoods.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXBrandGoods.h; sourceTree = "<group>"; };
+		9096CC1623692F5600D213DD /* GXBrandGoods.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXBrandGoods.m; sourceTree = "<group>"; };
 		9099EE6B2367D2510088D80C /* GXHomeData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXHomeData.h; sourceTree = "<group>"; };
 		9099EE6C2367D2510088D80C /* GXHomeData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXHomeData.m; sourceTree = "<group>"; };
 		9099EE6F23680C280088D80C /* GXDayDiscount.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXDayDiscount.h; sourceTree = "<group>"; };
@@ -1486,6 +1492,17 @@
 			name = "我的订单";
 			sourceTree = "<group>";
 		};
+		9096CC1123692B8700D213DD /* 品牌优选 */ = {
+			isa = PBXGroup;
+			children = (
+				9096CC1223692BA600D213DD /* GXGoodBrand.h */,
+				9096CC1323692BA600D213DD /* GXGoodBrand.m */,
+				9096CC1523692F5600D213DD /* GXBrandGoods.h */,
+				9096CC1623692F5600D213DD /* GXBrandGoods.m */,
+			);
+			name = "品牌优选";
+			sourceTree = "<group>";
+		};
 		9099EE6A2367D23B0088D80C /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2209,11 +2226,11 @@
 				9099EE72236814C70088D80C /* 搜索 */,
 				902E88CE234742D200EFD0DF /* 消息 */,
 				906973E92344C27A00D8A8FF /* 精选好店 */,
+				90E57EE92346D23300F49834 /* 品牌优选 */,
 				90E57F392347239D00F49834 /* 通货行情 */,
 				902E8901234771A300EFD0DF /* 卖货素材 */,
 				90E57F0B2346E51F00F49834 /* 每日必抢 */,
 				90E57EF52346DC7800F49834 /* 促销神器 */,
-				90E57EE92346D23300F49834 /* 品牌优选 */,
 				905B3DE923458FF700282515 /* 商品详情 */,
 			);
 			path = Controller;
@@ -2222,11 +2239,12 @@
 		90C0B4142340D27200A8C55B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				9099EE80236838610088D80C /* 精选好店 */,
-				9099EE7C23682D540088D80C /* 消息 */,
-				9099EE7823682B570088D80C /* 搜索 */,
-				9099EE6E23680C0A0088D80C /* 每日必抢 */,
+				9096CC1123692B8700D213DD /* 品牌优选 */,
 				9099EE6A2367D23B0088D80C /* 首页 */,
+				9099EE7823682B570088D80C /* 搜索 */,
+				9099EE7C23682D540088D80C /* 消息 */,
+				9099EE80236838610088D80C /* 精选好店 */,
+				9099EE6E23680C0A0088D80C /* 每日必抢 */,
 				905B3DF92345998500282515 /* 商品详情 */,
 			);
 			path = Model;
@@ -2235,14 +2253,14 @@
 		90C0B4152340D27200A8C55B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				906973B7234477F100D8A8FF /* 首页 */,
 				902E88D42347430D00EFD0DF /* 消息 */,
+				906973EF2344C2D300D8A8FF /* 精选好店 */,
 				902E88F32347683800EFD0DF /* 品牌优选 */,
 				902E890C2347772200EFD0DF /* 卖货素材 */,
 				90E57F44234726AF00F49834 /* 通货行情 */,
 				90E57EFB2346DD1100F49834 /* 促销神器 */,
 				905B3DEF234597B200282515 /* 商品详情 */,
-				906973EF2344C2D300D8A8FF /* 精选好店 */,
-				906973B7234477F100D8A8FF /* 首页 */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3344,6 +3362,7 @@
 				90C0B3E72340CD7200A8C55B /* zhAlertView.m in Sources */,
 				902413402366C1210069DDCA /* GXRegisterStore.m in Sources */,
 				903C54712349CCCD002743EE /* JJOptionView.m in Sources */,
+				9096CC1723692F5600D213DD /* GXBrandGoods.m in Sources */,
 				90C0B3EA2340CD7200A8C55B /* UILabel+ForLMJVerticalScrollText.m in Sources */,
 				909EAA6F2348706C00575FB8 /* GXCartCell.m in Sources */,
 				90FCDF112349949D00729A97 /* GXMyBusinessVC.m in Sources */,
@@ -3370,6 +3389,7 @@
 				9094F53B2349ECC100106699 /* GXMyIdeaVC.m in Sources */,
 				90BB98AD234C279C00444ACC /* GXAccountManageVC.m in Sources */,
 				905B3DFC2345999D00282515 /* GXGoodsMaterial.m in Sources */,
+				9096CC1423692BA600D213DD /* GXGoodBrand.m in Sources */,
 				903C54752349D167002743EE /* GXOnLineReportVC.m in Sources */,
 				90C0B3E82340CD7200A8C55B /* UIView+ForLMJVerticalScrollText.m in Sources */,
 				90FCDF202349966500729A97 /* GXMyCouponChildVC.m in Sources */,

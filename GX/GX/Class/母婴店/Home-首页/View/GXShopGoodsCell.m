@@ -10,6 +10,7 @@
 #import "GXHomeData.h"
 #import "GXSearchResult.h"
 #import "GXStore.h"
+#import "GXBrandGoods.h"
 
 @interface GXShopGoodsCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *cover_img;
@@ -54,6 +55,17 @@
         self.price.text = [NSString stringWithFormat:@"￥%@-￥%@",_storeGoods.min_price,_storeGoods.max_price];
     }else{
         self.price.text = [NSString stringWithFormat:@"￥%@",_storeGoods.min_price];
+    }
+}
+-(void)setBrandGoods:(GXBrandGoods *)brandGoods
+{
+    _brandGoods = brandGoods;
+    [self.cover_img sd_setImageWithURL:[NSURL URLWithString:_brandGoods.cover_img]];
+    self.goods_name.text = _brandGoods.goods_name;
+    if ([_brandGoods.control_type isEqualToString:@"1"]) {
+        self.price.text = [NSString stringWithFormat:@"￥%@-￥%@",_brandGoods.min_price,_brandGoods.max_price];
+    }else{
+        self.price.text = [NSString stringWithFormat:@"￥%@",_brandGoods.min_price];
     }
 }
 @end
