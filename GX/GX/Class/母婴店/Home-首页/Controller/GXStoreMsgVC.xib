@@ -12,6 +12,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GXStoreMsgVC">
             <connections>
+                <outlet property="brand_name" destination="n5D-UV-aog" id="Foz-5x-dhP"/>
+                <outlet property="evl_level" destination="q6A-9r-z1U" id="4eX-lr-VlZ"/>
+                <outlet property="license_img" destination="2YD-se-ZyH" id="rm2-X3-6W3"/>
+                <outlet property="open_time" destination="XlR-Vg-qFP" id="etO-mE-Hhe"/>
+                <outlet property="region" destination="U9m-JF-DHz" id="x0l-Tu-TD1"/>
+                <outlet property="shop_desc" destination="1eH-Xn-7hJ" id="GIw-eq-OxD"/>
+                <outlet property="shop_front_img" destination="uEf-B6-q1L" id="qqA-uS-7x6"/>
+                <outlet property="shop_name" destination="zUH-hQ-32w" id="ciC-G0-Tl4"/>
+                <outlet property="store_level" destination="8xv-PF-nfD" id="Ywl-ue-BKh"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -185,7 +194,7 @@
                                         <constraint firstItem="8aD-RU-Ton" firstAttribute="leading" secondItem="2Kt-O5-Uvm" secondAttribute="trailing" constant="10" id="vHt-TE-suk"/>
                                     </constraints>
                                 </view>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2YD-se-ZyH">
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2YD-se-ZyH">
                                     <rect key="frame" x="20" y="217" width="80" height="100"/>
                                     <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>

@@ -9,10 +9,14 @@
 #import "GXStoreGoodsListHeader.h"
 #import "GXStoreCouponCell.h"
 #import <ZLCollectionViewHorzontalLayout.h>
+#import "GXStore.h"
 
 static NSString *const StoreCouponCell = @"StoreCouponCell";
 @interface GXStoreGoodsListHeader ()<UICollectionViewDelegate,UICollectionViewDataSource,ZLCollectionViewBaseFlowLayoutDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet UIImageView *shop_front_img;
+@property (weak, nonatomic) IBOutlet UILabel *shop_name;
+@property (weak, nonatomic) IBOutlet UILabel *evl_level;
 
 @end
 @implementation GXStoreGoodsListHeader
@@ -31,7 +35,31 @@ static NSString *const StoreCouponCell = @"StoreCouponCell";
     
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([GXStoreCouponCell class]) bundle:nil] forCellWithReuseIdentifier:StoreCouponCell];
     
+    hx_weakify(self);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [weakSelf.collectionView reloadData];
+    });
+}
+- (IBAction)storeMsgClicked:(id)sender {
+    if (self.storeMsgCall) {
+        self.storeMsgCall();
+    }
+}
+
+-(void)setStoreInfo:(GXStore *)storeInfo
+{
+    _storeInfo = storeInfo;
+    [self.shop_front_img sd_setImageWithURL:[NSURL URLWithString:_storeInfo.shop_front_img]];
+    self.shop_name.text = _storeInfo.shop_name;
+    self.evl_level.text = [NSString stringWithFormat:@"综合评分：%@",_storeInfo.evl_level];
+    
+    if (_storeInfo.coupon && _storeInfo.coupon.count) {
+        self.collectionView.hidden = NO;
+        [self.collectionView reloadData];
+    }else{
+        self.collectionView.hidden = YES;
+    }
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.02 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.collectionView reloadData];
     });
 }
@@ -45,10 +73,19 @@ static NSString *const StoreCouponCell = @"StoreCouponCell";
     return 1;
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 3;
+    return self.storeInfo.coupon.count;
 }
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     GXStoreCouponCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:StoreCouponCell forIndexPath:indexPath];
+    GXStoreCoupons *coupon = self.storeInfo.coupon[indexPath.item];
+    cell.coupon = coupon;
+    if (indexPath.item %3 == 0) {
+        cell.coupon_bg_img.image = HXGetImage(@"coupon_bg_1");
+    }else if (indexPath.item %3 == 1) {
+        cell.coupon_bg_img.image = HXGetImage(@"coupon_bg_2");
+    }else{
+        cell.coupon_bg_img.image = HXGetImage(@"coupon_bg_3");
+    }
     return cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {

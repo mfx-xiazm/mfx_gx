@@ -10,7 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXStoreCoupons;
 @interface GXStoreCouponCell : UICollectionViewCell
+/* 优惠券 */
+@property(nonatomic,strong) GXStoreCoupons *coupon;
+@property (weak, nonatomic) IBOutlet UIImageView *coupon_bg_img;
 
 @end
 

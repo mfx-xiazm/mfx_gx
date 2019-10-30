@@ -7,7 +7,14 @@
 //
 
 #import "GXStoreCouponCell.h"
+#import "GXStore.h"
 
+@interface GXStoreCouponCell ()
+@property (weak, nonatomic) IBOutlet UILabel *coupon_amount;
+@property (weak, nonatomic) IBOutlet UILabel *full_amount;
+@property (weak, nonatomic) IBOutlet UILabel *coupon_name;
+@property (weak, nonatomic) IBOutlet UILabel *expire_time;
+@end
 @implementation GXStoreCouponCell
 
 - (void)awakeFromNib {
@@ -15,4 +22,12 @@
     // Initialization code
 }
 
+-(void)setCoupon:(GXStoreCoupons *)coupon
+{
+    _coupon = coupon;
+    self.coupon_amount.text = _coupon.coupon_amount;
+    self.full_amount.text = [NSString stringWithFormat:@"满%@使用",_coupon.fulfill_amount];
+    self.coupon_name.text = _coupon.coupon_name;
+    self.expire_time.text = [NSString stringWithFormat:@"使用时间:%@",_coupon.expire_time];
+}
 @end

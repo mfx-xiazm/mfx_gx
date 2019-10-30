@@ -10,10 +10,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXStore;
 typedef void(^storeHandleCall)(NSInteger index);
 @interface GXStoreCell : UITableViewCell
 /* 点击 */
 @property(nonatomic,copy) storeHandleCall storeHandleCall;
+/* 店铺 */
+@property(nonatomic,strong) GXStore *store;
 @end
 
 NS_ASSUME_NONNULL_END

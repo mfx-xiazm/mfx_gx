@@ -11,7 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface GXStoreGoodsListVC : HXBaseViewController
-
+/* 店铺id */
+@property(nonatomic,copy) NSString *provider_uid;
 @end
 
 NS_ASSUME_NONNULL_END

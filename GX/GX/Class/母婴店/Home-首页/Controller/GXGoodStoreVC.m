@@ -11,6 +11,8 @@
 #import <JXCategoryTitleView.h>
 #import <JXCategoryIndicatorLineView.h>
 #import "HXSearchBar.h"
+#import "GXCatalogItem.h"
+#import "GXSearchStoreVC.h"
 
 @interface GXGoodStoreVC ()<JXCategoryViewDelegate,UIScrollViewDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet JXCategoryTitleView *categoryView;
@@ -19,6 +21,8 @@
 @property (nonatomic,strong) NSArray *childVCs;
 /* 搜索条 */
 @property(nonatomic,strong) HXSearchBar *searchBar;
+/* 分类 */
+@property(nonatomic,strong) NSArray *cateItems;
 @end
 
 @implementation GXGoodStoreVC
@@ -26,7 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavBar];
-    [self setUpCategoryView];
+    [self getShopCateRequest];
 }
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -39,7 +43,9 @@
     if (_childVCs == nil) {
         NSMutableArray *vcs = [NSMutableArray array];
         for (int i=0;i<self.categoryView.titles.count;i++) {
+            GXCatalogItem *item = self.cateItems[i];
             GXGoodStoreChildVC *cvc0 = [GXGoodStoreChildVC new];
+            cvc0.catalog_id = item.catalog_id;
             [self addChildViewController:cvc0];
             [vcs addObject:cvc0];
         }
@@ -59,11 +65,45 @@
     self.searchBar = searchBar;
     self.navigationItem.titleView = searchBar;
 }
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if ([textField hasText]) {
+        [textField resignFirstResponder];
+        
+        GXSearchStoreVC *gvc = [GXSearchStoreVC new];
+        gvc.keyword = textField.text;
+        [self.navigationController pushViewController:gvc animated:YES];
+        return YES;
+    }else{
+        return NO;
+    }
+}
+-(void)getShopCateRequest
+{
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"selectShop" parameters:@{} success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            strongSelf.cateItems = [NSArray yy_modelArrayWithClass:[GXCatalogItem class] json:responseObject[@"data"]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [strongSelf setUpCategoryView];
+            });
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
+}
 -(void)setUpCategoryView
 {
+    NSMutableArray *titles = [NSMutableArray array];
+    for (GXCatalogItem *item in self.cateItems) {
+        [titles addObject:item.catalog_name];
+    }
     _categoryView.backgroundColor = [UIColor whiteColor];
     _categoryView.titleLabelZoomEnabled = NO;
-    _categoryView.titles = @[@"奶粉", @"尿不湿 ", @"婴幼食品 ", @"孕童哺喂", @"婴童洗护"];
+    _categoryView.titles = titles;
     _categoryView.titleFont = [UIFont systemFontOfSize:14 weight:UIFontWeightMedium];
     _categoryView.titleColor = [UIColor blackColor];
     _categoryView.titleSelectedColor = HXControlBg;
@@ -85,6 +125,8 @@
     UIViewController *targetViewController = self.childVCs.firstObject;
     targetViewController.view.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, _scrollView.hxn_height);
     [_scrollView addSubview:targetViewController.view];
+    
+    [_categoryView reloadData];
 }
 #pragma mark - JXCategoryViewDelegate
 // 滚动和点击选中

@@ -10,12 +10,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class GYHomePushGoods,GXSearchResult;
+@class GYHomePushGoods,GXSearchResult,GXStoreGoods;
 @interface GXShopGoodsCell : UICollectionViewCell
 /* 商品 */
 @property(nonatomic,strong) GYHomePushGoods *goods;
 /* h商品 */
 @property(nonatomic,strong) GXSearchResult *search;
+/* 商品 */
+@property(nonatomic,strong) GXStoreGoods *storeGoods;
 @end
 
 NS_ASSUME_NONNULL_END

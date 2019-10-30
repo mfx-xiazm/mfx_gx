@@ -9,9 +9,13 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
+@class GXStore;
+typedef void(^storeMsgCall)(void);
 @interface GXStoreGoodsListHeader : UIView
-
+/** 店铺基本信息 */
+@property(nonatomic,strong) GXStore *storeInfo;
+/* 信息点击 */
+@property(nonatomic,copy) storeMsgCall storeMsgCall;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -11,6 +11,9 @@
 #import "GXPageMainTable.h"
 #import <JXCategoryView.h>
 #import "GXStoreGoodsChildVC.h"
+#import "GXStore.h"
+#import "GXCatalogItem.h"
+#import "GXStoreMsgVC.h"
 
 @interface GXStoreGoodsListVC ()<UITableViewDelegate,UITableViewDataSource,JXCategoryViewDelegate>
 @property (weak, nonatomic) IBOutlet GXPageMainTable *tableView;
@@ -24,7 +27,8 @@
 @property(nonatomic,assign)BOOL isCanScroll;
 /** 切换控制器 */
 @property (strong, nonatomic) JXCategoryTitleView *categoryView;
-
+/** 店铺基本信息 */
+@property(nonatomic,strong) GXStore *storeInfo;
 @end
 
 @implementation GXStoreGoodsListVC
@@ -36,18 +40,19 @@
     self.isCanScroll = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(MainTableScroll:) name:@"MainTableScroll" object:nil];
     [self setUpMainTable];
+    
+    [self getShopInfoRequest];
 }
 
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    self.header.frame = CGRectMake(0, -(180.f+60.f), HX_SCREEN_WIDTH, 180.f+60.f);
 }
 -(GXStoreGoodsListHeader *)header
 {
     if (_header == nil) {
         _header = [GXStoreGoodsListHeader loadXibView];
-        _header.frame = CGRectMake(0,0, HX_SCREEN_WIDTH, 180.f+60.f);
+        _header.frame = CGRectMake(0,0, HX_SCREEN_WIDTH, 180.f);
     }
     return _header;
 }
@@ -57,7 +62,11 @@
         _categoryView = [[JXCategoryTitleView alloc] init];
         _categoryView.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, 44);
         _categoryView.backgroundColor = [UIColor whiteColor];
-        _categoryView.titles = @[@"奶粉", @"尿不湿 ", @"婴幼食品 ", @"孕童哺喂", @"婴童洗护"];
+        NSMutableArray *titles = [NSMutableArray array];
+        for (GXCatalogItem *item in self.storeInfo.catalog) {
+            [titles addObject:item.catalog_name];
+        }
+        _categoryView.titles = titles;
         _categoryView.titleFont = [UIFont systemFontOfSize:14 weight:UIFontWeightMedium];
         _categoryView.titleColor = [UIColor blackColor];
         _categoryView.titleSelectedColor = HXControlBg;
@@ -77,6 +86,9 @@
         
         for (int i=0; i<self.categoryView.titles.count; i++) {
             GXStoreGoodsChildVC *cvc = [GXStoreGoodsChildVC new];
+            cvc.provider_uid = self.provider_uid;
+            GXCatalogItem *item = self.storeInfo.catalog[i];
+            cvc.catalog_id = item.catalog_id;
             [self addChildViewController:cvc];
             [vcs addObject:cvc];
         }
@@ -114,8 +126,8 @@
     self.tableView.rowHeight = 0;
     self.tableView.estimatedSectionHeaderHeight = 0;
     self.tableView.estimatedSectionFooterHeight = 0;
+    self.tableView.contentInset = UIEdgeInsetsMake(180.f,0, 0, 0);
     
-    self.tableView.contentInset = UIEdgeInsetsMake(180.f+60.f,0, 0, 0);
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
@@ -128,6 +140,46 @@
     self.tableView.tableFooterView = [UIView new];
     
     [self.tableView addSubview:self.header];
+}
+#pragma mark -- 接口请求
+-(void)getShopInfoRequest
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"provider_uid"] = self.provider_uid;// 店铺id
+    
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"shopData" parameters:parameters success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            strongSelf.storeInfo = [GXStore yy_modelWithDictionary:responseObject[@"data"]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [strongSelf handleStoreInfo];
+            });
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
+}
+-(void)handleStoreInfo
+{
+    if (self.storeInfo.coupon && self.storeInfo.coupon.count) {
+        self.tableView.contentInset = UIEdgeInsetsMake(180.f+60.f,0, 0, 0);
+        self.header.frame = CGRectMake(0, -(180.f+60.f), HX_SCREEN_WIDTH, 180.f+60.f);
+    }else{
+        self.tableView.contentInset = UIEdgeInsetsMake(180.f,0, 0, 0);
+        self.header.frame = CGRectMake(0, -(180.f), HX_SCREEN_WIDTH, 180.f);
+    }
+    hx_weakify(self);
+    self.header.storeMsgCall = ^{
+        hx_strongify(weakSelf);
+        GXStoreMsgVC *mvc = [GXStoreMsgVC new];
+        mvc.provider_uid = strongSelf.provider_uid;
+        [strongSelf.navigationController pushViewController:mvc animated:YES];
+    };
+    self.header.storeInfo = self.storeInfo;
+    [self.tableView reloadData];
 }
 #pragma mark -- 主视图滑动通知处理
 -(void)MainTableScroll:(NSNotification *)user{
@@ -167,7 +219,7 @@
 }
 #pragma mark -- UITableView数据源和代理
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 1;
+    return self.storeInfo?1:0;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return tableView.hxn_height;
