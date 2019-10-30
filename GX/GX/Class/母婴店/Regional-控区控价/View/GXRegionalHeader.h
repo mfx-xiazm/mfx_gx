@@ -10,10 +10,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXRegional;
 typedef void(^regionalClickedCall)(NSInteger type,NSInteger index);
 @interface GXRegionalHeader : UIView
 /* 点击 */
 @property(nonatomic,copy) regionalClickedCall regionalClickedCall;
+/* 控区控价 */
+@property(nonatomic,strong) GXRegional *regional;
 @end
 
 NS_ASSUME_NONNULL_END

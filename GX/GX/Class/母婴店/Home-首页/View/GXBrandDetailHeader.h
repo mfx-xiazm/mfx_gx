@@ -9,9 +9,13 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
+@class GXBrandDetail;
+typedef void(^applyJoinCall)(void);
 @interface GXBrandDetailHeader : UICollectionReusableView
-
+/* 品牌基本信息 */
+@property(nonatomic,strong) GXBrandDetail *brandDetail;
+/* 申请加盟 */
+@property(nonatomic,copy) applyJoinCall applyJoinCall;
 @end
 
 NS_ASSUME_NONNULL_END

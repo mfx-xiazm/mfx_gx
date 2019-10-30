@@ -22,7 +22,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JIO-jk-WoD">
                         <rect key="frame" x="10" y="5" width="352" height="89.5"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ose-jc-z5L">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ose-jc-z5L">
                                 <rect key="frame" x="10" y="10" width="69.5" height="69.5"/>
                                 <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -140,6 +140,11 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="brand_logo" destination="ose-jc-z5L" id="j6l-G6-6ZC"/>
+                <outlet property="brand_name" destination="Gmh-sF-Gkh" id="t5g-la-QdE"/>
+                <outlet property="sale_num" destination="Hh9-uu-hBe" id="A2h-7O-4jX"/>
+            </connections>
             <point key="canvasLocation" x="175.36231884057972" y="137.27678571428569"/>
         </tableViewCell>
     </objects>

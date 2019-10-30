@@ -12,13 +12,19 @@
 #import <JXCategoryIndicatorLineView.h>
 #import "GXGoodsFilterView.h"
 #import <zhPopupController.h>
+#import "GXCatalogItem.h"
 
 @interface GXBrandPartnerVC ()<JXCategoryViewDelegate,UIScrollViewDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet JXCategoryTitleView *categoryView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+/* 筛选按钮 */
+@property(nonatomic,strong) SPButton *filterBtn;
 /** 子控制器数组 */
 @property (nonatomic,strong) NSArray *childVCs;
-
+/* 分类 */
+@property(nonatomic,strong) NSArray *catalogItems;
+/* 分类视图 */
+@property(nonatomic,strong) GXGoodsFilterView *fliterView;
 @end
 
 @implementation GXBrandPartnerVC
@@ -27,6 +33,7 @@
     [super viewDidLoad];
     [self setUpNavBar];
     [self setUpCategoryView];
+    [self getCatalogItemRequest];
 }
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -40,13 +47,21 @@
         NSMutableArray *vcs = [NSMutableArray array];
         for (int i=0;i<self.categoryView.titles.count;i++) {
             GXBrandPartnerChildVC *cvc0 = [GXBrandPartnerChildVC new];
-            cvc0.dataType = i;
+            cvc0.dataType = i+1;
             [self addChildViewController:cvc0];
             [vcs addObject:cvc0];
         }
         _childVCs = vcs;
     }
     return _childVCs;
+}
+-(GXGoodsFilterView *)fliterView
+{
+    if (_fliterView == nil) {
+        _fliterView = [GXGoodsFilterView loadXibView];
+        _fliterView.hxn_size = CGSizeMake(HX_SCREEN_WIDTH-80, HX_SCREEN_HEIGHT);
+    }
+    return _fliterView;
 }
 -(void)setUpNavBar
 {
@@ -61,8 +76,9 @@
     [filter setTitle:@"筛选" forState:UIControlStateNormal];
     [filter addTarget:self action:@selector(filterClicked) forControlEvents:UIControlEventTouchUpInside];
     [filter setTitleColor:UIColorFromRGB(0XFFFFFF) forState:UIControlStateNormal];
-    
+    self.filterBtn = filter;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:filter];
+    self.filterBtn.hidden = YES;
 }
 -(void)setUpCategoryView
 {
@@ -91,12 +107,32 @@
     targetViewController.view.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, _scrollView.hxn_height);
     [_scrollView addSubview:targetViewController.view];
 }
-#pragma mark - JXCategoryViewDelegate
+#pragma mark -- 获取分类
+-(void)getCatalogItemRequest
+{
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"getCatalogItem" parameters:@{} success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            strongSelf.catalogItems = [NSArray yy_modelArrayWithClass:[GXCatalogItem class] json:responseObject[@"data"]];
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
+}
+#pragma mark -- JXCategoryViewDelegate
 // 滚动和点击选中
 - (void)categoryView:(JXCategoryBaseView *)categoryView didSelectedItemAtIndex:(NSInteger)index
 {
     // 处理侧滑手势
     //self.navigationController.interactivePopGestureRecognizer.enabled = (index == 0);
+    if (index) {
+        self.filterBtn.hidden = NO;
+    }else{
+        self.filterBtn.hidden = YES;
+    }
     
     if (self.childVCs.count <= index) {return;}
     
@@ -111,11 +147,22 @@
 #pragma mark -- 点击事件
 -(void)filterClicked
 {
-    GXGoodsFilterView *fliter = [GXGoodsFilterView loadXibView];
-    fliter.hxn_size = CGSizeMake(HX_SCREEN_WIDTH-80, HX_SCREEN_HEIGHT);
+    if (!self.catalogItems) {
+        return;
+    }
+    
+    self.fliterView.dataType = 1;
+    self.fliterView.dataSouce = self.catalogItems;
+    hx_weakify(self);
+    self.fliterView.sureFilterCall = ^(NSString * _Nonnull cata_id) {
+        hx_strongify(weakSelf);
+        [strongSelf.zh_popupController dismissWithDuration:0.25 springAnimated:NO];
+        GXBrandPartnerChildVC *brandVc = (GXBrandPartnerChildVC *)strongSelf.childVCs.lastObject;
+        brandVc.catalog_id = cata_id;
+    };
     
     self.zh_popupController = [[zhPopupController alloc] init];
     self.zh_popupController.layoutType = zhPopupLayoutTypeRight;
-    [self.zh_popupController presentContentView:fliter duration:0.25 springAnimated:NO];
+    [self.zh_popupController presentContentView:self.fliterView duration:0.25 springAnimated:NO];
 }
 @end

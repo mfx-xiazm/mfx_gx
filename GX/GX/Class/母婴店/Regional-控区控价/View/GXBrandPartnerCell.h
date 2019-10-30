@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
+@class GXGoodBrand;
 @interface GXBrandPartnerCell : UITableViewCell
-
+/* 品牌 */
+@property(nonatomic,strong) GXGoodBrand *brand;
 @end
 
 NS_ASSUME_NONNULL_END

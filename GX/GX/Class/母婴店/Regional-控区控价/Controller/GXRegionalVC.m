@@ -15,6 +15,8 @@
 #import "GXSaleMaterialVC.h"
 #import "GXTryApplyVC.h"
 #import "GXPartnerDataVC.h"
+#import "GXRegional.h"
+#import "GXGoodBrand.h"
 
 static NSString *const RegionalCell = @"RegionalCell";
 
@@ -22,18 +24,34 @@ static NSString *const RegionalCell = @"RegionalCell";
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 /* 头视图 */
 @property(nonatomic,strong) GXRegionalHeader *header;
+/* 控区控价 */
+@property(nonatomic,strong) GXRegional *regional;
+/** 页码 */
+@property(nonatomic,assign) NSInteger pagenum;
+/** 列表 */
+@property(nonatomic,strong) NSMutableArray *brands;
 @end
 
 @implementation GXRegionalVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.navigationItem setTitle:@"控区控价"];
     [self setUpTableView];
+    [self setUpRefresh];
+    [self getRegionalControlDataRequest];
 }
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
     self.header.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, 265.f);
+}
+-(NSMutableArray *)brands
+{
+    if (_brands == nil) {
+        _brands = [NSMutableArray array];
+    }
+    return _brands;
 }
 -(GXRegionalHeader *)header
 {
@@ -49,9 +67,12 @@ static NSString *const RegionalCell = @"RegionalCell";
                 wvc.navTitle = @"轮播图详情";
                 [strongSelf.navigationController pushViewController:wvc animated:YES];
             }else if (type == 2){
+                GXRegionalNotice *notice = strongSelf.regional.notice[index];
                 GXWebContentVC *wvc = [GXWebContentVC new];
-                wvc.url = @"http://news.cctv.com/2019/10/03/ARTI2EUlwRGH3jMPI6cAVqti191003.shtml";
                 wvc.navTitle = @"公告详情";
+                wvc.isNeedRequest = YES;
+                wvc.requestType = 3;
+                wvc.notice_id = notice.notice_id;
                 [strongSelf.navigationController pushViewController:wvc animated:YES];
             }else{
                 if (index == 1) {
@@ -99,6 +120,124 @@ static NSString *const RegionalCell = @"RegionalCell";
     
     self.tableView.tableHeaderView = self.header;
 }
+/** 添加刷新控件 */
+-(void)setUpRefresh
+{
+    hx_weakify(self);
+    self.tableView.mj_header.automaticallyChangeAlpha = YES;
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        hx_strongify(weakSelf);
+        [strongSelf.tableView.mj_footer resetNoMoreData];
+        [strongSelf getHotBrandDataRequest:YES completedCall:^{
+            [strongSelf.tableView reloadData];
+        }];
+    }];
+    //追加尾部刷新
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        hx_strongify(weakSelf);
+        [strongSelf getHotBrandDataRequest:NO completedCall:^{
+            [strongSelf.tableView reloadData];
+        }];
+    }];
+}
+#pragma mark -- 接口请求
+-(void)getRegionalControlDataRequest
+{
+    dispatch_group_t group = dispatch_group_create();
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    // 执行循序1
+    hx_weakify(self);
+    dispatch_group_async(group, queue, ^{
+        hx_strongify(weakSelf);
+
+        [HXNetworkTool POST:HXRC_M_URL action:@"controlData" parameters:@{} success:^(id responseObject) {
+            if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+                strongSelf.regional = [GXRegional yy_modelWithDictionary:responseObject[@"data"]];
+            }else{
+                [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+            }
+            dispatch_semaphore_signal(semaphore);
+        } failure:^(NSError *error) {
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+            dispatch_semaphore_signal(semaphore);
+        }];
+    });
+    // 执行循序2
+    dispatch_group_async(group, queue, ^{
+        hx_strongify(weakSelf);
+        [strongSelf getHotBrandDataRequest:YES completedCall:^{
+            dispatch_semaphore_signal(semaphore);
+        }];
+    });
+    dispatch_group_notify(group, queue, ^{
+        // 执行循序4
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+        // 执行顺序6
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+        
+        // 执行顺序10
+        hx_strongify(weakSelf);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [strongSelf handleRegionalData];
+        });
+    });
+}
+-(void)getHotBrandDataRequest:(BOOL)isRefresh completedCall:(void(^)(void))completedCall
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    if (isRefresh) {
+        parameters[@"page"] = @(1);//第几页
+    }else{
+        NSInteger page = self.pagenum+1;
+        parameters[@"page"] = @(page);//第几页
+    }
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"getHotBrand" parameters:parameters success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            if (isRefresh) {
+                [strongSelf.tableView.mj_header endRefreshing];
+                strongSelf.pagenum = 1;
+                
+                [strongSelf.brands removeAllObjects];
+                NSArray *arrt = [NSArray yy_modelArrayWithClass:[GXGoodBrand class] json:responseObject[@"data"]];
+                [strongSelf.brands addObjectsFromArray:arrt];
+            }else{
+                [strongSelf.tableView.mj_footer endRefreshing];
+                strongSelf.pagenum ++;
+                
+                if ([responseObject[@"data"] isKindOfClass:[NSArray class]] && ((NSArray *)responseObject[@"data"]).count){
+                    NSArray *arrt = [NSArray yy_modelArrayWithClass:[GXGoodBrand class] json:responseObject[@"data"]];
+                    [strongSelf.brands addObjectsFromArray:arrt];
+                }else{// 提示没有更多数据
+                    [strongSelf.tableView.mj_footer endRefreshingWithNoMoreData];
+                }
+            }
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+        if (completedCall) {
+            completedCall();
+        }
+    } failure:^(NSError *error) {
+        hx_strongify(weakSelf);
+        [strongSelf.tableView.mj_header endRefreshing];
+        [strongSelf.tableView.mj_footer endRefreshing];
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+        if (completedCall) {
+            completedCall();
+        }
+    }];
+}
+-(void)handleRegionalData
+{
+    self.tableView.hidden = NO;
+    
+    self.header.regional = self.regional;
+    
+    [self.tableView reloadData];
+}
 #pragma mark -- UITableView数据源和代理
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -109,13 +248,25 @@ static NSString *const RegionalCell = @"RegionalCell";
     if (section == 0) {
         return 2;
     }else{
-        return 6;
+        return self.brands.count;
     }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     GXRegionalCell *cell = [tableView dequeueReusableCellWithIdentifier:RegionalCell forIndexPath:indexPath];
     //无色
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    if (indexPath.section) {
+        GXGoodBrand *brand = self.brands[indexPath.row];
+        cell.brand = brand;
+    }else{
+        if (indexPath.row) {
+            GXRegionalTry *rtry = self.regional.try_cover;
+            cell.rtry = rtry;
+        }else{
+            GXRegionalWeekNewer *week = self.regional.week_newer;
+            cell.week = week;
+        }
+    }
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

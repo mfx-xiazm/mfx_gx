@@ -10,13 +10,15 @@
 #import <TYCyclePagerView.h>
 #import <TYPageControl.h>
 #import "GXHomePushCell.h"
-#import "LMJHorizontalScrollText.h"
+#import "GXRegional.h"
+#import "GXRegionNoticeCell.h"
+#import <GYRollingNoticeView.h>
 
-@interface GXRegionalHeader ()<TYCyclePagerViewDataSource, TYCyclePagerViewDelegate>
+@interface GXRegionalHeader ()<TYCyclePagerViewDataSource, TYCyclePagerViewDelegate, GYRollingNoticeViewDataSource, GYRollingNoticeViewDelegate>
 @property (weak, nonatomic) IBOutlet TYCyclePagerView *cyclePagerView;
 @property (nonatomic,strong) TYPageControl *pageControl;
 @property (weak, nonatomic) IBOutlet UIView *scrollTextView;
-@property (strong, nonatomic) LMJHorizontalScrollText *scrollText;
+@property (nonatomic,strong) GYRollingNoticeView *roolNoticeView;
 @end
 @implementation GXRegionalHeader
 
@@ -35,40 +37,36 @@
     pageControl.numberOfPages = 4;
     pageControl.currentPageIndicatorSize = CGSizeMake(6, 6);
     pageControl.pageIndicatorSize = CGSizeMake(6, 6);
-    //    pageControl.pageIndicatorImage = HXGetImage(@"轮播点灰");
-    //    pageControl.currentPageIndicatorImage = HXGetImage(@"轮播点黑");
-    pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
-    pageControl.currentPageIndicatorTintColor = HXControlBg;
+    pageControl.pageIndicatorImage = HXGetImage(@"灰色渐进器");
+    pageControl.currentPageIndicatorImage = HXGetImage(@"当前渐进器");
     pageControl.frame = CGRectMake(0, CGRectGetHeight(self.cyclePagerView.frame) - 20, CGRectGetWidth(self.cyclePagerView.frame), 20);
     self.pageControl = pageControl;
     [self.cyclePagerView addSubview:pageControl];
     
     
-    self.scrollText = [[LMJHorizontalScrollText alloc] initWithFrame:self.scrollTextView.bounds];
-    self.scrollText.layer.cornerRadius = 2;
-    self.scrollText.layer.masksToBounds = YES;
-    self.scrollText.backgroundColor    = [UIColor whiteColor];
-    self.scrollText.text               = @"《呱选控区控价细则》，门店必看！门店必看，《呱选控区控价细则》！";
-    self.scrollText.textColor          = HXControlBg;
-    self.scrollText.textFont           = [UIFont systemFontOfSize:13];
-    self.scrollText.speed              = 0.07;
-    //self.scrollText.moveDirection      = LMJTextScrollMoveLeft;
-    self.scrollText.moveMode           = LMJTextScrollWandering;
-    
-    [self.scrollTextView addSubview:self.scrollText];
-    [self.scrollText move];
+    GYRollingNoticeView *noticeView = [[GYRollingNoticeView alloc]initWithFrame:self.scrollTextView.bounds];
+    noticeView.dataSource = self;
+    noticeView.delegate = self;
+    [noticeView registerNib:[UINib nibWithNibName:@"GXRegionNoticeCell" bundle:nil] forCellReuseIdentifier:@"TopNoticeCell"];
+    self.roolNoticeView = noticeView;
+    [self.scrollTextView addSubview:noticeView];
 }
 -(void)layoutSubviews
 {
     [super layoutSubviews];
     self.pageControl.frame = CGRectMake(0, CGRectGetHeight(self.cyclePagerView.frame) - 20, CGRectGetWidth(self.cyclePagerView.frame), 20);
     
-    self.scrollText.frame = self.scrollTextView.bounds;
+    self.roolNoticeView.frame = self.scrollTextView.bounds;
 }
-- (IBAction)noticeClicked:(UIButton *)sender {
-    if (self.regionalClickedCall) {
-        self.regionalClickedCall(2,0);
-    }
+-(void)setRegional:(GXRegional *)regional
+{
+    _regional = regional;
+    
+    self.pageControl.numberOfPages = _regional.adv.count;
+
+    [self.cyclePagerView reloadData];
+    
+    [self.roolNoticeView reloadDataAndStartRoll];
 }
 - (IBAction)brandDataClicked:(UIButton *)sender {
     if (self.regionalClickedCall) {
@@ -78,12 +76,13 @@
 
 #pragma mark -- TYCyclePagerView代理
 - (NSInteger)numberOfItemsInPagerView:(TYCyclePagerView *)pageView {
-    return 2;
+    return self.regional.adv.count;
 }
 
 - (UICollectionViewCell *)pagerView:(TYCyclePagerView *)pagerView cellForItemAtIndex:(NSInteger)index {
     GXHomePushCell *cell = [pagerView dequeueReusableCellWithReuseIdentifier:@"TopBannerCell" forIndex:index];
-    
+    GXRegionalBanner *regionalBanner = self.regional.adv[index];
+    cell.regionalBanner = regionalBanner;
     return cell;
 }
 
@@ -106,5 +105,23 @@
         self.regionalClickedCall(1,index);
     }
 }
+#pragma mark -- GYRollingNoticeView数据源和代理
+- (NSInteger)numberOfRowsForRollingNoticeView:(GYRollingNoticeView *)rollingView
+{
+    return self.regional.notice.count;
+}
+- (__kindof GYNoticeViewCell *)rollingNoticeView:(GYRollingNoticeView *)rollingView cellAtIndex:(NSUInteger)index
+{
+    GXRegionNoticeCell *cell = [rollingView dequeueReusableCellWithIdentifier:@"TopNoticeCell"];
+    GXRegionalNotice *notice = self.regional.notice[index];
+    cell.notice = notice;
+    return cell;
+}
 
+- (void)didClickRollingNoticeView:(GYRollingNoticeView *)rollingView forIndex:(NSUInteger)index
+{
+    if (self.regionalClickedCall) {
+        self.regionalClickedCall(2,index);
+    }
+}
 @end

@@ -46,29 +46,19 @@
                             <rect key="frame" x="10" y="13" width="17" height="14"/>
                         </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5nB-A9-hJp">
-                            <rect key="frame" x="37" y="0.0" width="347" height="40"/>
+                            <rect key="frame" x="27" y="0.0" width="367" height="40"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RCn-iP-UEP">
-                            <rect key="frame" x="0.0" y="0.0" width="394" height="40"/>
-                            <connections>
-                                <action selector="noticeClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="sDD-0P-IOn"/>
-                            </connections>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="5nB-A9-hJp" secondAttribute="bottom" id="AcJ-IM-D5L"/>
-                        <constraint firstItem="RCn-iP-UEP" firstAttribute="top" secondItem="ftm-Zh-tj0" secondAttribute="top" id="CNC-Bm-UBl"/>
-                        <constraint firstItem="RCn-iP-UEP" firstAttribute="leading" secondItem="ftm-Zh-tj0" secondAttribute="leading" id="Clp-g0-CKe"/>
-                        <constraint firstAttribute="trailing" secondItem="RCn-iP-UEP" secondAttribute="trailing" id="J9F-CJ-EHP"/>
                         <constraint firstAttribute="height" constant="40" id="MpX-CF-LKo"/>
                         <constraint firstItem="U2s-Nn-mgM" firstAttribute="centerY" secondItem="ftm-Zh-tj0" secondAttribute="centerY" id="PQL-cb-kFK"/>
-                        <constraint firstAttribute="bottom" secondItem="RCn-iP-UEP" secondAttribute="bottom" id="SCh-Ie-bep"/>
                         <constraint firstItem="U2s-Nn-mgM" firstAttribute="leading" secondItem="ftm-Zh-tj0" secondAttribute="leading" constant="10" id="lg8-1f-Tgr"/>
-                        <constraint firstItem="5nB-A9-hJp" firstAttribute="leading" secondItem="U2s-Nn-mgM" secondAttribute="trailing" constant="10" id="qyg-e1-pL6"/>
+                        <constraint firstItem="5nB-A9-hJp" firstAttribute="leading" secondItem="U2s-Nn-mgM" secondAttribute="trailing" id="qyg-e1-pL6"/>
                         <constraint firstItem="5nB-A9-hJp" firstAttribute="top" secondItem="ftm-Zh-tj0" secondAttribute="top" id="xey-WA-e0U"/>
-                        <constraint firstAttribute="trailing" secondItem="5nB-A9-hJp" secondAttribute="trailing" constant="10" id="yWb-ye-1Yo"/>
+                        <constraint firstAttribute="trailing" secondItem="5nB-A9-hJp" secondAttribute="trailing" id="yWb-ye-1Yo"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
