@@ -23,6 +23,8 @@
 @property (nonatomic , strong) UIButton *lookGoods;
 /** 分享 */
 @property (nonatomic , strong) UIButton *share;
+/** 分享热度 */
+@property (nonatomic , strong) UILabel *shareNum;
 /** 分割线 */
 @property (nonatomic , strong) UIView *dividingLine;
 @end
@@ -59,6 +61,7 @@
     [self.contentView addSubview:self.textContent];
     [self.contentView addSubview:self.moreLessBtn];
     [self.contentView addSubview:self.picContainerView];
+    [self.contentView addSubview:self.shareNum];
     [self.contentView addSubview:self.lookGoods];
     [self.contentView addSubview:self.share];
     [self.contentView addSubview:self.dividingLine];
@@ -101,6 +104,15 @@
         _picContainerView.hidden = YES;
     }
     return _picContainerView;
+}
+-(UILabel *)shareNum
+{
+    if (!_shareNum) {
+        _shareNum = [UILabel new];
+        _shareNum.font = [UIFont systemFontOfSize:12];
+        _shareNum.textColor = HXControlBg;
+    }
+    return _shareNum;
 }
 -(UIButton *)lookGoods
 {
@@ -203,6 +215,14 @@
     }else{
         _picContainerView.hidden = YES;
     }
+    
+    // 分享热度
+    _shareNum.text = [NSString stringWithFormat:@"分享热度 %@",material.shareNum];
+    _shareNum.hxn_y = lastView.hxn_bottom + kMomentMarginPadding;;
+    _shareNum.hxn_x = kMomentMarginPadding;
+    CGSize shareNumSize = [_shareNum sizeThatFits:CGSizeZero];
+    _shareNum.hxn_width = shareNumSize.width;
+    _shareNum.hxn_height = kMomentHandleButtonHeight;
     
     //点赞
     _share.hxn_y = lastView.hxn_bottom + kMomentMarginPadding;

@@ -10,6 +10,7 @@
 #import "GXHomeData.h"
 #import "GXRegional.h"
 #import "GXActivityCataInfo.h"
+#import "GXTopSaleMaterial.h"
 
 @implementation GXHomePushCell
 
@@ -51,5 +52,10 @@
 {
     _activityBanner = activityBanner;
     [self.contentImage sd_setImageWithURL:[NSURL URLWithString:_activityBanner.adv_img]];
+}
+-(void)setTopMaterial:(GXTopSaleMaterial *)topMaterial
+{
+    _topMaterial = topMaterial;
+    [self.contentImage sd_setImageWithURL:[NSURL URLWithString:_topMaterial.material_filter_img]];
 }
 @end

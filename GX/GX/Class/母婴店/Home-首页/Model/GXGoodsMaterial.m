@@ -42,4 +42,32 @@
         _isOpening = isOpening;
     }
 }
+
+-(void)setMaterial_title:(NSString *)material_title
+{
+    _material_title = material_title;
+    _nick = _material_title;
+}
+
+-(void)setMaterial_desc:(NSString *)material_desc
+{
+    _material_desc = material_desc;
+    _dsp = _material_desc;
+}
+
+-(void)setShare_num:(NSString *)share_num
+{
+    _share_num = share_num;
+    _shareNum = _share_num;
+}
+
+-(void)setImg:(NSArray *)img
+{
+    _img = img;
+    NSMutableArray *tamp = [NSMutableArray array];
+    for (NSDictionary *dict in _img) {
+        [tamp addObject:dict[@"material_img"]];
+    }
+    _photos = [NSArray arrayWithArray:tamp];
+}
 @end

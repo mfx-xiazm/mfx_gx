@@ -10,8 +10,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^materialClickedCall)(NSInteger index);
 @interface GXSaleMaterialHeader : UIView
-
+/* 顶部素材 */
+@property(nonatomic,strong) NSArray *topMaterials;
+/* 点击 */
+@property(nonatomic,copy) materialClickedCall materialClickedCall;
 @end
 
 NS_ASSUME_NONNULL_END

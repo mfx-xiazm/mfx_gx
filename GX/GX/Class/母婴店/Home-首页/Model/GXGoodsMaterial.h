@@ -17,14 +17,23 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy)NSString *nick;
 /** 时间 */
 @property(nonatomic,copy)NSString *creatTime;
-/** 点赞分享数量 */
-@property(nonatomic,copy)NSString *thumbNum;
+/** 分享数量 */
+@property(nonatomic,copy)NSString *shareNum;
 /** 照片数组 */
 @property(nonatomic,strong)NSArray *photos;
 /** 是否已展开文字 */
 @property (nonatomic, assign) BOOL isOpening;
 /** 是否应该显示"全文" */
 @property (nonatomic, assign, readonly) BOOL shouldShowMoreButton;
+
+@property(nonatomic,copy) NSString *material_id;
+@property(nonatomic,copy) NSString *goods_id;
+@property(nonatomic,copy) NSString *control_type;
+@property(nonatomic,copy) NSString *material_title;
+@property(nonatomic,copy) NSString *share_num;
+@property(nonatomic,copy) NSString *material_desc;
+@property(nonatomic,strong)NSArray *img;//material_img
+
 @end
 
 NS_ASSUME_NONNULL_END

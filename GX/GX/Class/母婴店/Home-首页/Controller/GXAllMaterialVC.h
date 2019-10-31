@@ -11,7 +11,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface GXAllMaterialVC : HXBaseViewController
-
+/* 是否是搜索 */
+@property(nonatomic,assign) BOOL isSearch;
+/* 分类id */
+@property(nonatomic,copy) NSString *catalog_id;
 @end
 
 NS_ASSUME_NONNULL_END

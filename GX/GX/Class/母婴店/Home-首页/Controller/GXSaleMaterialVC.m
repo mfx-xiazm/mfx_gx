@@ -10,6 +10,7 @@
 #import "GXSaleMaterialChildVC.h"
 #import <JXCategoryTitleView.h>
 #import <JXCategoryIndicatorLineView.h>
+#import "GXAllMaterialVC.h"
 
 @interface GXSaleMaterialVC ()<JXCategoryViewDelegate,UIScrollViewDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet JXCategoryTitleView *categoryView;
@@ -38,6 +39,7 @@
         NSMutableArray *vcs = [NSMutableArray array];
         for (int i=0;i<self.categoryView.titles.count;i++) {
             GXSaleMaterialChildVC *cvc0 = [GXSaleMaterialChildVC new];
+            cvc0.dataType = i+1;
             [self addChildViewController:cvc0];
             [vcs addObject:cvc0];
         }
@@ -49,13 +51,7 @@
 {
     [self.navigationItem setTitle:@"卖货素材"];
     
-//    HXSearchBar *searchBar = [[HXSearchBar alloc] initWithFrame:CGRectMake(0, 0, HX_SCREEN_WIDTH - 70.f, 30.f)];
-//    searchBar.backgroundColor = [UIColor whiteColor];
-//    searchBar.layer.cornerRadius = 6;
-//    searchBar.layer.masksToBounds = YES;
-//    searchBar.delegate = self;
-//    self.searchBar = searchBar;
-//    self.navigationItem.titleView = searchBar;
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithTarget:self action:@selector(searchClicked) image:HXGetImage(@"搜索")];
 }
 -(void)setUpCategoryView
 {
@@ -83,6 +79,13 @@
     UIViewController *targetViewController = self.childVCs.firstObject;
     targetViewController.view.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, _scrollView.hxn_height);
     [_scrollView addSubview:targetViewController.view];
+}
+#pragma mark -- 点击事件
+-(void)searchClicked
+{
+    GXAllMaterialVC *mvc = [GXAllMaterialVC new];
+    mvc.isSearch = self;
+    [self.navigationController pushViewController:mvc animated:YES];
 }
 #pragma mark - JXCategoryViewDelegate
 // 滚动和点击选中

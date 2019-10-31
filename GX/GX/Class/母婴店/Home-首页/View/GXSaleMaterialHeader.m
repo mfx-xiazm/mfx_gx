@@ -9,6 +9,7 @@
 #import "GXSaleMaterialHeader.h"
 #import <ZLCollectionViewHorzontalLayout.h>
 #import "GXHomePushCell.h"
+#import "GXTopSaleMaterial.h"
 
 static NSString *const HomePushCell = @"HomePushCell";
 @interface GXSaleMaterialHeader ()<UICollectionViewDelegate,UICollectionViewDataSource,ZLCollectionViewBaseFlowLayoutDelegate>
@@ -28,6 +29,11 @@ static NSString *const HomePushCell = @"HomePushCell";
     
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([GXHomePushCell class]) bundle:nil] forCellWithReuseIdentifier:HomePushCell];
 }
+-(void)setTopMaterials:(NSArray *)topMaterials
+{
+    _topMaterials = topMaterials;
+    [self.collectionView reloadData];
+}
 #pragma mark -- UICollectionView 数据源和代理
 - (ZLLayoutType)collectionView:(UICollectionView *)collectionView layout:(ZLCollectionViewBaseFlowLayout *)collectionViewLayout typeOfLayout:(NSInteger)section
 {
@@ -38,15 +44,18 @@ static NSString *const HomePushCell = @"HomePushCell";
     return 1;
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 4;
+    return self.topMaterials.count;
 }
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    GXHomePushCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:HomePushCell forIndexPath:indexPath];
-    cell.contentImage.backgroundColor = UIColorFromRGB(0xFF8A00);
+    GXHomePushCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:HomePushCell forIndexPath:indexPath];
+    GXTopSaleMaterial *topMaterial = self.topMaterials[indexPath.item];
+    cell.topMaterial = topMaterial;
     return cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+    if (self.materialClickedCall) {
+        self.materialClickedCall(indexPath.item);
+    }
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return CGSizeMake(120, collectionView.hxn_height - 10*2.f);
