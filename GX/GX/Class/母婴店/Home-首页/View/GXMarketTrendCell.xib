@@ -23,43 +23,40 @@
                         <rect key="frame" x="10" y="5" width="355" height="54.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="惠氏启赋1段" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BAS-PS-Kxt">
-                                <rect key="frame" x="10" y="10" width="66.5" height="12"/>
+                                <rect key="frame" x="10" y="10" width="100" height="34.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="G2J-9k-lHg"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name=".PingFangSC-Regular" family=".PingFang SC" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123.5" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GRg-qF-AOo">
-                                <rect key="frame" x="96.5" y="10" width="31" height="12"/>
+                                <rect key="frame" x="115" y="10" width="31" height="12"/>
                                 <fontDescription key="fontDescription" name=".PingFangSC-Regular" family=".PingFang SC" pointSize="12"/>
                                 <color key="textColor" red="0.92549019610000005" green="0.078431372550000003" blue="0.1764705882" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2段2段" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UPo-Oq-2Y6">
-                                <rect key="frame" x="10" y="32.5" width="39.5" height="12"/>
-                                <fontDescription key="fontDescription" name=".PingFangSC-Regular" family=".PingFang SC" pointSize="12"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2019.02/6罐装" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QP1-5P-VHh">
-                                <rect key="frame" x="69.5" y="32.5" width="84" height="12"/>
-                                <fontDescription key="fontDescription" name=".PingFangSC-Regular" family=".PingFang SC" pointSize="12"/>
-                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PTM-VS-d7A">
                                 <rect key="frame" x="215" y="12.5" width="130" height="30"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tTx-Vo-wZA">
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tTx-Vo-wZA">
                                         <rect key="frame" x="0.0" y="0.0" width="65" height="30"/>
                                         <color key="backgroundColor" red="1" green="0.62352941179999999" blue="0.031372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <state key="normal" title="加购物车"/>
+                                        <connections>
+                                            <action selector="btnClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="oau-hO-gcz"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qPL-yh-qzz">
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qPL-yh-qzz">
                                         <rect key="frame" x="65" y="0.0" width="65" height="30"/>
                                         <color key="backgroundColor" red="0.92549019610000005" green="0.078431372550000003" blue="0.1764705882" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <state key="normal" title="立即补货"/>
+                                        <connections>
+                                            <action selector="btnClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="k6U-Cq-GeO"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -81,19 +78,24 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2019.02/6罐装" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QP1-5P-VHh">
+                                <rect key="frame" x="115" y="32.5" width="84" height="12"/>
+                                <fontDescription key="fontDescription" name=".PingFangSC-Regular" family=".PingFang SC" pointSize="12"/>
+                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="GRg-qF-AOo" firstAttribute="top" secondItem="yeF-OY-Tq1" secondAttribute="top" constant="10" id="DeD-hF-z2v"/>
                             <constraint firstItem="BAS-PS-Kxt" firstAttribute="top" secondItem="yeF-OY-Tq1" secondAttribute="top" constant="10" id="NYG-Ud-6Ip"/>
-                            <constraint firstItem="UPo-Oq-2Y6" firstAttribute="leading" secondItem="yeF-OY-Tq1" secondAttribute="leading" constant="10" id="Q8t-LZ-Ge4"/>
-                            <constraint firstItem="GRg-qF-AOo" firstAttribute="centerY" secondItem="BAS-PS-Kxt" secondAttribute="centerY" id="WG9-re-Jwr"/>
+                            <constraint firstItem="QP1-5P-VHh" firstAttribute="leading" secondItem="BAS-PS-Kxt" secondAttribute="trailing" constant="5" id="UaC-jG-voe"/>
                             <constraint firstItem="PTM-VS-d7A" firstAttribute="centerY" secondItem="yeF-OY-Tq1" secondAttribute="centerY" id="ZJy-FN-JCa"/>
-                            <constraint firstItem="GRg-qF-AOo" firstAttribute="leading" secondItem="BAS-PS-Kxt" secondAttribute="trailing" constant="20" id="k43-gH-Deb"/>
+                            <constraint firstAttribute="bottom" secondItem="QP1-5P-VHh" secondAttribute="bottom" constant="10" id="eyd-R7-FPf"/>
+                            <constraint firstItem="GRg-qF-AOo" firstAttribute="leading" secondItem="BAS-PS-Kxt" secondAttribute="trailing" constant="5" id="k43-gH-Deb"/>
                             <constraint firstAttribute="trailing" secondItem="PTM-VS-d7A" secondAttribute="trailing" constant="10" id="lW6-2u-BVk"/>
                             <constraint firstItem="BAS-PS-Kxt" firstAttribute="leading" secondItem="yeF-OY-Tq1" secondAttribute="leading" constant="10" id="lqh-Rb-9do"/>
-                            <constraint firstItem="QP1-5P-VHh" firstAttribute="centerY" secondItem="UPo-Oq-2Y6" secondAttribute="centerY" id="mZh-t9-Mea"/>
-                            <constraint firstAttribute="bottom" secondItem="UPo-Oq-2Y6" secondAttribute="bottom" constant="10" id="oKv-P4-AIh"/>
-                            <constraint firstItem="QP1-5P-VHh" firstAttribute="leading" secondItem="UPo-Oq-2Y6" secondAttribute="trailing" constant="20" id="xnw-ky-cnH"/>
+                            <constraint firstAttribute="bottom" secondItem="BAS-PS-Kxt" secondAttribute="bottom" constant="10" id="psc-ze-unZ"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
@@ -123,6 +125,11 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="name" destination="BAS-PS-Kxt" id="UoQ-C1-aRq"/>
+                <outlet property="price" destination="GRg-qF-AOo" id="Cp3-Wr-7k6"/>
+                <outlet property="sku_name" destination="QP1-5P-VHh" id="UCg-3c-hX2"/>
+            </connections>
             <point key="canvasLocation" x="160.1449275362319" y="122.87946428571428"/>
         </tableViewCell>
     </objects>

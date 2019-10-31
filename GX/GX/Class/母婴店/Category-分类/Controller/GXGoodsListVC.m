@@ -13,13 +13,27 @@
 #import "HXSearchBar.h"
 #import "GXGoodsFilterView.h"
 #import <zhPopupController.h>
+#import "GXCatalogItem.h"
+#import "GXCategoryGoods.h"
 
 static NSString *const DiscountGoodsCell = @"DiscountGoodsCell";
 
 @interface GXGoodsListVC ()<UITextFieldDelegate,UICollectionViewDelegate,UICollectionViewDataSource,ZLCollectionViewBaseFlowLayoutDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet UIImageView *sale_img;
+@property (weak, nonatomic) IBOutlet UIImageView *price_img;
+/* 筛选视图 */
+@property(nonatomic,strong) GXGoodsFilterView *fliterView;
 /* 搜索条 */
 @property(nonatomic,strong) HXSearchBar *searchBar;
+/* 为1按照销量从高到低排序 其他则取消按照从高到低排序  销量排序 1降序 2升序 */
+@property(nonatomic,copy) NSString *sale_num;
+/* 按照价格排序 1降序 2升序 */
+@property(nonatomic,copy) NSString *price;
+/** 页码 */
+@property(nonatomic,assign) NSInteger pagenum;
+/** 列表 */
+@property(nonatomic,strong) NSMutableArray *goods;
 @end
 
 @implementation GXGoodsListVC
@@ -28,10 +42,27 @@ static NSString *const DiscountGoodsCell = @"DiscountGoodsCell";
     [super viewDidLoad];
     [self setUpNavBar];
     [self setUpCollectionView];
+    [self setUpRefresh];
+    [self getGoodsListDataRequest:YES];
 }
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
+}
+-(NSMutableArray *)goods
+{
+    if (_goods == nil) {
+        _goods = [NSMutableArray array];
+    }
+    return _goods;
+}
+-(GXGoodsFilterView *)fliterView
+{
+    if (_fliterView == nil) {
+        _fliterView = [GXGoodsFilterView loadXibView];
+        _fliterView.hxn_size = CGSizeMake(HX_SCREEN_WIDTH-80, HX_SCREEN_HEIGHT);
+    }
+    return _fliterView;
 }
 -(void)setUpNavBar
 {
@@ -65,22 +96,128 @@ static NSString *const DiscountGoodsCell = @"DiscountGoodsCell";
     
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([GXDiscountGoodsCell class]) bundle:nil] forCellWithReuseIdentifier:DiscountGoodsCell];
 }
+/** 添加刷新控件 */
+-(void)setUpRefresh
+{
+    hx_weakify(self);
+    self.collectionView.mj_header.automaticallyChangeAlpha = YES;
+    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        hx_strongify(weakSelf);
+        [strongSelf.collectionView.mj_footer resetNoMoreData];
+        [strongSelf getGoodsListDataRequest:YES];
+    }];
+    //追加尾部刷新
+    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        hx_strongify(weakSelf);
+        [strongSelf getGoodsListDataRequest:NO];
+    }];
+}
+#pragma mark -- 接口请求
+-(void)getGoodsListDataRequest:(BOOL)isRefresh
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"catalog_id"] = (self.catalog_id && self.catalog_id.length)?self.catalog_id:@"";//二级分类id
+    parameters[@"brand_id"] = (self.brand_id && self.brand_id.length)?self.brand_id:@"";//品牌id
+    parameters[@"sale_num"] = (self.sale_num && self.sale_num.length)?self.sale_num:@"";//为1按照销量从高到低排序 其他则取消按照从高到低排序
+    parameters[@"price"] = (self.price && self.price.length)?self.price:@"";//按照价格排序
+    parameters[@"goods_name"] = @"";//根据商品名称筛选
+
+    if (isRefresh) {
+        parameters[@"page"] = @(1);//第几页
+    }else{
+        NSInteger page = self.pagenum+1;
+        parameters[@"page"] = @(page);//第几页
+    }
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"catalogBrandGoods" parameters:parameters success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            if (isRefresh) {
+                [strongSelf.collectionView.mj_header endRefreshing];
+                strongSelf.pagenum = 1;
+
+                [strongSelf.goods removeAllObjects];
+                NSArray *arrt = [NSArray yy_modelArrayWithClass:[GXCategoryGoods class] json:responseObject[@"data"]];
+                [strongSelf.goods addObjectsFromArray:arrt];
+            }else{
+                [strongSelf.collectionView.mj_footer endRefreshing];
+                strongSelf.pagenum ++;
+
+                if ([responseObject[@"data"] isKindOfClass:[NSArray class]] && ((NSArray *)responseObject[@"data"]).count){
+                    NSArray *arrt = [NSArray yy_modelArrayWithClass:[GXCategoryGoods class] json:responseObject[@"data"]];
+                    [strongSelf.goods addObjectsFromArray:arrt];
+                }else{// 提示没有更多数据
+                    [strongSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
+                }
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                strongSelf.collectionView.hidden = NO;
+                [strongSelf.collectionView reloadData];
+            });
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        hx_strongify(weakSelf);
+        [strongSelf.collectionView.mj_header endRefreshing];
+        [strongSelf.collectionView.mj_footer endRefreshing];
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
+}
 #pragma mark -- 点击事件
 - (IBAction)saleNumSankClicked:(UIButton *)sender {
+    self.price_img.image = HXGetImage(@"全黑");
+    self.price = @"";
     
+    /* 销量排序 1降序 2升序*/
+    if ([self.sale_num isEqualToString:@"1"]) {
+        self.sale_num = @"2";
+        [self.sale_img setImage:HXGetImage(@"上红下黑")];
+    }else{
+        self.sale_num = @"1";
+        [self.sale_img setImage:HXGetImage(@"上黑下红")];
+    }
+    [self getGoodsListDataRequest:YES];
 }
 
 - (IBAction)priceSankClicked:(UIButton *)sender {
+    self.sale_img.image = HXGetImage(@"全黑");
+    self.sale_num = @"";
     
+    /* 销量排序 1降序 2升序*/
+    if ([self.price isEqualToString:@"1"]) {
+        self.price = @"2";
+        [self.price_img setImage:HXGetImage(@"上红下黑")];
+    }else{
+        self.price = @"1";
+        [self.price_img setImage:HXGetImage(@"上黑下红")];
+    }
+    [self getGoodsListDataRequest:YES];
 }
 
 - (IBAction)filterClicked:(UIButton *)sender {
-    GXGoodsFilterView *fliter = [GXGoodsFilterView loadXibView];
-    fliter.hxn_size = CGSizeMake(HX_SCREEN_WIDTH-80, HX_SCREEN_HEIGHT);
     
+    if (self.catalog_id) {
+        self.fliterView.dataType = 3;
+        self.fliterView.dataSouce = self.brands;
+    }else{
+        self.fliterView.dataType = 2;
+        self.fliterView.dataSouce = self.catalogs;
+    }
+    hx_weakify(self);
+    self.fliterView.sureFilterCall = ^(NSString * _Nonnull cata_id) {
+        hx_strongify(weakSelf);
+        [strongSelf.zh_popupController dismissWithDuration:0.25 springAnimated:NO];
+        if (strongSelf.catalog_id) {
+            strongSelf.brand_id = cata_id;
+        }else{
+            strongSelf.catalog_id = cata_id;
+        }
+        [strongSelf getGoodsListDataRequest:YES];
+    };
     self.zh_popupController = [[zhPopupController alloc] init];
     self.zh_popupController.layoutType = zhPopupLayoutTypeRight;
-    [self.zh_popupController presentContentView:fliter duration:0.25 springAnimated:NO];
+    [self.zh_popupController presentContentView:self.fliterView duration:0.25 springAnimated:NO];
 }
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
@@ -90,7 +227,7 @@ static NSString *const DiscountGoodsCell = @"DiscountGoodsCell";
 }
 #pragma mark -- UICollectionView 数据源和代理
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 8;
+    return self.goods.count;
 }
 - (ZLLayoutType)collectionView:(UICollectionView *)collectionView layout:(ZLCollectionViewBaseFlowLayout *)collectionViewLayout typeOfLayout:(NSInteger)section {
     return ClosedLayout;
@@ -101,6 +238,8 @@ static NSString *const DiscountGoodsCell = @"DiscountGoodsCell";
 }
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     GXDiscountGoodsCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:DiscountGoodsCell forIndexPath:indexPath];
+    GXCategoryGoods *goods = self.goods[indexPath.item];
+    cell.goods = goods;
     return cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {

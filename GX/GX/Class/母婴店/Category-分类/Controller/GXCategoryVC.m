@@ -14,6 +14,7 @@
 #import "HXSearchBar.h"
 #import "GXMessageVC.h"
 #import "GXGoodsListVC.h"
+#import "GXCatalogItem.h"
 
 static NSString *const BigCateCell = @"BigCateCell";
 static NSString *const SmallCateCell = @"SmallCateCell";
@@ -28,6 +29,10 @@ static NSString *const SmallCateHeaderView = @"SmallCateHeaderView";
 @property(nonatomic,strong) HXSearchBar *searchBar;
 /* 消息 */
 @property(nonatomic,strong) SPButton *msgBtn;
+/* 分类 */
+@property(nonatomic,strong) NSArray *catalogItems;
+/* 当前选中的大分类 */
+@property(nonatomic,strong) GXCatalogItem *currentCatalogItem;
 @end
 
 @implementation GXCategoryVC
@@ -37,8 +42,7 @@ static NSString *const SmallCateHeaderView = @"SmallCateHeaderView";
     [self setUpNavBar];
     [self setUpTableView];
     [self setUpCollectionView];
-    
-    [self.leftTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+    [self getCatalogItemRequest];
 }
 -(void)viewDidLayoutSubviews
 {
@@ -116,18 +120,86 @@ static NSString *const SmallCateHeaderView = @"SmallCateHeaderView";
     HXLog(@"搜索条");
     return NO;
 }
+#pragma mark -- 接口请求
+-(void)getCatalogItemRequest
+{
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"getCatalogItem" parameters:@{} success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            NSArray *arrt = [NSArray yy_modelArrayWithClass:[GXCatalogItem class] json:responseObject[@"data"]];
+            
+            NSMutableArray *tampArr = [NSMutableArray arrayWithArray:arrt];
+            GXCatalogItem *item = [[GXCatalogItem alloc] init];
+            item.catalog_name = @"控区控价";
+            [tampArr insertObject:item atIndex:0];
+            
+            strongSelf.catalogItems = tampArr;
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [strongSelf.leftTableView reloadData];
+                [strongSelf.leftTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+                [strongSelf tableView:strongSelf.leftTableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+            });
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
+}
+-(void)getCatalogBrandRequest:(NSString *)control catalogId:(NSString *)catalog_id
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"control"] = control;//为1表示点击控区控价查询控区控价下的品牌列表
+    if (![control isEqualToString:@"1"]) {
+        parameters[@"catalog_id"] = catalog_id;
+    }
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"getCatalogBrand" parameters:parameters success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            strongSelf.currentCatalogItem.catalog = [NSArray yy_modelArrayWithClass:[GXCatalogItem class] json:responseObject[@"data"][@"catalog"]];
+            strongSelf.currentCatalogItem.control = [NSArray yy_modelArrayWithClass:[GXBrandItem class] json:responseObject[@"data"][@"control"]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [strongSelf.rightCollectionView reloadData];
+            });
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
+}
 #pragma mark -- UITableView 数据源和代理
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 12;
+    return self.catalogItems.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     GXBigCateCell *cell = [tableView dequeueReusableCellWithIdentifier:BigCateCell forIndexPath:indexPath];
+    GXCatalogItem *logItem = self.catalogItems[indexPath.row];
+    cell.logItem = logItem;
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
+    GXCatalogItem *logItem = self.catalogItems[indexPath.row];
+    if (logItem.control && logItem.catalog) {
+        self.currentCatalogItem = logItem;
+        [self.rightCollectionView reloadData];
+    }else{
+//        if (self.currentCatalogItem && ![self.currentCatalogItem isEqual:logItem] && (!self.currentCatalogItem.control || self.currentCatalogItem.catalog)) {
+//            return;
+//        }
+        self.currentCatalogItem = logItem;
+        if (indexPath.row) {
+            [self getCatalogBrandRequest:@"0" catalogId:logItem.catalog_id];
+        }else{
+            [self getCatalogBrandRequest:@"1" catalogId:@""];
+        }
+    }
     
 }
 #pragma mark -- UICollectionView 数据源和代理
@@ -135,7 +207,11 @@ static NSString *const SmallCateHeaderView = @"SmallCateHeaderView";
     return 2;
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 8;
+    if (section == 0) {
+        return self.currentCatalogItem.catalog.count;
+    }else{
+        return self.currentCatalogItem.control.count;
+    }
 }
 - (ZLLayoutType)collectionView:(UICollectionView *)collectionView layout:(ZLCollectionViewBaseFlowLayout *)collectionViewLayout typeOfLayout:(NSInteger)section {
     return ClosedLayout;
@@ -145,11 +221,27 @@ static NSString *const SmallCateHeaderView = @"SmallCateHeaderView";
     return 3;
 }
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    GXSmallCateCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:SmallCateCell forIndexPath:indexPath];
+    GXSmallCateCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:SmallCateCell forIndexPath:indexPath];
+    if (indexPath.section == 0) {
+        GXCatalogItem *caItem = self.currentCatalogItem.catalog[indexPath.item];
+        cell.caItem = caItem;
+    }else{
+        GXBrandItem *brand = self.currentCatalogItem.control[indexPath.item];
+        cell.brand = brand;
+    }
     return cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     GXGoodsListVC *lvc = [GXGoodsListVC new];
+    if (indexPath.section == 0) {
+        GXCatalogItem *caItem = self.currentCatalogItem.catalog[indexPath.item];
+        lvc.catalog_id = caItem.catalog_id;
+        lvc.brands = self.currentCatalogItem.control;
+    }else{
+        GXBrandItem *brand = self.currentCatalogItem.control[indexPath.item];
+        lvc.brand_id = brand.brand_id;
+        lvc.catalogs = self.currentCatalogItem.catalog;
+    }
     [self.navigationController pushViewController:lvc animated:YES];
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -169,13 +261,23 @@ static NSString *const SmallCateHeaderView = @"SmallCateHeaderView";
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     if ([kind isEqualToString : UICollectionElementKindSectionHeader]){
         GXSmallCateHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:SmallCateHeaderView forIndexPath:indexPath];
-        return headerView;
+        if (indexPath.section == 0) {
+            headerView.cate_name.text = @"分类";
+            return self.currentCatalogItem.catalog.count?headerView:nil;
+        }else{
+            headerView.cate_name.text = @"热门品牌";
+            return self.currentCatalogItem.control.count?headerView:nil;
+        }
     }
     return nil;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-    return CGSizeMake(collectionView.frame.size.width, 44);
+    if (section == 0) {
+        return self.currentCatalogItem.catalog.count?CGSizeMake(collectionView.frame.size.width, 44):CGSizeZero;
+    }else{
+        return self.currentCatalogItem.control.count?CGSizeMake(collectionView.frame.size.width, 44):CGSizeZero;
+    }
 }
 
 @end

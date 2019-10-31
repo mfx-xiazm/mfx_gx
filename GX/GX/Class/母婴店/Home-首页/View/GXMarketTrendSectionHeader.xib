@@ -18,7 +18,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IiG-6S-GCM">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="52"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="liJ-Ny-rEH">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="liJ-Ny-rEH">
                             <rect key="frame" x="153.5" y="11" width="30" height="30"/>
                             <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
@@ -52,6 +52,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="cateName" destination="Wk4-Wf-bEM" id="zqS-dg-jQe"/>
+                <outlet property="cate_img" destination="liJ-Ny-rEH" id="eEM-TP-wlN"/>
             </connections>
             <point key="canvasLocation" x="82.608695652173921" y="293.97321428571428"/>
         </view>

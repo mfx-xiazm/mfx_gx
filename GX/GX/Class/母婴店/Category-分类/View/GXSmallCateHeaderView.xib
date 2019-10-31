@@ -48,6 +48,9 @@
                 <constraint firstAttribute="trailing" secondItem="pTX-k5-LAd" secondAttribute="trailing" id="iNE-u9-Hcx"/>
                 <constraint firstAttribute="bottom" secondItem="pTX-k5-LAd" secondAttribute="bottom" id="v9R-PM-2rx"/>
             </constraints>
+            <connections>
+                <outlet property="cate_name" destination="xzD-ew-uIJ" id="3Ou-Cv-0S7"/>
+            </connections>
             <point key="canvasLocation" x="346" y="37"/>
         </collectionReusableView>
     </objects>

@@ -9,6 +9,7 @@
 #import "GXDiscountGoodsCell.h"
 #import "GXHomeData.h"
 #import "GXDayDiscount.h"
+#import "GXCategoryGoods.h"
 
 @interface GXDiscountGoodsCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *cover_img;
@@ -16,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *price;
 @property (weak, nonatomic) IBOutlet UIButton *handleBtn;
 @property (weak, nonatomic) IBOutlet UILabel *market_price;
+@property (weak, nonatomic) IBOutlet UILabel *sale_num;
 
 @end
 @implementation GXDiscountGoodsCell
@@ -68,5 +70,22 @@
         [self.handleBtn setTitle:@"未开始" forState:UIControlStateNormal];
         [self.handleBtn setTitleColor:UIColorFromRGB(0xFF9F08) forState:UIControlStateNormal];
     }
+}
+-(void)setGoods:(GXCategoryGoods *)goods
+{
+    _goods = goods;
+    
+    [self.cover_img sd_setImageWithURL:[NSURL URLWithString:_goods.cover_img]];
+    self.good_name.text = _goods.goods_name;
+    if ([_goods.control_type isEqualToString:@"1"]) {
+        self.price.text = [NSString stringWithFormat:@"￥%@-￥%@",_goods.min_price,_goods.max_price];
+    }else{
+        self.price.text = [NSString stringWithFormat:@"￥%@",_goods.min_price];
+    }
+    self.market_price.hidden = YES;
+    self.handleBtn.hidden = YES;
+    self.sale_num.hidden = NO;
+    self.sale_num.text = [NSString stringWithFormat:@"销量：%@",_goods.sale_num];
+    
 }
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "GXMarketTrendHeader.h"
+#import "GXMarketTrend.h"
 
 @interface GXMarketTrendHeader()<JXCategoryViewDelegate>
 
@@ -38,6 +39,16 @@
         _categoryView.delegate = self;
     }
     return _categoryView;
+}
+-(void)setTrends:(NSArray *)trends
+{
+    _trends = trends;
+    NSMutableArray *titles = [NSMutableArray array];
+    for (GXMarketTrend *trend in _trends) {
+        [titles addObject:trend.brand_name];
+    }
+    self.categoryView.titles = titles;
+    [self.categoryView reloadData];
 }
 /**
  点击选中的情况才会调用该方法

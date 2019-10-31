@@ -63,4 +63,18 @@
         self.contentText.textColor = [UIColor blackColor];
     }
 }
+-(void)setBrandItem:(GXBrandItem *)brandItem
+{
+    _brandItem = brandItem;
+    self.contentText.text = _brandItem.brand_name;
+    if (_brandItem.isSelected) {
+        self.contentText.layer.borderColor = HXControlBg.CGColor;
+        self.contentText.backgroundColor = HXControlBg;
+        self.contentText.textColor = [UIColor whiteColor];
+    }else{
+        self.contentText.layer.borderColor = UIColorFromRGB(0xf3f3f3).CGColor;
+        self.contentText.backgroundColor = UIColorFromRGB(0xf3f3f3);
+        self.contentText.textColor = [UIColor blackColor];
+    }
+}
 @end

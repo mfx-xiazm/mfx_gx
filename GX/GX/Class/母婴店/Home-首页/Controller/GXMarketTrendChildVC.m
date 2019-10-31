@@ -11,6 +11,7 @@
 #import "GXMarketTrendSectionHeader.h"
 #import "GXMarketTrendHeader.h"
 #import "GXGoodsDetailVC.h"
+#import "GXMarketTrend.h"
 
 static NSString *const MarketTrendCell = @"MarketTrendCell";
 @interface GXMarketTrendChildVC ()<UITableViewDelegate,UITableViewDataSource>
@@ -19,7 +20,10 @@ static NSString *const MarketTrendCell = @"MarketTrendCell";
 @property(nonatomic,strong) GXMarketTrendHeader *header;
 /* 是否向下滑动*/
 @property(nonatomic,assign) BOOL isScrollDown;
-
+/* 行情 */
+@property(nonatomic,strong) NSArray *trends;
+/* 处理过系列数组 */
+@property(nonatomic,strong) NSMutableArray *showTrends;
 @end
 
 @implementation GXMarketTrendChildVC
@@ -29,12 +33,20 @@ static NSString *const MarketTrendCell = @"MarketTrendCell";
     [self setUpTableView];
     // 初始化
     self.isScrollDown = YES;
+    [self getCurrencyQuotationsRequest];
 }
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
     self.view.hxn_width = HX_SCREEN_WIDTH;
     self.header.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, 140.f);
+}
+-(NSMutableArray *)showTrends
+{
+    if (_showTrends == nil) {
+        _showTrends = [NSMutableArray array];
+    }
+    return _showTrends;
 }
 -(GXMarketTrendHeader *)header
 {
@@ -44,7 +56,8 @@ static NSString *const MarketTrendCell = @"MarketTrendCell";
         hx_weakify(self);
         _header.cateClickedCall = ^(NSInteger index) {
             hx_strongify(weakSelf);
-            [strongSelf.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:index] animated:YES scrollPosition:UITableViewScrollPositionTop];
+            GXMarketTrend *trend = strongSelf.trends[index];
+            [strongSelf.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:trend.series_section-1] animated:YES scrollPosition:UITableViewScrollPositionTop];
         };
     }
     return _header;
@@ -79,6 +92,44 @@ static NSString *const MarketTrendCell = @"MarketTrendCell";
     
     self.tableView.tableHeaderView = self.header;
 }
+#pragma mark -- 接口请求
+-(void)getCurrencyQuotationsRequest
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"catalog_name"] = (self.dataType == 1)?@"奶粉":@"纸尿裤";//分类名称
+    hx_weakify(self);
+    
+    [HXNetworkTool POST:HXRC_M_URL action:@"currencyQuotations" parameters:parameters success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            strongSelf.trends = [NSArray yy_modelArrayWithClass:[GXMarketTrend class] json:responseObject[@"data"][@"brand"]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [strongSelf handleTrendData];
+            });
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
+}
+-(void)handleTrendData
+{
+    self.header.trends = self.trends;
+
+    NSInteger series_section = 0;
+    for (int i=0; i<self.trends.count; i++) {
+        GXMarketTrend *trend = self.trends[i];
+        series_section += trend.series.count;
+        trend.series_section = series_section;
+        for (GXMarketTrendSeries *serie in trend.series) {
+            serie.section_flag = i;
+        }
+        [self.showTrends addObjectsFromArray:trend.series];
+    }
+    
+    [self.tableView reloadData];
+}
 #pragma mark -- UIScrollView代理
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
@@ -104,16 +155,29 @@ static NSString *const MarketTrendCell = @"MarketTrendCell";
 #pragma mark -- UITableView数据源和代理
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 6;
+    return self.showTrends.count;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    GXMarketTrendSeries *series = self.showTrends[section];
+    return series.goods.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     GXMarketTrendCell *cell = [tableView dequeueReusableCellWithIdentifier:MarketTrendCell forIndexPath:indexPath];
     //无色
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    GXMarketTrendSeries *series = self.showTrends[indexPath.section];
+    GXSeriesGoods *goods = series.goods[indexPath.row];
+    cell.goods = goods;
+    //hx_weakify(self);
+    cell.trendBtnCall = ^(NSInteger index) {
+        //hx_strongify(weakSelf);
+        if (index == 1) {
+            HXLog(@"加入购物车");
+        }else{
+            HXLog(@"立即补货");
+        }
+    };
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -129,7 +193,8 @@ static NSString *const MarketTrendCell = @"MarketTrendCell";
 {
     GXMarketTrendSectionHeader *header = [GXMarketTrendSectionHeader loadXibView];
     header.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 40.f);
-    header.cateName.text = [NSString stringWithFormat:@"启赋-%zd",section];
+    GXMarketTrendSeries *series = self.showTrends[section];
+    header.series = series;
     return header;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -143,7 +208,8 @@ static NSString *const MarketTrendCell = @"MarketTrendCell";
 //当前的tableView滚动的方向向上，并且是用户拖拽而产生滚动的（（主要判断tableView用户拖拽而滚动的，还是点击分类而滚动的）
     if (!self.isScrollDown
         && (tableView.dragging || tableView.decelerating)) {
-        [self.header.categoryView selectItemAtIndex:section];
+        GXMarketTrendSeries *series = self.showTrends[section];//通过展示的组来获取真实的组
+        [self.header.categoryView selectItemAtIndex:series.section_flag];
     }
 }
 
@@ -152,7 +218,8 @@ static NSString *const MarketTrendCell = @"MarketTrendCell";
 {
 //当前的tableView滚动的方向向下，并且是用户拖拽而产生滚动的（（主要判断tableView用户拖拽而滚动的，还是点击分类而滚动的）
     if (self.isScrollDown && tableView.dragging) {
-        [self.header.categoryView selectItemAtIndex:section+1];
+        GXMarketTrendSeries *series = self.showTrends[section+1];//通过展示的组来获取真实的组
+        [self.header.categoryView selectItemAtIndex:series.section_flag];
     }
 }
 

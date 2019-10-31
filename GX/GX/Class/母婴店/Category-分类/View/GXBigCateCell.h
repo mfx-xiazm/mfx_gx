@@ -10,8 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXCatalogItem;
 @interface GXBigCateCell : UITableViewCell
-
+/* 分类 */
+@property(nonatomic,strong) GXCatalogItem *logItem;
 @end
 
 NS_ASSUME_NONNULL_END

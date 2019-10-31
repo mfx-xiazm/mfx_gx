@@ -9,5 +9,13 @@
 #import "GXCatalogItem.h"
 
 @implementation GXCatalogItem
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    return @{@"catalog":[GXCatalogItem class],
+             @"control":[GXBrandItem class]
+             };
+}
+@end
+
+@implementation GXBrandItem
 
 @end

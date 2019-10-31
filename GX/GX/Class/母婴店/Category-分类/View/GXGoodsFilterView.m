@@ -17,18 +17,18 @@ static NSString *const ChooseClassHeader = @"ChooseClassHeader";
 
 @interface GXGoodsFilterView ()<UICollectionViewDelegate,UICollectionViewDataSource,ZLCollectionViewBaseFlowLayoutDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-/* 类目 */
-@property(nonatomic,strong) NSArray *cates;
 /* 上一次选中的分类 */
 @property(nonatomic,strong) GXCatalogItem *selectItem;
+/* 上一次选中的二级分类 */
+@property(nonatomic,strong) GXCatalogItem *selectSubItem;
+/* 上一次选中的热门品牌 */
+@property(nonatomic,strong) GXBrandItem *selectBrand;
 @end
 @implementation GXGoodsFilterView
 
 -(void)awakeFromNib
 {
     [super awakeFromNib];
-    
-    self.cates = @[@"规格",@"大规格2",@"非常规格3",@"小规格4",@"超长规格5",@"规格6",@"规格7",@"规格8",@"规格9",@"规格10",@"规格11"];
     
     ZLCollectionViewVerticalLayout *flowLayout = [[ZLCollectionViewVerticalLayout alloc] init];
     flowLayout.delegate = self;
@@ -45,11 +45,19 @@ static NSString *const ChooseClassHeader = @"ChooseClassHeader";
         if (self.sureFilterCall) {
             if (self.dataType == 1) {
                 self.sureFilterCall((self.selectItem && self.selectItem.isSelected)?self.selectItem.catalog_id:@"");
+            }else if (self.dataType == 2) {
+                self.sureFilterCall((self.selectSubItem && self.selectSubItem.isSelected)?self.selectSubItem.catalog_id:@"");
+            }else{
+               self.sureFilterCall((self.selectBrand && self.selectBrand.isSelected)?self.selectBrand.brand_id:@"");
             }
         }
     }else{
         if (self.dataType == 1) {
             self.selectItem.isSelected = NO;
+        }else if (self.dataType == 2) {
+            self.selectSubItem.isSelected = NO;
+        }else{
+            self.selectBrand.isSelected = NO;
         }
         [self.collectionView reloadData];
     }
@@ -65,14 +73,20 @@ static NSString *const ChooseClassHeader = @"ChooseClassHeader";
 {
     if (self.dataType == 1) {
         return 1;
+    }else if (self.dataType == 2) {
+        return 1;
+    }else{
+        return 1;
     }
-    return 3;
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     if (self.dataType == 1) {
         return self.dataSouce.count;
+    }else if (self.dataType == 2) {
+        return self.dataSouce.count;
+    }else{
+        return self.dataSouce.count;
     }
-    return self.cates.count;
 }
 - (ZLLayoutType)collectionView:(UICollectionView *)collectionView layout:(ZLCollectionViewBaseFlowLayout *)collectionViewLayout typeOfLayout:(NSInteger)section {
     return ClosedLayout;
@@ -86,8 +100,12 @@ static NSString *const ChooseClassHeader = @"ChooseClassHeader";
     if (self.dataType == 1) {
         GXCatalogItem *caItem = self.dataSouce[indexPath.item];
         cell.caItem = caItem;
+    }else if (self.dataType == 2) {
+        GXCatalogItem *logItem = self.dataSouce[indexPath.item];
+        cell.logItem = logItem;
     }else{
-        cell.contentText.text = self.cates[indexPath.item];
+        GXBrandItem *brandItem = self.dataSouce[indexPath.item];
+        cell.brandItem = brandItem;
     }
     return cell;
 }
@@ -97,6 +115,16 @@ static NSString *const ChooseClassHeader = @"ChooseClassHeader";
         GXCatalogItem *caItem = self.dataSouce[indexPath.item];
         caItem.isSelected = YES;
         self.selectItem = caItem;
+    }else if (self.dataType == 2) {
+        self.selectSubItem.isSelected = NO;
+        GXCatalogItem *subItem = self.dataSouce[indexPath.item];
+        subItem.isSelected = YES;
+        self.selectSubItem = subItem;
+    }else{
+        self.selectBrand.isSelected = NO;
+        GXBrandItem *brandItem = self.dataSouce[indexPath.item];
+        brandItem.isSelected = YES;
+        self.selectBrand = brandItem;
     }
    
     [collectionView reloadData];
@@ -111,14 +139,10 @@ static NSString *const ChooseClassHeader = @"ChooseClassHeader";
         GXChooseClassHeader *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:ChooseClassHeader forIndexPath:indexPath];
         if (self.dataType == 1) {
             header.titleLabel.text = @"类目";
+        }else if (self.dataType == 2) {
+            header.titleLabel.text = @"分类";
         }else{
-            if (indexPath.section==0) {
-                header.titleLabel.text = @"类目";
-            }else if (indexPath.section==1) {
-                header.titleLabel.text = @"分类";
-            }else{
-                header.titleLabel.text = @"品牌";
-            }
+            header.titleLabel.text = @"品牌";
         }
         return header;
     }

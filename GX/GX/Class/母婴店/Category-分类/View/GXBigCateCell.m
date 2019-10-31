@@ -7,6 +7,7 @@
 //
 
 #import "GXBigCateCell.h"
+#import "GXCatalogItem.h"
 
 @interface GXBigCateCell ()
 @property (weak, nonatomic) IBOutlet UILabel *cateName;
@@ -18,7 +19,11 @@
     [super awakeFromNib];
     // Initialization code
 }
-
+-(void)setLogItem:(GXCatalogItem *)logItem
+{
+    _logItem = logItem;
+    self.cateName.text = _logItem.catalog_name;
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

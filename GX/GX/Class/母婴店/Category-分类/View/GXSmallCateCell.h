@@ -10,8 +10,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXCatalogItem,GXBrandItem;
 @interface GXSmallCateCell : UICollectionViewCell
-
+/* 二级分类 */
+@property(nonatomic,strong) GXCatalogItem *caItem;
+/* 二级品牌 */
+@property(nonatomic,strong) GXBrandItem *brand;
 @end
 
 NS_ASSUME_NONNULL_END

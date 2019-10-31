@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
+@class GXMarketTrendSeries;
 @interface GXMarketTrendSectionHeader : UIView
-@property (weak, nonatomic) IBOutlet UILabel *cateName;
-
+/* 系列 */
+@property(nonatomic,strong) GXMarketTrendSeries *series;
 @end
 
 NS_ASSUME_NONNULL_END

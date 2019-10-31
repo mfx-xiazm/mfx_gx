@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface GXSmallCateHeaderView : UICollectionReusableView
+@property (weak, nonatomic) IBOutlet UILabel *cate_name;
 
 @end
 

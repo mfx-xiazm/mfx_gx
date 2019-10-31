@@ -286,10 +286,10 @@ static NSString *const ShopGoodsCell = @"ShopGoodsCell";
     /* 销量排序 1升序 2倒序*/
     if ([self.sale_num isEqualToString:@"2"]) {//降序
         self.sale_num = @"1";
-        [self.saleImg setImage:HXGetImage(@"上拉红色")];
+        [self.saleImg setImage:HXGetImage(@"上红下黑")];
     }else{//升序
         self.sale_num = @"2";
-        [self.saleImg setImage:HXGetImage(@"下拉红色")];
+        [self.saleImg setImage:HXGetImage(@"上黑下红")];
     }
     hx_weakify(self);
     [self getGoodsListDataRequest:YES completedCall:^{

@@ -67,6 +67,12 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="销量：1241" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cmI-sF-4yu">
+                                <rect key="frame" x="242" y="71" width="63" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OLD-w9-iIT" userLabel="分割线">
                                 <rect key="frame" x="10" y="99" width="295" height="1"/>
                                 <color key="backgroundColor" red="0.96470588239999999" green="0.96862745100000003" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -80,12 +86,14 @@
                             <constraint firstAttribute="bottom" secondItem="629-lC-K5t" secondAttribute="bottom" constant="10" id="8b0-BL-FQz"/>
                             <constraint firstItem="629-lC-K5t" firstAttribute="leading" secondItem="J1Z-5n-7vC" secondAttribute="trailing" constant="10" id="GQZ-Xh-gLs"/>
                             <constraint firstAttribute="bottom" secondItem="J1Z-5n-7vC" secondAttribute="bottom" constant="10" id="Gr5-s5-Jao"/>
+                            <constraint firstItem="cmI-sF-4yu" firstAttribute="centerY" secondItem="629-lC-K5t" secondAttribute="centerY" id="HyL-AH-TYB"/>
                             <constraint firstItem="Plb-M4-Isi" firstAttribute="leading" secondItem="J1Z-5n-7vC" secondAttribute="trailing" constant="10" id="Jee-Gx-m89"/>
                             <constraint firstItem="Plb-M4-Isi" firstAttribute="top" secondItem="F3y-ar-s1M" secondAttribute="top" constant="10" id="K4v-IH-SFC"/>
                             <constraint firstItem="J1Z-5n-7vC" firstAttribute="top" secondItem="F3y-ar-s1M" secondAttribute="top" constant="10" id="PUj-Tb-9UX"/>
                             <constraint firstAttribute="bottom" secondItem="OLD-w9-iIT" secondAttribute="bottom" id="Qyi-jf-NLX"/>
                             <constraint firstAttribute="trailing" secondItem="Plb-M4-Isi" secondAttribute="trailing" constant="10" id="VQN-u4-39j"/>
                             <constraint firstItem="OLD-w9-iIT" firstAttribute="leading" secondItem="F3y-ar-s1M" secondAttribute="leading" constant="10" id="WQr-mt-bPv"/>
+                            <constraint firstAttribute="trailing" secondItem="cmI-sF-4yu" secondAttribute="trailing" constant="10" id="fYs-1y-qaf"/>
                             <constraint firstAttribute="trailing" secondItem="Bk6-3j-NVC" secondAttribute="trailing" constant="10" id="hOM-Ms-GKE"/>
                             <constraint firstItem="Sem-FX-BjQ" firstAttribute="leading" secondItem="629-lC-K5t" secondAttribute="trailing" constant="10" id="hWP-9T-F63"/>
                             <constraint firstItem="J1Z-5n-7vC" firstAttribute="leading" secondItem="F3y-ar-s1M" secondAttribute="leading" constant="10" id="pz8-cC-TCd"/>
@@ -110,6 +118,7 @@
                 <outlet property="handleBtn" destination="Bk6-3j-NVC" id="Zgc-pb-YUU"/>
                 <outlet property="market_price" destination="Sem-FX-BjQ" id="UAz-ca-gfD"/>
                 <outlet property="price" destination="629-lC-K5t" id="K1V-sV-a89"/>
+                <outlet property="sale_num" destination="cmI-sF-4yu" id="D4e-D7-bEA"/>
             </connections>
             <point key="canvasLocation" x="-285" y="124"/>
         </collectionViewCell>

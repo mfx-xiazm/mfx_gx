@@ -21,6 +21,7 @@
 #import "GXMemberVC.h"
 #import "GXMyIdeaVC.h"
 #import "GXMyOrderVC.h"
+#import "GXMineData.h"
 
 @interface GXMyVC ()
 
@@ -31,7 +32,28 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self getMemberRequest];
+}
+#pragma mark -- 业务逻辑
+-(void)getMemberRequest
+{
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"getMineData" parameters:@{} success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+//            strongSelf.mineData = [GXMineData yy_modelWithDictionary:responseObject[@"data"]];
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//            });
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
+}
 #pragma mark -- 点击事件
 /** 客服经理 */
 - (IBAction)contactBtnClicked:(UIButton *)sender {

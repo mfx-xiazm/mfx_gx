@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class GXCatalogItem,GXTopSaleMaterial;
+@class GXCatalogItem,GXTopSaleMaterial,GXBrandItem;
 @interface GXRunCategoryCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UILabel *contentText;
 /* 类目 */
@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong) GXCatalogItem *logItem;
 /* 素材 */
 @property(nonatomic,strong) GXTopSaleMaterial *material;
+/* 品牌 */
+@property(nonatomic,strong) GXBrandItem *brandItem;
 @end
 
 NS_ASSUME_NONNULL_END

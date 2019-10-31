@@ -13,6 +13,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GXGoodsListVC">
             <connections>
                 <outlet property="collectionView" destination="vL8-8i-hkj" id="mEG-Ql-unF"/>
+                <outlet property="price_img" destination="4Of-hN-iTa" id="shm-Ie-Syl"/>
+                <outlet property="sale_img" destination="HO5-L5-6Gl" id="LUc-Lm-Avk"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -33,8 +35,8 @@
                                     <color key="textColor" red="0.074509803920000006" green="0.1137254902" blue="0.1764705882" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="下" translatesAutoresizingMaskIntoConstraints="NO" id="HO5-L5-6Gl">
-                                    <rect key="frame" x="88.5" y="20" width="6.5" height="4.5"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="全黑" translatesAutoresizingMaskIntoConstraints="NO" id="HO5-L5-6Gl">
+                                    <rect key="frame" x="88.5" y="16.5" width="7" height="11"/>
                                 </imageView>
                                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A7M-sU-Xvj">
                                     <rect key="frame" x="0.0" y="0.0" width="138" height="44"/>
@@ -65,8 +67,8 @@
                                     <color key="textColor" red="0.074509803920000006" green="0.1137254902" blue="0.1764705882" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="下" translatesAutoresizingMaskIntoConstraints="NO" id="4Of-hN-iTa">
-                                    <rect key="frame" x="88.5" y="20" width="6.5" height="4.5"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="全黑" translatesAutoresizingMaskIntoConstraints="NO" id="4Of-hN-iTa">
+                                    <rect key="frame" x="88.5" y="16.5" width="7" height="11"/>
                                 </imageView>
                                 <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wL5-yu-khq">
                                     <rect key="frame" x="0.0" y="0.0" width="138" height="44"/>
@@ -174,7 +176,7 @@
         </view>
     </objects>
     <resources>
-        <image name="下" width="6.5" height="4.5"/>
+        <image name="全黑" width="7" height="11"/>
         <image name="筛选" width="10.5" height="12"/>
     </resources>
 </document>
