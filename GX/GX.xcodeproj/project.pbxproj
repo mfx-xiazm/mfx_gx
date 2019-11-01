@@ -499,6 +499,7 @@
 		903C54792349D18A002743EE /* GXOffLineReportVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXOffLineReportVC.xib; sourceTree = "<group>"; };
 		9043B5A0236BC55800731C6F /* GXMyAddress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXMyAddress.h; sourceTree = "<group>"; };
 		9043B5A1236BC55800731C6F /* GXMyAddress.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXMyAddress.m; sourceTree = "<group>"; };
+		9043B5A3236BD44D00731C6F /* SGQRCodeObtainConfigure.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGQRCodeObtainConfigure.h; sourceTree = "<group>"; };
 		904F4A41234877FC0056AF49 /* GXCartSectionBgReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXCartSectionBgReusableView.h; sourceTree = "<group>"; };
 		904F4A42234877FC0056AF49 /* GXCartSectionBgReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXCartSectionBgReusableView.m; sourceTree = "<group>"; };
 		904F4A47234880620056AF49 /* GXUpOrderVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXUpOrderVC.h; sourceTree = "<group>"; };
@@ -895,7 +896,6 @@
 		90C0B37D2340CD7200A8C55B /* SGQRCodeObtainConfigure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeObtainConfigure.m; sourceTree = "<group>"; };
 		90C0B37E2340CD7200A8C55B /* SGQRCodeObtain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeObtain.h; sourceTree = "<group>"; };
 		90C0B37F2340CD7200A8C55B /* SGQRCodeScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeScanView.h; sourceTree = "<group>"; };
-		90C0B3802340CD7200A8C55B /* SGQRCodeObtainConfigure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeObtainConfigure.h; sourceTree = "<group>"; };
 		90C0B3812340CD7200A8C55B /* SGQRCodeObtain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeObtain.m; sourceTree = "<group>"; };
 		90C0B3822340CD7200A8C55B /* SGQRCodeScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeScanView.m; sourceTree = "<group>"; };
 		90C0B3842340CD7200A8C55B /* LYEmptyBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYEmptyBaseView.m; sourceTree = "<group>"; };
@@ -2020,11 +2020,11 @@
 			children = (
 				90C0B37B2340CD7200A8C55B /* SGQRCode.h */,
 				90C0B37C2340CD7200A8C55B /* SGQRCode.bundle */,
+				9043B5A3236BD44D00731C6F /* SGQRCodeObtainConfigure.h */,
 				90C0B37D2340CD7200A8C55B /* SGQRCodeObtainConfigure.m */,
 				90C0B37E2340CD7200A8C55B /* SGQRCodeObtain.h */,
-				90C0B37F2340CD7200A8C55B /* SGQRCodeScanView.h */,
-				90C0B3802340CD7200A8C55B /* SGQRCodeObtainConfigure.h */,
 				90C0B3812340CD7200A8C55B /* SGQRCodeObtain.m */,
+				90C0B37F2340CD7200A8C55B /* SGQRCodeScanView.h */,
 				90C0B3822340CD7200A8C55B /* SGQRCodeScanView.m */,
 			);
 			path = SGQRCode;

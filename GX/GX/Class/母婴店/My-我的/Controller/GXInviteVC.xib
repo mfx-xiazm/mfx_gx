@@ -12,6 +12,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GXInviteVC">
             <connections>
+                <outlet property="code_img" destination="4BE-w3-obU" id="JpH-7W-7WP"/>
+                <outlet property="relu_txt" destination="ROx-Mq-Jwo" id="tjv-Kw-d36"/>
+                <outlet property="share_code" destination="4pd-Su-3gs" id="Zo2-6U-rm8"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
