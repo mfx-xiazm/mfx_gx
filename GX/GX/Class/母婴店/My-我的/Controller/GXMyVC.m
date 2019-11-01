@@ -93,6 +93,7 @@
 /** 权益中心 */
 - (IBAction)memberBtnClicked:(UIButton *)sender {
     GXMemberVC *mvc = [GXMemberVC new];
+    mvc.mineData = self.mineData;
     [self.navigationController pushViewController:mvc animated:YES];
 }
 /** 设置 */

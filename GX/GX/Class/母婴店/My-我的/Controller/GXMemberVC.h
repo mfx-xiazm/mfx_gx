@@ -10,8 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXMineData;
 @interface GXMemberVC : HXBaseViewController
-
+/* 个人信息 */
+@property(nonatomic,strong) GXMineData *mineData;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -12,6 +12,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GXMemberVC">
             <connections>
+                <outlet property="need_amout" destination="RKG-TE-QAB" id="VoN-G0-P3X"/>
+                <outlet property="now_amount" destination="AQn-30-pGF" id="aGn-8H-pKj"/>
+                <outlet property="shop_name" destination="LDb-I6-778" id="XfA-uC-I1m"/>
                 <outlet property="tableView" destination="gke-xB-E49" id="IZb-BV-M9D"/>
                 <outlet property="tableViewHeight" destination="OGE-lT-fGS" id="JqD-P1-mSQ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -68,7 +71,7 @@
                                         <constraint firstItem="AQn-30-pGF" firstAttribute="centerX" secondItem="Qce-aL-XOy" secondAttribute="centerX" id="yM9-xc-9EG"/>
                                     </constraints>
                                 </view>
-                                <tableView contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gke-xB-E49">
+                                <tableView contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gke-xB-E49">
                                     <rect key="frame" x="10" y="125" width="394" height="300"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>

@@ -34,6 +34,21 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 当前 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="13F-JS-Icj">
+                                <rect key="frame" x="100.5" y="9.5" width="31.5" height="18"/>
+                                <color key="backgroundColor" red="0.96078431369999995" green="0.86666666670000003" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="KFZ-hH-Xwo"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="1" green="0.62352941179999999" blue="0.031372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layerBoderCorner">
+                                        <real key="value" value="9"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="消费控区控价的商品满xxx元之后可升级为该等级" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jng-ti-sdE">
                                 <rect key="frame" x="37" y="31.5" width="292" height="22"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -95,6 +110,7 @@
                             <constraint firstItem="Jng-ti-sdE" firstAttribute="leading" secondItem="bSB-7U-iTX" secondAttribute="leading" id="3xX-hd-NvL"/>
                             <constraint firstAttribute="bottom" secondItem="tbT-4l-P6q" secondAttribute="bottom" id="CIp-PR-r7c"/>
                             <constraint firstItem="Jng-ti-sdE" firstAttribute="top" secondItem="bSB-7U-iTX" secondAttribute="bottom" constant="5" id="NDM-gb-fFY"/>
+                            <constraint firstItem="13F-JS-Icj" firstAttribute="leading" secondItem="bSB-7U-iTX" secondAttribute="trailing" constant="10" id="NPb-lR-vxm"/>
                             <constraint firstAttribute="trailing" secondItem="tbT-4l-P6q" secondAttribute="trailing" id="NVN-6L-U4e"/>
                             <constraint firstItem="c0l-7H-ufp" firstAttribute="leading" secondItem="bSB-7U-iTX" secondAttribute="leading" id="Nlp-mI-OMF"/>
                             <constraint firstItem="SK8-4c-yfq" firstAttribute="top" secondItem="MsS-Zs-iGm" secondAttribute="top" constant="10" id="OIm-mH-cu8"/>
@@ -105,6 +121,7 @@
                             <constraint firstAttribute="bottom" secondItem="c0l-7H-ufp" secondAttribute="bottom" constant="10" id="lEd-kq-bTH"/>
                             <constraint firstAttribute="trailing" secondItem="Jng-ti-sdE" secondAttribute="trailing" constant="10" id="mfN-0V-6aW"/>
                             <constraint firstAttribute="trailing" secondItem="c0l-7H-ufp" secondAttribute="trailing" constant="10" id="xNG-Oi-mtB"/>
+                            <constraint firstItem="13F-JS-Icj" firstAttribute="centerY" secondItem="bSB-7U-iTX" secondAttribute="centerY" id="xb6-n5-JCw"/>
                             <constraint firstItem="SK8-4c-yfq" firstAttribute="leading" secondItem="MsS-Zs-iGm" secondAttribute="leading" constant="10" id="xdn-1m-Zom"/>
                         </constraints>
                     </view>
@@ -119,6 +136,13 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="current_level" destination="13F-JS-Icj" id="R3W-pN-jsu"/>
+                <outlet property="level_coupon" destination="c0l-7H-ufp" id="c0c-6S-GjZ"/>
+                <outlet property="level_img" destination="SK8-4c-yfq" id="5fb-IT-DO2"/>
+                <outlet property="level_name" destination="bSB-7U-iTX" id="Is7-ev-k2g"/>
+                <outlet property="level_need" destination="Jng-ti-sdE" id="T8U-MJ-FY6"/>
+            </connections>
             <point key="canvasLocation" x="151.44927536231884" y="127.23214285714285"/>
         </tableViewCell>
     </objects>
