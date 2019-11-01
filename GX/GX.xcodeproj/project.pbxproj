@@ -58,6 +58,7 @@
 		9043B5AB236C05BF00731C6F /* GXHelp.m in Sources */ = {isa = PBXBuildFile; fileRef = 9043B5AA236C05BF00731C6F /* GXHelp.m */; };
 		9043B5AF236C093B00731C6F /* GXSuggestionType.m in Sources */ = {isa = PBXBuildFile; fileRef = 9043B5AE236C093B00731C6F /* GXSuggestionType.m */; };
 		9043B5B3236C22BA00731C6F /* GXMyCoupon.m in Sources */ = {isa = PBXBuildFile; fileRef = 9043B5B2236C22BA00731C6F /* GXMyCoupon.m */; };
+		9043B5B7236C2E4E00731C6F /* GXMyCollect.m in Sources */ = {isa = PBXBuildFile; fileRef = 9043B5B6236C2E4E00731C6F /* GXMyCollect.m */; };
 		904F4A43234877FC0056AF49 /* GXCartSectionBgReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 904F4A42234877FC0056AF49 /* GXCartSectionBgReusableView.m */; };
 		904F4A4A234880620056AF49 /* GXUpOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 904F4A48234880620056AF49 /* GXUpOrderVC.m */; };
 		904F4A4B234880620056AF49 /* GXUpOrderVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 904F4A49234880620056AF49 /* GXUpOrderVC.xib */; };
@@ -512,6 +513,8 @@
 		9043B5AE236C093B00731C6F /* GXSuggestionType.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXSuggestionType.m; sourceTree = "<group>"; };
 		9043B5B1236C22BA00731C6F /* GXMyCoupon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXMyCoupon.h; sourceTree = "<group>"; };
 		9043B5B2236C22BA00731C6F /* GXMyCoupon.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXMyCoupon.m; sourceTree = "<group>"; };
+		9043B5B5236C2E4E00731C6F /* GXMyCollect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXMyCollect.h; sourceTree = "<group>"; };
+		9043B5B6236C2E4E00731C6F /* GXMyCollect.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXMyCollect.m; sourceTree = "<group>"; };
 		904F4A41234877FC0056AF49 /* GXCartSectionBgReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXCartSectionBgReusableView.h; sourceTree = "<group>"; };
 		904F4A42234877FC0056AF49 /* GXCartSectionBgReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXCartSectionBgReusableView.m; sourceTree = "<group>"; };
 		904F4A47234880620056AF49 /* GXUpOrderVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXUpOrderVC.h; sourceTree = "<group>"; };
@@ -1233,6 +1236,15 @@
 				9043B5B2236C22BA00731C6F /* GXMyCoupon.m */,
 			);
 			name = "优惠券";
+			sourceTree = "<group>";
+		};
+		9043B5B4236C2E4000731C6F /* 我的清单 */ = {
+			isa = PBXGroup;
+			children = (
+				9043B5B5236C2E4E00731C6F /* GXMyCollect.h */,
+				9043B5B6236C2E4E00731C6F /* GXMyCollect.m */,
+			);
+			name = "我的清单";
 			sourceTree = "<group>";
 		};
 		904F4A4523487CF00056AF49 /* 购物车 */ = {
@@ -2459,6 +2471,7 @@
 			children = (
 				909A77F5236AD7E200562435 /* GXMineData.h */,
 				909A77F6236AD7E200562435 /* GXMineData.m */,
+				9043B5B4236C2E4000731C6F /* 我的清单 */,
 				9043B5B0236C22AA00731C6F /* 优惠券 */,
 				9043B5AC236C092800731C6F /* 我的建议 */,
 				9043B5A8236C05A800731C6F /* 使用帮助 */,
@@ -3467,6 +3480,7 @@
 				90E57F3723471C4200F49834 /* GXValidAddressCell.m in Sources */,
 				906973ED2344C2AC00D8A8FF /* GXGoodStoreVC.m in Sources */,
 				90E57F0F2346E59100F49834 /* GXDiscountVC.m in Sources */,
+				9043B5B7236C2E4E00731C6F /* GXMyCollect.m in Sources */,
 				9094F579234A118100106699 /* GXRefundDetailFooter.m in Sources */,
 				909EAA5423483CC100575FB8 /* GXTryApplyCell.m in Sources */,
 				90C0B3C62340CD7200A8C55B /* YCMenuView.m in Sources */,

@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class GYHomeDiscount,GXDayDiscount,GXCategoryGoods;
+@class GYHomeDiscount,GXDayDiscount,GXCategoryGoods,GXMyCollect;
 @interface GXDiscountGoodsCell : UICollectionViewCell
 /* 抢购 */
 @property(nonatomic,strong) GYHomeDiscount *discount;
@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong) GXDayDiscount *dayDiscount;
 /* 商品 */
 @property(nonatomic,strong) GXCategoryGoods *goods;
+/* 收藏 */
+@property(nonatomic,strong) GXMyCollect *collect;
 @end
 
 NS_ASSUME_NONNULL_END

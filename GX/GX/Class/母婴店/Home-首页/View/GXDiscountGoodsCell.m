@@ -10,6 +10,7 @@
 #import "GXHomeData.h"
 #import "GXDayDiscount.h"
 #import "GXCategoryGoods.h"
+#import "GXMyCollect.h"
 
 @interface GXDiscountGoodsCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *cover_img;
@@ -86,6 +87,21 @@
     self.handleBtn.hidden = YES;
     self.sale_num.hidden = NO;
     self.sale_num.text = [NSString stringWithFormat:@"销量：%@",_goods.sale_num];
+}
+
+-(void)setCollect:(GXMyCollect *)collect
+{
+    _collect = collect;
     
+    [self.cover_img sd_setImageWithURL:[NSURL URLWithString:_collect.cover_img]];
+    self.good_name.text = _collect.goods_name;
+    if ([_collect.control_type isEqualToString:@"1"]) {
+        self.price.text = [NSString stringWithFormat:@"￥%@-￥%@",_collect.min_price,_collect.max_price];
+    }else{
+        self.price.text = [NSString stringWithFormat:@"￥%@",_collect.min_price];
+    }
+    self.market_price.hidden = YES;
+    self.handleBtn.hidden = YES;
+    self.sale_num.hidden = YES;
 }
 @end
