@@ -90,6 +90,11 @@
         parameters[@"notice_id"] = self.notice_id;
     }else if (self.requestType == 4) {
         action = @"aboutUs";
+    }else if (self.requestType == 5) {
+        action = @"saleStandard";
+    }else if (self.requestType == 6) {
+        action = @"helpDataDetail";
+        parameters[@"help_id"] = self.help_id;
     }
     
     hx_weakify(self);
@@ -106,6 +111,12 @@
                 NSString *h5 = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"><style>img{width:100%%; height:auto;}body{margin:0 15px;}</style></head><body>%@</body></html>",responseObject[@"data"][@"notice_content"]];
                 [strongSelf.webView loadHTMLString:h5 baseURL:nil];
             }else if (self.requestType == 4) {
+                NSString *h5 = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"><style>img{width:100%%; height:auto;}body{margin:0 15px;}</style></head><body>%@</body></html>",responseObject[@"data"]];
+                [strongSelf.webView loadHTMLString:h5 baseURL:nil];
+            }else if (self.requestType == 5) {
+                NSString *h5 = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"><style>img{width:100%%; height:auto;}body{margin:0 15px;}</style></head><body>%@</body></html>",responseObject[@"data"]];
+                [strongSelf.webView loadHTMLString:h5 baseURL:nil];
+            }else if (self.requestType == 6) {
                 NSString *h5 = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"><style>img{width:100%%; height:auto;}body{margin:0 15px;}</style></head><body>%@</body></html>",responseObject[@"data"]];
                 [strongSelf.webView loadHTMLString:h5 baseURL:nil];
             }

@@ -133,11 +133,13 @@
         [self.navigationController pushViewController:avc animated:YES];
     }else if (sender.tag == 2){
         GXWebContentVC *wvc = [GXWebContentVC new];
-        wvc.url = @"http://news.cctv.com/2019/10/03/ARTI2EUlwRGH3jMPI6cAVqti191003.shtml";
         wvc.navTitle = @"售后标准";
+        wvc.isNeedRequest = YES;
+        wvc.requestType = 5;
         [self.navigationController pushViewController:wvc animated:YES];
     }else if (sender.tag == 3){
         GXMemberVC *mvc = [GXMemberVC new];
+        mvc.mineData = self.mineData;
         [self.navigationController pushViewController:mvc animated:YES];
     }else if (sender.tag == 4){
         GXHelpVC *hvc = [GXHelpVC new];
@@ -152,19 +154,19 @@
         GXReportVC *rvc = [GXReportVC new];
         [self.navigationController pushViewController:rvc animated:YES];
     }else if (sender.tag == 8){
-        FSActionSheet *as = [[FSActionSheet alloc] initWithTitle:@"客户经理" delegate:nil cancelButtonTitle:@"取消" highlightedButtonTitle:nil otherButtonTitles:@[@"13487655423(王鹏)"]];
-        //        hx_weakify(self);
+        FSActionSheet *as = [[FSActionSheet alloc] initWithTitle:@"客户经理" delegate:nil cancelButtonTitle:@"取消" highlightedButtonTitle:nil otherButtonTitles:@[[NSString stringWithFormat:@"%@(%@)",self.mineData.saleman_phone,self.mineData.saleman_name]]];
+        hx_weakify(self);
         [as showWithSelectedCompletion:^(NSInteger selectedIndex) {
-            //            hx_strongify(weakSelf);
+            hx_strongify(weakSelf);
             if (selectedIndex == 1) {
-                HXLog(@"拨打");
-                //[[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel:%@",@"13496755975"]]];
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel:%@",strongSelf.mineData.saleman_phone]]];
             }
         }];
     }else{
         GXWebContentVC *wvc = [GXWebContentVC new];
-        wvc.url = @"http://news.cctv.com/2019/10/03/ARTI2EUlwRGH3jMPI6cAVqti191003.shtml";
         wvc.navTitle = @"申请供货";
+        wvc.isNeedRequest = YES;
+        wvc.requestType = 2;
         [self.navigationController pushViewController:wvc animated:YES];
     }
 }

@@ -55,6 +55,7 @@
 		903C547B2349D18A002743EE /* GXOffLineReportVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 903C54792349D18A002743EE /* GXOffLineReportVC.xib */; };
 		9043B5A2236BC55800731C6F /* GXMyAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 9043B5A1236BC55800731C6F /* GXMyAddress.m */; };
 		9043B5A7236BD7E900731C6F /* GXMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 9043B5A6236BD7E900731C6F /* GXMember.m */; };
+		9043B5AB236C05BF00731C6F /* GXHelp.m in Sources */ = {isa = PBXBuildFile; fileRef = 9043B5AA236C05BF00731C6F /* GXHelp.m */; };
 		904F4A43234877FC0056AF49 /* GXCartSectionBgReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 904F4A42234877FC0056AF49 /* GXCartSectionBgReusableView.m */; };
 		904F4A4A234880620056AF49 /* GXUpOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 904F4A48234880620056AF49 /* GXUpOrderVC.m */; };
 		904F4A4B234880620056AF49 /* GXUpOrderVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 904F4A49234880620056AF49 /* GXUpOrderVC.xib */; };
@@ -503,6 +504,8 @@
 		9043B5A3236BD44D00731C6F /* SGQRCodeObtainConfigure.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGQRCodeObtainConfigure.h; sourceTree = "<group>"; };
 		9043B5A5236BD7E900731C6F /* GXMember.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXMember.h; sourceTree = "<group>"; };
 		9043B5A6236BD7E900731C6F /* GXMember.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXMember.m; sourceTree = "<group>"; };
+		9043B5A9236C05BF00731C6F /* GXHelp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXHelp.h; sourceTree = "<group>"; };
+		9043B5AA236C05BF00731C6F /* GXHelp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXHelp.m; sourceTree = "<group>"; };
 		904F4A41234877FC0056AF49 /* GXCartSectionBgReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXCartSectionBgReusableView.h; sourceTree = "<group>"; };
 		904F4A42234877FC0056AF49 /* GXCartSectionBgReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXCartSectionBgReusableView.m; sourceTree = "<group>"; };
 		904F4A47234880620056AF49 /* GXUpOrderVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXUpOrderVC.h; sourceTree = "<group>"; };
@@ -1197,6 +1200,15 @@
 				9043B5A6236BD7E900731C6F /* GXMember.m */,
 			);
 			name = "会员中心";
+			sourceTree = "<group>";
+		};
+		9043B5A8236C05A800731C6F /* 使用帮助 */ = {
+			isa = PBXGroup;
+			children = (
+				9043B5A9236C05BF00731C6F /* GXHelp.h */,
+				9043B5AA236C05BF00731C6F /* GXHelp.m */,
+			);
+			name = "使用帮助";
 			sourceTree = "<group>";
 		};
 		904F4A4523487CF00056AF49 /* 购物车 */ = {
@@ -2423,6 +2435,7 @@
 			children = (
 				909A77F5236AD7E200562435 /* GXMineData.h */,
 				909A77F6236AD7E200562435 /* GXMineData.m */,
+				9043B5A8236C05A800731C6F /* 使用帮助 */,
 				9043B5A4236BD7D700731C6F /* 会员中心 */,
 				9043B59F236BC53F00731C6F /* 收货地址 */,
 			);
@@ -3511,6 +3524,7 @@
 				90FCDF112349949D00729A97 /* GXMyBusinessVC.m in Sources */,
 				909A77F7236AD7E200562435 /* GXMineData.m in Sources */,
 				9099EE76236814E70088D80C /* GXSearchResultVC.m in Sources */,
+				9043B5AB236C05BF00731C6F /* GXHelp.m in Sources */,
 				906973C52344817A00D8A8FF /* GXHomePushCell.m in Sources */,
 				9094F54B2349EFDF00106699 /* GXMyIdeaPhotoCell.m in Sources */,
 				90FCDEFF23498BC900729A97 /* GXChangeBindVC.m in Sources */,

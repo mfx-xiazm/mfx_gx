@@ -10,8 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXHelp;
 @interface GXHelpCell : UITableViewCell
-
+/* 帮助 */
+@property(nonatomic,strong) GXHelp *help;
 @end
 
 NS_ASSUME_NONNULL_END
