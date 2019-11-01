@@ -15,6 +15,7 @@
                 <outlet property="photoCollectionView" destination="Ff6-0H-3Oo" id="zfL-4f-e00"/>
                 <outlet property="photoViewHeight" destination="zPr-BT-shj" id="YUw-wb-jkf"/>
                 <outlet property="remarkText" destination="8vP-CB-A7N" id="H8A-tY-3vV"/>
+                <outlet property="submitBtn" destination="vue-8Y-52Q" id="5cN-z8-mYb"/>
                 <outlet property="typeCollectionView" destination="hG7-dX-TpB" id="ehT-cS-5la"/>
                 <outlet property="typeViewHeight" destination="NKd-8Y-meF" id="mg0-Co-fOL"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

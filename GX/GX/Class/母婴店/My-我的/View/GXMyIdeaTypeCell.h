@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
+@class GXSuggestionType;
 @interface GXMyIdeaTypeCell : UICollectionViewCell
-
+/* 类型 */
+@property(nonatomic,strong) GXSuggestionType *type;
 @end
 
 NS_ASSUME_NONNULL_END

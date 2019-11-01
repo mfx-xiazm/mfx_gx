@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface GXMyIdeaPhotoCell : UICollectionViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *photoImg;
+
 @end
 
 NS_ASSUME_NONNULL_END

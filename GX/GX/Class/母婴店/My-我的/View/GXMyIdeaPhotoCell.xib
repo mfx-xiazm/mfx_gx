@@ -19,30 +19,24 @@
                 <rect key="frame" x="0.0" y="0.0" width="118" height="107"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xWk-ge-GPQ">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xWk-ge-GPQ">
                         <rect key="frame" x="0.0" y="0.0" width="118" height="107"/>
                         <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                     </imageView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nWl-yx-8WT">
-                        <rect key="frame" x="95" y="0.0" width="23" height="23"/>
-                        <state key="normal" image="删除图片"/>
-                    </button>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="nWl-yx-8WT" secondAttribute="trailing" id="AKh-h3-B78"/>
                 <constraint firstAttribute="bottom" secondItem="xWk-ge-GPQ" secondAttribute="bottom" id="HOW-02-rrm"/>
-                <constraint firstItem="nWl-yx-8WT" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="QjY-LD-4Vl"/>
                 <constraint firstAttribute="trailing" secondItem="xWk-ge-GPQ" secondAttribute="trailing" id="Zoo-eg-13i"/>
                 <constraint firstItem="xWk-ge-GPQ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="bkf-pM-gEE"/>
                 <constraint firstItem="xWk-ge-GPQ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="gcN-OO-CHX"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <size key="customSize" width="118" height="107"/>
+            <connections>
+                <outlet property="photoImg" destination="xWk-ge-GPQ" id="EaH-Y6-CbD"/>
+            </connections>
             <point key="canvasLocation" x="-5.7971014492753632" y="87.388392857142847"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="删除图片" width="23" height="23"/>
-    </resources>
 </document>
