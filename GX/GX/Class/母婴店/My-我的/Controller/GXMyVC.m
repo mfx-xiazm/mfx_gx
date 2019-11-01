@@ -148,8 +148,13 @@
         GXMyIdeaVC *cvc = [GXMyIdeaVC new];
         [self.navigationController pushViewController:cvc animated:YES];
     }else if (sender.tag == 6){
-        GXComplainVC *cvc = [GXComplainVC new];
-        [self.navigationController pushViewController:cvc animated:YES];
+        //GXComplainVC *cvc = [GXComplainVC new];
+        //[self.navigationController pushViewController:cvc animated:YES];
+        GXWebContentVC *wvc = [GXWebContentVC new];
+        wvc.navTitle = @"我要投诉";
+        wvc.isNeedRequest = YES;
+        wvc.requestType = 7;
+        [self.navigationController pushViewController:wvc animated:YES];
     }else if (sender.tag == 7){
         GXReportVC *rvc = [GXReportVC new];
         [self.navigationController pushViewController:rvc animated:YES];

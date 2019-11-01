@@ -95,6 +95,8 @@
     }else if (self.requestType == 6) {
         action = @"helpDataDetail";
         parameters[@"help_id"] = self.help_id;
+    }else if (self.requestType == 7) {
+        action = @"complainChannelData";
     }
     
     hx_weakify(self);
@@ -117,6 +119,9 @@
                 NSString *h5 = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"><style>img{width:100%%; height:auto;}body{margin:0 15px;}</style></head><body>%@</body></html>",responseObject[@"data"]];
                 [strongSelf.webView loadHTMLString:h5 baseURL:nil];
             }else if (self.requestType == 6) {
+                NSString *h5 = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"><style>img{width:100%%; height:auto;}body{margin:0 15px;}</style></head><body>%@</body></html>",responseObject[@"data"]];
+                [strongSelf.webView loadHTMLString:h5 baseURL:nil];
+            }else if (self.requestType == 7) {
                 NSString *h5 = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"><style>img{width:100%%; height:auto;}body{margin:0 15px;}</style></head><body>%@</body></html>",responseObject[@"data"]];
                 [strongSelf.webView loadHTMLString:h5 baseURL:nil];
             }
