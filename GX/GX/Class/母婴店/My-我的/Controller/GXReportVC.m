@@ -12,6 +12,7 @@
 #import "GXOffLineReportVC.h"
 
 @interface GXReportVC ()
+@property (weak, nonatomic) IBOutlet UILabel *report_desc;
 @property (weak, nonatomic) IBOutlet UIView *optionSuperView;
 /* 选择 */
 @property(nonatomic,strong) JJOptionView *optionView;
@@ -24,12 +25,32 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationItem setTitle:@"窜货举报"];
+    
+    self.selectIndex = -1;
     [self.optionSuperView addSubview:self.optionView];
+    
+    [self getReportDescRequest];
 }
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
     self.optionView.frame = self.optionSuperView.bounds;
+}
+-(void)getReportDescRequest
+{
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"fleeingGoodsReport" parameters:@{} success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [strongSelf.report_desc setTextWithLineSpace:5.f withString:responseObject[@"data"][@"tipsDesc"] withFont:[UIFont systemFontOfSize:13]];
+            });
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
 }
 -(JJOptionView *)optionView
 {
@@ -51,6 +72,10 @@
     return _optionView;
 }
 - (IBAction)nextBtnClicked:(UIButton *)sender {
+    if (self.selectIndex == -1) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请选择举报类型"];
+        return;
+    }
     if (self.selectIndex == 0) {
         GXOnLineReportVC *rvc = [GXOnLineReportVC new];
         [self.navigationController pushViewController:rvc animated:YES];

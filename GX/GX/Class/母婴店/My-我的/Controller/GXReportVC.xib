@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GXReportVC">
             <connections>
                 <outlet property="optionSuperView" destination="GHO-0b-VUt" id="WNb-qT-Tj2"/>
+                <outlet property="report_desc" destination="rRv-AG-Kvu" id="RcJ-Bc-PWW"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
