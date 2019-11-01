@@ -67,6 +67,9 @@
                                         <color key="value" red="0.92549019610000005" green="0.078431372550000003" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="takeCouponClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="cVi-SD-Ho3"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="有效期限：2020-05-07" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C5B-A9-03U">
                                 <rect key="frame" x="81.5" y="56" width="121.5" height="13.5"/>
@@ -117,6 +120,14 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="coupon_amount" destination="nYW-m4-PZw" id="0Lp-uY-iuj"/>
+                <outlet property="coupon_full" destination="Zpf-0h-LvJ" id="dQ7-rR-ceF"/>
+                <outlet property="coupon_img" destination="aYD-BJ-EvI" id="KQ5-fb-vrt"/>
+                <outlet property="coupon_time" destination="C5B-A9-03U" id="8o2-75-IQ4"/>
+                <outlet property="coupon_type" destination="Jxb-c2-j0I" id="oeY-AK-gJS"/>
+                <outlet property="get_coupon" destination="IWh-JN-fuH" id="2Eu-qi-jFs"/>
+            </connections>
             <point key="canvasLocation" x="216.66666666666669" y="130.58035714285714"/>
         </tableViewCell>
     </objects>
