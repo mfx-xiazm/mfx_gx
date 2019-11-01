@@ -53,6 +53,7 @@
 		903C54762349D167002743EE /* GXOnLineReportVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 903C54742349D167002743EE /* GXOnLineReportVC.xib */; };
 		903C547A2349D18A002743EE /* GXOffLineReportVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 903C54782349D18A002743EE /* GXOffLineReportVC.m */; };
 		903C547B2349D18A002743EE /* GXOffLineReportVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 903C54792349D18A002743EE /* GXOffLineReportVC.xib */; };
+		9043B5A2236BC55800731C6F /* GXMyAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 9043B5A1236BC55800731C6F /* GXMyAddress.m */; };
 		904F4A43234877FC0056AF49 /* GXCartSectionBgReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 904F4A42234877FC0056AF49 /* GXCartSectionBgReusableView.m */; };
 		904F4A4A234880620056AF49 /* GXUpOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 904F4A48234880620056AF49 /* GXUpOrderVC.m */; };
 		904F4A4B234880620056AF49 /* GXUpOrderVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 904F4A49234880620056AF49 /* GXUpOrderVC.xib */; };
@@ -496,6 +497,8 @@
 		903C54772349D18A002743EE /* GXOffLineReportVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXOffLineReportVC.h; sourceTree = "<group>"; };
 		903C54782349D18A002743EE /* GXOffLineReportVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXOffLineReportVC.m; sourceTree = "<group>"; };
 		903C54792349D18A002743EE /* GXOffLineReportVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXOffLineReportVC.xib; sourceTree = "<group>"; };
+		9043B5A0236BC55800731C6F /* GXMyAddress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXMyAddress.h; sourceTree = "<group>"; };
+		9043B5A1236BC55800731C6F /* GXMyAddress.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXMyAddress.m; sourceTree = "<group>"; };
 		904F4A41234877FC0056AF49 /* GXCartSectionBgReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXCartSectionBgReusableView.h; sourceTree = "<group>"; };
 		904F4A42234877FC0056AF49 /* GXCartSectionBgReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXCartSectionBgReusableView.m; sourceTree = "<group>"; };
 		904F4A47234880620056AF49 /* GXUpOrderVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXUpOrderVC.h; sourceTree = "<group>"; };
@@ -1173,6 +1176,15 @@
 				903C54702349CCCD002743EE /* JJOptionView.m */,
 			);
 			path = JJOptionView;
+			sourceTree = "<group>";
+		};
+		9043B59F236BC53F00731C6F /* 收货地址 */ = {
+			isa = PBXGroup;
+			children = (
+				9043B5A0236BC55800731C6F /* GXMyAddress.h */,
+				9043B5A1236BC55800731C6F /* GXMyAddress.m */,
+			);
+			name = "收货地址";
 			sourceTree = "<group>";
 		};
 		904F4A4523487CF00056AF49 /* 购物车 */ = {
@@ -2399,6 +2411,7 @@
 			children = (
 				909A77F5236AD7E200562435 /* GXMineData.h */,
 				909A77F6236AD7E200562435 /* GXMineData.m */,
+				9043B59F236BC53F00731C6F /* 收货地址 */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3505,6 +3518,7 @@
 				902E890F2347773E00EFD0DF /* GXSaleMaterialHeader.m in Sources */,
 				90C0B3B32340CD7200A8C55B /* UIButton+HXCode.m in Sources */,
 				9094F53B2349ECC100106699 /* GXMyIdeaVC.m in Sources */,
+				9043B5A2236BC55800731C6F /* GXMyAddress.m in Sources */,
 				90BB98AD234C279C00444ACC /* GXAccountManageVC.m in Sources */,
 				905B3DFC2345999D00282515 /* GXGoodsMaterial.m in Sources */,
 				9096CC1423692BA600D213DD /* GXGoodBrand.m in Sources */,

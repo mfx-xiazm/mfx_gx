@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="140"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="图层 22" translatesAutoresizingMaskIntoConstraints="NO" id="QVT-Et-hVf">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="顶部图蓝色" translatesAutoresizingMaskIntoConstraints="NO" id="QVT-Et-hVf">
                     <rect key="frame" x="10" y="10" width="394" height="80"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="80" id="WQO-FA-Nod"/>
@@ -43,11 +43,12 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="cateSuperView" destination="HT1-ab-mmQ" id="6Rx-Dk-SHE"/>
+                <outlet property="topImg" destination="QVT-Et-hVf" id="Uaf-EU-1Po"/>
             </connections>
             <point key="canvasLocation" x="111.59420289855073" y="334.15178571428572"/>
         </view>
     </objects>
     <resources>
-        <image name="图层 22" width="330" height="90"/>
+        <image name="顶部图蓝色" width="351" height="70"/>
     </resources>
 </document>

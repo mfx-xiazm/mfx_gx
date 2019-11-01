@@ -25,7 +25,7 @@
     _goods = goods;
     self.name.text = _goods.goods_name;
     self.price.text = _goods.price;
-//    self.sku_name.text = _goods.sku_name;
+    self.sku_name.text = _goods.specs_attrs;
 }
 - (IBAction)btnClicked:(UIButton *)sender {
     if (self.trendBtnCall) {

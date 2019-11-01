@@ -36,6 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *goods_name;
 @property(nonatomic,copy) NSString *sku_id;
 @property(nonatomic,copy) NSString *price;
+@property(nonatomic,copy) NSString *specs_attrs;
 @end
 
 NS_ASSUME_NONNULL_END

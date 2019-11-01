@@ -15,6 +15,7 @@ typedef void(^cateClickedCall)(NSInteger index);
 @interface GXMarketTrendHeader : UIView
 /** 切换 */
 @property (strong, nonatomic) JXCategoryTitleView *categoryView;
+@property (weak, nonatomic) IBOutlet UIImageView *topImg;
 @property (weak, nonatomic) IBOutlet UIView *cateSuperView;
 /* 点击分类 */
 @property(nonatomic,copy) cateClickedCall cateClickedCall;

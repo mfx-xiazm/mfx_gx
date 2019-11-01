@@ -7,6 +7,7 @@
 //
 
 #import "SPPageMenu.h"
+#import <JJFontFit.h>
 
 #define tagBaseValue 100
 #define scrollViewContentOffset @"contentOffset"
@@ -91,6 +92,8 @@
 
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
+    
+    self.isNotFontFit = YES;
 }
 
 - (void)setHighlighted:(BOOL)highlighted {}

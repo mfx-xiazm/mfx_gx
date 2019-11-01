@@ -88,6 +88,8 @@
     }else if (self.requestType == 3) {
         action = @"getNoticeDetail";
         parameters[@"notice_id"] = self.notice_id;
+    }else if (self.requestType == 4) {
+        action = @"aboutUs";
     }
     
     hx_weakify(self);
@@ -102,6 +104,9 @@
                 [strongSelf.webView loadHTMLString:h5 baseURL:nil];
             }else if (strongSelf.requestType == 3) {
                 NSString *h5 = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"><style>img{width:100%%; height:auto;}body{margin:0 15px;}</style></head><body>%@</body></html>",responseObject[@"data"][@"notice_content"]];
+                [strongSelf.webView loadHTMLString:h5 baseURL:nil];
+            }else if (self.requestType == 4) {
+                NSString *h5 = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"><style>img{width:100%%; height:auto;}body{margin:0 15px;}</style></head><body>%@</body></html>",responseObject[@"data"]];
                 [strongSelf.webView loadHTMLString:h5 baseURL:nil];
             }
         }else{

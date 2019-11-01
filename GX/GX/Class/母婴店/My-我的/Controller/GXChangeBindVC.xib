@@ -12,6 +12,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GXChangeBindVC">
             <connections>
+                <outlet property="code" destination="y5L-ke-LLC" id="zqK-tm-tAa"/>
+                <outlet property="oldPhone" destination="I5C-Af-1C8" id="jnV-Ly-EBt"/>
+                <outlet property="phone" destination="WHO-BP-cQg" id="tV8-2A-evO"/>
+                <outlet property="sureBtn" destination="Pf7-bb-ZP9" id="zCt-Gd-rNg"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -40,11 +44,12 @@
                                         </label>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入您的旧手机账号" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="I5C-Af-1C8">
                                             <rect key="frame" x="105" y="5" width="297" height="40"/>
+                                            <color key="tintColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="345-Za-ZmD"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                         </textField>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bZk-BE-FtZ" userLabel="分割线">
                                             <rect key="frame" x="0.0" y="49" width="414" height="1"/>
@@ -81,11 +86,12 @@
                                         </label>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入您的新手机账号" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="WHO-BP-cQg">
                                             <rect key="frame" x="105" y="5" width="297" height="40"/>
+                                            <color key="tintColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="IMz-lU-Om5"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                         </textField>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xQE-BE-HqD" userLabel="分割线">
                                             <rect key="frame" x="0.0" y="49" width="414" height="1"/>
@@ -122,11 +128,12 @@
                                         </label>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入验证码" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="y5L-ke-LLC">
                                             <rect key="frame" x="105" y="5" width="187" height="40"/>
+                                            <color key="tintColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="o3G-eH-mbS"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                         </textField>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lry-s4-mNq">
                                             <rect key="frame" x="302" y="10" width="100" height="30"/>
@@ -142,6 +149,9 @@
                                                     <real key="value" value="5"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="getCodeRequest:" destination="-1" eventType="touchUpInside" id="knj-I3-bZA"/>
+                                            </connections>
                                         </button>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fbc-Ck-QOI" userLabel="分割线">
                                             <rect key="frame" x="0.0" y="49" width="414" height="1"/>

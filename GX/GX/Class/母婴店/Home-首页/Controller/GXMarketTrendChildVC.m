@@ -53,6 +53,7 @@ static NSString *const MarketTrendCell = @"MarketTrendCell";
     if (_header == nil) {
         _header = [GXMarketTrendHeader loadXibView];
         _header.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, 140.f);
+        _header.topImg.image = (self.dataType==1)?HXGetImage(@"顶部图"):HXGetImage(@"顶部图蓝色");
         hx_weakify(self);
         _header.cateClickedCall = ^(NSInteger index) {
             hx_strongify(weakSelf);
@@ -102,7 +103,7 @@ static NSString *const MarketTrendCell = @"MarketTrendCell";
     [HXNetworkTool POST:HXRC_M_URL action:@"currencyQuotations" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
-            strongSelf.trends = [NSArray yy_modelArrayWithClass:[GXMarketTrend class] json:responseObject[@"data"][@"brand"]];
+            strongSelf.trends = [NSArray yy_modelArrayWithClass:[GXMarketTrend class] json:responseObject[@"data"]];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [strongSelf handleTrendData];
             });

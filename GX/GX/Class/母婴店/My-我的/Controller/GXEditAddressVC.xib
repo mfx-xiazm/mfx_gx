@@ -13,6 +13,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GXEditAddressVC">
             <connections>
                 <outlet property="addressDetial" destination="6Ic-22-WrY" id="D7S-mL-F45"/>
+                <outlet property="area_name" destination="tg3-F9-LlZ" id="kq2-6u-zz5"/>
+                <outlet property="is_defalt" destination="TIg-GW-wTf" id="JqJ-nc-5Ab"/>
+                <outlet property="receiver" destination="iF3-sC-OJl" id="oPa-LW-4gl"/>
+                <outlet property="receiver_phone" destination="Rlc-A2-Sdx" id="aSL-D4-LJ1"/>
+                <outlet property="sureBtn" destination="FVv-Z5-Kl0" id="SLD-Ae-ykq"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -41,11 +46,12 @@
                                         </label>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入手机号" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Rlc-A2-Sdx">
                                             <rect key="frame" x="105" y="5" width="294" height="40"/>
+                                            <color key="tintColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="A4I-eR-7bf"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                         </textField>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nLx-3y-UnA" userLabel="分割线">
                                             <rect key="frame" x="0.0" y="49" width="414" height="1"/>
@@ -82,6 +88,7 @@
                                         </label>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入收货姓名" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="iF3-sC-OJl">
                                             <rect key="frame" x="105" y="5" width="294" height="40"/>
+                                            <color key="tintColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="bFG-q4-h9D"/>
                                             </constraints>
@@ -180,6 +187,7 @@
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="6Ic-22-WrY" customClass="HXPlaceholderTextView">
                                             <rect key="frame" x="105" y="10" width="294" height="80"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="tintColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
@@ -217,6 +225,10 @@
                                     <state key="normal" title="设为默认" image="协议未选">
                                         <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
+                                    <state key="selected" image="协议选择"/>
+                                    <connections>
+                                        <action selector="defaultClicked:" destination="-1" eventType="touchUpInside" id="0Ky-67-pJS"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -280,6 +292,7 @@
     </objects>
     <resources>
         <image name="协议未选" width="17" height="17"/>
+        <image name="协议选择" width="16.5" height="16.5"/>
         <image name="向右" width="6" height="11"/>
     </resources>
 </document>

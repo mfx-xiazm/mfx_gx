@@ -24,6 +24,12 @@
 #import "GXMineData.h"
 
 @interface GXMyVC ()
+/* 个人信息 */
+@property(nonatomic,strong) GXMineData *mineData;
+@property (weak, nonatomic) IBOutlet UIImageView *shop_img;
+@property (weak, nonatomic) IBOutlet UILabel *shop_name;
+@property (weak, nonatomic) IBOutlet UIButton *user_level;
+@property (weak, nonatomic) IBOutlet UIButton *sale_man;
 
 @end
 
@@ -44,9 +50,10 @@
     [HXNetworkTool POST:HXRC_M_URL action:@"getMineData" parameters:@{} success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
-//            strongSelf.mineData = [GXMineData yy_modelWithDictionary:responseObject[@"data"]];
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//            });
+            strongSelf.mineData = [GXMineData yy_modelWithDictionary:responseObject[@"data"]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [strongSelf handleMineData];
+            });
         }else{
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
         }
@@ -54,16 +61,32 @@
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
     }];
 }
+-(void)handleMineData
+{
+    [self.shop_img sd_setImageWithURL:[NSURL URLWithString:self.mineData.shop_front_img]];
+    self.shop_name.text = self.mineData.shop_name;
+    if (self.mineData.level_id && self.mineData.level_id.length) {
+        self.user_level.hidden = NO;
+        [self.user_level setTitle:self.mineData.level_name forState:UIControlStateNormal];
+    }else{
+        self.user_level.hidden = YES;
+    }
+    
+    if (self.mineData.saleman_phone && self.mineData.saleman_phone.length) {
+        self.sale_man.hidden = NO;
+    }else{
+        self.sale_man.hidden = YES;
+    }
+}
 #pragma mark -- 点击事件
 /** 客服经理 */
 - (IBAction)contactBtnClicked:(UIButton *)sender {
-    FSActionSheet *as = [[FSActionSheet alloc] initWithTitle:@"客户经理" delegate:nil cancelButtonTitle:@"取消" highlightedButtonTitle:nil otherButtonTitles:@[@"13487655423(王鹏)"]];
-    //        hx_weakify(self);
+    FSActionSheet *as = [[FSActionSheet alloc] initWithTitle:@"客户经理" delegate:nil cancelButtonTitle:@"取消" highlightedButtonTitle:nil otherButtonTitles:@[[NSString stringWithFormat:@"%@(%@)",self.mineData.saleman_phone,self.mineData.saleman_name]]];
+    hx_weakify(self);
     [as showWithSelectedCompletion:^(NSInteger selectedIndex) {
-        //            hx_strongify(weakSelf);
+        hx_strongify(weakSelf);
         if (selectedIndex == 1) {
-            HXLog(@"拨打");
-            //[[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel:%@",@"13496755975"]]];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel:%@",strongSelf.mineData.saleman_phone]]];
         }
     }];
 }
@@ -75,6 +98,7 @@
 /** 设置 */
 - (IBAction)settingBtnClicked:(UIButton *)sender {
     GXMySetVC *svc = [GXMySetVC new];
+    svc.mineData = self.mineData;
     [self.navigationController pushViewController:svc animated:YES];
 }
 /** 我的生意 */

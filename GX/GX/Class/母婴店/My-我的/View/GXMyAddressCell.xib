@@ -54,6 +54,7 @@
                                         <state key="normal" title="设为默认" image="协议未选">
                                             <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <state key="selected" image="协议选择"/>
                                         <connections>
                                             <action selector="addressClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="om6-hV-t5E"/>
                                         </connections>
@@ -155,12 +156,19 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="address_detail" destination="syA-vu-2kr" id="9oz-i8-Fn8"/>
+                <outlet property="is_default" destination="twa-BF-qNX" id="wty-p4-ZaO"/>
+                <outlet property="receiver" destination="7iJ-uc-pm0" id="HvX-zT-WfW"/>
+                <outlet property="receiver_phone" destination="ODa-az-Gbl" id="hPi-eT-cND"/>
+            </connections>
             <point key="canvasLocation" x="145.6521739130435" y="134.93303571428569"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="删除" width="14.5" height="15.5"/>
         <image name="协议未选" width="17" height="17"/>
+        <image name="协议选择" width="16.5" height="16.5"/>
         <image name="编辑" width="12" height="15"/>
     </resources>
 </document>

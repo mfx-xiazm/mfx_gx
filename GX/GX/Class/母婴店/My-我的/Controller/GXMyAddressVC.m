@@ -11,11 +11,13 @@
 #import "zhAlertView.h"
 #import <zhPopupController.h>
 #import "GXEditAddressVC.h"
+#import "GXMyAddress.h"
 
 static NSString *const MyAddressCell = @"MyAddressCell";
 @interface GXMyAddressVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
+/* 地址列表 */
+@property(nonatomic,strong) NSArray *addressList;
 @end
 
 @implementation GXMyAddressVC
@@ -24,6 +26,7 @@ static NSString *const MyAddressCell = @"MyAddressCell";
     [super viewDidLoad];
     [self.navigationItem setTitle:@"收货地址"];
     [self setUpTableView];
+    [self getAddressListRequest];
 }
 -(void)viewDidLayoutSubviews
 {
@@ -45,26 +48,92 @@ static NSString *const MyAddressCell = @"MyAddressCell";
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GXMyAddressCell class]) bundle:nil] forCellReuseIdentifier:MyAddressCell];
 }
+#pragma mark -- 业务逻辑
+-(void)getAddressListRequest
+{
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"getAddressList" parameters:@{} success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            strongSelf.addressList = [NSArray yy_modelArrayWithClass:[GXMyAddress class] json:responseObject[@"data"]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                strongSelf.tableView.hidden = NO;
+                [strongSelf.tableView reloadData];
+            });
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
+}
+-(void)setDefaultAddressRequest:(NSString *)address_id  is_default:(NSString *)is_default
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"address_id"] = address_id;
+    parameters[@"is_default"] = is_default;
+    
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"setDefaultAddress" parameters:parameters success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            [strongSelf getAddressListRequest];
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
+}
+-(void)delAddressRequest:(GXMyAddress *)address
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"address_id"] = address.address_id;
+    
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"delAddress" parameters:parameters success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            NSMutableArray *temp = [NSMutableArray arrayWithArray:strongSelf.addressList];
+            [temp removeObject:address];
+            strongSelf.addressList = temp;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [strongSelf.tableView reloadData];
+            });
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
+}
 #pragma mark -- 点击事件
 - (IBAction)addAddressClicked:(UIButton *)sender {
     GXEditAddressVC *avc = [GXEditAddressVC new];
+    hx_weakify(self);
+    avc.editSuccessCall = ^{
+        hx_strongify(weakSelf);
+        [strongSelf getAddressListRequest];
+    };
     [self.navigationController pushViewController:avc animated:YES];
 }
 
 #pragma mark -- UITableView数据源和代理
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    return self.addressList.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     GXMyAddressCell *cell = [tableView dequeueReusableCellWithIdentifier:MyAddressCell forIndexPath:indexPath];
     //无色
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    GXMyAddress *address = self.addressList[indexPath.row];
+    cell.address = address;
     hx_weakify(self);
     cell.addressClickedCall = ^(NSInteger index) {
         hx_strongify(weakSelf);
         if (index == 1) {
-            
+            [strongSelf setDefaultAddressRequest:address.address_id is_default:address.is_default?@"0":@"1"];
         }else if (index == 2) {
             zhAlertView *alert = [[zhAlertView alloc] initWithTitle:@"提示" message:@"确定要删除该地址吗？" constantWidth:HX_SCREEN_WIDTH - 50*2];
             hx_weakify(self);
@@ -75,7 +144,7 @@ static NSString *const MyAddressCell = @"MyAddressCell";
             zhAlertButton *okButton = [zhAlertButton buttonWithTitle:@"删除" handler:^(zhAlertButton * _Nonnull button) {
                 hx_strongify(weakSelf);
                 [strongSelf.zh_popupController dismiss];
-                //[[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel:%@",@"13496755975"]]];
+                [strongSelf delAddressRequest:address];
             }];
             cancelButton.lineColor = UIColorFromRGB(0xDDDDDD);
             [cancelButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
@@ -86,6 +155,10 @@ static NSString *const MyAddressCell = @"MyAddressCell";
             [strongSelf.zh_popupController presentContentView:alert duration:0.25 springAnimated:NO];
         }else{
             GXEditAddressVC *avc = [GXEditAddressVC new];
+            avc.address = address;
+            avc.editSuccessCall = ^{
+                [strongSelf getAddressListRequest];
+            };
             [strongSelf.navigationController pushViewController:avc animated:YES];
         }
     };

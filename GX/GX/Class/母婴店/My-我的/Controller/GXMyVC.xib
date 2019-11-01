@@ -12,6 +12,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GXMyVC">
             <connections>
+                <outlet property="sale_man" destination="w9H-34-NZF" id="J41-b4-cIJ"/>
+                <outlet property="shop_img" destination="edv-SO-kp8" id="VlM-GY-Wup"/>
+                <outlet property="shop_name" destination="HqQ-vv-pm0" id="6xq-n0-M8e"/>
+                <outlet property="user_level" destination="rod-Lg-e8N" id="XAW-FL-HDO"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -51,6 +55,19 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rod-Lg-e8N">
+                                            <rect key="frame" x="200" y="28" width="57" height="14"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <state key="normal" title="普通会员" image="金色等级">
+                                                <color key="titleColor" red="1" green="0.62352941179999999" blue="0.031372549020000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layerBoderCorner">
+                                                    <real key="value" value="11"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w9H-34-NZF">
                                             <rect key="frame" x="75" y="53" width="110" height="22"/>
                                             <color key="backgroundColor" red="0.96078431372549022" green="0.8666666666666667" blue="0.76078431372549016" alpha="1" colorSpace="calibratedRGB"/>
@@ -96,9 +113,11 @@
                                         <constraint firstItem="hvE-Jv-BZq" firstAttribute="leading" secondItem="3CC-9a-1Cm" secondAttribute="leading" id="46n-OQ-i0T"/>
                                         <constraint firstItem="w9H-34-NZF" firstAttribute="leading" secondItem="edv-SO-kp8" secondAttribute="trailing" constant="10" id="54p-RP-jmI"/>
                                         <constraint firstAttribute="bottom" secondItem="hvE-Jv-BZq" secondAttribute="bottom" id="FwE-JP-ubQ"/>
+                                        <constraint firstItem="rod-Lg-e8N" firstAttribute="centerY" secondItem="HqQ-vv-pm0" secondAttribute="centerY" id="Hio-Ue-xiH"/>
                                         <constraint firstItem="hvE-Jv-BZq" firstAttribute="top" secondItem="3CC-9a-1Cm" secondAttribute="top" id="It2-39-em3"/>
                                         <constraint firstItem="vbH-3E-RvC" firstAttribute="top" secondItem="3CC-9a-1Cm" secondAttribute="top" id="L9G-DU-dEV"/>
                                         <constraint firstItem="HqQ-vv-pm0" firstAttribute="leading" secondItem="edv-SO-kp8" secondAttribute="trailing" constant="10" id="Ly9-TD-Qac"/>
+                                        <constraint firstItem="rod-Lg-e8N" firstAttribute="leading" secondItem="HqQ-vv-pm0" secondAttribute="trailing" constant="10" id="QA0-gh-cbw"/>
                                         <constraint firstAttribute="trailing" secondItem="vbH-3E-RvC" secondAttribute="trailing" constant="15" id="QbS-Fu-vx3"/>
                                         <constraint firstItem="edv-SO-kp8" firstAttribute="leading" secondItem="3CC-9a-1Cm" secondAttribute="leading" constant="15" id="SGk-th-mD6"/>
                                         <constraint firstItem="edv-SO-kp8" firstAttribute="top" secondItem="3CC-9a-1Cm" secondAttribute="top" constant="25" id="a4s-ZI-YtT"/>
@@ -1034,5 +1053,6 @@
         <image name="联系客服" width="30" height="30"/>
         <image name="设置" width="13" height="12.5"/>
         <image name="邀请有礼" width="30" height="30"/>
+        <image name="金色等级" width="12" height="11.5"/>
     </resources>
 </document>
