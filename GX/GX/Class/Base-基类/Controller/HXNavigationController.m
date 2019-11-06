@@ -8,6 +8,8 @@
 
 #import "HXNavigationController.h"
 #import "UIImage+HXNExtension.h"
+#import "GXPayTypeVC.h"
+#import "GXPayResultVC.h"
 
 @interface HXNavigationController ()<UIGestureRecognizerDelegate>
 /** 手势 */
@@ -67,7 +69,9 @@
     if (translation.x <= 0) {
         return NO;
     }
-    
+    if ([self.visibleViewController isKindOfClass:[GXPayTypeVC class]] || [self.visibleViewController isKindOfClass:[GXPayResultVC class]]) {
+        return NO;
+    }
     return self.childViewControllers.count == 1 ? NO : YES;
 }
 /**

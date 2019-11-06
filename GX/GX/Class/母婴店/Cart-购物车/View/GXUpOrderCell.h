@@ -10,8 +10,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXConfirmOrderData;
+typedef void(^chooseCouponCall)(void);
 @interface GXUpOrderCell : UITableViewCell
-
+/* 商品 */
+@property(nonatomic,strong) GXConfirmOrderData *orderData;
+/* 点击 */
+@property(nonatomic,copy) chooseCouponCall chooseCouponCall;
 @end
 
 NS_ASSUME_NONNULL_END

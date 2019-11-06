@@ -10,8 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXSankPrice;
 @interface GXSankPriceCell : UITableViewCell
-
+/* 价格排序 */
+@property(nonatomic,strong) GXSankPrice *sank;
 @end
 
 NS_ASSUME_NONNULL_END

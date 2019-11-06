@@ -9,6 +9,7 @@
 #import "GXRunCategoryCell.h"
 #import "GXCatalogItem.h"
 #import "GXTopSaleMaterial.h"
+#import "GXGoodsDetail.h"
 
 @interface GXRunCategoryCell ()
 
@@ -75,6 +76,39 @@
         self.contentText.layer.borderColor = UIColorFromRGB(0xf3f3f3).CGColor;
         self.contentText.backgroundColor = UIColorFromRGB(0xf3f3f3);
         self.contentText.textColor = [UIColor blackColor];
+    }
+}
+
+-(void)setSubSpec:(GXGoodsDetailSubSpec *)subSpec
+{
+    _subSpec = subSpec;
+    
+    self.contentText.text = _subSpec.attr_name;
+    
+    if (_subSpec.isSelected) {
+        self.contentText.textColor = [UIColor whiteColor];
+        self.contentText.backgroundColor = HXControlBg;
+        self.contentText.layer.borderColor = [UIColor clearColor].CGColor;
+    }else{
+        self.contentText.textColor = [UIColor blackColor];
+        self.contentText.backgroundColor = [UIColor whiteColor];
+        self.contentText.layer.borderColor = [UIColor blackColor].CGColor;
+    }
+}
+-(void)setLogisticst:(GXGoodsLogisticst *)logisticst
+{
+    _logisticst = logisticst;
+    
+    self.contentText.text = _logisticst.logistics_com_name;
+    
+    if (_logisticst.isSelected) {
+        self.contentText.textColor = [UIColor whiteColor];
+        self.contentText.backgroundColor = HXControlBg;
+        self.contentText.layer.borderColor = [UIColor clearColor].CGColor;
+    }else{
+        self.contentText.textColor = [UIColor blackColor];
+        self.contentText.backgroundColor = [UIColor whiteColor];
+        self.contentText.layer.borderColor = [UIColor blackColor].CGColor;
     }
 }
 @end

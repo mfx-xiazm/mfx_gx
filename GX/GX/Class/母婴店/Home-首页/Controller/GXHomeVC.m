@@ -367,6 +367,10 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
         [self.navigationController pushViewController:wvc animated:YES];
     }else{//为你推荐
         GXGoodsDetailVC *dvc = [GXGoodsDetailVC new];
+        dvc.goods_id = @"17";
+//        dvc.goods_id = @"1";
+//        dvc.goods_id = @"8";
+//        dvc.rushbuy_id = @"5";
         [self.navigationController pushViewController:dvc animated:YES];
     }
 }

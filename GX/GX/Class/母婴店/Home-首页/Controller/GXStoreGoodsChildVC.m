@@ -10,6 +10,7 @@
 #import "GXShopGoodsCell.h"
 #import <ZLCollectionViewVerticalLayout.h>
 #import "GXStore.h"
+#import "GXGoodsDetailVC.h"
 
 static NSString *const ShopGoodsCell = @"ShopGoodsCell";
 
@@ -159,7 +160,10 @@ static NSString *const ShopGoodsCell = @"ShopGoodsCell";
     return cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+    GXGoodsDetailVC *dvc = [GXGoodsDetailVC new];
+    GXStoreGoods *storeGoods = self.storeGoods[indexPath.item];
+    dvc.goods_id = storeGoods.goods_id;
+    [self.navigationController pushViewController:dvc animated:YES];
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat width = (HX_SCREEN_WIDTH-10*3)/2.0;

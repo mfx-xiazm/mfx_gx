@@ -10,8 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXGoodsDetailParam;
 @interface GXGoodsInfoCell : UITableViewCell
-
+/* 商品信息 */
+@property(nonatomic,strong) GXGoodsDetailParam *param;
 @end
 
 NS_ASSUME_NONNULL_END

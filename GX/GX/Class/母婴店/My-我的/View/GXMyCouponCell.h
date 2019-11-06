@@ -15,6 +15,8 @@ typedef void(^getCouponCall)(void);
 @interface GXMyCouponCell : UITableViewCell
 /* 优惠券 */
 @property(nonatomic,strong) GXMyCoupon *coupon;
+/* 优惠券 */
+@property(nonatomic,strong) GXMyCoupon *useCoupon;
 /* 领取 */
 @property(nonatomic,copy) getCouponCall getCouponCall;
 @end

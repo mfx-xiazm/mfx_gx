@@ -9,11 +9,17 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
+typedef void(^buyNumCall)(NSInteger num);
 
 @interface GXChooseClassFooter : UICollectionReusableView
 @property (weak, nonatomic) IBOutlet UIView *numView;
 @property (weak, nonatomic) IBOutlet UIView *storeCodeView;
-
+@property (weak, nonatomic) IBOutlet UILabel *shop_code;
+/* 库存 */
+@property(nonatomic,assign) NSInteger stock_num;
+@property (weak, nonatomic) IBOutlet UILabel *buy_num;
+/* 点击 */
+@property(nonatomic,copy) buyNumCall buyNumCall;
 @end
 
 NS_ASSUME_NONNULL_END

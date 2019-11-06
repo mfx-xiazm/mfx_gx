@@ -14,20 +14,20 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - IQKeyboardManager (6.4.2)
-  - JCore (2.1.2)
+  - IQKeyboardManager (6.5.3)
+  - JCore (2.1.4)
   - JJFontFit (1.0.1)
-  - JPush (3.2.4):
+  - JPush (3.2.6):
     - JCore (< 3.0.0, >= 2.0.0)
-  - JXCategoryView (1.5.0)
+  - JXCategoryView (1.5.2)
   - MBProgressHUD (1.1.0)
   - MJRefresh (3.2.0)
   - NHHUDExtend (1.0.2):
     - MBProgressHUD
-  - RollingNotice (1.0.9)
-  - SDWebImage (5.1.1):
-    - SDWebImage/Core (= 5.1.1)
-  - SDWebImage/Core (5.1.1)
+  - RollingNotice (1.1.0)
+  - SDWebImage (5.2.5):
+    - SDWebImage/Core (= 5.2.5)
+  - SDWebImage/Core (5.2.5)
   - TYCyclePagerView (1.2.0)
   - UMCCommon (2.1.1)
   - UMCSecurityPlugins (1.0.6)
@@ -41,9 +41,9 @@ PODS:
   - YYModel (1.0.4)
   - YYText (1.0.7)
   - zhPopupController (1.0.3)
-  - ZLCollectionViewFlowLayout (1.1.5)
-  - ZLPhotoBrowser (3.0.7):
-    - SDWebImage (~> 5.1.0)
+  - ZLCollectionViewFlowLayout (1.1.6)
+  - ZLPhotoBrowser (3.1.2):
+    - SDWebImage
 
 DEPENDENCIES:
   - AFNetworking
@@ -93,16 +93,16 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  IQKeyboardManager: b41e0a4943fbac4c11a239d31a688667675f962e
-  JCore: 1a426120b510cdebfd67b82bfb9483238ee09413
+  IQKeyboardManager: c2f901164d56807a35788483584d09fa69192e8e
+  JCore: d345c049141877eb61c33011455fdb5fcab1673f
   JJFontFit: 1332e4bf5b5d55d335ec1d6dd585d7f4da21c348
-  JPush: 29466e5f30dbd703f640d70540e411e829cac1fa
-  JXCategoryView: 9ea4bdf5cd63a6441701147da269446ed97d5dc9
+  JPush: 41dd48a69bd8c08abc692dc7f2b23c0fb281471f
+  JXCategoryView: b284d35a7a8772eada05dd78642233e1eb763ea8
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MJRefresh: ed450d6eb9d3346a2cb033ab7eb6de090aeef437
   NHHUDExtend: 1fd914b12b93ac61c1cfdb04485c25db59f27627
-  RollingNotice: 6bb331a2cd892cf8c87d816bd3b503a98d830fc0
-  SDWebImage: 96d7f03415ccb28d299d765f93557ff8a617abd8
+  RollingNotice: 93a1c239fb41449af1c9e8c604c7dd5370810185
+  SDWebImage: 4eabf2fa6695c95c47724214417a9c036c965e4a
   TYCyclePagerView: 2b051dade0615c70784aa34f40c646feeddb7344
   UMCCommon: 971f324a5a99c9d662ae040a815e7e3d7ef8b2a8
   UMCSecurityPlugins: 0831a08f3988f3cea9f1d3a7626cd9bee4fef150
@@ -112,8 +112,8 @@ SPEC CHECKSUMS:
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
   zhPopupController: 4e6bd734062cb9c7ebe8113568550bade168bed7
-  ZLCollectionViewFlowLayout: 385bfd4a557ee01a3b3efbc46cb49b3032ec29f4
-  ZLPhotoBrowser: 55d631fb86eb4456230c5f8f6fd83933b9a53d21
+  ZLCollectionViewFlowLayout: 105020fbab88e3dc66ceebc307b36f2c363a8c1f
+  ZLPhotoBrowser: 7e88434918366af98f8ebbaf5b94206985812ed6
 
 PODFILE CHECKSUM: 4292d50fb08b9368f618f51d4c1e3a9467d2eaf6
 

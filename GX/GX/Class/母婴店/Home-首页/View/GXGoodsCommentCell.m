@@ -153,7 +153,7 @@
     _avatarView.hxn_x = kMomentMarginPadding;
     _avatarView.hxn_y = kMomentTopPadding;
     _avatarView.hxn_size = CGSizeMake(kMomentPortraitWidthAndHeight, kMomentPortraitWidthAndHeight);
-    _avatarView.image = HXGetImage(@"logo");
+    [_avatarView sd_setImageWithURL:[NSURL URLWithString:comment.portrait]];
     
     //昵称
     _nickName.text = comment.nick;

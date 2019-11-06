@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface GXMyCoupon : NSObject
 @property(nonatomic,copy) NSString *rule_id;
 @property(nonatomic,copy) NSString *coupon_name;
+@property(nonatomic,copy) NSString *coupon_id;
 @property(nonatomic,copy) NSString *fulfill_amount;
 @property(nonatomic,copy) NSString *coupon_amount;
 @property(nonatomic,copy) NSString *valid_day;
@@ -21,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *shop_name;
 /* 查询类型 1查询可以领取 2查询可使用 3查询已使用 */
 @property(nonatomic,assign) NSInteger seaType;
+/* 是否选择 */
+@property(nonatomic,assign) BOOL isSelected;
 @end
 
 NS_ASSUME_NONNULL_END

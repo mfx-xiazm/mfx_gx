@@ -9,9 +9,17 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
+@class GXGoodsDetail;
+typedef void(^countDownCall)(void);
 @interface GXGoodsDetailHeader : UIView
-
+/* 商品详情 */
+@property(nonatomic,strong) GXGoodsDetail *goodsDetail;
+@property (weak, nonatomic) IBOutlet UIView *rushView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *rushViewHeight;
+@property (weak, nonatomic) IBOutlet UIView *noticeView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *noticeViewHeight;
+/* 倒是结束 */
+@property(nonatomic,copy) countDownCall countDownCall;
 @end
 
 NS_ASSUME_NONNULL_END

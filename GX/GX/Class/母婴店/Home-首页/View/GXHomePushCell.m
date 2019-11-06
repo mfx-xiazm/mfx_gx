@@ -11,6 +11,7 @@
 #import "GXRegional.h"
 #import "GXActivityCataInfo.h"
 #import "GXTopSaleMaterial.h"
+#import "GXGoodsDetail.h"
 
 @implementation GXHomePushCell
 
@@ -57,5 +58,10 @@
 {
     _topMaterial = topMaterial;
     [self.contentImage sd_setImageWithURL:[NSURL URLWithString:_topMaterial.material_filter_img]];
+}
+-(void)setAdv:(GXGoodsDetailAdv *)adv
+{
+    _adv = adv;
+    [self.contentImage sd_setImageWithURL:[NSURL URLWithString:_adv.adv_img]];
 }
 @end

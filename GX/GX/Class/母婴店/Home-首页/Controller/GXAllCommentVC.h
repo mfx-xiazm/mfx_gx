@@ -10,8 +10,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXGoodsDetail;
 @interface GXAllCommentVC : HXBaseViewController
-
+/* 商品id */
+@property(nonatomic,copy) NSString *goods_id;
+/* 商品详情 */
+@property(nonatomic,strong) GXGoodsDetail *goodsDetail;
 @end
 
 NS_ASSUME_NONNULL_END

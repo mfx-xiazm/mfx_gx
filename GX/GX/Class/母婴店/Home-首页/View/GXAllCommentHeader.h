@@ -10,8 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXGoodsDetail;
 @interface GXAllCommentHeader : UIView
-
+/* 商品详情 */
+@property(nonatomic,strong) GXGoodsDetail *goodsDetail;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -10,10 +10,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXConfirmOrder;
 typedef void(^getCouponCall)(void);
 @interface GXUpOrderFooter : UIView
 /* 点击 */
 @property(nonatomic,copy) getCouponCall getCouponCall;
+/* 订单 */
+@property(nonatomic,strong) GXConfirmOrder *confirmOrder;
 @end
 
 NS_ASSUME_NONNULL_END

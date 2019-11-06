@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -82,6 +80,9 @@
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D8Y-Va-qSx">
                             <rect key="frame" x="0.0" y="0.0" width="394" height="60"/>
+                            <connections>
+                                <action selector="addressClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="fUo-Bb-Tn6"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -126,6 +127,13 @@
                 <constraint firstAttribute="bottom" secondItem="aoP-Lp-6FZ" secondAttribute="bottom" constant="10" id="d6Z-il-6Wx"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="address" destination="krB-et-zQa" id="4fn-JE-NH8"/>
+                <outlet property="addressView" destination="zu7-Fl-Ni1" id="Td8-0t-DmM"/>
+                <outlet property="noAddressView" destination="nbA-Lg-fO4" id="QRm-rI-2lT"/>
+                <outlet property="receiver" destination="Lt1-Zv-c8K" id="mqn-pV-nyX"/>
+                <outlet property="receiver_phone" destination="PwP-6u-4Yz" id="yxP-yG-Y1h"/>
+            </connections>
             <point key="canvasLocation" x="92.753623188405811" y="359.26339285714283"/>
         </view>
     </objects>

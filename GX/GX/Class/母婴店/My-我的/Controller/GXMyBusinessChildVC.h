@@ -11,7 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface GXMyBusinessChildVC : HXBaseViewController
-
+/* 为1查询A类数据 为2查询B数据 */
+@property(nonatomic,assign) NSInteger seaType;
 @end
 
 NS_ASSUME_NONNULL_END

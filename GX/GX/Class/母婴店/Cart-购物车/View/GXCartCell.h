@@ -10,8 +10,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXCartShopGoods;
+typedef void(^cartHandleCall)(NSInteger index);
 @interface GXCartCell : UICollectionViewCell
-
+/* 商品 */
+@property(nonatomic,strong) GXCartShopGoods *goods;
+/* 点击 */
+@property(nonatomic,copy) cartHandleCall cartHandleCall;
 @end
 
 NS_ASSUME_NONNULL_END

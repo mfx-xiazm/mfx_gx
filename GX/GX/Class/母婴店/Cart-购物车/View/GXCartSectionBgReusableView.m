@@ -26,7 +26,7 @@
 -(void)layoutSubviews
 {
     [super layoutSubviews];
-    self.imgV.frame = CGRectMake(10, 0, self.bounds.size.width-20.f, self.bounds.size.height-10.f);
+    self.imgV.frame = CGRectMake(10, 0, self.bounds.size.width-20.f, self.bounds.size.height-10);
     [self.imgV setShadowWithCornerRadius:5.f shadowColor:[UIColor blackColor] shadowOffset:CGSizeMake(0, 0) shadowOpacity:0.1 shadowRadius:5.f];
 }
 @end

@@ -15,6 +15,8 @@
 #import "GXWebContentVC.h"
 #import "HXCacheTool.h"
 #import "GXMineData.h"
+#import "GXLoginVC.h"
+#import "HXNavigationController.h"
 
 #define CachePath [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject]
 
@@ -128,7 +130,18 @@
         zhAlertButton *okButton = [zhAlertButton buttonWithTitle:@"退出" handler:^(zhAlertButton * _Nonnull button) {
             hx_strongify(weakSelf);
             [strongSelf.zh_popupController dismiss];
-            //[[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel:%@",@"13496755975"]]];
+            
+            [[MSUserManager sharedInstance] logout:nil];
+            
+            GXLoginVC *lvc = [GXLoginVC new];
+            HXNavigationController *nav = [[HXNavigationController alloc] initWithRootViewController:lvc];
+            [UIApplication sharedApplication].keyWindow.rootViewController = nav;
+            
+            //推出主界面出来
+            CATransition *ca = [CATransition animation];
+            ca.type = @"movein";
+            ca.duration = 0.5;
+            [[UIApplication sharedApplication].keyWindow.layer addAnimation:ca forKey:nil];
         }];
         cancelButton.lineColor = UIColorFromRGB(0xDDDDDD);
         [cancelButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];

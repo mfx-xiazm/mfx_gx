@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign) BOOL isSearch;
 /* 分类id */
 @property(nonatomic,copy) NSString *catalog_id;
+/* 商品id */
+@property(nonatomic,copy) NSString *goods_id;
 @end
 
 NS_ASSUME_NONNULL_END

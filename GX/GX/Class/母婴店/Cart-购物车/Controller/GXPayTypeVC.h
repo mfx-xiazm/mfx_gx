@@ -11,7 +11,12 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface GXPayTypeVC : HXBaseViewController
-
+/* 订单号 */
+@property(nonatomic,copy) NSString *order_no;
+/* 订单id */
+@property(nonatomic,copy) NSString *oid;
+/* 订单列表y跳转 */
+@property(nonatomic,assign) BOOL isOrderPush;
 @end
 
 NS_ASSUME_NONNULL_END

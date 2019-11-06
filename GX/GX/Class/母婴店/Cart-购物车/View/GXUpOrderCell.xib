@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,11 +14,11 @@
             <rect key="frame" x="0.0" y="0.0" width="334" height="295"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="334" height="294.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="334" height="295"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="og3-Qk-oEy">
-                        <rect key="frame" x="10" y="5" width="314" height="284.5"/>
+                        <rect key="frame" x="10" y="5" width="314" height="285"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TzC-2p-4je">
                                 <rect key="frame" x="0.0" y="0.0" width="314" height="40"/>
@@ -50,11 +48,11 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OV6-WD-9Ho">
-                                <rect key="frame" x="0.0" y="40" width="314" height="124.5"/>
+                                <rect key="frame" x="0.0" y="40" width="314" height="125"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vBy-WF-WMM">
-                                <rect key="frame" x="0.0" y="164.5" width="314" height="40"/>
+                                <rect key="frame" x="0.0" y="165" width="314" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="运费" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LLz-sv-gE5">
                                         <rect key="frame" x="10" y="12.5" width="25" height="15"/>
@@ -79,7 +77,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wW7-2c-3f9">
-                                <rect key="frame" x="0.0" y="204.5" width="314" height="40"/>
+                                <rect key="frame" x="0.0" y="205" width="314" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="优惠券" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0zi-zO-1TS">
                                         <rect key="frame" x="10" y="12.5" width="37" height="15"/>
@@ -105,6 +103,9 @@
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zGW-TN-kbE">
                                         <rect key="frame" x="0.0" y="1" width="314" height="39"/>
+                                        <connections>
+                                            <action selector="couponClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="zHF-G8-SIz"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -126,7 +127,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4CC-kd-u3b">
-                                <rect key="frame" x="0.0" y="244.5" width="314" height="40"/>
+                                <rect key="frame" x="0.0" y="245" width="314" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="共2件商品" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q9U-dv-vFg">
                                         <rect key="frame" x="10" y="12.5" width="56.5" height="15"/>
@@ -217,7 +218,14 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
+                <outlet property="couponAmount" destination="1D5-vY-O3I" id="tIw-me-M6I"/>
+                <outlet property="couponView" destination="wW7-2c-3f9" id="jfi-7R-f3G"/>
+                <outlet property="couponViewHeight" destination="QFK-x6-bEO" id="FTx-z7-roU"/>
+                <outlet property="goodsNum" destination="q9U-dv-vFg" id="dgB-od-l6D"/>
+                <outlet property="shop_name" destination="HVY-EW-70E" id="qQT-8T-TLb"/>
                 <outlet property="tableView" destination="OV6-WD-9Ho" id="hnb-cL-79Z"/>
+                <outlet property="totalAmount" destination="9JB-FZ-7Sr" id="w4e-fz-lml"/>
+                <outlet property="totalFreight" destination="Zh0-KP-SPe" id="Oco-1v-K3J"/>
             </connections>
             <point key="canvasLocation" x="147.82608695652175" y="197.87946428571428"/>
         </tableViewCell>

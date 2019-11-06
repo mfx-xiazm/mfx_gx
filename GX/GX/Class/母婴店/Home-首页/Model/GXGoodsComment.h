@@ -25,6 +25,18 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL isOpening;
 /** 是否应该显示"全文" */
 @property (nonatomic, assign, readonly) BOOL shouldShowMoreButton;
+
+@property(nonatomic,copy)NSString *evl_id;
+@property(nonatomic,copy)NSString *evl_level;
+@property(nonatomic,copy)NSString *desc_level;
+@property(nonatomic,copy)NSString *deliver_level;
+@property(nonatomic,copy)NSString *answer_level;
+@property(nonatomic,copy)NSString *evl_content;
+@property(nonatomic,copy)NSString *create_time;
+@property(nonatomic,copy)NSString *shop_name;
+@property(nonatomic,copy)NSString *shop_front_img;
+@property(nonatomic,strong)NSArray *evaImgData;//img_src
+
 @end
 
 NS_ASSUME_NONNULL_END

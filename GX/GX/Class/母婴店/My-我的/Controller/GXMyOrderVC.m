@@ -11,6 +11,7 @@
 #import <JXCategoryTitleView.h>
 #import <JXCategoryIndicatorLineView.h>
 
+
 @interface GXMyOrderVC ()<JXCategoryViewDelegate,UIScrollViewDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet JXCategoryTitleView *categoryView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -38,6 +39,7 @@
         NSMutableArray *vcs = [NSMutableArray array];
         for (int i=0;i<self.categoryView.titles.count;i++) {
             GXMyOrderChildVC *cvc0 = [GXMyOrderChildVC new];
+            cvc0.status = i;
             [self addChildViewController:cvc0];
             [vcs addObject:cvc0];
         }

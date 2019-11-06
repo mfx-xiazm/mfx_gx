@@ -10,10 +10,22 @@
 #import <TYCyclePagerView.h>
 #import <TYPageControl.h>
 #import "GXHomePushCell.h"
+#import "GXGoodsDetail.h"
+#import "XTimer.h"
 
 @interface GXGoodsDetailHeader ()<TYCyclePagerViewDataSource, TYCyclePagerViewDelegate>
 @property (weak, nonatomic) IBOutlet TYCyclePagerView *cyclePagerView;
 @property (nonatomic,strong) TYPageControl *pageControl;
+@property (weak, nonatomic) IBOutlet UILabel *shop_name;
+@property (weak, nonatomic) IBOutlet UILabel *price;
+@property (weak, nonatomic) IBOutlet UILabel *market_price;
+@property (weak, nonatomic) IBOutlet UILabel *cale_num;
+@property (weak, nonatomic) IBOutlet UILabel *notice;
+@property (weak, nonatomic) IBOutlet UILabel *rush_price;
+@property (weak, nonatomic) IBOutlet UILabel *rush_market_price;
+@property (weak, nonatomic) IBOutlet UILabel *rush_time;
+/** 倒计时 */
+@property (nonatomic,strong) XTimer *timer;
 @end
 @implementation GXGoodsDetailHeader
 
@@ -45,14 +57,79 @@
     [super layoutSubviews];
     self.pageControl.frame = CGRectMake(0, CGRectGetHeight(self.cyclePagerView.frame) - 20, CGRectGetWidth(self.cyclePagerView.frame), 20);
 }
+-(void)setGoodsDetail:(GXGoodsDetail *)goodsDetail
+{
+    _goodsDetail = goodsDetail;
+    
+    self.pageControl.numberOfPages = _goodsDetail.good_adv.count;
+    [self.cyclePagerView reloadData];
+    
+    [self.shop_name setTextWithLineSpace:5.f withString:_goodsDetail.goods_name withFont:[UIFont systemFontOfSize:15]];
+    if ([self.goodsDetail.rushbuy isEqualToString:@"1"]) {//抢购商品
+        self.rush_price.text = [NSString stringWithFormat:@"￥%@-￥%@",_goodsDetail.rush.rush_min_price,_goodsDetail.rush.rush_max_price];
+        [self.rush_market_price setLabelUnderline:[NSString stringWithFormat:@"￥%@-￥%@",_goodsDetail.min_price,_goodsDetail.max_price]];
+        /** 1未开始，2进行中；3已结束；4暂停 */
+        if ([_goodsDetail.rush.rushbuy_status isEqualToString:@"1"]) {
+            self.rush_time.text = @"未开始";
+        }else if ([_goodsDetail.rush.rushbuy_status isEqualToString:@"2"]) {
+            [self countTimeDown];
+            if (!self.timer) {
+                self.timer = [XTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(countTimeDown) userInfo:nil repeats:YES];
+            }
+        }else{
+            self.rush_time.text = @"已结束";
+        }
+        self.price.text = @"";
+    }else{//不抢购商品
+        if ([_goodsDetail.control_type isEqualToString:@"1"]) {
+            self.price.text = [NSString stringWithFormat:@"￥%@-￥%@  ",_goodsDetail.min_price,_goodsDetail.max_price];
+        }else{
+            self.price.text = [NSString stringWithFormat:@"￥%@  ",_goodsDetail.min_price];
+        }
+    }
+    self.market_price.text = [NSString stringWithFormat:@"建议价：￥%@",_goodsDetail.suggest_price];
+    self.cale_num.text = [NSString stringWithFormat:@"销量：%@",_goodsDetail.sale_num];
+    
+    self.notice.text = _goodsDetail.important_notice;
+}
+-(void)countTimeDown
+{
+    if (self.goodsDetail.rush.countDown >0) {
+        //NSString *str_day = [NSString stringWithFormat:@"%02ld",(self.shopSeckill.countDown/3600)/24];
+        NSString *str_hour = [NSString stringWithFormat:@"%02ld",self.goodsDetail.rush.countDown/3600%24];
+        NSString *str_minute = [NSString stringWithFormat:@"%02ld",(self.goodsDetail.rush.countDown%(60*60))/60];
+        NSString *str_second = [NSString stringWithFormat:@"%02ld",self.goodsDetail.rush.countDown%60];
+        NSString *format_time = [NSString stringWithFormat:@"%@:%@:%@",str_hour,str_minute,str_second];
+        //设置文字显示 根据自己需求设置
+        self.rush_time.text = [NSString stringWithFormat:@"距结束 %@",format_time];
+        self.goodsDetail.rush.countDown -= 1;
+    }else{
+        // 移除倒计时，发出通知并刷新页面
+        self.goodsDetail.rush.countDown = 0;
+        [self.timer invalidate];
+        self.timer = nil;
+        
+        if (self.countDownCall) {
+            self.countDownCall();
+        }
+    }
+}
+-(void)dealloc
+{
+    if (self.timer) {
+        [self.timer invalidate];
+        self.timer = nil;
+    }
+}
 #pragma mark -- TYCyclePagerView代理
 - (NSInteger)numberOfItemsInPagerView:(TYCyclePagerView *)pageView {
-    return 4;
+    return self.goodsDetail.good_adv.count;
 }
 
 - (UICollectionViewCell *)pagerView:(TYCyclePagerView *)pagerView cellForItemAtIndex:(NSInteger)index {
     GXHomePushCell *cell = [pagerView dequeueReusableCellWithReuseIdentifier:@"TopBannerCell" forIndex:index];
-    
+    GXGoodsDetailAdv *adv = self.goodsDetail.good_adv[index];
+    cell.adv = adv;
     return cell;
 }
 

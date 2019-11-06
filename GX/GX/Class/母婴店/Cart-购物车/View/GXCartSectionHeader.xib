@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -26,6 +24,7 @@
                             <state key="normal" image="协议未选">
                                 <color key="titleColor" red="0.074509803920000006" green="0.1137254902" blue="0.1764705882" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <state key="selected" image="协议选择"/>
                             <connections>
                                 <action selector="cartClicked:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="iA0-2E-Ayb"/>
                             </connections>
@@ -79,9 +78,16 @@
                 <constraint firstItem="3o2-Gl-3S8" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="zxj-ne-qHJ"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="9Gg-ye-v9C"/>
+            <connections>
+                <outlet property="checkBtn" destination="LvX-TS-8Na" id="xEj-lW-AHv"/>
+                <outlet property="getCouponBtn" destination="T1x-tw-8kn" id="XPJ-JV-wuU"/>
+                <outlet property="shopName" destination="YQ8-UT-iQQ" id="pF8-kL-faD"/>
+            </connections>
+            <point key="canvasLocation" x="139" y="115"/>
         </collectionReusableView>
     </objects>
     <resources>
         <image name="协议未选" width="17" height="17"/>
+        <image name="协议选择" width="16.5" height="16.5"/>
     </resources>
 </document>

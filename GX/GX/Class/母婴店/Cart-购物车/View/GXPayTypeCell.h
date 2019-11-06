@@ -10,8 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXPayType;
 @interface GXPayTypeCell : UITableViewCell
-
+/* 支付方式 */
+@property(nonatomic,strong) GXPayType *payType;
 @end
 
 NS_ASSUME_NONNULL_END

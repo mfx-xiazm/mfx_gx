@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
+@class GXOrderPay;
 @interface GXPayTypeHeader : UIView
-
+/* 订单信息 */
+@property(nonatomic,strong) GXOrderPay *orderPay;
 @end
 
 NS_ASSUME_NONNULL_END

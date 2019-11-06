@@ -17,6 +17,8 @@
 @property(nonatomic,strong) GXAllCommentHeader *header;
 /** 布局数组 */
 @property (nonatomic,strong) NSMutableArray *layoutsArr;
+/** 页码 */
+@property(nonatomic,assign) NSInteger pagenum;
 @end
 
 @implementation GXAllCommentVC
@@ -25,18 +27,13 @@
     [super viewDidLoad];
     [self.navigationItem setTitle:@"全部评价"];
     [self setUpTableView];
+    [self setUpRefresh];
+    [self getCommentListDataRequest:YES];
 }
 -(NSMutableArray *)layoutsArr
 {
     if (!_layoutsArr) {
         _layoutsArr = [NSMutableArray array];
-        NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"moment2" ofType:@"plist"];
-        NSArray *dataArray = [NSArray arrayWithContentsOfFile:plistPath];
-        for (NSDictionary *dict in dataArray) {
-            GXGoodsComment *model = [GXGoodsComment yy_modelWithDictionary:dict];
-            GXGoodsCommentLayout *layout = [[GXGoodsCommentLayout alloc] initWithModel:model];
-            [_layoutsArr addObject:layout];
-        }
     }
     return _layoutsArr;
 }
@@ -51,6 +48,7 @@
     if (_header == nil) {
         _header = [GXAllCommentHeader loadXibView];
         _header.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, 200);
+        _header.goodsDetail = self.goodsDetail;
     }
     return _header;
 }
@@ -77,6 +75,74 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     self.tableView.tableHeaderView = self.header;
+}
+/** 添加刷新控件 */
+-(void)setUpRefresh
+{
+    hx_weakify(self);
+    self.tableView.mj_header.automaticallyChangeAlpha = YES;
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        hx_strongify(weakSelf);
+        [strongSelf.tableView.mj_footer resetNoMoreData];
+        [strongSelf getCommentListDataRequest:YES];
+    }];
+    //追加尾部刷新
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        hx_strongify(weakSelf);
+        [strongSelf getCommentListDataRequest:NO];
+    }];
+}
+-(void)getCommentListDataRequest:(BOOL)isRefresh
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"goods_id"] = self.goods_id;//商品id
+    if (isRefresh) {
+        parameters[@"page"] = @(1);//第几页
+    }else{
+        NSInteger page = self.pagenum+1;
+        parameters[@"page"] = @(page);//第几页
+    }
+    
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"getGoodEvaList" parameters:parameters success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            if (isRefresh) {
+                [strongSelf.tableView.mj_header endRefreshing];
+                strongSelf.pagenum = 1;
+
+                [strongSelf.layoutsArr removeAllObjects];
+                NSArray *arrt = [NSArray yy_modelArrayWithClass:[GXGoodsComment class] json:responseObject[@"data"]];
+                for (GXGoodsComment *comment in arrt) {
+                    GXGoodsCommentLayout *layout = [[GXGoodsCommentLayout alloc] initWithModel:comment];
+                    [strongSelf.layoutsArr addObject:layout];
+                }
+            }else{
+                [strongSelf.tableView.mj_footer endRefreshing];
+                strongSelf.pagenum ++;
+
+                if ([responseObject[@"data"] isKindOfClass:[NSArray class]] && ((NSArray *)responseObject[@"data"]).count){
+                    NSArray *arrt = [NSArray yy_modelArrayWithClass:[GXGoodsComment class] json:responseObject[@"data"]];
+                    for (GXGoodsComment *comment in arrt) {
+                        GXGoodsCommentLayout *layout = [[GXGoodsCommentLayout alloc] initWithModel:comment];
+                        [strongSelf.layoutsArr addObject:layout];
+                    }
+                }else{// 提示没有更多数据
+                    [strongSelf.tableView.mj_footer endRefreshingWithNoMoreData];
+                }
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [strongSelf.tableView reloadData];
+            });
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        hx_strongify(weakSelf);
+        [strongSelf.tableView.mj_header endRefreshing];
+        [strongSelf.tableView.mj_footer endRefreshing];
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
 }
 #pragma mark -- TableViewDelegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -107,7 +173,7 @@
     label.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 30.f);
     label.backgroundColor = [UIColor whiteColor];
     label.font = [UIFont systemFontOfSize:15 weight:UIFontWeightMedium];
-    label.text = @"   全部评价（3569）";
+    label.text = [NSString stringWithFormat:@"   全部评价"];
     
     return label;
 }
@@ -115,7 +181,7 @@
 {
     //    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
-#pragma arguments/** 评价 */
+#pragma mark -- GXGoodsCommentCellDelegate
 /** 点击了全文/收回 */
 - (void)didClickMoreLessInCommentCell:(GXGoodsCommentCell *)Cell
 {

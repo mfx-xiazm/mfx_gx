@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class GYHomeBanner,GYHomeRegional,GYHomeMarketTrend,GYHomeBrand,GYHomeActivity,GXRegionalBanner,GXActivityBanner,GXTopSaleMaterial;
+@class GYHomeBanner,GYHomeRegional,GYHomeMarketTrend,GYHomeBrand,GYHomeActivity,GXRegionalBanner,GXActivityBanner,GXTopSaleMaterial,GXGoodsDetailAdv;
 @interface GXHomePushCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *contentImage;
 /* banner */
@@ -29,6 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong) GXActivityBanner *activityBanner;
 /* 素材 */
 @property(nonatomic,strong) GXTopSaleMaterial *topMaterial;
+/* 详情banner */
+@property(nonatomic,strong) GXGoodsDetailAdv *adv;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -171,7 +171,11 @@ static NSString *const MyAddressCell = @"MyAddressCell";
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    GXMyAddress *address = self.addressList[indexPath.row];
+    if (self.getAddressCall) {
+        self.getAddressCall(address);
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 @end

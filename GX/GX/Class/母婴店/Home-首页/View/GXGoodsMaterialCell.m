@@ -217,12 +217,14 @@
     }
     
     // 分享热度
-    _shareNum.text = [NSString stringWithFormat:@"分享热度 %@",material.shareNum];
-    _shareNum.hxn_y = lastView.hxn_bottom + kMomentMarginPadding;;
-    _shareNum.hxn_x = kMomentMarginPadding;
-    CGSize shareNumSize = [_shareNum sizeThatFits:CGSizeZero];
-    _shareNum.hxn_width = shareNumSize.width;
-    _shareNum.hxn_height = kMomentHandleButtonHeight;
+    if (material.shareNum && material.shareNum.length) {
+        _shareNum.text = [NSString stringWithFormat:@"分享热度 %@",material.shareNum];
+        _shareNum.hxn_y = lastView.hxn_bottom + kMomentMarginPadding;;
+        _shareNum.hxn_x = kMomentMarginPadding;
+        CGSize shareNumSize = [_shareNum sizeThatFits:CGSizeZero];
+        _shareNum.hxn_width = shareNumSize.width;
+        _shareNum.hxn_height = kMomentHandleButtonHeight;
+    }
     
     //点赞
     _share.hxn_y = lastView.hxn_bottom + kMomentMarginPadding;
@@ -231,10 +233,15 @@
     _share.hxn_height = kMomentHandleButtonHeight;
     
     //评论
-    _lookGoods.hxn_y = lastView.hxn_bottom + kMomentMarginPadding;
-    _lookGoods.hxn_x = HX_SCREEN_WIDTH - 70*2 - 10*2;
-    _lookGoods.hxn_width = 70;
-    _lookGoods.hxn_height = kMomentHandleButtonHeight;
+    if (material.goods_id && material.goods_id.length) {
+        _lookGoods.hidden = NO;
+        _lookGoods.hxn_y = lastView.hxn_bottom + kMomentMarginPadding;
+        _lookGoods.hxn_x = HX_SCREEN_WIDTH - 70*2 - 10*2;
+        _lookGoods.hxn_width = 70;
+        _lookGoods.hxn_height = kMomentHandleButtonHeight;
+    }else{
+        _lookGoods.hidden = YES;
+    }
     
     //分割线
     _dividingLine.hxn_x = 0;

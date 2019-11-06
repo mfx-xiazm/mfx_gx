@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -39,13 +37,16 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e0U-qO-zcK">
+                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e0U-qO-zcK">
                             <rect key="frame" x="301" y="11" width="35" height="35"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="35" id="CBB-ZS-gv2"/>
                                 <constraint firstAttribute="height" constant="35" id="Wza-RJ-oY2"/>
                             </constraints>
                             <state key="normal" image="加"/>
+                            <connections>
+                                <action selector="numChangeClicked:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="Rlz-kM-SS6"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="prV-K7-guB">
                             <rect key="frame" x="266" y="18.5" width="35" height="20"/>
@@ -63,6 +64,9 @@
                                 <constraint firstAttribute="width" constant="35" id="TU1-4p-uFq"/>
                             </constraints>
                             <state key="normal" image="减"/>
+                            <connections>
+                                <action selector="numChangeClicked:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="Hd8-aE-xZh"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -90,7 +94,9 @@
                 <constraint firstItem="tnz-ri-efk" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="qee-np-9Jm"/>
             </constraints>
             <connections>
+                <outlet property="buy_num" destination="prV-K7-guB" id="WgX-iK-PcB"/>
                 <outlet property="numView" destination="drJ-dG-wQj" id="ilA-NK-L4E"/>
+                <outlet property="shop_code" destination="Wew-D4-Dkp" id="19c-gk-oGy"/>
                 <outlet property="storeCodeView" destination="tnz-ri-efk" id="ESa-RT-5xQ"/>
             </connections>
             <point key="canvasLocation" x="138.40579710144928" y="108.14732142857143"/>

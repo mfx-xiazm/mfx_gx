@@ -22,22 +22,32 @@
 #import <zhPopupController.h>
 #import "GXSankPriceVC.h"
 #import "GXBrandDetailVC.h"
+#import "GXGoodsDetail.h"
+#import "GXCartVC.h"
+#import "GXSaleMaterialVC.h"
+#import "GXUpOrderVC.h"
 
 static NSString *const GoodsInfoCell = @"GoodsInfoCell";
-@interface GXGoodsDetailVC ()<UITableViewDelegate,WKNavigationDelegate,UITableViewDataSource,GXGoodsMaterialCellDelegate,GXGoodsCommentCellDelegate>
+@interface GXGoodsDetailVC ()<UITableViewDelegate,UITableViewDataSource,GXGoodsMaterialCellDelegate,GXGoodsCommentCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *normal_tool;
+@property (weak, nonatomic) IBOutlet UIView *try_tool;
+@property (weak, nonatomic) IBOutlet UIView *control_tool;
+@property (weak, nonatomic) IBOutlet SPButton *normal_collect;
+@property (weak, nonatomic) IBOutlet SPButton *try_collect;
+@property (weak, nonatomic) IBOutlet SPButton *control_collect;
 /* 头视图 */
 @property(nonatomic,strong) GXGoodsDetailHeader *header;
-/** 素材布局数组 */
-@property (nonatomic,strong) NSMutableArray *materialLayoutsArr;
-/** 评论布局数组 */
-@property (nonatomic,strong) NSMutableArray *commentLayoutsArr;
+/* 规格视图 */
+@property(nonatomic,strong) GXChooseClassView *chooseClassView;
 /** 尾部视图 */
 @property(nonatomic,strong) UIView *footer;
-/* https://www.jianshu.com/p/7179e886a109 */
+/* 详情 */
 @property(nonatomic,strong) WKWebView *webView;
 /* 缓存自适应的cell高度 */
 @property(nonatomic,strong) NSMutableDictionary *cellHeightsDictionary;
+/* 商品详情 */
+@property(nonatomic,strong) GXGoodsDetail *goodsDetail;
 @end
 
 @implementation GXGoodsDetailVC
@@ -46,13 +56,11 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
     [super viewDidLoad];
     [self setUpNavBar];
     [self setUpTableView];
-    
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.jianshu.com/p/7179e886a109"]]];
+    [self getGoodDetailRequest];
 }
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    self.header.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, HX_SCREEN_WIDTH*3/5.0 + 50.f + 150);
 }
 -(NSMutableDictionary *)cellHeightsDictionary
 {
@@ -69,44 +77,23 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
     }
     return _header;
 }
+-(GXChooseClassView *)chooseClassView
+{
+    if (_chooseClassView == nil) {
+        _chooseClassView = [GXChooseClassView loadXibView];
+        _chooseClassView.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 380);
+    }
+    return _chooseClassView;
+}
 -(WKWebView *)webView
 {
     if (_webView == nil) {
         _webView = [[WKWebView alloc] init];
         _webView.scrollView.scrollEnabled = NO;
-        _webView.navigationDelegate = self;
         [self.footer addSubview:_webView];
         [_webView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
     }
     return _webView;
-}
--(NSMutableArray *)materialLayoutsArr
-{
-    if (!_materialLayoutsArr) {
-        _materialLayoutsArr = [NSMutableArray array];
-        NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"moment1" ofType:@"plist"];
-        NSArray *dataArray = [NSArray arrayWithContentsOfFile:plistPath];
-        for (NSDictionary *dict in dataArray) {
-            GXGoodsMaterial *model = [GXGoodsMaterial yy_modelWithDictionary:dict];
-            GXGoodsMaterialLayout *layout = [[GXGoodsMaterialLayout alloc] initWithModel:model];
-            [_materialLayoutsArr addObject:layout];
-        }
-    }
-    return _materialLayoutsArr;
-}
--(NSMutableArray *)commentLayoutsArr
-{
-    if (!_commentLayoutsArr) {
-        _commentLayoutsArr = [NSMutableArray array];
-        NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"moment2" ofType:@"plist"];
-        NSArray *dataArray = [NSArray arrayWithContentsOfFile:plistPath];
-        for (NSDictionary *dict in dataArray) {
-            GXGoodsComment *model = [GXGoodsComment yy_modelWithDictionary:dict];
-            GXGoodsCommentLayout *layout = [[GXGoodsCommentLayout alloc] initWithModel:model];
-            [_commentLayoutsArr addObject:layout];
-        }
-    }
-    return _commentLayoutsArr;
 }
 -(UIView *)footer
 {
@@ -177,14 +164,12 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GXGoodsInfoCell class]) bundle:nil] forCellReuseIdentifier:GoodsInfoCell];
-
-    
-    self.tableView.tableHeaderView = self.header;
 }
 #pragma mark -- 点击事件
 -(void)cartClicked
 {
-
+    GXCartVC *cvc = [GXCartVC new];
+    [self.navigationController pushViewController:cvc animated:YES];
 }
 -(void)shareClicked
 {
@@ -192,35 +177,240 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
 }
 -(void)materialClicked
 {
-    GXAllMaterialVC *mvc = [GXAllMaterialVC new];
+    GXSaleMaterialVC *mvc = [GXSaleMaterialVC new];
     [self.navigationController pushViewController:mvc animated:YES];
 }
 -(void)applyClicked
 {
     GXWebContentVC *wvc = [GXWebContentVC new];
-    wvc.url = @"http://news.cctv.com/2019/10/03/ARTI2EUlwRGH3jMPI6cAVqti191003.shtml";
     wvc.navTitle = @"申请供货";
+    wvc.isNeedRequest = YES;
+    wvc.requestType = 2;
     [self.navigationController pushViewController:wvc animated:YES];
 }
 - (IBAction)addCollectClicked:(SPButton *)sender {
-    GXBrandDetailVC *dvc = [GXBrandDetailVC new];
-    [self.navigationController pushViewController:dvc animated:YES];
+    [self setCollectGoodsRequest];
 }
 
 - (IBAction)sankPriceClicked:(SPButton *)sender {
     GXSankPriceVC *pvc = [GXSankPriceVC new];
+    pvc.goods_id = self.goods_id;
     [self.navigationController pushViewController:pvc animated:YES];
 }
 
 - (IBAction)buyGoodsClicked:(UIButton *)sender {
-    GXChooseClassView *cv = [GXChooseClassView loadXibView];
-    cv.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 380);
     
+    self.chooseClassView.goodsDetail = self.goodsDetail;
+    hx_weakify(self);
+    self.chooseClassView.goodsHandleCall = ^(NSInteger type) {
+        hx_strongify(weakSelf);
+        [strongSelf.zh_popupController dismissWithDuration:0.25 springAnimated:NO];
+        if (type) {
+            // 1加入购物车 2立即购买
+            if (sender.tag == 1) {
+                 [strongSelf addOrderCartRequest];
+            }else{
+                GXUpOrderVC *ovc = [GXUpOrderVC new];
+                ovc.goods_id = strongSelf.goods_id;//商品id
+                ovc.goods_num = [NSString stringWithFormat:@"%ld",(long)strongSelf.goodsDetail.buyNum];//商品数量
+                if (strongSelf.goodsDetail.spec && strongSelf.goodsDetail.spec.count) {
+                    NSMutableString *specs_attrs = [NSMutableString string];
+                    for (GXGoodsDetailSpec *spec in strongSelf.goodsDetail.spec) {
+                        if (specs_attrs.length) {
+                            [specs_attrs appendFormat:@",%@",spec.selectSpec.attr_name];
+                        }else{
+                            [specs_attrs appendFormat:@"%@",spec.selectSpec.attr_name];
+                        }
+                    }
+                    ovc.specs_attrs = specs_attrs;//商品规格
+                }else{
+                    ovc.specs_attrs = @"";//商品规格
+                }
+                ovc.sku_id = strongSelf.goodsDetail.sku.sku_id;
+                ovc.logistics_com_id = strongSelf.goodsDetail.selectLogisticst.logistics_com_id;
+                [strongSelf.navigationController pushViewController:ovc animated:YES];
+            }
+        }
+    };
     self.zh_popupController = [[zhPopupController alloc] init];
     self.zh_popupController.layoutType = zhPopupLayoutTypeBottom;
-    [self.zh_popupController presentContentView:cv duration:0.25 springAnimated:NO];
+    [self.zh_popupController presentContentView:self.chooseClassView duration:0.25 springAnimated:NO];
 }
+- (IBAction)applyJoinClicked:(UIButton *)sender {
+    GXBrandDetailVC *bvc = [GXBrandDetailVC new];
+    bvc.brand_id = self.goodsDetail.brand_id;
+    [self.navigationController pushViewController:bvc animated:YES];
+}
+#pragma mark -- 接口请求
+-(void)getGoodDetailRequest
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"goods_id"] = self.goods_id;
+    if (self.rushbuy_id) {
+        parameters[@"rushbuy_id"] = self.rushbuy_id;//每日必抢id 常规商品和控区控价商品无该字段 则不需要传
+    }
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"getGoodDetail" parameters:parameters success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            strongSelf.goodsDetail = [GXGoodsDetail yy_modelWithDictionary:responseObject[@"data"]];
+            NSMutableArray *materialLayouts = [NSMutableArray array];
+            for (GXGoodsMaterial *material in strongSelf.goodsDetail.material) {
+                GXGoodsMaterialLayout *layout = [[GXGoodsMaterialLayout alloc] initWithModel:material];
+                [materialLayouts addObject:layout];
+            }
+            strongSelf.goodsDetail.materialLayout = [NSArray arrayWithArray:materialLayouts];
+            
+            NSMutableArray *commentLayouts = [NSMutableArray array];
+            for (GXGoodsComment *comment in strongSelf.goodsDetail.eva) {
+                GXGoodsCommentLayout *layout = [[GXGoodsCommentLayout alloc] initWithModel:comment];
+                [commentLayouts addObject:layout];
+            }
+            strongSelf.goodsDetail.evaLayout = [NSArray arrayWithArray:commentLayouts];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [strongSelf handleGoodsDetailData];
+            });
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
+}
+-(void)handleGoodsDetailData
+{
+    self.header.goodsDetail = self.goodsDetail;
+    
+    CGFloat nameHeight = [self.goodsDetail.goods_name textHeightSize:CGSizeMake(HX_SCREEN_WIDTH-15*2.f, CGFLOAT_MAX) font:[UIFont systemFontOfSize:15] lineSpacing:5.f];
+    CGRect headerFrame = CGRectZero;
+    if ([self.goodsDetail.rushbuy isEqualToString:@"1"]) {//抢购商品
+        self.header.rushView.hidden = NO;
+        self.header.rushViewHeight.constant = 50.f;
+        if (self.goodsDetail.important_notice && self.goodsDetail.important_notice.length) {// 有重要通知
+            self.header.noticeView.hidden = NO;
+            self.header.noticeViewHeight.constant = 40.f;
+            headerFrame = CGRectMake(0, 0, HX_SCREEN_WIDTH, HX_SCREEN_WIDTH*3/5.0 + 50.f + nameHeight + 100.f + 10.f);
+        }else{// 没有重要通知
+            self.header.noticeView.hidden = YES;
+            self.header.noticeViewHeight.constant = 0.f;
+            headerFrame = CGRectMake(0, 0, HX_SCREEN_WIDTH, HX_SCREEN_WIDTH*3/5.0 + 50.f + nameHeight + 50.f + 10.f);
+        }
+    }else{//非抢购商品
+        self.header.rushView.hidden = YES;
+        self.header.rushViewHeight.constant = 0.f;
+        
+        if (self.goodsDetail.important_notice && self.goodsDetail.important_notice.length) {// 有重要通知
+            self.header.noticeView.hidden = NO;
+            self.header.noticeViewHeight.constant = 40.f;
+            headerFrame = CGRectMake(0, 0, HX_SCREEN_WIDTH, HX_SCREEN_WIDTH*3/5.0 + nameHeight + 100.f + 10.f);
+        }else{// 没有重要通知
+            self.header.noticeView.hidden = YES;
+            self.header.noticeViewHeight.constant = 0.f;
+            headerFrame = CGRectMake(0, 0, HX_SCREEN_WIDTH, HX_SCREEN_WIDTH*3/5.0 + nameHeight + 50.f + 10.f);
+        }
+    }
+    
+    self.header.frame = headerFrame;
+    hx_weakify(self);
+    self.header.countDownCall = ^{// 倒计时结束，刷新页面
+        hx_strongify(weakSelf);
+        [strongSelf getGoodDetailRequest];
+    };
+    self.tableView.tableHeaderView = self.header;
 
+    if ([self.goodsDetail.control_type isEqualToString:@"1"]) {// 常规
+        self.normal_tool.hidden = NO;
+        self.try_tool.hidden = YES;
+        self.control_tool.hidden = YES;
+        if ([self.goodsDetail.collected isEqualToString:@"1"]) {
+            self.normal_collect.selected = YES;
+        }
+    }else{// 控区控价
+        if ([self.goodsDetail.is_try isEqualToString:@"1"]) {// 试用装
+            self.normal_tool.hidden = YES;
+            self.try_tool.hidden = NO;
+            self.control_tool.hidden = YES;
+            if ([self.goodsDetail.collected isEqualToString:@"1"]) {
+                self.try_collect.selected = YES;
+            }
+        }else{// 非试用装
+            if ([self.goodsDetail.is_join isEqualToString:@"1"]) {//已加盟，和常规商品一样
+                self.normal_tool.hidden = NO;
+                self.try_tool.hidden = YES;
+                self.control_tool.hidden = YES;
+                if ([self.goodsDetail.collected isEqualToString:@"1"]) {
+                    self.normal_collect.selected = YES;
+                }
+            }else{// 未加盟
+                self.normal_tool.hidden = YES;
+                self.try_tool.hidden = YES;
+                self.control_tool.hidden = NO;
+                if ([self.goodsDetail.collected isEqualToString:@"1"]) {
+                    self.control_collect.selected = YES;
+                }
+            }
+        }
+    }
+    NSString *h5 = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"><style>img{width:100%%; height:auto;}body{margin:0 14px;}</style></head><body>%@</body></html>",self.goodsDetail.goods_desc];
+    [self.webView loadHTMLString:h5 baseURL:nil];
+
+    [self.tableView reloadData];
+}
+-(void)setCollectGoodsRequest
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"goods_id"] = self.goods_id;
+    
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"collectGood" parameters:parameters success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                strongSelf.normal_collect.selected = !strongSelf.normal_collect.selected;
+                strongSelf.try_collect.selected = !strongSelf.try_collect.selected;
+                strongSelf.control_collect.selected = !strongSelf.control_collect.selected;
+            });
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
+}
+-(void)addOrderCartRequest
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"goods_id"] = self.goods_id;//商品id
+    parameters[@"cart_num"] = @(self.goodsDetail.buyNum);//商品数量
+    if (self.goodsDetail.spec && self.goodsDetail.spec.count) {
+        NSMutableString *specs_attrs = [NSMutableString string];
+        for (GXGoodsDetailSpec *spec in self.goodsDetail.spec) {
+            if (specs_attrs.length) {
+                [specs_attrs appendFormat:@",%@",spec.selectSpec.attr_id];
+            }else{
+                [specs_attrs appendFormat:@"%@",spec.selectSpec.attr_id];
+            }
+        }
+        parameters[@"specs_attrs"] = specs_attrs;//商品规格
+    }else{
+        parameters[@"specs_attrs"] = @"";//商品规格
+    }
+    parameters[@"is_try"] = self.goodsDetail.is_try;//是否试用装商品
+    parameters[@"is_checked"] = @"1";//0未选择；1已选择
+    parameters[@"logistics_com_id"] = self.goodsDetail.selectLogisticst.logistics_com_id;
+    parameters[@"sku_id"] = self.goodsDetail.sku.sku_id;
+
+    [HXNetworkTool POST:HXRC_M_URL action:@"addOrderCart" parameters:parameters success:^(id responseObject) {
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
+}
 #pragma mark -- 事件监听
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
 {
@@ -228,18 +418,6 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
         self.webView.frame = CGRectMake(0, 60.f, HX_SCREEN_WIDTH, self.webView.scrollView.contentSize.height);
         self.footer.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, self.webView.scrollView.contentSize.height + 60.f);
         self.tableView.tableFooterView = self.footer;
-    }
-}
--(void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
-{
-    @try {
-        [self.webView.scrollView removeObserver:self forKeyPath:@"contentSize"];
-    }
-    @catch (NSException *exception) {
-        HXLog(@"多次删除了");
-    }
-    @finally {
-        HXLog(@"多次删除了");
     }
 }
 -(void)dealloc
@@ -262,11 +440,11 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0) {
-        return self.materialLayoutsArr.count;
+        return self.goodsDetail.materialLayout.count;
     }else if (section == 1) {
-        return self.commentLayoutsArr.count;
+        return self.goodsDetail.evaLayout.count;
     }else{
-        return 5;
+        return self.goodsDetail.good_param.count;
     }
 }
 
@@ -278,10 +456,10 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        GXGoodsMaterialLayout *layout = self.materialLayoutsArr[indexPath.row];
+        GXGoodsMaterialLayout *layout = self.goodsDetail.materialLayout[indexPath.row];
         return layout.height;
     }else if (indexPath.section == 1) {
-        GXGoodsCommentLayout *layout = self.commentLayoutsArr[indexPath.row];
+        GXGoodsCommentLayout *layout = self.goodsDetail.evaLayout[indexPath.row];
         return layout.height;
     }else{
         NSNumber *height = [self.cellHeightsDictionary objectForKey:indexPath];
@@ -294,20 +472,22 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
     if (indexPath.section == 0) {
         GXGoodsMaterialCell * cell = [GXGoodsMaterialCell cellWithTableView:tableView];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        GXGoodsMaterialLayout *layout = self.materialLayoutsArr[indexPath.row];
+        GXGoodsMaterialLayout *layout = self.goodsDetail.materialLayout[indexPath.row];
         cell.materialLayout = layout;
         cell.delegate = self;
         return cell;
     }else if (indexPath.section == 1){
         GXGoodsCommentCell * cell = [GXGoodsCommentCell cellWithTableView:tableView];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        GXGoodsCommentLayout *layout = self.commentLayoutsArr[indexPath.row];
+        GXGoodsCommentLayout *layout = self.goodsDetail.evaLayout[indexPath.row];
         cell.commentLayout = layout;
         cell.delegate = self;
         return cell;
     }else{
         GXGoodsInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:GoodsInfoCell forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        GXGoodsDetailParam *param = self.goodsDetail.good_param[indexPath.row];
+        cell.param = param;
         return cell;
     }
 }
@@ -335,9 +515,12 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
         hx_strongify(weakSelf);
         if (section == 0) {
             GXAllMaterialVC *mvc = [GXAllMaterialVC new];
+            mvc.goods_id = strongSelf.goods_id;
             [strongSelf.navigationController pushViewController:mvc animated:YES];
         }else if (section == 1) {
             GXAllCommentVC *mvc = [GXAllCommentVC new];
+            mvc.goods_id = strongSelf.goods_id;
+            mvc.goodsDetail = strongSelf.goodsDetail;
             [strongSelf.navigationController pushViewController:mvc animated:YES];
         }
     };

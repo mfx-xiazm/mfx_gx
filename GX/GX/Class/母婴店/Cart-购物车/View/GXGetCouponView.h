@@ -10,8 +10,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXCartData;
+typedef void(^closeViewCall)(void);
 @interface GXGetCouponView : UIView
-
+/* 店铺 */
+@property(nonatomic,strong) GXCartData *cartData;
+/* 关闭 */
+@property(nonatomic,copy) closeViewCall closeViewCall;
 @end
 
 NS_ASSUME_NONNULL_END

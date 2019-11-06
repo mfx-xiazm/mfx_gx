@@ -9,9 +9,15 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
+@class GXMyAddress;
+typedef void(^addressClickedCall)(void);
 @interface GXUpOrderHeader : UIView
-
+@property (weak, nonatomic) IBOutlet UIView *noAddressView;
+@property (weak, nonatomic) IBOutlet UIView *addressView;
+/* 地址 */
+@property(nonatomic,strong) GXMyAddress *defaultAddress;
+/* 点击 */
+@property(nonatomic,copy) addressClickedCall addressClickedCall;
 @end
 
 NS_ASSUME_NONNULL_END

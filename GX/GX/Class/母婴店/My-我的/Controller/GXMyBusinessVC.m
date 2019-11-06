@@ -37,6 +37,7 @@
         NSMutableArray *vcs = [NSMutableArray array];
         for (int i=0;i<self.categoryView.titles.count;i++) {
             GXMyBusinessChildVC *cvc0 = [GXMyBusinessChildVC new];
+            cvc0.seaType = i+1;
             [self addChildViewController:cvc0];
             [vcs addObject:cvc0];
         }

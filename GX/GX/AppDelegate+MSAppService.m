@@ -26,6 +26,9 @@
 //    [UMConfigure initWithAppkey:HXUMengKey channel:@"App Store"];
 //    
 //    [self configUSharePlatforms];
+    
+    //->微信支付相关//
+    [WXApi registerApp:HXWXKey];
 }
 -(void)configUSharePlatforms
 {
@@ -38,9 +41,41 @@
 {
     BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url options:options];
     if (!result) {
-        
+        // 其他如支付等SDK的回调
+        if ([url.host isEqualToString:@"safepay"]) {
+            //跳转支付宝钱包进行支付，处理支付结果
+            [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+                // 1成功 2取消支付 3支付失败
+                if ([resultDic[@"resultStatus"] intValue] == 9000) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:HXPayPushNotification object:nil userInfo:@{@"result":@"1"}];
+                }else if ([resultDic[@"resultStatus"] intValue] == 6001){
+                    [[NSNotificationCenter defaultCenter] postNotificationName:HXPayPushNotification object:nil userInfo:@{@"result":@"2"}];
+                }else{
+                    [[NSNotificationCenter defaultCenter] postNotificationName:HXPayPushNotification object:nil userInfo:@{@"result":@"3"}];
+                }
+            }];
+        }else if ([url.host isEqualToString:@"pay"]) { //微信支付回调
+            return [WXApi handleOpenURL:url delegate:self];
+        }
     }
     return result;
+}
+#pragma mark ————— 微信支付回调 —————
+//微信SDK自带的方法，处理从微信客户端完成操作后返回程序之后的回调方法,显示支付结果的
+-(void)onResp:(BaseResp*)resp
+{
+    //启动微信支付的response
+    if([resp isKindOfClass:[PayResp class]]){
+        //支付返回结果，实际支付结果需要去微信服务器端查询
+        // 1成功 2取消支付 3支付失败
+        if (resp.errCode == 0) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:HXPayPushNotification object:nil userInfo:@{@"result":@"1"}];
+        }else if (resp.errCode == -2){
+            [[NSNotificationCenter defaultCenter] postNotificationName:HXPayPushNotification object:nil userInfo:@{@"result":@"2"}];
+        }else{
+            [[NSNotificationCenter defaultCenter] postNotificationName:HXPayPushNotification object:nil userInfo:@{@"result":@"3"}];
+        }
+    }
 }
 #pragma mark ————— 初始化window —————
 -(void)initWindow{

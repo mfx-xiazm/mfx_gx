@@ -10,8 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXMyRefund;
 @interface GXRefundDetailFooter : UIView
-
+/* 退款详情 */
+@property(nonatomic,strong) GXMyRefund *refundDetail;
 @end
 
 NS_ASSUME_NONNULL_END

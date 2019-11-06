@@ -160,7 +160,9 @@ static NSString *const ShopGoodsCell = @"ShopGoodsCell";
     return cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    GXSearchResult *search = self.goods[indexPath.item];
     GXGoodsDetailVC *dvc = [GXGoodsDetailVC new];
+    dvc.goods_id = search.goods_id;
     [self.navigationController pushViewController:dvc animated:YES];
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {

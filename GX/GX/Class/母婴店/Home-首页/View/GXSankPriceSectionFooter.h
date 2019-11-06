@@ -10,8 +10,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXSankPrice;
+typedef void(^priceSankHandleCall)(NSInteger index);
 @interface GXSankPriceSectionFooter : UIView
-
+/* 排序 */
+@property(nonatomic,strong) GXSankPrice *sank;
+/* 点击 */
+@property(nonatomic,copy) priceSankHandleCall priceSankHandleCall;
 @end
 
 NS_ASSUME_NONNULL_END

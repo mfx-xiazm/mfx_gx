@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -22,13 +20,13 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="40"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="描述相符" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c9q-aO-itS">
-                                    <rect key="frame" x="10" y="12" width="53.5" height="16"/>
+                                    <rect key="frame" x="10" y="11.5" width="59" height="17.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SyV-ue-2xR" customClass="HCSStarRatingView">
-                                    <rect key="frame" x="73.5" y="5" width="120" height="30"/>
+                                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SyV-ue-2xR" customClass="HCSStarRatingView">
+                                    <rect key="frame" x="79" y="5" width="120" height="30"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="0P7-Jo-5Oq"/>
@@ -50,7 +48,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.8" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hKW-or-vtz">
-                                    <rect key="frame" x="203.5" y="12" width="19.5" height="16"/>
+                                    <rect key="frame" x="209" y="11.5" width="21.5" height="17.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -70,13 +68,13 @@
                             <rect key="frame" x="0.0" y="40" width="414" height="40"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发货速度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VWW-XI-veV">
-                                    <rect key="frame" x="10" y="12" width="53.5" height="16"/>
+                                    <rect key="frame" x="10" y="11.5" width="59" height="17.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Bu-db-Gt7" customClass="HCSStarRatingView">
-                                    <rect key="frame" x="73.5" y="5" width="120" height="30"/>
+                                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Bu-db-Gt7" customClass="HCSStarRatingView">
+                                    <rect key="frame" x="79" y="5" width="120" height="30"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="efL-j5-MY9"/>
@@ -98,7 +96,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.8" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9WL-cM-SFy">
-                                    <rect key="frame" x="203.5" y="12" width="19.5" height="16"/>
+                                    <rect key="frame" x="209" y="11.5" width="21.5" height="17.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -118,13 +116,13 @@
                             <rect key="frame" x="0.0" y="80" width="414" height="40"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="响应速度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RdC-dz-lvx">
-                                    <rect key="frame" x="10" y="12" width="53.5" height="16"/>
+                                    <rect key="frame" x="10" y="11.5" width="59" height="17.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="voJ-ua-H8O" customClass="HCSStarRatingView">
-                                    <rect key="frame" x="73.5" y="5" width="120" height="30"/>
+                                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="voJ-ua-H8O" customClass="HCSStarRatingView">
+                                    <rect key="frame" x="79" y="5" width="120" height="30"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="120" id="DZM-Tf-mVm"/>
@@ -146,7 +144,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.8" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oEO-SY-4FW">
-                                    <rect key="frame" x="203.5" y="12" width="19.5" height="16"/>
+                                    <rect key="frame" x="209" y="11.5" width="21.5" height="17.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -211,6 +209,14 @@
                 <constraint firstItem="fR8-Pn-e2b" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="m0z-NY-wJV"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="answer_level" destination="oEO-SY-4FW" id="X8U-08-GbK"/>
+                <outlet property="answer_star" destination="voJ-ua-H8O" id="zcp-eP-8HD"/>
+                <outlet property="deliver_level" destination="9WL-cM-SFy" id="u57-fU-GSH"/>
+                <outlet property="deliver_star" destination="9Bu-db-Gt7" id="7kK-Px-Tz0"/>
+                <outlet property="desc_label" destination="hKW-or-vtz" id="rpp-Xy-QrP"/>
+                <outlet property="desc_star" destination="SyV-ue-2xR" id="fbi-fp-3F7"/>
+            </connections>
             <point key="canvasLocation" x="92.753623188405811" y="224.33035714285714"/>
         </view>
     </objects>

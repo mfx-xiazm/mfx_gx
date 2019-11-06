@@ -10,10 +10,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXCartData;
 typedef void(^cartHeaderClickedCall)(NSInteger index);
 @interface GXCartSectionHeader : UICollectionReusableView
 /* 点击事件 */
 @property(nonatomic,copy) cartHeaderClickedCall cartHeaderClickedCall;
+/* 商品 */
+@property(nonatomic,strong) GXCartData *cartData;
 @end
 
 NS_ASSUME_NONNULL_END

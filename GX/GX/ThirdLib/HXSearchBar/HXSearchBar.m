@@ -30,8 +30,12 @@
         self.leftView = searchIcon;
         self.leftViewMode = UITextFieldViewModeAlways;
         
-        [self setValue:UIColorFromRGB(0xBFBFBF) forKeyPath:@"_placeholderLabel.textColor"];
-        [self setValue:[UIFont boldSystemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
+        
+        // [self setValue:UIColorFromRGB(0xBFBFBF) forKeyPath:@"_placeholderLabel.textColor"];
+        // [self setValue:[UIFont boldSystemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
+
+        //替换为
+        self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.placeholder attributes:@{NSForegroundColorAttributeName:UIColorFromRGB(0xBFBFBF),NSFontAttributeName:[UIFont boldSystemFontOfSize:14]}];
 
     }
     return self;

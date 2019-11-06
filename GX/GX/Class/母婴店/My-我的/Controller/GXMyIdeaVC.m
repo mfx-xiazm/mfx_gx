@@ -364,7 +364,6 @@ static NSString *const MyIdeaTypeCell = @"MyIdeaTypeCell";
     
     return uploadTask;
 }
-#pragma mark -- 点击事件
 
 #pragma mark -- UICollectionView 数据源和代理
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{

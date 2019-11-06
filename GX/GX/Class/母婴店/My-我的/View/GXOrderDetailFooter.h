@@ -9,9 +9,12 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
+@class GXMyOrder,GXMyRefund;
 @interface GXOrderDetailFooter : UIView
-
+/* 订单详情 */
+@property(nonatomic,strong) GXMyOrder *orderDetail;
+/* 退款详情 */
+@property(nonatomic,strong) GXMyRefund *refundDetail;
 @end
 
 NS_ASSUME_NONNULL_END

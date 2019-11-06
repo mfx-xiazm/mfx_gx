@@ -10,8 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 @class GYHomeBanner;
+typedef void(^bannerClickCall)(NSInteger item);
 @interface GXHomeBannerHeader : ZLCollectionReusableView
 @property(nonatomic,strong) NSArray<GYHomeBanner *> *homeAdv;
+/* 点击 */
+@property(nonatomic,copy) bannerClickCall bannerClickCall;
 @end
 
 NS_ASSUME_NONNULL_END

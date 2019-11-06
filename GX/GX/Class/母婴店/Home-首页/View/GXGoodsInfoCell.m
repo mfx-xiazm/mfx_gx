@@ -7,14 +7,25 @@
 //
 
 #import "GXGoodsInfoCell.h"
+#import "GXGoodsDetail.h"
 
+@interface GXGoodsInfoCell ()
+@property (weak, nonatomic) IBOutlet UILabel *param_name;
+@property (weak, nonatomic) IBOutlet UILabel *param_value;
+
+@end
 @implementation GXGoodsInfoCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
 }
-
+-(void)setParam:(GXGoodsDetailParam *)param
+{
+    _param = param;
+    self.param_name.text = _param.param_name;
+    self.param_value.text = _param.param_desc;
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

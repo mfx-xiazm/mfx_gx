@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *coupon_type;
 @property (weak, nonatomic) IBOutlet UILabel *coupon_time;
 @property (weak, nonatomic) IBOutlet UIButton *get_coupon;
+@property (weak, nonatomic) IBOutlet UIButton *select_btn;
 
 @end
 @implementation GXMyCouponCell
@@ -59,6 +60,27 @@
         self.coupon_time.textColor = UIColorFromRGB(0x999999);
         self.get_coupon.hidden = YES;
     }
+    
+    self.select_btn.hidden = YES;
+}
+
+-(void)setUseCoupon:(GXMyCoupon *)useCoupon
+{
+    _useCoupon = useCoupon;
+    
+    self.coupon_amount.text = [NSString stringWithFormat:@"￥%@",_useCoupon.coupon_amount];
+    self.coupon_full.text = _useCoupon.coupon_name;
+    if ([_useCoupon.provider_uid isEqualToString:@"0"]) {
+        self.coupon_type.text = @"全店通用";
+    }else{
+        self.coupon_type.text = _useCoupon.shop_name;
+    }
+    self.coupon_time.text = [NSString stringWithFormat:@"有效期限：%@",_useCoupon.deadline];
+    self.get_coupon.hidden = YES;
+
+    self.select_btn.hidden = NO;
+    
+    self.select_btn.selected = _useCoupon.isSelected;
 }
 - (IBAction)takeCouponClicked:(UIButton *)sender {
     if (self.getCouponCall) {

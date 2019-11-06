@@ -42,4 +42,39 @@
         _isOpening = isOpening;
     }
 }
+
+-(void)setShop_name:(NSString *)shop_name
+{
+    _shop_name = shop_name;
+    _nick = _shop_name;
+}
+
+-(void)setShop_front_img:(NSString *)shop_front_img
+{
+    _shop_front_img = shop_front_img;
+    _portrait = _shop_front_img;
+}
+
+-(void)setEvl_content:(NSString *)evl_content
+{
+    _evl_content = evl_content;
+    _dsp = (_evl_content.length)?_evl_content:@"";
+}
+
+-(void)setCreate_time:(NSString *)create_time
+{
+    _create_time = create_time;
+    _creatTime = _create_time;
+}
+
+-(void)setEvaImgData:(NSArray *)evaImgData
+{
+    _evaImgData = evaImgData;
+    
+    NSMutableArray *tamp = [NSMutableArray array];
+    for (NSDictionary *dict in _evaImgData) {
+        [tamp addObject:dict[@"img_src"]];
+    }
+    _photos = [NSArray arrayWithArray:tamp];
+}
 @end

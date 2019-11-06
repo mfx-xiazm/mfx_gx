@@ -8,11 +8,14 @@
 
 #import "GXGetCouponView.h"
 #import "GXMyCouponCell.h"
+#import "GXCartData.h"
+#import "GXMyCoupon.h"
 
 static NSString *const MyCouponCell = @"MyCouponCell";
 
 @interface GXGetCouponView ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UILabel *shop_name;
 
 @end
 @implementation GXGetCouponView
@@ -38,15 +41,60 @@ static NSString *const MyCouponCell = @"MyCouponCell";
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GXMyCouponCell class]) bundle:nil] forCellReuseIdentifier:MyCouponCell];
 }
+- (IBAction)closeClicked:(UIButton *)sender {
+    if (self.closeViewCall) {
+        self.closeViewCall();
+    }
+}
+
+-(void)setCartData:(GXCartData *)cartData
+{
+    _cartData = cartData;
+    self.shop_name.text = [NSString stringWithFormat:@"%@通用",_cartData.shop_name];
+    [self.tableView reloadData];
+}
+-(void)drawCouponRequest:(GXMyCoupon *)coupon
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"rule_id"] = coupon.rule_id;
+    
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"drawCoupon" parameters:parameters success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+            NSMutableArray *temp = [NSMutableArray arrayWithArray:strongSelf.cartData.coupons];
+            [temp removeObject:coupon];
+            strongSelf.cartData.coupons = temp;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [strongSelf.tableView reloadData];
+            });
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
+}
 #pragma mark -- UITableView数据源和代理
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return self.cartData.coupons.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     GXMyCouponCell *cell = [tableView dequeueReusableCellWithIdentifier:MyCouponCell forIndexPath:indexPath];
     //无色
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    GXMyCoupon *coupon = self.cartData.coupons[indexPath.row];
+    coupon.seaType = 1;
+    coupon.shop_name = self.cartData.shop_name;
+    coupon.provider_uid = self.cartData.provider_uid;
+    cell.coupon = coupon;
+    hx_weakify(self);
+    cell.getCouponCall = ^{
+        hx_strongify(weakSelf);
+        [strongSelf drawCouponRequest:coupon];
+    };
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
