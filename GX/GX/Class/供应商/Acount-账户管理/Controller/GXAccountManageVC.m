@@ -32,6 +32,7 @@ static NSString *const AccountManageCell = @"AccountManageCell";
     [super viewDidLoad];
     [self setUpTableView];
     [self setUpRefresh];
+    [self startShimmer];
     [self getFinanceLogRequest:YES];
 }
 -(void)viewWillAppear:(BOOL)animated

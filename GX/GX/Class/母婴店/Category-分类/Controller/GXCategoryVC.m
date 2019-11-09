@@ -42,6 +42,7 @@ static NSString *const SmallCateHeaderView = @"SmallCateHeaderView";
     [self setUpNavBar];
     [self setUpTableView];
     [self setUpCollectionView];
+    [self startShimmer];
     [self getCatalogItemRequest];
 }
 -(void)viewDidLayoutSubviews
@@ -128,6 +129,7 @@ static NSString *const SmallCateHeaderView = @"SmallCateHeaderView";
     hx_weakify(self);
     [HXNetworkTool POST:HXRC_M_URL action:@"admin/getCatalogItem" parameters:@{} success:^(id responseObject) {
         hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             NSArray *arrt = [NSArray yy_modelArrayWithClass:[GXCatalogItem class] json:responseObject[@"data"]];
             
@@ -147,6 +149,8 @@ static NSString *const SmallCateHeaderView = @"SmallCateHeaderView";
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
         }
     } failure:^(NSError *error) {
+        hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
     }];
 }

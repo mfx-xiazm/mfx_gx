@@ -33,6 +33,7 @@ static NSString *const TryApplyCell = @"TryApplyCell";
     [self.navigationItem setTitle:@"试用装申请"];
     [self setUpTableView];
     [self setUpRefresh];
+    [self startShimmer];
     [self getTryGoodsListDataRequest:YES];
 }
 -(void)viewDidLayoutSubviews
@@ -114,6 +115,7 @@ static NSString *const TryApplyCell = @"TryApplyCell";
     hx_weakify(self);
     [HXNetworkTool POST:HXRC_M_URL action:@"admin/getTryGood" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             if (isRefresh) {
                 [strongSelf.tableView.mj_header endRefreshing];
@@ -143,6 +145,7 @@ static NSString *const TryApplyCell = @"TryApplyCell";
         }
     } failure:^(NSError *error) {
         hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
         [strongSelf.tableView.mj_header endRefreshing];
         [strongSelf.tableView.mj_footer endRefreshing];
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];

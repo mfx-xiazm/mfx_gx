@@ -38,6 +38,7 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
     [super viewDidLoad];
     [self setUpTableView];
     [self setUpRefresh];
+    [self startShimmer];
     [self getOrderDataRequest:YES];
 }
 -(void)viewDidLayoutSubviews

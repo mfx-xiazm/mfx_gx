@@ -31,6 +31,7 @@ static NSString *const ActivityCell = @"ActivityCell";
     [self setUpNavBar];
     [self setUpTableView];
     [self setUpRefresh];
+    [self startShimmer];
     [self getActivityListaRequest:YES];
 }
 -(NSMutableArray *)activitys

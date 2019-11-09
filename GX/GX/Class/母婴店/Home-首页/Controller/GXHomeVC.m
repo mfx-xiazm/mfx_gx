@@ -60,6 +60,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
     [super viewDidLoad];
     [self setUpNavBar];
     [self setUpCollectionView];
+    [self startShimmer];
     [self getHomeDataRequest];
 }
 -(void)viewWillAppear:(BOOL)animated

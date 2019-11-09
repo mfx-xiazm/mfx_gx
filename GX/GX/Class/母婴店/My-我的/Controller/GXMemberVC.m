@@ -29,7 +29,7 @@ static NSString *const MemberRankCell = @"MemberRankCell";
     [super viewDidLoad];
     [self.navigationItem setTitle:@"会员中心"];
     [self setUpTableView];
-    
+    [self startShimmer];
     [self geMemberLevelDataRequest];
 }
 -(void)setUpTableView
@@ -55,6 +55,7 @@ static NSString *const MemberRankCell = @"MemberRankCell";
     hx_weakify(self);
     [HXNetworkTool POST:HXRC_M_URL action:@"admin/memberLevel" parameters:@{} success:^(id responseObject) {
         hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             strongSelf.member = [GXMember yy_modelWithDictionary:responseObject[@"data"]];
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -64,6 +65,8 @@ static NSString *const MemberRankCell = @"MemberRankCell";
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
         }
     } failure:^(NSError *error) {
+        hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
     }];
 }

@@ -44,7 +44,7 @@
     self.isCanScroll = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(MainTableScroll:) name:@"MainTableScroll" object:nil];
     [self setUpMainTable];
-    
+    [self startShimmer];
     [self getCatalogRequest];
 }
 
@@ -163,6 +163,7 @@
     hx_weakify(self);
     [HXNetworkTool POST:HXRC_M_URL action:@"admin/promoteGoods" parameters:@{} success:^(id responseObject) {
         hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             strongSelf.activityInfo = [GXActivityCataInfo yy_modelWithDictionary:responseObject[@"data"]];
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -172,6 +173,8 @@
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
         }
     } failure:^(NSError *error) {
+        hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
     }];
 }

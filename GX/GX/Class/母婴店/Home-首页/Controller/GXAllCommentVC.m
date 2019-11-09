@@ -28,6 +28,7 @@
     [self.navigationItem setTitle:@"全部评价"];
     [self setUpTableView];
     [self setUpRefresh];
+    [self startShimmer];
     [self getCommentListDataRequest:YES];
 }
 -(NSMutableArray *)layoutsArr
@@ -106,6 +107,7 @@
     hx_weakify(self);
     [HXNetworkTool POST:HXRC_M_URL action:@"admin/getGoodEvaList" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             if (isRefresh) {
                 [strongSelf.tableView.mj_header endRefreshing];
@@ -139,6 +141,7 @@
         }
     } failure:^(NSError *error) {
         hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
         [strongSelf.tableView.mj_header endRefreshing];
         [strongSelf.tableView.mj_footer endRefreshing];
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];

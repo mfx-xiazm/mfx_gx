@@ -27,6 +27,7 @@ static NSString *const HelpCell = @"HelpCell";
     [self.navigationItem setTitle:@"使用帮助"];
     [self setUpTableView];
     [self setUpRefresh];
+    [self startShimmer];
     [self getHelpsRequest:YES];
 }
 -(void)viewDidLayoutSubviews

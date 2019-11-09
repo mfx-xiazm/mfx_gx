@@ -24,6 +24,7 @@ static NSString *const MyCouponCell = @"MyCouponCell";
     [self.navigationItem setTitle:@"选择优惠券"];
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithTarget:self action:@selector(sureClicked) title:@"确定" font:[UIFont systemFontOfSize:14] titleColor:[UIColor whiteColor] highlightedColor:[UIColor whiteColor] titleEdgeInsets:UIEdgeInsetsZero];
     [self setUpTableView];
+    [self startShimmer];
     [self getCouponUseDataRequest];
 }
 -(void)setUpTableView

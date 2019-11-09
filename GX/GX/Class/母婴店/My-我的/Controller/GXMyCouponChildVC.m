@@ -25,6 +25,7 @@ static NSString *const MyCouponCell = @"MyCouponCell";
     [super viewDidLoad];
     [self setUpTableView];
     [self setUpRefresh];
+    [self startShimmer];
     [self getCouponListRequest:YES];
 }
 -(void)viewDidLayoutSubviews

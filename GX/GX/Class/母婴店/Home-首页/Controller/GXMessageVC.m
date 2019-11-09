@@ -28,6 +28,7 @@ static NSString *const MessageCell = @"MessageCell";
     [self.navigationItem setTitle:@"消息"];
     [self setUpTableView];
     [self setUpRefresh];
+    [self startShimmer];
     [self getMessageDataRequest:YES];
 }
 -(void)viewDidLayoutSubviews

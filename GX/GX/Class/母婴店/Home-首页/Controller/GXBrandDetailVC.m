@@ -34,6 +34,7 @@ static NSString *const BrandDetailHeader = @"BrandDetailHeader";
     [self.navigationItem setTitle:@"品牌页"];
     [self setUpCollectionView];
     [self setUpRefresh];
+    [self startShimmer];
     [self getBrandDetailRequest];
 }
 -(void)viewDidLayoutSubviews
@@ -122,6 +123,7 @@ static NSString *const BrandDetailHeader = @"BrandDetailHeader";
         // 执行顺序10
         hx_strongify(weakSelf);
         dispatch_async(dispatch_get_main_queue(), ^{
+            [strongSelf stopShimmer];
             [strongSelf handleBrandDetailData];
         });
     });

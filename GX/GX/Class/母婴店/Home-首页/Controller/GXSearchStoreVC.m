@@ -31,6 +31,7 @@ static NSString *const StoreCell = @"StoreCell";
     [self setUpNavBar];
     [self setUpTableView];
     [self setUpRefresh];
+    [self startShimmer];
     [self searchShopDataRequest:YES];
 }
 -(void)setUpNavBar

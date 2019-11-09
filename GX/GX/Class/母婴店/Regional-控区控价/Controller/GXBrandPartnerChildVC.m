@@ -29,6 +29,7 @@ static NSString *const BrandPartnerCell = @"BrandPartnerCell";
     [super viewDidLoad];
     [self setUpTableView];
     [self setUpRefresh];
+    [self startShimmer];
     [self getBrandDataRequest:YES];
 }
 -(void)viewDidLayoutSubviews

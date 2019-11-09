@@ -46,6 +46,7 @@
     [super viewDidLoad];
     self.control = @"2";
     [self setUpTableView];
+    [self startShimmer];
     [self getMaterialFilterDataRequest];
 }
 -(void)viewDidLayoutSubviews
@@ -202,6 +203,7 @@
         // 执行顺序10
         hx_strongify(weakSelf);
         dispatch_async(dispatch_get_main_queue(), ^{
+            [strongSelf stopShimmer];
             [strongSelf handleMaterialData];
         });
     });

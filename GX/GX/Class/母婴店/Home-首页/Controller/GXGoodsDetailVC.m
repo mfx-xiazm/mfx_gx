@@ -62,6 +62,7 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
     [super viewDidLoad];
     [self setUpNavBar];
     [self setUpTableView];
+    [self startShimmer];
     [self getGoodDetailRequest];
 }
 -(void)viewDidLayoutSubviews
@@ -262,6 +263,7 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
     hx_weakify(self);
     [HXNetworkTool POST:HXRC_M_URL action:@"admin/getGoodDetail" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             strongSelf.goodsDetail = [GXGoodsDetail yy_modelWithDictionary:responseObject[@"data"]];
             NSMutableArray *materialLayouts = [NSMutableArray array];
@@ -284,6 +286,8 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
         }
     } failure:^(NSError *error) {
+        hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
     }];
 }

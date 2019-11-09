@@ -25,6 +25,7 @@ static NSString *const ClientManageCell = @"ClientManageCell";
     [super viewDidLoad];
     [self setUpTableView];
     [self setUpRefresh];
+    [self startShimmer];
     [self getClientDataRequest:YES];
 }
 -(void)viewDidLayoutSubviews

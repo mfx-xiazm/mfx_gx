@@ -26,6 +26,7 @@ static NSString *const MyAddressCell = @"MyAddressCell";
     [super viewDidLoad];
     [self.navigationItem setTitle:@"收货地址"];
     [self setUpTableView];
+    [self startShimmer];
     [self getAddressListRequest];
 }
 -(void)viewDidLayoutSubviews
@@ -54,6 +55,7 @@ static NSString *const MyAddressCell = @"MyAddressCell";
     hx_weakify(self);
     [HXNetworkTool POST:HXRC_M_URL action:@"admin/getAddressList" parameters:@{} success:^(id responseObject) {
         hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             strongSelf.addressList = [NSArray yy_modelArrayWithClass:[GXMyAddress class] json:responseObject[@"data"]];
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -64,6 +66,8 @@ static NSString *const MyAddressCell = @"MyAddressCell";
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
         }
     } failure:^(NSError *error) {
+        hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
     }];
 }

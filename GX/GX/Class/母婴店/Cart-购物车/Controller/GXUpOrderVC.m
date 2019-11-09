@@ -38,6 +38,7 @@ static NSString *const UpOrderCell = @"UpOrderCell";
     [super viewDidLoad];
     [self.navigationItem setTitle:@"提交订单"];
     [self setUpTableView];
+    [self startShimmer];
     [self getConfirmOrderDataRequest];
 }
 -(void)viewDidLayoutSubviews

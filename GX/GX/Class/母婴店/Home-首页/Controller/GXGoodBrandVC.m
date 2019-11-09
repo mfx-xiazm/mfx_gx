@@ -57,6 +57,7 @@ static NSString *const ShopGoodsCell = @"ShopGoodsCell";
     [self setUpNavBar];
     [self setUpCollectionView];
     [self setUpRefresh];
+    [self startShimmer];
     [self getCatalogRequest];
 }
 -(void)viewDidLayoutSubviews
@@ -210,6 +211,7 @@ static NSString *const ShopGoodsCell = @"ShopGoodsCell";
         // 执行顺序10
         hx_strongify(weakSelf);
         dispatch_async(dispatch_get_main_queue(), ^{
+            [strongSelf stopShimmer];
             strongSelf.collectionView.hidden = NO;
             [strongSelf.collectionView reloadData];
         });

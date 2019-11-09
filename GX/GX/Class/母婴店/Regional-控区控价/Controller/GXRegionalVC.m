@@ -40,6 +40,7 @@ static NSString *const RegionalCell = @"RegionalCell";
     [self.navigationItem setTitle:@"控区控价"];
     [self setUpTableView];
     [self setUpRefresh];
+    [self startShimmer];
     [self getRegionalControlDataRequest];
 }
 -(void)viewDidLayoutSubviews
@@ -197,6 +198,7 @@ static NSString *const RegionalCell = @"RegionalCell";
         // 执行顺序10
         hx_strongify(weakSelf);
         dispatch_async(dispatch_get_main_queue(), ^{
+            [strongSelf stopShimmer];
             [strongSelf handleRegionalData];
         });
     });

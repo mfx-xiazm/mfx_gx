@@ -23,6 +23,7 @@ static NSString *const PartnerDataCell = @"PartnerDataCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpTableView];
+    [self startShimmer];
     [self getMyBusinessRequest];
 }
 -(void)viewDidLayoutSubviews
@@ -66,6 +67,7 @@ static NSString *const PartnerDataCell = @"PartnerDataCell";
     hx_weakify(self);
     [HXNetworkTool POST:HXRC_M_URL action:@"admin/getMyBusiness" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             strongSelf.myBusiness = [GXMyBusiness yy_modelWithDictionary:responseObject[@"data"]];
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -75,6 +77,8 @@ static NSString *const PartnerDataCell = @"PartnerDataCell";
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
         }
     } failure:^(NSError *error) {
+        hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
     }];
 }

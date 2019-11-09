@@ -30,6 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavBar];
+    [self startShimmer];
     [self getShopCateRequest];
 }
 - (void)viewWillDisappear:(BOOL)animated {
@@ -83,6 +84,7 @@
     hx_weakify(self);
     [HXNetworkTool POST:HXRC_M_URL action:@"admin/selectShop" parameters:@{} success:^(id responseObject) {
         hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             strongSelf.cateItems = [NSArray yy_modelArrayWithClass:[GXCatalogItem class] json:responseObject[@"data"]];
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -92,6 +94,8 @@
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
         }
     } failure:^(NSError *error) {
+        hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
     }];
 }

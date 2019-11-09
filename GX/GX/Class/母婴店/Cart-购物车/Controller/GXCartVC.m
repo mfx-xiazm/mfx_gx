@@ -54,6 +54,7 @@ static NSString *const CartSectionHeader = @"CartSectionHeader";
     [self setUpNavBar];
     [self setUpCollectionView];
     [self setUpRefresh];
+    [self startShimmer];
     [self getOrderCartListRequest:YES];
 }
 -(void)viewDidLayoutSubviews

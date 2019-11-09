@@ -42,7 +42,7 @@
     }
     
     [self.webContentView addSubview:self.webView];
-    
+    [self startShimmer];
     [self getPromoteActDetailRequest];
 }
 -(void)viewDidLayoutSubviews
@@ -67,6 +67,7 @@
     hx_weakify(self);
     [HXNetworkTool POST:HXRC_M_URL action:@"admin/promoteActDetail" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             strongSelf.activity = [GXActivity yy_modelWithDictionary:responseObject[@"data"]];
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -76,6 +77,8 @@
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
         }
     } failure:^(NSError *error) {
+        hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
     }];
 }

@@ -45,6 +45,7 @@ static NSString *const DiscountGoodsCell = @"DiscountGoodsCell";
     [self setUpNavBar];
     [self setUpCollectionView];
     [self setUpRefresh];
+    [self startShimmer];
     [self getGoodsListDataRequest:YES];
 }
 -(void)viewDidLayoutSubviews
@@ -140,6 +141,7 @@ static NSString *const DiscountGoodsCell = @"DiscountGoodsCell";
     hx_weakify(self);
     [HXNetworkTool POST:HXRC_M_URL action:@"admin/catalogBrandGoods" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             if (isRefresh) {
                 [strongSelf.collectionView.mj_header endRefreshing];
@@ -168,6 +170,7 @@ static NSString *const DiscountGoodsCell = @"DiscountGoodsCell";
         }
     } failure:^(NSError *error) {
         hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
         [strongSelf.collectionView.mj_header endRefreshing];
         [strongSelf.collectionView.mj_footer endRefreshing];
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];

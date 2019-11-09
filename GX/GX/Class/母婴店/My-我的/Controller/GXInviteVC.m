@@ -21,6 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationItem setTitle:@"邀请有礼"];
+    [self startShimmer];
     [self getInviteDataRequest];
 }
 -(void)getInviteDataRequest
@@ -28,6 +29,7 @@
     hx_weakify(self);
     [HXNetworkTool POST:HXRC_M_URL action:@"admin/inviteData" parameters:@{} success:^(id responseObject) {
         hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -37,6 +39,8 @@
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
         }
     } failure:^(NSError *error) {
+        hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
     }];
 }

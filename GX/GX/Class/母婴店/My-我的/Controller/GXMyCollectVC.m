@@ -28,6 +28,7 @@ static NSString *const DiscountGoodsCell = @"DiscountGoodsCell";
     [self.navigationItem setTitle:@"我的清单"];
     [self setUpCollectionView];
     [self setUpRefresh];
+    [self startShimmer];
     [self getCollectListRequest:YES];
 }
 -(void)viewDidLayoutSubviews

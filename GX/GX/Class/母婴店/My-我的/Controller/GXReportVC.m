@@ -28,7 +28,7 @@
     
     self.selectIndex = -1;
     [self.optionSuperView addSubview:self.optionView];
-    
+    [self startShimmer];
     [self getReportDescRequest];
 }
 -(void)viewDidLayoutSubviews
@@ -41,6 +41,7 @@
     hx_weakify(self);
     [HXNetworkTool POST:HXRC_M_URL action:@"admin/fleeingGoodsReport" parameters:@{} success:^(id responseObject) {
         hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [strongSelf.report_desc setTextWithLineSpace:5.f withString:responseObject[@"data"][@"tipsDesc"] withFont:[UIFont systemFontOfSize:13]];
@@ -49,6 +50,8 @@
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
         }
     } failure:^(NSError *error) {
+        hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
     }];
 }

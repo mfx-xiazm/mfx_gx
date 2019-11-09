@@ -45,6 +45,7 @@ static NSString *const SankPriceCell = @"SankPriceCell";
     [self setUpNavBar];
     [self setUpTableView];
     [self setUpRefresh];
+    [self startShimmer];
     [self getAddressListRequest];
     [self goodsSortByPriceRequest:YES];
 }
@@ -169,6 +170,7 @@ static NSString *const SankPriceCell = @"SankPriceCell";
     hx_weakify(self);
     [HXNetworkTool POST:HXRC_M_URL action:@"admin/goodsSortByPrice" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             if (isRefresh) {
                 [strongSelf.tableView.mj_header endRefreshing];
@@ -196,6 +198,7 @@ static NSString *const SankPriceCell = @"SankPriceCell";
         }
     } failure:^(NSError *error) {
         hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
         [strongSelf.tableView.mj_header endRefreshing];
         [strongSelf.tableView.mj_footer endRefreshing];
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];

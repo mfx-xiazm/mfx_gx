@@ -27,6 +27,7 @@ static NSString *const DiscountGoodsCell = @"DiscountGoodsCell";
     [super viewDidLoad];
     [self setUpCollectionView];
     [self setUpRefresh];
+    [self startShimmer];
     [self getDiscountListDataRequest:YES];
 }
 -(NSMutableArray *)discounts
