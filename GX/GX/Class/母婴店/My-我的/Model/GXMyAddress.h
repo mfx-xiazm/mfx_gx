@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign) BOOL is_default;
 @property(nonatomic,copy) NSString *create_time;
 
+/* 是否选中 */
+@property(nonatomic,assign) BOOL isSelected;
 @end
 
 NS_ASSUME_NONNULL_END

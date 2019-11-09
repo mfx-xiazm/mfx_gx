@@ -86,7 +86,7 @@ static NSString *const MyCouponCell = @"MyCouponCell";
         parameters[@"page"] = @(page);//第几页
     }
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"getCouponList" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getCouponList" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         [strongSelf stopShimmer];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
@@ -129,7 +129,7 @@ static NSString *const MyCouponCell = @"MyCouponCell";
     parameters[@"rule_id"] = coupon.rule_id;
     
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"drawCoupon" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/drawCoupon" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             [strongSelf.coupons removeObject:coupon];

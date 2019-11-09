@@ -204,7 +204,7 @@
         _picContainerView.hxn_y = lastView.hxn_bottom + kMomentMarginPadding;
         _picContainerView.hxn_width = _commentLayout.photoContainerSize.width;
         _picContainerView.hxn_height = _commentLayout.photoContainerSize.height;
-        //_picContainerView.target = self.sender;
+        _picContainerView.targetVc = self.targetVc;
         _picContainerView.picPathStringsArray = comment.photos;
         
         lastView = _picContainerView;

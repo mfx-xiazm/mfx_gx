@@ -89,7 +89,7 @@ static NSString *const DiscountGoodsCell = @"DiscountGoodsCell";
         parameters[@"page"] = @(page);//第几页
     }
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"rushBuyGoods" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/rushBuyGoods" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         [strongSelf stopShimmer];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
@@ -143,10 +143,21 @@ static NSString *const DiscountGoodsCell = @"DiscountGoodsCell";
     GXDiscountGoodsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:DiscountGoodsCell forIndexPath:indexPath];
     GXDayDiscount *dayDiscount = self.discounts[indexPath.item];
     cell.dayDiscount = dayDiscount;
+    hx_weakify(self);
+    cell.discountClickedCall = ^{
+        hx_strongify(weakSelf);
+        GXGoodsDetailVC *dvc = [GXGoodsDetailVC new];
+        dvc.goods_id = dayDiscount.goods_id;
+        dvc.rushbuy_id = dayDiscount.rushbuy_id;
+        [strongSelf.navigationController pushViewController:dvc animated:YES];
+    };
     return cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     GXGoodsDetailVC *dvc = [GXGoodsDetailVC new];
+    GXDayDiscount *dayDiscount = self.discounts[indexPath.item];
+    dvc.goods_id = dayDiscount.goods_id;
+    dvc.rushbuy_id = dayDiscount.rushbuy_id;
     [self.navigationController pushViewController:dvc animated:YES];
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {

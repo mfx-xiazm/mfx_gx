@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *order_num;
 @property(nonatomic,copy) NSString *order_freight_amount;
 @property(nonatomic,copy) NSString *order_price_amount;
+@property(nonatomic,copy) NSString *total_pay_amount;
 @property(nonatomic,copy) NSString *pay_amount;
 @property(nonatomic,copy) NSString *create_time;
 @property(nonatomic,copy) NSString *area_name;
@@ -34,6 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *pay_time;
 @property(nonatomic,copy) NSString *reject_reason;
 @property(nonatomic,copy) NSString *order_coupon_amount;
+@property(nonatomic,copy) NSString *total_reduce_amount;
 @property(nonatomic,copy) NSString *provider_no;
 @property(nonatomic,copy) NSString *username;
 @property(nonatomic,copy) NSString *saleman_code;

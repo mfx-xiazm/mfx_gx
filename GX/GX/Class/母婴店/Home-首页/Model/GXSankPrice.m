@@ -9,11 +9,11 @@
 #import "GXSankPrice.h"
 
 @implementation GXSankPrice
--(NSString *)sale_num
+-(NSInteger)buy_num
 {
-    if ([_sale_num isEqualToString:@"0"] || !_sale_num.length) {
-        return @"1";
+    if (_buy_num>0) {
+        return _buy_num;
     }
-    return _sale_num;
+    return 1;
 }
 @end

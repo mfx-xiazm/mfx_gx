@@ -37,7 +37,7 @@
     parameters[@"provider_uid"] = self.provider_uid;
     
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"getShopDetail" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getShopDetail" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             strongSelf.storeDetail = [GXStoreDetail yy_modelWithDictionary:responseObject[@"data"]];

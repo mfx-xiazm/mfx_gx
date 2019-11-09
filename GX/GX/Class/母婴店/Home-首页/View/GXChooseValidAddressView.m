@@ -8,11 +8,13 @@
 
 #import "GXChooseValidAddressView.h"
 #import "GXValidAddressCell.h"
+#import "GXMyAddress.h"
 
 static NSString *const ValidAddressCell = @"ValidAddressCell";
 @interface GXChooseValidAddressView ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
+/* 选择的地址 */
+@property(nonatomic,strong) GXMyAddress *selectAddress;
 @end
 
 @implementation GXChooseValidAddressView
@@ -38,15 +40,28 @@ static NSString *const ValidAddressCell = @"ValidAddressCell";
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GXValidAddressCell class]) bundle:nil] forCellReuseIdentifier:ValidAddressCell];
 }
+- (IBAction)closeClicked:(UIButton *)sender {
+    if (self.chooseAddressCall) {
+        self.chooseAddressCall(nil);
+    }
+}
+
+-(void)setAddressList:(NSArray *)addressList
+{
+    _addressList = addressList;
+    [self.tableView reloadData];
+}
 #pragma mark -- UITableView数据源和代理
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return self.addressList.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     GXValidAddressCell *cell = [tableView dequeueReusableCellWithIdentifier:ValidAddressCell forIndexPath:indexPath];
     //无色
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    GXMyAddress *address = self.addressList[indexPath.row];
+    cell.address = address;
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -56,7 +71,18 @@ static NSString *const ValidAddressCell = @"ValidAddressCell";
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    self.selectAddress.isSelected = NO;
     
+    GXMyAddress *address = self.addressList[indexPath.row];
+    address.isSelected = YES;
+    
+    self.selectAddress = address;
+    
+    [tableView reloadData];
+    
+    if (self.chooseAddressCall) {
+        self.chooseAddressCall(address);
+    }
 }
 
 @end

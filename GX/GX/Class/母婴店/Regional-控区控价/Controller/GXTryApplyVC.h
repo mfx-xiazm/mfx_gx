@@ -11,7 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface GXTryApplyVC : HXBaseViewController
-
+/* 顶部图 */
+@property(nonatomic,copy) NSString *try_cover;
 @end
 
 NS_ASSUME_NONNULL_END

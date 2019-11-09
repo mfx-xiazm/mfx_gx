@@ -11,7 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface GXOrderManageChildVC : HXBaseViewController
-
+/* 订单状态 */
+@property(nonatomic,assign) NSInteger status;
 @end
 
 NS_ASSUME_NONNULL_END

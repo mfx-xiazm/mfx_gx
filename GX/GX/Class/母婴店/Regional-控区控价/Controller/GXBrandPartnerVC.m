@@ -111,7 +111,7 @@
 -(void)getCatalogItemRequest
 {
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"getCatalogItem" parameters:@{} success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getCatalogItem" parameters:@{} success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             strongSelf.catalogItems = [NSArray yy_modelArrayWithClass:[GXCatalogItem class] json:responseObject[@"data"]];

@@ -27,6 +27,12 @@
     [super awakeFromNib];
     // Initialization code
 }
+- (IBAction)discountClicked:(UIButton *)sender {
+    if (self.discountClickedCall) {
+        self.discountClickedCall();
+    }
+}
+
 -(void)setDiscount:(GYHomeDiscount *)discount
 {
     _discount = discount;

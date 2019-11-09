@@ -75,6 +75,8 @@
 
 - (void)pagerView:(TYCyclePagerView *)pageView didSelectedItemCell:(__kindof UICollectionViewCell *)cell atIndex:(NSInteger)index
 {
-    
+    if (self.bannerClickCall) {
+        self.bannerClickCall(index);
+    }
 }
 @end

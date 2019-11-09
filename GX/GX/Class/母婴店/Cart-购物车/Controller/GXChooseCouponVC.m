@@ -60,7 +60,7 @@ static NSString *const MyCouponCell = @"MyCouponCell";
     parameters[@"price_amount"] = self.price_amount;//店铺下商品总价格 如果是平台的话则是所有的店铺的商品的价格总和
        
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"getCouponUseData" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getCouponUseData" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         [strongSelf stopShimmer];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {

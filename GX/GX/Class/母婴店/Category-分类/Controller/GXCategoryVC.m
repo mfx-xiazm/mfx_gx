@@ -51,8 +51,9 @@ static NSString *const SmallCateHeaderView = @"SmallCateHeaderView";
 #pragma mark -- 页面设置
 -(void)setUpNavBar
 {
-    [self.navigationItem setTitle:nil];
+    [self.navigationItem setTitle:@"分类"];
     
+    /*
     HXSearchBar *searchBar = [[HXSearchBar alloc] initWithFrame:CGRectMake(0, 0, HX_SCREEN_WIDTH - 70.f, 30.f)];
     searchBar.backgroundColor = [UIColor whiteColor];
     searchBar.layer.cornerRadius = 6;
@@ -74,6 +75,7 @@ static NSString *const SmallCateHeaderView = @"SmallCateHeaderView";
     self.msgBtn = msg;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:msg];
+     */
 }
 /** 页面设置 */
 -(void)setUpTableView
@@ -124,7 +126,7 @@ static NSString *const SmallCateHeaderView = @"SmallCateHeaderView";
 -(void)getCatalogItemRequest
 {
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"getCatalogItem" parameters:@{} success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getCatalogItem" parameters:@{} success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             NSArray *arrt = [NSArray yy_modelArrayWithClass:[GXCatalogItem class] json:responseObject[@"data"]];
@@ -156,7 +158,7 @@ static NSString *const SmallCateHeaderView = @"SmallCateHeaderView";
         parameters[@"catalog_id"] = catalog_id;
     }
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"getCatalogBrand" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getCatalogBrand" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             strongSelf.currentCatalogItem.catalog = [NSArray yy_modelArrayWithClass:[GXCatalogItem class] json:responseObject[@"data"][@"catalog"]];

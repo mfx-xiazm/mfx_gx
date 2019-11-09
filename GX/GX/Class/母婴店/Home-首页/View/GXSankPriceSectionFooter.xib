@@ -113,7 +113,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uNK-SY-9sq">
-                            <rect key="frame" x="10" y="8" width="80.5" height="16"/>
+                            <rect key="frame" x="10" y="17" width="80.5" height="16"/>
                             <attributedString key="attributedText">
                                 <fragment content="合计：">
                                     <attributes>
@@ -131,26 +131,18 @@
                             </attributedString>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="含运费：0.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y7S-fD-er2">
-                            <rect key="frame" x="10" y="27.5" width="75" height="14.5"/>
-                            <fontDescription key="fontDescription" name=".PingFangSC-Regular" family=".PingFang SC" pointSize="13"/>
-                            <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="UvG-DI-MGm" firstAttribute="centerY" secondItem="EpO-mo-vm8" secondAttribute="centerY" id="BL5-Og-kBA"/>
                         <constraint firstItem="oR9-hx-w8q" firstAttribute="centerY" secondItem="EpO-mo-vm8" secondAttribute="centerY" id="Dnu-xS-MCN"/>
                         <constraint firstItem="dk6-Su-AL8" firstAttribute="top" secondItem="EpO-mo-vm8" secondAttribute="top" id="EhU-Mi-tWh"/>
-                        <constraint firstAttribute="bottom" secondItem="y7S-fD-er2" secondAttribute="bottom" constant="8" id="FlS-HT-w3X"/>
                         <constraint firstAttribute="trailing" secondItem="oR9-hx-w8q" secondAttribute="trailing" constant="10" id="IMh-pF-nhh"/>
-                        <constraint firstItem="uNK-SY-9sq" firstAttribute="top" secondItem="EpO-mo-vm8" secondAttribute="top" constant="8" id="XQ9-JB-X9G"/>
+                        <constraint firstItem="uNK-SY-9sq" firstAttribute="centerY" secondItem="EpO-mo-vm8" secondAttribute="centerY" id="NIY-8Y-hWB"/>
                         <constraint firstItem="uNK-SY-9sq" firstAttribute="leading" secondItem="EpO-mo-vm8" secondAttribute="leading" constant="10" id="iL7-pO-VG6"/>
                         <constraint firstAttribute="trailing" secondItem="dk6-Su-AL8" secondAttribute="trailing" constant="10" id="kHI-hU-uzE"/>
                         <constraint firstItem="oR9-hx-w8q" firstAttribute="leading" secondItem="UvG-DI-MGm" secondAttribute="trailing" constant="10" id="mo8-aP-elU"/>
                         <constraint firstItem="dk6-Su-AL8" firstAttribute="leading" secondItem="EpO-mo-vm8" secondAttribute="leading" constant="10" id="sEy-gE-Ozh"/>
-                        <constraint firstItem="y7S-fD-er2" firstAttribute="leading" secondItem="EpO-mo-vm8" secondAttribute="leading" constant="10" id="tJs-2A-hek"/>
                     </constraints>
                 </view>
             </subviews>

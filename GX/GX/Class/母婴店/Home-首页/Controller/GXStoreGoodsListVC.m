@@ -148,7 +148,7 @@
     parameters[@"provider_uid"] = self.provider_uid;// 店铺id
     
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"shopData" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/shopData" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             strongSelf.storeInfo = [GXStore yy_modelWithDictionary:responseObject[@"data"]];

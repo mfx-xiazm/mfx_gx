@@ -131,7 +131,7 @@ static NSString *const RegisterAuthCell = @"RegisterAuthCell";
 -(void)getCatalogItemRequest
 {
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"getCatalogItem" parameters:@{} success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getCatalogItem" parameters:@{} success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             strongSelf.catalogItem = [NSArray yy_modelArrayWithClass:[GXCatalogItem class] json:responseObject[@"data"]];
@@ -148,7 +148,7 @@ static NSString *const RegisterAuthCell = @"RegisterAuthCell";
 -(void)getAllAreaRequest
 {
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"getAreaData" parameters:@{} success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getAreaData" parameters:@{} success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             strongSelf.region = [[GXSelectRegion alloc] init];
@@ -243,7 +243,7 @@ static NSString *const RegisterAuthCell = @"RegisterAuthCell";
     parameters[@"username"] = self.username;//用户名
     parameters[@"shop_type"] = self.mainStore.shop_type;//门店类型：1单门店；2连锁。供应商默认为1
     parameters[@"shop_name"] = self.mainStore.shop_name;//主门店名称
-    parameters[@"shop_address"] = self.mainStore.shop_address;//店铺详细地址
+    parameters[@"shop_address"] = [NSString stringWithFormat:@"%@%@",self.mainStore.shop_area,self.mainStore.shop_address];//店铺详细地址
     parameters[@"month_turnover"] = self.mainStore.month_turnover;//月度营业额
     parameters[@"business_license_img"] = self.mainStore.business_license_img;//营业执照图片
     parameters[@"shop_front_img"] = self.mainStore.shop_front_img;//门店正面照
@@ -269,7 +269,7 @@ static NSString *const RegisterAuthCell = @"RegisterAuthCell";
     }
 
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"register" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/register" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];

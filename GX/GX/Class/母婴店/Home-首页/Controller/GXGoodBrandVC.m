@@ -16,6 +16,7 @@
 #import "GXCatalogItem.h"
 #import "GXGoodBrand.h"
 #import "GXBrandGoods.h"
+#import "GXSearchResultVC.h"
 
 static NSString *const ShopGoodsCell = @"ShopGoodsCell";
 
@@ -161,7 +162,7 @@ static NSString *const ShopGoodsCell = @"ShopGoodsCell";
         NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
         parameters[@"searchType"] = @"1";//1为查询所有的分类 2位查询所有的品牌
         
-        [HXNetworkTool POST:HXRC_M_URL action:@"getAllCatalogBrand" parameters:parameters success:^(id responseObject) {
+        [HXNetworkTool POST:HXRC_M_URL action:@"admin/getAllCatalogBrand" parameters:parameters success:^(id responseObject) {
             if([[responseObject objectForKey:@"status"] integerValue] == 1) {
                 strongSelf.cataItems = [NSArray yy_modelArrayWithClass:[GXCatalogItem class] json:responseObject[@"data"]];
             }else{
@@ -179,7 +180,7 @@ static NSString *const ShopGoodsCell = @"ShopGoodsCell";
         NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
         parameters[@"searchType"] = @"2";//1为查询所有的分类 2位查询所有的品牌
         
-        [HXNetworkTool POST:HXRC_M_URL action:@"getAllCatalogBrand" parameters:parameters success:^(id responseObject) {
+        [HXNetworkTool POST:HXRC_M_URL action:@"admin/getAllCatalogBrand" parameters:parameters success:^(id responseObject) {
             if([[responseObject objectForKey:@"status"] integerValue] == 1) {
                 strongSelf.goodsBrands = [NSArray yy_modelArrayWithClass:[GXGoodBrand class] json:responseObject[@"data"]];
             }else{
@@ -228,7 +229,7 @@ static NSString *const ShopGoodsCell = @"ShopGoodsCell";
         parameters[@"page"] = @(page);//第几页
     }
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"goodsList" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/goodsList" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             if (isRefresh) {
@@ -304,11 +305,18 @@ static NSString *const ShopGoodsCell = @"ShopGoodsCell";
     wvc.requestType = 2;
     [self.navigationController pushViewController:wvc animated:YES];
 }
-
--(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    HXLog(@"搜索条");
-    return NO;
+    if ([textField hasText]) {
+        [textField resignFirstResponder];
+
+        GXSearchResultVC *gvc = [GXSearchResultVC new];
+        gvc.keyword = textField.text;
+        [self.navigationController pushViewController:gvc animated:YES];
+        return YES;
+    }else{
+        return NO;
+    }
 }
 #pragma mark -- HXDropMenuDelegate
 - (CGPoint)menu_positionInSuperView {
@@ -358,6 +366,8 @@ static NSString *const ShopGoodsCell = @"ShopGoodsCell";
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     GXGoodsDetailVC *dvc = [GXGoodsDetailVC new];
+    GXBrandGoods *brandGoods = self.goods[indexPath.item];
+    dvc.goods_id = brandGoods.goods_id;
     [self.navigationController pushViewController:dvc animated:YES];
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {

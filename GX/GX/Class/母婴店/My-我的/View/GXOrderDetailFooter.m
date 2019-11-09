@@ -30,8 +30,8 @@
     _orderDetail = orderDetail;
    
     self.order_freight_amount.text = [NSString stringWithFormat:@"￥%@",_orderDetail.order_freight_amount];
-    self.order_coupon_amount.text = [NSString stringWithFormat:@"-￥%@",_orderDetail.order_coupon_amount];
-    self.order_price_amount.text = [NSString stringWithFormat:@"￥%@",_orderDetail.order_price_amount];
+    self.order_coupon_amount.text = [NSString stringWithFormat:@"-￥%@",_orderDetail.total_reduce_amount];
+    self.order_price_amount.text = [NSString stringWithFormat:@"￥%@",_orderDetail.total_pay_amount];
     self.pay_amount.text = [NSString stringWithFormat:@"￥%@",_orderDetail.pay_amount];
     
     [self.order_desc setTextWithLineSpace:5.f withString:[NSString stringWithFormat:@"订单编号：%@\n下单时间：%@\n发货商家：%@\n推广店员：%@（%@）",_orderDetail.order_no,_orderDetail.create_time,_orderDetail.provider_no,_orderDetail.username,_orderDetail.saleman_code] withFont:[UIFont systemFontOfSize:13]];
@@ -41,8 +41,8 @@
     _refundDetail = refundDetail;
     
     self.order_freight_amount.text = [NSString stringWithFormat:@"￥%@",_refundDetail.order_freight_amount];
-    self.order_coupon_amount.text = [NSString stringWithFormat:@"-￥%@",_refundDetail.order_coupon_amount];
-    self.order_price_amount.text = [NSString stringWithFormat:@"￥%@",_refundDetail.order_price_amount];
+    self.order_coupon_amount.text = [NSString stringWithFormat:@"-￥%@",_refundDetail.total_reduce_amount];
+    self.order_price_amount.text = [NSString stringWithFormat:@"￥%@",_refundDetail.total_pay_amount];
     self.pay_amount.text = [NSString stringWithFormat:@"￥%@",_refundDetail.pay_amount];
     
     [self.order_desc setTextWithLineSpace:5.f withString:[NSString stringWithFormat:@"订单编号：%@\n下单时间：%@\n发货商家：%@\n推广店员：%@（%@）",_refundDetail.order_no,_refundDetail.create_time,_refundDetail.provider_no,_refundDetail.username,_refundDetail.saleman_code] withFont:[UIFont systemFontOfSize:13]];

@@ -9,11 +9,13 @@
 #import "GXPartnerDataVC.h"
 #import "GXPartnerDataCell.h"
 #import "GXPartnerDataSectionHeader.h"
+#import "GXMyBusiness.h"
 
 static NSString *const PartnerDataCell = @"PartnerDataCell";
 @interface GXPartnerDataVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
+/* 我的生意 */
+@property(nonatomic,strong) GXMyBusiness *myBusiness;
 @end
 
 @implementation GXPartnerDataVC
@@ -22,6 +24,7 @@ static NSString *const PartnerDataCell = @"PartnerDataCell";
     [super viewDidLoad];
     [self.navigationItem setTitle:@"门店经营数据报告"];
     [self setUpTableView];
+    [self getMyBusinessRequest];
 }
 -(void)viewDidLayoutSubviews
 {
@@ -55,6 +58,26 @@ static NSString *const PartnerDataCell = @"PartnerDataCell";
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GXPartnerDataCell class]) bundle:nil] forCellReuseIdentifier:PartnerDataCell];
 }
+-(void)getMyBusinessRequest
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"seaType"] = @(2);
+    
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getMyBusiness" parameters:parameters success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            strongSelf.myBusiness = [GXMyBusiness yy_modelWithDictionary:responseObject[@"data"]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [strongSelf.tableView reloadData];
+            });
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
+}
 #pragma mark -- UITableView数据源和代理
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -62,13 +85,28 @@ static NSString *const PartnerDataCell = @"PartnerDataCell";
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return section?2:1;
+    if (section == 0) {
+        return 1;
+    }else if (section == 1) {
+        return self.myBusiness.brand.count;
+    }else{
+        return self.myBusiness.catalog.count;
+    }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     GXPartnerDataCell *cell = [tableView dequeueReusableCellWithIdentifier:PartnerDataCell forIndexPath:indexPath];
     //无色
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.titleView.hidden = indexPath.section?NO:YES;
+    if (indexPath.section == 0) {
+        cell.myBusiness = self.myBusiness;
+    }else if (indexPath.section == 1) {
+        GXMyBrandBusiness *brandBusiness = self.myBusiness.brand[indexPath.row];
+        cell.brandBusiness = brandBusiness;
+    }else{
+        GXMyCataBusiness *cateBusiness = self.myBusiness.catalog[indexPath.row];
+        cell.cateBusiness = cateBusiness;
+    }
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -88,7 +126,13 @@ static NSString *const PartnerDataCell = @"PartnerDataCell";
 {
     GXPartnerDataSectionHeader *header = [GXPartnerDataSectionHeader loadXibView];
     header.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 44.f);
-    header.titleLabel.text = @"数据概览";
+    if (section == 0) {
+        header.titleLabel.text = @"数据概览";
+    }else if (section == 1) {
+        header.titleLabel.text = @"品牌数据";
+    }else{
+        header.titleLabel.text = @"类目数据";
+    }
     header.moreTitle.hidden = NO;
     
     return header;

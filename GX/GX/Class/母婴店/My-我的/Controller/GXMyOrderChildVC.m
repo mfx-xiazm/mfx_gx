@@ -109,7 +109,7 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
     }
     
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:(self.status != 6)?@"getOrderData":@"orderRefundList" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:(self.status != 6)?@"admin/getOrderData":@"admin/orderRefundList" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         [strongSelf stopShimmer];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
@@ -163,7 +163,7 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
     parameters[@"oid"] = self.currentOrder.oid;
     
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"cancelOrder" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/cancelOrder" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -188,7 +188,7 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
     parameters[@"oid"] = self.currentOrder.oid;
     
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"orderRefund" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/orderRefund" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -209,7 +209,7 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
     parameters[@"oid"] = self.currentOrder.oid;
     
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"confirmReceiveGood" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/confirmReceiveGood" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             dispatch_async(dispatch_get_main_queue(), ^{

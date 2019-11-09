@@ -12,12 +12,26 @@
 #import "GXChooseValidAddressView.h"
 #import <zhPopupController.h>
 #import "GXSankPrice.h"
+#import "GXUpOrderVC.h"
+#import "GXMyAddress.h"
 
 static NSString *const SankPriceCell = @"SankPriceCell";
 @interface GXSankPriceVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+/* 选择地址视图 */
+@property(nonatomic,strong) GXChooseValidAddressView *addressView;
+/* 地址列表 */
+@property(nonatomic,strong) NSArray *addressList;
 /* titileView */
 @property(nonatomic,strong) UIView *titileView;
+/* 地址text */
+@property(nonatomic,strong) UILabel *addressText;
+/* 地址展开 */
+@property(nonatomic,strong) UIImageView *expandImg;
+/* 地址图标 */
+@property(nonatomic,strong) UIImageView *addressImg;
+/* 地址id */
+@property(nonatomic,copy) NSString *address_id;
 /** 数组 */
 @property (nonatomic,strong) NSMutableArray *goodsPrices;
 /** 页码 */
@@ -31,11 +45,20 @@ static NSString *const SankPriceCell = @"SankPriceCell";
     [self setUpNavBar];
     [self setUpTableView];
     [self setUpRefresh];
+    [self getAddressListRequest];
     [self goodsSortByPriceRequest:YES];
 }
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
+}
+-(GXChooseValidAddressView *)addressView
+{
+    if (_addressView == nil) {
+        _addressView = [GXChooseValidAddressView loadXibView];
+        _addressView.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 360);
+    }
+    return _addressView;
 }
 -(NSMutableArray *)goodsPrices
 {
@@ -47,31 +70,34 @@ static NSString *const SankPriceCell = @"SankPriceCell";
 #pragma mark -- 视图相关
 -(void)setUpNavBar
 {
-    [self.navigationItem setTitle:@"价格排序"];
-    /*
+    [self.navigationItem setTitle:nil];
+
     UIView *titleView = [[UIView alloc] init];
     titleView.backgroundColor = [UIColor clearColor];
     titleView.hxn_size = CGSizeMake(HX_SCREEN_WIDTH-100, 40.f);
     
     UILabel *title = [[UILabel alloc] init];
-    title.textColor = [UIColor blackColor];
+    title.textColor = [UIColor whiteColor];
     title.font = [UIFont systemFontOfSize:13];
-    title.text = @"配送至：咸宁市咸安区";
+    title.text = @"配送至：请选择";
     CGSize titleSize = [title sizeThatFits:CGSizeZero];
     title.hxn_x = (titleView.hxn_width-titleSize.width)/2.0;
     title.hxn_y = (titleView.hxn_height-titleSize.height)/2.0;
     title.hxn_width = titleSize.width;
     title.hxn_height = titleSize.height;
+    self.addressText = title;
     [titleView addSubview:title];
     
-    UIImageView *dw = [[UIImageView alloc] initWithImage:HXGetImage(@"地址")];
+    UIImageView *dw = [[UIImageView alloc] initWithImage:HXGetImage(@"地址白色")];
     dw.hxn_centerY = titleView.hxn_centerY;
     dw.hxn_x = CGRectGetMinX(title.frame) - 20.f;
+    self.addressImg = dw;
     [titleView addSubview:dw];
     
-    UIImageView *zk = [[UIImageView alloc] initWithImage:HXGetImage(@"展开")];
+    UIImageView *zk = [[UIImageView alloc] initWithImage:HXGetImage(@"展开白")];
     zk.hxn_centerY = titleView.hxn_centerY;
     zk.hxn_x = CGRectGetMaxX(title.frame) + 10.f;
+    self.expandImg = zk;
     [titleView addSubview:zk];
     
     UIButton *coverBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -82,7 +108,6 @@ static NSString *const SankPriceCell = @"SankPriceCell";
     self.titileView = titleView;
     
     self.navigationItem.titleView = titleView;
-    */
 }
 -(void)setUpTableView
 {
@@ -131,6 +156,9 @@ static NSString *const SankPriceCell = @"SankPriceCell";
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"goods_id"] = self.goods_id;//商品id
+    if (self.address_id && self.address_id.length) {
+        parameters[@"address_id"] = self.address_id;
+    }
     if (isRefresh) {
         parameters[@"page"] = @(1);//第几页
     }else{
@@ -139,7 +167,7 @@ static NSString *const SankPriceCell = @"SankPriceCell";
     }
     
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"goodsSortByPrice" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/goodsSortByPrice" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             if (isRefresh) {
@@ -173,15 +201,76 @@ static NSString *const SankPriceCell = @"SankPriceCell";
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
     }];
 }
+-(void)getAddressListRequest
+{
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getAddressList" parameters:@{} success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            strongSelf.addressList = [NSArray yy_modelArrayWithClass:[GXMyAddress class] json:responseObject[@"data"]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                strongSelf.tableView.hidden = NO;
+                [strongSelf.tableView reloadData];
+            });
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
+}
+#pragma mark -- 业务逻辑
+-(void)addOrderCartRequest:(NSString *)goods_id specs_attrs:(NSString *)specs_attrs logistics_com_id:(NSString *)logistics_com_id sku_id:(NSString *)sku_id
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"goods_id"] = goods_id;//商品id
+    parameters[@"cart_num"] = @(1);//商品数量
+    parameters[@"specs_attrs"] = specs_attrs;//商品规格
+    parameters[@"is_try"] = @(0);//是否试用装商品
+    parameters[@"is_checked"] = @"1";//0未选择；1已选择
+    parameters[@"logistics_com_id"] = logistics_com_id;
+    parameters[@"sku_id"] = sku_id;
+
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/addOrderCart" parameters:parameters success:^(id responseObject) {
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
+}
 #pragma mark -- 点击事件
 -(void)chooseAddressClicked
 {
-    GXChooseValidAddressView *vdv = [GXChooseValidAddressView loadXibView];
-    vdv.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 300);
-    
+    self.addressView.addressList = self.addressList;
+    hx_weakify(self);
+    self.addressView.chooseAddressCall = ^(GXMyAddress * _Nullable address) {
+        hx_strongify(weakSelf);
+        [strongSelf.zh_popupController dismissWithDuration:0.25 springAnimated:NO];
+        if (address) {
+            strongSelf.addressText.text = [NSString stringWithFormat:@"配送至：%@",address.area_name];
+            CGSize titleSize = [strongSelf.addressText sizeThatFits:CGSizeZero];
+            strongSelf.addressText.hxn_x = (strongSelf.titileView.hxn_width-titleSize.width)/2.0;
+            strongSelf.addressText.hxn_y = (strongSelf.titileView.hxn_height-titleSize.height)/2.0;
+            strongSelf.addressText.hxn_width = (titleSize.width>200.f)?200.f:titleSize.width;
+            strongSelf.addressText.hxn_height = titleSize.height;
+
+            strongSelf.addressImg.hxn_centerY = strongSelf.titileView.hxn_centerY;
+            strongSelf.addressImg.hxn_x = CGRectGetMinX(strongSelf.addressText.frame) - 20.f;
+            
+            strongSelf.expandImg.hxn_centerY = strongSelf.titileView.hxn_centerY;
+            strongSelf.expandImg.hxn_x = CGRectGetMaxX(strongSelf.addressText.frame) + 10.f;
+            
+            strongSelf.address_id = address.address_id;
+            
+            [strongSelf goodsSortByPriceRequest:YES];
+        }
+    };
     self.zh_popupController = [[zhPopupController alloc] init];
     self.zh_popupController.layoutType = zhPopupLayoutTypeBottom;
-    [self.zh_popupController presentContentView:vdv duration:0.25 springAnimated:NO];
+    [self.zh_popupController presentContentView:self.addressView duration:0.25 springAnimated:NO];
 }
 #pragma mark -- UITableView数据源和代理
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -221,13 +310,19 @@ static NSString *const SankPriceCell = @"SankPriceCell";
         GXSankPriceSectionFooter *footer = [GXSankPriceSectionFooter loadXibView];
         footer.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 100.f);
         footer.sank = sank;
-        //hx_weakify(self);
+        hx_weakify(self);
         footer.priceSankHandleCall = ^(NSInteger index) {
-            //hx_strongify(weakSelf);
+            hx_strongify(weakSelf);
             if (index == 1) {
-                HXLog(@"加入购物车");
+                [strongSelf addOrderCartRequest:sank.goods_id specs_attrs:sank.specs_attrs logistics_com_id:sank.logistics_com_id sku_id:sank.sku_id];
             }else{
-                HXLog(@"立即购买");
+                GXUpOrderVC *ovc = [GXUpOrderVC new];
+                ovc.goods_id = sank.goods_id;
+                ovc.goods_num = @"1";
+                ovc.specs_attrs = sank.specs_attrs;
+                ovc.sku_id = sank.sku_id;
+                ovc.logistics_com_id = sank.logistics_com_id;
+                [strongSelf.navigationController pushViewController:ovc animated:YES];
             }
         };
         return footer;

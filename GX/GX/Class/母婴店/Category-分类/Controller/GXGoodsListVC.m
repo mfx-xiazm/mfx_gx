@@ -34,6 +34,8 @@ static NSString *const DiscountGoodsCell = @"DiscountGoodsCell";
 @property(nonatomic,assign) NSInteger pagenum;
 /** 列表 */
 @property(nonatomic,strong) NSMutableArray *goods;
+/* 搜索的商品名 */
+@property(nonatomic,copy) NSString *goods_name;
 @end
 
 @implementation GXGoodsListVC
@@ -48,6 +50,13 @@ static NSString *const DiscountGoodsCell = @"DiscountGoodsCell";
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
+}
+-(void)setGoods_name:(NSString *)goods_name
+{
+    if (![_goods_name isEqualToString:goods_name]) {
+        _goods_name = goods_name;
+        [self getGoodsListDataRequest:YES];
+    }
 }
 -(NSMutableArray *)goods
 {
@@ -120,7 +129,7 @@ static NSString *const DiscountGoodsCell = @"DiscountGoodsCell";
     parameters[@"brand_id"] = (self.brand_id && self.brand_id.length)?self.brand_id:@"";//品牌id
     parameters[@"sale_num"] = (self.sale_num && self.sale_num.length)?self.sale_num:@"";//为1按照销量从高到低排序 其他则取消按照从高到低排序
     parameters[@"price"] = (self.price && self.price.length)?self.price:@"";//按照价格排序
-    parameters[@"goods_name"] = @"";//根据商品名称筛选
+    parameters[@"goods_name"] = (self.goods_name && self.goods_name.length)?self.goods_name:@"";//根据商品名称筛选
 
     if (isRefresh) {
         parameters[@"page"] = @(1);//第几页
@@ -129,7 +138,7 @@ static NSString *const DiscountGoodsCell = @"DiscountGoodsCell";
         parameters[@"page"] = @(page);//第几页
     }
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"catalogBrandGoods" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/catalogBrandGoods" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             if (isRefresh) {
@@ -220,10 +229,15 @@ static NSString *const DiscountGoodsCell = @"DiscountGoodsCell";
     [self.zh_popupController presentContentView:self.fliterView duration:0.25 springAnimated:NO];
 }
 
--(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    HXLog(@"搜索条");
-    return NO;
+    //    if ([textField hasText]) {
+    [textField resignFirstResponder];
+    self.goods_name = [textField hasText]?textField.text:@"";
+    return YES;
+    //    }else{
+    //        return NO;
+    //    }
 }
 #pragma mark -- UICollectionView 数据源和代理
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
@@ -244,6 +258,8 @@ static NSString *const DiscountGoodsCell = @"DiscountGoodsCell";
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     GXGoodsDetailVC *dvc = [GXGoodsDetailVC new];
+    GXCategoryGoods *goods = self.goods[indexPath.item];
+    dvc.goods_id = goods.goods_id;
     [self.navigationController pushViewController:dvc animated:YES];
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {

@@ -156,7 +156,7 @@ static NSString *const PayTypeCell = @"PayTypeCell";
     parameters[@"pay_type"] = self.selectPayType.payType;//支付方式：1支付宝；2微信支付；3线下支付(后台审核)；4银联支付
 
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"orderPay" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/orderPay" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             //pay_type 支付方式：1支付宝；2微信支付；3线下支付(后台审核)
@@ -273,7 +273,7 @@ static NSString *const PayTypeCell = @"PayTypeCell";
     parameters[@"oid"] = self.oid;
     
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"getPayOrderData" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getPayOrderData" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             strongSelf.orderPay = [GXOrderPay yy_modelWithDictionary:responseObject[@"data"]];

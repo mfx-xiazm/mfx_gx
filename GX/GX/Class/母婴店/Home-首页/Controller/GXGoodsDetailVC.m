@@ -31,11 +31,17 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
 @interface GXGoodsDetailVC ()<UITableViewDelegate,UITableViewDataSource,GXGoodsMaterialCellDelegate,GXGoodsCommentCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *normal_tool;
+@property (weak, nonatomic) IBOutlet UIButton *normal_buy_btn;
+@property (weak, nonatomic) IBOutlet UIButton *normal_add_btn;
 @property (weak, nonatomic) IBOutlet UIView *try_tool;
 @property (weak, nonatomic) IBOutlet UIView *control_tool;
 @property (weak, nonatomic) IBOutlet SPButton *normal_collect;
 @property (weak, nonatomic) IBOutlet SPButton *try_collect;
 @property (weak, nonatomic) IBOutlet SPButton *control_collect;
+/* 卖货素材 */
+@property(nonatomic,weak) UIButton *materialBtn;
+/* 我要供货 */
+@property(nonatomic,weak) UIButton *applyBtn;
 /* 头视图 */
 @property(nonatomic,strong) GXGoodsDetailHeader *header;
 /* 规格视图 */
@@ -61,6 +67,8 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
+    self.materialBtn.layer.cornerRadius = self.materialBtn.hxn_height/2.0;
+    self.applyBtn.layer.cornerRadius = self.applyBtn.hxn_height/2.0;
 }
 -(NSMutableDictionary *)cellHeightsDictionary
 {
@@ -113,18 +121,19 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
 {
     [self.navigationItem setTitle:nil];
     
-    UIBarButtonItem *cartItem = [UIBarButtonItem itemWithTarget:self action:@selector(cartClicked) image:HXGetImage(@"购物车黑色")];
-    UIBarButtonItem *shareItem = [UIBarButtonItem itemWithTarget:self action:@selector(shareClicked) image:HXGetImage(@"分享黑色")];
+    UIBarButtonItem *cartItem = [UIBarButtonItem itemWithTarget:self action:@selector(cartClicked) image:HXGetImage(@"购物车白")];
+    UIBarButtonItem *shareItem = [UIBarButtonItem itemWithTarget:self action:@selector(shareClicked) image:HXGetImage(@"分享白色")];
     
     UIButton *material = [UIButton buttonWithType:UIButtonTypeCustom];
     [material setTitle:@"卖货素材" forState:UIControlStateNormal];
     [material setTitleColor:HXControlBg forState:UIControlStateNormal];
     material.titleLabel.font = [UIFont systemFontOfSize:12];
     material.hxn_size = CGSizeMake(70, 22);
-    material.layer.cornerRadius = 11.f;
+    material.layer.cornerRadius = material.hxn_height/2.0;
     material.layer.masksToBounds = YES;
     material.backgroundColor = [UIColor whiteColor];
     [material addTarget:self action:@selector(materialClicked) forControlEvents:UIControlEventTouchUpInside];
+    self.materialBtn = material;
     UIBarButtonItem *materialItem = [[UIBarButtonItem alloc] initWithCustomView:material];
     
     UIButton *apply = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -132,9 +141,10 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
     [apply setTitleColor:HXControlBg forState:UIControlStateNormal];
     apply.titleLabel.font = [UIFont systemFontOfSize:12];
     apply.hxn_size = CGSizeMake(70, 22);
-    apply.layer.cornerRadius = 11.f;
+    apply.layer.cornerRadius = apply.hxn_height/2.0;
     apply.layer.masksToBounds = YES;
     apply.backgroundColor = [UIColor whiteColor];
+    self.applyBtn = apply;
     [apply addTarget:self action:@selector(applyClicked) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *applyItem = [[UIBarButtonItem alloc] initWithCustomView:apply];
     
@@ -173,7 +183,7 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
 }
 -(void)shareClicked
 {
-    
+    HXLog(@"分享");
 }
 -(void)materialClicked
 {
@@ -250,7 +260,7 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
         parameters[@"rushbuy_id"] = self.rushbuy_id;//每日必抢id 常规商品和控区控价商品无该字段 则不需要传
     }
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"getGoodDetail" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getGoodDetail" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             strongSelf.goodsDetail = [GXGoodsDetail yy_modelWithDictionary:responseObject[@"data"]];
@@ -325,6 +335,21 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
         if ([self.goodsDetail.collected isEqualToString:@"1"]) {
             self.normal_collect.selected = YES;
         }
+        if ([self.goodsDetail.rushbuy isEqualToString:@"1"]) {//抢购商品
+            /** 1未开始，2进行中；3已结束；4暂停 */
+            if ([self.goodsDetail.rush.rushbuy_status isEqualToString:@"2"]) {
+                self.normal_buy_btn.userInteractionEnabled = YES;
+                self.normal_add_btn.userInteractionEnabled = YES;
+            }else{
+                self.normal_buy_btn.userInteractionEnabled = NO;
+                self.normal_add_btn.userInteractionEnabled = NO;
+                [self.normal_buy_btn setBackgroundColor:UIColorFromRGB(0XDDDDDD)];
+                [self.normal_add_btn setBackgroundColor:UIColorFromRGB(0XDDDDDD)];
+            }
+        }else{//非抢购商品
+            self.normal_buy_btn.userInteractionEnabled = YES;
+            self.normal_add_btn.userInteractionEnabled = YES;
+        }
     }else{// 控区控价
         if ([self.goodsDetail.is_try isEqualToString:@"1"]) {// 试用装
             self.normal_tool.hidden = YES;
@@ -352,7 +377,7 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
         }
     }
     NSString *h5 = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"><style>img{width:100%%; height:auto;}body{margin:0 14px;}</style></head><body>%@</body></html>",self.goodsDetail.goods_desc];
-    [self.webView loadHTMLString:h5 baseURL:nil];
+    [self.webView loadHTMLString:h5 baseURL:[NSURL URLWithString:HXRC_URL_HEADER]];
 
     [self.tableView reloadData];
 }
@@ -362,7 +387,7 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
     parameters[@"goods_id"] = self.goods_id;
     
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"collectGood" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/collectGood" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
@@ -401,7 +426,7 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
     parameters[@"logistics_com_id"] = self.goodsDetail.selectLogisticst.logistics_com_id;
     parameters[@"sku_id"] = self.goodsDetail.sku.sku_id;
 
-    [HXNetworkTool POST:HXRC_M_URL action:@"addOrderCart" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/addOrderCart" parameters:parameters success:^(id responseObject) {
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
         }else{
@@ -472,6 +497,7 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
     if (indexPath.section == 0) {
         GXGoodsMaterialCell * cell = [GXGoodsMaterialCell cellWithTableView:tableView];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.targetVc = self;
         GXGoodsMaterialLayout *layout = self.goodsDetail.materialLayout[indexPath.row];
         cell.materialLayout = layout;
         cell.delegate = self;
@@ -479,6 +505,7 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
     }else if (indexPath.section == 1){
         GXGoodsCommentCell * cell = [GXGoodsCommentCell cellWithTableView:tableView];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.targetVc = self;
         GXGoodsCommentLayout *layout = self.goodsDetail.evaLayout[indexPath.row];
         cell.commentLayout = layout;
         cell.delegate = self;

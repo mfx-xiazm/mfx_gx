@@ -12,7 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class GYHomeBanner,GYHomeTopCate,GYHomeDiscount,GYHomeRegional,GYHomeMarketTrend,GYHomeBrand,GYHomeActivity,GYHomePushGoods;
 @interface GXHomeData : NSObject
-@property(nonatomic,assign) BOOL homeUnReadMsg;
 @property(nonatomic,strong) NSArray<GYHomeBanner *> *homeAdv;
 @property(nonatomic,strong) NSArray<GYHomeTopCate *> *homeTopCate;
 @property(nonatomic,strong) NSArray<GYHomeDiscount *> *home_rushbuy;

@@ -82,21 +82,23 @@
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     NSString *action = nil;
     if (self.requestType == 1) {
-        action = @"getShopRegAgreement";
+        action = @"admin/getShopRegAgreement";
     }else if (self.requestType == 2) {
-        action = @"getSupplyIntroData";
+        action = @"admin/getSupplyIntroData";
     }else if (self.requestType == 3) {
-        action = @"getNoticeDetail";
+        action = @"admin/getNoticeDetail";
         parameters[@"notice_id"] = self.notice_id;
     }else if (self.requestType == 4) {
-        action = @"aboutUs";
+        action = @"admin/aboutUs";
     }else if (self.requestType == 5) {
-        action = @"saleStandard";
+        action = @"admin/saleStandard";
     }else if (self.requestType == 6) {
-        action = @"helpDataDetail";
+        action = @"admin/helpDataDetail";
         parameters[@"help_id"] = self.help_id;
     }else if (self.requestType == 7) {
-        action = @"complainChannelData";
+        action = @"admin/complainChannelData";
+    }else if (self.requestType == 8) {
+        action = @"index/getProviderRegAgreement";
     }
     
     hx_weakify(self);
@@ -122,6 +124,9 @@
                 NSString *h5 = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"><style>img{width:100%%; height:auto;}body{margin:0 15px;}</style></head><body>%@</body></html>",responseObject[@"data"]];
                 [strongSelf.webView loadHTMLString:h5 baseURL:nil];
             }else if (self.requestType == 7) {
+                NSString *h5 = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"><style>img{width:100%%; height:auto;}body{margin:0 15px;}</style></head><body>%@</body></html>",responseObject[@"data"]];
+                [strongSelf.webView loadHTMLString:h5 baseURL:nil];
+            }else if (self.requestType == 8) {
                 NSString *h5 = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"><style>img{width:100%%; height:auto;}body{margin:0 15px;}</style></head><body>%@</body></html>",responseObject[@"data"]];
                 [strongSelf.webView loadHTMLString:h5 baseURL:nil];
             }

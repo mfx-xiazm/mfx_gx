@@ -10,6 +10,7 @@
 #import "GXMyOrder.h"
 #import "GXMyRefund.h"
 #import "GXConfirmOrder.h"
+#import "GXSalerOrder.h"
 
 @interface GXUpOrderGoodsCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *cover_img;
@@ -62,6 +63,17 @@
     self.price.text = [NSString stringWithFormat:@"￥%@",_upGoods.price];
     self.goods_spec.text = (_upGoods.specs_attrs&&_upGoods.specs_attrs.length)?[NSString stringWithFormat:@"%@",_upGoods.specs_attrs]:@"";
     self.goods_num.text = [NSString stringWithFormat:@"x%@",_upGoods.cart_num];
+}
+
+-(void)setSalerOrder:(GXSalerOrder *)salerOrder
+{
+    _salerOrder = salerOrder;
+    
+    [self.cover_img sd_setImageWithURL:[NSURL URLWithString:_salerOrder.cover_img]];
+    [self.goods_title setTextWithLineSpace:5.f withString:_salerOrder.goods_name?_salerOrder.goods_name:@"" withFont:[UIFont systemFontOfSize:13]];
+    self.price.text = [NSString stringWithFormat:@"￥%@",_salerOrder.price];
+    self.goods_spec.text = (_salerOrder.specs_attrs&&_salerOrder.specs_attrs.length)?[NSString stringWithFormat:@"%@",_salerOrder.specs_attrs]:@"";
+    self.goods_num.text = [NSString stringWithFormat:@"x%@",_salerOrder.goods_num];
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

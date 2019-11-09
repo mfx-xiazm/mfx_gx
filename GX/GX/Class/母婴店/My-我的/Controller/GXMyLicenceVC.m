@@ -38,7 +38,7 @@
     parameters[@"seaType"] = self.seaType;//查询类型 1查询资质信息 2查询食品经营许可证
 
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"naturalData" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/naturalData" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
            

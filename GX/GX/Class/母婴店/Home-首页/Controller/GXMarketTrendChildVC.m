@@ -12,6 +12,7 @@
 #import "GXMarketTrendHeader.h"
 #import "GXGoodsDetailVC.h"
 #import "GXMarketTrend.h"
+#import "GXUpOrderVC.h"
 
 static NSString *const MarketTrendCell = @"MarketTrendCell";
 @interface GXMarketTrendChildVC ()<UITableViewDelegate,UITableViewDataSource>
@@ -100,7 +101,7 @@ static NSString *const MarketTrendCell = @"MarketTrendCell";
     parameters[@"catalog_name"] = (self.dataType == 1)?@"奶粉":@"纸尿裤";//分类名称
     hx_weakify(self);
     
-    [HXNetworkTool POST:HXRC_M_URL action:@"currencyQuotations" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/currencyQuotations" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             strongSelf.trends = [NSArray yy_modelArrayWithClass:[GXMarketTrend class] json:responseObject[@"data"]];
@@ -130,6 +131,28 @@ static NSString *const MarketTrendCell = @"MarketTrendCell";
     }
     
     [self.tableView reloadData];
+}
+#pragma mark -- 业务逻辑
+-(void)addOrderCartRequest:(NSString *)goods_id specs_attrs:(NSString *)specs_attrs logistics_com_id:(NSString *)logistics_com_id sku_id:(NSString *)sku_id
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"goods_id"] = goods_id;//商品id
+    parameters[@"cart_num"] = @(1);//商品数量
+    parameters[@"specs_attrs"] = specs_attrs;//商品规格
+    parameters[@"is_try"] = @(0);//是否试用装商品
+    parameters[@"is_checked"] = @"1";//0未选择；1已选择
+    parameters[@"logistics_com_id"] = logistics_com_id;
+    parameters[@"sku_id"] = sku_id;
+
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/addOrderCart" parameters:parameters success:^(id responseObject) {
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
 }
 #pragma mark -- UIScrollView代理
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -170,13 +193,19 @@ static NSString *const MarketTrendCell = @"MarketTrendCell";
     GXMarketTrendSeries *series = self.showTrends[indexPath.section];
     GXSeriesGoods *goods = series.goods[indexPath.row];
     cell.goods = goods;
-    //hx_weakify(self);
+    hx_weakify(self);
     cell.trendBtnCall = ^(NSInteger index) {
-        //hx_strongify(weakSelf);
+        hx_strongify(weakSelf);
         if (index == 1) {
-            HXLog(@"加入购物车");
+            [strongSelf addOrderCartRequest:goods.goods_id specs_attrs:goods.specs_attrs logistics_com_id:goods.logistics_com_id sku_id:goods.sku_id];
         }else{
-            HXLog(@"立即补货");
+            GXUpOrderVC *ovc = [GXUpOrderVC new];
+            ovc.goods_id = goods.goods_id;
+            ovc.goods_num = @"1";
+            ovc.specs_attrs = goods.specs_attrs;
+            ovc.sku_id = goods.sku_id;
+            ovc.logistics_com_id = goods.logistics_com_id;
+            [strongSelf.navigationController pushViewController:ovc animated:YES];
         }
     };
     return cell;

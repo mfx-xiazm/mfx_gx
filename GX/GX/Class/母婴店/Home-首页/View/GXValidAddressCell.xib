@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,18 +14,19 @@
             <rect key="frame" x="0.0" y="0.0" width="355" height="60"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="355" height="59.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="355" height="60"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3YC-6m-nzt">
-                        <rect key="frame" x="0.0" y="0.0" width="355" height="59.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="355" height="60"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aOw-UT-ND9">
-                                <rect key="frame" x="0.0" y="0.0" width="40" height="59.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="40" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="nsX-Et-cul"/>
                                 </constraints>
                                 <state key="normal" image="协议未选"/>
+                                <state key="selected" image="协议选择"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="王一涵" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aOQ-Lv-j2D">
                                 <rect key="frame" x="40" y="10" width="40" height="16"/>
@@ -42,13 +41,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="湖北省咸宁市咸安区浮山街道浮山新村63栋4号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="36y-3r-5Jb">
-                                <rect key="frame" x="40" y="34.5" width="305" height="15"/>
+                                <rect key="frame" x="40" y="35" width="305" height="15"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h7Q-mr-Dsu" userLabel="分割线">
-                                <rect key="frame" x="40" y="58.5" width="315" height="1"/>
+                                <rect key="frame" x="40" y="59" width="315" height="1"/>
                                 <color key="backgroundColor" red="0.96470588239999999" green="0.96862745100000003" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="bmb-eA-AnH"/>
@@ -81,10 +80,17 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="address_detail" destination="36y-3r-5Jb" id="OIR-gN-hrd"/>
+                <outlet property="receiver" destination="aOQ-Lv-j2D" id="XfH-BB-zhv"/>
+                <outlet property="receiver_phone" destination="o1a-oa-fQi" id="gNW-aH-8k9"/>
+                <outlet property="selectBtn" destination="aOw-UT-ND9" id="JyO-ai-ebx"/>
+            </connections>
             <point key="canvasLocation" x="163.04347826086959" y="119.19642857142857"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="协议未选" width="17" height="17"/>
+        <image name="协议选择" width="16.5" height="16.5"/>
     </resources>
 </document>

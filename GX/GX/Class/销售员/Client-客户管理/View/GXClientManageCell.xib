@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,23 +14,23 @@
             <rect key="frame" x="0.0" y="0.0" width="361" height="140"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="361" height="139.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="361" height="140"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ysl-PT-zqE">
-                        <rect key="frame" x="10" y="5" width="341" height="129.5"/>
+                        <rect key="frame" x="10" y="5" width="341" height="130"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uP4-il-M3U">
-                                <rect key="frame" x="0.0" y="0.0" width="341" height="34.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="341" height="35"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HP15821314113" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Qe-bY-KXb">
-                                        <rect key="frame" x="10" y="10" width="321" height="14.5"/>
+                                        <rect key="frame" x="10" y="10.5" width="321" height="14.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PdK-6B-t8A" userLabel="分割线">
-                                        <rect key="frame" x="0.0" y="33.5" width="341" height="1"/>
+                                        <rect key="frame" x="0.0" y="34" width="341" height="1"/>
                                         <color key="backgroundColor" red="0.96470588239999999" green="0.96862745100000003" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="Pvj-iZ-vhm"/>
@@ -50,7 +48,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XDb-gl-uLT">
-                                <rect key="frame" x="0.0" y="34.5" width="341" height="60"/>
+                                <rect key="frame" x="0.0" y="35" width="341" height="60"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="终端店或供应商客户名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="82y-zl-Ehp">
                                         <rect key="frame" x="10" y="8" width="146" height="16"/>
@@ -75,7 +73,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dTb-IE-DPO">
-                                <rect key="frame" x="0.0" y="94.5" width="341" height="35"/>
+                                <rect key="frame" x="0.0" y="95" width="341" height="35"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="湖北省武汉市青山区红钢城街道工业四路利加华庭10栋1204" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cGr-B4-U5n">
                                         <rect key="frame" x="10" y="10.5" width="321" height="14.5"/>
@@ -144,6 +142,10 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
+                <outlet property="phone" destination="vA4-h8-PH4" id="l1o-Zw-IQL"/>
+                <outlet property="provider_no" destination="4Qe-bY-KXb" id="4dH-sb-TQ6"/>
+                <outlet property="shop_address" destination="cGr-B4-U5n" id="0TI-1J-glI"/>
+                <outlet property="shop_name" destination="82y-zl-Ehp" id="Ix5-8j-ag3"/>
                 <outlet property="topTitleView" destination="uP4-il-M3U" id="OTC-Xp-c8y"/>
             </connections>
             <point key="canvasLocation" x="-50.000000000000007" y="90.401785714285708"/>

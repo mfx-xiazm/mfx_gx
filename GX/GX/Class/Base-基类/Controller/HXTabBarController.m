@@ -49,25 +49,24 @@
     [item setTitleTextAttributes:attrs forState:UIControlStateNormal];
     [item setTitleTextAttributes:selectedAttrs forState:UIControlStateSelected];
     
-    // 添加母婴店子控制器
-    [self setupChildVc:[[GXHomeVC alloc] init] title:@"首页" image:@"首页图标" selectedImage:@"首页图标选中"];
-    [self setupChildVc:[[GXCategoryVC alloc] init] title:@"分类" image:@"分类图标" selectedImage:@"分类图标选中"];
-    [self setupChildVc:[[GXRegionalVC alloc] init] title:@"控区控价" image:@"控区控价图标" selectedImage:@"控区控价图标选中"];
-    [self setupChildVc:[[GXCartVC alloc] init] title:@"购物车" image:@"购物车图标" selectedImage:@"购物车图标选中"];
-    [self setupChildVc:[[GXMyVC alloc] init] title:@"我的" image:@"我的图标" selectedImage:@"我的图标选中"];
-     
-    // 添加供应商子控制器
-    /*
-    [self setupChildVc:[[GXOrderManageVC alloc] init] title:@"订单管理" image:@"订单管理图标" selectedImage:@"订单管理图标选中"];
-    [self setupChildVc:[[GXAccountManageVC alloc] init] title:@"账户管理" image:@"账户管理图标" selectedImage:@"账户管理图标选中"];
-     */
-    // 添加销售员子控制器
-    /*
-    [self setupChildVc:[[GXClientManageVC alloc] init] title:@"客户管理" image:@"客户管理图标" selectedImage:@"客户管理图标选中"];
-    [self setupChildVc:[[GXSalerOrderManageVC alloc] init] title:@"订单管理" image:@"订单管理图标" selectedImage:@"订单管理图标选中"];
-    [self setupChildVc:[[GXAccountManageVC alloc] init] title:@"账户管理" image:@"账户管理图标" selectedImage:@"账户管理图标选中"];
-    [self setupChildVc:[[GXSalerMyVC alloc] init] title:@"个人中心" image:@"我的图标" selectedImage:@"我的图标选中"];
-     */
+    if ([[MSUserManager sharedInstance].curUserInfo.utype isEqualToString:@"1"]) {
+        // 添加母婴店子控制器
+        [self setupChildVc:[[GXHomeVC alloc] init] title:@"首页" image:@"首页图标" selectedImage:@"首页图标选中"];
+        [self setupChildVc:[[GXCategoryVC alloc] init] title:@"分类" image:@"分类图标" selectedImage:@"分类图标选中"];
+        [self setupChildVc:[[GXRegionalVC alloc] init] title:@"控区控价" image:@"控区控价图标" selectedImage:@"控区控价图标选中"];
+        [self setupChildVc:[[GXCartVC alloc] init] title:@"购物车" image:@"购物车图标" selectedImage:@"购物车图标选中"];
+        [self setupChildVc:[[GXMyVC alloc] init] title:@"我的" image:@"我的图标" selectedImage:@"我的图标选中"];
+    }else if ([[MSUserManager sharedInstance].curUserInfo.utype isEqualToString:@"2"]) {
+        // 添加供应商子控制器
+        [self setupChildVc:[[GXOrderManageVC alloc] init] title:@"订单管理" image:@"订单管理图标" selectedImage:@"订单管理图标选中"];
+        [self setupChildVc:[[GXAccountManageVC alloc] init] title:@"账户管理" image:@"账户管理图标" selectedImage:@"账户管理图标选中"];
+    }else{
+        // 添加销售员子控制器
+        [self setupChildVc:[[GXClientManageVC alloc] init] title:@"客户管理" image:@"客户管理图标" selectedImage:@"客户管理图标选中"];
+        [self setupChildVc:[[GXSalerOrderManageVC alloc] init] title:@"订单管理" image:@"订单管理图标" selectedImage:@"订单管理图标选中"];
+        [self setupChildVc:[[GXAccountManageVC alloc] init] title:@"账户管理" image:@"账户管理图标" selectedImage:@"账户管理图标选中"];
+        [self setupChildVc:[[GXSalerMyVC alloc] init] title:@"个人中心" image:@"我的图标" selectedImage:@"我的图标选中"];
+    }
     
     self.delegate = self;
     

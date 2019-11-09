@@ -8,7 +8,7 @@
 
 #import "GXActivityChildVC.h"
 #import "GXActivityCell.h"
-#import "GXWebContentVC.h"
+#import "GXActivityContentVC.h"
 #import "GXActivity.h"
 
 static NSString *const ActivityCell = @"ActivityCell";
@@ -103,7 +103,7 @@ static NSString *const ActivityCell = @"ActivityCell";
         parameters[@"page"] = @(page);//第几页
     }
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"promoteActList" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/promoteActList" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         [strongSelf stopShimmer];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
@@ -181,9 +181,9 @@ static NSString *const ActivityCell = @"ActivityCell";
 //}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    GXWebContentVC *wvc = [GXWebContentVC new];
-    wvc.url = @"http://news.cctv.com/2019/10/03/ARTI2EUlwRGH3jMPI6cAVqti191003.shtml";
-    wvc.navTitle = @"活动方案";
+    GXActivityContentVC *wvc = [GXActivityContentVC new];
+    GXActivity *activity = self.activitys[indexPath.row];
+    wvc.material_id = activity.material_id;
     [self.navigationController pushViewController:wvc animated:YES];
 }
 

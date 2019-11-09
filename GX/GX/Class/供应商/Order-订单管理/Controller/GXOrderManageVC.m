@@ -13,6 +13,8 @@
 #import "HXSearchBar.h"
 #import "GXMessageVC.h"
 #import "GXMySetVC.h"
+#import "GXMineData.h"
+#import "UIView+WZLBadge.h"
 
 @interface GXOrderManageVC ()<JXCategoryViewDelegate,UIScrollViewDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet JXCategoryTitleView *categoryView;
@@ -23,6 +25,8 @@
 @property(nonatomic,strong) HXSearchBar *searchBar;
 /* 消息 */
 @property(nonatomic,strong) SPButton *msgBtn;
+/* 个人信息 */
+@property(nonatomic,strong) GXMineData *mineData;
 @end
 
 @implementation GXOrderManageVC
@@ -31,6 +35,12 @@
     [super viewDidLoad];
     [self setUpNavBar];
     [self setUpCategoryView];
+    [self getMemberRequest];
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self getHomeUnReadMsg];
 }
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -44,6 +54,7 @@
         NSMutableArray *vcs = [NSMutableArray array];
         for (int i=0;i<self.categoryView.titles.count;i++) {
             GXOrderManageChildVC *cvc0 = [GXOrderManageChildVC new];
+            cvc0.status = i+1;
             [self addChildViewController:cvc0];
             [vcs addObject:cvc0];
         }
@@ -72,6 +83,8 @@
     [msg setTitle:@"消息" forState:UIControlStateNormal];
     [msg addTarget:self action:@selector(msgClicked) forControlEvents:UIControlEventTouchUpInside];
     [msg setTitleColor:UIColorFromRGB(0XFFFFFF) forState:UIControlStateNormal];
+    msg.badgeBgColor = [UIColor whiteColor];
+    msg.badgeCenterOffset = CGPointMake(-10, 5);
     self.msgBtn = msg;
     UIBarButtonItem *msgItem = [[UIBarButtonItem alloc] initWithCustomView:msg];
     
@@ -92,7 +105,7 @@
 {
     _categoryView.backgroundColor = [UIColor whiteColor];
     _categoryView.titleLabelZoomEnabled = NO;
-    _categoryView.titles = @[@"全部", @"待发货",@"待收货", @"待评价", @"已完成", @"售后退款"];
+    _categoryView.titles = @[@"全部", @"待发货",@"待收货", @"待评价", @"售后退款"];
     _categoryView.titleFont = [UIFont systemFontOfSize:14 weight:UIFontWeightMedium];
     _categoryView.titleColor = [UIColor blackColor];
     _categoryView.titleSelectedColor = HXControlBg;
@@ -124,6 +137,7 @@
 -(void)setClicked
 {
     GXMySetVC *mvc = [GXMySetVC new];
+    mvc.mineData = self.mineData;
     [self.navigationController pushViewController:mvc animated:YES];
 }
 #pragma mark -- JXCategoryViewDelegate
@@ -142,5 +156,38 @@
     targetViewController.view.frame = CGRectMake(HX_SCREEN_WIDTH * index, 0, HX_SCREEN_WIDTH, self.scrollView.hxn_height);
     
     [self.scrollView addSubview:targetViewController.view];
+}
+#pragma mark -- 接口
+-(void)getMemberRequest
+{
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getMineData" parameters:@{} success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            strongSelf.mineData = [GXMineData yy_modelWithDictionary:responseObject[@"data"]];
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
+}
+-(void)getHomeUnReadMsg
+{
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getHomeMsg" parameters:@{} success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            if ([responseObject[@"data"] boolValue]) {
+                [strongSelf.msgBtn showBadgeWithStyle:WBadgeStyleRedDot value:1 animationType:WBadgeAnimTypeNone];
+            }else{
+                [strongSelf.msgBtn clearBadge];
+            }
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
 }
 @end

@@ -11,7 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface GXMarketTrendVC : HXBaseViewController
-
+/* 默认选中的索引 */
+@property(nonatomic,assign) NSInteger selectIndex;
 @end
 
 NS_ASSUME_NONNULL_END

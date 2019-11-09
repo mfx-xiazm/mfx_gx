@@ -10,6 +10,7 @@
 #import "GXGoodsMaterialCell.h"
 #import "GXGoodsMaterialLayout.h"
 #import "HXSearchBar.h"
+#import "GXGoodsDetailVC.h"
 
 @interface GXAllMaterialVC ()<UITableViewDelegate,UITableViewDataSource,GXGoodsMaterialCellDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -115,7 +116,7 @@
     }
     
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:(self.goods_id && self.goods_id.length)?@"getGoodMaterial":@"materialList" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:(self.goods_id && self.goods_id.length)?@"admin/getGoodMaterial":@"admin/materialList" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             if (isRefresh) {
@@ -175,6 +176,7 @@
 {
     GXGoodsMaterialCell * cell = [GXGoodsMaterialCell cellWithTableView:tableView];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.targetVc = self;
     GXGoodsMaterialLayout *layout = self.layoutsArr[indexPath.row];
     cell.materialLayout = layout;
     cell.delegate = self;
@@ -197,7 +199,10 @@
 /** 查看商品 */
 - (void)didClickGoodsInCell:(GXGoodsMaterialCell *)Cell
 {
-    HXLog(@"查看商品");
+    GXGoodsMaterial *material = Cell.materialLayout.material;
+    GXGoodsDetailVC *dvc = [GXGoodsDetailVC new];
+    dvc.goods_id = material.goods_id;
+    [self.navigationController pushViewController:dvc animated:YES];
 }
 /** 分享 */
 - (void)didClickShareInCell:(GXGoodsMaterialCell *)Cell

@@ -11,9 +11,13 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class GXActivityBanner;
+typedef void(^activityBannerClicked)(NSInteger index);
 @interface GXActivityBannerHeader : UIView
 @property(nonatomic,strong) NSArray<GXActivityBanner *> *adv;
-
+/* 顶部图 */
+@property(nonatomic,strong) NSArray *tryCovers;
+/* 点击 */
+@property(nonatomic,copy) activityBannerClicked activityBannerClicked;
 @end
 
 NS_ASSUME_NONNULL_END

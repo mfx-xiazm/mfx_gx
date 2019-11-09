@@ -47,7 +47,7 @@
 -(void)getMemberRequest
 {
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"getMineData" parameters:@{} success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getMineData" parameters:@{} success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             strongSelf.mineData = [GXMineData yy_modelWithDictionary:responseObject[@"data"]];
@@ -159,12 +159,12 @@
         GXReportVC *rvc = [GXReportVC new];
         [self.navigationController pushViewController:rvc animated:YES];
     }else if (sender.tag == 8){
-        FSActionSheet *as = [[FSActionSheet alloc] initWithTitle:@"客户经理" delegate:nil cancelButtonTitle:@"取消" highlightedButtonTitle:nil otherButtonTitles:@[[NSString stringWithFormat:@"%@(%@)",self.mineData.saleman_phone,self.mineData.saleman_name]]];
+        FSActionSheet *as = [[FSActionSheet alloc] initWithTitle:@"联系客服" delegate:nil cancelButtonTitle:@"取消" highlightedButtonTitle:nil otherButtonTitles:@[[NSString stringWithFormat:@"%@",self.mineData.platform_tel]]];
         hx_weakify(self);
         [as showWithSelectedCompletion:^(NSInteger selectedIndex) {
             hx_strongify(weakSelf);
             if (selectedIndex == 1) {
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel:%@",strongSelf.mineData.saleman_phone]]];
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel:%@",strongSelf.mineData.platform_tel]]];
             }
         }];
     }else{

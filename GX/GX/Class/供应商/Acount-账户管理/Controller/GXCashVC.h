@@ -11,7 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface GXCashVC : HXBaseViewController
-
+/* 可提现金额 */
+@property(nonatomic,copy) NSString *cashable;
 @end
 
 NS_ASSUME_NONNULL_END

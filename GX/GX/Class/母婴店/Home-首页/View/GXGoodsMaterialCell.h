@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface GXGoodsMaterialCell : UITableViewCell
 + (instancetype)cellWithTableView:(UITableView *)tableView;
+@property (nonatomic, weak) UIViewController *targetVc;
 /** 数据源 */
 @property (nonatomic, strong) GXGoodsMaterialLayout *materialLayout;
 /** 代理 */

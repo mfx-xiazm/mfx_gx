@@ -17,6 +17,7 @@
 #import "GXPartnerDataVC.h"
 #import "GXRegional.h"
 #import "GXGoodBrand.h"
+#import "GXGoodsDetailVC.h"
 
 static NSString *const RegionalCell = @"RegionalCell";
 
@@ -62,10 +63,27 @@ static NSString *const RegionalCell = @"RegionalCell";
         _header.regionalClickedCall = ^(NSInteger type, NSInteger index) {
             hx_strongify(weakSelf);
             if (type == 1) {
-                GXWebContentVC *wvc = [GXWebContentVC new];
-                wvc.url = @"http://news.cctv.com/2019/10/03/ARTI2EUlwRGH3jMPI6cAVqti191003.shtml";
-                wvc.navTitle = @"轮播图详情";
-                [strongSelf.navigationController pushViewController:wvc animated:YES];
+                GXRegionalBanner *banner = strongSelf.regional.adv[index];
+                /** 1仅图片 2链接内容 3html富文本内容 4产品详情 */
+                if ([banner.adv_type isEqualToString:@"1"]) {
+                    HXLog(@"仅图片");
+                }else if ([banner.adv_type isEqualToString:@"2"]) {
+                    GXWebContentVC *cvc = [GXWebContentVC new];
+                    cvc.navTitle = banner.adv_name;
+                    cvc.isNeedRequest = NO;
+                    cvc.url = banner.adv_content;
+                    [strongSelf.navigationController pushViewController:cvc animated:YES];
+                }else if ([banner.adv_type isEqualToString:@"3"]) {
+                    GXWebContentVC *cvc = [GXWebContentVC new];
+                    cvc.navTitle = banner.adv_name;
+                    cvc.isNeedRequest = NO;
+                    cvc.htmlContent = banner.adv_content;
+                    [strongSelf.navigationController pushViewController:cvc animated:YES];
+                }else{
+                    GXGoodsDetailVC *dvc = [GXGoodsDetailVC new];
+                    dvc.goods_id = banner.adv_content;
+                    [strongSelf.navigationController pushViewController:dvc animated:YES];
+                }
             }else if (type == 2){
                 GXRegionalNotice *notice = strongSelf.regional.notice[index];
                 GXWebContentVC *wvc = [GXWebContentVC new];
@@ -150,8 +168,8 @@ static NSString *const RegionalCell = @"RegionalCell";
     hx_weakify(self);
     dispatch_group_async(group, queue, ^{
         hx_strongify(weakSelf);
-
-        [HXNetworkTool POST:HXRC_M_URL action:@"controlData" parameters:@{} success:^(id responseObject) {
+        
+        [HXNetworkTool POST:HXRC_M_URL action:@"admin/controlData" parameters:@{} success:^(id responseObject) {
             if([[responseObject objectForKey:@"status"] integerValue] == 1) {
                 strongSelf.regional = [GXRegional yy_modelWithDictionary:responseObject[@"data"]];
             }else{
@@ -193,7 +211,7 @@ static NSString *const RegionalCell = @"RegionalCell";
         parameters[@"page"] = @(page);//第几页
     }
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"getHotBrand" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getHotBrand" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             if (isRefresh) {
@@ -303,13 +321,17 @@ static NSString *const RegionalCell = @"RegionalCell";
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {//本周上新
             GXBrandDetailVC *dvc = [GXBrandDetailVC new];
+            dvc.brand_id = self.regional.week_newer.brand_id;
             [self.navigationController pushViewController:dvc animated:YES];
         }else{//试用装
             GXTryApplyVC *avc = [GXTryApplyVC new];
+            avc.try_cover = self.regional.try_cover.try_cover;
             [self.navigationController pushViewController:avc animated:YES];
         }
     }else{//热门品牌
+        GXGoodBrand *brand = self.brands[indexPath.row];
         GXBrandDetailVC *dvc = [GXBrandDetailVC new];
+        dvc.brand_id = brand.brand_id;
         [self.navigationController pushViewController:dvc animated:YES];
     }
 }

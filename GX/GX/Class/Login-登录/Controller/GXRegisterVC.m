@@ -9,6 +9,7 @@
 #import "GXRegisterVC.h"
 #import "GXRegisterAuthVC.h"
 #import "FSActionSheet.h"
+#import "GXRegisterAuthVC2.h"
 
 @interface GXRegisterVC ()
 @property (weak, nonatomic) IBOutlet UITextField *name;
@@ -91,7 +92,7 @@
     parameters[@"type"] = @"1";//默认为1 为1表示注册时获取短信验证码或者更换手机号时获取验证码 为2表示忘记密码重置密码或更新密码时获取验证码
     
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"getCheckCode" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getCheckCode" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             [sender startWithTime:60 title:@"获取验证码" countDownTitle:@"s" mainColor:HXControlBg countColor:HXControlBg];
@@ -113,7 +114,7 @@
     parameters[@"phone"] = self.phone.text;//手机号
     
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"checkCode" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/checkCode" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         [sender stopLoading:@"下一步" image:nil textColor:nil backgroundColor:nil];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
@@ -125,7 +126,11 @@
                     svc.username = strongSelf.name.text;
                     [strongSelf.navigationController pushViewController:svc animated:YES];
                 }else{// 供销商
-                    
+                    GXRegisterAuthVC2 *avc = [GXRegisterAuthVC2 new];
+                    avc.phone = strongSelf.phone.text;
+                    avc.pwd = strongSelf.pwd.text;
+                    avc.username = strongSelf.name.text;
+                    [strongSelf.navigationController pushViewController:avc animated:YES];
                 }
             });
         }else{

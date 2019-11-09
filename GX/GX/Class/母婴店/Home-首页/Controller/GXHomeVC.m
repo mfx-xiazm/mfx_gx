@@ -34,6 +34,7 @@
 #import "GXMessageVC.h"
 #import "GXHomeData.h"
 #import "GXSearchResultVC.h"
+#import "GXActivityContentVC.h"
 
 static NSString *const HomeCateCell = @"HomeCateCell";
 static NSString *const ShopGoodsCell = @"ShopGoodsCell";
@@ -61,6 +62,11 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
     [self setUpCollectionView];
     [self getHomeDataRequest];
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self getHomeUnReadMsg];
+}
 -(void)setUpNavBar
 {
     [self.navigationItem setTitle:nil];
@@ -82,6 +88,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
     [msg setTitle:@"消息" forState:UIControlStateNormal];
     [msg addTarget:self action:@selector(msgClicked) forControlEvents:UIControlEventTouchUpInside];
     [msg setTitleColor:UIColorFromRGB(0XFFFFFF) forState:UIControlStateNormal];
+    msg.badgeBgColor = [UIColor whiteColor];
     msg.badgeCenterOffset = CGPointMake(-10, 5);
     self.msgBtn = msg;
     
@@ -126,10 +133,28 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
     }
 }
 #pragma mark -- 接口请求
+-(void)getHomeUnReadMsg
+{
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getHomeMsg" parameters:@{} success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            if ([responseObject[@"data"] boolValue]) {
+                [strongSelf.msgBtn showBadgeWithStyle:WBadgeStyleRedDot value:1 animationType:WBadgeAnimTypeNone];
+            }else{
+                [strongSelf.msgBtn clearBadge];
+            }
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
+}
 -(void)getHomeDataRequest
 {
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"getHomeData" parameters:@{} success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getHomeData" parameters:@{} success:^(id responseObject) {
         hx_strongify(weakSelf);
         [strongSelf stopShimmer];
         [strongSelf.collectionView.mj_header endRefreshing];
@@ -144,9 +169,6 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
             strongSelf.homeData.homeTopCate = [NSArray yy_modelArrayWithClass:[GYHomeTopCate class] json:tempArr];
             dispatch_async(dispatch_get_main_queue(), ^{
                 strongSelf.collectionView.hidden = NO;
-                if (strongSelf.homeData.homeUnReadMsg) {
-                    [strongSelf.msgBtn showBadgeWithStyle:WBadgeStyleRedDot value:1 animationType:WBadgeAnimTypeNone];
-                }
                 [strongSelf.collectionView reloadData];
             });
         }else{
@@ -169,7 +191,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
     if (section == 0) {//分类
         return self.homeData.homeTopCate.count;
     }else if (section == 1) {//每日必抢
-        return 5;
+        return self.homeData.home_rushbuy.count;
     }else if (section == 2) {//控区控价
         return self.homeData.home_control_price_brand.count;
     }else if (section == 3) {//通货行情
@@ -226,11 +248,21 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
     }else if (indexPath.section == 1) {//每日必抢
         if (indexPath.item) {
             GXDiscountGoodsCell2 * cell = [collectionView dequeueReusableCellWithReuseIdentifier:DiscountGoodsCell2 forIndexPath:indexPath];
+            GYHomeDiscount *discount = self.homeData.home_rushbuy[indexPath.item];
+            cell.discount = discount;
             return cell;
         }else{
             GXDiscountGoodsCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:DiscountGoodsCell forIndexPath:indexPath];
-//            GYHomeDiscount *discount = self.homeData.home_rushbuy[indexPath.item];
-//            cell.discount = discount;
+            GYHomeDiscount *discount = self.homeData.home_rushbuy[indexPath.item];
+            cell.discount = discount;
+            hx_weakify(self);
+            cell.discountClickedCall = ^{
+                hx_strongify(weakSelf);
+                GXGoodsDetailVC *dvc = [GXGoodsDetailVC new];
+                dvc.goods_id = discount.goods_id;
+                dvc.rushbuy_id = discount.rushbuy_id;
+                [strongSelf.navigationController pushViewController:dvc animated:YES];
+            };
             return cell;
         }
     }else if (indexPath.section == 2) {//控区控价
@@ -274,6 +306,31 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
         if (indexPath.section == 0) {
             GXHomeBannerHeader *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HomeBannerHeader forIndexPath:indexPath];
             header.homeAdv = self.homeData.homeAdv;
+            hx_weakify(self);
+            header.bannerClickCall = ^(NSInteger item) {
+                hx_strongify(weakSelf);
+                GYHomeBanner *banner = strongSelf.homeData.homeAdv[item];
+                /** 1仅图片 2链接内容 3html富文本内容 4产品详情 */
+                if ([banner.adv_type isEqualToString:@"1"]) {
+                    HXLog(@"仅图片");
+                }else if ([banner.adv_type isEqualToString:@"2"]) {
+                    GXWebContentVC *cvc = [GXWebContentVC new];
+                    cvc.navTitle = banner.adv_name;
+                    cvc.isNeedRequest = NO;
+                    cvc.url = banner.adv_content;
+                    [strongSelf.navigationController pushViewController:cvc animated:YES];
+                }else if ([banner.adv_type isEqualToString:@"3"]) {
+                    GXWebContentVC *cvc = [GXWebContentVC new];
+                    cvc.navTitle = banner.adv_name;
+                    cvc.isNeedRequest = NO;
+                    cvc.htmlContent = banner.adv_content;
+                    [strongSelf.navigationController pushViewController:cvc animated:YES];
+                }else{
+                    GXGoodsDetailVC *dvc = [GXGoodsDetailVC new];
+                    dvc.goods_id = banner.adv_content;
+                    [strongSelf.navigationController pushViewController:dvc animated:YES];
+                }
+            };
             return header;
         }else{
             GXHomeSectionHeader *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HomeSectionHeader forIndexPath:indexPath];
@@ -350,27 +407,33 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
         }
     }else if (indexPath.section == 1) {//每日必抢,这个区间为填充式布局
         GXGoodsDetailVC *dvc = [GXGoodsDetailVC new];
+        GYHomeDiscount *discount = self.homeData.home_rushbuy[indexPath.item];
+        dvc.goods_id = discount.goods_id;
+        dvc.rushbuy_id = discount.rushbuy_id;
         [self.navigationController pushViewController:dvc animated:YES];
     }else if (indexPath.section == 2) {//控区控价
         GXBrandDetailVC *dvc = [GXBrandDetailVC new];
+        GYHomeRegional *regional = self.homeData.home_control_price_brand[indexPath.item];
+        dvc.brand_id = regional.ref_id;
         [self.navigationController pushViewController:dvc animated:YES];
     }else if (indexPath.section == 3) {//通货行情
         GXMarketTrendVC *tvc = [GXMarketTrendVC new];
+        tvc.selectIndex = indexPath.item;
         [self.navigationController pushViewController:tvc animated:YES];
     }else if (indexPath.section == 4) {//品牌优选
-        GXBrandDetailVC *dvc = [GXBrandDetailVC new];
+        GXGoodsDetailVC *dvc = [GXGoodsDetailVC new];
+        GYHomeBrand *brand = self.homeData.home_brand_goods[indexPath.item];
+        dvc.goods_id = brand.ref_id;
         [self.navigationController pushViewController:dvc animated:YES];
     }else if (indexPath.section == 5) {//精选活动
-        GXWebContentVC *wvc = [GXWebContentVC new];
-        wvc.url = @"http://news.cctv.com/2019/10/03/ARTI2EUlwRGH3jMPI6cAVqti191003.shtml";
-        wvc.navTitle = @"活动方案";
+        GXActivityContentVC *wvc = [GXActivityContentVC new];
+        GYHomeActivity *activity = self.homeData.home_select_material[indexPath.item];
+        wvc.material_id = activity.ref_id;
         [self.navigationController pushViewController:wvc animated:YES];
     }else{//为你推荐
         GXGoodsDetailVC *dvc = [GXGoodsDetailVC new];
-        dvc.goods_id = @"17";
-//        dvc.goods_id = @"1";
-//        dvc.goods_id = @"8";
-//        dvc.rushbuy_id = @"5";
+        GYHomePushGoods *goods = self.homeData.home_recommend_goods[indexPath.item];
+        dvc.goods_id = goods.goods_id;
         [self.navigationController pushViewController:dvc animated:YES];
     }
 }

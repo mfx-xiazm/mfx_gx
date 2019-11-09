@@ -104,7 +104,7 @@
     }
     
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"getGoodEvaList" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getGoodEvaList" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             if (isRefresh) {
@@ -158,6 +158,7 @@
 {
     GXGoodsCommentCell * cell = [GXGoodsCommentCell cellWithTableView:tableView];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.targetVc = self;
     GXGoodsCommentLayout *layout = self.layoutsArr[indexPath.row];
     cell.commentLayout = layout;
     cell.delegate = self;

@@ -8,8 +8,9 @@
 
 #import "GXMessageVC.h"
 #import "GXMessageCell.h"
-#import "GXWebContentVC.h"
 #import "GXMessage.h"
+#import "GXOrderDetailVC.h"
+#import "GXMyCouponVC.h"
 
 static NSString *const MessageCell = @"MessageCell";
 @interface GXMessageVC ()<UITableViewDelegate,UITableViewDataSource>
@@ -95,7 +96,7 @@ static NSString *const MessageCell = @"MessageCell";
         parameters[@"page"] = @(page);//第几页
     }
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"getMessageData" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:[[MSUserManager sharedInstance].curUserInfo.utype isEqualToString:@"3"]?@"program/getMessageData":@"admin/getMessageData" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         [strongSelf stopShimmer];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
@@ -136,7 +137,7 @@ static NSString *const MessageCell = @"MessageCell";
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"msg_id"] = msg_id;
-    [HXNetworkTool POST:HXRC_M_URL action:@"readMsg" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:[[MSUserManager sharedInstance].curUserInfo.utype isEqualToString:@"3"]?@"program/readMsg":@"admin/readMsg" parameters:parameters success:^(id responseObject) {
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             
         }else{
@@ -172,10 +173,20 @@ static NSString *const MessageCell = @"MessageCell";
         [self readMsgRequest:msg.msg_id];
         [tableView reloadData];
     }
-    GXWebContentVC *wvc = [GXWebContentVC new];
-    wvc.url = @"http://news.cctv.com/2019/10/03/ARTI2EUlwRGH3jMPI6cAVqti191003.shtml";
-    wvc.navTitle = @"消息详情";
-    [self.navigationController pushViewController:wvc animated:YES];
+    /** 0不关联 1订单详情 2退款订单详情 3优惠券发放 */
+    if ([msg.ref_type isEqualToString:@"1"]) {
+        GXOrderDetailVC *dvc = [GXOrderDetailVC new];
+        dvc.oid = msg.ref_id;
+        [self.navigationController pushViewController:dvc animated:YES];
+    }else if ([msg.ref_type isEqualToString:@"2"]) {
+        GXOrderDetailVC *dvc = [GXOrderDetailVC new];
+        dvc.refund_id = msg.ref_id;
+        [self.navigationController pushViewController:dvc animated:YES];
+    }else if ([msg.ref_type isEqualToString:@"3"]){
+        GXMyCouponVC *cvc = [GXMyCouponVC new];
+        cvc.selectIndex = 1;
+        [self.navigationController pushViewController:cvc animated:YES];
+    }
 }
 
 @end

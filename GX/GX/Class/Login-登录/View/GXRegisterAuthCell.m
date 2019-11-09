@@ -108,6 +108,11 @@
                 [UIImagePickerController isCameraDeviceAvailable:YES];
                 //相机闪光灯是否OK
                 [UIImagePickerController isFlashAvailableForCameraDevice:YES];
+                if (@available(iOS 13.0, *)) {
+                    imagePickerController.modalPresentationStyle = UIModalPresentationFullScreen;
+                    /*当该属性为 false 时，用户下拉可以 dismiss 控制器，为 true 时，下拉不可以 dismiss控制器*/
+                    imagePickerController.modalInPresentation = YES;
+                }
                 [self.target presentViewController:imagePickerController animated:YES completion:nil];
             }else{
                 hx_weakify(self);
@@ -138,6 +143,11 @@
                 [UIImagePickerController isCameraDeviceAvailable:YES];
                 //相机闪光灯是否OK
                 [UIImagePickerController isFlashAvailableForCameraDevice:YES];
+                if (@available(iOS 13.0, *)) {
+                    imagePickerController.modalPresentationStyle = UIModalPresentationFullScreen;
+                    /*当该属性为 false 时，用户下拉可以 dismiss 控制器，为 true 时，下拉不可以 dismiss控制器*/
+                    imagePickerController.modalInPresentation = YES;
+                }
                 [self.target presentViewController:imagePickerController animated:YES completion:nil];
             }else{
                 hx_weakify(self);
@@ -176,7 +186,7 @@
 }
 -(void)upImageRequestWithImage:(UIImage *)image completedCall:(void(^)(NSString * imageUrl,NSString * imagePath))completedCall
 {
-    [HXNetworkTool uploadImagesWithURL:HXRC_M_URL action:@"uploadFile" parameters:@{} name:@"file" images:@[image] fileNames:nil imageScale:0.8 imageType:@"png" progress:nil success:^(id responseObject) {
+    [HXNetworkTool uploadImagesWithURL:HXRC_M_URL action:@"admin/uploadFile" parameters:@{} name:@"file" images:@[image] fileNames:nil imageScale:0.8 imageType:@"png" progress:nil success:^(id responseObject) {
         if ([[responseObject objectForKey:@"status"] integerValue] == 1) {
             completedCall(responseObject[@"data"][@"path"],responseObject[@"data"][@"imgPath"]);
         }else{

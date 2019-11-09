@@ -88,6 +88,8 @@ static NSString *const CartSectionHeader = @"CartSectionHeader";
 }
 -(void)setUpNavBar
 {
+    [self.navigationItem setTitle:@"购物车"];
+    
     UIButton *edit = [UIButton buttonWithType:UIButtonTypeCustom];
     edit.hxn_size = CGSizeMake(50, 40);
     edit.titleLabel.font = [UIFont systemFontOfSize:13];
@@ -146,7 +148,7 @@ static NSString *const CartSectionHeader = @"CartSectionHeader";
         parameters[@"page"] = @(page);//第几页
     }
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"getOrderCartData" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getOrderCartData" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         [strongSelf stopShimmer];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
@@ -266,7 +268,7 @@ static NSString *const CartSectionHeader = @"CartSectionHeader";
     parameters[@"cartIds"] = cartIds;//删除多个id间用逗号隔开
 
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"delOrderCart" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/delOrderCart" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
@@ -296,7 +298,7 @@ static NSString *const CartSectionHeader = @"CartSectionHeader";
     parameters[@"cartData"] = cartData;//cartData
     
     //hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"editOrderCart" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/editOrderCart" parameters:parameters success:^(id responseObject) {
         //hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             completeCall(YES);
@@ -315,7 +317,7 @@ static NSString *const CartSectionHeader = @"CartSectionHeader";
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"provider_uid"] = cartData.provider_uid;//店铺id
 
-    [HXNetworkTool POST:HXRC_M_URL action:@"getCoupon" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getCoupon" parameters:parameters success:^(id responseObject) {
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             NSArray *arrt = [NSArray yy_modelArrayWithClass:[GXMyCoupon class] json:responseObject[@"data"]];
             cartData.coupons = [NSArray arrayWithArray:arrt];

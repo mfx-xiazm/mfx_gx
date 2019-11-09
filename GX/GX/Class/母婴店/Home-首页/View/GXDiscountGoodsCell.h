@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class GYHomeDiscount,GXDayDiscount,GXCategoryGoods,GXMyCollect;
+typedef void(^discountClickedCall)(void);
 @interface GXDiscountGoodsCell : UICollectionViewCell
 /* 抢购 */
 @property(nonatomic,strong) GYHomeDiscount *discount;
@@ -20,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong) GXCategoryGoods *goods;
 /* 收藏 */
 @property(nonatomic,strong) GXMyCollect *collect;
+/* 点击 */
+@property(nonatomic,copy) discountClickedCall discountClickedCall;
 @end
 
 NS_ASSUME_NONNULL_END

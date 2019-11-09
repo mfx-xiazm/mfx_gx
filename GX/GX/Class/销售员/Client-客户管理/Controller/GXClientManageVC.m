@@ -12,6 +12,7 @@
 #import <JXCategoryIndicatorLineView.h>
 #import "HXSearchBar.h"
 #import "GXMessageVC.h"
+#import "UIView+WZLBadge.h"
 
 @interface GXClientManageVC ()<JXCategoryViewDelegate,UIScrollViewDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet JXCategoryTitleView *categoryView;
@@ -32,6 +33,11 @@
     [self setUpNavBar];
     [self setUpCategoryView];
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self getHomeUnReadMsg];
+}
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     //离开页面的时候，需要恢复屏幕边缘手势，不能影响其他页面
@@ -44,7 +50,7 @@
         NSMutableArray *vcs = [NSMutableArray array];
         for (int i=0;i<self.categoryView.titles.count;i++) {
             GXClientManageChildVC *cvc0 = [GXClientManageChildVC new];
-            cvc0.dataType = i;
+            cvc0.dataType = i+1;
             [self addChildViewController:cvc0];
             [vcs addObject:cvc0];
         }
@@ -73,6 +79,8 @@
     [msg setTitle:@"消息" forState:UIControlStateNormal];
     [msg addTarget:self action:@selector(msgClicked) forControlEvents:UIControlEventTouchUpInside];
     [msg setTitleColor:UIColorFromRGB(0XFFFFFF) forState:UIControlStateNormal];
+    msg.badgeBgColor = [UIColor whiteColor];
+    msg.badgeCenterOffset = CGPointMake(-10, 5);
     self.msgBtn = msg;
     UIBarButtonItem *msgItem = [[UIBarButtonItem alloc] initWithCustomView:msg];
     
@@ -106,6 +114,16 @@
     [_scrollView addSubview:targetViewController.view];
 }
 #pragma mark -- 点击事件
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    GXClientManageChildVC *targetViewController = (GXClientManageChildVC *)self.childVCs[self.categoryView.selectedIndex];
+    if ([textField hasText]) {
+        targetViewController.seaKey = textField.text;
+    }else{
+        targetViewController.seaKey = @"";
+    }
+    return YES;
+}
 -(void)msgClicked
 {
     GXMessageVC *mvc = [GXMessageVC new];
@@ -128,6 +146,23 @@
     
     [self.scrollView addSubview:targetViewController.view];
 }
-
-
+#pragma mark -- 接口
+-(void)getHomeUnReadMsg
+{
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"program/getHomeMsg" parameters:@{} success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            if ([responseObject[@"data"] boolValue]) {
+                [strongSelf.msgBtn showBadgeWithStyle:WBadgeStyleRedDot value:1 animationType:WBadgeAnimTypeNone];
+            }else{
+                [strongSelf.msgBtn clearBadge];
+            }
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
+}
 @end

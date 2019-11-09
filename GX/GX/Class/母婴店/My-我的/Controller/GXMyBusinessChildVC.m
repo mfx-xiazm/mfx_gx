@@ -64,7 +64,7 @@ static NSString *const PartnerDataCell = @"PartnerDataCell";
     parameters[@"seaType"] = @(self.seaType);
     
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"getMyBusiness" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getMyBusiness" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             strongSelf.myBusiness = [GXMyBusiness yy_modelWithDictionary:responseObject[@"data"]];

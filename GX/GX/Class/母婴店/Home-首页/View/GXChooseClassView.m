@@ -100,7 +100,7 @@ static NSString *const ChooseClassFooter = @"ChooseClassFooter";
     parameters[@"spec_attr_ids"] = spec_attr_ids;
 
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"getSkuDetail" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getSkuDetail" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             strongSelf.goodsDetail.sku = [GXGoodsDetailSku yy_modelWithDictionary:responseObject[@"data"]];

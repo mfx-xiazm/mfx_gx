@@ -53,7 +53,7 @@ static NSString *const MemberRankCell = @"MemberRankCell";
 -(void)geMemberLevelDataRequest
 {
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"memberLevel" parameters:@{} success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/memberLevel" parameters:@{} success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             strongSelf.member = [GXMember yy_modelWithDictionary:responseObject[@"data"]];
@@ -79,7 +79,7 @@ static NSString *const MemberRankCell = @"MemberRankCell";
     hx_weakify(self);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         hx_strongify(weakSelf);
-        strongSelf.tableViewHeight.constant = strongSelf.tableView.contentSize.height;
+        strongSelf.tableViewHeight.constant = strongSelf.tableView.contentSize.height + 20.f;
     });
 }
 #pragma mark -- UITableView数据源和代理
@@ -97,10 +97,10 @@ static NSString *const MemberRankCell = @"MemberRankCell";
     cell.level = level;
     return cell;
 }
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 90.f;
-}
+//-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return 90.f;
+//}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     

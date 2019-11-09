@@ -89,7 +89,20 @@ static NSString *const StoreCouponCell = @"StoreCouponCell";
     return cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    GXStoreCoupons *coupon = self.storeInfo.coupon[indexPath.item];
+
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"rule_id"] = coupon.rule_id;
     
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/drawCoupon" parameters:parameters success:^(id responseObject) {
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return CGSizeMake(120, 40);

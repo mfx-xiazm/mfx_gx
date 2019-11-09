@@ -10,6 +10,7 @@
 #import "GXMarketTrendChildVC.h"
 #import <JXCategoryTitleView.h>
 #import <JXCategoryIndicatorLineView.h>
+#import "GXCartVC.h"
 
 @interface GXMarketTrendVC ()<JXCategoryViewDelegate,UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet JXCategoryTitleView *categoryView;
@@ -60,6 +61,7 @@
     _categoryView.titleFont = [UIFont systemFontOfSize:14 weight:UIFontWeightMedium];
     _categoryView.titleColor = [UIColor blackColor];
     _categoryView.titleSelectedColor = HXControlBg;
+    _categoryView.defaultSelectedIndex = self.selectIndex;
     _categoryView.delegate = self;
     _categoryView.contentScrollView = self.scrollView;
     
@@ -75,14 +77,15 @@
     _scrollView.contentSize = CGSizeMake(HX_SCREEN_WIDTH*self.childVCs.count, 0);
     
     // 加第一个视图
-    UIViewController *targetViewController = self.childVCs.firstObject;
-    targetViewController.view.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, _scrollView.hxn_height);
+    UIViewController *targetViewController = self.childVCs[self.selectIndex];
+    targetViewController.view.frame = CGRectMake(self.selectIndex*HX_SCREEN_WIDTH, 0, HX_SCREEN_WIDTH, _scrollView.hxn_height);
     [_scrollView addSubview:targetViewController.view];
 }
 #pragma mark -- 点击事件
 -(void)cartClicked
 {
-    HXLog(@"购物车");
+    GXCartVC *cvc = [GXCartVC new];
+    [self.navigationController pushViewController:cvc animated:YES];
 }
 #pragma mark - JXCategoryViewDelegate
 // 滚动和点击选中

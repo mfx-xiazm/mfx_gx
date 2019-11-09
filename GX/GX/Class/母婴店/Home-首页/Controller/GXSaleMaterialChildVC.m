@@ -14,6 +14,7 @@
 #import "GXTopSaleMaterial.h"
 #import "GXSaleMaterialFilerView.h"
 #import "GXAllMaterialVC.h"
+#import "GXGoodsDetailVC.h"
 
 @interface GXSaleMaterialChildVC ()<UITableViewDelegate,UITableViewDataSource,GXGoodsMaterialCellDelegate,GXSaleMaterialFilerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -156,7 +157,7 @@
     dispatch_group_async(group, queue, ^{
         hx_strongify(weakSelf);
         
-        [HXNetworkTool POST:HXRC_M_URL action:@"materialGood" parameters:@{} success:^(id responseObject) {
+        [HXNetworkTool POST:HXRC_M_URL action:@"admin/materialGood" parameters:@{} success:^(id responseObject) {
             if([[responseObject objectForKey:@"status"] integerValue] == 1) {
                 strongSelf.topMaterials = [NSArray yy_modelArrayWithClass:[GXTopSaleMaterial class] json:responseObject[@"data"]];
             }else{
@@ -171,7 +172,7 @@
     dispatch_group_async(group, queue, ^{
         hx_strongify(weakSelf);
         
-        [HXNetworkTool POST:HXRC_M_URL action:@"materialData" parameters:@{} success:^(id responseObject) {
+        [HXNetworkTool POST:HXRC_M_URL action:@"admin/materialData" parameters:@{} success:^(id responseObject) {
             if([[responseObject objectForKey:@"status"] integerValue] == 1) {
                 strongSelf.materialFilter = [GXMaterialFilter yy_modelWithDictionary:responseObject[@"data"]];
             }else{
@@ -222,7 +223,7 @@
     }
 
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"materialList" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/materialList" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             if (isRefresh) {
@@ -300,6 +301,7 @@
 {
     GXGoodsMaterialCell * cell = [GXGoodsMaterialCell cellWithTableView:tableView];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.targetVc = self;
     GXGoodsMaterialLayout *layout = self.materialLayouts[indexPath.row];
     cell.materialLayout = layout;
     cell.delegate = self;
@@ -322,7 +324,10 @@
 /** 查看商品 */
 - (void)didClickGoodsInCell:(GXGoodsMaterialCell *)Cell
 {
-    HXLog(@"查看商品");
+    GXGoodsMaterial *material = Cell.materialLayout.material;
+    GXGoodsDetailVC *dvc = [GXGoodsDetailVC new];
+    dvc.goods_id = material.goods_id;
+    [self.navigationController pushViewController:dvc animated:YES];
 }
 /** 分享 */
 - (void)didClickShareInCell:(GXGoodsMaterialCell *)Cell

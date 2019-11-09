@@ -52,7 +52,7 @@ static NSString *const MyAddressCell = @"MyAddressCell";
 -(void)getAddressListRequest
 {
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"getAddressList" parameters:@{} success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getAddressList" parameters:@{} success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             strongSelf.addressList = [NSArray yy_modelArrayWithClass:[GXMyAddress class] json:responseObject[@"data"]];
@@ -74,7 +74,7 @@ static NSString *const MyAddressCell = @"MyAddressCell";
     parameters[@"is_default"] = is_default;
     
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"setDefaultAddress" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/setDefaultAddress" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             [strongSelf getAddressListRequest];
@@ -91,7 +91,7 @@ static NSString *const MyAddressCell = @"MyAddressCell";
     parameters[@"address_id"] = address.address_id;
     
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"delAddress" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/delAddress" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             NSMutableArray *temp = [NSMutableArray arrayWithArray:strongSelf.addressList];

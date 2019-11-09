@@ -34,10 +34,8 @@
     pageControl.numberOfPages = 4;
     pageControl.currentPageIndicatorSize = CGSizeMake(6, 6);
     pageControl.pageIndicatorSize = CGSizeMake(6, 6);
-    //    pageControl.pageIndicatorImage = HXGetImage(@"轮播点灰");
-    //    pageControl.currentPageIndicatorImage = HXGetImage(@"轮播点黑");
-    pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
-    pageControl.currentPageIndicatorTintColor = HXControlBg;
+    pageControl.pageIndicatorImage = HXGetImage(@"灰色渐进器");
+    pageControl.currentPageIndicatorImage = HXGetImage(@"当前渐进器");
     pageControl.frame = CGRectMake(0, CGRectGetHeight(self.cyclePagerView.frame) - 20, CGRectGetWidth(self.cyclePagerView.frame), 20);
     self.pageControl = pageControl;
     [self.cyclePagerView addSubview:pageControl];
@@ -53,15 +51,26 @@
     self.pageControl.numberOfPages = _adv.count;
     [self.cyclePagerView reloadData];
 }
+-(void)setTryCovers:(NSArray *)tryCovers
+{
+    _tryCovers = tryCovers;
+    self.pageControl.numberOfPages = _tryCovers.count;
+    [self.cyclePagerView reloadData];
+}
 #pragma mark -- TYCyclePagerView代理
 - (NSInteger)numberOfItemsInPagerView:(TYCyclePagerView *)pageView {
-    return self.adv.count;
+    return self.adv ? self.adv.count : self.tryCovers.count;
 }
 
 - (UICollectionViewCell *)pagerView:(TYCyclePagerView *)pagerView cellForItemAtIndex:(NSInteger)index {
     GXHomePushCell *cell = [pagerView dequeueReusableCellWithReuseIdentifier:@"TopBannerCell" forIndex:index];
-    GXActivityBanner *activityBanner = self.adv[index];
-    cell.activityBanner = activityBanner;
+    if (self.adv) {
+        GXActivityBanner *activityBanner = self.adv[index];
+        cell.activityBanner = activityBanner;
+    }else{
+        NSString *imgUrl = self.tryCovers[index];
+        [cell.contentImage sd_setImageWithURL:[NSURL URLWithString:imgUrl]];
+    }
     return cell;
 }
 
@@ -80,7 +89,9 @@
 
 - (void)pagerView:(TYCyclePagerView *)pageView didSelectedItemCell:(__kindof UICollectionViewCell *)cell atIndex:(NSInteger)index
 {
-    
+    if (self.activityBannerClicked) {
+        self.activityBannerClicked(index);
+    }
 }
 
 @end

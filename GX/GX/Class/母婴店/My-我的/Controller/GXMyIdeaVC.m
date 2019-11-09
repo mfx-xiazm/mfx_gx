@@ -259,7 +259,7 @@ static NSString *const MyIdeaTypeCell = @"MyIdeaTypeCell";
     }
     
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"submitSuggest" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/submitSuggest" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         [btn stopLoading:@"提交" image:nil textColor:nil backgroundColor:nil];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
@@ -276,7 +276,7 @@ static NSString *const MyIdeaTypeCell = @"MyIdeaTypeCell";
 -(void)getSuggestTypeRequest
 {
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"getSuggestType" parameters:@{} success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getSuggestType" parameters:@{} success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             strongSelf.suggestionTypes = [NSArray yy_modelArrayWithClass:[GXSuggestionType class] json:responseObject[@"data"]];

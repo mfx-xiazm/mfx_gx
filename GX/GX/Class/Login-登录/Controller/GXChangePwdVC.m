@@ -67,7 +67,7 @@
     parameters[@"type"] = @"2";//默认为1 表示注册时获取短信验证码 为2表示修改手机号或密码或忘记密码时获取验证码
     
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"getCheckCode" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getCheckCode" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             [sender startWithTime:60 title:@"获取验证码" countDownTitle:@"s" mainColor:HXControlBg countColor:HXControlBg];
@@ -89,7 +89,7 @@
     parameters[@"confirmPass"] = self.confirmPwd.text;
     
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:(self.dataType ==1)?@"forgetPassword":@"editPassword" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:(self.dataType ==1)?@"admin/forgetPassword":@"admin/editPassword" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         [btn stopLoading:@"确定" image:nil textColor:nil backgroundColor:nil];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {

@@ -59,7 +59,7 @@ static NSString *const MyCouponCell = @"MyCouponCell";
     parameters[@"rule_id"] = coupon.rule_id;
     
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"drawCoupon" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/drawCoupon" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];

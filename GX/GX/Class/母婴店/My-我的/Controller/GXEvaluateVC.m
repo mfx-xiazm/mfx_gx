@@ -259,7 +259,7 @@ static NSString *const MyIdeaPhotoCell = @"MyIdeaPhotoCell";
     }
     
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"evaOrder" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/evaOrder" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         [btn stopLoading:@"确定" image:nil textColor:nil backgroundColor:nil];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {

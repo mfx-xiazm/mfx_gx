@@ -10,9 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXClient;
 @interface GXClientManageCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIView *topTitleView;
-
+/* 客户 */
+@property(nonatomic,strong) GXClient *client;
 @end
 
 NS_ASSUME_NONNULL_END

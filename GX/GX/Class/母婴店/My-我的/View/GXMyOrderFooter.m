@@ -9,6 +9,7 @@
 #import "GXMyOrderFooter.h"
 #import "GXMyOrder.h"
 #import "GXMyRefund.h"
+#import "GXSalerOrder.h"
 
 @interface GXMyOrderFooter ()
 @property (weak, nonatomic) IBOutlet UILabel *total_price;
@@ -107,6 +108,21 @@
 {
     _refund = refund;
     self.total_price.text = [NSString stringWithFormat:@"￥%@",_refund.pay_amount];
+}
+-(void)setPOrder:(GXMyOrder *)pOrder
+{
+    _pOrder = pOrder;
+    self.total_price.text = [NSString stringWithFormat:@"￥%@",_pOrder.pay_amount];
+}
+-(void)setPRefund:(GXMyRefund *)pRefund
+{
+    _pRefund = pRefund;
+    self.total_price.text = [NSString stringWithFormat:@"￥%@",_pRefund.pay_amount];
+}
+-(void)setSalerOrder:(GXSalerOrder *)salerOrder
+{
+    _salerOrder = salerOrder;
+    self.total_price.text = [NSString stringWithFormat:@"￥%@",_salerOrder.pay_amount];
 }
 - (IBAction)orderHandleClicked:(UIButton *)sender {
     if (self.orderHandleCall) {

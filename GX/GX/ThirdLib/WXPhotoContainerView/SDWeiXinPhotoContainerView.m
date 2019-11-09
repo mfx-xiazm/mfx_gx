@@ -54,7 +54,7 @@
     
     for (long i = 0; i < _picPathStringsArray.count; i++) {
         UIImageView *imageView = [self.imageViewsArray objectAtIndex:i];
-        if (self.target) {
+        if (self.targetVc) {
             imageView.userInteractionEnabled = YES;
         }else{
             imageView.userInteractionEnabled = NO;
@@ -106,8 +106,8 @@
     NSMutableArray * items = [NSMutableArray array];
     for (int i = 0; i < _picPathStringsArray.count; i++) {
         NSMutableDictionary *temp = [NSMutableDictionary dictionary];
-        temp[@"ZLPreviewPhotoObj"] = [_picPathStringsArray[i] hasPrefix:@"http"]?[NSURL URLWithString:_picPathStringsArray[i]]:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HXRC_URL_HEADER,_picPathStringsArray[i]]];
-        temp[@"ZLPreviewPhotoTyp"] = @(ZLPreviewPhotoTypeURLImage);
+        temp[ZLPreviewPhotoObj] = [_picPathStringsArray[i] hasPrefix:@"http"]?[NSURL URLWithString:_picPathStringsArray[i]]:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HXRC_URL_HEADER,_picPathStringsArray[i]]];
+        temp[ZLPreviewPhotoTyp] = @(ZLPreviewPhotoTypeURLImage);
         [items addObject:temp];
     }
 
@@ -115,12 +115,12 @@
     /**
      导航条颜色
      */
-    actionSheet.configuration.navBarColor = UIColorFromRGB(0xF1C736);
+    actionSheet.configuration.navBarColor = HXControlBg;
     /**
      底部工具栏按钮 可交互 状态标题颜色
      */
-    actionSheet.configuration.bottomBtnsNormalTitleColor = UIColorFromRGB(0xF1C736);
-    actionSheet.sender = self.target;
+    actionSheet.configuration.statusBarStyle = UIStatusBarStyleLightContent;
+    actionSheet.sender = self.targetVc;
     [actionSheet previewPhotos:items index:tap.view.tag hideToolBar:YES complete:^(NSArray * _Nonnull photos) {
 
     }];

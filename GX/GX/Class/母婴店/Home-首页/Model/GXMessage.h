@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface GXMessage : NSObject
 @property(nonatomic,copy) NSString *msg_id;
 @property(nonatomic,copy) NSString *msg_title;
+/** 0不关联 1订单详情 2退款订单详情 3优惠券发放 */
 @property(nonatomic,copy) NSString *ref_type;
 @property(nonatomic,copy) NSString *ref_id;
 @property(nonatomic,copy) NSString *msg_content;

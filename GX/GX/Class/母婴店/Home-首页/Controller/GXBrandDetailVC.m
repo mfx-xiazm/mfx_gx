@@ -94,7 +94,7 @@ static NSString *const BrandDetailHeader = @"BrandDetailHeader";
         NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
         parameters[@"brand_id"] = self.brand_id;
         
-        [HXNetworkTool POST:HXRC_M_URL action:@"brandDetail" parameters:parameters success:^(id responseObject) {
+        [HXNetworkTool POST:HXRC_M_URL action:@"admin/brandDetail" parameters:parameters success:^(id responseObject) {
             if([[responseObject objectForKey:@"status"] integerValue] == 1) {
                 strongSelf.brandDetail = [GXBrandDetail yy_modelWithDictionary:responseObject[@"data"]];
             }else{
@@ -138,7 +138,7 @@ static NSString *const BrandDetailHeader = @"BrandDetailHeader";
         parameters[@"page"] = @(page);//第几页
     }
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"getBrandGoodList" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getBrandGoodList" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             if (isRefresh) {
@@ -187,7 +187,7 @@ static NSString *const BrandDetailHeader = @"BrandDetailHeader";
     parameters[@"brand_id"] = self.brand_id;
     
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"joinBrand" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/joinBrand" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             [strongSelf getBrandDetailRequest];//成功刷新页面
@@ -217,6 +217,8 @@ static NSString *const BrandDetailHeader = @"BrandDetailHeader";
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     GXGoodsDetailVC *dvc = [GXGoodsDetailVC new];
+    GXBrandGoods *brandGoods = self.goods[indexPath.item];
+    dvc.goods_id = brandGoods.goods_id;
     [self.navigationController pushViewController:dvc animated:YES];
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {

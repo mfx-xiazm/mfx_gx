@@ -26,7 +26,7 @@
 -(void)getInviteDataRequest
 {
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"inviteData" parameters:@{} success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/inviteData" parameters:@{} success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             
@@ -46,4 +46,8 @@
     self.share_code.text = [NSString stringWithFormat:@"我的邀请码：%@",result[@"share_code"]];
     [self.relu_txt setTextWithLineSpace:5.f withString:result[@"act_rule"] withFont:[UIFont systemFontOfSize:13]];
 }
+- (IBAction)inviteClicked:(UIButton *)sender {
+    HXLog(@"立即邀请");
+}
+
 @end

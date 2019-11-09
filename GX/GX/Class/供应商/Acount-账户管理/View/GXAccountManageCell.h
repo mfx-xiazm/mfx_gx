@@ -10,8 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXFinanceLog;
 @interface GXAccountManageCell : UITableViewCell
-
+/* 明细 */
+@property(nonatomic,strong) GXFinanceLog *log;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -15,6 +15,8 @@
 #import "GXActivityCataInfo.h"
 #import "GXCatalogItem.h"
 #import "GXSearchActivityVC.h"
+#import "GXWebContentVC.h"
+#import "GXGoodsDetailVC.h"
 
 @interface GXActivityVC ()<UITableViewDelegate,UITableViewDataSource,JXCategoryViewDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet GXPageMainTable *tableView;
@@ -159,7 +161,7 @@
 -(void)getCatalogRequest
 {
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"promoteGoods" parameters:@{} success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/promoteGoods" parameters:@{} success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             strongSelf.activityInfo = [GXActivityCataInfo yy_modelWithDictionary:responseObject[@"data"]];
@@ -178,6 +180,32 @@
     self.tableView.hidden = NO;
     
     self.header.adv = self.activityInfo.adv;
+    
+    hx_weakify(self);
+    self.header.activityBannerClicked = ^(NSInteger index) {
+        hx_strongify(weakSelf);
+        GXActivityBanner *banner = strongSelf.activityInfo.adv[index];
+        /** 1仅图片 2链接内容 3html富文本内容 4产品详情 */
+        if ([banner.adv_type isEqualToString:@"1"]) {
+            HXLog(@"仅图片");
+        }else if ([banner.adv_type isEqualToString:@"2"]) {
+            GXWebContentVC *cvc = [GXWebContentVC new];
+            cvc.navTitle = banner.adv_name;
+            cvc.isNeedRequest = NO;
+            cvc.url = banner.adv_content;
+            [strongSelf.navigationController pushViewController:cvc animated:YES];
+        }else if ([banner.adv_type isEqualToString:@"3"]) {
+            GXWebContentVC *cvc = [GXWebContentVC new];
+            cvc.navTitle = banner.adv_name;
+            cvc.isNeedRequest = NO;
+            cvc.htmlContent = banner.adv_content;
+            [strongSelf.navigationController pushViewController:cvc animated:YES];
+        }else{
+            GXGoodsDetailVC *dvc = [GXGoodsDetailVC new];
+            dvc.goods_id = banner.adv_content;
+            [strongSelf.navigationController pushViewController:dvc animated:YES];
+        }
+    };
     
     [self.tableView reloadData];
 }

@@ -18,7 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface GXGoodsCommentCell : UITableViewCell
+
 + (instancetype)cellWithTableView:(UITableView *)tableView;
+@property (nonatomic, weak) UIViewController *targetVc;
 /** 数据源 */
 @property (nonatomic, strong) GXGoodsCommentLayout *commentLayout;
 /** 代理 */

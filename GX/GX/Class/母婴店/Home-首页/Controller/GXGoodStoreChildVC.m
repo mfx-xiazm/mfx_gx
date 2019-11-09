@@ -97,7 +97,7 @@ static NSString *const StoreCell = @"StoreCell";
         parameters[@"page"] = @(page);//第几页
     }
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"getCatalogShop" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getCatalogShop" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         [strongSelf stopShimmer];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
@@ -148,9 +148,15 @@ static NSString *const StoreCell = @"StoreCell";
     hx_weakify(self);
     cell.storeHandleCall = ^(NSInteger index) {
         hx_strongify(weakSelf);
-        GXStoreMsgVC *mvc = [GXStoreMsgVC new];
-        mvc.provider_uid = store.uid;
-        [strongSelf.navigationController pushViewController:mvc animated:YES];
+        if (index == 1) {
+            GXStoreMsgVC *mvc = [GXStoreMsgVC new];
+            mvc.provider_uid = store.uid;
+            [strongSelf.navigationController pushViewController:mvc animated:YES];
+        }else{
+            GXStoreGoodsListVC *lvc = [GXStoreGoodsListVC new];
+            lvc.provider_uid = store.uid;
+            [strongSelf.navigationController pushViewController:lvc animated:YES];
+        }
     };
     return cell;
 }

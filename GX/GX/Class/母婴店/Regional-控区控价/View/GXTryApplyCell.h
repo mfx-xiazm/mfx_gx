@@ -10,8 +10,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXTryGoods;
+typedef void(^getTryCall)(void);
 @interface GXTryApplyCell : UITableViewCell
-
+/* 商品 */
+@property(nonatomic,strong) GXTryGoods *goods;
+/* 点击 */
+@property(nonatomic,copy) getTryCall getTryCall;
 @end
 
 NS_ASSUME_NONNULL_END

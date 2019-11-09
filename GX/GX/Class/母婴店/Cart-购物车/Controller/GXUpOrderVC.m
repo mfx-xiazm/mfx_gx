@@ -56,8 +56,17 @@ static NSString *const UpOrderCell = @"UpOrderCell";
             hx_strongify(weakSelf);
             GXMyAddressVC *avc = [GXMyAddressVC new];
             avc.getAddressCall = ^(GXMyAddress * _Nonnull address) {
-                strongSelf.confirmOrder.defaultAddress = address;
-                [strongSelf handleConfirmOrderData];
+                if (strongSelf.confirmOrder.defaultAddress) {
+                    if (![address.address_id isEqualToString:strongSelf.confirmOrder.defaultAddress.address_id]) {
+                        strongSelf.confirmOrder.defaultAddress = address;
+                        [strongSelf checkGoodsAreaRequest];//请求接口
+                    }else{
+                        strongSelf.confirmOrder.defaultAddress = address;
+                    }
+                }else{
+                    strongSelf.confirmOrder.defaultAddress = address;
+                    [strongSelf checkGoodsAreaRequest];//请求接口
+                }
             };
             [strongSelf.navigationController pushViewController:avc animated:YES];
         };
@@ -144,7 +153,45 @@ static NSString *const UpOrderCell = @"UpOrderCell";
     }
    
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:self.isCartPush?@"getConfirmOrderData":@"getConfirmData" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:self.isCartPush?@"admin/getConfirmOrderData":@"admin/getConfirmData" parameters:parameters success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            strongSelf.confirmOrder = [GXConfirmOrder yy_modelWithDictionary:responseObject[@"data"]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                strongSelf.tableView.hidden = NO;
+                [strongSelf handleConfirmOrderData];
+            });
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
+}
+-(void)checkGoodsAreaRequest
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"address_id"] = self.confirmOrder.defaultAddress.address_id;//选择的收货地址id
+    
+    NSMutableString *skuDatas = [NSMutableString string];
+    [skuDatas appendString:@"["];
+    for (GXConfirmOrderData *orderData in self.confirmOrder.goodsData) {
+        for (GXConfirmOrderGoods *orderGood in orderData.goods) {
+            if (skuDatas.length == 1) {
+                [skuDatas appendFormat:@"{\"sku_id\":\"%@\",\"cart_num\":\"%@\"}",orderGood.sku_id,orderGood.cart_num];
+            }else{
+                [skuDatas appendFormat:@",{\"sku_id\":\"%@\",\"cart_num\":\"%@\"}",orderGood.sku_id,orderGood.cart_num];
+            }
+        }
+    }
+    [skuDatas appendString:@"]"];
+    parameters[@"skuDatas"] = skuDatas;//选择的商品的sku_id 和每个商品的cart_num数量
+    
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/checkGoodsArea" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         [strongSelf stopShimmer];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
@@ -228,7 +275,7 @@ static NSString *const UpOrderCell = @"UpOrderCell";
     }
 
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:self.isCartPush?@"saveOrder":@"saveOrderData" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:self.isCartPush?@"admin/saveOrder":@"admin/saveOrderData" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             if (strongSelf.upOrderSuccessCall) {

@@ -23,9 +23,8 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dkQ-vw-gxd">
                     <rect key="frame" x="0.0" y="260.5" width="434" height="50"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AW5-ur-4tK">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="每日必抢_top" translatesAutoresizingMaskIntoConstraints="NO" id="AW5-ur-4tK">
                             <rect key="frame" x="10" y="5" width="40" height="40"/>
-                            <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="AW5-ur-4tK" secondAttribute="height" multiplier="1:1" id="oMM-Q0-ult"/>
                             </constraints>
@@ -102,8 +101,8 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XGt-fO-Gd0">
                     <rect key="frame" x="10" y="397" width="414" height="40"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="显示" translatesAutoresizingMaskIntoConstraints="NO" id="tuw-78-6Uk">
-                            <rect key="frame" x="10" y="14" width="19" height="12"/>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="说明" translatesAutoresizingMaskIntoConstraints="NO" id="tuw-78-6Uk">
+                            <rect key="frame" x="10" y="8.5" width="19" height="23"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="19" id="7sl-Z4-UgW"/>
                             </constraints>
@@ -178,6 +177,7 @@
         </view>
     </objects>
     <resources>
-        <image name="显示" width="19" height="12"/>
+        <image name="每日必抢_top" width="34" height="37"/>
+        <image name="说明" width="23" height="23"/>
     </resources>
 </document>

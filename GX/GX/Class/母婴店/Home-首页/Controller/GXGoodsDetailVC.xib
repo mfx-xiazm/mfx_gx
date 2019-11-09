@@ -12,6 +12,8 @@
             <connections>
                 <outlet property="control_collect" destination="vXM-dJ-jsV" id="amA-tf-aYB"/>
                 <outlet property="control_tool" destination="dci-xu-NWx" id="ONG-L6-XLd"/>
+                <outlet property="normal_add_btn" destination="KkW-ND-l8c" id="Z7t-rP-Oot"/>
+                <outlet property="normal_buy_btn" destination="4KB-xH-ESk" id="cz0-xG-iPc"/>
                 <outlet property="normal_collect" destination="Oms-L0-DOk" id="vTe-8s-mwG"/>
                 <outlet property="normal_tool" destination="DAn-sc-4Wd" id="Nfo-u4-aNO"/>
                 <outlet property="tableView" destination="0Wq-xO-tCB" id="rV8-z9-k8p"/>
@@ -233,7 +235,7 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zqq-Ve-HZM">
                             <rect key="frame" x="80" y="0.0" width="334" height="50"/>
-                            <color key="backgroundColor" red="0.91764705882352937" green="0.29019607843137252" blue="0.36078431372549019" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal" title="申请加盟">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

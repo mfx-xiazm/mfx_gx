@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
+@class GXMyAddress;
 @interface GXValidAddressCell : UITableViewCell
-
+/* 地址 */
+@property(nonatomic,strong) GXMyAddress *address;
 @end
 
 NS_ASSUME_NONNULL_END
