@@ -61,6 +61,12 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
     
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GXUpOrderGoodsCell class]) bundle:nil] forCellReuseIdentifier:UpOrderGoodsCell];
+    
+    hx_weakify(self);
+    [self.tableView zx_setEmptyView:[GYEmptyView class] isFull:YES clickedBlock:^(UIButton * _Nullable btn) {
+        [weakSelf startShimmer];
+        [weakSelf getOrderDataRequest:YES];
+    }];
 }
 /** 添加刷新控件 */
 -(void)setUpRefresh

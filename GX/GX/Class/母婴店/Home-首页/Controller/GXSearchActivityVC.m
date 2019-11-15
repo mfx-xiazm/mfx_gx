@@ -82,6 +82,12 @@ static NSString *const ActivityCell = @"ActivityCell";
     
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GXActivityCell class]) bundle:nil] forCellReuseIdentifier:ActivityCell];
+    
+    hx_weakify(self);
+    [self.tableView zx_setEmptyView:[GYEmptyView class] isFull:YES clickedBlock:^(UIButton * _Nullable btn) {
+        [weakSelf startShimmer];
+        [weakSelf getActivityListaRequest:YES];
+    }];
 }
 /** 添加刷新控件 */
 -(void)setUpRefresh

@@ -67,6 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *set_id;
 @property(nonatomic,copy) NSString *set_type;
 @property(nonatomic,copy) NSString *img;
+@property(nonatomic,copy) NSString *trade_img;
 
 @end
 

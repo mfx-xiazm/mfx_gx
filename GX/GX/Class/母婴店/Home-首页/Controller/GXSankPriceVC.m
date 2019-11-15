@@ -136,6 +136,12 @@ static NSString *const SankPriceCell = @"SankPriceCell";
     
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GXSankPriceCell class]) bundle:nil] forCellReuseIdentifier:SankPriceCell];
+    
+    hx_weakify(self);
+    [self.tableView zx_setEmptyView:[GYEmptyView class] isFull:YES clickedBlock:^(UIButton * _Nullable btn) {
+        [weakSelf startShimmer];
+        [weakSelf goodsSortByPriceRequest:YES];
+    }];
 }
 /** 添加刷新控件 */
 -(void)setUpRefresh
@@ -317,12 +323,12 @@ static NSString *const SankPriceCell = @"SankPriceCell";
         footer.priceSankHandleCall = ^(NSInteger index) {
             hx_strongify(weakSelf);
             if (index == 1) {
-                [strongSelf addOrderCartRequest:sank.goods_id specs_attrs:sank.specs_attrs logistics_com_id:sank.logistics_com_id sku_id:sank.sku_id];
+                [strongSelf addOrderCartRequest:sank.goods_id specs_attrs:[NSString stringWithFormat:@"%@,%@",sank.specs_attrs,sank.logistics_com_name] logistics_com_id:sank.logistics_com_id sku_id:sank.sku_id];
             }else{
                 GXUpOrderVC *ovc = [GXUpOrderVC new];
                 ovc.goods_id = sank.goods_id;
                 ovc.goods_num = @"1";
-                ovc.specs_attrs = sank.specs_attrs;
+                ovc.specs_attrs = [NSString stringWithFormat:@"%@,%@",sank.specs_attrs,sank.logistics_com_name];
                 ovc.sku_id = sank.sku_id;
                 ovc.logistics_com_id = sank.logistics_com_id;
                 [strongSelf.navigationController pushViewController:ovc animated:YES];

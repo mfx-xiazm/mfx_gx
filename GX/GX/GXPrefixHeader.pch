@@ -26,6 +26,9 @@
 #import <MBProgressHUD+NHAdd.h>
 #import "NSString+HXNExtension.h"
 #import <YYText.h>
+#import <ZXEmptyView.h>
+#import "GYEmptyView.h"
+
 /**
  调试阶段，用HXLog代替NSLog
  发布阶段，HXLog就不会打印

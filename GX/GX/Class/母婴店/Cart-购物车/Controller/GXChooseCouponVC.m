@@ -45,6 +45,12 @@ static NSString *const MyCouponCell = @"MyCouponCell";
     
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GXMyCouponCell class]) bundle:nil] forCellReuseIdentifier:MyCouponCell];
+    
+    hx_weakify(self);
+    [self.tableView zx_setEmptyView:[GYEmptyView class] isFull:YES clickedBlock:^(UIButton * _Nullable btn) {
+        [weakSelf startShimmer];
+        [weakSelf getCouponUseDataRequest];
+    }];
 }
 -(void)sureClicked
 {
@@ -110,8 +116,14 @@ static NSString *const MyCouponCell = @"MyCouponCell";
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     GXMyCoupon *useCoupon = self.coupons[indexPath.row];
-    useCoupon.isSelected = !useCoupon.isSelected;
+    if (self.selectCoupon == useCoupon) {
+        useCoupon.isSelected = !useCoupon.isSelected;
+    }else{
+        self.selectCoupon.isSelected = NO;
+        useCoupon.isSelected = !useCoupon.isSelected;
+    }
     self.selectCoupon = useCoupon;
     [tableView reloadData];
 }

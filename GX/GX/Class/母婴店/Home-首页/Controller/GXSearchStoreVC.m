@@ -43,6 +43,7 @@ static NSString *const StoreCell = @"StoreCell";
     searchBar.layer.cornerRadius = 6;
     searchBar.layer.masksToBounds = YES;
     searchBar.delegate = self;
+    searchBar.placeholder = @"请输入店铺名称查询";
     searchBar.text = self.keyword;
     self.searchBar = searchBar;
     self.navigationItem.titleView = searchBar;
@@ -81,6 +82,12 @@ static NSString *const StoreCell = @"StoreCell";
     
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GXStoreCell class]) bundle:nil] forCellReuseIdentifier:StoreCell];
+    
+    hx_weakify(self);
+    [self.tableView zx_setEmptyView:[GYEmptyView class] isFull:YES clickedBlock:^(UIButton * _Nullable btn) {
+        [weakSelf startShimmer];
+        [weakSelf searchShopDataRequest:YES];
+    }];
 }
 /** 添加刷新控件 */
 -(void)setUpRefresh

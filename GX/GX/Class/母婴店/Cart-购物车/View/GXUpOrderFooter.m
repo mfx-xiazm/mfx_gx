@@ -24,7 +24,7 @@
 -(void)setConfirmOrder:(GXConfirmOrder *)confirmOrder
 {
     _confirmOrder = confirmOrder;
-    if (![_confirmOrder.discount isEqualToString:@"0"]) {
+    if (![_confirmOrder.discount isEqualToString:@"10"]) {
         self.discount.text = [NSString stringWithFormat:@"%@折 -%@",_confirmOrder.discount,_confirmOrder.discount_amount];
     }else {
         self.discount.text = @"无";

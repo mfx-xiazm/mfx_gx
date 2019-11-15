@@ -18,7 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (CGPoint)filterMenu_positionInSuperView;
 //点击事件
 - (void)filterMenu:(GXSaleMaterialFilerView *)menu didSelectLogId:(NSString *)logId didSelectAdvertiseId:(NSString *)advertiseId didSelectPlanId:(NSString *)planId;
-
+@optional
+//视图消失
+- (void)filterMenu_didDismiss;
 @end
 
 

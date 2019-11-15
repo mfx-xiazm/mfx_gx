@@ -38,9 +38,19 @@
         self.order_tip.hidden = NO;
         self.order_tip.text = @"   订单待付款，请尽快付款   ";
     }else if ([_orderDetail.status isEqualToString:@"待发货"]) {
-        self.order_desc.text = @"您的订单待发货";
         self.order_tip.hidden = NO;
-        self.order_tip.text = @"   订单待发货，请耐心等待   ";
+        if ([self.orderDetail.pay_type isEqualToString:@"3"]) {// 线下付款
+            if ([self.orderDetail.approve_status isEqualToString:@"3"]) {//订单审核通过
+                self.order_desc.text = @"订单审核被拒";
+                self.order_tip.text = [NSString stringWithFormat:@"   原因：%@   ",self.orderDetail.reject_reason];
+            }else{
+                self.order_desc.text = @"您的订单待发货";
+                self.order_tip.text = @"   订单待发货，请耐心等待   ";
+            }
+        }else{
+            self.order_desc.text = @"您的订单待发货";
+            self.order_tip.text = @"   订单待发货，请耐心等待   ";
+        }
     }else if ([_orderDetail.status isEqualToString:@"待收货"]) {
         self.order_desc.text = @"您的订单已发货，请耐心等待";
         self.order_tip.hidden = YES;

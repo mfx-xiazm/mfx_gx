@@ -57,10 +57,17 @@ static NSString *const StoreCouponCell = @"StoreCouponCell";
         self.collectionView.hidden = YES;
         self.collectionViewHeight.constant = 0.f;
     }
-    for (int i=0;i<_store.goods.count;i++) {
-        GXStoreGoods *goods = _store.goods[i];
-        UIImageView *img = self.shop_goods_imgs[i];
-        [img sd_setImageWithURL:[NSURL URLWithString:goods.cover_img]];
+    if (_store.goods.count) {
+        for (int i=0;i<_store.goods.count;i++) {
+            GXStoreGoods *goods = _store.goods[i];
+            UIImageView *img = self.shop_goods_imgs[i];
+            [img sd_setImageWithURL:[NSURL URLWithString:goods.cover_img]];
+        }
+    }else{
+        for (int i=0;i<self.shop_goods_imgs.count;i++) {
+            UIImageView *img = self.shop_goods_imgs[i];
+            [img setImage:nil];
+        }
     }
     hx_weakify(self);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.02 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -109,7 +116,7 @@ static NSString *const StoreCouponCell = @"StoreCouponCell";
     }];
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(120, 40);
+    return CGSizeMake(125, 40);
 }
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {

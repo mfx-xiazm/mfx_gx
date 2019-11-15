@@ -53,6 +53,7 @@ static NSString *const ShopGoodsCell = @"ShopGoodsCell";
     searchBar.layer.cornerRadius = 6;
     searchBar.layer.masksToBounds = YES;
     searchBar.delegate = self;
+    searchBar.placeholder = @"请输入商品名称查询";
     searchBar.text = self.keyword;
     self.searchBar = searchBar;
     self.navigationItem.titleView = searchBar;
@@ -69,6 +70,12 @@ static NSString *const ShopGoodsCell = @"ShopGoodsCell";
     
     
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([GXShopGoodsCell class]) bundle:nil] forCellWithReuseIdentifier:ShopGoodsCell];
+    
+    hx_weakify(self);
+    [self.collectionView zx_setEmptyView:[GYEmptyView class] isFull:YES clickedBlock:^(UIButton * _Nullable btn) {
+        [weakSelf startShimmer];
+        [weakSelf getSearchGoodsRequest:YES];
+    }];
 }
 /** 添加刷新控件 */
 -(void)setUpRefresh

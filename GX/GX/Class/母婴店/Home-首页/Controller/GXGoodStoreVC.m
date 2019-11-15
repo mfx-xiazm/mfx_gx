@@ -63,6 +63,7 @@
     searchBar.layer.cornerRadius = 6;
     searchBar.layer.masksToBounds = YES;
     searchBar.delegate = self;
+    searchBar.placeholder = @"请输入店铺名称查询";
     self.searchBar = searchBar;
     self.navigationItem.titleView = searchBar;
 }

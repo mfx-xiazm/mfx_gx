@@ -121,6 +121,12 @@ static NSString *const CartSectionHeader = @"CartSectionHeader";
     self.collectionView.delegate = self;
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([GXCartCell class]) bundle:nil] forCellWithReuseIdentifier:CartCell];
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([GXCartSectionHeader class]) bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CartSectionHeader];
+    
+    hx_weakify(self);
+    [self.collectionView zx_setEmptyView:[GYEmptyView class] isFull:YES clickedBlock:^(UIButton * _Nullable btn) {
+        [weakSelf startShimmer];
+        [weakSelf getOrderCartListRequest:YES];
+    }];
 }
 /** 添加刷新控件 */
 -(void)setUpRefresh

@@ -60,6 +60,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
     [super viewDidLoad];
     [self setUpNavBar];
     [self setUpCollectionView];
+    [self setUpRefresh];
     [self startShimmer];
     [self getHomeDataRequest];
 }
@@ -77,6 +78,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
     searchBar.layer.cornerRadius = 6;
     searchBar.layer.masksToBounds = YES;
     searchBar.delegate = self;
+    searchBar.placeholder = @"请输入商品名称查询";
     self.searchBar = searchBar;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
     
@@ -113,6 +115,23 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([GXHomePushCell class]) bundle:nil] forCellWithReuseIdentifier:HomePushCell];
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([GXHomeSectionHeader class]) bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HomeSectionHeader];
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([GXHomeBannerHeader class]) bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HomeBannerHeader];
+    
+    hx_weakify(self);
+    [self.collectionView zx_setEmptyView:[GYEmptyView class] isFull:YES clickedBlock:^(UIButton * _Nullable btn) {
+        [weakSelf startShimmer];
+        [weakSelf getHomeDataRequest];
+    }]; 
+}
+/** 添加刷新控件 */
+-(void)setUpRefresh
+{
+    hx_weakify(self);
+    self.collectionView.mj_header.automaticallyChangeAlpha = YES;
+    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        hx_strongify(weakSelf);
+        [strongSelf.collectionView.mj_footer resetNoMoreData];
+        [strongSelf getHomeDataRequest];
+    }];
 }
 #pragma mark -- 点击事件
 -(void)msgClicked
@@ -419,6 +438,10 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
         [self.navigationController pushViewController:dvc animated:YES];
     }else if (indexPath.section == 3) {//通货行情
         GXMarketTrendVC *tvc = [GXMarketTrendVC new];
+        GYHomeMarketTrend *trend = self.homeData.currency_img.firstObject;
+        tvc.left_trend_img = trend.trade_img;
+        GYHomeMarketTrend *trend1 = self.homeData.currency_img.lastObject;
+        tvc.right_trend_img = trend1.trade_img;
         tvc.selectIndex = indexPath.item;
         [self.navigationController pushViewController:tvc animated:YES];
     }else if (indexPath.section == 4) {//品牌优选

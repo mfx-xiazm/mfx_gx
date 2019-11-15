@@ -18,7 +18,7 @@
                 <outlet property="desc_star" destination="wD1-wa-5Xg" id="Rck-xU-dDP"/>
                 <outlet property="photoCollectionView" destination="59P-xa-62w" id="Cj3-gQ-iCQ"/>
                 <outlet property="photoViewHeight" destination="bKr-Vl-xBH" id="Kd6-xj-ZEE"/>
-                <outlet property="remarkText" destination="L9f-LQ-b6G" id="hYZ-zq-6IF"/>
+                <outlet property="remarkTextView" destination="tEh-Uj-NHz" id="pvb-Lz-afN"/>
                 <outlet property="submitBtn" destination="LVY-zO-6mg" id="clZ-Pr-CZj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -206,20 +206,18 @@
                                         <constraint firstAttribute="bottom" secondItem="aW5-qw-xsT" secondAttribute="bottom" id="tgp-kf-K9h"/>
                                     </constraints>
                                 </view>
-                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="L9f-LQ-b6G" customClass="HXPlaceholderTextView">
+                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tEh-Uj-NHz">
                                     <rect key="frame" x="10" y="150" width="394" height="100"/>
-                                    <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="100" id="yl6-kS-Kb9"/>
+                                        <constraint firstAttribute="height" constant="100" id="qWD-6N-N2W"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="layerBoderCorner">
                                             <real key="value" value="5"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
-                                </textView>
+                                </view>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="59P-xa-62w">
                                     <rect key="frame" x="10" y="270" width="394" height="165"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -240,14 +238,14 @@
                                 <constraint firstAttribute="trailing" secondItem="59P-xa-62w" secondAttribute="trailing" constant="10" id="2sC-yQ-YbH"/>
                                 <constraint firstItem="zIX-gR-mtG" firstAttribute="top" secondItem="g9z-EI-hYk" secondAttribute="bottom" id="40e-Jp-OLg"/>
                                 <constraint firstAttribute="trailing" secondItem="g9z-EI-hYk" secondAttribute="trailing" id="Abm-nG-oqP"/>
+                                <constraint firstItem="tEh-Uj-NHz" firstAttribute="top" secondItem="zIX-gR-mtG" secondAttribute="bottom" constant="10" id="FNZ-Yf-fMh"/>
                                 <constraint firstItem="g9z-EI-hYk" firstAttribute="leading" secondItem="A3I-RJ-dLg" secondAttribute="leading" id="Faf-Zf-2Zd"/>
                                 <constraint firstItem="g9z-EI-hYk" firstAttribute="top" secondItem="A3I-RJ-dLg" secondAttribute="top" id="G3o-1c-Xcu"/>
-                                <constraint firstAttribute="trailing" secondItem="L9f-LQ-b6G" secondAttribute="trailing" constant="10" id="Gzt-4l-L7p"/>
-                                <constraint firstItem="59P-xa-62w" firstAttribute="top" secondItem="L9f-LQ-b6G" secondAttribute="bottom" constant="20" id="K0h-ec-0gi"/>
+                                <constraint firstItem="59P-xa-62w" firstAttribute="top" secondItem="tEh-Uj-NHz" secondAttribute="bottom" constant="20" id="afZ-Jc-lAW"/>
+                                <constraint firstAttribute="trailing" secondItem="tEh-Uj-NHz" secondAttribute="trailing" constant="10" id="avh-wd-xEp"/>
                                 <constraint firstAttribute="trailing" secondItem="zIX-gR-mtG" secondAttribute="trailing" id="l3b-sS-IQJ"/>
+                                <constraint firstItem="tEh-Uj-NHz" firstAttribute="leading" secondItem="A3I-RJ-dLg" secondAttribute="leading" constant="10" id="m19-mR-K9l"/>
                                 <constraint firstItem="59P-xa-62w" firstAttribute="leading" secondItem="A3I-RJ-dLg" secondAttribute="leading" constant="10" id="tgI-oR-vig"/>
-                                <constraint firstItem="L9f-LQ-b6G" firstAttribute="top" secondItem="zIX-gR-mtG" secondAttribute="bottom" constant="10" id="ujo-21-EMD"/>
-                                <constraint firstItem="L9f-LQ-b6G" firstAttribute="leading" secondItem="A3I-RJ-dLg" secondAttribute="leading" constant="10" id="zjB-Zf-CpJ"/>
                             </constraints>
                         </view>
                     </subviews>

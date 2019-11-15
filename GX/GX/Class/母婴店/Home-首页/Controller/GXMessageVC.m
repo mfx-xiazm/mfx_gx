@@ -11,6 +11,7 @@
 #import "GXMessage.h"
 #import "GXOrderDetailVC.h"
 #import "GXMyCouponVC.h"
+#import "GXWebContentVC.h"
 
 static NSString *const MessageCell = @"MessageCell";
 @interface GXMessageVC ()<UITableViewDelegate,UITableViewDataSource>
@@ -69,6 +70,12 @@ static NSString *const MessageCell = @"MessageCell";
     
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GXMessageCell class]) bundle:nil] forCellReuseIdentifier:MessageCell];
+    
+    hx_weakify(self);
+    [self.tableView zx_setEmptyView:[GYEmptyView class] isFull:YES clickedBlock:^(UIButton * _Nullable btn) {
+        [weakSelf startShimmer];
+        [weakSelf getMessageDataRequest:YES];
+    }];
 }
 /** 添加刷新控件 */
 -(void)setUpRefresh
@@ -175,7 +182,13 @@ static NSString *const MessageCell = @"MessageCell";
         [tableView reloadData];
     }
     /** 0不关联 1订单详情 2退款订单详情 3优惠券发放 */
-    if ([msg.ref_type isEqualToString:@"1"]) {
+    if ([msg.ref_type isEqualToString:@"0"]) {
+        GXWebContentVC *cvc = [GXWebContentVC new];
+        cvc.navTitle = @"消息";
+        cvc.isNeedRequest = NO;
+        cvc.htmlContent = msg.msg_content;
+        [self.navigationController pushViewController:cvc animated:YES];
+    }else if ([msg.ref_type isEqualToString:@"1"]) {
         GXOrderDetailVC *dvc = [GXOrderDetailVC new];
         dvc.oid = msg.ref_id;
         [self.navigationController pushViewController:dvc animated:YES];

@@ -78,6 +78,12 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
     
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GXUpOrderGoodsCell class]) bundle:nil] forCellReuseIdentifier:UpOrderGoodsCell];
+    
+    hx_weakify(self);
+    [self.tableView zx_setEmptyView:[GYEmptyView class] isFull:YES clickedBlock:^(UIButton * _Nullable btn) {
+        [weakSelf startShimmer];
+        [weakSelf getOrderDataRequest:YES];
+    }];
 }
 /** 添加刷新控件 */
 -(void)setUpRefresh
@@ -281,25 +287,29 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     if (self.status !=6) {
-        GXMyOrder *order = self.orders[section];
-        if ([order.pay_type isEqualToString:@"3"]) {//线下付款
-            if ([order.status isEqualToString:@"待发货"]) {
-                if ([order.approve_status isEqualToString:@"2"]) {//订单审核通过
-                    return 80.f;
-                }else{
+        if (self.orders && self.orders.count) {
+            GXMyOrder *order = self.orders[section];
+            if ([order.pay_type isEqualToString:@"3"]) {//线下付款
+                if ([order.status isEqualToString:@"待发货"]) {
+                    if ([order.approve_status isEqualToString:@"2"]) {//订单审核通过
+                        return 80.f;
+                    }else{
+                        return 30.f;
+                    }
+                }else if ([order.status isEqualToString:@"已完成"] || [order.status isEqualToString:@"已取消"]) {
                     return 30.f;
+                }else{
+                    return 80.f;
                 }
-            }else if ([order.status isEqualToString:@"已完成"] || [order.status isEqualToString:@"已取消"]) {
-                return 30.f;
-            }else{
-                return 80.f;
+            }else{// 线上付款
+                if ([order.status isEqualToString:@"已完成"] || [order.status isEqualToString:@"已取消"]) {
+                    return 30.f;
+                }else{
+                    return 80.f;
+                }
             }
-        }else{// 线上付款
-            if ([order.status isEqualToString:@"已完成"] || [order.status isEqualToString:@"已取消"]) {
-                return 30.f;
-            }else{
-                return 80.f;
-            }
+        }else{
+            return CGFLOAT_MIN;
         }
     }else{
         return 30.f;

@@ -79,6 +79,12 @@ static NSString *const BrandPartnerCell = @"BrandPartnerCell";
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GXRegionalCell class]) bundle:nil] forCellReuseIdentifier:RegionalCell];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GXBrandPartnerCell class]) bundle:nil] forCellReuseIdentifier:BrandPartnerCell];
+    
+    hx_weakify(self);
+    [self.tableView zx_setEmptyView:[GYEmptyView class] isFull:YES clickedBlock:^(UIButton * _Nullable btn) {
+        [weakSelf startShimmer];
+        [weakSelf getBrandDataRequest:YES];
+    }];
 }
 /** 添加刷新控件 */
 -(void)setUpRefresh

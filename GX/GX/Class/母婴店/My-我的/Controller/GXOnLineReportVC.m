@@ -95,6 +95,11 @@
             return NO;
         }
         
+        if (![strongSelf.email.text validateEmail]) {
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"联系邮箱格式有误"];
+            return NO;
+        }
+        
         return YES;
     } ActionBlock:^(UIButton * _Nullable button) {
         hx_strongify(weakSelf);

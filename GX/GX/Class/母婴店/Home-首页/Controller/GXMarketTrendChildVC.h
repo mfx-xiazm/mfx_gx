@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface GXMarketTrendChildVC : HXBaseViewController
 /* 数据类型 1奶粉 2纸尿裤*/
 @property(nonatomic,assign) NSInteger dataType;
+/* 图片 */
+@property(nonatomic,copy) NSString *trend_img;
 @end
 
 NS_ASSUME_NONNULL_END

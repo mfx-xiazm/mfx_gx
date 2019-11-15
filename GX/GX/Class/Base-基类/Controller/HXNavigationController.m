@@ -60,6 +60,12 @@
     // 关闭边缘触发手势 防止和原有边缘手势冲突
     [self.interactivePopGestureRecognizer setEnabled:NO];
 }
+- (UIViewController *)childViewControllerForStatusBarStyle{
+    return self.topViewController;
+}
+- (UIViewController *)childViewControllerForStatusBarHidden{
+    return self.topViewController;
+}
 #pragma mark - UIGestureRecognizerDelegate
 //  防止导航控制器只有一个rootViewcontroller时触发手势
 - (BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)gestureRecognizer {

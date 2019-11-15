@@ -25,7 +25,7 @@
 -(void)setCoupon:(GXStoreCoupons *)coupon
 {
     _coupon = coupon;
-    self.coupon_amount.text = _coupon.coupon_amount;
+    self.coupon_amount.text = [NSString stringWithFormat:@"  %@  ",_coupon.coupon_amount];
     self.full_amount.text = [NSString stringWithFormat:@"满%@使用",_coupon.fulfill_amount];
     self.coupon_name.text = _coupon.coupon_name;
     self.expire_time.text = [NSString stringWithFormat:@"使用时间:%@",_coupon.expire_time];

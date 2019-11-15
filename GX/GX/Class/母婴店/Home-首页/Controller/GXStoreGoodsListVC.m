@@ -14,8 +14,10 @@
 #import "GXStore.h"
 #import "GXCatalogItem.h"
 #import "GXStoreMsgVC.h"
+#import "GXSearchResultVC.h"
+#import "HXSearchBar.h"
 
-@interface GXStoreGoodsListVC ()<UITableViewDelegate,UITableViewDataSource,JXCategoryViewDelegate>
+@interface GXStoreGoodsListVC ()<UITableViewDelegate,UITableViewDataSource,JXCategoryViewDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet GXPageMainTable *tableView;
 /* 头视图 */
 @property(nonatomic,strong) GXStoreGoodsListHeader *header;
@@ -29,14 +31,16 @@
 @property (strong, nonatomic) JXCategoryTitleView *categoryView;
 /** 店铺基本信息 */
 @property(nonatomic,strong) GXStore *storeInfo;
+/* 搜索条 */
+@property(nonatomic,strong) HXSearchBar *searchBar;
 @end
 
 @implementation GXStoreGoodsListVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.navigationItem setTitle:@"店铺商品列表"];
-    
+    [self setUpNavBar];
+
     self.isCanScroll = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(MainTableScroll:) name:@"MainTableScroll" object:nil];
     [self setUpMainTable];
@@ -113,6 +117,19 @@
     }
     return  _scrollView;
 }
+-(void)setUpNavBar
+{
+    [self.navigationItem setTitle:nil];
+    
+    HXSearchBar *searchBar = [[HXSearchBar alloc] initWithFrame:CGRectMake(0, 0, HX_SCREEN_WIDTH - 70.f, 30.f)];
+    searchBar.backgroundColor = [UIColor whiteColor];
+    searchBar.layer.cornerRadius = 6;
+    searchBar.layer.masksToBounds = YES;
+    searchBar.delegate = self;
+    searchBar.placeholder = @"请输入商品名称查询";
+    self.searchBar = searchBar;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
+}
 -(void)setUpMainTable
 {
     // 针对 11.0 以上的iOS系统进行处理
@@ -140,6 +157,20 @@
     self.tableView.tableFooterView = [UIView new];
     
     [self.tableView addSubview:self.header];
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if ([textField hasText]) {
+        [textField resignFirstResponder];
+
+        GXSearchResultVC *gvc = [GXSearchResultVC new];
+        gvc.keyword = textField.text;
+        gvc.provider_uid = self.provider_uid;
+        [self.navigationController pushViewController:gvc animated:YES];
+        return YES;
+    }else{
+        return NO;
+    }
 }
 #pragma mark -- 接口请求
 -(void)getShopInfoRequest

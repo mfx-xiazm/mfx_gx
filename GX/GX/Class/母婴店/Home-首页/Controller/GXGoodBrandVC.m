@@ -129,6 +129,12 @@ static NSString *const ShopGoodsCell = @"ShopGoodsCell";
     
     
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([GXShopGoodsCell class]) bundle:nil] forCellWithReuseIdentifier:ShopGoodsCell];
+    
+    hx_weakify(self);
+    [self.collectionView zx_setEmptyView:[GYEmptyView class] isFull:YES clickedBlock:^(UIButton * _Nullable btn) {
+        [weakSelf startShimmer];
+        [weakSelf getCatalogRequest];
+    }];
 }
 /** 添加刷新控件 */
 -(void)setUpRefresh
@@ -165,7 +171,12 @@ static NSString *const ShopGoodsCell = @"ShopGoodsCell";
         
         [HXNetworkTool POST:HXRC_M_URL action:@"admin/getAllCatalogBrand" parameters:parameters success:^(id responseObject) {
             if([[responseObject objectForKey:@"status"] integerValue] == 1) {
-                strongSelf.cataItems = [NSArray yy_modelArrayWithClass:[GXCatalogItem class] json:responseObject[@"data"]];
+                NSMutableArray *tampArr = [NSMutableArray arrayWithArray:[NSArray yy_modelArrayWithClass:[GXCatalogItem class] json:responseObject[@"data"]]];
+                GXCatalogItem *item = [[GXCatalogItem alloc] init];
+                item.catalog_id = @"";
+                item.catalog_name = @"全部";
+                [tampArr insertObject:item atIndex:0];
+                strongSelf.cataItems = tampArr;
             }else{
                 [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
             }
@@ -183,7 +194,14 @@ static NSString *const ShopGoodsCell = @"ShopGoodsCell";
         
         [HXNetworkTool POST:HXRC_M_URL action:@"admin/getAllCatalogBrand" parameters:parameters success:^(id responseObject) {
             if([[responseObject objectForKey:@"status"] integerValue] == 1) {
-                strongSelf.goodsBrands = [NSArray yy_modelArrayWithClass:[GXGoodBrand class] json:responseObject[@"data"]];
+                NSMutableArray *tampArr = [NSMutableArray arrayWithArray:[NSArray yy_modelArrayWithClass:[GXGoodBrand class] json:responseObject[@"data"]]];
+               
+                GXGoodBrand *brand = [[GXGoodBrand alloc] init];
+                brand.brand_id = @"";
+                brand.brand_name = @"全部";
+                [tampArr insertObject:brand atIndex:0];
+                
+                strongSelf.goodsBrands = tampArr;
             }else{
                 [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
             }

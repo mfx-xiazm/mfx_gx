@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface GXAllCommentVC : HXBaseViewController
 /* 商品id */
 @property(nonatomic,copy) NSString *goods_id;
+/* 评价数量 */
+@property(nonatomic,copy) NSString *evaCount;
 /* 商品详情 */
 @property(nonatomic,strong) GXGoodsDetail *goodsDetail;
 @end

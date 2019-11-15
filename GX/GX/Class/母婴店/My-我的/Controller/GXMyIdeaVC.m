@@ -19,7 +19,8 @@ static NSString *const MyIdeaPhotoCell = @"MyIdeaPhotoCell";
 static NSString *const MyIdeaTypeCell = @"MyIdeaTypeCell";
 
 @interface GXMyIdeaVC ()<UICollectionViewDelegate,UICollectionViewDataSource,ZLCollectionViewBaseFlowLayoutDelegate>
-@property (weak, nonatomic) IBOutlet HXPlaceholderTextView *remarkText;
+@property (weak, nonatomic) IBOutlet UIView *remarkTextView;
+@property (strong, nonatomic) HXPlaceholderTextView *remarkText;
 @property (weak, nonatomic) IBOutlet UICollectionView *typeCollectionView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *typeViewHeight;
 
@@ -46,10 +47,17 @@ static NSString *const MyIdeaTypeCell = @"MyIdeaTypeCell";
 
 @implementation GXMyIdeaVC
 
+-(void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+    self.remarkText.frame = self.remarkTextView.bounds;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationItem setTitle:@"我的建议"];
+    self.remarkText = [[HXPlaceholderTextView alloc] initWithFrame:self.remarkTextView.bounds];
     self.remarkText.placeholder = @"请输入反馈内容哦";
+    [self.remarkTextView addSubview:self.remarkText];
 
     [self setUpCollectionView];
     
@@ -350,7 +358,7 @@ static NSString *const MyIdeaTypeCell = @"MyIdeaTypeCell";
     
     AFHTTPSessionManager *HTTPmanager = [AFHTTPSessionManager manager];
     //    HTTPmanager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", @"text/json", @"text/plain", @"text/javascript", @"text/xml", @"image/*", nil];
-    NSMutableURLRequest *request = [HTTPmanager.requestSerializer multipartFormRequestWithMethod:@"POST" URLString:[NSString stringWithFormat:@"%@uploadFile",HXRC_M_URL]  parameters:@{} constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    NSMutableURLRequest *request = [HTTPmanager.requestSerializer multipartFormRequestWithMethod:@"POST" URLString:[NSString stringWithFormat:@"%@admin/uploadFile",HXRC_M_URL]  parameters:@{} constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         //把本地的图片转换为NSData类型的数据
         NSData* imageData = UIImageJPEGRepresentation(image, 0.8);
         [formData appendPartWithFileData:imageData name:@"file" fileName:@"file.png" mimeType:@"image/png"];

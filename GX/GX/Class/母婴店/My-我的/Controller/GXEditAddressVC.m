@@ -18,7 +18,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *receiver_phone;
 @property (weak, nonatomic) IBOutlet UITextField *area_name;
 @property (weak, nonatomic) IBOutlet UIButton *is_defalt;
-@property (weak, nonatomic) IBOutlet HXPlaceholderTextView *addressDetial;
+@property (weak, nonatomic) IBOutlet UIView *address_detail_view;
+@property (strong, nonatomic) HXPlaceholderTextView *addressDetial;
 @property (weak, nonatomic) IBOutlet UIButton *sureBtn;
 
 /* 地址 */
@@ -37,11 +38,18 @@
 
 @implementation GXEditAddressVC
 
+-(void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    self.addressDetial.frame = self.address_detail_view.bounds;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationItem setTitle:self.address?@"编辑地址":@"新增地址"];
 
+    self.addressDetial = [[HXPlaceholderTextView alloc] initWithFrame:self.address_detail_view.bounds];
     self.addressDetial.placeholder = @"请输入详细的收货地址";
+    [self.address_detail_view addSubview:self.addressDetial];
     
     if (self.address) {
         self.receiver.text = _address.receiver;
@@ -149,7 +157,7 @@
     }
    
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:self.address?@"editAddress":@"addAddress" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:self.address?@"admin/editAddress":@"admin/addAddress" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         [btn stopLoading:@"确定" image:nil textColor:nil backgroundColor:nil];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {

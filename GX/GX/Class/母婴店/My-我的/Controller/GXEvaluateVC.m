@@ -22,7 +22,8 @@ static NSString *const MyIdeaPhotoCell = @"MyIdeaPhotoCell";
 @property (weak, nonatomic) IBOutlet UILabel *desc_label;
 @property (weak, nonatomic) IBOutlet UILabel *deliver_level;
 @property (weak, nonatomic) IBOutlet UILabel *answer_level;
-@property (weak, nonatomic) IBOutlet HXPlaceholderTextView *remarkText;
+@property (weak, nonatomic) IBOutlet UIView *remarkTextView;
+@property (strong, nonatomic) HXPlaceholderTextView *remarkText;
 @property (weak, nonatomic) IBOutlet UICollectionView *photoCollectionView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *photoViewHeight;
 @property (weak, nonatomic) IBOutlet UIButton *submitBtn;
@@ -40,11 +41,18 @@ static NSString *const MyIdeaPhotoCell = @"MyIdeaPhotoCell";
 
 @implementation GXEvaluateVC
 
+-(void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    self.remarkText.frame = self.remarkTextView.bounds;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationItem setTitle:@"评价"];
     
+    self.remarkText = [[HXPlaceholderTextView alloc] initWithFrame:self.remarkTextView.bounds];
     self.remarkText.placeholder = @"请输入评价内容";
+    [self.remarkTextView addSubview:self.remarkText];
     
     [self.desc_star addTarget:self action:@selector(starValueChanged:) forControlEvents:UIControlEventValueChanged];
     [self.deliver_star addTarget:self action:@selector(starValueChanged:) forControlEvents:UIControlEventValueChanged];
@@ -264,6 +272,9 @@ static NSString *const MyIdeaPhotoCell = @"MyIdeaPhotoCell";
         [btn stopLoading:@"确定" image:nil textColor:nil backgroundColor:nil];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+            if (strongSelf.evaluatSuccessCall) {
+                strongSelf.evaluatSuccessCall();
+            }
             [strongSelf.navigationController popViewControllerAnimated:YES];
         }else{
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
@@ -330,7 +341,7 @@ static NSString *const MyIdeaPhotoCell = @"MyIdeaPhotoCell";
     
     AFHTTPSessionManager *HTTPmanager = [AFHTTPSessionManager manager];
     //    HTTPmanager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", @"text/json", @"text/plain", @"text/javascript", @"text/xml", @"image/*", nil];
-    NSMutableURLRequest *request = [HTTPmanager.requestSerializer multipartFormRequestWithMethod:@"POST" URLString:[NSString stringWithFormat:@"%@uploadFile",HXRC_M_URL]  parameters:@{} constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    NSMutableURLRequest *request = [HTTPmanager.requestSerializer multipartFormRequestWithMethod:@"POST" URLString:[NSString stringWithFormat:@"%@admin/uploadFile",HXRC_M_URL]  parameters:@{} constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         //把本地的图片转换为NSData类型的数据
         NSData* imageData = UIImageJPEGRepresentation(image, 0.8);
         [formData appendPartWithFileData:imageData name:@"file" fileName:@"file.png" mimeType:@"image/png"];

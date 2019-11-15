@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GXEditAddressVC">
             <connections>
-                <outlet property="addressDetial" destination="6Ic-22-WrY" id="D7S-mL-F45"/>
+                <outlet property="address_detail_view" destination="8QT-ug-w5s" id="5Xu-fq-A3V"/>
                 <outlet property="area_name" destination="tg3-F9-LlZ" id="kq2-6u-zz5"/>
                 <outlet property="is_defalt" destination="TIg-GW-wTf" id="JqJ-nc-5Ab"/>
                 <outlet property="receiver" destination="iF3-sC-OJl" id="oPa-LW-4gl"/>
@@ -184,13 +182,10 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="6Ic-22-WrY" customClass="HXPlaceholderTextView">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8QT-ug-w5s">
                                             <rect key="frame" x="105" y="10" width="294" height="80"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <color key="tintColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                        </textView>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ePp-tx-vmd" userLabel="分割线">
                                             <rect key="frame" x="0.0" y="99" width="414" height="1"/>
                                             <color key="backgroundColor" red="0.96470588239999999" green="0.96862745100000003" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -202,15 +197,15 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="ePp-tx-vmd" secondAttribute="trailing" id="1gV-nJ-iaM"/>
-                                        <constraint firstItem="6Ic-22-WrY" firstAttribute="top" secondItem="QfV-kT-CPs" secondAttribute="top" constant="10" id="2Rh-GC-pYc"/>
+                                        <constraint firstItem="8QT-ug-w5s" firstAttribute="top" secondItem="QfV-kT-CPs" secondAttribute="top" constant="10" id="DWk-J0-ycw"/>
                                         <constraint firstAttribute="bottom" secondItem="ePp-tx-vmd" secondAttribute="bottom" id="G2P-Zu-zVm"/>
-                                        <constraint firstAttribute="trailing" secondItem="6Ic-22-WrY" secondAttribute="trailing" constant="15" id="TPk-aH-KTy"/>
+                                        <constraint firstItem="8QT-ug-w5s" firstAttribute="leading" secondItem="vby-k5-HAN" secondAttribute="trailing" constant="10" id="I6S-cC-b9s"/>
                                         <constraint firstItem="vby-k5-HAN" firstAttribute="top" secondItem="QfV-kT-CPs" secondAttribute="top" constant="16.5" id="XIh-XE-TJb"/>
+                                        <constraint firstAttribute="bottom" secondItem="8QT-ug-w5s" secondAttribute="bottom" constant="10" id="YWb-fL-nx4"/>
                                         <constraint firstItem="vby-k5-HAN" firstAttribute="leading" secondItem="QfV-kT-CPs" secondAttribute="leading" constant="15" id="daK-aV-DEc"/>
-                                        <constraint firstItem="6Ic-22-WrY" firstAttribute="leading" secondItem="vby-k5-HAN" secondAttribute="trailing" constant="10" id="oRf-Ub-9TD"/>
-                                        <constraint firstAttribute="bottom" secondItem="6Ic-22-WrY" secondAttribute="bottom" constant="10" id="rwg-8s-VJe"/>
                                         <constraint firstAttribute="height" constant="100" id="ux1-p7-zJO"/>
                                         <constraint firstItem="ePp-tx-vmd" firstAttribute="leading" secondItem="QfV-kT-CPs" secondAttribute="leading" id="vDC-TK-LRm"/>
+                                        <constraint firstAttribute="trailing" secondItem="8QT-ug-w5s" secondAttribute="trailing" constant="15" id="ynN-Tc-GZ2"/>
                                     </constraints>
                                 </view>
                                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TIg-GW-wTf">

@@ -173,13 +173,23 @@
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    UIView *header = [UIView new];
+    header.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 30.f);
+    header.backgroundColor = [UIColor whiteColor];
+    
     UILabel *label = [UILabel new];
     label.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 30.f);
     label.backgroundColor = [UIColor whiteColor];
     label.font = [UIFont systemFontOfSize:15 weight:UIFontWeightMedium];
-    label.text = [NSString stringWithFormat:@"   全部评价"];
+    label.text = [NSString stringWithFormat:@"   全部评价(%@)",self.evaCount];
+    [header addSubview:label];
     
-    return label;
+    UIView *line = [UIView new];
+    line.frame = CGRectMake(10, 29.f, HX_SCREEN_WIDTH-20.f, 1.f);
+    line.backgroundColor = HXGlobalBg;
+    [header addSubview:line];
+    
+    return header;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

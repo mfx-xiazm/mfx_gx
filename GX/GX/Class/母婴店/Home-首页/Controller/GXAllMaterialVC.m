@@ -11,6 +11,9 @@
 #import "GXGoodsMaterialLayout.h"
 #import "HXSearchBar.h"
 #import "GXGoodsDetailVC.h"
+#import "GXSaveImageToPHAsset.h"
+#import "GXShareView.h"
+#import <zhPopupController.h>
 
 @interface GXAllMaterialVC ()<UITableViewDelegate,UITableViewDataSource,GXGoodsMaterialCellDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -210,6 +213,47 @@
 /** 分享 */
 - (void)didClickShareInCell:(GXGoodsMaterialCell *)Cell
 {
-    HXLog(@"一键分享");
+    //HXLog(@"分享");
+    [MBProgressHUD showLoadToView:nil title:@"图片处理中..."];
+    hx_weakify(self);
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        hx_strongify(weakSelf);
+        GXSaveImageToPHAsset *savePh = [[GXSaveImageToPHAsset alloc] init];
+        savePh.targetVC = strongSelf;
+        [savePh saveImages:Cell.materialLayout.material.photos comletedCall:^{
+            // 复制文本
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUD];
+                
+                UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+                
+                pasteboard.string = Cell.materialLayout.material.dsp;
+                
+                [strongSelf showShareView];
+            });
+            
+        }];
+    });
+}
+-(void)showShareView
+{
+    GXShareView *share  = [GXShareView loadXibView];
+    share.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 180.f);
+    hx_weakify(self);
+    share.shareTypeCall = ^(NSInteger index) {
+        hx_strongify(weakSelf);
+        [strongSelf.zh_popupController dismissWithDuration:0.25 springAnimated:NO];
+        NSURL *url = [NSURL URLWithString:@"weixin://"];
+        BOOL canOpen = [[UIApplication sharedApplication] canOpenURL:url];
+        //先判断是否能打开该url
+        if (canOpen) {   //打开微信
+            [[UIApplication sharedApplication] openURL:url];
+        }else {
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"您的设备未安装微信APP"];
+        }
+    };
+    self.zh_popupController = [[zhPopupController alloc] init];
+    self.zh_popupController.layoutType = zhPopupLayoutTypeBottom;
+    [self.zh_popupController presentContentView:share duration:0.25 springAnimated:NO];
 }
 @end

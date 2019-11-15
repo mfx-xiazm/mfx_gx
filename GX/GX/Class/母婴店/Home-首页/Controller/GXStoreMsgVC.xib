@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -33,7 +31,7 @@
                     <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ged-fP-JgI">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="544"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="550"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="INv-za-gfj" userLabel="分割线">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="10"/>
@@ -45,7 +43,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r04-Kq-Jsk">
                                     <rect key="frame" x="0.0" y="10" width="414" height="60"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uEf-B6-q1L">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uEf-B6-q1L">
                                             <rect key="frame" x="15" y="10" width="40" height="40"/>
                                             <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
@@ -116,7 +114,7 @@
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8xv-PF-nfD">
-                                    <rect key="frame" x="20" y="120" width="86" height="57"/>
+                                    <rect key="frame" x="20" y="120" width="85" height="57"/>
                                     <attributedString key="attributedText">
                                         <fragment content="描述相符：">
                                             <attributes>
@@ -194,7 +192,7 @@
                                         <constraint firstItem="8aD-RU-Ton" firstAttribute="leading" secondItem="2Kt-O5-Uvm" secondAttribute="trailing" constant="10" id="vHt-TE-suk"/>
                                     </constraints>
                                 </view>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2YD-se-ZyH">
+                                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2YD-se-ZyH">
                                     <rect key="frame" x="20" y="217" width="80" height="100"/>
                                     <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
@@ -230,7 +228,7 @@
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1eH-Xn-7hJ">
-                                    <rect key="frame" x="20" y="357" width="374" height="13"/>
+                                    <rect key="frame" x="20" y="357" width="374" height="14.5"/>
                                     <attributedString key="attributedText">
                                         <fragment content="品牌直供，正品保证">
                                             <attributes>
@@ -243,7 +241,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ooS-Ef-Lqt">
-                                    <rect key="frame" x="0.0" y="370" width="414" height="40"/>
+                                    <rect key="frame" x="0.0" y="371.5" width="414" height="40"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n8L-zw-aCH">
                                             <rect key="frame" x="15" y="12" width="4" height="16"/>
@@ -270,7 +268,7 @@
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n5D-UV-aog">
-                                    <rect key="frame" x="20" y="410" width="374" height="13"/>
+                                    <rect key="frame" x="20" y="411.5" width="374" height="14.5"/>
                                     <attributedString key="attributedText">
                                         <fragment content="安满">
                                             <attributes>
@@ -283,7 +281,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cR3-44-6NS">
-                                    <rect key="frame" x="0.0" y="423" width="414" height="40"/>
+                                    <rect key="frame" x="0.0" y="426" width="414" height="40"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kP5-mC-meA">
                                             <rect key="frame" x="15" y="12" width="4" height="16"/>
@@ -310,7 +308,7 @@
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U9m-JF-DHz">
-                                    <rect key="frame" x="20" y="463" width="374" height="13"/>
+                                    <rect key="frame" x="20" y="466" width="374" height="14.5"/>
                                     <attributedString key="attributedText">
                                         <fragment content="湖北省武汉市">
                                             <attributes>
@@ -323,7 +321,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aYp-rR-lv8">
-                                    <rect key="frame" x="0.0" y="476" width="414" height="40"/>
+                                    <rect key="frame" x="0.0" y="480.5" width="414" height="40"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pyM-Oh-HmH">
                                             <rect key="frame" x="15" y="12" width="4" height="16"/>
@@ -350,7 +348,7 @@
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XlR-Vg-qFP">
-                                    <rect key="frame" x="20" y="516" width="374" height="13"/>
+                                    <rect key="frame" x="20" y="520.5" width="374" height="14.5"/>
                                     <attributedString key="attributedText">
                                         <fragment content="2019-06-27">
                                             <attributes>

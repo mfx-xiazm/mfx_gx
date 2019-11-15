@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *specs_attrs;
 @property(nonatomic,copy) NSString *stock;
 @property(nonatomic,copy) NSString *logistics_com_id;
-
+@property(nonatomic,copy) NSString *logistics_com_name;
 @end
 
 NS_ASSUME_NONNULL_END

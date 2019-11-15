@@ -15,9 +15,13 @@
 #import "GXSaleMaterialFilerView.h"
 #import "GXAllMaterialVC.h"
 #import "GXGoodsDetailVC.h"
+#import "GXSaveImageToPHAsset.h"
+#import "GXShareView.h"
+#import <zhPopupController.h>
 
 @interface GXSaleMaterialChildVC ()<UITableViewDelegate,UITableViewDataSource,GXGoodsMaterialCellDelegate,GXSaleMaterialFilerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet SPButton *filterBtn;
 /* 头视图 */
 @property(nonatomic,strong) GXSaleMaterialHeader *header;
 /* 筛选视图 */
@@ -101,6 +105,14 @@
     self.tableView.showsVerticalScrollIndicator = YES;
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    hx_weakify(self);
+    [self.tableView zx_setEmptyView:[GYEmptyView class] isFull:YES clickedBlock:^(UIButton * _Nullable btn) {
+        [weakSelf startShimmer];
+        [weakSelf getMaterialListDataRequest:YES completedCall:^{
+            [weakSelf.tableView reloadData];
+        }];
+    }];
 }
 #pragma mark -- 点击事件
 - (IBAction)controlClicked:(UIButton *)sender {
@@ -124,6 +136,9 @@
         return;
     }
     
+    self.filterBtn.selected = YES;
+    self.filterBtn.backgroundColor = HXControlBg;
+    
     self.filterView.dataSource = self.materialFilter;
     
     [self.filterView menuShowInSuperView:nil];
@@ -133,6 +148,12 @@
 - (CGPoint)filterMenu_positionInSuperView
 {
     return CGPointMake(0, self.HXNavBarHeight + 44.f + 50.f);
+}
+//消失
+- (void)filterMenu_didDismiss
+{
+    self.filterBtn.selected = NO;
+    self.filterBtn.backgroundColor = UIColorFromRGB(0xF3F3F3);
 }
 //点击事件
 - (void)filterMenu:(GXSaleMaterialFilerView *)menu didSelectLogId:(NSString *)logId didSelectAdvertiseId:(NSString *)advertiseId didSelectPlanId:(NSString *)planId
@@ -334,6 +355,47 @@
 /** 分享 */
 - (void)didClickShareInCell:(GXGoodsMaterialCell *)Cell
 {
-    HXLog(@"一键分享");
+    //HXLog(@"分享");
+    [MBProgressHUD showLoadToView:nil title:@"图片处理中..."];
+    hx_weakify(self);
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        hx_strongify(weakSelf);
+        GXSaveImageToPHAsset *savePh = [[GXSaveImageToPHAsset alloc] init];
+        savePh.targetVC = strongSelf;
+        [savePh saveImages:Cell.materialLayout.material.photos comletedCall:^{
+            // 复制文本
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUD];
+                
+                UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+                
+                pasteboard.string = Cell.materialLayout.material.dsp;
+                
+                [strongSelf showShareView];
+            });
+            
+        }];
+    });
+}
+-(void)showShareView
+{
+    GXShareView *share  = [GXShareView loadXibView];
+    share.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 180.f);
+    hx_weakify(self);
+    share.shareTypeCall = ^(NSInteger index) {
+        hx_strongify(weakSelf);
+        [strongSelf.zh_popupController dismissWithDuration:0.25 springAnimated:NO];
+        NSURL *url = [NSURL URLWithString:@"weixin://"];
+        BOOL canOpen = [[UIApplication sharedApplication] canOpenURL:url];
+        //先判断是否能打开该url
+        if (canOpen) {   //打开微信
+            [[UIApplication sharedApplication] openURL:url];
+        }else {
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"您的设备未安装微信APP"];
+        }
+    };
+    self.zh_popupController = [[zhPopupController alloc] init];
+    self.zh_popupController.layoutType = zhPopupLayoutTypeBottom;
+    [self.zh_popupController presentContentView:share duration:0.25 springAnimated:NO];
 }
 @end

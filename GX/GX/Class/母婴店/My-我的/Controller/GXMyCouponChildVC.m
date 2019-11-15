@@ -58,6 +58,12 @@ static NSString *const MyCouponCell = @"MyCouponCell";
     
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GXMyCouponCell class]) bundle:nil] forCellReuseIdentifier:MyCouponCell];
+    
+    hx_weakify(self);
+    [self.tableView zx_setEmptyView:[GYEmptyView class] isFull:YES clickedBlock:^(UIButton * _Nullable btn) {
+        [weakSelf startShimmer];
+        [weakSelf getCouponListRequest:YES];
+    }];
 }
 /** 添加刷新控件 */
 -(void)setUpRefresh

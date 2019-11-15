@@ -116,7 +116,7 @@ static NSString *const CategoryCell = @"CategoryCell";
     reset.layer.borderColor = UIColorFromRGB(0x1a1a1a).CGColor;
     reset.layer.masksToBounds = YES;
     [reset setTitle:@"重置" forState:UIControlStateNormal];
-    reset.titleLabel.textColor = UIColorFromRGB(0x1a1a1a);
+    [reset setTitleColor:UIColorFromRGB(0x1a1a1a) forState:UIControlStateNormal];
     reset.titleLabel.font = [UIFont systemFontOfSize:12];
     [reset addTarget:self action:@selector(handleBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [_btnView addSubview:reset];
@@ -180,7 +180,7 @@ static NSString *const CategoryCell = @"CategoryCell";
         [self.collectionView reloadData];
     }
 }
-- (void)menuHidden {
+- (void)menuHidden{
     if (_show) {
         self.titleLabel.textColor = UIColorFromRGB(0x131D2D);
         hx_weakify(self);
@@ -194,6 +194,9 @@ static NSString *const CategoryCell = @"CategoryCell";
             hx_strongify(weakSelf);
             strongSelf.show = !strongSelf.show;
             [strongSelf removeFromSuperview];
+            if ([strongSelf.delegate respondsToSelector:@selector(filterMenu_didDismiss)]) {
+                [strongSelf.delegate filterMenu_didDismiss];
+            }
         }];
     }
 }

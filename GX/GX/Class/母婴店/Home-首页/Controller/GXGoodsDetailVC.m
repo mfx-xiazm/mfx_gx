@@ -26,6 +26,8 @@
 #import "GXCartVC.h"
 #import "GXSaleMaterialVC.h"
 #import "GXUpOrderVC.h"
+#import "GXSaveImageToPHAsset.h"
+#import "GXShareView.h"
 
 static NSString *const GoodsInfoCell = @"GoodsInfoCell";
 @interface GXGoodsDetailVC ()<UITableViewDelegate,UITableViewDataSource,GXGoodsMaterialCellDelegate,GXGoodsCommentCellDelegate>
@@ -54,6 +56,8 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
 @property(nonatomic,strong) NSMutableDictionary *cellHeightsDictionary;
 /* 商品详情 */
 @property(nonatomic,strong) GXGoodsDetail *goodsDetail;
+/** 分享数据模型 */
+@property (nonatomic,strong) id shareModel;
 @end
 
 @implementation GXGoodsDetailVC
@@ -224,8 +228,8 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
                 GXUpOrderVC *ovc = [GXUpOrderVC new];
                 ovc.goods_id = strongSelf.goods_id;//商品id
                 ovc.goods_num = [NSString stringWithFormat:@"%ld",(long)strongSelf.goodsDetail.buyNum];//商品数量
+                NSMutableString *specs_attrs = [NSMutableString string];
                 if (strongSelf.goodsDetail.spec && strongSelf.goodsDetail.spec.count) {
-                    NSMutableString *specs_attrs = [NSMutableString string];
                     for (GXGoodsDetailSpec *spec in strongSelf.goodsDetail.spec) {
                         if (specs_attrs.length) {
                             [specs_attrs appendFormat:@",%@",spec.selectSpec.attr_name];
@@ -233,10 +237,13 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
                             [specs_attrs appendFormat:@"%@",spec.selectSpec.attr_name];
                         }
                     }
-                    ovc.specs_attrs = specs_attrs;//商品规格
-                }else{
-                    ovc.specs_attrs = @"";//商品规格
                 }
+                if (specs_attrs.length) {
+                    [specs_attrs appendFormat:@",%@",strongSelf.goodsDetail.selectLogisticst.logistics_com_name];
+                }else{
+                    [specs_attrs appendFormat:@"%@",strongSelf.goodsDetail.selectLogisticst.logistics_com_name];
+                }
+                ovc.specs_attrs = specs_attrs;//商品规格
                 ovc.sku_id = strongSelf.goodsDetail.sku.sku_id;
                 ovc.logistics_com_id = strongSelf.goodsDetail.selectLogisticst.logistics_com_id;
                 [strongSelf.navigationController pushViewController:ovc animated:YES];
@@ -412,19 +419,24 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"goods_id"] = self.goods_id;//商品id
     parameters[@"cart_num"] = @(self.goodsDetail.buyNum);//商品数量
+    
+    NSMutableString *specs_attrs = [NSMutableString string];
     if (self.goodsDetail.spec && self.goodsDetail.spec.count) {
-        NSMutableString *specs_attrs = [NSMutableString string];
         for (GXGoodsDetailSpec *spec in self.goodsDetail.spec) {
             if (specs_attrs.length) {
-                [specs_attrs appendFormat:@",%@",spec.selectSpec.attr_id];
+                [specs_attrs appendFormat:@",%@",spec.selectSpec.attr_name];
             }else{
-                [specs_attrs appendFormat:@"%@",spec.selectSpec.attr_id];
+                [specs_attrs appendFormat:@"%@",spec.selectSpec.attr_name];
             }
         }
-        parameters[@"specs_attrs"] = specs_attrs;//商品规格
-    }else{
-        parameters[@"specs_attrs"] = @"";//商品规格
     }
+    if (specs_attrs.length) {
+        [specs_attrs appendFormat:@",%@",self.goodsDetail.selectLogisticst.logistics_com_name];
+    }else{
+        [specs_attrs appendFormat:@"%@",self.goodsDetail.selectLogisticst.logistics_com_name];
+    }
+    parameters[@"specs_attrs"] = specs_attrs;//商品规格
+    
     parameters[@"is_try"] = self.goodsDetail.is_try;//是否试用装商品
     parameters[@"is_checked"] = @"1";//0未选择；1已选择
     parameters[@"logistics_com_id"] = self.goodsDetail.selectLogisticst.logistics_com_id;
@@ -524,11 +536,23 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 44.f;
+    if (section == 0) {
+        return self.goodsDetail.materialLayout.count?44.f:CGFLOAT_MIN;
+    }else if (section == 1) {
+        return self.goodsDetail.evaLayout.count?44.f:CGFLOAT_MIN;
+    }else{
+        return self.goodsDetail.good_param.count?44.f:CGFLOAT_MIN;
+    }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 10.f;
+    if (section == 0) {
+        return self.goodsDetail.materialLayout.count?10.f:CGFLOAT_MIN;
+    }else if (section == 1) {
+        return self.goodsDetail.evaLayout.count?10.f:CGFLOAT_MIN;
+    }else{
+        return self.goodsDetail.good_param.count?10.f:CGFLOAT_MIN;
+    }
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
@@ -536,10 +560,16 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
     header.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 44.f);
     if (section == 0) {
         header.titleLabel.text = @"素材";
+        header.moreImg.hidden = NO;
+        header.moreTitle.hidden = NO;
     }else if (section == 1){
         header.titleLabel.text = @"评价";
+        header.moreImg.hidden = NO;
+        header.moreTitle.hidden = NO;
     }else{
         header.titleLabel.text = @"商品规格";
+        header.moreImg.hidden = YES;
+        header.moreTitle.hidden = YES;
     }
     hx_weakify(self);
     header.sectionClickCall = ^{
@@ -551,11 +581,18 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
         }else if (section == 1) {
             GXAllCommentVC *mvc = [GXAllCommentVC new];
             mvc.goods_id = strongSelf.goods_id;
+            mvc.evaCount = strongSelf.goodsDetail.evaCount;
             mvc.goodsDetail = strongSelf.goodsDetail;
             [strongSelf.navigationController pushViewController:mvc animated:YES];
         }
     };
-    return header;
+    if (section == 0) {
+        return self.goodsDetail.materialLayout.count?header:nil;
+    }else if (section == 1) {
+        return self.goodsDetail.evaLayout.count?header:nil;
+    }else{
+        return self.goodsDetail.good_param.count?header:nil;
+    }
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -579,7 +616,48 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
 /** 分享 */
 - (void)didClickShareInCell:(GXGoodsMaterialCell *)Cell
 {
-    HXLog(@"分享");
+    //HXLog(@"分享");
+    [MBProgressHUD showLoadToView:nil title:@"图片处理中..."];
+    hx_weakify(self);
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        hx_strongify(weakSelf);
+        GXSaveImageToPHAsset *savePh = [[GXSaveImageToPHAsset alloc] init];
+        savePh.targetVC = strongSelf;
+        [savePh saveImages:Cell.materialLayout.material.photos comletedCall:^{
+            // 复制文本
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUD];
+
+                UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+                
+                pasteboard.string = Cell.materialLayout.material.dsp;
+                
+                [strongSelf showShareView];
+            });
+            
+        }];
+    });
+}
+-(void)showShareView
+{
+    GXShareView *share  = [GXShareView loadXibView];
+    share.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 180.f);
+    hx_weakify(self);
+    share.shareTypeCall = ^(NSInteger index) {
+        hx_strongify(weakSelf);
+        [strongSelf.zh_popupController dismissWithDuration:0.25 springAnimated:NO];
+        NSURL *url = [NSURL URLWithString:@"weixin://"];
+        BOOL canOpen = [[UIApplication sharedApplication] canOpenURL:url];
+        //先判断是否能打开该url
+        if (canOpen) {   //打开微信
+            [[UIApplication sharedApplication] openURL:url];
+        }else {
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"您的设备未安装微信APP"];
+        }
+    };
+    self.zh_popupController = [[zhPopupController alloc] init];
+    self.zh_popupController.layoutType = zhPopupLayoutTypeBottom;
+    [self.zh_popupController presentContentView:share duration:0.25 springAnimated:NO];
 }
 #pragma mark -- GXGoodsCommentCellDelegate
 /** 点击了全文/收回 */

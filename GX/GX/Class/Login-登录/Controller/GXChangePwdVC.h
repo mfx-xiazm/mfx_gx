@@ -11,6 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface GXChangePwdVC : HXBaseViewController
+/* 手机号 */
+@property(nonatomic,copy) NSString *phoneStr;
 /* 1忘记密码  2修改密码 */
 @property(nonatomic,assign) NSInteger dataType;
 @end

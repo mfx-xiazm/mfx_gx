@@ -37,6 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *is_try;
 @property(nonatomic,copy) NSString *collected;
 @property(nonatomic,copy) NSString *is_join;
+@property(nonatomic,copy) NSString *evaCount;
 /** 购买的数量 */
 @property(nonatomic,assign) NSInteger buyNum;
 @property(nonatomic,strong) NSArray<GXGoodsDetailAdv *> *good_adv;
@@ -48,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong) NSArray<GXGoodsCommentLayout *> *evaLayout;
 @property(nonatomic,strong) GXGoodsRush *rush;
 @property(nonatomic,strong) NSArray<GXGoodsLogisticst *> *logistics;
-/* 选中的改分区的那个快递 */
+/* 选中的分区的那个快递 */
 @property(nonatomic,strong) GXGoodsLogisticst *selectLogisticst;
 /* 规格数据信息 */
 @property(nonatomic,strong) GXGoodsDetailSku *sku;

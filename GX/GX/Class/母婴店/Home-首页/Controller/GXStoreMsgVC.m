@@ -8,6 +8,7 @@
 
 #import "GXStoreMsgVC.h"
 #import "GXStoreDetail.h"
+#import <ZLPhotoActionSheet.h>
 
 @interface GXStoreMsgVC ()
 @property (weak, nonatomic) IBOutlet UIImageView *shop_front_img;
@@ -29,8 +30,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationItem setTitle:@"店铺详情"];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imgTapClicked:)];
+    [self.license_img addGestureRecognizer:tap];
+    
     [self startShimmer];
     [self getShopDetailRequest];
+}
+-(void)imgTapClicked:(UITapGestureRecognizer *)tap
+{
+    NSMutableArray * items = [NSMutableArray array];
+    NSMutableDictionary *temp = [NSMutableDictionary dictionary];
+    temp[@"ZLPreviewPhotoObj"] = [NSURL URLWithString:self.storeDetail.food_license_img];
+    temp[@"ZLPreviewPhotoTyp"] = @(ZLPreviewPhotoTypeURLImage);
+    [items addObject:temp];
+    
+    ZLPhotoActionSheet *actionSheet = [[ZLPhotoActionSheet alloc] init];
+    actionSheet.configuration.navBarColor = HXControlBg;
+    actionSheet.configuration.statusBarStyle = UIStatusBarStyleLightContent;
+    actionSheet.sender = self;
+    [actionSheet previewPhotos:items index:tap.view.tag hideToolBar:YES complete:^(NSArray * _Nonnull photos) {
+        
+    }];
 }
 -(void)getShopDetailRequest
 {
@@ -62,9 +82,9 @@
     self.evl_level.text = [NSString stringWithFormat:@"综合评分：%@",self.storeDetail.evl_level];
     [self.store_level setTextWithLineSpace:5.f withString:[NSString stringWithFormat:@"描述相符：%@\n发货速度：%@\n响应速度：%@",self.storeDetail.desc_level,self.storeDetail.deliver_level,self.storeDetail.answer_level] withFont:[UIFont systemFontOfSize:13]];
     [self.license_img sd_setImageWithURL:[NSURL URLWithString:self.storeDetail.food_license_img]];
-    [self.shop_desc setTextWithLineSpace:5.f withString:(self.storeDetail.shop_desc.length)?self.storeDetail.shop_desc:@"" withFont:[UIFont systemFontOfSize:13]];
+    [self.shop_desc setTextWithLineSpace:5.f withString:(self.storeDetail.shop_desc.length)?self.storeDetail.shop_desc:@"——" withFont:[UIFont systemFontOfSize:13]];
     [self.brand_name setTextWithLineSpace:5.f withString:(self.storeDetail.brand_name.length)?self.storeDetail.brand_name:@"" withFont:[UIFont systemFontOfSize:13]];
     self.region.text = [NSString stringWithFormat:@"%@%@%@",self.storeDetail.province_name,self.storeDetail.city_name,self.storeDetail.town_name];
-    self.open_time.text = self.storeDetail.shop_open_time;
+    self.open_time.text = (self.storeDetail.shop_open_time.length>10) ?[self.storeDetail.shop_open_time substringToIndex:10]:self.storeDetail.shop_open_time;
 }
 @end

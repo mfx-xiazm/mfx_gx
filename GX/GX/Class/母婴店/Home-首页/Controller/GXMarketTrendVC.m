@@ -39,6 +39,7 @@
         NSMutableArray *vcs = [NSMutableArray array];
         for (int i=0;i<self.categoryView.titles.count;i++) {
             GXMarketTrendChildVC *cvc0 = [GXMarketTrendChildVC new];
+            cvc0.trend_img = (i==0)?self.left_trend_img:self.right_trend_img;
             cvc0.dataType = i+1;
             [self addChildViewController:cvc0];
             [vcs addObject:cvc0];

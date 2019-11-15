@@ -82,6 +82,7 @@
         [self.navigationController pushViewController:bvc animated:YES];
     }else if (sender.tag == 2) {
         GXChangePwdVC *pvc = [GXChangePwdVC new];
+        pvc.phoneStr = self.mineData.phone;
         pvc.dataType = 2;
         [self.navigationController pushViewController:pvc animated:YES];
     }else if (sender.tag == 3) {

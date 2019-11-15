@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy)NSString *sale_num;
 @property(nonatomic,copy)NSString *specs_attrs;
 @property(nonatomic,copy)NSString *logistics_com_id;
+@property(nonatomic,copy)NSString *logistics_com_name;
+
 /* 是否展开 */
 @property(nonatomic,assign) BOOL isExpand;
 @property(nonatomic,assign)NSInteger buy_num;

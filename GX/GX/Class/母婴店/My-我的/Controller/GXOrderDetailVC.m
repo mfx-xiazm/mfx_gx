@@ -22,6 +22,7 @@
 #import "GXUpOrderVC.h"
 #import "GXPayTypeVC.h"
 #import "GXPayResultVC.h"
+#import "GXGoodsDetailVC.h"
 
 static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
 @interface GXOrderDetailVC ()<UITableViewDelegate,UITableViewDataSource>
@@ -521,7 +522,15 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+//    GXGoodsDetailVC *dvc = [GXGoodsDetailVC new];
+//    if (self.refund_id && self.refund_id.length) {
+//        GYMyRefundGoods *refundGoods = self.refundDetail.goods[indexPath.row];
+//        dvc.goods_id = refundGoods.goods_id;
+//    }else{
+//        GXMyOrderGoods *goods = self.orderDetail.goods[indexPath.row];
+//        dvc.goods_id = goods.goods_id;
+//    }
+//    [self.navigationController pushViewController:dvc animated:YES];
 }
 
 

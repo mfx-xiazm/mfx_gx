@@ -68,6 +68,12 @@ static NSString *const StoreCell = @"StoreCell";
     
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GXStoreCell class]) bundle:nil] forCellReuseIdentifier:StoreCell];
+    
+    hx_weakify(self);
+    [self.tableView zx_setEmptyView:[GYEmptyView class] isFull:YES clickedBlock:^(UIButton * _Nullable btn) {
+        [weakSelf startShimmer];
+        [weakSelf getCatalogShopRequest:YES];
+    }];
 }
 /** 添加刷新控件 */
 -(void)setUpRefresh

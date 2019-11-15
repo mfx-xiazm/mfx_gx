@@ -70,6 +70,7 @@
             [weakSelf.target.zh_popupController dismissWithDuration:0.25 springAnimated:NO];
             if (type) {
                 weakSelf.shop_area.text = [NSString stringWithFormat:@"%@%@%@%@",region.selectRegion.area_alias,region.selectCity.area_alias,region.selectArea.area_alias,region.selectTown.area_alias];
+                weakSelf.mainStore.shop_area = weakSelf.shop_area.text;
                 weakSelf.mainStore.town_id = region.selectTown.area_id;
             }
         };

@@ -125,6 +125,7 @@
     searchBar.backgroundColor = [UIColor whiteColor];
     searchBar.layer.cornerRadius = 6;
     searchBar.layer.masksToBounds = YES;
+    searchBar.placeholder = @"请输入活动名称查询";
     searchBar.delegate = self;
     self.searchBar = searchBar;
     self.navigationItem.titleView = searchBar;
