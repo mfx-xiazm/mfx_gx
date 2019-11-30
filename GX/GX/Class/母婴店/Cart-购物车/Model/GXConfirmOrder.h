@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class GXMyAddress,GXConfirmOrderData,GXConfirmOrderGoods,GXMyCoupon;
 @interface GXConfirmOrder : NSObject
 /* 地址 */
-@property(nonatomic,strong) GXMyAddress *defaultAddress;
+@property(nonatomic,strong) GXMyAddress *_Nullable defaultAddress;
 /* 商品 */
 @property(nonatomic,strong) NSArray<GXConfirmOrderData *> *goodsData;
 
@@ -32,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface GXConfirmOrderData : NSObject
 @property(nonatomic,copy) NSString *provider_uid;
 @property(nonatomic,copy) NSString *shop_name;
-/// 未加运费的不含商家优惠的总价格
+/// 未加运费的不含商家优惠的并且减去了平台会员权益的总价格
 @property(nonatomic,copy) NSString *shopActTotalPrice;
 /// 加了运费的不含商家优惠的总价格
 @property(nonatomic,copy) NSString *shopActTotalAmount;

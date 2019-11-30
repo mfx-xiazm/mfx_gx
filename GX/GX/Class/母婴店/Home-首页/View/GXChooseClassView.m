@@ -43,6 +43,10 @@ static NSString *const ChooseClassFooter = @"ChooseClassFooter";
 }
 - (IBAction)goodHandleClicked:(UIButton *)sender {
     if (sender.tag) {
+        if ([_goodsDetail.sku.stock isEqualToString:@"0"]) {
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"商品库存为0"];
+            return;
+        }
         if (self.goodsHandleCall) {
             self.goodsHandleCall(sender.tag);
         }
@@ -58,14 +62,13 @@ static NSString *const ChooseClassFooter = @"ChooseClassFooter";
     _goodsDetail = goodsDetail;
     
     [self.cover_img sd_setImageWithURL:[NSURL URLWithString:_goodsDetail.cover_img]];
-    [self.market_price setLabelUnderline:[NSString stringWithFormat:@"建议价：￥%@",_goodsDetail.suggest_price]];
-    
-    if (!_goodsDetail.selectLogisticst && _goodsDetail.logistics.count) {
-        // 如果未选择就默认第一个
-        GXGoodsLogisticst *logisticst = _goodsDetail.logistics.firstObject;
-        logisticst.isSelected = YES;
-        _goodsDetail.selectLogisticst = logisticst;
+    if ([_goodsDetail.control_type isEqualToString:@"2"]) {
+        self.market_price.hidden = YES;
+    }else{
+        self.market_price.hidden = NO;
+        [self.market_price setLabelUnderline:[NSString stringWithFormat:@"建议价：￥%@",_goodsDetail.suggest_price]];
     }
+    
     if (_goodsDetail.spec && _goodsDetail.spec.count) {
         if (_goodsDetail.sku) {
             self.price.text = [NSString stringWithFormat:@"￥%@",_goodsDetail.sku.price];
@@ -103,7 +106,23 @@ static NSString *const ChooseClassFooter = @"ChooseClassFooter";
     [HXNetworkTool POST:HXRC_M_URL action:@"admin/getSkuDetail" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
-            strongSelf.goodsDetail.sku = [GXGoodsDetailSku yy_modelWithDictionary:responseObject[@"data"]];
+            if ([responseObject[@"data"] isKindOfClass:[NSDictionary class]]) {
+                strongSelf.goodsDetail.sku = [GXGoodsDetailSku yy_modelWithDictionary:responseObject[@"data"]];
+                // 如果未选择就默认第一个
+                GXGoodsLogisticst *logisticst = strongSelf.goodsDetail.sku.logistic.firstObject;
+                logisticst.isSelected = YES;
+                strongSelf.goodsDetail.selectLogisticst = logisticst;
+            }else{
+                GXGoodsDetailSku *sku = [[GXGoodsDetailSku alloc] init];
+                sku.sku_id = @"0";
+                sku.provider_no = @"暂无";
+                sku.price = strongSelf.goodsDetail.min_price;
+                sku.stock = @"0";
+                sku.logistic = @[];
+                strongSelf.goodsDetail.sku = sku;
+                // 清除选择的快递
+                strongSelf.goodsDetail.selectLogisticst = nil;
+            }
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 strongSelf.price.text = [NSString stringWithFormat:@"￥%@",strongSelf.goodsDetail.sku.price];
@@ -132,10 +151,10 @@ static NSString *const ChooseClassFooter = @"ChooseClassFooter";
             GXGoodsDetailSpec *spec = self.goodsDetail.spec[section];
             return spec.spec_val.count;
         }else{
-            return self.goodsDetail.logistics.count;
+            return self.goodsDetail.sku.logistic.count;
         }
     }else{
-        return self.goodsDetail.logistics.count;
+        return self.goodsDetail.sku.logistic.count;
     }
 }
 - (ZLLayoutType)collectionView:(UICollectionView *)collectionView layout:(ZLCollectionViewBaseFlowLayout *)collectionViewLayout typeOfLayout:(NSInteger)section {
@@ -149,11 +168,11 @@ static NSString *const ChooseClassFooter = @"ChooseClassFooter";
             GXGoodsDetailSubSpec *subSpec = spec.spec_val[indexPath.row];
             cell.subSpec = subSpec;
         }else{
-            GXGoodsLogisticst *logisticst = self.goodsDetail.logistics[indexPath.row];
+            GXGoodsLogisticst *logisticst = self.goodsDetail.sku.logistic[indexPath.row];
             cell.logisticst = logisticst;
         }
     }else{
-        GXGoodsLogisticst *logisticst = self.goodsDetail.logistics[indexPath.row];
+        GXGoodsLogisticst *logisticst = self.goodsDetail.sku.logistic[indexPath.row];
         cell.logisticst = logisticst;
     }
     return cell;
@@ -171,7 +190,7 @@ static NSString *const ChooseClassFooter = @"ChooseClassFooter";
             
             [self getShopStockRequest];
         }else{
-            GXGoodsLogisticst *logisticst = self.goodsDetail.logistics[indexPath.row];
+            GXGoodsLogisticst *logisticst = self.goodsDetail.sku.logistic[indexPath.row];
             self.goodsDetail.selectLogisticst.isSelected = NO;
             
             logisticst.isSelected = YES;
@@ -179,7 +198,7 @@ static NSString *const ChooseClassFooter = @"ChooseClassFooter";
             self.goodsDetail.selectLogisticst = logisticst;
         }
     }else{
-        GXGoodsLogisticst *logisticst = self.goodsDetail.logistics[indexPath.row];
+        GXGoodsLogisticst *logisticst = self.goodsDetail.sku.logistic[indexPath.row];
         self.goodsDetail.selectLogisticst.isSelected = NO;
         
         logisticst.isSelected = YES;
@@ -256,11 +275,11 @@ static NSString *const ChooseClassFooter = @"ChooseClassFooter";
             GXGoodsDetailSubSpec *subSpec = spec.spec_val[indexPath.row];
             return CGSizeMake([subSpec.attr_name boundingRectWithSize:CGSizeMake(1000000, 30) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:14]} context:nil].size.width + 20, 30);
         }else{
-            GXGoodsLogisticst *logisticst = self.goodsDetail.logistics[indexPath.row];
+            GXGoodsLogisticst *logisticst = self.goodsDetail.sku.logistic[indexPath.row];
             return CGSizeMake([logisticst.logistics_com_name boundingRectWithSize:CGSizeMake(1000000, 30) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:14]} context:nil].size.width + 20, 30);
         }
     }else{
-        GXGoodsLogisticst *logisticst = self.goodsDetail.logistics[indexPath.row];
+        GXGoodsLogisticst *logisticst = self.goodsDetail.sku.logistic[indexPath.row];
         return CGSizeMake([logisticst.logistics_com_name boundingRectWithSize:CGSizeMake(1000000, 30) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:14]} context:nil].size.width + 20, 30);
     }
 }

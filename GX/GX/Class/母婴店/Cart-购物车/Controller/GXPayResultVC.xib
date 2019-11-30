@@ -16,7 +16,6 @@
                 <outlet property="offLineView" destination="kOH-3F-h0e" id="AJG-ZW-Lwh"/>
                 <outlet property="payAmount" destination="2OB-Yw-ePi" id="SoV-ie-prj"/>
                 <outlet property="payType" destination="MsV-sl-mvS" id="91I-3G-jgB"/>
-                <outlet property="tipDesc" destination="mFf-j0-NvU" id="nEE-0y-4zX"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -110,23 +109,10 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kOH-3F-h0e">
-                    <rect key="frame" x="0.0" y="214" width="414" height="177"/>
+                    <rect key="frame" x="0.0" y="214" width="414" height="114"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请在2小时内转账到以下账户，超时订单将自动关闭" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mFf-j0-NvU">
-                            <rect key="frame" x="10" y="10" width="394" height="16"/>
-                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="13"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gKO-Kq-dMc" userLabel="分割线">
-                            <rect key="frame" x="10" y="36" width="394" height="1"/>
-                            <color key="backgroundColor" red="0.96470588239999999" green="0.96862745100000003" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="1" id="5UM-Pc-1M7"/>
-                            </constraints>
-                        </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="开户名称" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F0n-j3-Kpv">
-                            <rect key="frame" x="10" y="47" width="70" height="16"/>
+                            <rect key="frame" x="10" y="10" width="70" height="16"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="70" id="uyz-EF-bXj"/>
                             </constraints>
@@ -135,13 +121,13 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="杭州呱选科技有限公司" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dc3-LA-KkM">
-                            <rect key="frame" x="80" y="47" width="133" height="16"/>
+                            <rect key="frame" x="80" y="10" width="133" height="16"/>
                             <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="13"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="开户银行" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="piR-iT-MJG">
-                            <rect key="frame" x="10" y="73" width="70" height="16"/>
+                            <rect key="frame" x="10" y="36" width="70" height="16"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="70" id="d8b-LU-U0K"/>
                             </constraints>
@@ -150,13 +136,13 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="网商银行" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qin-UK-S0p">
-                            <rect key="frame" x="80" y="73" width="53.5" height="16"/>
+                            <rect key="frame" x="80" y="36" width="53.5" height="16"/>
                             <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="13"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="开户账号" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xaf-ZK-cdz">
-                            <rect key="frame" x="10" y="99" width="70" height="16"/>
+                            <rect key="frame" x="10" y="62" width="70" height="16"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="70" id="lh9-JK-6mm"/>
                             </constraints>
@@ -165,61 +151,35 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="98001870588800283006" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t4s-hX-rNb">
-                            <rect key="frame" x="80" y="99" width="160" height="16"/>
+                            <rect key="frame" x="80" y="62" width="160" height="16"/>
                             <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="13"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="该账号为呱选银行账号，请放心转账！" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v2s-xe-MDG">
-                            <rect key="frame" x="80" y="125" width="324" height="16"/>
+                            <rect key="frame" x="80" y="88" width="324" height="16"/>
                             <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="13"/>
                             <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="说明    " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="veT-Kc-Ld3">
-                            <rect key="frame" x="10" y="151" width="70" height="16"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="70" id="BhR-kK-KUR"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="13"/>
-                            <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="由于订单超时将会自动关闭，请在转账时选择实时到账" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RCR-lz-5dB">
-                            <rect key="frame" x="80" y="151" width="324" height="16"/>
-                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="13"/>
-                            <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="RCR-lz-5dB" secondAttribute="bottom" constant="10" id="0hY-37-Ysg"/>
                         <constraint firstItem="xaf-ZK-cdz" firstAttribute="top" secondItem="piR-iT-MJG" secondAttribute="bottom" constant="10" id="4v4-Ng-A8O"/>
-                        <constraint firstItem="veT-Kc-Ld3" firstAttribute="leading" secondItem="kOH-3F-h0e" secondAttribute="leading" constant="10" id="54e-KQ-G16"/>
-                        <constraint firstItem="gKO-Kq-dMc" firstAttribute="leading" secondItem="kOH-3F-h0e" secondAttribute="leading" constant="10" id="64Q-rT-7Yg"/>
                         <constraint firstItem="t4s-hX-rNb" firstAttribute="top" secondItem="qin-UK-S0p" secondAttribute="bottom" constant="10" id="Ah3-ZK-kYM"/>
                         <constraint firstItem="v2s-xe-MDG" firstAttribute="leading" secondItem="xaf-ZK-cdz" secondAttribute="trailing" id="Aqh-Vl-BzT"/>
                         <constraint firstItem="qin-UK-S0p" firstAttribute="leading" secondItem="piR-iT-MJG" secondAttribute="trailing" id="BLW-U2-4w7"/>
                         <constraint firstItem="piR-iT-MJG" firstAttribute="leading" secondItem="kOH-3F-h0e" secondAttribute="leading" constant="10" id="GAU-yQ-v0j"/>
-                        <constraint firstAttribute="trailing" secondItem="gKO-Kq-dMc" secondAttribute="trailing" constant="10" id="HUC-i8-7pF"/>
-                        <constraint firstItem="gKO-Kq-dMc" firstAttribute="top" secondItem="mFf-j0-NvU" secondAttribute="bottom" constant="10" id="JLc-04-rAb"/>
-                        <constraint firstItem="mFf-j0-NvU" firstAttribute="leading" secondItem="kOH-3F-h0e" secondAttribute="leading" constant="10" id="KYw-cB-7H6"/>
                         <constraint firstItem="piR-iT-MJG" firstAttribute="top" secondItem="F0n-j3-Kpv" secondAttribute="bottom" constant="10" id="LDJ-Ut-PcN"/>
-                        <constraint firstItem="F0n-j3-Kpv" firstAttribute="top" secondItem="gKO-Kq-dMc" secondAttribute="bottom" constant="10" id="MER-bP-Gnu"/>
-                        <constraint firstItem="veT-Kc-Ld3" firstAttribute="top" secondItem="v2s-xe-MDG" secondAttribute="bottom" constant="10" id="RZ7-xN-pbX"/>
+                        <constraint firstItem="dc3-LA-KkM" firstAttribute="top" secondItem="kOH-3F-h0e" secondAttribute="top" constant="10" id="OpO-A7-e7e"/>
                         <constraint firstItem="v2s-xe-MDG" firstAttribute="top" secondItem="t4s-hX-rNb" secondAttribute="bottom" constant="10" id="Rn0-CN-3YS"/>
-                        <constraint firstAttribute="trailing" secondItem="RCR-lz-5dB" secondAttribute="trailing" constant="10" id="RvW-on-Pwp"/>
                         <constraint firstItem="dc3-LA-KkM" firstAttribute="leading" secondItem="F0n-j3-Kpv" secondAttribute="trailing" id="Wpw-ZM-3jU"/>
+                        <constraint firstAttribute="bottom" secondItem="v2s-xe-MDG" secondAttribute="bottom" constant="10" id="ZDu-u1-tdi"/>
                         <constraint firstItem="qin-UK-S0p" firstAttribute="top" secondItem="dc3-LA-KkM" secondAttribute="bottom" constant="10" id="aMi-B3-YKc"/>
-                        <constraint firstItem="dc3-LA-KkM" firstAttribute="top" secondItem="gKO-Kq-dMc" secondAttribute="bottom" constant="10" id="cyV-aG-Uyf"/>
                         <constraint firstItem="t4s-hX-rNb" firstAttribute="leading" secondItem="xaf-ZK-cdz" secondAttribute="trailing" id="d2L-Oj-MnX"/>
                         <constraint firstAttribute="trailing" secondItem="v2s-xe-MDG" secondAttribute="trailing" constant="10" id="gNK-bl-87M"/>
-                        <constraint firstItem="mFf-j0-NvU" firstAttribute="top" secondItem="kOH-3F-h0e" secondAttribute="top" constant="10" id="je1-IY-b3R"/>
-                        <constraint firstItem="RCR-lz-5dB" firstAttribute="top" secondItem="v2s-xe-MDG" secondAttribute="bottom" constant="10" id="kYn-i7-HEY"/>
-                        <constraint firstItem="RCR-lz-5dB" firstAttribute="leading" secondItem="veT-Kc-Ld3" secondAttribute="trailing" id="mjo-Kb-mdn"/>
+                        <constraint firstItem="F0n-j3-Kpv" firstAttribute="top" secondItem="kOH-3F-h0e" secondAttribute="top" constant="10" id="oaq-oP-pAF"/>
                         <constraint firstItem="xaf-ZK-cdz" firstAttribute="leading" secondItem="kOH-3F-h0e" secondAttribute="leading" constant="10" id="opl-Es-pSW"/>
-                        <constraint firstAttribute="trailing" secondItem="mFf-j0-NvU" secondAttribute="trailing" constant="10" id="pTr-ni-ykM"/>
                         <constraint firstItem="F0n-j3-Kpv" firstAttribute="leading" secondItem="kOH-3F-h0e" secondAttribute="leading" constant="10" id="ugf-H3-m8v"/>
                     </constraints>
                 </view>

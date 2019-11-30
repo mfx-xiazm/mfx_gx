@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *refund_id;
 @property(nonatomic,copy) NSString *oid;
 @property(nonatomic,copy) NSString *order_no;
-/** 1等待经销商审核；2等待平台审核；3退款成功；4退款驳回 5经销商同意 6经销商不同意 */
+/** 1等待供应商审核；2等待平台审核；3退款成功；4退款驳回 5供应商同意 6供应商不同意 */
 @property(nonatomic,copy) NSString *refund_status;
 @property(nonatomic,copy) NSString *refund_img;
 @property(nonatomic,copy) NSString *refund_time;
@@ -51,7 +51,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *provider_no;
 @property(nonatomic,copy) NSString *username;
 @property(nonatomic,copy) NSString *saleman_code;
-
+/* 是退款详情数据 */
+@property(nonatomic,assign) BOOL isRefundDetail;
 @property(nonatomic,strong) NSArray<GYMyRefundGoods *> *goods;
 
 @property(nonatomic,strong) GYMyRefundAddress *address;

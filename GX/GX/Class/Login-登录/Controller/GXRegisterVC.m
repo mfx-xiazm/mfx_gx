@@ -10,6 +10,7 @@
 #import "GXRegisterAuthVC.h"
 #import "FSActionSheet.h"
 #import "GXRegisterAuthVC2.h"
+#import "UITextField+GYExpand.h"
 
 @interface GXRegisterVC ()
 @property (weak, nonatomic) IBOutlet UITextField *name;
@@ -31,6 +32,13 @@
     [self.navigationItem setTitle:@"注册"];
     
     hx_weakify(self);
+    [self.phone lengthLimit:^{
+        hx_strongify(weakSelf);
+        if (strongSelf.phone.text.length > 11) {
+            strongSelf.phone.text = [strongSelf.phone.text substringToIndex:11];
+        }
+    }];
+    
     [self.nextBtn BindingBtnJudgeBlock:^BOOL{
         hx_strongify(weakSelf);
         if (![strongSelf.name hasText]) {
@@ -64,7 +72,7 @@
     }];
 }
 - (IBAction)chooseRoleClicked:(UIButton *)sender {
-    FSActionSheet *as = [[FSActionSheet alloc] initWithTitle:@"注册类型" delegate:nil cancelButtonTitle:@"取消" highlightedButtonTitle:nil otherButtonTitles:@[@"终端店",@"供销商"]];
+    FSActionSheet *as = [[FSActionSheet alloc] initWithTitle:@"注册类型" delegate:nil cancelButtonTitle:@"取消" highlightedButtonTitle:nil otherButtonTitles:@[@"终端店",@"供应商"]];
     hx_weakify(self);
     [as showWithSelectedCompletion:^(NSInteger selectedIndex) {
         hx_strongify(weakSelf);
@@ -72,7 +80,7 @@
             strongSelf.role.text = @"终端店";
             strongSelf.role_type = @"1";
         }else {
-            strongSelf.role.text = @"供销商";
+            strongSelf.role.text = @"供应商";
             strongSelf.role_type = @"2";
         }
     }];

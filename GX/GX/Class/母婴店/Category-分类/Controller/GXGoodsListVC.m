@@ -20,8 +20,12 @@ static NSString *const DiscountGoodsCell = @"DiscountGoodsCell";
 
 @interface GXGoodsListVC ()<UITextFieldDelegate,UICollectionViewDelegate,UICollectionViewDataSource,ZLCollectionViewBaseFlowLayoutDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet UIView *normalView;
+@property (weak, nonatomic) IBOutlet UIView *controlView;
 @property (weak, nonatomic) IBOutlet UIImageView *sale_img;
 @property (weak, nonatomic) IBOutlet UIImageView *price_img;
+@property (weak, nonatomic) IBOutlet UIImageView *sale_img1;
+@property (weak, nonatomic) IBOutlet UIImageView *price_img1;
 /* 筛选视图 */
 @property(nonatomic,strong) GXGoodsFilterView *fliterView;
 /* 搜索条 */
@@ -43,6 +47,13 @@ static NSString *const DiscountGoodsCell = @"DiscountGoodsCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavBar];
+    if (self.isControl) {
+        self.normalView.hidden = YES;
+        self.controlView.hidden = NO;
+    }else{
+        self.normalView.hidden = NO;
+        self.controlView.hidden = YES;
+    }
     [self setUpCollectionView];
     [self setUpRefresh];
     [self startShimmer];
@@ -51,6 +62,21 @@ static NSString *const DiscountGoodsCell = @"DiscountGoodsCell";
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
+}
+/* 二级分类 */
+-(void)setBrands:(NSArray<GXBrandItem *> *)brands
+{
+    _brands = brands;
+    for (GXBrandItem *item in _brands) {
+        item.isSelected = NO;
+    }
+}
+-(void)setCatalogs:(NSArray<GXCatalogItem *> *)catalogs
+{
+    _catalogs = catalogs;
+    for (GXCatalogItem *item in _catalogs) {
+        item.isSelected = NO;
+    }
 }
 -(void)setGoods_name:(NSString *)goods_name
 {
@@ -83,6 +109,7 @@ static NSString *const DiscountGoodsCell = @"DiscountGoodsCell";
     searchBar.layer.cornerRadius = 6;
     searchBar.layer.masksToBounds = YES;
     searchBar.delegate = self;
+    searchBar.placeholder = @"请输入商品名称查询";
     self.searchBar = searchBar;
     self.navigationItem.titleView = searchBar;
 }
@@ -184,31 +211,55 @@ static NSString *const DiscountGoodsCell = @"DiscountGoodsCell";
 }
 #pragma mark -- 点击事件
 - (IBAction)saleNumSankClicked:(UIButton *)sender {
-    self.price_img.image = HXGetImage(@"全黑");
+    if (self.isControl) {
+        self.price_img1.image = HXGetImage(@"全黑");
+    }else{
+        self.price_img.image = HXGetImage(@"全黑");
+    }
     self.price = @"";
     
     /* 销量排序 1降序 2升序*/
     if ([self.sale_num isEqualToString:@"1"]) {
         self.sale_num = @"2";
-        [self.sale_img setImage:HXGetImage(@"上红下黑")];
+        if (self.isControl) {
+            [self.sale_img1 setImage:HXGetImage(@"上红下黑")];
+        }else{
+            [self.sale_img setImage:HXGetImage(@"上红下黑")];
+        }
     }else{
         self.sale_num = @"1";
-        [self.sale_img setImage:HXGetImage(@"上黑下红")];
+        if (self.isControl) {
+            [self.sale_img1 setImage:HXGetImage(@"上黑下红")];
+        }else{
+            [self.sale_img setImage:HXGetImage(@"上黑下红")];
+        }
     }
     [self getGoodsListDataRequest:YES];
 }
 
 - (IBAction)priceSankClicked:(UIButton *)sender {
-    self.sale_img.image = HXGetImage(@"全黑");
+    if (self.isControl) {
+        self.sale_img1.image = HXGetImage(@"全黑");
+    }else{
+        self.sale_img.image = HXGetImage(@"全黑");
+    }
     self.sale_num = @"";
     
     /* 销量排序 1降序 2升序*/
     if ([self.price isEqualToString:@"1"]) {
         self.price = @"2";
-        [self.price_img setImage:HXGetImage(@"上红下黑")];
+        if (self.isControl) {
+            [self.price_img1 setImage:HXGetImage(@"上红下黑")];
+        }else{
+            [self.price_img setImage:HXGetImage(@"上红下黑")];
+        }
     }else{
         self.price = @"1";
-        [self.price_img setImage:HXGetImage(@"上黑下红")];
+        if (self.isControl) {
+            [self.price_img1 setImage:HXGetImage(@"上黑下红")];
+        }else{
+            [self.price_img setImage:HXGetImage(@"上黑下红")];
+        }
     }
     [self getGoodsListDataRequest:YES];
 }

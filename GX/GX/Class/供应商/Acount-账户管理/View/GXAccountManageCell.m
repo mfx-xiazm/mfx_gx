@@ -30,7 +30,7 @@
     _log = log;
     if (_log.finance_log_type <= 5) {
         self.top_view.hidden = NO;
-        self.order_no.text = [NSString stringWithFormat:@"订单编号：%@",_log.orderInfo.order_no];
+        self.order_no.text = [NSString stringWithFormat:@"%@",_log.orderInfo.order_no];
         self.time.text = _log.create_time;
     }else{
         self.top_view.hidden = YES;
@@ -39,10 +39,14 @@
     self.desc.text = _log.finance_log_desc;
     
     if (_log.finance_log_type <= 5) {
-        self.type.text = @"订单佣金";
+        if ([[MSUserManager sharedInstance].curUserInfo.utype isEqualToString:@"2"]) {
+            self.type.text = @"订单收入";
+        }else{
+            self.type.text = @"订单佣金";
+        }
         self.left_amount.textColor = HXControlBg;
         self.left_amount.text = [NSString stringWithFormat:@"￥%@",_log.orderInfo.pay_amount];
-        self.amount.text = [NSString stringWithFormat:@"%@",_log.amount];
+        self.amount.text = [NSString stringWithFormat:@"+%@",_log.amount];
     }else if (_log.finance_log_type == 6) {
         self.type.text = @"提现驳回";
         self.left_amount.textColor = UIColorFromRGB(0xCCCCCC);

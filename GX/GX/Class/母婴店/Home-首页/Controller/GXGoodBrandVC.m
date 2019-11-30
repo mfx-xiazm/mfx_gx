@@ -114,6 +114,7 @@ static NSString *const ShopGoodsCell = @"ShopGoodsCell";
     searchBar.layer.cornerRadius = 6;
     searchBar.layer.masksToBounds = YES;
     searchBar.delegate = self;
+    searchBar.placeholder = @"请输入商品名称查询";
     self.searchBar = searchBar;
     self.navigationItem.titleView = searchBar;
 }
@@ -243,6 +244,7 @@ static NSString *const ShopGoodsCell = @"ShopGoodsCell";
     parameters[@"brand_id"] = (self.brand_id && self.brand_id.length)?self.brand_id:@"";//品牌id
     parameters[@"sale_num"] = (self.sale_num && self.sale_num.length)?self.sale_num:@"";//销量排序
     if (isRefresh) {
+        [self.collectionView.mj_footer resetNoMoreData];
         parameters[@"page"] = @(1);//第几页
     }else{
         NSInteger page = self.pagenum+1;

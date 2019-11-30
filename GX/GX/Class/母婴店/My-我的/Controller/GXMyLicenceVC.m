@@ -25,7 +25,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *changeBtn;
 
 /* 信息 */
-@property(nonatomic,strong) NSDictionary *result;
+@property(nonatomic,strong) NSMutableDictionary *result;
 @end
 
 @implementation GXMyLicenceVC
@@ -53,7 +53,7 @@
     [self.card_back_img addGestureRecognizer:tap4];
     
     UITapGestureRecognizer *tap5 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imgTapClicked:)];
-    [self.card_back_img addGestureRecognizer:tap5];
+    [self.food_license_img addGestureRecognizer:tap5];
     
     [self getNaturalDataRequest];
 }
@@ -122,7 +122,7 @@
     [HXNetworkTool POST:HXRC_M_URL action:@"admin/naturalData" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
-            strongSelf.result = [NSDictionary dictionaryWithDictionary:responseObject[@"data"]];
+            strongSelf.result = [NSMutableDictionary dictionaryWithDictionary:responseObject[@"data"]];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [strongSelf handleNaturalData:responseObject[@"data"]];
             });
@@ -243,7 +243,7 @@
         // 显示保存图片
         [strongSelf upImageRequestWithImage:info[UIImagePickerControllerEditedImage] completedCall:^(NSString *imageUrl,NSString * imagePath) {
             [strongSelf.food_license_img sd_setImageWithURL:[NSURL URLWithString:imagePath]];
-            
+            strongSelf.result[@"food_license_img"] = imagePath;
             [strongSelf updateFoodLicenseImgRequest:imageUrl];
         }];
     }];

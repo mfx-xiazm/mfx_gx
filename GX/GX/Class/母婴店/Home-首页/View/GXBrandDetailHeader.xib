@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR" customClass="GXBrandDetailHeader">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="320"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="367"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shop_info_bg" translatesAutoresizingMaskIntoConstraints="NO" id="dBp-Wa-iy3">
@@ -118,9 +116,9 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ONJ-B2-vk3">
-                    <rect key="frame" x="15" y="155" width="345" height="49"/>
+                    <rect key="frame" x="15" y="155" width="345" height="53.5"/>
                     <attributedString key="attributedText">
-                        <fragment content="品牌直供，正品保证。品牌直供，正品保证品牌直供，正品保证。品牌直供，正品保证品牌直供，正品保证品牌直供，正品保证。品牌直供，正品保证品牌直供，正品保证。">
+                        <fragment content="品牌直供，正品保证。品牌直供，正品保证品牌直供，正品保证。品牌直供，正品保证品牌直供，正品保证品牌直供，正品保证。品牌直供">
                             <attributes>
                                 <color key="NSColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <font key="NSFont" size="13" name=".PingFangSC-Regular"/>
@@ -131,7 +129,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lgw-fV-FLV">
-                    <rect key="frame" x="112.5" y="214" width="150" height="30"/>
+                    <rect key="frame" x="112.5" y="218.5" width="150" height="30"/>
                     <color key="backgroundColor" red="0.92549019610000005" green="0.078431372550000003" blue="0.1764705882" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="Lc1-Qk-h5V"/>
@@ -151,7 +149,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RYj-rz-jns">
-                    <rect key="frame" x="15" y="254" width="345" height="29"/>
+                    <rect key="frame" x="15" y="258.5" width="345" height="32"/>
                     <attributedString key="attributedText">
                         <fragment content="加盟提示：本品牌要求线下指定代理区域、不低于建议零售价格进行销售。如有违反立即取消合作资格！">
                             <attributes>
@@ -164,7 +162,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3nu-z3-sg1">
-                    <rect key="frame" x="0.0" y="283" width="375" height="30"/>
+                    <rect key="frame" x="0.0" y="314" width="375" height="30"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X3B-A0-xoo">
                             <rect key="frame" x="10" y="6" width="4" height="18"/>
@@ -190,12 +188,25 @@
                         <constraint firstItem="enc-dn-3o2" firstAttribute="centerY" secondItem="3nu-z3-sg1" secondAttribute="centerY" id="pKm-eC-WRn"/>
                     </constraints>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hC2-FG-fUH">
+                    <rect key="frame" x="15" y="300.5" width="345" height="13.5"/>
+                    <attributedString key="attributedText">
+                        <fragment content="被拒原因：不同意">
+                            <attributes>
+                                <color key="NSColor" red="0.92549019610000005" green="0.078431372550000003" blue="0.1764705882" alpha="1" colorSpace="calibratedRGB"/>
+                                <font key="NSFont" size="12" name=".PingFangSC-Regular"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5" tighteningFactorForTruncation="0.0"/>
+                            </attributes>
+                        </fragment>
+                    </attributedString>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="ONJ-B2-vk3" firstAttribute="leading" secondItem="9Gg-ye-v9C" secondAttribute="leading" constant="15" id="0gL-gC-MNr"/>
                 <constraint firstItem="PcB-59-f4n" firstAttribute="top" secondItem="zth-SV-dRD" secondAttribute="bottom" constant="10" id="1Ja-N9-tYU"/>
-                <constraint firstItem="3nu-z3-sg1" firstAttribute="top" secondItem="RYj-rz-jns" secondAttribute="bottom" id="1fk-93-W7W"/>
+                <constraint firstItem="3nu-z3-sg1" firstAttribute="top" secondItem="hC2-FG-fUH" secondAttribute="bottom" id="1rH-LZ-g1a"/>
                 <constraint firstItem="zth-SV-dRD" firstAttribute="leading" secondItem="9Gg-ye-v9C" secondAttribute="leading" constant="10" id="6fx-4c-W6h"/>
                 <constraint firstItem="Lgw-fV-FLV" firstAttribute="centerX" secondItem="9Gg-ye-v9C" secondAttribute="centerX" id="73I-YF-eq7"/>
                 <constraint firstItem="zth-SV-dRD" firstAttribute="top" secondItem="dBp-Wa-iy3" secondAttribute="bottom" constant="-30" id="8Lk-2V-Rgx"/>
@@ -213,6 +224,9 @@
                 <constraint firstItem="ONJ-B2-vk3" firstAttribute="top" secondItem="PcB-59-f4n" secondAttribute="bottom" constant="5" id="lbm-2H-yD9"/>
                 <constraint firstItem="RYj-rz-jns" firstAttribute="top" secondItem="Lgw-fV-FLV" secondAttribute="bottom" constant="10" id="owL-fk-gcj"/>
                 <constraint firstAttribute="trailing" secondItem="ONJ-B2-vk3" secondAttribute="trailing" constant="15" id="rvn-Zw-Wnc"/>
+                <constraint firstItem="hC2-FG-fUH" firstAttribute="leading" secondItem="9Gg-ye-v9C" secondAttribute="leading" constant="15" id="uND-KY-YDo"/>
+                <constraint firstItem="hC2-FG-fUH" firstAttribute="top" secondItem="RYj-rz-jns" secondAttribute="bottom" constant="10" id="w3I-Js-eVL"/>
+                <constraint firstItem="9Gg-ye-v9C" firstAttribute="trailing" secondItem="hC2-FG-fUH" secondAttribute="trailing" constant="15" id="wq4-vT-4vY"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="9Gg-ye-v9C"/>
             <connections>
@@ -222,8 +236,10 @@
                 <outlet property="brand_desc" destination="ONJ-B2-vk3" id="OUI-db-Kvv"/>
                 <outlet property="brand_logo" destination="IDB-bj-62d" id="hnM-A8-U5C"/>
                 <outlet property="brand_name" destination="CfY-g6-NMc" id="foT-Ky-QZu"/>
+                <outlet property="join_desc" destination="RYj-rz-jns" id="0p6-4M-34T"/>
+                <outlet property="reject_resion" destination="hC2-FG-fUH" id="qPW-zm-P1F"/>
             </connections>
-            <point key="canvasLocation" x="203.62318840579712" y="167.41071428571428"/>
+            <point key="canvasLocation" x="203.62318840579712" y="183.14732142857142"/>
         </collectionReusableView>
     </objects>
     <resources>

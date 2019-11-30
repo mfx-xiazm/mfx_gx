@@ -35,6 +35,8 @@
 #import "GXHomeData.h"
 #import "GXSearchResultVC.h"
 #import "GXActivityContentVC.h"
+#import "SZUpdateView.h"
+#import <zhPopupController.h>
 
 static NSString *const HomeCateCell = @"HomeCateCell";
 static NSString *const ShopGoodsCell = @"ShopGoodsCell";
@@ -63,6 +65,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
     [self setUpRefresh];
     [self startShimmer];
     [self getHomeDataRequest];
+    [self updateVersionRequest];//版本升级
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -201,7 +204,52 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
     }];
 }
-
+-(void)updateVersionRequest
+{
+    hx_weakify(self);
+    NSString *key = @"CFBundleShortVersionString";
+    // 当前软件的版本号（从Info.plist中获得）
+    NSString *currentVersion = [NSBundle mainBundle].infoDictionary[key];
+    
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/isNewVersions" parameters:@{@"sys":@"2",@"versions":currentVersion} success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        if([[responseObject objectForKey:@"status"] boolValue]) {
+            if ([responseObject[@"data"] isKindOfClass:[NSDictionary class]]) {
+                [strongSelf updateAlert:responseObject[@"data"]];
+            }
+        }else{
+            //[JMNotifyView showNotify:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        //[JMNotifyView showNotify:error.localizedDescription];
+    }];
+}
+-(void)updateAlert:(NSDictionary *)dict
+{
+    // 删除数据
+    SZUpdateView *alert = [SZUpdateView loadXibView];
+    alert.hxn_width = HX_SCREEN_WIDTH - 30*2;
+    alert.hxn_height = (HX_SCREEN_WIDTH - 30*2) *130/300.0 + 240;
+    if ([dict[@"must_type"] integerValue] == 1) {
+        alert.closeBtn.hidden = YES;
+    }else{
+        alert.closeBtn.hidden = NO;
+    }
+    alert.versionTxt.text = [NSString stringWithFormat:@"发现新版本V%@",dict[@"app_version"]];
+    alert.updateText.text = dict[@"update_content"];
+    hx_weakify(self);
+    alert.updateClickedCall = ^(NSInteger index) {
+        hx_strongify(weakSelf);
+        if (index == 1) {// 强制更新不消失
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/cn/app/id1468066838?mt=8"]];
+        }else{// 不强制更新消失
+            [strongSelf.zh_popupController dismiss];
+        }
+    };
+    self.zh_popupController = [[zhPopupController alloc] init];
+    self.zh_popupController.dismissOnMaskTouched = NO;
+    [self.zh_popupController presentContentView:alert duration:0.25 springAnimated:NO];
+}
 #pragma mark -- UICollectionView 数据源和代理
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -315,9 +363,17 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
-        return CGSizeMake(HX_SCREEN_WIDTH,HX_SCREEN_WIDTH*3/5.0);
+        return CGSizeMake(HX_SCREEN_WIDTH,HX_SCREEN_WIDTH*2/5.0);
     }else{
-        return CGSizeMake(HX_SCREEN_WIDTH, 50.f);
+        if (section == 1) {//每日必抢
+            if (self.homeData.home_rushbuy.count) {
+                return CGSizeMake(HX_SCREEN_WIDTH, 50.f);
+            }else{
+                return CGSizeZero;
+            }
+        }else{
+            return CGSizeMake(HX_SCREEN_WIDTH, 50.f);
+        }
     }
 }
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
@@ -392,6 +448,11 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
                         [strongSelf.navigationController pushViewController:pvc animated:YES];
                     }else if (indexPath.section == 3) {//通货行情
                         GXMarketTrendVC *tvc = [GXMarketTrendVC new];
+                        GYHomeMarketTrend *trend = strongSelf.homeData.currency_img.firstObject;
+                        tvc.left_trend_img = trend.trade_img;
+                        GYHomeMarketTrend *trend1 = strongSelf.homeData.currency_img.lastObject;
+                        tvc.right_trend_img = trend1.trade_img;
+                        tvc.selectIndex = 0;
                         [strongSelf.navigationController pushViewController:tvc animated:YES];
                     }else if (indexPath.section == 4) {//品牌优选
                         GXGoodBrandVC *bvc = [GXGoodBrandVC new];
@@ -402,7 +463,11 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
                     }
                 };
             }
-            return header;
+            if (indexPath.section == 1) {//每日必抢
+                return self.homeData.home_rushbuy.count?header:nil;
+            }else{
+                return header;
+            }
         }
     }
     return nil;
@@ -553,7 +618,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
     if (section == 0 || section == 6) {
         return @"";
     }else if (section == 1){
-        return @"GXHomeSectionBgReusableView2";
+        return self.homeData.home_rushbuy.count?@"GXHomeSectionBgReusableView2":@"";
     }else{
         return @"GXHomeSectionBgReusableView";
     }

@@ -31,7 +31,6 @@ static NSString *const BrandDetailHeader = @"BrandDetailHeader";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.navigationItem setTitle:@"品牌页"];
     [self setUpCollectionView];
     [self setUpRefresh];
     [self startShimmer];
@@ -70,9 +69,7 @@ static NSString *const BrandDetailHeader = @"BrandDetailHeader";
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         hx_strongify(weakSelf);
         [strongSelf.collectionView.mj_footer resetNoMoreData];
-        [strongSelf getGoodsListDataRequest:YES completedCall:^{
-            [strongSelf.collectionView reloadData];
-        }];
+        [strongSelf getBrandDetailRequest];
     }];
     //追加尾部刷新
     self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
@@ -179,6 +176,8 @@ static NSString *const BrandDetailHeader = @"BrandDetailHeader";
 }
 -(void)handleBrandDetailData
 {
+    [self.navigationItem setTitle:self.brandDetail.brand_name];
+
     self.collectionView.hidden = NO;
     
     [self.collectionView reloadData];
@@ -220,6 +219,7 @@ static NSString *const BrandDetailHeader = @"BrandDetailHeader";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     GXGoodsDetailVC *dvc = [GXGoodsDetailVC new];
     GXBrandGoods *brandGoods = self.goods[indexPath.item];
+    dvc.isBrandPush = YES;
     dvc.goods_id = brandGoods.goods_id;
     [self.navigationController pushViewController:dvc animated:YES];
 }
@@ -252,14 +252,23 @@ static NSString *const BrandDetailHeader = @"BrandDetailHeader";
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-    CGFloat height = 155.f;
-    CGFloat descHeight = [self.brandDetail.brand_desc textHeightSize:CGSizeMake(HX_SCREEN_WIDTH-15*3, CGFLOAT_MAX) font:[UIFont systemFontOfSize:13] lineSpacing:5.f];
+    CGFloat height = 120.f;
+    CGFloat descHeight = [self.brandDetail.brand_desc textHeightSize:CGSizeMake(HX_SCREEN_WIDTH-15*2, CGFLOAT_MAX) font:[UIFont systemFontOfSize:13] lineSpacing:5.f];
     height+= descHeight;
+    CGFloat noticeHeight = [[NSString stringWithFormat:@"加盟提示：%@",self.brandDetail.brand_join_desc] textHeightSize:CGSizeMake(HX_SCREEN_WIDTH-15*2, CGFLOAT_MAX) font:[UIFont systemFontOfSize:12] lineSpacing:5.f];
+    height+= noticeHeight;
     /** 0未加盟 1审核中 2合作中 3审核驳回 4合作取消 */
     if ([self.brandDetail.apply_status isEqualToString:@"2"]) {// 没有加盟按钮
         return CGSizeMake(collectionView.frame.size.width, height+90.f);
     }else{// 有加盟按钮
-        return CGSizeMake(collectionView.frame.size.width, height+120.f);
+        if ([self.brandDetail.apply_status isEqualToString:@"3"]) {
+            CGFloat rejectHeight = [(self.brandDetail.reject_reason && self.brandDetail.reject_reason.length)?[NSString stringWithFormat:@"驳回原因：%@",self.brandDetail.reject_reason]:@"" textHeightSize:CGSizeMake(HX_SCREEN_WIDTH-15*2, CGFLOAT_MAX) font:[UIFont systemFontOfSize:12] lineSpacing:5.f] + 10;
+            
+            return CGSizeMake(collectionView.frame.size.width, rejectHeight+height+120.f);
+
+        }else{
+            return CGSizeMake(collectionView.frame.size.width, height+120.f);
+        }
     }
 }
 

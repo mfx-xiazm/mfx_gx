@@ -309,8 +309,12 @@ static NSString *const SankPriceCell = @"SankPriceCell";
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    GXSankPrice *sank = self.goodsPrices[section];
-    return sank.isExpand?100.f:0.f;
+    if (self.goodsPrices.count) {
+        GXSankPrice *sank = self.goodsPrices[section];
+        return sank.isExpand?100.f:0.f;
+    }else{
+        return CGFLOAT_MIN;
+    }
 }
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {

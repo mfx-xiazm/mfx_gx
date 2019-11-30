@@ -50,7 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong) GXGoodsRush *rush;
 @property(nonatomic,strong) NSArray<GXGoodsLogisticst *> *logistics;
 /* 选中的分区的那个快递 */
-@property(nonatomic,strong) GXGoodsLogisticst *selectLogisticst;
+@property(nonatomic,strong) GXGoodsLogisticst * _Nullable selectLogisticst;
 /* 规格数据信息 */
 @property(nonatomic,strong) GXGoodsDetailSku *sku;
 @end
@@ -88,6 +88,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *provider_no;
 @property(nonatomic,copy) NSString *price;
 @property(nonatomic,copy) NSString *stock;
+@property(nonatomic,strong) NSArray<GXGoodsLogisticst *> *logistic;
 
 @end
 

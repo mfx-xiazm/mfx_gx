@@ -197,13 +197,14 @@ static NSString *const UpOrderCell = @"UpOrderCell";
         [strongSelf stopShimmer];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             strongSelf.confirmOrder = [GXConfirmOrder yy_modelWithDictionary:responseObject[@"data"]];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                strongSelf.tableView.hidden = NO;
-                [strongSelf handleConfirmOrderData];
-            });
         }else{
+            strongSelf.confirmOrder.defaultAddress = nil;
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
         }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            strongSelf.tableView.hidden = NO;
+            [strongSelf handleConfirmOrderData];
+        });
     } failure:^(NSError *error) {
         hx_strongify(weakSelf);
         [strongSelf stopShimmer];
@@ -248,14 +249,31 @@ static NSString *const UpOrderCell = @"UpOrderCell";
     if (self.isCartPush) {
         parameters[@"cart_ids"] = self.cart_ids;//购物车选择多个商品对应的id
         parameters[@"address_id"] = self.confirmOrder.defaultAddress.address_id;//收货地址id
+        NSMutableString *skuDatas = [NSMutableString string];
+        [skuDatas appendString:@"["];
+        for (GXConfirmOrderData *orderData in self.confirmOrder.goodsData) {
+            for (GXConfirmOrderGoods *orderGood in orderData.goods) {
+                if (skuDatas.length == 1) {
+                    [skuDatas appendFormat:@"{\"sku_id\":\"%@\",\"cart_num\":\"%@\"}",orderGood.sku_id,orderGood.cart_num];
+                }else{
+                    [skuDatas appendFormat:@",{\"sku_id\":\"%@\",\"cart_num\":\"%@\"}",orderGood.sku_id,orderGood.cart_num];
+                }
+            }
+        }
+        [skuDatas appendString:@"]"];
+        parameters[@"skuDatas"] = skuDatas;//选择的商品的sku_id 和每个商品的cart_num数量
     }else{
-        parameters[@"goods_id"] = self.goods_id;//商品id
+        GXConfirmOrderData *orderData = self.confirmOrder.goodsData.firstObject;
+        GXConfirmOrderGoods *orderGood = orderData.goods.firstObject;
+        
+        parameters[@"goods_id"] = orderGood.goods_id;//商品id
         parameters[@"address_id"] = self.confirmOrder.defaultAddress.address_id;//收货地址id
-        parameters[@"sku_id"] = self.sku_id;//某个供应商下的该商品的id
+        parameters[@"sku_id"] = orderGood.sku_id;//某个供应商下的该商品的id
         parameters[@"goods_num"] = self.goods_num;//直接购买商品的数量
-        parameters[@"specs_attrs"] = self.specs_attrs;//直接购买商品规格
-        parameters[@"logistics_com_id"] = self.logistics_com_id;//物流公司id
+        parameters[@"specs_attrs"] = orderGood.specs_attrs;//直接购买商品规格
+        parameters[@"logistics_com_id"] = orderGood.logistics_com_id;//物流公司id
         NSMutableString *coupon_ids = [NSMutableString string];
+        
         for (GXConfirmOrderData *orderData in self.confirmOrder.goodsData) {
             if (orderData.selectedCoupon) {
                 if (coupon_ids.length) {

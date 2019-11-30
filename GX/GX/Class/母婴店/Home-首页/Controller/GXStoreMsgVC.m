@@ -38,19 +38,23 @@
 }
 -(void)imgTapClicked:(UITapGestureRecognizer *)tap
 {
-    NSMutableArray * items = [NSMutableArray array];
-    NSMutableDictionary *temp = [NSMutableDictionary dictionary];
-    temp[@"ZLPreviewPhotoObj"] = [NSURL URLWithString:self.storeDetail.food_license_img];
-    temp[@"ZLPreviewPhotoTyp"] = @(ZLPreviewPhotoTypeURLImage);
-    [items addObject:temp];
-    
-    ZLPhotoActionSheet *actionSheet = [[ZLPhotoActionSheet alloc] init];
-    actionSheet.configuration.navBarColor = HXControlBg;
-    actionSheet.configuration.statusBarStyle = UIStatusBarStyleLightContent;
-    actionSheet.sender = self;
-    [actionSheet previewPhotos:items index:tap.view.tag hideToolBar:YES complete:^(NSArray * _Nonnull photos) {
+    if (self.storeDetail.food_license_img && self.storeDetail.food_license_img.length) {
+        NSMutableArray * items = [NSMutableArray array];
+        NSMutableDictionary *temp = [NSMutableDictionary dictionary];
+        temp[@"ZLPreviewPhotoObj"] = [NSURL URLWithString:self.storeDetail.food_license_img];
+        temp[@"ZLPreviewPhotoTyp"] = @(ZLPreviewPhotoTypeURLImage);
+        [items addObject:temp];
         
-    }];
+        ZLPhotoActionSheet *actionSheet = [[ZLPhotoActionSheet alloc] init];
+        actionSheet.configuration.navBarColor = HXControlBg;
+        actionSheet.configuration.statusBarStyle = UIStatusBarStyleLightContent;
+        actionSheet.sender = self;
+        [actionSheet previewPhotos:items index:tap.view.tag hideToolBar:YES complete:^(NSArray * _Nonnull photos) {
+            
+        }];
+    }else{
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"商家未配置食品许可证"];
+    }
 }
 -(void)getShopDetailRequest
 {

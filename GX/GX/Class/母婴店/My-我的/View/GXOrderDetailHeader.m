@@ -74,9 +74,9 @@
 -(void)setRefundDetail:(GXMyRefund *)refundDetail
 {
     _refundDetail = refundDetail;
-    /* 1等待经销商审核 2等待平台审核 3退款成功 4退款驳回 5经销商同意 5经销商不同意*/
+    /* 1等待供应商审核 2等待平台审核 3退款成功 4退款驳回 5供应商同意 6供应商不同意*/
     if ([_refundDetail.refund_status isEqualToString:@"1"]) {
-        self.order_status.text = @"等待经销商审核";
+        self.order_status.text = @"等待供应商审核";
         self.order_desc.hidden = YES;
 
     }else if ([_refundDetail.refund_status isEqualToString:@"2"]){
@@ -89,18 +89,15 @@
 
     }else if ([_refundDetail.refund_status isEqualToString:@"4"]){
         self.order_status.text = @"退款驳回";
-        self.order_desc.hidden = NO;
-        self.order_desc.text = [NSString stringWithFormat:@"原因：%@",_refundDetail.reject_reason];
+        self.order_desc.hidden = YES;
         
     }else if ([_refundDetail.refund_status isEqualToString:@"5"]){
-        self.order_status.text = @"经销商同意";
+        self.order_status.text = @"供应商同意";
         self.order_desc.hidden = YES;
 
     }else{
-        self.order_status.text = @"经销商不同意";
-        self.order_desc.hidden = NO;
-        self.order_desc.text = [NSString stringWithFormat:@"原因：%@",_refundDetail.reject_reason];
-        
+        self.order_status.text = @"供应商不同意";
+        self.order_desc.hidden = YES;
     }
     
     if (_refundDetail.logistics_no && _refundDetail.logistics_no.length) {

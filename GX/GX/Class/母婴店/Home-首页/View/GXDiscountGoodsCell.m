@@ -44,14 +44,14 @@
         [self.handleBtn setBackgroundColor:UIColorFromRGB(0xFF9F08)];
         [self.handleBtn setTitle:@"立即抢购" forState:UIControlStateNormal];
         [self.handleBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    }else if ([_discount.rushbuy_status isEqualToString:@"3"]) {
-        [self.handleBtn setBackgroundColor:UIColorFromRGB(0xCCCCCC)];
-        [self.handleBtn setTitle:@"已结束" forState:UIControlStateNormal];
-        [self.handleBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    }else{
+    }else if ([_discount.rushbuy_status isEqualToString:@"1"]) {
         [self.handleBtn setBackgroundColor:HXRGBAColor(255, 138, 0, 0.3)];
         [self.handleBtn setTitle:@"未开始" forState:UIControlStateNormal];
         [self.handleBtn setTitleColor:UIColorFromRGB(0xFF9F08) forState:UIControlStateNormal];
+    }else{
+        [self.handleBtn setBackgroundColor:UIColorFromRGB(0xCCCCCC)];
+        [self.handleBtn setTitle:@"已结束" forState:UIControlStateNormal];
+        [self.handleBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
 }
 -(void)setDayDiscount:(GXDayDiscount *)dayDiscount
@@ -68,14 +68,14 @@
         [self.handleBtn setBackgroundColor:UIColorFromRGB(0xFF9F08)];
         [self.handleBtn setTitle:@"立即抢购" forState:UIControlStateNormal];
         [self.handleBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    }else if ([_dayDiscount.rushbuy_status isEqualToString:@"3"]) {
-        [self.handleBtn setBackgroundColor:UIColorFromRGB(0xCCCCCC)];
-        [self.handleBtn setTitle:@"已结束" forState:UIControlStateNormal];
-        [self.handleBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    }else{
+    }else if ([_dayDiscount.rushbuy_status isEqualToString:@"1"]) {
         [self.handleBtn setBackgroundColor:HXRGBAColor(255, 138, 0, 0.3)];
         [self.handleBtn setTitle:@"未开始" forState:UIControlStateNormal];
         [self.handleBtn setTitleColor:UIColorFromRGB(0xFF9F08) forState:UIControlStateNormal];
+    }else{
+        [self.handleBtn setBackgroundColor:UIColorFromRGB(0xCCCCCC)];
+        [self.handleBtn setTitle:@"已结束" forState:UIControlStateNormal];
+        [self.handleBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
 }
 -(void)setGoods:(GXCategoryGoods *)goods

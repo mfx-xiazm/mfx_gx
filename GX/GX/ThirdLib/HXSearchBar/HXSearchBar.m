@@ -8,6 +8,10 @@
 
 #import "HXSearchBar.h"
 
+@interface HXSearchBar ()
+/* 分割线 */
+@property(nonatomic,strong) UIView *line;
+@end
 @implementation HXSearchBar
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -30,6 +34,10 @@
         self.leftView = searchIcon;
         self.leftViewMode = UITextFieldViewModeAlways;
         
+        UIView *line = [[UIView alloc] init];
+        line.backgroundColor = UIColorFromRGB(0xCCCCCC);
+        [self addSubview:line];
+        self.line = line;
         
         // [self setValue:UIColorFromRGB(0xBFBFBF) forKeyPath:@"_placeholderLabel.textColor"];
         // [self setValue:[UIFont boldSystemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
@@ -40,7 +48,12 @@
     }
     return self;
 }
-
+-(void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    self.line.frame = CGRectMake(35.f, 5, 1, self.hxn_height - 10);
+}
 -(void)setSearchIcon:(NSString *)searchIcon
 {
     _searchIcon = searchIcon;
@@ -65,13 +78,13 @@
 -(CGRect)textRectForBounds:(CGRect)bounds
 {
     CGRect textRect = [super textRectForBounds:bounds];
-    textRect.origin.x += 10; //像右边偏10
+    textRect.origin.x += 15; //像右边偏10
     return textRect;
 }
 -(CGRect)editingRectForBounds:(CGRect)bounds
 {
     CGRect editRect = [super editingRectForBounds:bounds];
-    editRect.origin.x += 10; //像右边偏10
+    editRect.origin.x += 15; //像右边偏10
     return editRect;
 }
 +(instancetype)searchBar

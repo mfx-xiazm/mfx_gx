@@ -30,7 +30,7 @@
     _coupon = coupon;
     
     self.coupon_amount.text = [NSString stringWithFormat:@"￥%@",_coupon.coupon_amount];
-    self.coupon_full.text = _coupon.coupon_name;
+    self.coupon_full.text = [NSString stringWithFormat:@"%@(满%@减%@)",_coupon.coupon_name,_coupon.fulfill_amount,_coupon.coupon_amount];
     if ([_coupon.provider_uid isEqualToString:@"0"]) {
         self.coupon_type.text = @"全店通用";
     }else{
@@ -69,7 +69,7 @@
     _useCoupon = useCoupon;
     
     self.coupon_amount.text = [NSString stringWithFormat:@"￥%@",_useCoupon.coupon_amount];
-    self.coupon_full.text = _useCoupon.coupon_name;
+    self.coupon_full.text = [NSString stringWithFormat:@"%@(满%@减%@)",_useCoupon.coupon_name,_useCoupon.fulfill_amount,_useCoupon.coupon_amount];
     if ([_useCoupon.provider_uid isEqualToString:@"0"]) {
         self.coupon_type.text = @"全店通用";
     }else{

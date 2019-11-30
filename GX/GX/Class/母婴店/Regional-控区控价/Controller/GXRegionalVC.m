@@ -88,7 +88,7 @@ static NSString *const RegionalCell = @"RegionalCell";
             }else if (type == 2){
                 GXRegionalNotice *notice = strongSelf.regional.notice[index];
                 GXWebContentVC *wvc = [GXWebContentVC new];
-                wvc.navTitle = @"公告详情";
+                wvc.navTitle = notice.notice_title;
                 wvc.isNeedRequest = YES;
                 wvc.requestType = 3;
                 wvc.notice_id = notice.notice_id;
@@ -147,9 +147,7 @@ static NSString *const RegionalCell = @"RegionalCell";
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         hx_strongify(weakSelf);
         [strongSelf.tableView.mj_footer resetNoMoreData];
-        [strongSelf getHotBrandDataRequest:YES completedCall:^{
-            [strongSelf.tableView reloadData];
-        }];
+        [strongSelf getRegionalControlDataRequest];
     }];
     //追加尾部刷新
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
@@ -293,7 +291,7 @@ static NSString *const RegionalCell = @"RegionalCell";
 {
     // 返回这个模型对应的cell高度
     if (indexPath.section == 0) {
-        return 110.f;
+        return HX_SCREEN_WIDTH*7/20.f;
     }else{
         return 260.f;
     }
@@ -327,7 +325,7 @@ static NSString *const RegionalCell = @"RegionalCell";
             [self.navigationController pushViewController:dvc animated:YES];
         }else{//试用装
             GXTryApplyVC *avc = [GXTryApplyVC new];
-            avc.try_cover = self.regional.try_cover.try_cover;
+            avc.try_cover = self.regional.try_cover.set_val3;
             [self.navigationController pushViewController:avc animated:YES];
         }
     }else{//热门品牌

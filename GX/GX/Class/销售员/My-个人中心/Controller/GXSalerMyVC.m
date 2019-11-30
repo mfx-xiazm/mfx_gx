@@ -80,7 +80,7 @@
 {
     self.userName.text = [NSString stringWithFormat:@"%@",result[@"username"]];
     self.phone.text = [NSString stringWithFormat:@"%@",result[@"phone"]];
-    self.shareCodeImg.image = [SGQRCodeObtain generateQRCodeWithData:result[@"share_code"] size:self.shareCodeImg.hxn_width];
+    self.shareCodeImg.image = [SGQRCodeObtain generateQRCodeWithData:result[@"register_url"] size:self.shareCodeImg.hxn_width];
     self.shareCode.text = [NSString stringWithFormat:@"我的邀请码：%@",result[@"share_code"]];
 }
 @end

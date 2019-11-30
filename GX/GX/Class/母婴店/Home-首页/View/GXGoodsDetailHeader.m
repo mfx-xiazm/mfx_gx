@@ -80,28 +80,40 @@
             self.rush_time.text = @"已结束";
         }
         self.price.text = @"";
+        self.market_price.text = [NSString stringWithFormat:@"建议价：￥%@",_goodsDetail.suggest_price];
     }else{//不抢购商品
         if ([_goodsDetail.control_type isEqualToString:@"1"]) {
             self.price.text = [NSString stringWithFormat:@"￥%@-￥%@  ",_goodsDetail.min_price,_goodsDetail.max_price];
+            self.market_price.text = [NSString stringWithFormat:@"建议价：￥%@",_goodsDetail.suggest_price];
         }else{
             self.price.text = [NSString stringWithFormat:@"￥%@  ",_goodsDetail.min_price];
+            self.market_price.text = @"";
         }
     }
-    self.market_price.text = [NSString stringWithFormat:@"建议价：￥%@",_goodsDetail.suggest_price];
     self.cale_num.text = [NSString stringWithFormat:@"销量：%@",_goodsDetail.sale_num];
     
-    self.notice.text = _goodsDetail.important_notice;
+    self.notice.text = [NSString stringWithFormat:@"重要通知：%@",_goodsDetail.important_notice];
 }
 -(void)countTimeDown
 {
     if (self.goodsDetail.rush.countDown >0) {
-        //NSString *str_day = [NSString stringWithFormat:@"%02ld",(self.shopSeckill.countDown/3600)/24];
-        NSString *str_hour = [NSString stringWithFormat:@"%02ld",self.goodsDetail.rush.countDown/3600%24];
-        NSString *str_minute = [NSString stringWithFormat:@"%02ld",(self.goodsDetail.rush.countDown%(60*60))/60];
-        NSString *str_second = [NSString stringWithFormat:@"%02ld",self.goodsDetail.rush.countDown%60];
-        NSString *format_time = [NSString stringWithFormat:@"%@:%@:%@",str_hour,str_minute,str_second];
-        //设置文字显示 根据自己需求设置
-        self.rush_time.text = [NSString stringWithFormat:@"距结束 %@",format_time];
+        if ((self.goodsDetail.rush.countDown/3600)/24) {
+            NSString *str_day = [NSString stringWithFormat:@"%02ld",(self.goodsDetail.rush.countDown/3600)/24];
+            NSString *str_hour = [NSString stringWithFormat:@"%02ld",self.goodsDetail.rush.countDown/3600%24];
+            NSString *str_minute = [NSString stringWithFormat:@"%02ld",(self.goodsDetail.rush.countDown%(60*60))/60];
+            NSString *str_second = [NSString stringWithFormat:@"%02ld",self.goodsDetail.rush.countDown%60];
+            NSString *format_time = [NSString stringWithFormat:@"%@天%@:%@:%@",str_day,str_hour,str_minute,str_second];
+            //设置文字显示 根据自己需求设置
+            self.rush_time.text = [NSString stringWithFormat:@"距结束 %@",format_time];
+        }else{
+            NSString *str_hour = [NSString stringWithFormat:@"%02ld",self.goodsDetail.rush.countDown/3600%24];
+            NSString *str_minute = [NSString stringWithFormat:@"%02ld",(self.goodsDetail.rush.countDown%(60*60))/60];
+            NSString *str_second = [NSString stringWithFormat:@"%02ld",self.goodsDetail.rush.countDown%60];
+            NSString *format_time = [NSString stringWithFormat:@"%@:%@:%@",str_hour,str_minute,str_second];
+            //设置文字显示 根据自己需求设置
+            self.rush_time.text = [NSString stringWithFormat:@"距结束 %@",format_time];
+        }
+        
         self.goodsDetail.rush.countDown -= 1;
     }else{
         // 移除倒计时，发出通知并刷新页面

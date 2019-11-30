@@ -246,6 +246,7 @@ static NSString *const SmallCateHeaderView = @"SmallCateHeaderView";
     }else{
         GXBrandItem *brand = self.currentCatalogItem.control[indexPath.item];
         lvc.brand_id = brand.brand_id;
+        lvc.isControl = [self.currentCatalogItem.catalog_name isEqualToString:@"控区控价"]?YES:NO;
         lvc.catalogs = self.currentCatalogItem.catalog;
     }
     [self.navigationController pushViewController:lvc animated:YES];

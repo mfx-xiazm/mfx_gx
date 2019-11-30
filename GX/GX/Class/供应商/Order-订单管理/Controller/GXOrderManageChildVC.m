@@ -39,6 +39,13 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
     [super viewDidLayoutSubviews];
     self.view.hxn_width = HX_SCREEN_WIDTH;
 }
+-(void)setSeaKey:(NSString *)seaKey
+{
+    if (![_seaKey isEqualToString:seaKey]) {
+        _seaKey = seaKey;
+        [self getOrderDataRequest:YES];
+    }
+}
 -(NSMutableArray *)orders
 {
     if (_orders == nil) {
@@ -99,6 +106,7 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"status"] = @(self.status);
+    parameters[@"goods_name"] = (self.seaKey && self.seaKey.length)?self.seaKey:@"";
     if (isRefresh) {
         parameters[@"page"] = @(1);//第几页
     }else{

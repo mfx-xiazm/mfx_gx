@@ -32,11 +32,12 @@
     if ([_order.status isEqualToString:@"待付款"]) {
         self.firstHandleBtn.hidden = YES;
 
-        self.secondHandleBtn.hidden = NO;
-        [self.secondHandleBtn setTitle:@"取消订单" forState:UIControlStateNormal];
-        self.secondHandleBtn.backgroundColor = [UIColor whiteColor];
-        self.secondHandleBtn.layer.borderColor = [UIColor blackColor].CGColor;
-        [self.secondHandleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        self.secondHandleBtn.hidden = YES;
+//        self.secondHandleBtn.hidden = NO;
+//        [self.secondHandleBtn setTitle:@"取消订单" forState:UIControlStateNormal];
+//        self.secondHandleBtn.backgroundColor = [UIColor whiteColor];
+//        self.secondHandleBtn.layer.borderColor = [UIColor blackColor].CGColor;
+//        [self.secondHandleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         
         self.thirdHandleBtn.hidden = NO;
         [self.thirdHandleBtn setTitle:@"立即支付" forState:UIControlStateNormal];

@@ -9,8 +9,8 @@
 #import "GXPayResultVC.h"
 #import "GXPayTypeVC.h"
 #import "GXUpOrderVC.h"
-#import "GXOrderDetailVC.h"
 #import "GXOrderPay.h"
+#import "GXMyOrderVC.h"
 
 @interface GXPayResultVC ()
 @property (weak, nonatomic) IBOutlet UILabel *payType;
@@ -18,7 +18,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *account_name;
 @property (weak, nonatomic) IBOutlet UILabel *bank_name;
 @property (weak, nonatomic) IBOutlet UILabel *bank_no;
-@property (weak, nonatomic) IBOutlet UILabel *tipDesc;
 @property (weak, nonatomic) IBOutlet UIView *offLineView;
 /** vc控制器 */
 @property (nonatomic,strong) NSMutableArray *controllers;
@@ -46,7 +45,7 @@
         [self.payType setColorAttributedText:[NSString stringWithFormat:@"支付方式：微信支付"] andChangeStr:@"微信支付" andColor:HXControlBg];
         self.offLineView.hidden = YES;
     }else if ([self.pay_type isEqualToString:@"3"]) {
-        [self.payType setColorAttributedText:[NSString stringWithFormat:@"支付方式：网银支付"] andChangeStr:@"网银支付" andColor:HXControlBg];
+        [self.payType setColorAttributedText:[NSString stringWithFormat:@"支付方式：网银支付"] andChangeStr:@"网银线下支付" andColor:HXControlBg];
         self.offLineView.hidden = NO;
         self.account_name.text = self.orderPay.account_data.set_val2;
         self.bank_name.text = self.orderPay.account_data.set_val4;
@@ -70,8 +69,8 @@
 }
 
 - (IBAction)lookOrderClicked:(UIButton *)sender {
-    GXOrderDetailVC *dvc = [GXOrderDetailVC new];
-    dvc.oid = self.orderPay.oid;
+    GXMyOrderVC *dvc = [GXMyOrderVC new];
+    dvc.selectIndex = 0;
     [self.navigationController pushViewController:dvc animated:YES];
 }
 

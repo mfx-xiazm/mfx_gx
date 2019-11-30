@@ -53,7 +53,10 @@
 @end
 
 @implementation GXGoodsDetailSku
-
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    return @{@"logistic":[GXGoodsLogisticst class]
+             };
+}
 @end
 
 @implementation GXGoodsLogisticst

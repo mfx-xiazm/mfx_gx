@@ -12,6 +12,7 @@
 #import "HXPlaceholderTextView.h"
 #import "GXSelectRegion.h"
 #import "GXMyAddress.h"
+#import "UITextField+GYExpand.h"
 
 @interface GXEditAddressVC ()
 @property (weak, nonatomic) IBOutlet UITextField *receiver;
@@ -51,6 +52,14 @@
     self.addressDetial.placeholder = @"请输入详细的收货地址";
     [self.address_detail_view addSubview:self.addressDetial];
     
+    hx_weakify(self);
+    [self.receiver_phone lengthLimit:^{
+        hx_strongify(weakSelf);
+        if (strongSelf.receiver_phone.text.length > 11) {
+            strongSelf.receiver_phone.text = [strongSelf.receiver_phone.text substringToIndex:11];
+        }
+    }];
+    
     if (self.address) {
         self.receiver.text = _address.receiver;
         self.receiver_phone.text = _address.receiver_phone;
@@ -64,21 +73,25 @@
     }
     [self getAllAreaRequest];
     
-    hx_weakify(self);
     [self.sureBtn BindingBtnJudgeBlock:^BOOL{
-        if (![self.receiver_phone hasText]) {
-            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请填写收货人电话"];
+        hx_strongify(weakSelf);
+        if (![strongSelf.receiver_phone hasText]) {
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请填写收货人手机号"];
             return NO;
         }
-        if (![self.receiver hasText]) {
+        if (strongSelf.receiver_phone.text.length != 11) {
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"手机号格式有误"];
+            return NO;
+        }
+        if (![strongSelf.receiver hasText]) {
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请填写收货人"];
             return NO;
         }
-        if (![self.area_name hasText]) {
+        if (![strongSelf.area_name hasText]) {
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请选择地区"];
             return NO;
         }
-        if (![self.addressDetial hasText]) {
+        if (![strongSelf.addressDetial hasText]) {
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请填写详细地址"];
             return NO;
         }
@@ -155,7 +168,7 @@
     if (self.address) {
         parameters[@"address_id"] = self.address.address_id;
     }
-   
+    
     hx_weakify(self);
     [HXNetworkTool POST:HXRC_M_URL action:self.address?@"admin/editAddress":@"admin/addAddress" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);

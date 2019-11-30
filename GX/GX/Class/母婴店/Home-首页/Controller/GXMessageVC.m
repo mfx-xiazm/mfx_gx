@@ -186,7 +186,7 @@ static NSString *const MessageCell = @"MessageCell";
         GXWebContentVC *cvc = [GXWebContentVC new];
         cvc.navTitle = @"消息";
         cvc.isNeedRequest = NO;
-        cvc.htmlContent = msg.msg_content;
+        cvc.htmlContent = [msg.msg_content stringByReplacingOccurrencesOfString:@"\n" withString:@"<br>"];
         [self.navigationController pushViewController:cvc animated:YES];
     }else if ([msg.ref_type isEqualToString:@"1"]) {
         GXOrderDetailVC *dvc = [GXOrderDetailVC new];

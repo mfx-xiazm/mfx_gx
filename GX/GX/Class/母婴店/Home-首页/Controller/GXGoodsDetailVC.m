@@ -57,7 +57,7 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
 /* 商品详情 */
 @property(nonatomic,strong) GXGoodsDetail *goodsDetail;
 /** 分享数据模型 */
-@property (nonatomic,strong) id shareModel;
+@property (nonatomic,strong) GXGoodsMaterialLayout *shareModel;
 @end
 
 @implementation GXGoodsDetailVC
@@ -127,7 +127,7 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
     [self.navigationItem setTitle:nil];
     
     UIBarButtonItem *cartItem = [UIBarButtonItem itemWithTarget:self action:@selector(cartClicked) image:HXGetImage(@"购物车白")];
-    UIBarButtonItem *shareItem = [UIBarButtonItem itemWithTarget:self action:@selector(shareClicked) image:HXGetImage(@"分享白色")];
+//    UIBarButtonItem *shareItem = [UIBarButtonItem itemWithTarget:self action:@selector(shareClicked) image:HXGetImage(@"分享白色")];
     
     UIButton *material = [UIButton buttonWithType:UIButtonTypeCustom];
     [material setTitle:@"卖货素材" forState:UIControlStateNormal];
@@ -153,7 +153,7 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
     [apply addTarget:self action:@selector(applyClicked) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *applyItem = [[UIBarButtonItem alloc] initWithCustomView:apply];
     
-    self.navigationItem.rightBarButtonItems = @[cartItem,shareItem,materialItem,applyItem];
+    self.navigationItem.rightBarButtonItems = @[cartItem,materialItem,applyItem];
 }
 - (void)setUpTableView
 {
@@ -255,9 +255,13 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
     [self.zh_popupController presentContentView:self.chooseClassView duration:0.25 springAnimated:NO];
 }
 - (IBAction)applyJoinClicked:(UIButton *)sender {
-    GXBrandDetailVC *bvc = [GXBrandDetailVC new];
-    bvc.brand_id = self.goodsDetail.brand_id;
-    [self.navigationController pushViewController:bvc animated:YES];
+    if (self.isBrandPush) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        GXBrandDetailVC *bvc = [GXBrandDetailVC new];
+        bvc.brand_id = self.goodsDetail.brand_id;
+        [self.navigationController pushViewController:bvc animated:YES];
+    }
 }
 #pragma mark -- 接口请求
 -(void)getGoodDetailRequest
@@ -290,6 +294,7 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
                 [strongSelf handleGoodsDetailData];
             });
         }else{
+            
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
         }
     } failure:^(NSError *error) {
@@ -445,6 +450,21 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
     [HXNetworkTool POST:HXRC_M_URL action:@"admin/addOrderCart" parameters:parameters success:^(id responseObject) {
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
+}
+-(void)shareNumRequest:(NSString *)material_id
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"material_id"] = material_id;
+    
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/shareMaterial" parameters:parameters success:^(id responseObject) {
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            
         }else{
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
         }
@@ -617,26 +637,32 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
 - (void)didClickShareInCell:(GXGoodsMaterialCell *)Cell
 {
     //HXLog(@"分享");
-    [MBProgressHUD showLoadToView:nil title:@"图片处理中..."];
-    hx_weakify(self);
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        hx_strongify(weakSelf);
-        GXSaveImageToPHAsset *savePh = [[GXSaveImageToPHAsset alloc] init];
-        savePh.targetVC = strongSelf;
-        [savePh saveImages:Cell.materialLayout.material.photos comletedCall:^{
-            // 复制文本
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD hideHUD];
-
-                UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    self.shareModel = Cell.materialLayout;
+    if (Cell.materialLayout.material.photos && Cell.materialLayout.material.photos.count) {
+        [MBProgressHUD showLoadToView:nil title:@"图片处理中..."];
+        hx_weakify(self);
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            hx_strongify(weakSelf);
+            GXSaveImageToPHAsset *savePh = [[GXSaveImageToPHAsset alloc] init];
+            savePh.targetVC = strongSelf;
+            [savePh saveImages:Cell.materialLayout.material.photos comletedCall:^{
+                // 复制文本
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [MBProgressHUD hideHUD];
+                    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+                    pasteboard.string = Cell.materialLayout.material.dsp;
+                    
+                    [strongSelf showShareView];
+                });
                 
-                pasteboard.string = Cell.materialLayout.material.dsp;
-                
-                [strongSelf showShareView];
-            });
-            
-        }];
-    });
+            }];
+        });
+    }else{
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        pasteboard.string = Cell.materialLayout.material.dsp;
+        
+        [self showShareView];
+    }
 }
 -(void)showShareView
 {
@@ -646,6 +672,8 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
     share.shareTypeCall = ^(NSInteger index) {
         hx_strongify(weakSelf);
         [strongSelf.zh_popupController dismissWithDuration:0.25 springAnimated:NO];
+        [strongSelf shareNumRequest:strongSelf.shareModel.material.material_id];
+
         NSURL *url = [NSURL URLWithString:@"weixin://"];
         BOOL canOpen = [[UIApplication sharedApplication] canOpenURL:url];
         //先判断是否能打开该url

@@ -39,7 +39,7 @@ static NSString *const TryApplyCell = @"TryApplyCell";
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    self.header.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, HX_SCREEN_WIDTH*2/5.0);
+    self.header.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, HX_SCREEN_WIDTH*3/7.0);
 }
 -(NSMutableArray *)tryGoods
 {
@@ -52,7 +52,7 @@ static NSString *const TryApplyCell = @"TryApplyCell";
 {
     if (_header == nil) {
         _header = [GXActivityBannerHeader loadXibView];
-        _header.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, HX_SCREEN_WIDTH*2/5.0);
+        _header.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, HX_SCREEN_WIDTH*3/7.0);
     }
     return _header;
 }

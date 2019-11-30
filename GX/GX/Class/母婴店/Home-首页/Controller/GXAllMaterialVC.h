@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *catalog_id;
 /* 商品id */
 @property(nonatomic,copy) NSString *goods_id;
+/* 标题 */
+@property(nonatomic,copy) NSString *navTitle;
 @end
 
 NS_ASSUME_NONNULL_END

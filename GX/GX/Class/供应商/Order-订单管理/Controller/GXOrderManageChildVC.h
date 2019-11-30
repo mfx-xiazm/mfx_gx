@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface GXOrderManageChildVC : HXBaseViewController
 /* 订单状态 */
 @property(nonatomic,assign) NSInteger status;
+/* 关键词 */
+@property(nonatomic,copy) NSString *seaKey;
 @end
 
 NS_ASSUME_NONNULL_END

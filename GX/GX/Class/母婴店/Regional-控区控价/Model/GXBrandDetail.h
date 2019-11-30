@@ -19,9 +19,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *create_time;
 /** 0未加盟 1审核中 2合作中 3审核驳回 4合作取消 */
 @property(nonatomic,copy) NSString *apply_status;
+/** 审核驳回原因 */
 @property(nonatomic,copy) NSString *reject_reason;
 @property(nonatomic,copy) NSString *approve_time;
 @property(nonatomic,copy) NSString *apply_time;
+@property(nonatomic,copy) NSString *brand_join_desc;
+
 @end
 
 NS_ASSUME_NONNULL_END

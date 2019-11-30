@@ -56,7 +56,7 @@
 {
     if (_header == nil) {
         _header = [GXStoreGoodsListHeader loadXibView];
-        _header.frame = CGRectMake(0,0, HX_SCREEN_WIDTH, 180.f);
+        _header.frame = CGRectMake(0,0, HX_SCREEN_WIDTH, 120.f);
     }
     return _header;
 }
@@ -143,7 +143,7 @@
     self.tableView.rowHeight = 0;
     self.tableView.estimatedSectionHeaderHeight = 0;
     self.tableView.estimatedSectionFooterHeight = 0;
-    self.tableView.contentInset = UIEdgeInsetsMake(180.f,0, 0, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(120.f,0, 0, 0);
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -199,11 +199,11 @@
 -(void)handleStoreInfo
 {
     if (self.storeInfo.coupon && self.storeInfo.coupon.count) {
-        self.tableView.contentInset = UIEdgeInsetsMake(180.f+60.f,0, 0, 0);
-        self.header.frame = CGRectMake(0, -(180.f+60.f), HX_SCREEN_WIDTH, 180.f+60.f);
+        self.tableView.contentInset = UIEdgeInsetsMake(120.f+60.f,0, 0, 0);
+        self.header.frame = CGRectMake(0, -(120.f+60.f), HX_SCREEN_WIDTH, 120.f+60.f);
     }else{
-        self.tableView.contentInset = UIEdgeInsetsMake(180.f,0, 0, 0);
-        self.header.frame = CGRectMake(0, -(180.f), HX_SCREEN_WIDTH, 180.f);
+        self.tableView.contentInset = UIEdgeInsetsMake(120.f,0, 0, 0);
+        self.header.frame = CGRectMake(0, -(120.f), HX_SCREEN_WIDTH, 120.f);
     }
     hx_weakify(self);
     self.header.storeMsgCall = ^{

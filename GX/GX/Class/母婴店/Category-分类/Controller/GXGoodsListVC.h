@@ -11,6 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 @class GXCatalogItem,GXBrandItem;
 @interface GXGoodsListVC : HXBaseViewController
+/* 是否是控区控价 */
+@property(nonatomic,assign) BOOL isControl;
 /* 二级分类id */
 @property(nonatomic,copy) NSString *catalog_id;
 /* 品牌id */

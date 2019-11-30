@@ -39,7 +39,7 @@ static NSString *const MyIdeaTypeCell = @"MyIdeaTypeCell";
 @property (nonatomic,strong) NSMutableArray *selectedPhotos;
 /** 是否原图 */
 @property (nonatomic, assign) BOOL isOriginal;
-/** 是否选择了9张 */
+/** 是否选择了4张 */
 @property (nonatomic, assign) BOOL isSelect4;
 /** 模型数组 */
 @property (nonatomic,strong) NSMutableArray *showData;

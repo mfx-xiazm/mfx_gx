@@ -23,35 +23,41 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coupon_bg_1" translatesAutoresizingMaskIntoConstraints="NO" id="NCn-Fc-a7K">
                                 <rect key="frame" x="0.0" y="0.0" width="155" height="57"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  10  " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z7V-5W-ZJ0">
-                                <rect key="frame" x="10" y="20.5" width="33" height="22"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   10   " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z7V-5W-ZJ0">
+                                <rect key="frame" x="10" y="20.5" width="41" height="22"/>
                                 <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="22"/>
                                 <color key="textColor" red="0.77647058823529413" green="0.396078431372549" blue="0.023529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eCn-iP-0Ol" userLabel="分割线">
-                                <rect key="frame" x="43" y="2" width="1" height="53"/>
+                                <rect key="frame" x="51" y="2" width="1" height="53"/>
                                 <color key="backgroundColor" red="0.86666666670000003" green="0.86666666670000003" blue="0.86666666670000003" alpha="0.50429137323943662" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="1" id="FLg-e8-Yhe"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="满500使用" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rff-Yw-bFj">
-                                <rect key="frame" x="51" y="13" width="30.5" height="7.5"/>
+                                <rect key="frame" x="59" y="13" width="30.5" height="7.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="6"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="优惠券" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NA6-g5-bmO">
-                                <rect key="frame" x="51" y="22.5" width="31" height="12"/>
+                                <rect key="frame" x="59" y="22.5" width="31" height="12"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <color key="textColor" red="0.77647058820000003" green="0.39607843139999999" blue="0.023529411760000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="使用时间：11月11日" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AdZ-8x-fta">
-                                <rect key="frame" x="51" y="36.5" width="55.5" height="7.5"/>
+                                <rect key="frame" x="59" y="36.5" width="55.5" height="7.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="6"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jr6-bj-Un6">
+                                <rect key="frame" x="10" y="27.5" width="11" height="11"/>
+                                <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="11"/>
+                                <color key="textColor" red="0.77647058820000003" green="0.39607843139999999" blue="0.023529411760000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -63,6 +69,7 @@
                             <constraint firstItem="NCn-Fc-a7K" firstAttribute="top" secondItem="LpE-VO-PUm" secondAttribute="top" id="5s9-AL-yNS"/>
                             <constraint firstAttribute="trailing" secondItem="NCn-Fc-a7K" secondAttribute="trailing" id="6Xo-1U-LiC"/>
                             <constraint firstItem="NA6-g5-bmO" firstAttribute="leading" secondItem="Z7V-5W-ZJ0" secondAttribute="trailing" constant="8" id="AO8-6e-Ogu"/>
+                            <constraint firstItem="jr6-bj-Un6" firstAttribute="bottom" secondItem="Z7V-5W-ZJ0" secondAttribute="bottom" constant="-4" id="Amc-Gl-GWW"/>
                             <constraint firstItem="NA6-g5-bmO" firstAttribute="top" secondItem="rff-Yw-bFj" secondAttribute="bottom" constant="2" id="DA5-sK-W5R"/>
                             <constraint firstItem="AdZ-8x-fta" firstAttribute="top" secondItem="NA6-g5-bmO" secondAttribute="bottom" constant="2" id="Euj-aR-N4h"/>
                             <constraint firstItem="NA6-g5-bmO" firstAttribute="centerY" secondItem="LpE-VO-PUm" secondAttribute="centerY" id="LVn-nz-lZQ"/>
@@ -70,6 +77,7 @@
                             <constraint firstItem="Z7V-5W-ZJ0" firstAttribute="leading" secondItem="LpE-VO-PUm" secondAttribute="leading" constant="10" id="Tzb-ft-3tJ"/>
                             <constraint firstAttribute="bottom" secondItem="NCn-Fc-a7K" secondAttribute="bottom" id="a9y-R7-UrE"/>
                             <constraint firstAttribute="bottom" secondItem="eCn-iP-0Ol" secondAttribute="bottom" constant="2" id="ijU-3u-NSD"/>
+                            <constraint firstItem="jr6-bj-Un6" firstAttribute="leading" secondItem="LpE-VO-PUm" secondAttribute="leading" constant="10" id="uxG-Tx-WWl"/>
                             <constraint firstItem="NCn-Fc-a7K" firstAttribute="leading" secondItem="LpE-VO-PUm" secondAttribute="leading" id="vQ5-ca-DQj"/>
                             <constraint firstItem="Z7V-5W-ZJ0" firstAttribute="centerY" secondItem="LpE-VO-PUm" secondAttribute="centerY" constant="3" id="yaH-Bh-cYs"/>
                         </constraints>

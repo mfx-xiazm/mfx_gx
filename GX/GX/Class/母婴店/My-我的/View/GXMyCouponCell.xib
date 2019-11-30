@@ -35,7 +35,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="满299立减40" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zpf-0h-LvJ">
-                                <rect key="frame" x="81.5" y="10" width="80.5" height="16"/>
+                                <rect key="frame" x="81.5" y="10" width="277.5" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -92,6 +92,7 @@
                             <constraint firstItem="Zpf-0h-LvJ" firstAttribute="top" secondItem="74x-NN-7q1" secondAttribute="top" constant="10" id="YEt-VN-Pvw"/>
                             <constraint firstItem="VMd-PF-GbF" firstAttribute="centerY" secondItem="74x-NN-7q1" secondAttribute="centerY" id="bu6-UD-UuM"/>
                             <constraint firstItem="Zpf-0h-LvJ" firstAttribute="leading" secondItem="nYW-m4-PZw" secondAttribute="trailing" constant="25" id="g2E-Y9-IP2"/>
+                            <constraint firstAttribute="trailing" secondItem="Zpf-0h-LvJ" secondAttribute="trailing" constant="10" id="n16-wp-VFF"/>
                             <constraint firstItem="IWh-JN-fuH" firstAttribute="centerY" secondItem="74x-NN-7q1" secondAttribute="centerY" id="nQb-IL-Hqv"/>
                             <constraint firstAttribute="bottom" secondItem="nYW-m4-PZw" secondAttribute="bottom" constant="15" id="rd3-kg-De8"/>
                             <constraint firstItem="nYW-m4-PZw" firstAttribute="centerX" secondItem="aYD-BJ-EvI" secondAttribute="centerX" id="smw-Js-q3J"/>

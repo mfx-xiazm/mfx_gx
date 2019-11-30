@@ -76,6 +76,12 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(仅限B类商品)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zat-g8-2r0">
+                                    <rect key="frame" x="64.5" y="12.5" width="78.5" height="15"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="八折 -￥99.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="USS-Ag-0Ww">
                                     <rect key="frame" x="311.5" y="11" width="72.5" height="18"/>
                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="13"/>
@@ -92,7 +98,9 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
+                                <constraint firstItem="Zat-g8-2r0" firstAttribute="centerY" secondItem="BqV-Z3-DQK" secondAttribute="centerY" id="1ow-S3-u97"/>
                                 <constraint firstAttribute="height" constant="40" id="3nI-z1-vhX"/>
+                                <constraint firstItem="Zat-g8-2r0" firstAttribute="leading" secondItem="ufC-YO-0Rm" secondAttribute="trailing" constant="5" id="Fot-VD-974"/>
                                 <constraint firstItem="USS-Ag-0Ww" firstAttribute="centerY" secondItem="BqV-Z3-DQK" secondAttribute="centerY" id="V7D-2m-nDa"/>
                                 <constraint firstItem="ufC-YO-0Rm" firstAttribute="leading" secondItem="BqV-Z3-DQK" secondAttribute="leading" constant="10" id="YHt-g9-zqu"/>
                                 <constraint firstAttribute="trailing" secondItem="USS-Ag-0Ww" secondAttribute="trailing" constant="10" id="deY-WF-1gB"/>

@@ -26,7 +26,7 @@
     _brand = brand;
     [self.brand_logo sd_setImageWithURL:[NSURL URLWithString:_brand.brand_logo]];
     self.brand_name.text = _brand.brand_name;
-    self.sale_num.text = [NSString stringWithFormat:@"本月交易金额：￥%@",_brand.total_amount];
+    [self.sale_num setColorAttributedText:[NSString stringWithFormat:@"本月交易金额：￥%@",_brand.total_amount] andChangeStr:[NSString stringWithFormat:@"￥%@",_brand.total_amount] andColor:HXControlBg];
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

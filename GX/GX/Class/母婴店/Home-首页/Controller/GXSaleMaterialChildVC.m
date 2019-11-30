@@ -42,6 +42,8 @@
 @property(nonatomic,copy) NSString *advertise_id;
 /* 卖货方案分类id */
 @property(nonatomic,copy) NSString *plan_id;
+/** 分享数据模型 */
+@property (nonatomic,strong) GXGoodsMaterialLayout *shareModel;
 @end
 
 @implementation GXSaleMaterialChildVC
@@ -50,6 +52,7 @@
     [super viewDidLoad];
     self.control = @"2";
     [self setUpTableView];
+    [self setUpRefresh];
     [self startShimmer];
     [self getMaterialFilterDataRequest];
 }
@@ -111,6 +114,26 @@
         [weakSelf startShimmer];
         [weakSelf getMaterialListDataRequest:YES completedCall:^{
             [weakSelf.tableView reloadData];
+        }];
+    }];
+}
+/** 添加刷新控件 */
+-(void)setUpRefresh
+{
+    hx_weakify(self);
+    self.tableView.mj_header.automaticallyChangeAlpha = YES;
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        hx_strongify(weakSelf);
+        [strongSelf.tableView.mj_footer resetNoMoreData];
+        [strongSelf getMaterialListDataRequest:YES completedCall:^{
+            [strongSelf.tableView reloadData];
+        }];
+    }];
+    //追加尾部刷新
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        hx_strongify(weakSelf);
+        [strongSelf getMaterialListDataRequest:NO completedCall:^{
+            [strongSelf.tableView reloadData];
         }];
     }];
 }
@@ -304,11 +327,32 @@
             GXTopSaleMaterial *material = strongSelf.topMaterials[index];
             GXAllMaterialVC *mvc = [GXAllMaterialVC new];
             mvc.catalog_id = material.material_filter_id;
+            mvc.navTitle = material.material_filter_name;
             [strongSelf.navigationController pushViewController:mvc animated:YES];
         };
     }
     
     [self.tableView reloadData];
+}
+-(void)shareNumRequest:(NSString *)material_id
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"material_id"] = material_id;
+    
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/shareMaterial" parameters:parameters success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            strongSelf.shareModel.material.share_num = [NSString stringWithFormat:@"%@",responseObject[@"data"]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [strongSelf.tableView reloadData];
+            });
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
 }
 #pragma mark -- TableViewDelegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -356,26 +400,32 @@
 - (void)didClickShareInCell:(GXGoodsMaterialCell *)Cell
 {
     //HXLog(@"分享");
-    [MBProgressHUD showLoadToView:nil title:@"图片处理中..."];
-    hx_weakify(self);
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        hx_strongify(weakSelf);
-        GXSaveImageToPHAsset *savePh = [[GXSaveImageToPHAsset alloc] init];
-        savePh.targetVC = strongSelf;
-        [savePh saveImages:Cell.materialLayout.material.photos comletedCall:^{
-            // 复制文本
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD hideHUD];
+    self.shareModel = Cell.materialLayout;
+    if (Cell.materialLayout.material.photos && Cell.materialLayout.material.photos.count) {
+        [MBProgressHUD showLoadToView:nil title:@"图片处理中..."];
+        hx_weakify(self);
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            hx_strongify(weakSelf);
+            GXSaveImageToPHAsset *savePh = [[GXSaveImageToPHAsset alloc] init];
+            savePh.targetVC = strongSelf;
+            [savePh saveImages:Cell.materialLayout.material.photos comletedCall:^{
+                // 复制文本
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [MBProgressHUD hideHUD];
+                    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+                    pasteboard.string = Cell.materialLayout.material.dsp;
+                    
+                    [strongSelf showShareView];
+                });
                 
-                UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-                
-                pasteboard.string = Cell.materialLayout.material.dsp;
-                
-                [strongSelf showShareView];
-            });
-            
-        }];
-    });
+            }];
+        });
+    }else{
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        pasteboard.string = Cell.materialLayout.material.dsp;
+        
+        [self showShareView];
+    }
 }
 -(void)showShareView
 {
@@ -385,6 +435,8 @@
     share.shareTypeCall = ^(NSInteger index) {
         hx_strongify(weakSelf);
         [strongSelf.zh_popupController dismissWithDuration:0.25 springAnimated:NO];
+        [strongSelf shareNumRequest:strongSelf.shareModel.material.material_id];
+
         NSURL *url = [NSURL URLWithString:@"weixin://"];
         BOOL canOpen = [[UIApplication sharedApplication] canOpenURL:url];
         //先判断是否能打开该url

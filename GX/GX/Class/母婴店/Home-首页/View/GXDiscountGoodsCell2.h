@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface GXDiscountGoodsCell2 : UICollectionViewCell
 /* 必抢 */
 @property(nonatomic,strong) GYHomeDiscount *discount;
+@property (weak, nonatomic) IBOutlet UIView *bgContentView;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -70,6 +70,7 @@
     searchBar.backgroundColor = [UIColor whiteColor];
     searchBar.layer.cornerRadius = 6;
     searchBar.layer.masksToBounds = YES;
+    searchBar.placeholder = @"请输入商品名称查询";
     searchBar.delegate = self;
     self.searchBar = searchBar;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
@@ -127,6 +128,16 @@
     UIViewController *targetViewController = self.childVCs.firstObject;
     targetViewController.view.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, _scrollView.hxn_height);
     [_scrollView addSubview:targetViewController.view];
+}
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    GXOrderManageChildVC *targetViewController = (GXOrderManageChildVC *)self.childVCs[self.categoryView.selectedIndex];
+    if ([textField hasText]) {
+        targetViewController.seaKey = textField.text;
+    }else{
+        targetViewController.seaKey = @"";
+    }
+    return YES;
 }
 #pragma mark -- 点击事件
 -(void)msgClicked

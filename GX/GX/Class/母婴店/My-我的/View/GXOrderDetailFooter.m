@@ -49,7 +49,11 @@
     self.order_price_amount.text = [NSString stringWithFormat:@"￥%@",_refundDetail.total_pay_amount];
     self.pay_amount.text = [NSString stringWithFormat:@"￥%@",_refundDetail.pay_amount];
     
-    [self.order_desc setTextWithLineSpace:5.f withString:[NSString stringWithFormat:@"订单编号：%@\n下单时间：%@\n发货商家：%@\n推广店员：%@（%@）",_refundDetail.order_no,_refundDetail.create_time,_refundDetail.provider_no,_refundDetail.username,_refundDetail.saleman_code] withFont:[UIFont systemFontOfSize:13]];
+    if (_refundDetail.username && _refundDetail.username.length) {
+        [self.order_desc setTextWithLineSpace:5.f withString:[NSString stringWithFormat:@"订单编号：%@\n下单时间：%@\n发货商家：%@\n推广店员：%@（%@）",_refundDetail.order_no,_refundDetail.create_time,_refundDetail.provider_no,_refundDetail.username,_refundDetail.saleman_code] withFont:[UIFont systemFontOfSize:13]];
+    }else{
+        [self.order_desc setTextWithLineSpace:5.f withString:[NSString stringWithFormat:@"订单编号：%@\n下单时间：%@\n发货商家：%@\n",_refundDetail.order_no,_refundDetail.create_time,_refundDetail.provider_no] withFont:[UIFont systemFontOfSize:13]];
+    }
 }
 - (IBAction)orderNoCopy:(id)sender {
     if (self.refundDetail) {

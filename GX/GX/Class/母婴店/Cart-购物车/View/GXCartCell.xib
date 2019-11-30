@@ -69,9 +69,9 @@
                                 <rect key="frame" x="278" y="76" width="80" height="28"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9wN-RT-gRd">
-                                        <rect key="frame" x="0.0" y="0.0" width="30" height="28"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="28" height="28"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="30" id="eai-bH-11f"/>
+                                            <constraint firstAttribute="width" constant="28" id="eai-bH-11f"/>
                                         </constraints>
                                         <state key="normal" image="减"/>
                                         <connections>
@@ -79,14 +79,14 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ru-c1-WQn">
-                                        <rect key="frame" x="32" y="5.5" width="16" height="17"/>
+                                        <rect key="frame" x="28" y="5.5" width="24" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mGh-xj-322">
-                                        <rect key="frame" x="50" y="0.0" width="30" height="28"/>
+                                        <rect key="frame" x="52" y="0.0" width="28" height="28"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="30" id="htJ-t3-Q9s"/>
+                                            <constraint firstAttribute="width" constant="28" id="htJ-t3-Q9s"/>
                                         </constraints>
                                         <state key="normal" image="加"/>
                                         <connections>
@@ -96,7 +96,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="mGh-xj-322" firstAttribute="leading" secondItem="6ru-c1-WQn" secondAttribute="trailing" constant="2" id="06a-Nd-tIP"/>
+                                    <constraint firstItem="mGh-xj-322" firstAttribute="leading" secondItem="6ru-c1-WQn" secondAttribute="trailing" id="06a-Nd-tIP"/>
                                     <constraint firstAttribute="trailing" secondItem="mGh-xj-322" secondAttribute="trailing" id="6cD-QM-tY6"/>
                                     <constraint firstItem="6ru-c1-WQn" firstAttribute="centerY" secondItem="y23-Vy-Zz1" secondAttribute="centerY" id="Cgp-FO-NQ7"/>
                                     <constraint firstItem="mGh-xj-322" firstAttribute="top" secondItem="y23-Vy-Zz1" secondAttribute="top" id="Fgk-Kw-IlT"/>
@@ -106,7 +106,7 @@
                                     <constraint firstAttribute="bottom" secondItem="mGh-xj-322" secondAttribute="bottom" id="WIb-DG-noF"/>
                                     <constraint firstItem="9wN-RT-gRd" firstAttribute="top" secondItem="y23-Vy-Zz1" secondAttribute="top" id="bk0-Ce-cDX"/>
                                     <constraint firstItem="9wN-RT-gRd" firstAttribute="leading" secondItem="y23-Vy-Zz1" secondAttribute="leading" id="dA6-hi-O4K"/>
-                                    <constraint firstItem="6ru-c1-WQn" firstAttribute="leading" secondItem="9wN-RT-gRd" secondAttribute="trailing" constant="2" id="pnS-17-Ib5"/>
+                                    <constraint firstItem="6ru-c1-WQn" firstAttribute="leading" secondItem="9wN-RT-gRd" secondAttribute="trailing" id="pnS-17-Ib5"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="voh-IS-nDA" userLabel="分割线">

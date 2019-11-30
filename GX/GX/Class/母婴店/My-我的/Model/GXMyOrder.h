@@ -41,7 +41,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *saleman_code;
 @property(nonatomic,copy) NSString *url;
 @property(nonatomic,copy) NSString *logistics_title;
-
+/* 是详情数据 */
+@property(nonatomic,assign) BOOL isDetailOrder;
 @property(nonatomic,strong) NSArray<GXMyOrderGoods *> *goods;
 
 @end

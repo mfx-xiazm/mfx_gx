@@ -10,6 +10,7 @@
 #import "HXTabBarController.h"
 #import "GXChangePwdVC.h"
 #import "GXRegisterVC.h"
+#import "UITextField+GYExpand.h"
 
 @interface GXLoginVC ()
 @property (weak, nonatomic) IBOutlet UITextField *phone;
@@ -24,10 +25,21 @@
     [self.navigationItem setTitle:@"登录"];
     
     hx_weakify(self);
+    [self.phone lengthLimit:^{
+        hx_strongify(weakSelf);
+        if (strongSelf.phone.text.length > 11) {
+            strongSelf.phone.text = [strongSelf.phone.text substringToIndex:11];
+        }
+    }];
+    
     [self.loginBtn BindingBtnJudgeBlock:^BOOL{
         hx_strongify(weakSelf);
         if (![strongSelf.phone hasText]) {
-            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请输入账号"];
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请输入登录手机号"];
+            return NO;
+        }
+        if (strongSelf.phone.text.length != 11) {
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"手机号格式有误"];
             return NO;
         }
         if (![strongSelf.pwd hasText]) {

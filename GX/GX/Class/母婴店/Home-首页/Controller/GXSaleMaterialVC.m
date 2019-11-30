@@ -51,7 +51,7 @@
 {
     [self.navigationItem setTitle:@"卖货素材"];
     
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithTarget:self action:@selector(searchClicked) image:HXGetImage(@"搜索")];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithTarget:self action:@selector(searchClicked) image:HXGetImage(@"搜索白")];
 }
 -(void)setUpCategoryView
 {
