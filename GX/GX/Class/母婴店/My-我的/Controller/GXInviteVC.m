@@ -77,7 +77,7 @@
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
 
     //创建图片内容对象
-    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"呱选" descr:@"邀您一起拿红包" thumImage:HXGetImage(@"AppIcon")];
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"呱选-邀请有礼" descr:@"注册账号赢好礼" thumImage:HXGetImage(@"Icon-share")];
     //如果有缩略图，则设置缩略图
     shareObject.webpageUrl = self.register_url;
 

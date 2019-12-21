@@ -11,9 +11,9 @@ NSString * const HXPayPushNotification = @"HXPayPushNotification";
 NSString * const HXQMapKey = @"3KNBZ-JY46U-PJIVU-2CNIF-YX3RJ-OYFYZ";
 
 // 微信分享/微信支付的key
-NSString * const HXWXKey = @"wx449b0409e349f8f2";
+NSString * const HXWXKey = @"wxe832e011d81f8ab4";
 // 微信分享/微信支付的secret
-NSString * const HXWXSecret = @"92a6f859fce1994a17b8df5541199797";
+NSString * const HXWXSecret = @"8272cabe10c3eb3ac555d77001b0117e";
 // QQkey
 NSString * const HXQQKey = @"1109317246";
 // QQsecret

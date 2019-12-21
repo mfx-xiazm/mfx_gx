@@ -22,7 +22,6 @@
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sh0-Qe-98M">
                                 <rect key="frame" x="10" y="10" width="74" height="74"/>
-                                <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="sh0-Qe-98M" secondAttribute="height" multiplier="1:1" id="DhT-fs-Ut6"/>
                                 </constraints>

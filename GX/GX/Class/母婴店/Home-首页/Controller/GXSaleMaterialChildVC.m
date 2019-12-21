@@ -326,7 +326,7 @@
             hx_strongify(weakSelf);
             GXTopSaleMaterial *material = strongSelf.topMaterials[index];
             GXAllMaterialVC *mvc = [GXAllMaterialVC new];
-            mvc.catalog_id = material.material_filter_id;
+            mvc.material_catalog_id = material.material_filter_id;
             mvc.navTitle = material.material_filter_name;
             [strongSelf.navigationController pushViewController:mvc animated:YES];
         };

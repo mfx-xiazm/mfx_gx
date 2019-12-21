@@ -11,6 +11,7 @@
 #import "GXChangePwdVC.h"
 #import "GXRegisterVC.h"
 #import "UITextField+GYExpand.h"
+#import "GXAboutUsVC.h"
 
 @interface GXLoginVC ()
 @property (weak, nonatomic) IBOutlet UITextField *phone;
@@ -92,8 +93,10 @@
     [self.navigationController pushViewController:pvc animated:YES];
 }
 - (IBAction)registerClicked:(UIButton *)sender {
-    GXRegisterVC *rvc = [GXRegisterVC new];
-    [self.navigationController pushViewController:rvc animated:YES];
+    GXAboutUsVC *avc = [GXAboutUsVC new];
+    [self.navigationController pushViewController:avc animated:YES];
+//    GXRegisterVC *rvc = [GXRegisterVC new];
+//    [self.navigationController pushViewController:rvc animated:YES];
 }
 
 @end

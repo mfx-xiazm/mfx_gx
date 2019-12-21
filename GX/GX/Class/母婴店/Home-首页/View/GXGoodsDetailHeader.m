@@ -147,7 +147,7 @@
 
 - (TYCyclePagerViewLayout *)layoutForPagerView:(TYCyclePagerView *)pageView {
     TYCyclePagerViewLayout *layout = [[TYCyclePagerViewLayout alloc]init];
-    layout.itemSize = CGSizeMake(CGRectGetWidth(pageView.frame), CGRectGetHeight(pageView.frame));
+    layout.itemSize = CGSizeMake(HX_SCREEN_WIDTH, HX_SCREEN_WIDTH*2/3.0);
     layout.itemSpacing = 0;
     layout.itemHorizontalCenter = YES;
     return layout;

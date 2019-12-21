@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -82,7 +80,7 @@
                     <rect key="frame" x="10" y="190" width="124.5" height="70"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="合作品牌" translatesAutoresizingMaskIntoConstraints="NO" id="IXo-Mb-zeB">
-                            <rect key="frame" x="27.5" y="28" width="69.5" height="14.5"/>
+                            <rect key="frame" x="28.5" y="28.5" width="67.5" height="13.5"/>
                         </imageView>
                         <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WfD-fq-Xjf">
                             <rect key="frame" x="0.0" y="0.0" width="124.5" height="70"/>
@@ -123,7 +121,7 @@
                     <rect key="frame" x="144.5" y="190" width="125" height="70"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="合作数据" translatesAutoresizingMaskIntoConstraints="NO" id="tWr-pS-fZ3">
-                            <rect key="frame" x="28" y="27.5" width="69.5" height="15.5"/>
+                            <rect key="frame" x="29" y="28" width="67.5" height="14"/>
                         </imageView>
                         <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l4U-xR-WeZ">
                             <rect key="frame" x="0.0" y="0.0" width="125" height="70"/>
@@ -164,7 +162,7 @@
                     <rect key="frame" x="279.5" y="190" width="124.5" height="70"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="产品素材" translatesAutoresizingMaskIntoConstraints="NO" id="Her-nt-oij">
-                            <rect key="frame" x="27" y="27.5" width="70" height="15.5"/>
+                            <rect key="frame" x="28" y="28" width="68" height="14"/>
                         </imageView>
                         <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BmF-zb-FLD">
                             <rect key="frame" x="0.0" y="0.0" width="124.5" height="70"/>
@@ -229,9 +227,9 @@
         </view>
     </objects>
     <resources>
-        <image name="产品素材" width="70" height="15.5"/>
+        <image name="产品素材" width="68" height="14"/>
         <image name="公告" width="17" height="14"/>
-        <image name="合作品牌" width="69.5" height="14.5"/>
-        <image name="合作数据" width="69.5" height="15.5"/>
+        <image name="合作品牌" width="67.5" height="13.5"/>
+        <image name="合作数据" width="67.5" height="14"/>
     </resources>
 </document>

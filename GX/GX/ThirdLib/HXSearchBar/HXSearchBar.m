@@ -23,6 +23,7 @@
         self.clearButtonMode = UITextFieldViewModeWhileEditing;
         self.returnKeyType = UIReturnKeySearch;
         self.textAlignment = NSTextAlignmentLeft;
+        self.tintColor = HXControlBg;
 
         UIImageView *searchIcon = [[UIImageView alloc] init];
         searchIcon.image = [UIImage imageNamed:@"搜索"];
@@ -52,7 +53,7 @@
 {
     [super layoutSubviews];
     
-    self.line.frame = CGRectMake(35.f, 5, 1, self.hxn_height - 10);
+    self.line.frame = CGRectMake(35.f, 8, 1, self.hxn_height - 16);
 }
 -(void)setSearchIcon:(NSString *)searchIcon
 {

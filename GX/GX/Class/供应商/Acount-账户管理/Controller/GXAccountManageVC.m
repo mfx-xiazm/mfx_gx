@@ -10,6 +10,8 @@
 #import "GXAccountManageCell.h"
 #import "GXCashVC.h"
 #import "GXFinanceLog.h"
+#import "zhAlertView.h"
+#import <zhPopupController.h>
 
 static NSString *const AccountManageCell = @"AccountManageCell";
 @interface GXAccountManageVC ()<UITableViewDelegate,UITableViewDataSource>
@@ -24,6 +26,8 @@ static NSString *const AccountManageCell = @"AccountManageCell";
 @property(nonatomic,strong) NSMutableArray *logs;
 /* 账户信息 */
 @property(nonatomic,strong) NSDictionary *accountData;
+/* 提现天数 */
+@property(nonatomic,copy) NSString *cashable_day;
 @end
 
 @implementation GXAccountManageVC
@@ -80,6 +84,20 @@ static NSString *const AccountManageCell = @"AccountManageCell";
         hx_strongify(weakSelf);
         [strongSelf getFinanceLogRequest:NO];
     }];
+}
+-(IBAction)cashNoticeClicked:(UIButton *)sender
+{
+    zhAlertView *alert = [[zhAlertView alloc] initWithTitle:@"提现说明" message:[NSString stringWithFormat:@"订单确认收货后，%@天后才能申请提现",self.cashable_day] constantWidth:HX_SCREEN_WIDTH - 50*2];
+    hx_weakify(self);
+    zhAlertButton *okButton = [zhAlertButton buttonWithTitle:@"我知道了" handler:^(zhAlertButton * _Nonnull button) {
+        hx_strongify(weakSelf);
+        [strongSelf.zh_popupController dismiss];
+    }];
+    okButton.lineColor = UIColorFromRGB(0xDDDDDD);
+    [okButton setTitleColor:HXControlBg forState:UIControlStateNormal];
+    [alert addAction:okButton];
+    self.zh_popupController = [[zhPopupController alloc] init];
+    [self.zh_popupController presentContentView:alert duration:0.25 springAnimated:NO];
 }
 #pragma mark -- 数据请求
 -(void)getFinanceLogRequest:(BOOL)isRefresh
@@ -139,6 +157,11 @@ static NSString *const AccountManageCell = @"AccountManageCell";
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             strongSelf.accountData = [NSDictionary dictionaryWithDictionary:responseObject[@"data"]];
+            if ([[MSUserManager sharedInstance].curUserInfo.utype isEqualToString:@"2"]) {
+                strongSelf.cashable_day = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"provider_cashable_day"]];
+            }else{
+                strongSelf.cashable_day = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"saleman_cashable_day"]];
+            }
             dispatch_async(dispatch_get_main_queue(), ^{
                 strongSelf.balance.text = [NSString stringWithFormat:@"%@元",responseObject[@"data"][@"balance"]];
                 strongSelf.cash_balance.text = [NSString stringWithFormat:@"%@元",responseObject[@"data"][@"cashable_balance"]];

@@ -108,12 +108,8 @@
     if (self.goods_id && self.goods_id.length) {
         parameters[@"goods_id"] = self.goods_id;//商品id
     }else{
-        parameters[@"material_title"] = @"";//货素材标题搜索 没有则不传或者传""
-        parameters[@"top"] = @(1);//为1表示筛选全部 为2表示筛选购买过 为3表示筛选转发过 根据素材名称搜索时没有该字段则不传或者传""
-        parameters[@"control"] = @"2";//为1表示筛选控区控价 为2表示筛选全部 没有该字段则不传或者传""
-        parameters[@"catalog_id"] = (self.catalog_id && self.catalog_id.length)?self.catalog_id:@"";//根据商品分类筛选卖货素材
-        parameters[@"advertise_id"] = @"";//根据宣传分类筛选卖货素材
-        parameters[@"plan_id"] = @"";//根据卖货方案分类id筛选卖货素材
+        parameters[@"material_title"] = [self.searchBar hasText]?self.searchBar.text:@"";//货素材标题搜索 没有则不传或者传""
+        parameters[@"material_catalog_id"] = (self.material_catalog_id && self.material_catalog_id.length)?self.material_catalog_id:@"";
     }
     if (isRefresh) {
         parameters[@"page"] = @(1);//第几页

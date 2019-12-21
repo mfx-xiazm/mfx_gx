@@ -22,7 +22,6 @@
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="J1Z-5n-7vC">
                                 <rect key="frame" x="10" y="10" width="80" height="80"/>
-                                <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="J1Z-5n-7vC" secondAttribute="height" multiplier="1:1" id="Uca-wv-ets"/>
                                 </constraints>

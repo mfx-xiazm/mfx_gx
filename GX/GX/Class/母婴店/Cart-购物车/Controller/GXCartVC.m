@@ -61,6 +61,13 @@ static NSString *const CartSectionHeader = @"CartSectionHeader";
 {
     [super viewDidLayoutSubviews];
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if ([self isViewLoaded]) {
+        [self getOrderCartListRequest:YES];
+    }
+}
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];

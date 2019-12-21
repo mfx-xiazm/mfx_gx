@@ -86,7 +86,7 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
 {
     if (_header == nil) {
         _header = [GXGoodsDetailHeader loadXibView];
-        _header.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, HX_SCREEN_WIDTH*3/5.0 + 50.f + 150);
+        _header.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, HX_SCREEN_WIDTH*2/3.0 + 50.f + 150);
     }
     return _header;
 }
@@ -315,11 +315,11 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
         if (self.goodsDetail.important_notice && self.goodsDetail.important_notice.length) {// 有重要通知
             self.header.noticeView.hidden = NO;
             self.header.noticeViewHeight.constant = 40.f;
-            headerFrame = CGRectMake(0, 0, HX_SCREEN_WIDTH, HX_SCREEN_WIDTH*3/5.0 + 50.f + nameHeight + 100.f + 10.f);
+            headerFrame = CGRectMake(0, 0, HX_SCREEN_WIDTH, HX_SCREEN_WIDTH*2/3.0 + 50.f + nameHeight + 100.f + 10.f);
         }else{// 没有重要通知
             self.header.noticeView.hidden = YES;
             self.header.noticeViewHeight.constant = 0.f;
-            headerFrame = CGRectMake(0, 0, HX_SCREEN_WIDTH, HX_SCREEN_WIDTH*3/5.0 + 50.f + nameHeight + 50.f + 10.f);
+            headerFrame = CGRectMake(0, 0, HX_SCREEN_WIDTH, HX_SCREEN_WIDTH*2/3.0 + 50.f + nameHeight + 50.f + 10.f);
         }
     }else{//非抢购商品
         self.header.rushView.hidden = YES;
@@ -328,11 +328,11 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
         if (self.goodsDetail.important_notice && self.goodsDetail.important_notice.length) {// 有重要通知
             self.header.noticeView.hidden = NO;
             self.header.noticeViewHeight.constant = 40.f;
-            headerFrame = CGRectMake(0, 0, HX_SCREEN_WIDTH, HX_SCREEN_WIDTH*3/5.0 + nameHeight + 100.f + 10.f);
+            headerFrame = CGRectMake(0, 0, HX_SCREEN_WIDTH, HX_SCREEN_WIDTH*2/3.0 + nameHeight + 100.f + 10.f);
         }else{// 没有重要通知
             self.header.noticeView.hidden = YES;
             self.header.noticeViewHeight.constant = 0.f;
-            headerFrame = CGRectMake(0, 0, HX_SCREEN_WIDTH, HX_SCREEN_WIDTH*3/5.0 + nameHeight + 50.f + 10.f);
+            headerFrame = CGRectMake(0, 0, HX_SCREEN_WIDTH, HX_SCREEN_WIDTH*2/3.0 + nameHeight + 50.f + 10.f);
         }
     }
     

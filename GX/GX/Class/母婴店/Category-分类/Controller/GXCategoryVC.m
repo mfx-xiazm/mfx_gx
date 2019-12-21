@@ -15,6 +15,8 @@
 #import "GXMessageVC.h"
 #import "GXGoodsListVC.h"
 #import "GXCatalogItem.h"
+#import "GXSearchTagVC.h"
+#import "UIView+WZLBadge.h"
 
 static NSString *const BigCateCell = @"BigCateCell";
 static NSString *const SmallCateCell = @"SmallCateCell";
@@ -45,6 +47,11 @@ static NSString *const SmallCateHeaderView = @"SmallCateHeaderView";
     [self startShimmer];
     [self getCatalogItemRequest];
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self getHomeUnReadMsg];
+}
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
@@ -52,14 +59,14 @@ static NSString *const SmallCateHeaderView = @"SmallCateHeaderView";
 #pragma mark -- 页面设置
 -(void)setUpNavBar
 {
-    [self.navigationItem setTitle:@"分类"];
+    [self.navigationItem setTitle:nil];
     
-    /*
     HXSearchBar *searchBar = [[HXSearchBar alloc] initWithFrame:CGRectMake(0, 0, HX_SCREEN_WIDTH - 70.f, 30.f)];
     searchBar.backgroundColor = [UIColor whiteColor];
     searchBar.layer.cornerRadius = 6;
     searchBar.layer.masksToBounds = YES;
     searchBar.delegate = self;
+    searchBar.placeholder = @"请输入商品名称查询";
     self.searchBar = searchBar;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
     
@@ -72,11 +79,11 @@ static NSString *const SmallCateHeaderView = @"SmallCateHeaderView";
     [msg setTitle:@"消息" forState:UIControlStateNormal];
     [msg addTarget:self action:@selector(msgClicked) forControlEvents:UIControlEventTouchUpInside];
     [msg setTitleColor:UIColorFromRGB(0XFFFFFF) forState:UIControlStateNormal];
-    
+    msg.badgeBgColor = [UIColor whiteColor];
+    msg.badgeCenterOffset = CGPointMake(-10, 5);
     self.msgBtn = msg;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:msg];
-     */
 }
 /** 页面设置 */
 -(void)setUpTableView
@@ -84,7 +91,7 @@ static NSString *const SmallCateHeaderView = @"SmallCateHeaderView";
     _leftTableView.backgroundColor = HXGlobalBg;
     _leftTableView.delegate = self;
     _leftTableView.dataSource = self;
-    _leftTableView.rowHeight = 44.f;
+    _leftTableView.rowHeight = 54.f;
     _leftTableView.tableFooterView = [UIView new];
     _leftTableView.showsVerticalScrollIndicator = NO;
     _leftTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -118,12 +125,31 @@ static NSString *const SmallCateHeaderView = @"SmallCateHeaderView";
     GXMessageVC *mvc = [GXMessageVC new];
     [self.navigationController pushViewController:mvc animated:YES];
 }
--(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    HXLog(@"搜索条");
+    GXSearchTagVC *gvc = [GXSearchTagVC new];
+    [self.navigationController pushViewController:gvc animated:YES];
     return NO;
 }
 #pragma mark -- 接口请求
+-(void)getHomeUnReadMsg
+{
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getHomeMsg" parameters:@{} success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            if ([responseObject[@"data"] boolValue]) {
+                [strongSelf.msgBtn showBadgeWithStyle:WBadgeStyleRedDot value:1 animationType:WBadgeAnimTypeNone];
+            }else{
+                [strongSelf.msgBtn clearBadge];
+            }
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
+}
 -(void)getCatalogItemRequest
 {
     hx_weakify(self);
@@ -246,6 +272,7 @@ static NSString *const SmallCateHeaderView = @"SmallCateHeaderView";
     }else{
         GXBrandItem *brand = self.currentCatalogItem.control[indexPath.item];
         lvc.brand_id = brand.brand_id;
+        lvc.big_catalog_id = self.currentCatalogItem.catalog_id;
         lvc.isControl = [self.currentCatalogItem.catalog_name isEqualToString:@"控区控价"]?YES:NO;
         lvc.catalogs = self.currentCatalogItem.catalog;
     }

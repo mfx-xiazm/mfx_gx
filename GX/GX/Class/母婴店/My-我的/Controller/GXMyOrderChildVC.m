@@ -18,10 +18,14 @@
 #import "GXMyRefund.h"
 #import "GXWebContentVC.h"
 #import "GXPayTypeVC.h"
+#import "HXSearchBar.h"
 
 static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
-@interface GXMyOrderChildVC ()<UITableViewDelegate,UITableViewDataSource>
+@interface GXMyOrderChildVC ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *searchView;
+/* 搜索 */
+@property(nonatomic,strong) HXSearchBar *search;
 /** 页码 */
 @property(nonatomic,assign) NSInteger pagenum;
 /** 订单列表 */
@@ -36,6 +40,7 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setUpSearchView];
     [self setUpTableView];
     [self setUpRefresh];
     [self startShimmer];
@@ -59,6 +64,21 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
         _refunds = [NSMutableArray array];
     }
     return _refunds;
+}
+-(void)setUpSearchView
+{
+    HXSearchBar *search = [HXSearchBar searchBar];
+    search.backgroundColor = UIColorFromRGB(0xf5f5f5);
+    search.hxn_x = 15.f;
+    search.hxn_y = 5.f;
+    search.hxn_width = HX_SCREEN_WIDTH - 30.f;
+    search.hxn_height = 34.f;
+    search.layer.cornerRadius = 34/2.f;
+    search.layer.masksToBounds = YES;
+    search.placeholder = @"商品名称、姓名、手机号、订单号搜索";
+    search.delegate = self;
+    self.search = search;
+    [self.searchView addSubview:search];
 }
 -(void)setUpTableView
 {
@@ -101,6 +121,12 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
         [strongSelf getOrderDataRequest:NO];
     }];
 }
+#pragma mark -- UITextField代理
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self getOrderDataRequest:YES];
+    return YES;
+}
 #pragma mark -- 数据请求
 -(void)getOrderDataRequest:(BOOL)isRefresh
 {
@@ -108,6 +134,7 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
     if (self.status != 6) {// 不是售后退款
         parameters[@"status"] = @(self.status);
     }
+    parameters[@"keyword"] = [self.search hasText]?self.search.text:@"";
     if (isRefresh) {
         parameters[@"page"] = @(1);//第几页
     }else{

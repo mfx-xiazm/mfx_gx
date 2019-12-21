@@ -32,7 +32,7 @@ static NSString *const DiscountGoodsCell = @"DiscountGoodsCell";
 @property(nonatomic,strong) HXSearchBar *searchBar;
 /* 为1按照销量从高到低排序 其他则取消按照从高到低排序  销量排序 1降序 2升序 */
 @property(nonatomic,copy) NSString *sale_num;
-/* 按照价格排序 1降序 2升序 */
+/* 按照价格排序 1升序 2降序 */
 @property(nonatomic,copy) NSString *price;
 /** 页码 */
 @property(nonatomic,assign) NSInteger pagenum;
@@ -159,7 +159,7 @@ static NSString *const DiscountGoodsCell = @"DiscountGoodsCell";
 -(void)getGoodsListDataRequest:(BOOL)isRefresh
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    parameters[@"catalog_id"] = (self.catalog_id && self.catalog_id.length)?self.catalog_id:@"";//二级分类id
+    parameters[@"catalog_id"] = (self.catalog_id && self.catalog_id.length)?self.catalog_id:(self.big_catalog_id && self.big_catalog_id.length)?self.big_catalog_id:@"";//二级分类id
     parameters[@"brand_id"] = (self.brand_id && self.brand_id.length)?self.brand_id:@"";//品牌id
     parameters[@"sale_num"] = (self.sale_num && self.sale_num.length)?self.sale_num:@"";//为1按照销量从高到低排序 其他则取消按照从高到低排序
     parameters[@"price"] = (self.price && self.price.length)?self.price:@"";//按照价格排序
@@ -245,16 +245,16 @@ static NSString *const DiscountGoodsCell = @"DiscountGoodsCell";
     }
     self.sale_num = @"";
     
-    /* 销量排序 1降序 2升序*/
-    if ([self.price isEqualToString:@"1"]) {
-        self.price = @"2";
+    /* 销量排序 1升序 2降序*/
+    if ([self.price isEqualToString:@"2"]) {
+        self.price = @"1";
         if (self.isControl) {
             [self.price_img1 setImage:HXGetImage(@"上红下黑")];
         }else{
             [self.price_img setImage:HXGetImage(@"上红下黑")];
         }
     }else{
-        self.price = @"1";
+        self.price = @"2";
         if (self.isControl) {
             [self.price_img1 setImage:HXGetImage(@"上黑下红")];
         }else{
@@ -266,7 +266,7 @@ static NSString *const DiscountGoodsCell = @"DiscountGoodsCell";
 
 - (IBAction)filterClicked:(UIButton *)sender {
     
-    if (self.catalog_id) {
+    if (self.brands) {
         self.fliterView.dataType = 3;
         self.fliterView.dataSouce = self.brands;
     }else{
@@ -277,7 +277,7 @@ static NSString *const DiscountGoodsCell = @"DiscountGoodsCell";
     self.fliterView.sureFilterCall = ^(NSString * _Nonnull cata_id) {
         hx_strongify(weakSelf);
         [strongSelf.zh_popupController dismissWithDuration:0.25 springAnimated:NO];
-        if (strongSelf.catalog_id) {
+        if (strongSelf.brands) {
             strongSelf.brand_id = cata_id;
         }else{
             strongSelf.catalog_id = cata_id;

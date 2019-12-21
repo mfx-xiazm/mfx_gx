@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface GXGoodsListVC : HXBaseViewController
 /* 是否是控区控价 */
 @property(nonatomic,assign) BOOL isControl;
+/* 一级分类id */
+@property(nonatomic,copy) NSString *big_catalog_id;
 /* 二级分类id */
 @property(nonatomic,copy) NSString *catalog_id;
 /* 品牌id */

@@ -33,7 +33,7 @@
 #import "GXWebContentVC.h"
 #import "GXMessageVC.h"
 #import "GXHomeData.h"
-#import "GXSearchResultVC.h"
+#import "GXSearchTagVC.h"
 #import "GXActivityContentVC.h"
 #import "SZUpdateView.h"
 #import <zhPopupController.h>
@@ -142,18 +142,11 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
     GXMessageVC *mvc = [GXMessageVC new];
     [self.navigationController pushViewController:mvc animated:YES];
 }
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    if ([textField hasText]) {
-        [textField resignFirstResponder];
-
-        GXSearchResultVC *gvc = [GXSearchResultVC new];
-        gvc.keyword = textField.text;
-        [self.navigationController pushViewController:gvc animated:YES];
-        return YES;
-    }else{
-        return NO;
-    }
+    GXSearchTagVC *gvc = [GXSearchTagVC new];
+    [self.navigationController pushViewController:gvc animated:YES];
+    return NO;
 }
 #pragma mark -- 接口请求
 -(void)getHomeUnReadMsg
