@@ -29,7 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *logistics_com_name;
 @property(nonatomic,copy) NSString *approve_status;
 @property(nonatomic,copy) NSString *approve_time;
-
+/** 1等待供应商审核；2等待平台审核；3退款成功；4退款驳回 5供应商同意 6供应商不同意 */
+@property(nonatomic,copy) NSString *refund_status;
 @property(nonatomic,copy) NSString *receiver;
 @property(nonatomic,copy) NSString *receiver_phone;
 @property(nonatomic,copy) NSString *pay_time;
@@ -37,6 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *order_coupon_amount;
 @property(nonatomic,copy) NSString *total_reduce_amount;
 @property(nonatomic,copy) NSString *provider_no;
+@property(nonatomic,copy) NSString *provider_uid;
 @property(nonatomic,copy) NSString *username;
 @property(nonatomic,copy) NSString *saleman_code;
 @property(nonatomic,copy) NSString *url;
@@ -56,7 +58,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *price;
 @property(nonatomic,copy) NSString *price_amount;
 @property(nonatomic,copy) NSString *control_type;
-
+/** 1等待供应商审核；2等待平台审核；3退款成功；4退款驳回 5供应商同意 6供应商不同意 */
+@property(nonatomic,copy) NSString *refund_status;
 @property(nonatomic,copy) NSString *freight_amount;
 @property(nonatomic,copy) NSString *totalPrice;
 

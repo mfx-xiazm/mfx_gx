@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GXMyVC">
             <connections>
+                <outlet property="noDeliverView" destination="80i-MB-bkQ" id="OiE-Mi-bj8"/>
+                <outlet property="noEvaluateView" destination="OmE-6Y-bEH" id="gm0-i0-8hz"/>
+                <outlet property="noPayView" destination="fmw-H9-DbE" id="Mdn-tj-kq3"/>
+                <outlet property="noReceiveView" destination="luf-9e-1ZW" id="dXs-JR-BV3"/>
                 <outlet property="sale_man" destination="w9H-34-NZF" id="J41-b4-cIJ"/>
                 <outlet property="shop_img" destination="edv-SO-kp8" id="VlM-GY-Wup"/>
                 <outlet property="shop_name" destination="HqQ-vv-pm0" id="6xq-n0-M8e"/>
@@ -34,7 +38,7 @@
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="会员背景" translatesAutoresizingMaskIntoConstraints="NO" id="hvE-Jv-BZq">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="140"/>
                                         </imageView>
-                                        <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="edv-SO-kp8">
+                                        <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon-logo" translatesAutoresizingMaskIntoConstraints="NO" id="edv-SO-kp8">
                                             <rect key="frame" x="15" y="25" width="50" height="50"/>
                                             <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
@@ -331,13 +335,8 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uA6-X5-YqN">
                                             <rect key="frame" x="0.0" y="40" width="77" height="80"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="待付款" translatesAutoresizingMaskIntoConstraints="NO" id="fmw-H9-DbE">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="待付款" translatesAutoresizingMaskIntoConstraints="NO" id="fmw-H9-DbE">
                                                     <rect key="frame" x="28" y="16" width="21" height="21"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layerBoderCorner">
-                                                            <real key="value" value="5"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="待付款" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wmm-aV-05C">
                                                     <rect key="frame" x="20" y="49.5" width="37" height="14.5"/>
@@ -366,13 +365,8 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DoN-sS-t2X">
                                             <rect key="frame" x="77" y="40" width="76.5" height="80"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="待发货" translatesAutoresizingMaskIntoConstraints="NO" id="80i-MB-bkQ">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="待发货" translatesAutoresizingMaskIntoConstraints="NO" id="80i-MB-bkQ">
                                                     <rect key="frame" x="26.5" y="16" width="23" height="20"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layerBoderCorner">
-                                                            <real key="value" value="5"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="待发货" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QeW-tK-zze">
                                                     <rect key="frame" x="19.5" y="49.5" width="37" height="14.5"/>
@@ -401,13 +395,8 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cj8-QM-E25">
                                             <rect key="frame" x="153.5" y="40" width="77" height="80"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="待收货" translatesAutoresizingMaskIntoConstraints="NO" id="luf-9e-1ZW">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="待收货" translatesAutoresizingMaskIntoConstraints="NO" id="luf-9e-1ZW">
                                                     <rect key="frame" x="25.5" y="16" width="26" height="21"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layerBoderCorner">
-                                                            <real key="value" value="5"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="待收货" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hHv-X4-kWn">
                                                     <rect key="frame" x="20" y="49.5" width="37" height="14.5"/>
@@ -436,13 +425,8 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wsf-NW-CIt">
                                             <rect key="frame" x="230.5" y="40" width="76.5" height="80"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="已完成" translatesAutoresizingMaskIntoConstraints="NO" id="OmE-6Y-bEH">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="已完成" translatesAutoresizingMaskIntoConstraints="NO" id="OmE-6Y-bEH">
                                                     <rect key="frame" x="27.5" y="16" width="21.5" height="21.5"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layerBoderCorner">
-                                                            <real key="value" value="5"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="待评价" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vog-bF-grq">
                                                     <rect key="frame" x="20" y="49.5" width="37" height="14.5"/>
@@ -844,7 +828,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kop-lf-kAt">
                                             <rect key="frame" x="0.0" y="160" width="96" height="80"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="联系客服" translatesAutoresizingMaskIntoConstraints="NO" id="aIm-39-7wg">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="在线客服" translatesAutoresizingMaskIntoConstraints="NO" id="aIm-39-7wg">
                                                     <rect key="frame" x="33" y="15" width="30" height="30"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layerBoderCorner">
@@ -879,7 +863,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SuY-NT-OWL">
                                             <rect key="frame" x="96" y="160" width="96" height="80"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="申请供货" translatesAutoresizingMaskIntoConstraints="NO" id="w48-oJ-pI6">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="联系客服" translatesAutoresizingMaskIntoConstraints="NO" id="w48-oJ-pI6">
                                                     <rect key="frame" x="33" y="15" width="30" height="30"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layerBoderCorner">
@@ -887,7 +871,7 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="申请供货" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ekh-YG-Mm2">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="联系客服" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ekh-YG-Mm2">
                                                     <rect key="frame" x="23.5" y="53.5" width="49.5" height="14.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="highlightedColor"/>
@@ -909,6 +893,41 @@
                                                 <constraint firstAttribute="bottom" secondItem="ekh-YG-Mm2" secondAttribute="bottom" constant="12" id="kqZ-jT-ZGJ"/>
                                                 <constraint firstAttribute="trailing" secondItem="gGl-yE-QZL" secondAttribute="trailing" id="kvG-rE-C26"/>
                                                 <constraint firstItem="gGl-yE-QZL" firstAttribute="top" secondItem="SuY-NT-OWL" secondAttribute="top" id="tSf-Dd-fhn"/>
+                                            </constraints>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="196-kZ-kiL">
+                                            <rect key="frame" x="192" y="160" width="96" height="80"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="申请供货" translatesAutoresizingMaskIntoConstraints="NO" id="IKg-62-IVs">
+                                                    <rect key="frame" x="33" y="15" width="30" height="30"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layerBoderCorner">
+                                                            <real key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="申请供货" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZVA-lh-VqX">
+                                                    <rect key="frame" x="23" y="53.5" width="50" height="14.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SgK-ds-oUu">
+                                                    <rect key="frame" x="0.0" y="0.0" width="96" height="80"/>
+                                                    <connections>
+                                                        <action selector="myOtherBtnClicked:" destination="-1" eventType="touchUpInside" id="2hb-k2-10C"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="ZVA-lh-VqX" firstAttribute="centerX" secondItem="196-kZ-kiL" secondAttribute="centerX" id="62X-cg-RMG"/>
+                                                <constraint firstAttribute="bottom" secondItem="SgK-ds-oUu" secondAttribute="bottom" id="O2Z-HS-Oz6"/>
+                                                <constraint firstItem="IKg-62-IVs" firstAttribute="centerX" secondItem="196-kZ-kiL" secondAttribute="centerX" id="RPk-bz-oep"/>
+                                                <constraint firstItem="SgK-ds-oUu" firstAttribute="top" secondItem="196-kZ-kiL" secondAttribute="top" id="Z5t-Yv-wXX"/>
+                                                <constraint firstItem="SgK-ds-oUu" firstAttribute="leading" secondItem="196-kZ-kiL" secondAttribute="leading" id="aHU-IE-A8g"/>
+                                                <constraint firstAttribute="trailing" secondItem="SgK-ds-oUu" secondAttribute="trailing" id="bvB-G4-gl0"/>
+                                                <constraint firstItem="IKg-62-IVs" firstAttribute="top" secondItem="196-kZ-kiL" secondAttribute="top" constant="15" id="ft2-Ze-WdL"/>
+                                                <constraint firstAttribute="bottom" secondItem="ZVA-lh-VqX" secondAttribute="bottom" constant="12" id="skg-X0-dxe"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -933,11 +952,13 @@
                                         <constraint firstAttribute="trailing" secondItem="fxF-lE-oiL" secondAttribute="trailing" id="RKf-MV-VMg"/>
                                         <constraint firstItem="vUZ-jv-5YH" firstAttribute="width" secondItem="Vhj-GT-GUN" secondAttribute="width" id="Tfu-rk-Q4u"/>
                                         <constraint firstItem="ge8-qS-4V6" firstAttribute="leading" secondItem="vua-pI-HJe" secondAttribute="trailing" id="Uww-S4-4pU"/>
+                                        <constraint firstItem="196-kZ-kiL" firstAttribute="width" secondItem="pFK-dr-OYl" secondAttribute="width" id="V9f-CN-IrI"/>
                                         <constraint firstItem="37c-BO-Qqg" firstAttribute="top" secondItem="Vhj-GT-GUN" secondAttribute="bottom" id="VHM-9d-lOj"/>
                                         <constraint firstItem="kop-lf-kAt" firstAttribute="width" secondItem="Vhj-GT-GUN" secondAttribute="width" id="XQJ-zG-t8h"/>
                                         <constraint firstItem="SuY-NT-OWL" firstAttribute="top" secondItem="vUZ-jv-5YH" secondAttribute="bottom" id="YBK-bk-tKL"/>
                                         <constraint firstAttribute="bottom" secondItem="SuY-NT-OWL" secondAttribute="bottom" id="aIS-w6-uTy"/>
                                         <constraint firstItem="Vhj-GT-GUN" firstAttribute="top" secondItem="doh-eF-Meh" secondAttribute="top" id="cOp-uE-WUe"/>
+                                        <constraint firstItem="196-kZ-kiL" firstAttribute="leading" secondItem="SuY-NT-OWL" secondAttribute="trailing" id="dNi-pG-Ia3"/>
                                         <constraint firstItem="pFK-dr-OYl" firstAttribute="leading" secondItem="vUZ-jv-5YH" secondAttribute="trailing" id="dfD-qp-kDA"/>
                                         <constraint firstItem="vua-pI-HJe" firstAttribute="height" secondItem="Vhj-GT-GUN" secondAttribute="height" id="dyE-8v-Wgp"/>
                                         <constraint firstItem="kop-lf-kAt" firstAttribute="height" secondItem="Vhj-GT-GUN" secondAttribute="height" id="efl-Qg-gAx"/>
@@ -948,11 +969,13 @@
                                         <constraint firstItem="Vhj-GT-GUN" firstAttribute="leading" secondItem="doh-eF-Meh" secondAttribute="leading" id="gre-JA-RRi"/>
                                         <constraint firstItem="pFK-dr-OYl" firstAttribute="top" secondItem="ge8-qS-4V6" secondAttribute="bottom" id="hIc-D4-2bi"/>
                                         <constraint firstAttribute="trailing" secondItem="Zqp-9G-Ybc" secondAttribute="trailing" id="jmY-tw-wgi"/>
+                                        <constraint firstAttribute="bottom" secondItem="196-kZ-kiL" secondAttribute="bottom" id="jsJ-El-Vir"/>
                                         <constraint firstItem="vUZ-jv-5YH" firstAttribute="top" secondItem="vua-pI-HJe" secondAttribute="bottom" id="kFc-rv-3aD"/>
                                         <constraint firstItem="kop-lf-kAt" firstAttribute="top" secondItem="37c-BO-Qqg" secondAttribute="bottom" id="lDD-Go-JWb"/>
                                         <constraint firstItem="pFK-dr-OYl" firstAttribute="height" secondItem="Vhj-GT-GUN" secondAttribute="height" id="lpf-aR-VK7"/>
                                         <constraint firstItem="Zqp-9G-Ybc" firstAttribute="height" secondItem="Vhj-GT-GUN" secondAttribute="height" id="ozL-C0-tue"/>
                                         <constraint firstItem="37c-BO-Qqg" firstAttribute="leading" secondItem="doh-eF-Meh" secondAttribute="leading" id="qPd-lB-MXm"/>
+                                        <constraint firstItem="196-kZ-kiL" firstAttribute="top" secondItem="pFK-dr-OYl" secondAttribute="bottom" id="usg-PD-L90"/>
                                         <constraint firstItem="vUZ-jv-5YH" firstAttribute="leading" secondItem="37c-BO-Qqg" secondAttribute="trailing" id="vu9-80-8Z3"/>
                                         <constraint firstItem="37c-BO-Qqg" firstAttribute="width" secondItem="Vhj-GT-GUN" secondAttribute="width" id="xwA-Xw-9eB"/>
                                         <constraint firstItem="fxF-lE-oiL" firstAttribute="leading" secondItem="pFK-dr-OYl" secondAttribute="trailing" id="ypc-FB-mGe"/>
@@ -1016,6 +1039,7 @@
         </view>
     </objects>
     <resources>
+        <image name="Icon-logo" width="60" height="60"/>
         <image name="优惠券" width="26.5" height="20"/>
         <image name="会员中心" width="30" height="30"/>
         <image name="会员权益中心" width="76" height="28.5"/>
@@ -1023,6 +1047,7 @@
         <image name="使用帮助" width="30" height="30"/>
         <image name="售后标准" width="30" height="30"/>
         <image name="售后退款" width="21" height="22.5"/>
+        <image name="在线客服" width="30" height="30"/>
         <image name="已完成" width="21.5" height="21.5"/>
         <image name="待付款" width="21" height="21"/>
         <image name="待发货" width="23" height="20"/>

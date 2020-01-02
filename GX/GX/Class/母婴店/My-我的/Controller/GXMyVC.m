@@ -24,6 +24,7 @@
 #import "GXMineData.h"
 #import "zhAlertView.h"
 #import <zhPopupController.h>
+#import "UIView+WZLBadge.h"
 
 @interface GXMyVC ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 /* 个人信息 */
@@ -32,6 +33,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *shop_name;
 @property (weak, nonatomic) IBOutlet UIButton *user_level;
 @property (weak, nonatomic) IBOutlet UIButton *sale_man;
+
+@property (weak, nonatomic) IBOutlet UIImageView *noPayView;
+@property (weak, nonatomic) IBOutlet UIImageView *noDeliverView;
+@property (weak, nonatomic) IBOutlet UIImageView *noReceiveView;
+@property (weak, nonatomic) IBOutlet UIImageView *noEvaluateView;
 
 @end
 
@@ -47,6 +53,7 @@
 {
     [super viewWillAppear:animated];
     [self getMemberRequest];
+    [self getOrderNumRequest];
 }
 #pragma mark -- 业务逻辑
 -(void)getMemberRequest
@@ -66,9 +73,47 @@
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
     }];
 }
+-(void)getOrderNumRequest
+{
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getOrderNum" parameters:@{} success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if ([responseObject[@"data"][@"unPayNum"] integerValue] != 0) {
+                    [strongSelf.noPayView showBadgeWithStyle:WBadgeStyleNumber value:[responseObject[@"data"][@"unPayNum"] integerValue] animationType:WBadgeAnimTypeNone];
+                }else{
+                    [strongSelf.noPayView clearBadge];
+                }
+                
+                if ([responseObject[@"data"][@"unDeliverNum"] integerValue] != 0) {
+                    [strongSelf.noDeliverView showBadgeWithStyle:WBadgeStyleNumber value:[responseObject[@"data"][@"unDeliverNum"] integerValue] animationType:WBadgeAnimTypeNone];
+                }else{
+                    [strongSelf.noDeliverView clearBadge];
+                }
+                
+                if ([responseObject[@"data"][@"unReceiveNum"] integerValue] != 0) {
+                    [strongSelf.noReceiveView showBadgeWithStyle:WBadgeStyleNumber value:[responseObject[@"data"][@"unReceiveNum"] integerValue] animationType:WBadgeAnimTypeNone];
+                }else{
+                    [strongSelf.noReceiveView clearBadge];
+                }
+                
+                if ([responseObject[@"data"][@"unEvaNum"] integerValue] != 0) {
+                    [strongSelf.noEvaluateView showBadgeWithStyle:WBadgeStyleNumber value:[responseObject[@"data"][@"unEvaNum"] integerValue] animationType:WBadgeAnimTypeNone];
+                }else{
+                    [strongSelf.noEvaluateView clearBadge];
+                }
+            });
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
+}
 -(void)handleMineData
 {
-    [self.shop_img sd_setImageWithURL:[NSURL URLWithString:self.mineData.shop_front_img]];
+    [self.shop_img sd_setImageWithURL:[NSURL URLWithString:self.mineData.shop_front_img] placeholderImage:HXGetImage(@"Icon-logo")];
     self.shop_name.text = self.mineData.shop_name;
     if (self.mineData.level_id && self.mineData.level_id.length) {
         self.user_level.hidden = NO;
@@ -189,7 +234,7 @@
         GXReportVC *rvc = [GXReportVC new];
         [self.navigationController pushViewController:rvc animated:YES];
     }else if (sender.tag == 8){
-        FSActionSheet *as = [[FSActionSheet alloc] initWithTitle:@"联系客服" delegate:nil cancelButtonTitle:@"取消" highlightedButtonTitle:nil otherButtonTitles:@[[NSString stringWithFormat:@"%@",self.mineData.platform_tel]]];
+        FSActionSheet *as = [[FSActionSheet alloc] initWithTitle:@"联系我们" delegate:nil cancelButtonTitle:@"取消" highlightedButtonTitle:nil otherButtonTitles:@[[NSString stringWithFormat:@"%@",self.mineData.platform_tel]]];
         hx_weakify(self);
         [as showWithSelectedCompletion:^(NSInteger selectedIndex) {
             hx_strongify(weakSelf);
@@ -197,6 +242,11 @@
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel:%@",strongSelf.mineData.platform_tel]]];
             }
         }];
+    }else if (sender.tag == 9){
+        GXWebContentVC *wvc = [GXWebContentVC new];
+        wvc.isNeedRequest = NO;
+        wvc.url = @"https://ykf-webchat.7moor.com/wapchat.html?accessId=e1c9ecc0-2162-11ea-849d-c5eead77ac50&fromUrl=&urlTitle";
+        [self.navigationController pushViewController:wvc animated:YES];
     }else{
         GXWebContentVC *wvc = [GXWebContentVC new];
         wvc.navTitle = @"申请供货";

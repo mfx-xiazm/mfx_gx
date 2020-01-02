@@ -79,6 +79,7 @@ static NSString *const SankPriceCell = @"SankPriceCell";
     
     UILabel *title = [[UILabel alloc] init];
     title.textColor = [UIColor whiteColor];
+    title.textAlignment = NSTextAlignmentCenter;
     title.font = [UIFont systemFontOfSize:13];
     title.text = @"配送至：请选择";
     CGSize titleSize = [title sizeThatFits:CGSizeZero];
@@ -229,11 +230,11 @@ static NSString *const SankPriceCell = @"SankPriceCell";
     }];
 }
 #pragma mark -- 业务逻辑
--(void)addOrderCartRequest:(NSString *)goods_id specs_attrs:(NSString *)specs_attrs logistics_com_id:(NSString *)logistics_com_id sku_id:(NSString *)sku_id
+-(void)addOrderCartRequest:(NSString *)goods_id cart_num:(NSInteger)cart_num specs_attrs:(NSString *)specs_attrs logistics_com_id:(NSString *)logistics_com_id sku_id:(NSString *)sku_id
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"goods_id"] = goods_id;//商品id
-    parameters[@"cart_num"] = @(1);//商品数量
+    parameters[@"cart_num"] = @(cart_num);//商品数量
     parameters[@"specs_attrs"] = specs_attrs;//商品规格
     parameters[@"is_try"] = @(0);//是否试用装商品
     parameters[@"is_checked"] = @"1";//0未选择；1已选择
@@ -260,20 +261,21 @@ static NSString *const SankPriceCell = @"SankPriceCell";
         [strongSelf.zh_popupController dismissWithDuration:0.25 springAnimated:NO];
         if (address) {
             strongSelf.addressText.text = [NSString stringWithFormat:@"配送至：%@",address.area_name];
-            CGSize titleSize = [strongSelf.addressText sizeThatFits:CGSizeZero];
-            strongSelf.addressText.hxn_x = (strongSelf.titileView.hxn_width-titleSize.width)/2.0;
-            strongSelf.addressText.hxn_y = (strongSelf.titileView.hxn_height-titleSize.height)/2.0;
-            strongSelf.addressText.hxn_width = (titleSize.width>200.f)?200.f:titleSize.width;
-            strongSelf.addressText.hxn_height = titleSize.height;
-
-            strongSelf.addressImg.hxn_centerY = strongSelf.titileView.hxn_centerY;
-            strongSelf.addressImg.hxn_x = CGRectGetMinX(strongSelf.addressText.frame) - 20.f;
-            
-            strongSelf.expandImg.hxn_centerY = strongSelf.titileView.hxn_centerY;
-            strongSelf.expandImg.hxn_x = CGRectGetMaxX(strongSelf.addressText.frame) + 10.f;
-            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                CGSize titleSize = [strongSelf.addressText sizeThatFits:CGSizeZero];
+                strongSelf.addressText.hxn_centerX = strongSelf.titileView.hxn_centerX;
+                strongSelf.addressText.hxn_width = (titleSize.width>200.f)?200.f:titleSize.width;
+                
+                strongSelf.addressImg.hxn_centerY = strongSelf.titileView.hxn_centerY;
+                strongSelf.addressImg.hxn_x = CGRectGetMinX(strongSelf.addressText.frame) - 20.f;
+                
+                strongSelf.expandImg.hxn_centerY = strongSelf.titileView.hxn_centerY;
+                strongSelf.expandImg.hxn_x = CGRectGetMaxX(strongSelf.addressText.frame) + 10.f;
+                
+                [strongSelf.titileView setNeedsLayout];
+                [strongSelf.titileView layoutIfNeeded];
+            });
             strongSelf.address_id = address.address_id;
-            
             [strongSelf goodsSortByPriceRequest:YES];
         }
     };
@@ -327,11 +329,11 @@ static NSString *const SankPriceCell = @"SankPriceCell";
         footer.priceSankHandleCall = ^(NSInteger index) {
             hx_strongify(weakSelf);
             if (index == 1) {
-                [strongSelf addOrderCartRequest:sank.goods_id specs_attrs:[NSString stringWithFormat:@"%@,%@",sank.specs_attrs,sank.logistics_com_name] logistics_com_id:sank.logistics_com_id sku_id:sank.sku_id];
+                [strongSelf addOrderCartRequest:sank.goods_id cart_num:sank.buy_num specs_attrs:[NSString stringWithFormat:@"%@,%@",sank.specs_attrs,sank.logistics_com_name] logistics_com_id:sank.logistics_com_id sku_id:sank.sku_id];
             }else{
                 GXUpOrderVC *ovc = [GXUpOrderVC new];
                 ovc.goods_id = sank.goods_id;
-                ovc.goods_num = @"1";
+                ovc.goods_num = [NSString stringWithFormat:@"%ld",(long)sank.buy_num];
                 ovc.specs_attrs = [NSString stringWithFormat:@"%@,%@",sank.specs_attrs,sank.logistics_com_name];
                 ovc.sku_id = sank.sku_id;
                 ovc.logistics_com_id = sank.logistics_com_id;

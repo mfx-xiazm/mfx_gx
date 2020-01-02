@@ -234,6 +234,9 @@ static NSString *const MarketTrendCell = @"MarketTrendCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     GXGoodsDetailVC *dvc = [GXGoodsDetailVC new];
+    GXMarketTrendSeries *series = self.showTrends[indexPath.section];
+    GXSeriesGoods *goods = series.goods[indexPath.row];
+    dvc.goods_id = goods.goods_id;
     [self.navigationController pushViewController:dvc animated:YES];
 }
 // TableView分区标题即将展示

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -48,6 +48,12 @@
                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="退款中" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fa8-su-yRs">
+                                <rect key="frame" x="332" y="50.5" width="31" height="12"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <color key="textColor" red="0.92549019610000005" green="0.078431372550000003" blue="0.1764705882" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥99.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="twM-Lj-8Hh">
                                 <rect key="frame" x="110" y="76.5" width="50.5" height="23.5"/>
                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="17"/>
@@ -70,12 +76,14 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="fa8-su-yRs" secondAttribute="trailing" constant="12" id="3y6-DA-eXJ"/>
                             <constraint firstAttribute="bottom" secondItem="idW-Rd-sWA" secondAttribute="bottom" constant="10" id="9ud-KT-WDK"/>
                             <constraint firstItem="twM-Lj-8Hh" firstAttribute="leading" secondItem="idW-Rd-sWA" secondAttribute="trailing" constant="10" id="C7a-Bk-7ua"/>
                             <constraint firstAttribute="trailing" secondItem="rQe-zc-9a5" secondAttribute="trailing" constant="10" id="DlC-Kz-SS8"/>
                             <constraint firstItem="XJO-w7-h6W" firstAttribute="leading" secondItem="CRq-tn-2dn" secondAttribute="leading" constant="10" id="FJ7-UQ-LJu"/>
                             <constraint firstItem="VIq-3i-Ngx" firstAttribute="leading" secondItem="idW-Rd-sWA" secondAttribute="trailing" constant="10" id="PgE-aG-FrH"/>
                             <constraint firstAttribute="bottom" secondItem="XJO-w7-h6W" secondAttribute="bottom" id="TD5-gU-3vh"/>
+                            <constraint firstItem="fa8-su-yRs" firstAttribute="centerY" secondItem="rQe-zc-9a5" secondAttribute="centerY" id="aYA-gP-upd"/>
                             <constraint firstItem="VIq-3i-Ngx" firstAttribute="top" secondItem="CRq-tn-2dn" secondAttribute="top" constant="10" id="eWN-8R-iYH"/>
                             <constraint firstAttribute="bottom" secondItem="twM-Lj-8Hh" secondAttribute="bottom" constant="10" id="hHW-eF-p7p"/>
                             <constraint firstItem="idW-Rd-sWA" firstAttribute="top" secondItem="CRq-tn-2dn" secondAttribute="top" constant="10" id="iSE-7v-guB"/>
@@ -103,6 +111,7 @@
                 <outlet property="goods_spec" destination="rQe-zc-9a5" id="aw8-gq-4zK"/>
                 <outlet property="goods_title" destination="VIq-3i-Ngx" id="5Xn-h1-bQE"/>
                 <outlet property="price" destination="twM-Lj-8Hh" id="9YM-sB-2NJ"/>
+                <outlet property="refundStatus" destination="fa8-su-yRs" id="MJh-ug-mfT"/>
             </connections>
             <point key="canvasLocation" x="177.536231884058" y="131.58482142857142"/>
         </tableViewCell>

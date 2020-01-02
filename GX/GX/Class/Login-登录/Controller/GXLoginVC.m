@@ -95,8 +95,6 @@
 - (IBAction)registerClicked:(UIButton *)sender {
     GXAboutUsVC *avc = [GXAboutUsVC new];
     [self.navigationController pushViewController:avc animated:YES];
-//    GXRegisterVC *rvc = [GXRegisterVC new];
-//    [self.navigationController pushViewController:rvc animated:YES];
 }
 
 @end
