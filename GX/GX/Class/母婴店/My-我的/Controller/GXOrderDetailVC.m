@@ -309,14 +309,27 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
             };
         }
     }else {//供应商或者销售员
-        self.handleView.hidden = YES;
-        self.handleViewHeight.constant = 0.f;
-        self.firstHandleBtn.hidden = YES;
-        self.secondHandleBtn.hidden = YES;
-        self.thirdHandleBtn.hidden = YES;
-        
         if (self.refund_id && self.refund_id.length) {
-           
+            if ([self.refundDetail.refund_status isEqualToString:@"4"] || [self.refundDetail.refund_status isEqualToString:@"6"]) {
+                self.handleView.hidden = NO;
+                self.handleViewHeight.constant = 50.f;
+                
+                self.firstHandleBtn.hidden = YES;
+                self.secondHandleBtn.hidden = YES;
+                
+                self.thirdHandleBtn.hidden = NO;
+                [self.thirdHandleBtn setTitle:@"查看原因" forState:UIControlStateNormal];
+                self.thirdHandleBtn.backgroundColor = [UIColor whiteColor];
+                self.thirdHandleBtn.layer.borderColor = [UIColor blackColor].CGColor;
+                [self.thirdHandleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            }else{
+                self.handleView.hidden = YES;
+                self.handleViewHeight.constant = 0.f;
+                self.firstHandleBtn.hidden = YES;
+                self.secondHandleBtn.hidden = YES;
+                self.thirdHandleBtn.hidden = YES;
+            }
+            
             self.header.refundDetail = self.refundDetail;
             hx_weakify(self);
             self.header.lookLogisCall = ^{
@@ -333,6 +346,12 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
                 self.tableView.tableFooterView = self.footer;
             }
         }else{
+            self.handleView.hidden = YES;
+            self.handleViewHeight.constant = 0.f;
+            self.firstHandleBtn.hidden = YES;
+            self.secondHandleBtn.hidden = YES;
+            self.thirdHandleBtn.hidden = YES;
+            
             self.header.orderDetail = self.orderDetail;
             hx_weakify(self);
             self.header.lookLogisCall = ^{
@@ -526,6 +545,7 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
     }else{
         GXMyOrderGoods *goods = self.orderDetail.goods[indexPath.row];
         goods.refund_status = self.orderDetail.refund_status;
+        goods.status = self.orderDetail.status;
         cell.goods = goods;
     }
     return cell;

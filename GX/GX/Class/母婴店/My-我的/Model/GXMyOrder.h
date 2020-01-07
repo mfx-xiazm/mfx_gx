@@ -60,6 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *control_type;
 /** 1等待供应商审核；2等待平台审核；3退款成功；4退款驳回 5供应商同意 6供应商不同意 */
 @property(nonatomic,copy) NSString *refund_status;
+@property(nonatomic,copy) NSString *status;
 @property(nonatomic,copy) NSString *freight_amount;
 @property(nonatomic,copy) NSString *totalPrice;
 

@@ -287,6 +287,7 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
         GXMyOrder *order = self.orders[indexPath.section];
         GXMyOrderGoods *goods = order.goods[indexPath.row];
         goods.refund_status = order.refund_status;
+        goods.status = order.status;
         cell.goods = goods;
     }else{
         GXMyRefund *refund = self.refunds[indexPath.section];
