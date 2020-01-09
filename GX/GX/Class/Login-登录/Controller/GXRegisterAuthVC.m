@@ -148,20 +148,38 @@ static NSString *const RegisterAuthCell = @"RegisterAuthCell";
 -(void)getAllAreaRequest
 {
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getAreaData" parameters:@{} success:^(id responseObject) {
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
         hx_strongify(weakSelf);
-        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
-            strongSelf.region = [[GXSelectRegion alloc] init];
-            strongSelf.region.regions = [NSArray yy_modelArrayWithClass:[GXRegion class] json:responseObject[@"data"]];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                strongSelf.header.region = strongSelf.region;
-            });
-        }else{
-            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"areaData" ofType:@"txt"];
+        NSString *districtStr = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
+        
+        if (districtStr == nil) {
+            return ;
         }
-    } failure:^(NSError *error) {
-        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
-    }];
+        NSData *jsonData = [districtStr dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
+        strongSelf.region = [[GXSelectRegion alloc] init];
+        strongSelf.region.regions = [NSArray yy_modelArrayWithClass:[GXRegion class] json:responseObject[@"data"]];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            strongSelf.header.region = strongSelf.region;
+        });
+    });
+//    hx_weakify(self);
+//    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getAreaData" parameters:@{} success:^(id responseObject) {
+//        hx_strongify(weakSelf);
+//        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+//            strongSelf.region = [[GXSelectRegion alloc] init];
+//            strongSelf.region.regions = [NSArray yy_modelArrayWithClass:[GXRegion class] json:responseObject[@"data"]];
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                strongSelf.header.region = strongSelf.region;
+//            });
+//        }else{
+//            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+//        }
+//    } failure:^(NSError *error) {
+//        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+//    }];
 }
 -(void)checkDataValidity
 {

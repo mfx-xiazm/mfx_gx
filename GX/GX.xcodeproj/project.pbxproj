@@ -52,6 +52,7 @@
 		902E890B2347749800EFD0DF /* GXSaleMaterialChildVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 902E89092347749800EFD0DF /* GXSaleMaterialChildVC.xib */; };
 		902E890F2347773E00EFD0DF /* GXSaleMaterialHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 902E890E2347773E00EFD0DF /* GXSaleMaterialHeader.m */; };
 		902E89112347775500EFD0DF /* GXSaleMaterialHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 902E89102347775500EFD0DF /* GXSaleMaterialHeader.xib */; };
+		90359A8023C459240033074A /* areaData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 90359A7F23C459240033074A /* areaData.txt */; };
 		90363F9C23541EDC00A120AC /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 90363F9A23541EDC00A120AC /* AlipaySDK.bundle */; };
 		90363F9D23541EDC00A120AC /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90363F9B23541EDC00A120AC /* AlipaySDK.framework */; };
 		903C54712349CCCD002743EE /* JJOptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 903C54702349CCCD002743EE /* JJOptionView.m */; };
@@ -538,6 +539,7 @@
 		902E890D2347773E00EFD0DF /* GXSaleMaterialHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXSaleMaterialHeader.h; sourceTree = "<group>"; };
 		902E890E2347773E00EFD0DF /* GXSaleMaterialHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXSaleMaterialHeader.m; sourceTree = "<group>"; };
 		902E89102347775500EFD0DF /* GXSaleMaterialHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXSaleMaterialHeader.xib; sourceTree = "<group>"; };
+		90359A7F23C459240033074A /* areaData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = areaData.txt; sourceTree = "<group>"; };
 		90363F9A23541EDC00A120AC /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
 		90363F9B23541EDC00A120AC /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		903C546F2349CCCD002743EE /* JJOptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJOptionView.h; sourceTree = "<group>"; };
@@ -1317,6 +1319,7 @@
 		9043B59F236BC53F00731C6F /* 收货地址 */ = {
 			isa = PBXGroup;
 			children = (
+				90359A7F23C459240033074A /* areaData.txt */,
 				9043B5A0236BC55800731C6F /* GXMyAddress.h */,
 				9043B5A1236BC55800731C6F /* GXMyAddress.m */,
 			);
@@ -3485,6 +3488,7 @@
 				90067EDA23443A1300628503 /* GXRegisterAuthCell.xib in Resources */,
 				90FCDF1C2349964F00729A97 /* GXMyCouponVC.xib in Resources */,
 				90BB98D7234DB3C400444ACC /* GXSalerOrderManageChildVC.xib in Resources */,
+				90359A8023C459240033074A /* areaData.txt in Resources */,
 				906974082344D28400D8A8FF /* GXStoreGoodsListHeader.xib in Resources */,
 				902E88D3234742F700EFD0DF /* GXMessageVC.xib in Resources */,
 				90BB98A9234C1B0C00444ACC /* GXOrderManageChildVC.xib in Resources */,
@@ -4010,6 +4014,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = A2V85YL4T5;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4037,6 +4042,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = A2V85YL4T5;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
