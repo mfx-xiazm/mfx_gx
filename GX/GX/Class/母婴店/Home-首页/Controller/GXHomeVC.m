@@ -251,7 +251,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     if (section == 0) {//分类
         return self.homeData.homeTopCate.count;
-    }else if (section == 1) {//每日必抢
+    }else if (section == 1) {//爆款抢购
         return self.homeData.home_rushbuy.count;
     }else if (section == 2) {//控区控价
         return self.homeData.home_control_price_brand.count;
@@ -268,7 +268,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
 - (ZLLayoutType)collectionView:(UICollectionView *)collectionView layout:(ZLCollectionViewBaseFlowLayout *)collectionViewLayout typeOfLayout:(NSInteger)section {
     if (section == 0) {//分类
         return ClosedLayout;//列布局
-    }else if (section == 1) {//每日必抢
+    }else if (section == 1) {//爆款抢购
         return FillLayout;//填充式布局
     }else if (section == 2) {//控区控价
         return ClosedLayout;
@@ -286,7 +286,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
 - (NSInteger)collectionView:(UICollectionView *)collectionView layout:(ZLCollectionViewBaseFlowLayout*)collectionViewLayout columnCountOfSection:(NSInteger)section {
     if (section == 0) {//分类
         return 5;
-    }else if (section == 1) {//每日必抢
+    }else if (section == 1) {//爆款抢购
         return 0;//这个区间为填充式布局
     }else if (section == 2) {//控区控价
         return 1;
@@ -306,7 +306,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
         GYHomeTopCate *topCate = self.homeData.homeTopCate[indexPath.item];
         cell.topCate = topCate;
         return cell;
-    }else if (indexPath.section == 1) {//每日必抢
+    }else if (indexPath.section == 1) {//爆款抢购
         if (indexPath.item) {
             GXDiscountGoodsCell2 * cell = [collectionView dequeueReusableCellWithReuseIdentifier:DiscountGoodsCell2 forIndexPath:indexPath];
             GYHomeDiscount *discount = self.homeData.home_rushbuy[indexPath.item];
@@ -358,7 +358,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
     if (section == 0) {
         return CGSizeMake(HX_SCREEN_WIDTH,HX_SCREEN_WIDTH*2/5.0);
     }else{
-        if (section == 1) {//每日必抢
+        if (section == 1) {//爆款抢购
             if (self.homeData.home_rushbuy.count) {
                 return CGSizeMake(HX_SCREEN_WIDTH, 50.f);
             }else{
@@ -409,10 +409,10 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
             }else{
                 header.recommendView.hidden = YES;
                 header.titleView.hidden = NO;
-                if (indexPath.section == 1) {//每日必抢
+                if (indexPath.section == 1) {//爆款抢购
                     header.moreTitle.textColor = [UIColor whiteColor];
                     header.moreImg.image = HXGetImage(@"更多");
-                    header.titleImg.image = HXGetImage(@"每日必抢");
+                    header.titleImg.image = HXGetImage(@"爆款抢购");
                 }else if (indexPath.section == 2) {//控区控价
                     header.moreTitle.textColor = [UIColor lightGrayColor];
                     header.moreImg.image = HXGetImage(@"更多灰色");
@@ -433,7 +433,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
                 hx_weakify(self);
                 header.moreBtnClickedCall = ^{
                     hx_strongify(weakSelf);
-                    if (indexPath.section == 1) {//每日必抢
+                    if (indexPath.section == 1) {//爆款抢购
                         GXDiscountVC *dvc = [GXDiscountVC new];
                         [strongSelf.navigationController pushViewController:dvc animated:YES];
                     }else if (indexPath.section == 2) {//控区控价
@@ -456,7 +456,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
                     }
                 };
             }
-            if (indexPath.section == 1) {//每日必抢
+            if (indexPath.section == 1) {//爆款抢购
                 return self.homeData.home_rushbuy.count?header:nil;
             }else{
                 return header;
@@ -483,7 +483,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
             GXSaleMaterialVC *mvc = [GXSaleMaterialVC new];
             [self.navigationController pushViewController:mvc animated:YES];
         }
-    }else if (indexPath.section == 1) {//每日必抢,这个区间为填充式布局
+    }else if (indexPath.section == 1) {//爆款抢购,这个区间为填充式布局
         GXGoodsDetailVC *dvc = [GXGoodsDetailVC new];
         GYHomeDiscount *discount = self.homeData.home_rushbuy[indexPath.item];
         dvc.goods_id = discount.goods_id;
@@ -524,7 +524,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
         CGFloat width = (HX_SCREEN_WIDTH-10*2.0-15*4.0)/5.0;
         CGFloat height = width+30.f;
         return CGSizeMake(width, height);
-    }else if (indexPath.section == 1) {//每日必抢,这个区间为填充式布局
+    }else if (indexPath.section == 1) {//爆款抢购,这个区间为填充式布局
         if (indexPath.item) {
             CGFloat width = (HX_SCREEN_WIDTH-20.f*2.f)/4.0;
             CGFloat height = width+40.f;
@@ -559,7 +559,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     if (section == 0) {//分类
         return 0.f;
-    }else if (section == 1) {//每日必抢
+    }else if (section == 1) {//爆款抢购
         return 0.f;//这个区间为填充式布局
     }else if (section == 2) {//控区控价
         return 10.f;
@@ -576,7 +576,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
     if (section == 0) {//分类
         return 15.f;
-    }else if (section == 1) {//每日必抢
+    }else if (section == 1) {//爆款抢购
         return 0.f;//这个区间为填充式布局
     }else if (section == 2) {//控区控价
         return 0.f;
@@ -593,7 +593,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     if (section == 0) {//分类
         return  UIEdgeInsetsMake(10.f, 10.f, 10.f, 10.f);
-    }else if (section == 1) {//每日必抢
+    }else if (section == 1) {//爆款抢购
         return  UIEdgeInsetsMake(0.f, 20.f, 10, 20.f);//这个区间为填充式布局
     }else if (section == 2) {//控区控价
         return  UIEdgeInsetsMake(10.f, 20.f, 10.f, 20.f);

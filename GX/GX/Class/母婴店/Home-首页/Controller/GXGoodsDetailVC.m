@@ -269,7 +269,7 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"goods_id"] = self.goods_id;
     if (self.rushbuy_id) {
-        parameters[@"rushbuy_id"] = self.rushbuy_id;//每日必抢id 常规商品和控区控价商品无该字段 则不需要传
+        parameters[@"rushbuy_id"] = self.rushbuy_id;//爆款抢购id 常规商品和控区控价商品无该字段 则不需要传
     }
     hx_weakify(self);
     [HXNetworkTool POST:HXRC_M_URL action:@"admin/getGoodDetail" parameters:parameters success:^(id responseObject) {

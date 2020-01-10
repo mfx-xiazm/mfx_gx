@@ -23,7 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.navigationItem setTitle:@"每日必抢"];
+    [self.navigationItem setTitle:@"爆款抢购"];
     [self setUpCategoryView];
 }
 - (void)viewWillDisappear:(BOOL)animated {
