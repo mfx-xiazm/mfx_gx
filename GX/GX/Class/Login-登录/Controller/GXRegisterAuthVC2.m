@@ -34,6 +34,8 @@
 @property (nonatomic, weak) IBOutlet UIImageView *card_front_img;//身份证正面照
 @property (nonatomic, weak) IBOutlet UIImageView *card_back_img;//身份证背面照
 @property (nonatomic, weak) IBOutlet UIImageView *food_license_img;//食品经营许可证
+@property (nonatomic, weak) IBOutlet UIImageView *pay_img;//打款凭证
+
 @property (weak, nonatomic) IBOutlet UILabel *baozheng_amount;//保证金
 @property (weak, nonatomic) IBOutlet UILabel *plat_account;//平台账号
 @property (weak, nonatomic) IBOutlet UIButton *agree_btn;
@@ -50,6 +52,8 @@
 @property (nonatomic, copy) NSString *card_front_url;//身份证正面照
 @property (nonatomic, copy) NSString *card_back_url;//身份证背面照
 @property (nonatomic, copy) NSString *food_license_url;//食品经营许可证
+@property (nonatomic, copy) NSString *pay_img_url;//打款凭证
+
 /* 经营类目 */
 @property(nonatomic,strong) GXRegisterData *registerData;
 /* 所有地区 */
@@ -166,7 +170,7 @@
     parameters[@"pwd"] = self.pwd;//密码
     parameters[@"username"] = self.username;//用户名
     parameters[@"provider_type_id"] = self.selectProviderType.provider_type_id;//供应商本身的类型
-    parameters[@"control_type"] = self.control_type.text;//应商的供应商品类型
+    parameters[@"control_type"] = self.control_type_id;//应商的供应商品类型
     parameters[@"shop_name"] = self.shop_name.text;//主门店名称
     parameters[@"shop_open_time"] = self.shop_open_time.text;//店铺开店时间
     parameters[@"shop_address"] = [NSString stringWithFormat:@"%@%@",self.shop_area.text,self.shop_address.text];//店铺详细地址
@@ -177,6 +181,7 @@
     parameters[@"card_front_img"] = self.card_front_url;//身份证正面照
     parameters[@"card_back_img"] = self.card_back_url;//身份证背面照
     parameters[@"food_license_img"] = (self.food_license_url && self.food_license_url.length)?self.food_license_url:@"";//食品经营许可证
+    parameters[@"pay_img"] = (self.pay_img_url && self.pay_img_url.length)?self.pay_img_url:@"";//打款凭证
     parameters[@"town_id"] = self.town_id;//店铺所属镇
     parameters[@"catalogs"] = self.catalog_id;//经营类目 多个catalog_id间用逗号隔开
     
@@ -448,9 +453,12 @@
             }else if (strongSelf.selectBtn.tag == 5) {
                 [strongSelf.card_back_img sd_setImageWithURL:[NSURL URLWithString:imagePath]];
                 strongSelf.card_back_url = imageUrl;
-            }else{
+            }else if (strongSelf.selectBtn.tag == 6){
                 [strongSelf.food_license_img sd_setImageWithURL:[NSURL URLWithString:imagePath]];
                 strongSelf.food_license_url = imageUrl;
+            }else{
+                [strongSelf.pay_img sd_setImageWithURL:[NSURL URLWithString:imagePath]];
+                strongSelf.pay_img_url = imageUrl;
             }
         }];
     }];
