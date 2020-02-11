@@ -259,6 +259,8 @@
 		909EAA702348706C00575FB8 /* GXCartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 909EAA6E2348706C00575FB8 /* GXCartCell.xib */; };
 		909EAA742348739300575FB8 /* GXCartSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 909EAA722348739300575FB8 /* GXCartSectionHeader.m */; };
 		909EAA752348739300575FB8 /* GXCartSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 909EAA732348739300575FB8 /* GXCartSectionHeader.xib */; };
+		90A7A1BC23ED469A004F1A16 /* GXApplySupplyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A7A1BA23ED469A004F1A16 /* GXApplySupplyVC.m */; };
+		90A7A1BD23ED469A004F1A16 /* GXApplySupplyVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90A7A1BB23ED469A004F1A16 /* GXApplySupplyVC.xib */; };
 		90BB98A3234C1AF000444ACC /* GXOrderManageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BB98A1234C1AF000444ACC /* GXOrderManageVC.m */; };
 		90BB98A4234C1AF000444ACC /* GXOrderManageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90BB98A2234C1AF000444ACC /* GXOrderManageVC.xib */; };
 		90BB98A8234C1B0C00444ACC /* GXOrderManageChildVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BB98A6234C1B0C00444ACC /* GXOrderManageChildVC.m */; };
@@ -874,6 +876,9 @@
 		909EAA712348739300575FB8 /* GXCartSectionHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXCartSectionHeader.h; sourceTree = "<group>"; };
 		909EAA722348739300575FB8 /* GXCartSectionHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXCartSectionHeader.m; sourceTree = "<group>"; };
 		909EAA732348739300575FB8 /* GXCartSectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXCartSectionHeader.xib; sourceTree = "<group>"; };
+		90A7A1B923ED469A004F1A16 /* GXApplySupplyVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXApplySupplyVC.h; sourceTree = "<group>"; };
+		90A7A1BA23ED469A004F1A16 /* GXApplySupplyVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXApplySupplyVC.m; sourceTree = "<group>"; };
+		90A7A1BB23ED469A004F1A16 /* GXApplySupplyVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXApplySupplyVC.xib; sourceTree = "<group>"; };
 		90BB98A0234C1AF000444ACC /* GXOrderManageVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXOrderManageVC.h; sourceTree = "<group>"; };
 		90BB98A1234C1AF000444ACC /* GXOrderManageVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXOrderManageVC.m; sourceTree = "<group>"; };
 		90BB98A2234C1AF000444ACC /* GXOrderManageVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXOrderManageVC.xib; sourceTree = "<group>"; };
@@ -1927,6 +1932,9 @@
 				909EAA4B23483C3200575FB8 /* GXTryApplyVC.h */,
 				909EAA4C23483C3200575FB8 /* GXTryApplyVC.m */,
 				909EAA4D23483C3200575FB8 /* GXTryApplyVC.xib */,
+				90A7A1B923ED469A004F1A16 /* GXApplySupplyVC.h */,
+				90A7A1BA23ED469A004F1A16 /* GXApplySupplyVC.m */,
+				90A7A1BB23ED469A004F1A16 /* GXApplySupplyVC.xib */,
 			);
 			name = "试用装申请";
 			sourceTree = "<group>";
@@ -3488,6 +3496,7 @@
 				90067EDA23443A1300628503 /* GXRegisterAuthCell.xib in Resources */,
 				90FCDF1C2349964F00729A97 /* GXMyCouponVC.xib in Resources */,
 				90BB98D7234DB3C400444ACC /* GXSalerOrderManageChildVC.xib in Resources */,
+				90A7A1BD23ED469A004F1A16 /* GXApplySupplyVC.xib in Resources */,
 				90359A8023C459240033074A /* areaData.txt in Resources */,
 				906974082344D28400D8A8FF /* GXStoreGoodsListHeader.xib in Resources */,
 				902E88D3234742F700EFD0DF /* GXMessageVC.xib in Resources */,
@@ -3587,6 +3596,7 @@
 				900146A12384DDC600275DD9 /* SZUpdateView.m in Sources */,
 				906973FD2344CC1F00D8A8FF /* GXStoreCouponCell.m in Sources */,
 				903D60E5237D56DB000231CC /* GXSaveImageToPHAsset.m in Sources */,
+				90A7A1BC23ED469A004F1A16 /* GXApplySupplyVC.m in Sources */,
 				90C0B3C32340CD7200A8C55B /* MSUserInfo.m in Sources */,
 				90E57F192346F27A00F49834 /* GXSankPriceVC.m in Sources */,
 				9094F584234A15F700106699 /* GXExpressDetailCell.m in Sources */,

@@ -25,6 +25,7 @@
 #import "zhAlertView.h"
 #import <zhPopupController.h>
 #import "UIView+WZLBadge.h"
+#import "GXApplySupplyVC.h"
 
 @interface GXMyVC ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 /* 个人信息 */
@@ -248,10 +249,7 @@
         wvc.url = @"https://ykf-webchat.7moor.com/wapchat.html?accessId=e1c9ecc0-2162-11ea-849d-c5eead77ac50&fromUrl=&urlTitle";
         [self.navigationController pushViewController:wvc animated:YES];
     }else{
-        GXWebContentVC *wvc = [GXWebContentVC new];
-        wvc.navTitle = @"申请供货";
-        wvc.isNeedRequest = YES;
-        wvc.requestType = 2;
+        GXApplySupplyVC *wvc = [GXApplySupplyVC new];
         [self.navigationController pushViewController:wvc animated:YES];
     }
 }

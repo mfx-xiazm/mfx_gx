@@ -28,6 +28,7 @@
 #import "GXUpOrderVC.h"
 #import "GXSaveImageToPHAsset.h"
 #import "GXShareView.h"
+#import "GXApplySupplyVC.h"
 
 static NSString *const GoodsInfoCell = @"GoodsInfoCell";
 @interface GXGoodsDetailVC ()<UITableViewDelegate,UITableViewDataSource,GXGoodsMaterialCellDelegate,GXGoodsCommentCellDelegate>
@@ -197,10 +198,7 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
 }
 -(void)applyClicked
 {
-    GXWebContentVC *wvc = [GXWebContentVC new];
-    wvc.navTitle = @"申请供货";
-    wvc.isNeedRequest = YES;
-    wvc.requestType = 2;
+    GXApplySupplyVC *wvc = [GXApplySupplyVC new];
     [self.navigationController pushViewController:wvc animated:YES];
 }
 - (IBAction)addCollectClicked:(SPButton *)sender {

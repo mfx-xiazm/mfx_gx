@@ -17,6 +17,7 @@
 #import "GXGoodBrand.h"
 #import "GXBrandGoods.h"
 #import "GXSearchResultVC.h"
+#import "GXApplySupplyVC.h"
 
 static NSString *const ShopGoodsCell = @"ShopGoodsCell";
 
@@ -321,10 +322,7 @@ static NSString *const ShopGoodsCell = @"ShopGoodsCell";
     }];
 }
 - (IBAction)applyBtnClicked:(UIButton *)sender {
-    GXWebContentVC *wvc = [GXWebContentVC new];
-    wvc.navTitle = @"申请供货";
-    wvc.isNeedRequest = YES;
-    wvc.requestType = 2;
+    GXApplySupplyVC *wvc = [GXApplySupplyVC new];
     [self.navigationController pushViewController:wvc animated:YES];
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
