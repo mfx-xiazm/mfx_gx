@@ -79,9 +79,11 @@
         if (selectedIndex == 0) {
             strongSelf.role.text = @"终端店";
             strongSelf.role_type = @"1";
+            [strongSelf.nextBtn setTitle:@"下一步" forState:UIControlStateNormal];
         }else {
             strongSelf.role.text = @"供应商";
             strongSelf.role_type = @"2";
+            [strongSelf.nextBtn setTitle:@"注册" forState:UIControlStateNormal];
         }
     }];
 }
@@ -116,38 +118,61 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)nextBtnClicked:(UIButton *)sender {
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    parameters[@"sms_id"] = self.sms_id;//短信验证码id
-    parameters[@"sms_code"] = self.code.text;//短信验证码
-    parameters[@"phone"] = self.phone.text;//手机号
-    
-    hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"admin/checkCode" parameters:parameters success:^(id responseObject) {
-        hx_strongify(weakSelf);
-        [sender stopLoading:@"下一步" image:nil textColor:nil backgroundColor:nil];
-        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if ([strongSelf.role_type isEqualToString:@"1"]) {// 终端店
+    if ([self.role_type isEqualToString:@"1"]) {// 终端店
+        NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+        parameters[@"sms_id"] = self.sms_id;//短信验证码id
+        parameters[@"sms_code"] = self.code.text;//短信验证码
+        parameters[@"phone"] = self.phone.text;//手机号
+        
+        hx_weakify(self);
+        [HXNetworkTool POST:HXRC_M_URL action:@"admin/checkCode" parameters:parameters success:^(id responseObject) {
+            hx_strongify(weakSelf);
+            [sender stopLoading:@"下一步" image:nil textColor:nil backgroundColor:nil];
+            if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+                dispatch_async(dispatch_get_main_queue(), ^{
                     GXRegisterAuthVC *svc = [GXRegisterAuthVC new];
                     svc.phone = strongSelf.phone.text;
                     svc.pwd = strongSelf.pwd.text;
                     svc.username = strongSelf.name.text;
                     [strongSelf.navigationController pushViewController:svc animated:YES];
-                }else{// 供销商
-                    GXRegisterAuthVC2 *avc = [GXRegisterAuthVC2 new];
-                    avc.phone = strongSelf.phone.text;
-                    avc.pwd = strongSelf.pwd.text;
-                    avc.username = strongSelf.name.text;
-                    [strongSelf.navigationController pushViewController:avc animated:YES];
-                }
-            });
-        }else{
-            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
-        }
-    } failure:^(NSError *error) {
-        [sender stopLoading:@"下一步" image:nil textColor:nil backgroundColor:nil];
-        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
-    }];
+                });
+            }else{
+                [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+            }
+        } failure:^(NSError *error) {
+            [sender stopLoading:@"下一步" image:nil textColor:nil backgroundColor:nil];
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+        }];
+    }else{
+        NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+        parameters[@"username"] = self.name.text;
+        parameters[@"phone"] = self.phone.text;//手机号
+        parameters[@"pwd"] = self.pwd.text;
+        parameters[@"sms_id"] = self.sms_id;//短信验证码id
+        parameters[@"sms_code"] = self.code.text;//短信验证码
+        
+        hx_weakify(self);
+        [HXNetworkTool POST:HXRC_M_URL action:@"admin/supplierRegister" parameters:parameters success:^(id responseObject) {
+            hx_strongify(weakSelf);
+            [sender stopLoading:@"注册" image:nil textColor:nil backgroundColor:nil];
+            if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+                [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"注册成功"];
+                [strongSelf.navigationController popToRootViewControllerAnimated:YES];
+            }else{
+                [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+            }
+        } failure:^(NSError *error) {
+            [sender stopLoading:@"注册" image:nil textColor:nil backgroundColor:nil];
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+        }];
+        /*
+        GXRegisterAuthVC2 *avc = [GXRegisterAuthVC2 new];
+        avc.phone = strongSelf.phone.text;
+        avc.pwd = strongSelf.pwd.text;
+        avc.username = strongSelf.name.text;
+        [strongSelf.navigationController pushViewController:avc animated:YES];
+         */
+    }
 }
 
 @end

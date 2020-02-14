@@ -12,6 +12,10 @@
 #import "GXRegisterVC.h"
 #import "UITextField+GYExpand.h"
 #import "GXAboutUsVC.h"
+#import "GXAuthStep1VC.h"
+#import "GXAuthStep2VC.h"
+#import "GXAuthStep3VC.h"
+#import "GXAuthStep4VC.h"
 
 @interface GXLoginVC ()
 @property (weak, nonatomic) IBOutlet UITextField *phone;
@@ -59,22 +63,75 @@
     parameters[@"username"] = self.phone.text;
     parameters[@"password"] = self.pwd.text;
     
+    hx_weakify(self);
     [HXNetworkTool POST:HXRC_M_URL action:@"admin/userLogin" parameters:parameters success:^(id responseObject) {
+        hx_strongify(weakSelf);
         [sender stopLoading:@"登录" image:nil textColor:nil backgroundColor:nil];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
-            MSUserInfo *info = [MSUserInfo yy_modelWithDictionary:responseObject[@"data"]];
-            [MSUserManager sharedInstance].curUserInfo = info;
-            [[MSUserManager sharedInstance] saveUserInfo];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                HXTabBarController *tab = [[HXTabBarController alloc] init];
-                [UIApplication sharedApplication].keyWindow.rootViewController = tab;
+            if ([responseObject[@"data"][@"utype"] integerValue] == 2) {
+                if ([responseObject[@"data"][@"is_register"] integerValue] == 0) {
+                    if ([responseObject[@"data"][@"step"] integerValue] == 1) {
+                        GXAuthStep1VC *svc = [GXAuthStep1VC new];
+                        svc.uid = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"uid"]];
+                        svc.token = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"token"]];
+                        [strongSelf.navigationController pushViewController:svc animated:YES];
+                    }else if ([responseObject[@"data"][@"step"] integerValue] == 2) {
+                        if ([responseObject[@"data"][@"approve_status"] integerValue] == 2) {
+                            
+                        }else{
+                            GXAuthStep1VC *svc = [GXAuthStep1VC new];
+                            svc.uid = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"uid"]];
+                            svc.token = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"token"]];
+                            svc.approve_status = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"approve_status"]];
+                            svc.reject_reason = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"reject_reason"]];
+                            [strongSelf.navigationController pushViewController:svc animated:YES];
+                        }
+                    }else if ([responseObject[@"data"][@"step"] integerValue] == 3) {
+                        GXAuthStep2VC *svc = [GXAuthStep2VC new];
+                        svc.uid = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"uid"]];
+                        svc.token = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"token"]];
+                        [strongSelf.navigationController pushViewController:svc animated:YES];
+                    }else if ([responseObject[@"data"][@"step"] integerValue] == 4) {
+                        GXAuthStep3VC *svc = [GXAuthStep3VC new];
+                        svc.uid = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"uid"]];
+                        svc.token = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"token"]];
+                        [strongSelf.navigationController pushViewController:svc animated:YES];
+                    }else{
+                        GXAuthStep4VC *svc = [GXAuthStep4VC new];
+                        svc.uid = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"uid"]];
+                        svc.token = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"token"]];
+                        [strongSelf.navigationController pushViewController:svc animated:YES];
+                    }
+                }else{
+                    MSUserInfo *info = [MSUserInfo yy_modelWithDictionary:responseObject[@"data"]];
+                    [MSUserManager sharedInstance].curUserInfo = info;
+                    [[MSUserManager sharedInstance] saveUserInfo];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        HXTabBarController *tab = [[HXTabBarController alloc] init];
+                        [UIApplication sharedApplication].keyWindow.rootViewController = tab;
 
-                //推出主界面出来
-                CATransition *ca = [CATransition animation];
-                ca.type = @"movein";
-                ca.duration = 0.5;
-                [[UIApplication sharedApplication].keyWindow.layer addAnimation:ca forKey:nil];
-            });
+                        //推出主界面出来
+                        CATransition *ca = [CATransition animation];
+                        ca.type = @"movein";
+                        ca.duration = 0.5;
+                        [[UIApplication sharedApplication].keyWindow.layer addAnimation:ca forKey:nil];
+                    });
+                }
+            }else{
+                MSUserInfo *info = [MSUserInfo yy_modelWithDictionary:responseObject[@"data"]];
+                [MSUserManager sharedInstance].curUserInfo = info;
+                [[MSUserManager sharedInstance] saveUserInfo];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    HXTabBarController *tab = [[HXTabBarController alloc] init];
+                    [UIApplication sharedApplication].keyWindow.rootViewController = tab;
+
+                    //推出主界面出来
+                    CATransition *ca = [CATransition animation];
+                    ca.type = @"movein";
+                    ca.duration = 0.5;
+                    [[UIApplication sharedApplication].keyWindow.layer addAnimation:ca forKey:nil];
+                });
+            }
         }else{
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
         }
