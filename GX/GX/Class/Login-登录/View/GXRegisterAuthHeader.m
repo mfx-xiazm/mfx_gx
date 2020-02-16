@@ -64,6 +64,7 @@
     if (_addressView == nil) {
         _addressView = [GXChooseAddressView loadXibView];
         _addressView.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 360);
+        _addressView.componentsNum = 4;
         __weak __typeof(self) weakSelf = self;
         // 最后一列的行被点击的回调
         _addressView.lastComponentClickedBlock = ^(NSInteger type, GXSelectRegion * _Nullable region) {

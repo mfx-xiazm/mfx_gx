@@ -85,7 +85,7 @@ static NSString *const RegisterAuthCell = @"RegisterAuthCell";
         _footer.agreementCall = ^{
             hx_strongify(weakSelf);
             GXWebContentVC *wvc = [GXWebContentVC new];
-            wvc.navTitle = @"注册协议";
+            wvc.navTitle = @"母婴店注册协议";
             wvc.isNeedRequest = YES;
             wvc.requestType = 1;
             [strongSelf.navigationController pushViewController:wvc animated:YES];

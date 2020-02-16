@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class GXSelectRegion;
 @interface GXChooseAddressView : UIView
 @property (nonatomic, strong) GXSelectRegion *region;
+@property (nonatomic, assign) NSInteger componentsNum;
 
 @property (nonatomic, copy) void(^lastComponentClickedBlock)(NSInteger type,GXSelectRegion * _Nullable region);
 @end

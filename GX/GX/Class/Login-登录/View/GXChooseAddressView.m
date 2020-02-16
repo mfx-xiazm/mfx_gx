@@ -137,13 +137,26 @@ static NSString *const AddressCell = @"AddressCell";
         [self setupPageMenuWithName:self.region.selectCity.area_alias atComponent:component];
         
     }  else if (component == 2)  {
-        self.region.selectArea = self.region.selectCity.children[row];
-        
-        self.numerOfComponents = 4;
-        [pickerView sp_reloadAllComponents]; // 列数改变一定要刷新所有列才生效
-        
-        [self setupPageMenuWithName:self.region.selectArea.area_alias atComponent:component];
-        
+        if (self.componentsNum > component+1) {
+            self.region.selectArea = self.region.selectCity.children[row];
+            
+            self.numerOfComponents = 4;
+            [pickerView sp_reloadAllComponents]; // 列数改变一定要刷新所有列才生效
+            
+            [self setupPageMenuWithName:self.region.selectArea.area_alias atComponent:component];
+        }else{
+            self.region.selectArea = self.region.selectCity.children[row];
+            
+            [self.pageMenu setTitle:self.region.selectArea.area_alias forItemAtIndex:component];
+            
+            [pickerView sp_reloadComponent:component]; // 刷新当前列
+
+            self.pageMenu.selectedItemIndex = component;
+
+            if (self.lastComponentClickedBlock) {
+                self.lastComponentClickedBlock(1,self.region);
+            }
+        }
     }else{
         self.region.selectTown = self.region.selectArea.children[row];
         

@@ -8,6 +8,7 @@
 
 #import "GXAuthStep2VC.h"
 #import "GXAuthStep3VC.h"
+#import "UITextField+GYExpand.h"
 
 @interface GXAuthStep2VC ()
 @property (nonatomic, weak) IBOutlet UITextField *account_name;//账户姓名
@@ -26,6 +27,12 @@
     [super viewDidLoad];
     [self.navigationItem setTitle:@"签约"];
     hx_weakify(self);
+    [self.account_phone lengthLimit:^{
+        hx_strongify(weakSelf);
+        if (strongSelf.account_phone.text.length > 11) {
+            strongSelf.account_phone.text = [strongSelf.account_phone.text substringToIndex:11];
+        }
+    }];
     [self.submitBtn BindingBtnJudgeBlock:^BOOL{
         hx_strongify(weakSelf);
         if (![strongSelf.account_name hasText]) {
@@ -46,6 +53,10 @@
         }
         if (![strongSelf.account_phone hasText]) {
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请输入银行预留手机号"];
+            return NO;
+        }
+        if (strongSelf.account_phone.text.length != 11) {
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"手机号格式有误"];
             return NO;
         }
         return YES;
