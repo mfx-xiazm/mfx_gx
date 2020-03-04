@@ -127,15 +127,27 @@ static NSString *const AddressCell = @"AddressCell";
         
         [self setupPageMenuWithName:self.region.selectRegion.area_alias atComponent:component];
     } else if (component == 1) {
-        
-        self.region.selectCity = self.region.selectRegion.children[row];
-//        self.selectedDistrict = [self.selectedCity.children firstObject];
-        //[self.pickerView sp_reloadComponent:2];
-        
-        self.numerOfComponents = 3;
-        [pickerView sp_reloadAllComponents]; // 列数改变一定要刷新所有列才生效
-        [self setupPageMenuWithName:self.region.selectCity.area_alias atComponent:component];
-        
+        if (self.componentsNum > component+1) {
+            self.region.selectCity = self.region.selectRegion.children[row];
+            //        self.selectedDistrict = [self.selectedCity.children firstObject];
+            //[self.pickerView sp_reloadComponent:2];
+            
+            self.numerOfComponents = 3;
+            [pickerView sp_reloadAllComponents]; // 列数改变一定要刷新所有列才生效
+            [self setupPageMenuWithName:self.region.selectCity.area_alias atComponent:component];
+        }else{
+            self.region.selectCity = self.region.selectRegion.children[row];
+            
+            [self.pageMenu setTitle:self.region.selectCity.area_alias forItemAtIndex:component];
+            
+            [pickerView sp_reloadComponent:component]; // 刷新当前列
+
+            self.pageMenu.selectedItemIndex = component;
+
+            if (self.lastComponentClickedBlock) {
+                self.lastComponentClickedBlock(1,self.region);
+            }
+        }
     }  else if (component == 2)  {
         if (self.componentsNum > component+1) {
             self.region.selectArea = self.region.selectCity.children[row];

@@ -92,7 +92,7 @@
             self.auth_state.text = @"提交成功，请耐心等待审核";
         }else{
             self.reSubmitBtn.hidden = NO;
-            self.auth_state.text = self.reject_reason;
+            self.auth_state.text = [NSString stringWithFormat:@"被拒原因：%@",self.reject_reason];
         }
     }else{
         self.auth_view.hidden = YES;
@@ -138,22 +138,22 @@
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请填写统一社会信用代码"];
             return NO;
         }
-//        if (![strongSelf.shop_name hasText]) {
-//            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请填写门店名称"];
-//            return NO;
-//        }
+        if (![strongSelf.shop_name hasText]) {
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请填写店铺名称"];
+            return NO;
+        }
 //        if (![strongSelf.shop_open_time hasText]) {
 //            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请选择开店时间"];
 //            return NO;
 //        }
-//        if (![strongSelf.shop_area hasText]) {
-//            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请选择门店地址"];
-//            return NO;
-//        }
-//        if (![strongSelf.shop_address hasText]) {
-//            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请填写门店详细地址"];
-//            return NO;
-//        }
+        if (![strongSelf.shop_area hasText]) {
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请选择所在地区"];
+            return NO;
+        }
+        if (![strongSelf.shop_address hasText]) {
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请填写详细地址"];
+            return NO;
+        }
         if (![strongSelf.month_turnover hasText]) {
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请填写年营业额"];
             return NO;
@@ -231,16 +231,16 @@
     
     parameters[@"company"] = self.company.text;//公司名称
     parameters[@"shop_name"] = [self.shop_name hasText]?self.shop_name.text:@"";//门店名称
-    parameters[@"shop_address"] = ([self.shop_area hasText] && [self.shop_address hasText])?[NSString stringWithFormat:@"%@%@",self.shop_area.text,self.shop_address.text]:@"";//店铺详细地址
+    parameters[@"shop_address"] = [self.shop_address hasText]?self.shop_address.text:@"";//店铺详细地址
     parameters[@"town_id"] = [self.shop_area hasText]?self.town_id:@"";//店铺所属镇
-    parameters[@"shop_open_time"] = [self.shop_open_time hasText]?self.shop_open_time.text:@"";//店铺开店时间
+    parameters[@"shop_open_time"] = @"";//店铺开店时间
     parameters[@"legal_person"] = self.legal_person.text;//法人代表
     parameters[@"card_id"] = self.card_id.text;//身份证号码
     parameters[@"credit_code"] = self.credit_code.text;//统一社会信用代码
     parameters[@"month_turnover"] = self.month_turnover.text;//年度营业额
     parameters[@"business_license_img"] = self.business_license_url;//营业执照图片
-    parameters[@"shop_front_img"] = self.shop_front_url;//门店正面照
-    parameters[@"shop_inside_img"] = self.shop_inside_url;//门店内部照
+    parameters[@"shop_front_img"] = (self.shop_front_url && self.shop_front_url.length)?self.shop_front_url:@"";//门店正面照
+    parameters[@"shop_inside_img"] = (self.shop_inside_url && self.shop_inside_url.length)?self.shop_inside_url:@"";//门店内部照
     parameters[@"food_license_img"] = (self.food_license_url && self.food_license_url.length)?self.food_license_url:@"";//食品经营许可证
     
     parameters[@"postion"] = self.postion.text;//职务
@@ -325,6 +325,8 @@
                 strongSelf.auth_view.hidden = YES;
                 strongSelf.reSubmitBtn.hidden = YES;
                 strongSelf.apply_view.hidden = NO;
+                [strongSelf getCatalogItemRequest];
+                [strongSelf getAllAreaRequest];
             });
         }else{
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];

@@ -84,7 +84,7 @@
 }
 -(void)handleActivityDetail
 {
-    [self.m_cover_img sd_setImageWithURL:[NSURL URLWithString:self.activity.m_cover_img]];
+    [self.m_cover_img sd_setImageWithURL:[NSURL URLWithString:self.activity.inner_img]];
     [self.m_title setTextWithLineSpace:2. withString:self.activity.material_title withFont:[UIFont systemFontOfSize:13]];
     
     [self.cover_img sd_setImageWithURL:[NSURL URLWithString:self.activity.cover_img]];

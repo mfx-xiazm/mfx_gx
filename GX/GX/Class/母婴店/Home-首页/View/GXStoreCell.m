@@ -58,10 +58,14 @@ static NSString *const StoreCouponCell = @"StoreCouponCell";
         self.collectionViewHeight.constant = 0.f;
     }
     if (_store.goods.count) {
-        for (int i=0;i<_store.goods.count;i++) {
-            GXStoreGoods *goods = _store.goods[i];
+        for (int i=0;i<self.shop_goods_imgs.count;i++) {
             UIImageView *img = self.shop_goods_imgs[i];
-            [img sd_setImageWithURL:[NSURL URLWithString:goods.cover_img]];
+            if (_store.goods.count >= i+1) {
+                GXStoreGoods *goods = _store.goods[i];
+                [img sd_setImageWithURL:[NSURL URLWithString:goods.cover_img]];
+            }else{
+                [img setImage:nil];
+            }
         }
     }else{
         for (int i=0;i<self.shop_goods_imgs.count;i++) {
