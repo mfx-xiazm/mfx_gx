@@ -35,10 +35,10 @@
     }else{
         self.top_view.hidden = YES;
     }
-    
-    self.desc.text = _log.finance_log_desc;
-    
+        
     if (_log.finance_log_type <= 5) {
+        self.desc.text = _log.orderInfo.goods_name;
+
         if ([[MSUserManager sharedInstance].curUserInfo.utype isEqualToString:@"2"]) {
             self.type.text = @"订单收入";
         }else{
@@ -48,11 +48,15 @@
         self.left_amount.text = [NSString stringWithFormat:@"￥%@",_log.orderInfo.pay_amount];
         self.amount.text = [NSString stringWithFormat:@"+%@",_log.amount];
     }else if (_log.finance_log_type == 6) {
+        self.desc.text = @"提现驳回";
+        
         self.type.text = @"提现驳回";
         self.left_amount.textColor = UIColorFromRGB(0xCCCCCC);
         self.left_amount.text = _log.create_time;
         self.amount.text = [NSString stringWithFormat:@"%@",_log.amount];
     }else{
+        self.desc.text = @"余额提现";
+        
         self.type.text = @"余额提现";
         self.left_amount.textColor = UIColorFromRGB(0xCCCCCC);
         self.left_amount.text = _log.create_time;

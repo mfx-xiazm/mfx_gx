@@ -65,7 +65,7 @@ DEPENDENCIES:
   - ZXEmptyView
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
     - AFNetworking
     - IQKeyboardManager
     - JJFontFit
@@ -86,7 +86,6 @@ SPEC REPOS:
     - zhPopupController
     - ZLCollectionViewFlowLayout
     - ZLPhotoBrowser
-  trunk:
     - ZXEmptyView
 
 SPEC CHECKSUMS:
@@ -114,4 +113,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 27be702328a3da52c644614c80a98b8fa0e951e0
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.1
