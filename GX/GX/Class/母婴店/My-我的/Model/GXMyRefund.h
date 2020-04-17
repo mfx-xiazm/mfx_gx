@@ -40,6 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *logistics_com_id;
 @property(nonatomic,copy) NSString *logistics_no;
 @property(nonatomic,copy) NSString *logistics_com_name;
+@property(nonatomic,copy) NSString *driver_phone;
 @property(nonatomic,copy) NSString *receiver;
 @property(nonatomic,copy) NSString *receiver_phone;
 @property(nonatomic,copy) NSString *area_name;

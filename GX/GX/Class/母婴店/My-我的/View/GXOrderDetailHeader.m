@@ -54,18 +54,18 @@
     }else if ([_orderDetail.status isEqualToString:@"待收货"]) {
         self.order_desc.text = @"您的订单已发货，请耐心等待";
         self.order_tip.hidden = YES;
-        self.logistics_name.text = [NSString stringWithFormat:@"物流公司：%@",_orderDetail.logistics_com_name];
-        self.logistics_no.text = [NSString stringWithFormat:@"物流单号：%@",_orderDetail.logistics_no];
+        self.logistics_name.text = [NSString stringWithFormat:@"快递公司：%@",_orderDetail.logistics_com_name];
+        self.logistics_no.text = [_orderDetail.logistics_com_id isEqualToString:@"0"]?[NSString stringWithFormat:@"司机电话：%@",_orderDetail.driver_phone]:[NSString stringWithFormat:@"快递单号：%@",_orderDetail.logistics_no];
     }else if ([_orderDetail.status isEqualToString:@"待评价"]) {
         self.order_desc.text = @"您的评价对其他买家有帮助哦";
         self.order_tip.hidden = YES;
-        self.logistics_name.text = [NSString stringWithFormat:@"物流公司：%@",_orderDetail.logistics_com_name];
-        self.logistics_no.text = [NSString stringWithFormat:@"物流单号：%@",_orderDetail.logistics_no];
+        self.logistics_name.text = [NSString stringWithFormat:@"快递公司：%@",_orderDetail.logistics_com_name];
+        self.logistics_no.text = [_orderDetail.logistics_com_id isEqualToString:@"0"]?[NSString stringWithFormat:@"司机电话：%@",_orderDetail.driver_phone]:[NSString stringWithFormat:@"快递单号：%@",_orderDetail.logistics_no];
     }else{
         self.order_desc.text = @"您的订单已完成，棒棒哒";
         self.order_tip.hidden = YES;
-        self.logistics_name.text = [NSString stringWithFormat:@"物流公司：%@",_orderDetail.logistics_com_name];
-        self.logistics_no.text = [NSString stringWithFormat:@"物流单号：%@",_orderDetail.logistics_no];
+        self.logistics_name.text = [NSString stringWithFormat:@"快递公司：%@",_orderDetail.logistics_com_name];
+        self.logistics_no.text = [_orderDetail.logistics_com_id isEqualToString:@"0"]?[NSString stringWithFormat:@"司机电话：%@",_orderDetail.driver_phone]:[NSString stringWithFormat:@"快递单号：%@",_orderDetail.logistics_no];
     }
     
     self.receiver.text = [NSString stringWithFormat:@"%@  %@",_orderDetail.receiver,_orderDetail.receiver_phone];
@@ -100,10 +100,10 @@
         self.order_desc.hidden = YES;
     }
     
-    if (_refundDetail.logistics_no && _refundDetail.logistics_no.length) {
+    if (![_refundDetail.status isEqualToString:@"已取消"] && ![_refundDetail.status isEqualToString:@"待付款"] && ![_refundDetail.status isEqualToString:@"待发货"]) {
         self.order_tip.hidden = YES;
-        self.logistics_name.text = [NSString stringWithFormat:@"物流公司：%@",_refundDetail.logistics_com_name];
-        self.logistics_no.text = [NSString stringWithFormat:@"物流单号：%@",_refundDetail.logistics_no];
+        self.logistics_name.text = [NSString stringWithFormat:@"快递公司：%@",_refundDetail.logistics_com_name];
+        self.logistics_no.text = [_orderDetail.logistics_com_id isEqualToString:@"0"]?[NSString stringWithFormat:@"司机电话：%@",_orderDetail.driver_phone]:[NSString stringWithFormat:@"快递单号：%@",_orderDetail.logistics_no];
     }else{
         self.order_tip.hidden = NO;
         self.order_tip.text = [NSString stringWithFormat:@"  %@  ",self.order_status.text];
@@ -114,17 +114,26 @@
 }
 - (IBAction)lookLogisClicked:(UIButton *)sender {
     if (self.refundDetail) {
-        if (_refundDetail.logistics_no && _refundDetail.logistics_no.length) {
+        if ([_refundDetail.status isEqualToString:@"已取消"] || [_refundDetail.status isEqualToString:@"待付款"] || [_refundDetail.status isEqualToString:@"待发货"]) {
+            return;
+        }
+        if (![_refundDetail.logistics_com_id isEqualToString:@"0"]) {
             if (self.lookLogisCall) {
                 self.lookLogisCall();
             }
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请联系快递公司"];
         }
     }else{
         if ([_orderDetail.status isEqualToString:@"已取消"] || [_orderDetail.status isEqualToString:@"待付款"] || [_orderDetail.status isEqualToString:@"待发货"]) {
             return;
         }
-        if (self.lookLogisCall) {
-            self.lookLogisCall();
+        if (![_orderDetail.logistics_com_id isEqualToString:@"0"]) {
+            if (self.lookLogisCall) {
+                self.lookLogisCall();
+            }
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请联系快递公司"];
         }
     }
 }

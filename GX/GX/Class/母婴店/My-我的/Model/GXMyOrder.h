@@ -41,6 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *provider_uid;
 @property(nonatomic,copy) NSString *username;
 @property(nonatomic,copy) NSString *saleman_code;
+@property(nonatomic,copy) NSString *driver_phone;
 @property(nonatomic,copy) NSString *url;
 @property(nonatomic,copy) NSString *logistics_title;
 /* 是详情数据 */

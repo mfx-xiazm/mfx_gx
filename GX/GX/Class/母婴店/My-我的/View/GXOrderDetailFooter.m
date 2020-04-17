@@ -16,6 +16,7 @@
 @property(nonatomic,weak) IBOutlet UILabel *order_price_amount;
 @property(nonatomic,weak) IBOutlet UILabel *pay_amount;
 @property (weak, nonatomic) IBOutlet UILabel *order_desc;
+@property (weak, nonatomic) IBOutlet UILabel *goods_num;
 
 @end
 @implementation GXOrderDetailFooter
@@ -33,6 +34,7 @@
     self.order_coupon_amount.text = [NSString stringWithFormat:@"-￥%@",_orderDetail.total_reduce_amount];
     self.order_price_amount.text = [NSString stringWithFormat:@"￥%@",_orderDetail.total_pay_amount];
     self.pay_amount.text = [NSString stringWithFormat:@"￥%@",_orderDetail.pay_amount];
+    self.goods_num.text = [NSString stringWithFormat:@"共%zd件商品",_orderDetail.goods.count];
     
     if (_orderDetail.username && _orderDetail.username.length) {
         [self.order_desc setTextWithLineSpace:5.f withString:[NSString stringWithFormat:@"订单编号：%@\n下单时间：%@\n发货商家：%@\n推广店员：%@（%@）",_orderDetail.order_no,_orderDetail.create_time,_orderDetail.provider_no,_orderDetail.username,_orderDetail.saleman_code] withFont:[UIFont systemFontOfSize:13]];

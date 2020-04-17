@@ -25,8 +25,39 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YM2-KX-gCR">
                             <rect key="frame" x="0.0" y="50" width="408" height="80"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fQe-yr-nKT">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PnM-gR-PUE">
                                     <rect key="frame" x="0.0" y="0.0" width="204" height="80"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="微信" translatesAutoresizingMaskIntoConstraints="NO" id="ez3-s3-JNh">
+                                            <rect key="frame" x="83" y="10" width="38" height="38"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="微信好友" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GW8-Iz-Qaa">
+                                            <rect key="frame" x="77" y="58" width="50" height="14.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GTQ-rk-LP7">
+                                            <rect key="frame" x="0.0" y="0.0" width="204" height="80"/>
+                                            <connections>
+                                                <action selector="shareClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="jzM-oy-hSs"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="GTQ-rk-LP7" firstAttribute="top" secondItem="PnM-gR-PUE" secondAttribute="top" id="0xL-eL-kxQ"/>
+                                        <constraint firstItem="GW8-Iz-Qaa" firstAttribute="top" secondItem="ez3-s3-JNh" secondAttribute="bottom" constant="10" id="Gcb-Gm-KS8"/>
+                                        <constraint firstItem="GW8-Iz-Qaa" firstAttribute="centerX" secondItem="PnM-gR-PUE" secondAttribute="centerX" id="JGp-LK-nhA"/>
+                                        <constraint firstItem="ez3-s3-JNh" firstAttribute="centerX" secondItem="PnM-gR-PUE" secondAttribute="centerX" id="aDF-KU-OQx"/>
+                                        <constraint firstItem="ez3-s3-JNh" firstAttribute="top" secondItem="PnM-gR-PUE" secondAttribute="top" constant="10" id="gOv-em-9hV"/>
+                                        <constraint firstItem="GTQ-rk-LP7" firstAttribute="leading" secondItem="PnM-gR-PUE" secondAttribute="leading" id="kv9-14-IDq"/>
+                                        <constraint firstAttribute="bottom" secondItem="GTQ-rk-LP7" secondAttribute="bottom" id="ote-9l-Bww"/>
+                                        <constraint firstAttribute="trailing" secondItem="GTQ-rk-LP7" secondAttribute="trailing" id="zKb-HX-hZU"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fQe-yr-nKT">
+                                    <rect key="frame" x="204" y="0.0" width="204" height="80"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="朋友圈" translatesAutoresizingMaskIntoConstraints="NO" id="zoO-s7-jL4">
                                             <rect key="frame" x="83" y="10" width="38" height="38"/>
@@ -54,37 +85,6 @@
                                         <constraint firstItem="zoO-s7-jL4" firstAttribute="top" secondItem="fQe-yr-nKT" secondAttribute="top" constant="10" id="hey-MJ-XSp"/>
                                         <constraint firstItem="O8K-Dp-Ibj" firstAttribute="top" secondItem="fQe-yr-nKT" secondAttribute="top" id="j4b-R3-7Kl"/>
                                         <constraint firstAttribute="trailing" secondItem="O8K-Dp-Ibj" secondAttribute="trailing" id="nGn-Hr-bV1"/>
-                                    </constraints>
-                                </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PnM-gR-PUE">
-                                    <rect key="frame" x="204" y="0.0" width="204" height="80"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="微信" translatesAutoresizingMaskIntoConstraints="NO" id="ez3-s3-JNh">
-                                            <rect key="frame" x="83" y="10" width="38" height="38"/>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="微信好友" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GW8-Iz-Qaa">
-                                            <rect key="frame" x="77.5" y="58" width="49.5" height="14.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <color key="textColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GTQ-rk-LP7">
-                                            <rect key="frame" x="0.0" y="0.0" width="204" height="80"/>
-                                            <connections>
-                                                <action selector="shareClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="jzM-oy-hSs"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <constraints>
-                                        <constraint firstItem="GTQ-rk-LP7" firstAttribute="top" secondItem="PnM-gR-PUE" secondAttribute="top" id="0xL-eL-kxQ"/>
-                                        <constraint firstItem="GW8-Iz-Qaa" firstAttribute="top" secondItem="ez3-s3-JNh" secondAttribute="bottom" constant="10" id="Gcb-Gm-KS8"/>
-                                        <constraint firstItem="GW8-Iz-Qaa" firstAttribute="centerX" secondItem="PnM-gR-PUE" secondAttribute="centerX" id="JGp-LK-nhA"/>
-                                        <constraint firstItem="ez3-s3-JNh" firstAttribute="centerX" secondItem="PnM-gR-PUE" secondAttribute="centerX" id="aDF-KU-OQx"/>
-                                        <constraint firstItem="ez3-s3-JNh" firstAttribute="top" secondItem="PnM-gR-PUE" secondAttribute="top" constant="10" id="gOv-em-9hV"/>
-                                        <constraint firstItem="GTQ-rk-LP7" firstAttribute="leading" secondItem="PnM-gR-PUE" secondAttribute="leading" id="kv9-14-IDq"/>
-                                        <constraint firstAttribute="bottom" secondItem="GTQ-rk-LP7" secondAttribute="bottom" id="ote-9l-Bww"/>
-                                        <constraint firstAttribute="trailing" secondItem="GTQ-rk-LP7" secondAttribute="trailing" id="zKb-HX-hZU"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jN4-Hu-tiU">
@@ -122,18 +122,18 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="fQe-yr-nKT" secondAttribute="bottom" id="0RI-7h-Hyw"/>
+                                <constraint firstItem="PnM-gR-PUE" firstAttribute="leading" secondItem="YM2-KX-gCR" secondAttribute="leading" id="3Hx-5L-jjd"/>
+                                <constraint firstItem="fQe-yr-nKT" firstAttribute="leading" secondItem="PnM-gR-PUE" secondAttribute="trailing" id="84P-1K-qPu"/>
                                 <constraint firstItem="fQe-yr-nKT" firstAttribute="top" secondItem="YM2-KX-gCR" secondAttribute="top" id="8sT-tz-gUt"/>
                                 <constraint firstAttribute="bottom" secondItem="jN4-Hu-tiU" secondAttribute="bottom" id="Dkv-86-Dka"/>
                                 <constraint firstAttribute="bottom" secondItem="PnM-gR-PUE" secondAttribute="bottom" id="GpJ-2b-gw6"/>
                                 <constraint firstItem="PnM-gR-PUE" firstAttribute="top" secondItem="YM2-KX-gCR" secondAttribute="top" id="NA3-0J-TBu"/>
-                                <constraint firstItem="fQe-yr-nKT" firstAttribute="leading" secondItem="YM2-KX-gCR" secondAttribute="leading" id="YNP-be-9XR"/>
+                                <constraint firstAttribute="trailing" secondItem="fQe-yr-nKT" secondAttribute="trailing" id="WXa-iA-sXN"/>
                                 <constraint firstItem="jN4-Hu-tiU" firstAttribute="top" secondItem="YM2-KX-gCR" secondAttribute="top" id="a8s-Q9-NvD"/>
                                 <constraint firstAttribute="trailing" secondItem="jN4-Hu-tiU" secondAttribute="trailing" id="c49-Hd-Cy9"/>
                                 <constraint firstAttribute="height" constant="80" id="gDD-qU-FkR"/>
-                                <constraint firstAttribute="trailing" secondItem="PnM-gR-PUE" secondAttribute="trailing" id="h45-yM-CRs"/>
                                 <constraint firstItem="PnM-gR-PUE" firstAttribute="width" secondItem="fQe-yr-nKT" secondAttribute="width" id="h7f-xq-27A"/>
                                 <constraint firstItem="jN4-Hu-tiU" firstAttribute="leading" secondItem="YM2-KX-gCR" secondAttribute="leading" id="ylY-VL-0mi"/>
-                                <constraint firstItem="PnM-gR-PUE" firstAttribute="leading" secondItem="fQe-yr-nKT" secondAttribute="trailing" id="zGO-J5-0NQ"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -159,7 +159,7 @@
             <connections>
                 <outlet property="onlyWxView" destination="jN4-Hu-tiU" id="7oj-2u-Xvf"/>
             </connections>
-            <point key="canvasLocation" x="133.33333333333334" y="288.61607142857139"/>
+            <point key="canvasLocation" x="133.33333333333334" y="287.94642857142856"/>
         </view>
     </objects>
     <resources>

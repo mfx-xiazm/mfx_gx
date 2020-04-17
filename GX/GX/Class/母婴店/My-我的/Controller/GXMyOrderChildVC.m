@@ -400,11 +400,15 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
                     [strongSelf cancelOrderRequest];
                 }else if ([order.status isEqualToString:@"待收货"]) {
                     //HXLog(@"查看物流");
-                    GXWebContentVC *cvc = [GXWebContentVC new];
-                    cvc.navTitle = @"物流详情";
-                    cvc.isNeedRequest = NO;
-                    cvc.url = order.url;
-                    [strongSelf.navigationController pushViewController:cvc animated:YES];
+                    if (![order.logistics_com_id isEqualToString:@"0"]) {
+                        GXWebContentVC *cvc = [GXWebContentVC new];
+                        cvc.navTitle = @"物流详情";
+                        cvc.isNeedRequest = NO;
+                        cvc.url = order.url;
+                        [strongSelf.navigationController pushViewController:cvc animated:YES];
+                    }else{
+                        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请联系快递公司"];
+                    }
                 }
             }else{
                 if ([order.status isEqualToString:@"待付款"]) {
