@@ -201,12 +201,12 @@ static NSString *const MarketTrendCell = @"MarketTrendCell";
     cell.trendBtnCall = ^(NSInteger index) {
         hx_strongify(weakSelf);
         if (index == 1) {
-            [strongSelf addOrderCartRequest:goods.goods_id specs_attrs:[NSString stringWithFormat:@"%@,%@",goods.specs_attrs,goods.logistics_com_name] logistics_com_id:goods.logistics_com_id sku_id:goods.sku_id];
+            [strongSelf addOrderCartRequest:goods.goods_id specs_attrs:(goods.logistics_com_name && goods.logistics_com_name.length)?[NSString stringWithFormat:@"%@,%@",goods.specs_attrs,goods.logistics_com_name]:goods.specs_attrs logistics_com_id:goods.logistics_com_id sku_id:goods.sku_id];
         }else{
             GXUpOrderVC *ovc = [GXUpOrderVC new];
             ovc.goods_id = goods.goods_id;
             ovc.goods_num = @"1";
-            ovc.specs_attrs = [NSString stringWithFormat:@"%@,%@",goods.specs_attrs,goods.logistics_com_name];
+            ovc.specs_attrs = (goods.logistics_com_name && goods.logistics_com_name.length)?[NSString stringWithFormat:@"%@,%@",goods.specs_attrs,goods.logistics_com_name]:goods.specs_attrs;
             ovc.sku_id = goods.sku_id;
             ovc.logistics_com_id = goods.logistics_com_id;
             [strongSelf.navigationController pushViewController:ovc animated:YES];

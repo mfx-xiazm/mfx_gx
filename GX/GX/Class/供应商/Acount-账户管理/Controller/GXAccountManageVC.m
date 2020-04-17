@@ -12,6 +12,7 @@
 #import "GXFinanceLog.h"
 #import "zhAlertView.h"
 #import <zhPopupController.h>
+#import "GXOrderDetailVC.h"
 
 static NSString *const AccountManageCell = @"AccountManageCell";
 @interface GXAccountManageVC ()<UITableViewDelegate,UITableViewDataSource>
@@ -204,6 +205,12 @@ static NSString *const AccountManageCell = @"AccountManageCell";
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    GXFinanceLog *log = self.logs[indexPath.row];
+
+    if (log.finance_log_type <= 5) {
+        GXOrderDetailVC *dvc = [GXOrderDetailVC new];
+        dvc.oid = log.orderInfo.oid;
+        [self.navigationController pushViewController:dvc animated:YES];
+    }
 }
 @end

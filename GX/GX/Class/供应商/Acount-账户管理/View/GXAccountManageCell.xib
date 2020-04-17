@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -54,8 +54,8 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JhW-Xi-znG">
                         <rect key="frame" x="0.0" y="45" width="346" height="60"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="某某磨订单" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Sw-F0-6Vc">
-                                <rect key="frame" x="10" y="10" width="66.5" height="16"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="某某磨订单" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Sw-F0-6Vc">
+                                <rect key="frame" x="10" y="10" width="265" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -87,6 +87,7 @@
                             <constraint firstItem="2Sw-F0-6Vc" firstAttribute="top" secondItem="JhW-Xi-znG" secondAttribute="top" constant="10" id="aP8-h5-Ed0"/>
                             <constraint firstAttribute="bottom" secondItem="T5W-ml-qX7" secondAttribute="bottom" constant="12" id="cMd-hV-P6k"/>
                             <constraint firstAttribute="height" constant="60" id="dgL-oN-teJ"/>
+                            <constraint firstItem="Vyj-yI-Rp9" firstAttribute="leading" secondItem="2Sw-F0-6Vc" secondAttribute="trailing" constant="10" id="gP3-l4-uz3"/>
                             <constraint firstAttribute="trailing" secondItem="Vyj-yI-Rp9" secondAttribute="trailing" constant="10" id="h5i-L8-Lg7"/>
                             <constraint firstItem="Vyj-yI-Rp9" firstAttribute="top" secondItem="JhW-Xi-znG" secondAttribute="top" constant="10" id="k0m-g6-ePS"/>
                             <constraint firstItem="gYh-vm-FSL" firstAttribute="leading" secondItem="JhW-Xi-znG" secondAttribute="leading" constant="10" id="rcU-Id-OnN"/>

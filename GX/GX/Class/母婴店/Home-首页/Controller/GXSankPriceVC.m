@@ -329,12 +329,12 @@ static NSString *const SankPriceCell = @"SankPriceCell";
         footer.priceSankHandleCall = ^(NSInteger index) {
             hx_strongify(weakSelf);
             if (index == 1) {
-                [strongSelf addOrderCartRequest:sank.goods_id cart_num:sank.buy_num specs_attrs:[NSString stringWithFormat:@"%@,%@",sank.specs_attrs,sank.logistics_com_name] logistics_com_id:sank.logistics_com_id sku_id:sank.sku_id];
+                [strongSelf addOrderCartRequest:sank.goods_id cart_num:sank.buy_num specs_attrs:(sank.logistics_com_name && sank.logistics_com_name.length)?[NSString stringWithFormat:@"%@,%@",sank.specs_attrs,sank.logistics_com_name]:sank.specs_attrs logistics_com_id:sank.logistics_com_id sku_id:sank.sku_id];
             }else{
                 GXUpOrderVC *ovc = [GXUpOrderVC new];
                 ovc.goods_id = sank.goods_id;
                 ovc.goods_num = [NSString stringWithFormat:@"%ld",(long)sank.buy_num];
-                ovc.specs_attrs = [NSString stringWithFormat:@"%@,%@",sank.specs_attrs,sank.logistics_com_name];
+                ovc.specs_attrs = (sank.logistics_com_name && sank.logistics_com_name.length)?[NSString stringWithFormat:@"%@,%@",sank.specs_attrs,sank.logistics_com_name]:sank.specs_attrs;
                 ovc.sku_id = sank.sku_id;
                 ovc.logistics_com_id = sank.logistics_com_id;
                 [strongSelf.navigationController pushViewController:ovc animated:YES];

@@ -90,7 +90,11 @@
     [self.cover_img sd_setImageWithURL:[NSURL URLWithString:self.activity.cover_img]];
     self.good_name.text = self.activity.goods_name;
     if ([self.activity.control_type isEqualToString:@"1"]) {
-        self.price.text = [NSString stringWithFormat:@"￥%@-￥%@",self.activity.min_price,self.activity.max_price];
+        if ([self.activity.min_price floatValue] == [self.activity.max_price floatValue]) {
+            self.price.text = [NSString stringWithFormat:@"￥%@",self.activity.min_price];
+        }else{
+            self.price.text = [NSString stringWithFormat:@"￥%@-￥%@",self.activity.min_price,self.activity.max_price];
+        }
     }else{
         self.price.text = [NSString stringWithFormat:@"￥%@",self.activity.min_price];
     }

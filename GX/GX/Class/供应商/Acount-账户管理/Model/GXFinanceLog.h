@@ -29,6 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *pay_amount;
 @property(nonatomic,copy) NSString *goods_name;
 @property(nonatomic,copy) NSString *order_no;
+@property(nonatomic,copy) NSString *oid;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -109,9 +109,14 @@ static NSString *const ChooseClassFooter = @"ChooseClassFooter";
             if ([responseObject[@"data"] isKindOfClass:[NSDictionary class]]) {
                 strongSelf.goodsDetail.sku = [GXGoodsDetailSku yy_modelWithDictionary:responseObject[@"data"]];
                 // 如果未选择就默认第一个
-                GXGoodsLogisticst *logisticst = strongSelf.goodsDetail.sku.logistic.firstObject;
-                logisticst.isSelected = YES;
-                strongSelf.goodsDetail.selectLogisticst = logisticst;
+                if (strongSelf.goodsDetail.sku.logistic.count) {
+                    GXGoodsLogisticst *logisticst = strongSelf.goodsDetail.sku.logistic.firstObject;
+                    logisticst.isSelected = YES;
+                    strongSelf.goodsDetail.selectLogisticst = logisticst;
+                }else{
+                    // 清除选择的快递
+                    strongSelf.goodsDetail.selectLogisticst = nil;
+                }
             }else{
                 GXGoodsDetailSku *sku = [[GXGoodsDetailSku alloc] init];
                 sku.sku_id = @"0";
@@ -232,10 +237,10 @@ static NSString *const ChooseClassFooter = @"ChooseClassFooter";
                 GXGoodsDetailSpec *spec = self.goodsDetail.spec[indexPath.section];
                 header.titleLabel.text = spec.specs_name;
             }else{
-                header.titleLabel.text = @"快递";
+                header.titleLabel.text = self.goodsDetail.sku.logistic.count?@"快递":@"";
             }
         }else{
-            header.titleLabel.text = @"快递";
+            header.titleLabel.text = self.goodsDetail.sku.logistic.count?@"快递":@"";;
         }
         return header;
     }else{

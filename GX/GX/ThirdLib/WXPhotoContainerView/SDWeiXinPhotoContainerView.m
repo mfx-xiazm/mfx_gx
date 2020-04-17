@@ -115,7 +115,7 @@
     /**
      导航条颜色
      */
-    actionSheet.configuration.navBarColor = HXControlBg;
+    actionSheet.configuration.navBarColor = [UIColor clearColor];
     /**
      底部工具栏按钮 可交互 状态标题颜色
      */

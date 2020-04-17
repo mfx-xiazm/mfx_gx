@@ -29,6 +29,8 @@
 #import "GXSaveImageToPHAsset.h"
 #import "GXShareView.h"
 #import "GXApplySupplyVC.h"
+#import <ZLPhotoActionSheet.h>
+#import <UMShare/UMShare.h>
 
 static NSString *const GoodsInfoCell = @"GoodsInfoCell";
 @interface GXGoodsDetailVC ()<UITableViewDelegate,UITableViewDataSource,GXGoodsMaterialCellDelegate,GXGoodsCommentCellDelegate>
@@ -88,6 +90,11 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
     if (_header == nil) {
         _header = [GXGoodsDetailHeader loadXibView];
         _header.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, HX_SCREEN_WIDTH*2/3.0 + 50.f + 150);
+        hx_weakify(self);
+        _header.bannerClickedCall = ^(NSInteger index) {
+            hx_strongify(weakSelf);
+            [strongSelf showBannerPic:index];
+        };
     }
     return _header;
 }
@@ -237,9 +244,13 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
                     }
                 }
                 if (specs_attrs.length) {
-                    [specs_attrs appendFormat:@",%@",strongSelf.goodsDetail.selectLogisticst.logistics_com_name];
+                    if (strongSelf.goodsDetail.selectLogisticst.logistics_com_name && strongSelf.goodsDetail.selectLogisticst.logistics_com_name.length) {
+                        [specs_attrs appendFormat:@",%@",strongSelf.goodsDetail.selectLogisticst.logistics_com_name];
+                    }
                 }else{
-                    [specs_attrs appendFormat:@"%@",strongSelf.goodsDetail.selectLogisticst.logistics_com_name];
+                    if (strongSelf.goodsDetail.selectLogisticst.logistics_com_name && strongSelf.goodsDetail.selectLogisticst.logistics_com_name.length) {
+                        [specs_attrs appendFormat:@"%@",strongSelf.goodsDetail.selectLogisticst.logistics_com_name];
+                    }
                 }
                 ovc.specs_attrs = specs_attrs;//商品规格
                 ovc.sku_id = strongSelf.goodsDetail.sku.sku_id;
@@ -260,6 +271,32 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
         bvc.brand_id = self.goodsDetail.brand_id;
         [self.navigationController pushViewController:bvc animated:YES];
     }
+}
+-(void)showBannerPic:(NSInteger)index
+{
+    NSMutableArray *items = [NSMutableArray array];
+    for (int i = 0; i < self.goodsDetail.good_adv.count; i++) {
+        GXGoodsDetailAdv *adv = self.goodsDetail.good_adv[i];
+
+        NSMutableDictionary *temp = [NSMutableDictionary dictionary];
+        temp[ZLPreviewPhotoObj] = [adv.adv_img hasPrefix:@"http"]?[NSURL URLWithString:adv.adv_img]:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HXRC_URL_HEADER,adv.adv_img]];
+        temp[ZLPreviewPhotoTyp] = @(ZLPreviewPhotoTypeURLImage);
+        [items addObject:temp];
+    }
+
+    ZLPhotoActionSheet *actionSheet = [[ZLPhotoActionSheet alloc] init];
+    /**
+     导航条颜色
+     */
+    actionSheet.configuration.navBarColor = [UIColor clearColor];
+    /**
+     底部工具栏按钮 可交互 状态标题颜色
+     */
+    actionSheet.configuration.statusBarStyle = UIStatusBarStyleLightContent;
+    actionSheet.sender = self;
+    [actionSheet previewPhotos:items index:index hideToolBar:YES complete:^(NSArray * _Nonnull photos) {
+
+    }];
 }
 #pragma mark -- 接口请求
 -(void)getGoodDetailRequest
@@ -434,9 +471,13 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
         }
     }
     if (specs_attrs.length) {
-        [specs_attrs appendFormat:@",%@",self.goodsDetail.selectLogisticst.logistics_com_name];
+        if (self.goodsDetail.selectLogisticst.logistics_com_name && self.goodsDetail.selectLogisticst.logistics_com_name.length) {
+            [specs_attrs appendFormat:@",%@",self.goodsDetail.selectLogisticst.logistics_com_name];
+        }
     }else{
-        [specs_attrs appendFormat:@"%@",self.goodsDetail.selectLogisticst.logistics_com_name];
+        if (self.goodsDetail.selectLogisticst.logistics_com_name && self.goodsDetail.selectLogisticst.logistics_com_name.length) {
+            [specs_attrs appendFormat:@"%@",self.goodsDetail.selectLogisticst.logistics_com_name];
+        }
     }
     parameters[@"specs_attrs"] = specs_attrs;//商品规格
     
@@ -650,7 +691,11 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
                     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
                     pasteboard.string = Cell.materialLayout.material.dsp;
                     
-                    [strongSelf showShareView];
+                    if (Cell.materialLayout.material.photos.count > 1) {
+                        [strongSelf showShareView:YES];
+                    }else{
+                        [strongSelf showShareView:NO];
+                    }
                 });
                 
             }];
@@ -659,26 +704,59 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
         UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
         pasteboard.string = Cell.materialLayout.material.dsp;
         
-        [self showShareView];
+        [self showShareView:NO];
     }
 }
--(void)showShareView
+-(void)showShareView:(BOOL)isMorePicture
 {
     GXShareView *share  = [GXShareView loadXibView];
     share.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 180.f);
+    if (isMorePicture) {
+        share.onlyWxView.hidden = NO;
+    }else{
+        share.onlyWxView.hidden = YES;
+    }
     hx_weakify(self);
     share.shareTypeCall = ^(NSInteger index) {
         hx_strongify(weakSelf);
         [strongSelf.zh_popupController dismissWithDuration:0.25 springAnimated:NO];
         [strongSelf shareNumRequest:strongSelf.shareModel.material.material_id];
 
-        NSURL *url = [NSURL URLWithString:@"weixin://"];
-        BOOL canOpen = [[UIApplication sharedApplication] canOpenURL:url];
-        //先判断是否能打开该url
-        if (canOpen) {   //打开微信
-            [[UIApplication sharedApplication] openURL:url];
-        }else {
-            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"您的设备未安装微信APP"];
+        if (index == 0) {// 仅仅打开微信
+            NSURL *url = [NSURL URLWithString:@"weixin://"];
+            BOOL canOpen = [[UIApplication sharedApplication] canOpenURL:url];
+            //先判断是否能打开该url
+            if (canOpen) {//打开微信
+                [[UIApplication sharedApplication] openURL:url];
+            }else {
+                [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"您的设备未安装微信APP"];
+            }
+        }else{
+            //创建分享消息对象
+            NSData *data = [NSData dataWithContentsOfURL:[NSURL  URLWithString:strongSelf.shareModel.material.photos.firstObject]];
+            UIImage *image = [UIImage imageWithData:data]; // 取得图片
+            
+            UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+            UMShareImageObject *shareObject = [UMShareImageObject shareObjectWithTitle:@"呱选-精品素材" descr:strongSelf.shareModel.material.dsp thumImage:image];
+            shareObject.shareImage = image;
+            messageObject.shareObject = shareObject;
+            //调用分享接口
+            [[UMSocialManager defaultManager] shareToPlatform:index==1?UMSocialPlatformType_WechatTimeLine:UMSocialPlatformType_WechatSession messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+                if (error) {
+                    UMSocialLogInfo(@"************Share fail with error %@*********",error);
+                    [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+                }else{
+                    if ([data isKindOfClass:[UMSocialShareResponse class]]) {
+                        UMSocialShareResponse *resp = data;
+                        //分享结果消息
+                        UMSocialLogInfo(@"response message is %@",resp.message);
+                        //第三方原始返回的数据
+                        UMSocialLogInfo(@"response originalResponse data is %@",resp.originalResponse);
+                    }else{
+                        UMSocialLogInfo(@"response data is %@",data);
+                    }
+                }
+            }];
         }
     };
     self.zh_popupController = [[zhPopupController alloc] init];

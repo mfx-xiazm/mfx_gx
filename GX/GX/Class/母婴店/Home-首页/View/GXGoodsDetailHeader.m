@@ -66,8 +66,16 @@
     
     [self.shop_name setTextWithLineSpace:5.f withString:_goodsDetail.goods_name withFont:[UIFont systemFontOfSize:15]];
     if ([self.goodsDetail.rushbuy isEqualToString:@"1"]) {//抢购商品
-        self.rush_price.text = [NSString stringWithFormat:@"￥%@-￥%@",_goodsDetail.rush.rush_min_price,_goodsDetail.rush.rush_max_price];
-        [self.rush_market_price setLabelUnderline:[NSString stringWithFormat:@"￥%@-￥%@",_goodsDetail.min_price,_goodsDetail.max_price]];
+        if ([_goodsDetail.rush.rush_min_price floatValue] == [_goodsDetail.rush.rush_max_price floatValue]) {
+            self.rush_price.text = [NSString stringWithFormat:@"￥%@",_goodsDetail.rush.rush_min_price];
+        }else{
+            self.rush_price.text = [NSString stringWithFormat:@"￥%@-￥%@",_goodsDetail.rush.rush_min_price,_goodsDetail.rush.rush_max_price];
+        }
+        if ([_goodsDetail.min_price floatValue] == [_goodsDetail.max_price floatValue]) {
+            self.rush_market_price.text = [NSString stringWithFormat:@"￥%@",_goodsDetail.min_price];
+        }else{
+            self.rush_market_price.text = [NSString stringWithFormat:@"￥%@-￥%@",_goodsDetail.min_price,_goodsDetail.max_price];
+        }
         /** 1未开始，2进行中；3已结束；4暂停 */
         if ([_goodsDetail.rush.rushbuy_status isEqualToString:@"1"]) {
             self.rush_time.text = @"未开始";
@@ -83,7 +91,11 @@
         self.market_price.text = [NSString stringWithFormat:@"建议价：￥%@",_goodsDetail.suggest_price];
     }else{//不抢购商品
         if ([_goodsDetail.control_type isEqualToString:@"1"]) {
-            self.price.text = [NSString stringWithFormat:@"￥%@-￥%@  ",_goodsDetail.min_price,_goodsDetail.max_price];
+            if ([_goodsDetail.min_price floatValue] == [_goodsDetail.max_price floatValue]) {
+                self.price.text = [NSString stringWithFormat:@"￥%@",_goodsDetail.min_price];
+            }else{
+                self.price.text = [NSString stringWithFormat:@"￥%@-￥%@",_goodsDetail.min_price,_goodsDetail.max_price];
+            }
             self.market_price.text = [NSString stringWithFormat:@"建议价：￥%@",_goodsDetail.suggest_price];
         }else{
             self.price.text = [NSString stringWithFormat:@"￥%@  ",_goodsDetail.min_price];
@@ -160,7 +172,9 @@
 
 - (void)pagerView:(TYCyclePagerView *)pageView didSelectedItemCell:(__kindof UICollectionViewCell *)cell atIndex:(NSInteger)index
 {
-    
+    if (self.bannerClickedCall) {
+        self.bannerClickedCall(index);
+    }
 }
 
 @end

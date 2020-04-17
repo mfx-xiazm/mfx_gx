@@ -85,7 +85,11 @@
     [self.cover_img sd_setImageWithURL:[NSURL URLWithString:_goods.cover_img]];
     self.good_name.text = _goods.goods_name;
     if ([_goods.control_type isEqualToString:@"1"]) {
-        self.price.text = [NSString stringWithFormat:@"￥%@-￥%@",_goods.min_price,_goods.max_price];
+        if ([_goods.min_price floatValue] == [_goods.max_price floatValue]) {
+            self.price.text = [NSString stringWithFormat:@"￥%@",_goods.min_price];
+        }else{
+            self.price.text = [NSString stringWithFormat:@"￥%@-￥%@",_goods.min_price,_goods.max_price];
+        }
     }else{
         self.price.text = [NSString stringWithFormat:@"￥%@",_goods.min_price];
     }
@@ -102,7 +106,11 @@
     [self.cover_img sd_setImageWithURL:[NSURL URLWithString:_collect.cover_img]];
     self.good_name.text = _collect.goods_name;
     if ([_collect.control_type isEqualToString:@"1"]) {
-        self.price.text = [NSString stringWithFormat:@"￥%@-￥%@",_collect.min_price,_collect.max_price];
+        if ([_collect.min_price floatValue] == [_collect.max_price floatValue]) {
+            self.price.text = [NSString stringWithFormat:@"￥%@",_collect.min_price];
+        }else{
+            self.price.text = [NSString stringWithFormat:@"￥%@-￥%@",_collect.min_price,_collect.max_price];
+        }
     }else{
         self.price.text = [NSString stringWithFormat:@"￥%@",_collect.min_price];
     }

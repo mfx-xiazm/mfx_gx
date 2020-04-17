@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 @class GXGoodsDetail;
 typedef void(^countDownCall)(void);
+typedef void(^bannerClickedCall)(NSInteger index);
 @interface GXGoodsDetailHeader : UIView
 /* 商品详情 */
 @property(nonatomic,strong) GXGoodsDetail *goodsDetail;
@@ -20,6 +21,7 @@ typedef void(^countDownCall)(void);
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *noticeViewHeight;
 /* 倒是结束 */
 @property(nonatomic,copy) countDownCall countDownCall;
+@property (nonatomic, copy) bannerClickedCall bannerClickedCall;
 @end
 
 NS_ASSUME_NONNULL_END

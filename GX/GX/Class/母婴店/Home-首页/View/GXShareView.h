@@ -14,6 +14,8 @@ typedef void(^shareTypeCall)(NSInteger index);
 @interface GXShareView : UIView
 /* 点击 */
 @property(nonatomic,copy) shareTypeCall shareTypeCall;
+@property (weak, nonatomic) IBOutlet UIView *onlyWxView;
+
 @end
 
 NS_ASSUME_NONNULL_END
