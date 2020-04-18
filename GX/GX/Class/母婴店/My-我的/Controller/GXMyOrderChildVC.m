@@ -400,7 +400,7 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
                     [strongSelf cancelOrderRequest];
                 }else if ([order.status isEqualToString:@"待收货"]) {
                     //HXLog(@"查看物流");
-                    if (![order.logistics_com_id isEqualToString:@"0"]) {
+                    if (order.logistics_no && order.logistics_no.length) {
                         GXWebContentVC *cvc = [GXWebContentVC new];
                         cvc.navTitle = @"物流详情";
                         cvc.isNeedRequest = NO;

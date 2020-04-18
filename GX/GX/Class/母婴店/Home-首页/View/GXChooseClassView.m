@@ -66,7 +66,7 @@ static NSString *const ChooseClassFooter = @"ChooseClassFooter";
         self.market_price.hidden = YES;
     }else{
         self.market_price.hidden = NO;
-        [self.market_price setLabelUnderline:[NSString stringWithFormat:@"建议价：￥%@",_goodsDetail.suggest_price]];
+        [self.market_price setLabelUnderline:[NSString stringWithFormat:@"建议价:￥%@",_goodsDetail.suggest_price]];
     }
     
     if (_goodsDetail.spec && _goodsDetail.spec.count) {

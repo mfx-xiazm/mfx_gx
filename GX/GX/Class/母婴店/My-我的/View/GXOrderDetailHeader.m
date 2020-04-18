@@ -44,8 +44,8 @@
                 self.order_desc.text = @"订单审核被拒";
                 self.order_tip.text = [NSString stringWithFormat:@"   原因：%@   ",self.orderDetail.reject_reason];
             }else{
-                self.order_desc.text = @"您的订单待发货";
-                self.order_tip.text = @"   订单待发货，请耐心等待   ";
+                self.order_desc.text = @"您的订单待审核";
+                self.order_tip.text = @"   订单待审核，请耐心等待   ";
             }
         }else{
             self.order_desc.text = @"您的订单待发货";
@@ -103,7 +103,13 @@
     if (![_refundDetail.status isEqualToString:@"已取消"] && ![_refundDetail.status isEqualToString:@"待付款"] && ![_refundDetail.status isEqualToString:@"待发货"]) {
         self.order_tip.hidden = YES;
         self.logistics_name.text = [NSString stringWithFormat:@"快递公司：%@",_refundDetail.logistics_com_name];
-        self.logistics_no.text = [_orderDetail.logistics_com_id isEqualToString:@"0"]?[NSString stringWithFormat:@"司机电话：%@",_orderDetail.driver_phone]:[NSString stringWithFormat:@"快递单号：%@",_orderDetail.logistics_no];
+        if (_orderDetail.logistics_no && _orderDetail.logistics_no.length) {
+            self.logistics_no.text = [NSString stringWithFormat:@"快递单号：%@",_orderDetail.logistics_no];
+        }else if (_orderDetail.driver_phone && _orderDetail.driver_phone.length) {
+            self.logistics_no.text = [NSString stringWithFormat:@"司机电话：%@",_orderDetail.driver_phone];
+        }else{
+            self.logistics_no.text = @"";
+        }
     }else{
         self.order_tip.hidden = NO;
         self.order_tip.text = [NSString stringWithFormat:@"  %@  ",self.order_status.text];
@@ -117,7 +123,7 @@
         if ([_refundDetail.status isEqualToString:@"已取消"] || [_refundDetail.status isEqualToString:@"待付款"] || [_refundDetail.status isEqualToString:@"待发货"]) {
             return;
         }
-        if (![_refundDetail.logistics_com_id isEqualToString:@"0"]) {
+        if (_refundDetail.logistics_no && _refundDetail.logistics_no.length) {
             if (self.lookLogisCall) {
                 self.lookLogisCall();
             }
@@ -128,7 +134,7 @@
         if ([_orderDetail.status isEqualToString:@"已取消"] || [_orderDetail.status isEqualToString:@"待付款"] || [_orderDetail.status isEqualToString:@"待发货"]) {
             return;
         }
-        if (![_orderDetail.logistics_com_id isEqualToString:@"0"]) {
+        if (_orderDetail.logistics_no && _orderDetail.logistics_no.length) {
             if (self.lookLogisCall) {
                 self.lookLogisCall();
             }

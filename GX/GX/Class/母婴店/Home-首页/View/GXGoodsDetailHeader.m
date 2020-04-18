@@ -88,7 +88,7 @@
             self.rush_time.text = @"已结束";
         }
         self.price.text = @"";
-        self.market_price.text = [NSString stringWithFormat:@"建议价：￥%@",_goodsDetail.suggest_price];
+        self.market_price.text = [NSString stringWithFormat:@"建议价:￥%@",_goodsDetail.suggest_price];
     }else{//不抢购商品
         if ([_goodsDetail.control_type isEqualToString:@"1"]) {
             if ([_goodsDetail.min_price floatValue] == [_goodsDetail.max_price floatValue]) {
@@ -96,7 +96,7 @@
             }else{
                 self.price.text = [NSString stringWithFormat:@"￥%@-￥%@",_goodsDetail.min_price,_goodsDetail.max_price];
             }
-            self.market_price.text = [NSString stringWithFormat:@"建议价：￥%@",_goodsDetail.suggest_price];
+            self.market_price.text = [NSString stringWithFormat:@"建议价:￥%@",_goodsDetail.suggest_price];
         }else{
             self.price.text = [NSString stringWithFormat:@"￥%@  ",_goodsDetail.min_price];
             self.market_price.text = @"";

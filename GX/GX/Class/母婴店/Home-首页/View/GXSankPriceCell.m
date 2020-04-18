@@ -26,7 +26,7 @@
 {
     _sank = sank;
     
-    [self.price setColorAttributedText:[NSString stringWithFormat:@"折合单价：￥%@",_sank.price] andChangeStr:[NSString stringWithFormat:@"￥%@",_sank.price] andColor:HXControlBg];;
+    [self.price setColorAttributedText:[NSString stringWithFormat:@"折合单价：￥%@",_sank.reducedPrice] andChangeStr:[NSString stringWithFormat:@"￥%@",_sank.reducedPrice] andColor:HXControlBg];;
     self.stoke.text = [NSString stringWithFormat:@"库存：%@",_sank.stock];
     self.seac.text = _sank.specs_attrs;
     
