@@ -39,11 +39,29 @@
     if (_log.finance_log_type <= 5) {
         self.desc.text = _log.orderInfo.goods_name;
 
-        if ([[MSUserManager sharedInstance].curUserInfo.utype isEqualToString:@"2"]) {
-            self.type.text = @"订单收入";
+        /*
+         if ([[MSUserManager sharedInstance].curUserInfo.utype isEqualToString:@"2"]) {
+         self.type.text = @"订单收入";
+         }else{
+         self.type.text = @"订单佣金";
+         }
+         */
+        // 0 终端门店订单的提成佣金;1平台订单收入；2供应商订单收入 3供应商订单的平台抽佣；4推荐供应商的奖励佣金；5终端门店订单的提成佣金
+        if (_log.finance_log_type == 0) {
+            self.type.text = @"终端门店订单的提成佣金";
+        }else if (_log.finance_log_type == 1) {
+            self.type.text = @"平台订单收入";
+        }else if (_log.finance_log_type == 2) {
+            self.type.text = @"供应商订单收入";
+        }else if (_log.finance_log_type == 3) {
+            self.type.text = @"供应商订单的平台抽佣";
+        }else if (_log.finance_log_type == 4) {
+            self.type.text = @"推荐供应商的奖励佣金";
         }else{
-            self.type.text = @"订单佣金";
+            self.type.text = @"终端门店订单的提成佣金";
         }
+        
+        
         self.left_amount.textColor = HXControlBg;
         self.left_amount.text = [NSString stringWithFormat:@"￥%@",_log.orderInfo.pay_amount];
         self.amount.text = [NSString stringWithFormat:@"+%@",_log.amount];

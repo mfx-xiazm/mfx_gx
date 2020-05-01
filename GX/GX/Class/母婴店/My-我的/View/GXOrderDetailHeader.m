@@ -55,12 +55,24 @@
         self.order_desc.text = @"您的订单已发货，请耐心等待";
         self.order_tip.hidden = YES;
         self.logistics_name.text = [NSString stringWithFormat:@"快递公司：%@",_orderDetail.logistics_com_name];
-        self.logistics_no.text = [_orderDetail.logistics_com_id isEqualToString:@"0"]?[NSString stringWithFormat:@"司机电话：%@",_orderDetail.driver_phone]:[NSString stringWithFormat:@"快递单号：%@",_orderDetail.logistics_no];
+        if (_orderDetail.logistics_no && _orderDetail.logistics_no.length) {
+            self.logistics_no.text = [NSString stringWithFormat:@"快递单号：%@",_orderDetail.logistics_no];
+        }else if (_orderDetail.driver_phone && _orderDetail.driver_phone.length) {
+            self.logistics_no.text = [NSString stringWithFormat:@"司机电话：%@",_orderDetail.driver_phone];
+        }else{
+            self.logistics_no.text = @"";
+        }
     }else if ([_orderDetail.status isEqualToString:@"待评价"]) {
         self.order_desc.text = @"您的评价对其他买家有帮助哦";
         self.order_tip.hidden = YES;
         self.logistics_name.text = [NSString stringWithFormat:@"快递公司：%@",_orderDetail.logistics_com_name];
-        self.logistics_no.text = [_orderDetail.logistics_com_id isEqualToString:@"0"]?[NSString stringWithFormat:@"司机电话：%@",_orderDetail.driver_phone]:[NSString stringWithFormat:@"快递单号：%@",_orderDetail.logistics_no];
+        if (_orderDetail.logistics_no && _orderDetail.logistics_no.length) {
+            self.logistics_no.text = [NSString stringWithFormat:@"快递单号：%@",_orderDetail.logistics_no];
+        }else if (_orderDetail.driver_phone && _orderDetail.driver_phone.length) {
+            self.logistics_no.text = [NSString stringWithFormat:@"司机电话：%@",_orderDetail.driver_phone];
+        }else{
+            self.logistics_no.text = @"";
+        }
     }else{
         self.order_desc.text = @"您的订单已完成，棒棒哒";
         self.order_tip.hidden = YES;
@@ -103,10 +115,10 @@
     if (![_refundDetail.status isEqualToString:@"已取消"] && ![_refundDetail.status isEqualToString:@"待付款"] && ![_refundDetail.status isEqualToString:@"待发货"]) {
         self.order_tip.hidden = YES;
         self.logistics_name.text = [NSString stringWithFormat:@"快递公司：%@",_refundDetail.logistics_com_name];
-        if (_orderDetail.logistics_no && _orderDetail.logistics_no.length) {
-            self.logistics_no.text = [NSString stringWithFormat:@"快递单号：%@",_orderDetail.logistics_no];
+        if (_refundDetail.logistics_no && _refundDetail.logistics_no.length) {
+            self.logistics_no.text = [NSString stringWithFormat:@"快递单号：%@",_refundDetail.logistics_no];
         }else if (_orderDetail.driver_phone && _orderDetail.driver_phone.length) {
-            self.logistics_no.text = [NSString stringWithFormat:@"司机电话：%@",_orderDetail.driver_phone];
+            self.logistics_no.text = [NSString stringWithFormat:@"司机电话：%@",_refundDetail.driver_phone];
         }else{
             self.logistics_no.text = @"";
         }
