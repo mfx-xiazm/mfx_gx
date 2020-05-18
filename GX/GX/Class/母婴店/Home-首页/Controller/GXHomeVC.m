@@ -76,6 +76,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
 {
     [self.navigationItem setTitle:nil];
     
+    
     HXSearchBar *searchBar = [[HXSearchBar alloc] initWithFrame:CGRectMake(0, 0, HX_SCREEN_WIDTH - 70.f, 30.f)];
     searchBar.backgroundColor = [UIColor whiteColor];
     searchBar.layer.cornerRadius = 6;
