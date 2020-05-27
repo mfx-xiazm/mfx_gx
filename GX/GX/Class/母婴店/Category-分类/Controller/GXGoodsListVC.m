@@ -106,7 +106,7 @@ static NSString *const DiscountGoodsCell = @"DiscountGoodsCell";
     
     HXSearchBar *searchBar = [[HXSearchBar alloc] initWithFrame:CGRectMake(0, 0, HX_SCREEN_WIDTH - 70.f, 30.f)];
     searchBar.backgroundColor = [UIColor whiteColor];
-    searchBar.layer.cornerRadius = 6;
+    searchBar.layer.cornerRadius = 15.f;
     searchBar.layer.masksToBounds = YES;
     searchBar.delegate = self;
     searchBar.placeholder = @"请输入商品名称查询";
@@ -268,9 +268,11 @@ static NSString *const DiscountGoodsCell = @"DiscountGoodsCell";
     
     if (self.brands) {
         self.fliterView.dataType = 3;
+        self.fliterView.brandItemId = self.brand_id;
         self.fliterView.dataSouce = self.brands;
     }else{
         self.fliterView.dataType = 2;
+        self.fliterView.logItemId = self.catalog_id;
         self.fliterView.dataSouce = self.catalogs;
     }
     hx_weakify(self);

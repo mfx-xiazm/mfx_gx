@@ -7,10 +7,13 @@
 //
 
 #import "GXCashVC.h"
+#import "GXCashAlert.h"
+#import <zhPopupController.h>
 
 @interface GXCashVC ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *card_owner;
 @property (weak, nonatomic) IBOutlet UITextField *bank_name;
+@property (weak, nonatomic) IBOutlet UITextField *sub_bank_name;
 @property (weak, nonatomic) IBOutlet UITextField *card_no;
 @property (weak, nonatomic) IBOutlet UITextField *apply_amount;
 @property (weak, nonatomic) IBOutlet UIButton *sureBtn;
@@ -34,6 +37,10 @@
         }
         if (![strongSelf.bank_name hasText]) {
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请输入银行名称"];
+            return NO;
+        }
+        if (![strongSelf.sub_bank_name hasText]) {
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请输入开户网点"];
             return NO;
         }
         if (![strongSelf.card_no hasText]) {
@@ -60,6 +67,7 @@
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"card_owner"] = self.card_owner.text;
     parameters[@"bank_name"] = self.bank_name.text;
+    parameters[@"sub_bank_name"] = self.sub_bank_name.text;
     parameters[@"card_no"] = self.card_no.text;
     parameters[@"apply_amount"] = self.apply_amount.text;
     
@@ -68,8 +76,7 @@
         hx_strongify(weakSelf);
         [btn stopLoading:@"确定" image:nil textColor:nil backgroundColor:nil];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
-            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
-            [strongSelf.navigationController popViewControllerAnimated:YES];
+            [strongSelf showCashAlert];
         }else{
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
         }
@@ -78,7 +85,21 @@
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
     }];
 }
-
+-(void)showCashAlert
+{
+    GXCashAlert *alert = [GXCashAlert loadXibView];
+    alert.hxn_width = HX_SCREEN_WIDTH - 60*2;
+    alert.hxn_height = 180;
+    hx_weakify(self);
+    alert.cashKnowCall = ^{
+        hx_strongify(weakSelf);
+        [strongSelf.zh_popupController dismiss];
+        [strongSelf.navigationController popViewControllerAnimated:YES];
+    };
+    self.zh_popupController = [[zhPopupController alloc] init];
+    self.zh_popupController.dismissOnMaskTouched = NO;
+    [self.zh_popupController presentContentView:alert duration:0.25 springAnimated:NO];
+}
 //参数一：range，要被替换的字符串的range，如果是新输入的，就没有字符串被替换，range.length = 0
 //参数二：替换的字符串，即键盘即将输入或者即将粘贴到textField的string
 //返回值为BOOL类型，YES表示允许替换，NO表示不允许

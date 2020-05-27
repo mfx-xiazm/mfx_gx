@@ -25,6 +25,8 @@
 @property(nonatomic,strong) NSArray *catalogItems;
 /* 分类视图 */
 @property(nonatomic,strong) GXGoodsFilterView *fliterView;
+/* 分类id */
+@property (nonatomic, copy) NSString *catalog_id;
 @end
 
 @implementation GXBrandPartnerVC
@@ -152,11 +154,13 @@
     }
     
     self.fliterView.dataType = 1;
+    self.fliterView.logItemId = self.catalog_id;
     self.fliterView.dataSouce = self.catalogItems;
     hx_weakify(self);
     self.fliterView.sureFilterCall = ^(NSString * _Nonnull cata_id) {
         hx_strongify(weakSelf);
         [strongSelf.zh_popupController dismissWithDuration:0.25 springAnimated:NO];
+        strongSelf.catalog_id = cata_id;
         GXBrandPartnerChildVC *brandVc = (GXBrandPartnerChildVC *)strongSelf.childVCs.lastObject;
         brandVc.catalog_id = cata_id;
     };

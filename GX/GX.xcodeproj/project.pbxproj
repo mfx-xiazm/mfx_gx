@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		11AF349C58F7A342E9336E28 /* libPods-GX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E67F6C2F7D067769D4BA925 /* libPods-GX.a */; };
+		497AEBEC247DFC9E00E0FACB /* GXCashAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 497AEBEB247DFC9E00E0FACB /* GXCashAlert.m */; };
+		497AEBEE247DFCBA00E0FACB /* GXCashAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = 497AEBED247DFCBA00E0FACB /* GXCashAlert.xib */; };
+		497AEBF1247E19AD00E0FACB /* GXStoreHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 497AEBF0247E19AD00E0FACB /* GXStoreHeader.m */; };
+		497AEBF3247E19B300E0FACB /* GXStoreHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 497AEBF2247E19B300E0FACB /* GXStoreHeader.xib */; };
 		900146A02384DDC600275DD9 /* SZUpdateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9001469D2384DDC500275DD9 /* SZUpdateView.xib */; };
 		900146A12384DDC600275DD9 /* SZUpdateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9001469F2384DDC600275DD9 /* SZUpdateView.m */; };
 		90067ECF2344356700628503 /* GXRegisterAuthVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 90067ECD2344356700628503 /* GXRegisterAuthVC.m */; };
@@ -478,6 +482,12 @@
 /* Begin PBXFileReference section */
 		1330E51C61ADF8FC1AE77408 /* Pods-GX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GX.debug.xcconfig"; path = "Target Support Files/Pods-GX/Pods-GX.debug.xcconfig"; sourceTree = "<group>"; };
 		2975184EF33AC041D33915E0 /* Pods-GX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GX.release.xcconfig"; path = "Target Support Files/Pods-GX/Pods-GX.release.xcconfig"; sourceTree = "<group>"; };
+		497AEBEA247DFC9E00E0FACB /* GXCashAlert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXCashAlert.h; sourceTree = "<group>"; };
+		497AEBEB247DFC9E00E0FACB /* GXCashAlert.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXCashAlert.m; sourceTree = "<group>"; };
+		497AEBED247DFCBA00E0FACB /* GXCashAlert.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXCashAlert.xib; sourceTree = "<group>"; };
+		497AEBEF247E19AD00E0FACB /* GXStoreHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXStoreHeader.h; sourceTree = "<group>"; };
+		497AEBF0247E19AD00E0FACB /* GXStoreHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXStoreHeader.m; sourceTree = "<group>"; };
+		497AEBF2247E19B300E0FACB /* GXStoreHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXStoreHeader.xib; sourceTree = "<group>"; };
 		7E67F6C2F7D067769D4BA925 /* libPods-GX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9001469D2384DDC500275DD9 /* SZUpdateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SZUpdateView.xib; sourceTree = "<group>"; };
 		9001469E2384DDC500275DD9 /* SZUpdateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZUpdateView.h; sourceTree = "<group>"; };
@@ -1667,6 +1677,9 @@
 				906973F02344C2F000D8A8FF /* GXStoreCell.h */,
 				906973F12344C2F000D8A8FF /* GXStoreCell.m */,
 				906973F22344C2F000D8A8FF /* GXStoreCell.xib */,
+				497AEBEF247E19AD00E0FACB /* GXStoreHeader.h */,
+				497AEBF0247E19AD00E0FACB /* GXStoreHeader.m */,
+				497AEBF2247E19B300E0FACB /* GXStoreHeader.xib */,
 				906973FA2344CC1F00D8A8FF /* GXStoreCouponCell.h */,
 				906973FB2344CC1F00D8A8FF /* GXStoreCouponCell.m */,
 				906973FC2344CC1F00D8A8FF /* GXStoreCouponCell.xib */,
@@ -2477,6 +2490,9 @@
 				90BB98BF234DAE6C00444ACC /* GXAccountManageCell.h */,
 				90BB98C0234DAE6C00444ACC /* GXAccountManageCell.m */,
 				90BB98C1234DAE6C00444ACC /* GXAccountManageCell.xib */,
+				497AEBEA247DFC9E00E0FACB /* GXCashAlert.h */,
+				497AEBEB247DFC9E00E0FACB /* GXCashAlert.m */,
+				497AEBED247DFCBA00E0FACB /* GXCashAlert.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3504,6 +3520,7 @@
 				90FCDF452349C5F100729A97 /* GXHelpVC.xib in Resources */,
 				909EAA3623482B6A00575FB8 /* GXRegionalHeader.xib in Resources */,
 				9099EE77236814E70088D80C /* GXSearchResultVC.xib in Resources */,
+				497AEBF3247E19B300E0FACB /* GXStoreHeader.xib in Resources */,
 				90BB98E1234DB81300444ACC /* GXClientManageChildVC.xib in Resources */,
 				90FCDF502349C96500729A97 /* GXReportVC.xib in Resources */,
 				90FCDF122349949D00729A97 /* GXMyBusinessVC.xib in Resources */,
@@ -3534,6 +3551,7 @@
 				90359A8023C459240033074A /* areaData.txt in Resources */,
 				909A468123F65D5D000AC801 /* GXAuthStep2VC.xib in Resources */,
 				909A468B23F66710000AC801 /* GXAuthStep4VC.xib in Resources */,
+				497AEBEE247DFCBA00E0FACB /* GXCashAlert.xib in Resources */,
 				906974082344D28400D8A8FF /* GXStoreGoodsListHeader.xib in Resources */,
 				902E88D3234742F700EFD0DF /* GXMessageVC.xib in Resources */,
 				90BB98A9234C1B0C00444ACC /* GXOrderManageChildVC.xib in Resources */,
@@ -3807,6 +3825,7 @@
 				909EAA742348739300575FB8 /* GXCartSectionHeader.m in Sources */,
 				90C0B43D2340D9EF00A8C55B /* RCFilterCell.m in Sources */,
 				90BB98E5234DBBE300444ACC /* GXClientManageCell.m in Sources */,
+				497AEBEC247DFC9E00E0FACB /* GXCashAlert.m in Sources */,
 				90C0B3C42340CD7200A8C55B /* MSUserManager.m in Sources */,
 				90C0B4342340D27200A8C55B /* HXTabBarController.m in Sources */,
 				909A77FB236ADD0100562435 /* GXMarketTrend.m in Sources */,
@@ -3869,6 +3888,7 @@
 				905B3DFC2345999D00282515 /* GXGoodsMaterial.m in Sources */,
 				9096CC1423692BA600D213DD /* GXGoodBrand.m in Sources */,
 				903C54752349D167002743EE /* GXOnLineReportVC.m in Sources */,
+				497AEBF1247E19AD00E0FACB /* GXStoreHeader.m in Sources */,
 				90C0B3E82340CD7200A8C55B /* UIView+ForLMJVerticalScrollText.m in Sources */,
 				90FCDF202349966500729A97 /* GXMyCouponChildVC.m in Sources */,
 				90C0B3E42340CD7200A8C55B /* UIView+LYExtension.m in Sources */,

@@ -11,28 +11,44 @@
 #import "GXStoreGoodsListVC.h"
 #import "GXStoreMsgVC.h"
 #import "GXStore.h"
+#import "HXSearchBar.h"
+#import "GXStoreHeader.h"
+#import "GXGoodsFilterView.h"
+#import <zhPopupController.h>
+#import "GXCatalogItem.h"
 
 static NSString *const StoreCell = @"StoreCell";
-@interface GXGoodStoreChildVC ()<UITableViewDelegate,UITableViewDataSource>
+@interface GXGoodStoreChildVC ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+/* 头部 */
+@property (nonatomic, strong) GXStoreHeader *header;
+/* 搜索条 */
+@property(nonatomic,strong) HXSearchBar *searchBar;
 /** 页码 */
 @property(nonatomic,assign) NSInteger pagenum;
 /** 列表 */
 @property(nonatomic,strong) NSMutableArray *stores;
+/* 分类 */
+@property(nonatomic,strong) NSArray *cateItems;
+/* 分类筛选视图 */
+@property(nonatomic,strong) GXGoodsFilterView *fliterView;
 @end
 
 @implementation GXGoodStoreChildVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setUpNavBar];
     [self setUpTableView];
     [self setUpRefresh];
+    [self getShopCateRequest];
     [self getCatalogShopRequest:YES];
 }
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
     self.view.hxn_width = HX_SCREEN_WIDTH;
+    self.header.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 44.f);
 }
 -(NSMutableArray *)stores
 {
@@ -41,7 +57,30 @@ static NSString *const StoreCell = @"StoreCell";
     }
     return _stores;
 }
+-(GXGoodsFilterView *)fliterView
+{
+    if (_fliterView == nil) {
+        _fliterView = [GXGoodsFilterView loadXibView];
+        _fliterView.hxn_size = CGSizeMake(HX_SCREEN_WIDTH-80, HX_SCREEN_HEIGHT);
+    }
+    return _fliterView;
+}
 #pragma mark -- 视图相关
+-(void)setUpNavBar
+{
+    [self.navigationItem setTitle:nil];
+    
+    HXSearchBar *searchBar = [[HXSearchBar alloc] initWithFrame:CGRectMake(0, 0, HX_SCREEN_WIDTH - 88.f, 30.f)];
+    searchBar.backgroundColor = [UIColor whiteColor];
+    searchBar.layer.cornerRadius = 15.f;
+    searchBar.layer.masksToBounds = YES;
+    searchBar.delegate = self;
+    searchBar.placeholder = @"请输入店铺名称查询";
+    self.searchBar = searchBar;
+    self.navigationItem.titleView = searchBar;
+    
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithTarget:self action:@selector(filterClicked) nomalImage:HXGetImage(@"筛选白") higeLightedImage:HXGetImage(@"筛选白") imageEdgeInsets:UIEdgeInsetsZero];
+}
 -(void)setUpTableView
 {
     // 针对 11.0 以上的iOS系统进行处理
@@ -69,6 +108,11 @@ static NSString *const StoreCell = @"StoreCell";
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GXStoreCell class]) bundle:nil] forCellReuseIdentifier:StoreCell];
     
+    GXStoreHeader *header = [GXStoreHeader loadXibView];
+    header.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, 44.f);
+    self.header = header;
+    self.tableView.tableHeaderView = header;
+    
     hx_weakify(self);
     [self.tableView zx_setEmptyView:[GYEmptyView class] isFull:YES clickedBlock:^(UIButton * _Nullable btn) {
         [weakSelf startShimmer];
@@ -91,11 +135,56 @@ static NSString *const StoreCell = @"StoreCell";
         [strongSelf getCatalogShopRequest:NO];
     }];
 }
+#pragma mark -- 点击事件
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+-(void)filterClicked
+{
+    if (!self.cateItems) {
+        return;
+    }
+    
+    self.fliterView.dataType = 4;
+    self.fliterView.logItemId = self.catalog_id;
+    self.fliterView.brandItemId = self.brand_id;
+    self.fliterView.dataSouce = self.cateItems;
+    hx_weakify(self);
+    self.fliterView.filterCall = ^(NSString *logItemId, NSString  *brandItemId) {
+        hx_strongify(weakSelf);
+        [strongSelf.zh_popupController dismissWithDuration:0.25 springAnimated:NO];
+        strongSelf.catalog_id = logItemId;
+        strongSelf.brand_id = brandItemId;
+        [strongSelf getCatalogShopRequest:YES];
+    };
+    
+    self.zh_popupController = [[zhPopupController alloc] init];
+    self.zh_popupController.layoutType = zhPopupLayoutTypeRight;
+    [self.zh_popupController presentContentView:self.fliterView duration:0.25 springAnimated:NO];
+}
 #pragma mark -- 数据请求
+-(void)getShopCateRequest
+{
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/selectShop" parameters:@{} success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            strongSelf.cateItems = [NSArray yy_modelArrayWithClass:[GXCatalogItem class] json:responseObject[@"data"]];
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
+}
 -(void)getCatalogShopRequest:(BOOL)isRefresh
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"catalog_id"] = self.catalog_id;
+    parameters[@"brand_id"] = self.brand_id;
+    parameters[@"goods_name"] = self.searchBar.text;
     if (isRefresh) {
         parameters[@"page"] = @(1);//第几页
     }else{
@@ -171,9 +260,9 @@ static NSString *const StoreCell = @"StoreCell";
     // 返回这个模型对应的cell高度
     GXStore *store = self.stores[indexPath.row];
     if (store.coupons && store.coupons.count) {
-        return 5.f + 50.f + 60.f + (HX_SCREEN_WIDTH-10.f*5)*2/3.0 + 50.f + 5.f;
+        return 5.f + 60.f + 60.f + (HX_SCREEN_WIDTH-10.f*6)/3.0 + 50.f + 5.f;
     }else{
-        return 5.f + 50.f + (HX_SCREEN_WIDTH-10.f*5)*2/3.0 + 50.f + 5.f;
+        return 5.f + 60.f + (HX_SCREEN_WIDTH-10.f*6)/3.0 + 50.f + 5.f;
     }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

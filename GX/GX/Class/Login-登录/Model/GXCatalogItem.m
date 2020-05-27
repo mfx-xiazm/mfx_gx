@@ -11,7 +11,8 @@
 @implementation GXCatalogItem
 + (NSDictionary *)modelContainerPropertyGenericClass {
     return @{@"catalog":[GXCatalogItem class],
-             @"control":[GXBrandItem class]
+             @"control":[GXBrandItem class],
+             @"brandData":[GXBrandItem class]
              };
 }
 @end

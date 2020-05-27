@@ -48,7 +48,7 @@ static NSString *const ActivityCell = @"ActivityCell";
     
     HXSearchBar *searchBar = [[HXSearchBar alloc] initWithFrame:CGRectMake(0, 0, HX_SCREEN_WIDTH - 70.f, 30.f)];
     searchBar.backgroundColor = [UIColor whiteColor];
-    searchBar.layer.cornerRadius = 6;
+    searchBar.layer.cornerRadius = 15.f;
     searchBar.layer.masksToBounds = YES;
     searchBar.delegate = self;
     searchBar.text = self.keyword;

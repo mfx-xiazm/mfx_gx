@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong) NSArray<GXCatalogItem *> *catalog;
 /* 二级品牌 */
 @property(nonatomic,strong) NSArray<GXBrandItem *> *control;
+/* 二级品牌 */
+@property(nonatomic,strong) NSArray<GXBrandItem *> *brandData;
 @end
 
 @interface GXBrandItem : NSObject

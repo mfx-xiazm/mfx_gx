@@ -58,14 +58,16 @@
 {
     [self.navigationItem setTitle:nil];
     
-    HXSearchBar *searchBar = [[HXSearchBar alloc] initWithFrame:CGRectMake(0, 0, HX_SCREEN_WIDTH - 70.f, 30.f)];
+    HXSearchBar *searchBar = [[HXSearchBar alloc] initWithFrame:CGRectMake(0, 0, HX_SCREEN_WIDTH - 88.f, 30.f)];
     searchBar.backgroundColor = [UIColor whiteColor];
-    searchBar.layer.cornerRadius = 6;
+    searchBar.layer.cornerRadius = 15.f;
     searchBar.layer.masksToBounds = YES;
     searchBar.delegate = self;
     searchBar.placeholder = @"请输入店铺名称查询";
     self.searchBar = searchBar;
     self.navigationItem.titleView = searchBar;
+    
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithTarget:self action:@selector(filterClicked) nomalImage:HXGetImage(@"筛选白") higeLightedImage:HXGetImage(@"筛选白") imageEdgeInsets:UIEdgeInsetsZero];
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -79,6 +81,10 @@
     }else{
         return NO;
     }
+}
+-(void)filterClicked
+{
+    HXLog(@"筛选");
 }
 -(void)getShopCateRequest
 {

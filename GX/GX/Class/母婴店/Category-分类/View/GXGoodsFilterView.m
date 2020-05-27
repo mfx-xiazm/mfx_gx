@@ -44,11 +44,16 @@ static NSString *const ChooseClassHeader = @"ChooseClassHeader";
     if (sender.tag) {
         if (self.sureFilterCall) {
             if (self.dataType == 1) {
-                self.sureFilterCall((self.selectItem && self.selectItem.isSelected)?self.selectItem.catalog_id:@"");
+                self.sureFilterCall((self.selectItem && self.selectItem.isSelected)?self.selectItem.catalog_id:nil);
             }else if (self.dataType == 2) {
-                self.sureFilterCall((self.selectSubItem && self.selectSubItem.isSelected)?self.selectSubItem.catalog_id:@"");
-            }else{
-               self.sureFilterCall((self.selectBrand && self.selectBrand.isSelected)?self.selectBrand.brand_id:@"");
+                self.sureFilterCall((self.selectSubItem && self.selectSubItem.isSelected)?self.selectSubItem.catalog_id:nil);
+            }else if (self.dataType == 3){
+               self.sureFilterCall((self.selectBrand && self.selectBrand.isSelected)?self.selectBrand.brand_id:nil);
+            }
+        }
+        if (self.filterCall) {
+            if (self.dataType == 4) {
+                self.filterCall((self.selectItem && self.selectItem.isSelected)?self.selectItem.catalog_id:nil,(self.selectBrand && self.selectBrand.isSelected)?self.selectBrand.brand_id:nil);
             }
         }
     }else{
@@ -56,7 +61,10 @@ static NSString *const ChooseClassHeader = @"ChooseClassHeader";
             self.selectItem.isSelected = NO;
         }else if (self.dataType == 2) {
             self.selectSubItem.isSelected = NO;
-        }else{
+        }else if (self.dataType == 3){
+            self.selectBrand.isSelected = NO;
+        }else {
+            self.selectItem.isSelected = NO;
             self.selectBrand.isSelected = NO;
         }
         [self.collectionView reloadData];
@@ -66,6 +74,56 @@ static NSString *const ChooseClassHeader = @"ChooseClassHeader";
 -(void)setDataSouce:(NSArray *)dataSouce
 {
     _dataSouce = dataSouce;
+    self.selectItem = nil;
+    self.selectSubItem = nil;
+    self.selectBrand = nil;
+    if (self.dataType == 1) {
+        for (GXCatalogItem *item in _dataSouce) {
+            if ([item.catalog_id isEqualToString:self.logItemId]) {
+                item.isSelected = YES;
+                self.selectItem = item;
+            }else{
+                item.isSelected = NO;
+            }
+        }
+    }else if (self.dataType == 2) {
+        for (GXCatalogItem *item in _dataSouce) {
+            if ([item.catalog_id isEqualToString:self.logItemId]) {
+                item.isSelected = YES;
+                self.selectSubItem = item;
+            }else{
+                item.isSelected = NO;
+            }
+        }
+    }else if (self.dataType == 3){
+        for (GXBrandItem *item in _dataSouce) {
+            if ([item.brand_id isEqualToString:self.brandItemId]) {
+                item.isSelected = YES;
+                self.selectBrand = item;
+            }else{
+                item.isSelected = NO;
+            }
+        }
+    }else {
+            for (GXCatalogItem *item in _dataSouce) {
+                if ([item.catalog_id isEqualToString:self.logItemId]) {
+                    item.isSelected = YES;
+                    self.selectItem = item;
+                }else{
+                    item.isSelected = NO;
+                }
+            }
+            if (self.selectItem) {
+                for (GXBrandItem *item in self.selectItem.brandData) {
+                    if ([item.brand_id isEqualToString:self.brandItemId]) {
+                        item.isSelected = YES;
+                        self.selectBrand = item;
+                    }else{
+                        item.isSelected = NO;
+                    }
+                }
+            }
+    }
     [self.collectionView reloadData];
 }
 #pragma mark -- UICollectionView 数据源和代理
@@ -75,8 +133,10 @@ static NSString *const ChooseClassHeader = @"ChooseClassHeader";
         return 1;
     }else if (self.dataType == 2) {
         return 1;
-    }else{
+    }else if (self.dataType == 3){
         return 1;
+    }else{
+        return 2;
     }
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
@@ -84,8 +144,14 @@ static NSString *const ChooseClassHeader = @"ChooseClassHeader";
         return self.dataSouce.count;
     }else if (self.dataType == 2) {
         return self.dataSouce.count;
-    }else{
+    }else if (self.dataType == 3){
         return self.dataSouce.count;
+    }else{
+        if (section == 0) {
+           return self.dataSouce.count;
+        }else{
+            return (self.selectItem && self.selectItem.isSelected)?self.selectItem.brandData.count:0;
+        }
     }
 }
 - (ZLLayoutType)collectionView:(UICollectionView *)collectionView layout:(ZLCollectionViewBaseFlowLayout *)collectionViewLayout typeOfLayout:(NSInteger)section {
@@ -103,9 +169,17 @@ static NSString *const ChooseClassHeader = @"ChooseClassHeader";
     }else if (self.dataType == 2) {
         GXCatalogItem *logItem = self.dataSouce[indexPath.item];
         cell.logItem = logItem;
-    }else{
+    }else if (self.dataType == 3){
         GXBrandItem *brandItem = self.dataSouce[indexPath.item];
         cell.brandItem = brandItem;
+    }else{
+        if (indexPath.section == 0) {
+           GXCatalogItem *logItem = self.dataSouce[indexPath.item];
+           cell.logItem = logItem;
+        }else{
+            GXBrandItem *brandItem = self.selectItem.brandData[indexPath.item];
+            cell.brandItem = brandItem;
+        }
     }
     return cell;
 }
@@ -120,11 +194,26 @@ static NSString *const ChooseClassHeader = @"ChooseClassHeader";
         GXCatalogItem *subItem = self.dataSouce[indexPath.item];
         subItem.isSelected = YES;
         self.selectSubItem = subItem;
-    }else{
+    }else if (self.dataType == 3) {
         self.selectBrand.isSelected = NO;
         GXBrandItem *brandItem = self.dataSouce[indexPath.item];
         brandItem.isSelected = YES;
         self.selectBrand = brandItem;
+    }else{
+        if (indexPath.section == 0) {
+            self.selectItem.isSelected = NO;
+            GXCatalogItem *logItem = self.dataSouce[indexPath.item];
+            logItem.isSelected = YES;
+            self.selectItem = logItem;
+            
+            // 重置品牌
+            self.selectBrand.isSelected = NO;
+        }else{
+            self.selectBrand.isSelected = NO;
+            GXBrandItem *brandItem = self.selectItem.brandData[indexPath.item];
+            brandItem.isSelected = YES;
+            self.selectBrand = brandItem;
+        }
     }
    
     [collectionView reloadData];
@@ -141,8 +230,10 @@ static NSString *const ChooseClassHeader = @"ChooseClassHeader";
             header.titleLabel.text = @"类目";
         }else if (self.dataType == 2) {
             header.titleLabel.text = @"分类";
-        }else{
+        }else if (self.dataType == 3){
             header.titleLabel.text = @"品牌";
+        }else{
+            header.titleLabel.text = indexPath.section?@"品牌":@"分类";
         }
         return header;
     }

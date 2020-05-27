@@ -40,7 +40,7 @@ static NSString *const StoreCell = @"StoreCell";
     
     HXSearchBar *searchBar = [[HXSearchBar alloc] initWithFrame:CGRectMake(0, 0, HX_SCREEN_WIDTH - 70.f, 30.f)];
     searchBar.backgroundColor = [UIColor whiteColor];
-    searchBar.layer.cornerRadius = 6;
+    searchBar.layer.cornerRadius = 15.f;
     searchBar.layer.masksToBounds = YES;
     searchBar.delegate = self;
     searchBar.placeholder = @"请输入店铺名称查询";
@@ -191,10 +191,10 @@ static NSString *const StoreCell = @"StoreCell";
 {
     // 返回这个模型对应的cell高度
     GXStore *store = self.stores[indexPath.row];
-    if (store.coupons && store.coupons.count) {
-        return 5.f + 50.f + 60.f + (HX_SCREEN_WIDTH-10.f*5)*2/3.0 + 50.f + 5.f;
+   if (store.coupons && store.coupons.count) {
+        return 5.f + 60.f + 60.f + (HX_SCREEN_WIDTH-10.f*6)/3.0 + 50.f + 5.f;
     }else{
-        return 5.f + 50.f + (HX_SCREEN_WIDTH-10.f*5)*2/3.0 + 50.f + 5.f;
+        return 5.f + 60.f + (HX_SCREEN_WIDTH-10.f*6)/3.0 + 50.f + 5.f;
     }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

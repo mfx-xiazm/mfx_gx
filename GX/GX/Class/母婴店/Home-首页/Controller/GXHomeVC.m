@@ -20,7 +20,7 @@
 #import "GXHomeSectionBgReusableView.h"
 #import "GXHomeSectionBgReusableView2.h"
 #import "GXHomeBannerHeader.h"
-#import "GXGoodStoreVC.h"
+#import "GXGoodStoreChildVC.h"
 #import "GXGoodsDetailVC.h"
 #import "GXGoodBrandVC.h"
 #import "GXActivityVC.h"
@@ -79,12 +79,13 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
     
     HXSearchBar *searchBar = [[HXSearchBar alloc] initWithFrame:CGRectMake(0, 0, HX_SCREEN_WIDTH - 70.f, 30.f)];
     searchBar.backgroundColor = [UIColor whiteColor];
-    searchBar.layer.cornerRadius = 6;
+    searchBar.layer.cornerRadius = 15.f;
     searchBar.layer.masksToBounds = YES;
     searchBar.delegate = self;
     searchBar.placeholder = @"请输入商品名称查询";
     self.searchBar = searchBar;
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
+    self.navigationItem.titleView = searchBar;
     
     SPButton *msg = [SPButton buttonWithType:UIButtonTypeCustom];
     msg.imagePosition = SPButtonImagePositionTop;
@@ -469,7 +470,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {//分类
         if (indexPath.item == 0) {
-            GXGoodStoreVC *svc = [GXGoodStoreVC new];
+            GXGoodStoreChildVC *svc = [GXGoodStoreChildVC new];
             [self.navigationController pushViewController:svc animated:YES];
         }else if (indexPath.item == 1) {
             GXGoodBrandVC *bvc = [GXGoodBrandVC new];

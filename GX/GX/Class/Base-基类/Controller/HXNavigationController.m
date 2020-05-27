@@ -95,10 +95,10 @@
         
         [button setImage:[UIImage imageNamed:@"返回白色"] forState:UIControlStateNormal];
         [button setImage:[UIImage imageNamed:@"返回白色"] forState:UIControlStateHighlighted];
-        button.hxn_size = CGSizeMake(44, 44);
+        button.hxn_size = CGSizeMake(30, 44);
         // 让按钮内部的所有内容左对齐
 //        button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        button.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 20);
+        button.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10);
         [button addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
         viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     }

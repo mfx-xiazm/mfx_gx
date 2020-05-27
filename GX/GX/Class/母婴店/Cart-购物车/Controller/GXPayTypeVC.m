@@ -67,8 +67,8 @@ static NSString *const PayTypeCell = @"PayTypeCell";
     if (_payTypes == nil) {
         NSArray *pays = @[@{@"payType":@"1",@"typeName":@"支付宝",@"typeImg":HXGetImage(@"支付宝")},
                           @{@"payType":@"2",@"typeName":@"微信支付",@"typeImg":HXGetImage(@"微信支付")},
-                    @{@"payType":@"3",@"typeName":@"网银线下支付",@"typeImg":HXGetImage(@"网商银行")}
-//                          @{@"payType":@"4",@"typeName":@"银联支付",@"typeImg":HXGetImage(@"银联")}
+                    @{@"payType":@"3",@"typeName":@"网银线下支付",@"typeImg":HXGetImage(@"网商银行")},
+                          @{@"payType":@"4",@"typeName":@"银联支付",@"typeImg":HXGetImage(@"银联")}
         ];
         _payTypes = [NSArray yy_modelArrayWithClass:[GXPayType class] json:pays];
     }
