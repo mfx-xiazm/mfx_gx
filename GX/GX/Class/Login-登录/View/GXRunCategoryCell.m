@@ -99,7 +99,7 @@
 {
     _logisticst = logisticst;
     
-    self.contentText.text = _logisticst.logistics_com_name;
+    self.contentText.text = _logisticst.freight_type;
     
     if (_logisticst.isSelected) {
         self.contentText.textColor = [UIColor whiteColor];

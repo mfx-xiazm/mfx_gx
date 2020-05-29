@@ -230,7 +230,7 @@ static NSString *const SankPriceCell = @"SankPriceCell";
     }];
 }
 #pragma mark -- 业务逻辑
--(void)addOrderCartRequest:(NSString *)goods_id cart_num:(NSInteger)cart_num specs_attrs:(NSString *)specs_attrs logistics_com_id:(NSString *)logistics_com_id sku_id:(NSString *)sku_id
+-(void)addOrderCartRequest:(NSString *)goods_id cart_num:(NSInteger)cart_num specs_attrs:(NSString *)specs_attrs freight_template_id:(NSString *)freight_template_id sku_id:(NSString *)sku_id
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"goods_id"] = goods_id;//商品id
@@ -238,7 +238,7 @@ static NSString *const SankPriceCell = @"SankPriceCell";
     parameters[@"specs_attrs"] = specs_attrs;//商品规格
     parameters[@"is_try"] = @(0);//是否试用装商品
     parameters[@"is_checked"] = @"1";//0未选择；1已选择
-    parameters[@"logistics_com_id"] = logistics_com_id;
+    parameters[@"freight_template_id"] = freight_template_id;
     parameters[@"sku_id"] = sku_id;
 
     [HXNetworkTool POST:HXRC_M_URL action:@"admin/addOrderCart" parameters:parameters success:^(id responseObject) {
@@ -329,14 +329,14 @@ static NSString *const SankPriceCell = @"SankPriceCell";
         footer.priceSankHandleCall = ^(NSInteger index) {
             hx_strongify(weakSelf);
             if (index == 1) {
-                [strongSelf addOrderCartRequest:sank.goods_id cart_num:sank.buy_num specs_attrs:(sank.logistics_com_name && sank.logistics_com_name.length)?[NSString stringWithFormat:@"%@,%@",sank.specs_attrs,sank.logistics_com_name]:sank.specs_attrs logistics_com_id:sank.logistics_com_id sku_id:sank.sku_id];
+                [strongSelf addOrderCartRequest:sank.goods_id cart_num:sank.buy_num specs_attrs:(sank.logistics_com_name && sank.logistics_com_name.length)?[NSString stringWithFormat:@"%@,%@",sank.specs_attrs,sank.logistics_com_name]:sank.specs_attrs freight_template_id:sank.freight_template_id sku_id:sank.sku_id];
             }else{
                 GXUpOrderVC *ovc = [GXUpOrderVC new];
                 ovc.goods_id = sank.goods_id;
                 ovc.goods_num = [NSString stringWithFormat:@"%ld",(long)sank.buy_num];
                 ovc.specs_attrs = (sank.logistics_com_name && sank.logistics_com_name.length)?[NSString stringWithFormat:@"%@,%@",sank.specs_attrs,sank.logistics_com_name]:sank.specs_attrs;
                 ovc.sku_id = sank.sku_id;
-                ovc.logistics_com_id = sank.logistics_com_id;
+                ovc.freight_template_id = sank.freight_template_id;
                 [strongSelf.navigationController pushViewController:ovc animated:YES];
             }
         };

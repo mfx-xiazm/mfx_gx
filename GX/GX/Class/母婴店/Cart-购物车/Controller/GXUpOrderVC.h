@@ -23,7 +23,7 @@ typedef void(^upOrderSuccessCall)(void);
 /* 直接购买该商品的规格id */
 @property(nonatomic,copy) NSString *sku_id;
 /* 直接购买物流公司id */
-@property(nonatomic,copy) NSString *logistics_com_id;
+@property(nonatomic,copy) NSString *freight_template_id;
 /* 购物车跳转 */
 @property(nonatomic,assign) BOOL isCartPush;
 /* 订单提交成功 */

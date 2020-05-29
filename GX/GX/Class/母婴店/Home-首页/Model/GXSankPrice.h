@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy)NSString *stock;
 @property(nonatomic,copy)NSString *sale_num;
 @property(nonatomic,copy)NSString *specs_attrs;
-@property(nonatomic,copy)NSString *logistics_com_id;
+@property(nonatomic,copy)NSString *freight_template_id;
 @property(nonatomic,copy)NSString *logistics_com_name;
 @property(nonatomic,copy)NSString *reducedPrice;
 /* 是否展开 */

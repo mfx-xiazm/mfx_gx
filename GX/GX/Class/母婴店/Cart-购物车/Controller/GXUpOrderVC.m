@@ -150,7 +150,7 @@ static NSString *const UpOrderCell = @"UpOrderCell";
         parameters[@"goods_num"] = self.goods_num;//直接购买商品数量
         parameters[@"specs_attrs"] = self.specs_attrs;//直接购买商品规格
         parameters[@"sku_id"] = self.sku_id;//直接购买该商品的规格id
-        parameters[@"logistics_com_id"] = self.logistics_com_id;//直接购买物流公司id
+        parameters[@"freight_template_id"] = self.freight_template_id;//直接购买物流公司id
     }
    
     hx_weakify(self);
@@ -271,7 +271,7 @@ static NSString *const UpOrderCell = @"UpOrderCell";
         parameters[@"sku_id"] = orderGood.sku_id;//某个供应商下的该商品的id
         parameters[@"goods_num"] = self.goods_num;//直接购买商品的数量
         parameters[@"specs_attrs"] = orderGood.specs_attrs;//直接购买商品规格
-        parameters[@"logistics_com_id"] = orderGood.logistics_com_id;//物流公司id
+        parameters[@"freight_template_id"] = orderGood.freight_template_id;//物流公司id
         NSMutableString *coupon_ids = [NSMutableString string];
         
         for (GXConfirmOrderData *orderData in self.confirmOrder.goodsData) {

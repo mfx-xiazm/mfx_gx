@@ -137,7 +137,7 @@ static NSString *const MarketTrendCell = @"MarketTrendCell";
     [self.tableView reloadData];
 }
 #pragma mark -- 业务逻辑
--(void)addOrderCartRequest:(NSString *)goods_id specs_attrs:(NSString *)specs_attrs logistics_com_id:(NSString *)logistics_com_id sku_id:(NSString *)sku_id
+-(void)addOrderCartRequest:(NSString *)goods_id specs_attrs:(NSString *)specs_attrs freight_template_id:(NSString *)freight_template_id sku_id:(NSString *)sku_id
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"goods_id"] = goods_id;//商品id
@@ -145,7 +145,7 @@ static NSString *const MarketTrendCell = @"MarketTrendCell";
     parameters[@"specs_attrs"] = specs_attrs;//商品规格
     parameters[@"is_try"] = @(0);//是否试用装商品
     parameters[@"is_checked"] = @"1";//0未选择；1已选择
-    parameters[@"logistics_com_id"] = logistics_com_id;
+    parameters[@"freight_template_id"] = freight_template_id;
     parameters[@"sku_id"] = sku_id;
 
     [HXNetworkTool POST:HXRC_M_URL action:@"admin/addOrderCart" parameters:parameters success:^(id responseObject) {
@@ -201,14 +201,14 @@ static NSString *const MarketTrendCell = @"MarketTrendCell";
     cell.trendBtnCall = ^(NSInteger index) {
         hx_strongify(weakSelf);
         if (index == 1) {
-            [strongSelf addOrderCartRequest:goods.goods_id specs_attrs:(goods.logistics_com_name && goods.logistics_com_name.length)?[NSString stringWithFormat:@"%@,%@",goods.specs_attrs,goods.logistics_com_name]:goods.specs_attrs logistics_com_id:goods.logistics_com_id sku_id:goods.sku_id];
+            [strongSelf addOrderCartRequest:goods.goods_id specs_attrs:(goods.logistics_com_name && goods.logistics_com_name.length)?[NSString stringWithFormat:@"%@,%@",goods.specs_attrs,goods.logistics_com_name]:goods.specs_attrs freight_template_id:goods.freight_template_id sku_id:goods.sku_id];
         }else{
             GXUpOrderVC *ovc = [GXUpOrderVC new];
             ovc.goods_id = goods.goods_id;
             ovc.goods_num = @"1";
             ovc.specs_attrs = (goods.logistics_com_name && goods.logistics_com_name.length)?[NSString stringWithFormat:@"%@,%@",goods.specs_attrs,goods.logistics_com_name]:goods.specs_attrs;
             ovc.sku_id = goods.sku_id;
-            ovc.logistics_com_id = goods.logistics_com_id;
+            ovc.freight_template_id = goods.freight_template_id;
             [strongSelf.navigationController pushViewController:ovc animated:YES];
         }
     };

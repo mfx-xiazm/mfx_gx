@@ -88,14 +88,23 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *provider_no;
 @property(nonatomic,copy) NSString *price;
 @property(nonatomic,copy) NSString *stock;
+@property(nonatomic,copy) NSString *control_type;
+@property(nonatomic,copy) NSString *sale_id;
+@property(nonatomic,copy) NSString *is_contry;
+@property(nonatomic,copy) NSString *province_id;
+@property(nonatomic,copy) NSString *city_id;
+@property(nonatomic,copy) NSString *district_id;
+@property(nonatomic,copy) NSString *town_id;
+
 @property(nonatomic,strong) NSArray<GXGoodsLogisticst *> *logistic;
 
 @end
 
 
 @interface GXGoodsLogisticst : NSObject
-@property(nonatomic,copy) NSString *logistics_com_id;
-@property(nonatomic,copy) NSString *logistics_com_name;
+@property(nonatomic,copy) NSString *freight_type;
+@property(nonatomic,copy) NSString *freight_template_name;
+@property(nonatomic,copy) NSString *freight_template_id;
 /* 是否选中 */
 @property(nonatomic,assign) BOOL isSelected;
 @end

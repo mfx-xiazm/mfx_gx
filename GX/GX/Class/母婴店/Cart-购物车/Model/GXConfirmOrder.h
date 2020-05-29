@@ -53,7 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *cover_img;
 @property(nonatomic,copy) NSString *price;
 @property(nonatomic,copy) NSString *cart_num;
-@property(nonatomic,copy) NSString *logistics_com_id;
+@property(nonatomic,copy) NSString *freight_template_id;
 @property(nonatomic,copy) NSString *specs_attrs;
 @property(nonatomic,copy) NSString *sku_id;
 @property(nonatomic,copy) NSString *is_try;

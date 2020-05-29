@@ -244,17 +244,17 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
                     }
                 }
                 if (specs_attrs.length) {
-                    if (strongSelf.goodsDetail.selectLogisticst.logistics_com_name && strongSelf.goodsDetail.selectLogisticst.logistics_com_name.length) {
-                        [specs_attrs appendFormat:@",%@",strongSelf.goodsDetail.selectLogisticst.logistics_com_name];
+                    if (strongSelf.goodsDetail.selectLogisticst.freight_type && strongSelf.goodsDetail.selectLogisticst.freight_type.length) {
+                        [specs_attrs appendFormat:@",%@",strongSelf.goodsDetail.selectLogisticst.freight_type];
                     }
                 }else{
-                    if (strongSelf.goodsDetail.selectLogisticst.logistics_com_name && strongSelf.goodsDetail.selectLogisticst.logistics_com_name.length) {
-                        [specs_attrs appendFormat:@"%@",strongSelf.goodsDetail.selectLogisticst.logistics_com_name];
+                    if (strongSelf.goodsDetail.selectLogisticst.freight_type && strongSelf.goodsDetail.selectLogisticst.freight_type.length) {
+                        [specs_attrs appendFormat:@"%@",strongSelf.goodsDetail.selectLogisticst.freight_type];
                     }
                 }
                 ovc.specs_attrs = specs_attrs;//商品规格
                 ovc.sku_id = strongSelf.goodsDetail.sku.sku_id;
-                ovc.logistics_com_id = strongSelf.goodsDetail.selectLogisticst.logistics_com_id;
+                ovc.freight_template_id = strongSelf.goodsDetail.selectLogisticst.freight_template_id;
                 [strongSelf.navigationController pushViewController:ovc animated:YES];
             }
         }
@@ -471,21 +471,21 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
         }
     }
     if (specs_attrs.length) {
-        if (self.goodsDetail.selectLogisticst.logistics_com_name && self.goodsDetail.selectLogisticst.logistics_com_name.length) {
-            [specs_attrs appendFormat:@",%@",self.goodsDetail.selectLogisticst.logistics_com_name];
+        if (self.goodsDetail.selectLogisticst.freight_type && self.goodsDetail.selectLogisticst.freight_type.length) {
+            [specs_attrs appendFormat:@",%@",self.goodsDetail.selectLogisticst.freight_type];
         }
     }else{
-        if (self.goodsDetail.selectLogisticst.logistics_com_name && self.goodsDetail.selectLogisticst.logistics_com_name.length) {
-            [specs_attrs appendFormat:@"%@",self.goodsDetail.selectLogisticst.logistics_com_name];
+        if (self.goodsDetail.selectLogisticst.freight_type && self.goodsDetail.selectLogisticst.freight_type.length) {
+            [specs_attrs appendFormat:@"%@",self.goodsDetail.selectLogisticst.freight_type];
         }
     }
     parameters[@"specs_attrs"] = specs_attrs;//商品规格
     
     parameters[@"is_try"] = self.goodsDetail.is_try;//是否试用装商品
     parameters[@"is_checked"] = @"1";//0未选择；1已选择
-    parameters[@"logistics_com_id"] = self.goodsDetail.selectLogisticst.logistics_com_id;
+    parameters[@"freight_template_id"] = self.goodsDetail.selectLogisticst.freight_template_id;
     parameters[@"sku_id"] = self.goodsDetail.sku.sku_id;
-
+ 
     [HXNetworkTool POST:HXRC_M_URL action:@"admin/addOrderCart" parameters:parameters success:^(id responseObject) {
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
