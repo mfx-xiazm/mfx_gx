@@ -70,9 +70,11 @@
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"phone"] = self.phone.text;
     parameters[@"type"] = @"2";//默认为1 表示注册时获取短信验证码 为2表示修改手机号或密码或忘记密码时获取验证码
+    /** 1 母婴店 2供应商 3销售员 */
+    parameters[@"utype"] = @"2";
     
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getCheckCode" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"index/getCheckCode" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             [sender startWithTime:59 title:@"获取验证码" countDownTitle:@"s" mainColor:HXControlBg countColor:HXControlBg];
@@ -92,6 +94,8 @@
     parameters[@"sms_code"] = self.code.text;
     parameters[@"password"] = self.pwd.text;
     parameters[@"confirmPass"] = self.confirmPwd.text;
+    /** 1 母婴店 2供应商 3销售员 */
+    parameters[@"utype"] = @"2";
     
     hx_weakify(self);
     [HXNetworkTool POST:HXRC_M_URL action:(self.dataType ==1)?@"admin/forgetPassword":@"admin/editPassword" parameters:parameters success:^(id responseObject) {

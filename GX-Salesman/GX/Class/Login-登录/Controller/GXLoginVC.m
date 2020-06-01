@@ -56,9 +56,11 @@
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"username"] = self.phone.text;
     parameters[@"password"] = self.pwd.text;
+    /** 1 母婴店 2供应商 3销售员 */
+    parameters[@"utype"] = @"3";
     
     //hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"admin/userLogin" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"program/userLogin" parameters:parameters success:^(id responseObject) {
         [sender stopLoading:@"登录" image:nil textColor:nil backgroundColor:nil];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             MSUserInfo *info = [MSUserInfo yy_modelWithDictionary:responseObject[@"data"]];

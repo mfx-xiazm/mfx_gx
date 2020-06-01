@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class GXMyOrderGoods,GXMyRefund,GYMyRefundGoods,GXConfirmOrderGoods,GXSalerOrder;
+@class GXMyOrderGoods,GXMyRefund,GYMyRefundGoods,GXConfirmOrderGoods;
 @interface GXUpOrderGoodsCell : UITableViewCell
 /* 商品 */
 @property(nonatomic,strong) GXMyOrderGoods *goods;
@@ -20,8 +20,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong) GXMyRefund *refund;
 /* 提交订单商品 */
 @property(nonatomic,strong) GXConfirmOrderGoods *upGoods;
-/* 销售员订单 */
-@property(nonatomic,strong) GXSalerOrder *salerOrder;
 @end
 
 NS_ASSUME_NONNULL_END

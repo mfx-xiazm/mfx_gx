@@ -24,6 +24,13 @@ UIKIT_EXTERN NSString * const HXUMengKey;
 // 腾讯Bugly的Key
 UIKIT_EXTERN NSString * const HXBuglyKey;
 
+// 支付宝支付Scheme
+UIKIT_EXTERN NSString * const HXAliPayScheme;
+// 银联支付Scheme
+UIKIT_EXTERN NSString * const HXUPPayScheme;
+// 银联支付Mode "00"代表接入生产环境（正式版本需要）；"01"代表接入开发测试环境（测试版本需要）；
+UIKIT_EXTERN NSString * const HXUPPayMode;
+
 // 用户定位信息
 UIKIT_EXTERN NSString * const HXUserLongitude;//经度
 

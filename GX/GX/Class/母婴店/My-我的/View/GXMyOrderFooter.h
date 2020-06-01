@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class GXMyOrder,GXMyRefund,GXSalerOrder;
+@class GXMyOrder,GXMyRefund;
 typedef void(^orderHandleCall)(NSInteger index);
 @interface GXMyOrderFooter : UIView
 @property (weak, nonatomic) IBOutlet UIView *handleView;
@@ -22,8 +22,6 @@ typedef void(^orderHandleCall)(NSInteger index);
 @property(nonatomic,strong) GXMyOrder *pOrder;
 /* 退款 */
 @property(nonatomic,strong) GXMyRefund *pRefund;
-/* 销售员订单 */
-@property(nonatomic,strong) GXSalerOrder *salerOrder;
 /* 操作 */
 @property(nonatomic,copy) orderHandleCall orderHandleCall;
 @end

@@ -46,8 +46,6 @@
 		4994C54024810F7C00A9A239 /* GXMyCoupon.m in Sources */ = {isa = PBXBuildFile; fileRef = 4994C53F24810F7B00A9A239 /* GXMyCoupon.m */; };
 		4994C54424810F8300A9A239 /* GXMyCouponCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4994C54224810F8200A9A239 /* GXMyCouponCell.m */; };
 		4994C54524810F8300A9A239 /* GXMyCouponCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4994C54324810F8300A9A239 /* GXMyCouponCell.xib */; };
-		90067ECF2344356700628503 /* GXRegisterAuthVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 90067ECD2344356700628503 /* GXRegisterAuthVC.m */; };
-		90067ED02344356700628503 /* GXRegisterAuthVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90067ECE2344356700628503 /* GXRegisterAuthVC.xib */; };
 		90067ED3234435E300628503 /* GXRegisterAuthHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 90067ED2234435E300628503 /* GXRegisterAuthHeader.m */; };
 		90067ED5234435E900628503 /* GXRegisterAuthHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90067ED4234435E900628503 /* GXRegisterAuthHeader.xib */; };
 		90067ED923443A1300628503 /* GXRegisterAuthCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 90067ED723443A1300628503 /* GXRegisterAuthCell.m */; };
@@ -77,8 +75,6 @@
 		907F2F8C234441D80067D16A /* GXRunCategoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 907F2F8B234441D80067D16A /* GXRunCategoryView.xib */; };
 		907F2F90234443A80067D16A /* GXRunCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 907F2F8E234443A80067D16A /* GXRunCategoryCell.m */; };
 		907F2F91234443A80067D16A /* GXRunCategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 907F2F8F234443A80067D16A /* GXRunCategoryCell.xib */; };
-		90884215237417D1005D4382 /* GXRegisterAuthVC2.m in Sources */ = {isa = PBXBuildFile; fileRef = 90884213237417D1005D4382 /* GXRegisterAuthVC2.m */; };
-		90884216237417D1005D4382 /* GXRegisterAuthVC2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90884214237417D1005D4382 /* GXRegisterAuthVC2.xib */; };
 		9088421923743350005D4382 /* GXRegisterData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9088421823743350005D4382 /* GXRegisterData.m */; };
 		9088421C23750928005D4382 /* GXFinanceLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 9088421B23750928005D4382 /* GXFinanceLog.m */; };
 		909A467B23F63BDA000AC801 /* GXAuthStep1VC.m in Sources */ = {isa = PBXBuildFile; fileRef = 909A467923F63BDA000AC801 /* GXAuthStep1VC.m */; };
@@ -260,9 +256,6 @@
 		4994C54224810F8200A9A239 /* GXMyCouponCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXMyCouponCell.m; sourceTree = "<group>"; };
 		4994C54324810F8300A9A239 /* GXMyCouponCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXMyCouponCell.xib; sourceTree = "<group>"; };
 		7E67F6C2F7D067769D4BA925 /* libPods-GX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		90067ECC2344356700628503 /* GXRegisterAuthVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXRegisterAuthVC.h; sourceTree = "<group>"; };
-		90067ECD2344356700628503 /* GXRegisterAuthVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXRegisterAuthVC.m; sourceTree = "<group>"; };
-		90067ECE2344356700628503 /* GXRegisterAuthVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXRegisterAuthVC.xib; sourceTree = "<group>"; };
 		90067ED1234435E300628503 /* GXRegisterAuthHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXRegisterAuthHeader.h; sourceTree = "<group>"; };
 		90067ED2234435E300628503 /* GXRegisterAuthHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXRegisterAuthHeader.m; sourceTree = "<group>"; };
 		90067ED4234435E900628503 /* GXRegisterAuthHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXRegisterAuthHeader.xib; sourceTree = "<group>"; };
@@ -314,9 +307,6 @@
 		907F2F8D234443A80067D16A /* GXRunCategoryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXRunCategoryCell.h; sourceTree = "<group>"; };
 		907F2F8E234443A80067D16A /* GXRunCategoryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXRunCategoryCell.m; sourceTree = "<group>"; };
 		907F2F8F234443A80067D16A /* GXRunCategoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXRunCategoryCell.xib; sourceTree = "<group>"; };
-		90884212237417D1005D4382 /* GXRegisterAuthVC2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXRegisterAuthVC2.h; sourceTree = "<group>"; };
-		90884213237417D1005D4382 /* GXRegisterAuthVC2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXRegisterAuthVC2.m; sourceTree = "<group>"; };
-		90884214237417D1005D4382 /* GXRegisterAuthVC2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXRegisterAuthVC2.xib; sourceTree = "<group>"; };
 		9088421723743350005D4382 /* GXRegisterData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXRegisterData.h; sourceTree = "<group>"; };
 		9088421823743350005D4382 /* GXRegisterData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXRegisterData.m; sourceTree = "<group>"; };
 		9088421A23750928005D4382 /* GXFinanceLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXFinanceLog.h; sourceTree = "<group>"; };
@@ -1182,9 +1172,6 @@
 				90FFBD7F23ACA0260093A3FE /* GXAboutUsVC.h */,
 				90FFBD8023ACA0260093A3FE /* GXAboutUsVC.m */,
 				90FFBD8123ACA0260093A3FE /* GXAboutUsVC.xib */,
-				90067ECC2344356700628503 /* GXRegisterAuthVC.h */,
-				90067ECD2344356700628503 /* GXRegisterAuthVC.m */,
-				90067ECE2344356700628503 /* GXRegisterAuthVC.xib */,
 				909A467823F63BDA000AC801 /* GXAuthStep1VC.h */,
 				909A467923F63BDA000AC801 /* GXAuthStep1VC.m */,
 				909A467A23F63BDA000AC801 /* GXAuthStep1VC.xib */,
@@ -1197,9 +1184,6 @@
 				909A468723F66710000AC801 /* GXAuthStep4VC.h */,
 				909A468823F66710000AC801 /* GXAuthStep4VC.m */,
 				909A468923F66710000AC801 /* GXAuthStep4VC.xib */,
-				90884212237417D1005D4382 /* GXRegisterAuthVC2.h */,
-				90884213237417D1005D4382 /* GXRegisterAuthVC2.m */,
-				90884214237417D1005D4382 /* GXRegisterAuthVC2.xib */,
 				90E7C8FF2341934100D46E19 /* GXChangePwdVC.h */,
 				90E7C9002341934100D46E19 /* GXChangePwdVC.m */,
 				90E7C9012341934100D46E19 /* GXChangePwdVC.xib */,
@@ -1392,11 +1376,9 @@
 				907F2F91234443A80067D16A /* GXRunCategoryCell.xib in Resources */,
 				90E7C9082341A7EF00D46E19 /* GXRegisterVC.xib in Resources */,
 				4994C50424810CEB00A9A239 /* GXChangeBindVC.xib in Resources */,
-				90067ED02344356700628503 /* GXRegisterAuthVC.xib in Resources */,
 				90BB98C3234DAE6C00444ACC /* GXAccountManageCell.xib in Resources */,
 				90FFBD8323ACA0260093A3FE /* GXAboutUsVC.xib in Resources */,
 				4994C52424810E5000A9A239 /* GXOrderDetailVC.xib in Resources */,
-				90884216237417D1005D4382 /* GXRegisterAuthVC2.xib in Resources */,
 				907F2F8C234441D80067D16A /* GXRunCategoryView.xib in Resources */,
 				4994C53324810ED800A9A239 /* GXRefundDetailFooter.xib in Resources */,
 				4994C54524810F8300A9A239 /* GXMyCouponCell.xib in Resources */,
@@ -1562,7 +1544,6 @@
 				907F2F8A234441D20067D16A /* GXRunCategoryView.m in Sources */,
 				4994C51F24810DC200A9A239 /* GXMyOrder.m in Sources */,
 				9088421C23750928005D4382 /* GXFinanceLog.m in Sources */,
-				90067ECF2344356700628503 /* GXRegisterAuthVC.m in Sources */,
 				90C0B3DF2340CD7200A8C55B /* SGQRCodeObtainConfigure.m in Sources */,
 				9069739B23444E8600D8A8FF /* SPPickerView.m in Sources */,
 				90C0B45E2340DD1300A8C55B /* AppDelegate+MSPushService.m in Sources */,
@@ -1583,7 +1564,6 @@
 				90C0B4342340D27200A8C55B /* HXTabBarController.m in Sources */,
 				909A467B23F63BDA000AC801 /* GXAuthStep1VC.m in Sources */,
 				909A468A23F66710000AC801 /* GXAuthStep4VC.m in Sources */,
-				90884215237417D1005D4382 /* GXRegisterAuthVC2.m in Sources */,
 				905B3E0F2345A50000282515 /* HCSStarRatingView.m in Sources */,
 				90C0B3BF2340CD7200A8C55B /* HXLocationTool_.m in Sources */,
 				909A468523F66204000AC801 /* GXAuthStep3VC.m in Sources */,

@@ -15,6 +15,7 @@
 #import "GXLoginVC.h"
 #import <AlipaySDK/AlipaySDK.h>
 #import <WXApi.h>
+#import "UPPaymentControl.h"
 
 @implementation AppDelegate (MSAppService)
 
@@ -54,8 +55,23 @@
                     [[NSNotificationCenter defaultCenter] postNotificationName:HXPayPushNotification object:nil userInfo:@{@"result":@"3"}];
                 }
             }];
+            return YES;
         }else if ([url.host isEqualToString:@"pay"]) { //微信支付回调
             return [WXApi handleOpenURL:url delegate:self];
+        }else{
+            [[UPPaymentControl defaultControl] handlePaymentResult:url completeBlock:^(NSString *code,NSDictionary *data) {
+                if([code isEqualToString:@"success"]) {// code-success
+                    //结果code为成功时，去商户后台查询一下确保交易是成功的再展示成功
+                    [[NSNotificationCenter defaultCenter] postNotificationName:HXPayPushNotification object:nil userInfo:@{@"result":@"1"}];
+                }else if([code isEqualToString:@"cancel"]) {// code-cancel
+                    //交易取消
+                    [[NSNotificationCenter defaultCenter] postNotificationName:HXPayPushNotification object:nil userInfo:@{@"result":@"2"}];
+                }else {// code-fail
+                    //交易失败
+                    [[NSNotificationCenter defaultCenter] postNotificationName:HXPayPushNotification object:nil userInfo:@{@"result":@"3"}];
+                }
+            }];
+            return YES;
         }
     }
     return result;

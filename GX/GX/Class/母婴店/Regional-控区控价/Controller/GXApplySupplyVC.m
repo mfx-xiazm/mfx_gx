@@ -305,6 +305,7 @@ static NSString *const RunCategoryCell = @"RunCategoryCell";
     parameters[@"district_id"] = self.area_id;
     parameters[@"address_detail"] = @"";
     parameters[@"catalogs"] = self.catalogs_id;
+    
     hx_weakify(self);
     [HXNetworkTool POST:HXRC_M_URL action:@"admin/saveSupply" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);

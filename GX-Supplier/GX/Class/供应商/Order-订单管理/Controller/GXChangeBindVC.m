@@ -55,7 +55,9 @@
     parameters[@"phone"] = self.phone.text;
     parameters[@"sms_id"] = self.sms_id;
     parameters[@"sms_code"] = self.code.text;
-
+    /** 1 母婴店 2供应商 3销售员 */
+    parameters[@"utype"] = @"2";
+    
     hx_weakify(self);
     [HXNetworkTool POST:HXRC_M_URL action:@"admin/editPhone" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
@@ -81,9 +83,11 @@
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"phone"] = self.phone.text;
     parameters[@"type"] = @"1";//默认为1 为1表示注册时获取短信验证码或者更换手机号时获取验证码 为2表示忘记密码重置密码或更新密码时获取验证码
+    /** 1 母婴店 2供应商 3销售员 */
+    parameters[@"utype"] = @"2";
     
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getCheckCode" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"index/getCheckCode" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             [sender startWithTime:59 title:@"获取验证码" countDownTitle:@"s" mainColor:HXControlBg countColor:HXControlBg];

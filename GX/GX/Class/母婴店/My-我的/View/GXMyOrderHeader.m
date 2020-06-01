@@ -9,7 +9,6 @@
 #import "GXMyOrderHeader.h"
 #import "GXMyOrder.h"
 #import "GXMyRefund.h"
-#import "GXSalerOrder.h"
 
 @interface GXMyOrderHeader ()
 @property (weak, nonatomic) IBOutlet UILabel *order_no;
@@ -56,11 +55,5 @@
             self.order_state.text = @"供应商不同意";
         }
     }
-}
--(void)setSalerOrder:(GXSalerOrder *)salerOrder
-{
-    _salerOrder = salerOrder;
-    self.order_no.text = [NSString stringWithFormat:@"%@",_salerOrder.order_no];
-    self.order_state.hidden = YES;
 }
 @end
