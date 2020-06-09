@@ -100,7 +100,12 @@ static NSString *const PayTypeCell = @"PayTypeCell";
                 NSInteger payResult = [[responseObject objectForKey:@"data"] integerValue];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (payResult == 1 && ![strongSelf.selectPayType.payType isEqualToString:@"3"] && ![strongSelf.selectPayType.payType isEqualToString:@"4"]) {//支付成功
-                       if (strongSelf.isOrderPush) {// 订单列表或者订单详情跳转
+                        if (strongSelf.timer) {
+                            [strongSelf.timer stop];
+                            [strongSelf.timer invalidate];
+                            strongSelf.timer = nil;
+                        }
+                        if (strongSelf.isOrderPush) {// 订单列表或者订单详情跳转
                             if (strongSelf.paySuccessCall) {
                                 strongSelf.paySuccessCall();
                             }
