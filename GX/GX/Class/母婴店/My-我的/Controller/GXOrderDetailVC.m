@@ -481,6 +481,11 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
                 pvc.oid = self.orderDetail.oid;
                 pvc.order_no = self.orderDetail.order_no;
                 pvc.isOrderPush = YES;
+                hx_weakify(self);
+                pvc.paySuccessCall = ^{
+                    hx_strongify(weakSelf);
+                    [strongSelf getOrderInfoRequest];
+                };
                 [self.navigationController pushViewController:pvc animated:YES];
             }else if ([self.orderDetail.status isEqualToString:@"待发货"]) {
                 //HXLog(@"申请退款");
