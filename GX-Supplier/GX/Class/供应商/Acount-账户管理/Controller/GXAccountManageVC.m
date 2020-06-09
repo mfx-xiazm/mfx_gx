@@ -105,6 +105,7 @@ static NSString *const AccountManageCell = @"AccountManageCell";
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     if (isRefresh) {
+        [self getUserBalanceRequest];
         parameters[@"page"] = @(1);//第几页
     }else{
         NSInteger page = self.pagenum+1;
@@ -136,6 +137,7 @@ static NSString *const AccountManageCell = @"AccountManageCell";
             dispatch_async(dispatch_get_main_queue(), ^{
                 strongSelf.content_scroll.hidden = NO;
                 [strongSelf.tableView reloadData];
+                strongSelf.tableView.hidden = !strongSelf.logs.count;
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     strongSelf.tableViewHeight.constant = strongSelf.tableView.contentSize.height + 30.f;
                 });
@@ -178,6 +180,11 @@ static NSString *const AccountManageCell = @"AccountManageCell";
 - (IBAction)cashBtnClicked:(UIButton *)sender {
     GXCashVC *cvc = [GXCashVC new];
     cvc.cashable = [NSString stringWithFormat:@"%@",self.accountData[@"cashable_balance"]];
+    hx_weakify(self);
+    cvc.cashCall = ^{
+        hx_strongify(weakSelf);
+        [strongSelf getFinanceLogRequest:YES];
+    };
     [self.navigationController pushViewController:cvc animated:YES];
 }
 

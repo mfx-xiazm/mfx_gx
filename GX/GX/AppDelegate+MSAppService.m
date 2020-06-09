@@ -14,8 +14,10 @@
 #import <UMCommon/UMCommon.h>
 #import "GXLoginVC.h"
 #import <AlipaySDK/AlipaySDK.h>
-#import <WXApi.h>
+#import "WXApi.h"
 #import "UPPaymentControl.h"
+#import "UMSPPPayPluginSettings.h"
+#import "UMSPPPayUnifyPayPlugin.h"
 
 @implementation AppDelegate (MSAppService)
 
@@ -28,8 +30,13 @@
     
     [self configUSharePlatforms];
     
+    // 全民付环境配置  UMSP_PROD 生产环境  UMSP_TEST 测试环境
+    [UMSPPPayPluginSettings sharedInstance].umspEnviroment = UMSP_TEST;
+    
     //->微信支付相关//
-    [WXApi registerApp:HXWXKey];
+    [UMSPPPayUnifyPayPlugin registerApp:HXWXKey universalLink:@"https://guaxuanapi.guaxuan.cn/app/"];
+
+    // [WXApi registerApp:HXWXKey];
 }
 -(void)configUSharePlatforms
 {
@@ -59,19 +66,24 @@
         }else if ([url.host isEqualToString:@"pay"]) { //微信支付回调
             return [WXApi handleOpenURL:url delegate:self];
         }else{
-            [[UPPaymentControl defaultControl] handlePaymentResult:url completeBlock:^(NSString *code,NSDictionary *data) {
-                if([code isEqualToString:@"success"]) {// code-success
-                    //结果code为成功时，去商户后台查询一下确保交易是成功的再展示成功
-                    [[NSNotificationCenter defaultCenter] postNotificationName:HXPayPushNotification object:nil userInfo:@{@"result":@"1"}];
-                }else if([code isEqualToString:@"cancel"]) {// code-cancel
-                    //交易取消
-                    [[NSNotificationCenter defaultCenter] postNotificationName:HXPayPushNotification object:nil userInfo:@{@"result":@"2"}];
-                }else {// code-fail
-                    //交易失败
-                    [[NSNotificationCenter defaultCenter] postNotificationName:HXPayPushNotification object:nil userInfo:@{@"result":@"3"}];
-                }
-            }];
-            return YES;
+            NSString *string = [url absoluteString];
+            if ([string hasPrefix:HXUPPayScheme]){
+                return [UMSPPPayUnifyPayPlugin cloudPayHandleOpenURL:url];
+            }
+            return  [UMSPPPayUnifyPayPlugin handleOpenURL:url otherDelegate:self];// 此钱包只有微信处理
+//            [[UPPaymentControl defaultControl] handlePaymentResult:url completeBlock:^(NSString *code,NSDictionary *data) {
+//                if([code isEqualToString:@"success"]) {// code-success
+//                    //结果code为成功时，去商户后台查询一下确保交易是成功的再展示成功
+//                    [[NSNotificationCenter defaultCenter] postNotificationName:HXPayPushNotification object:nil userInfo:@{@"result":@"1"}];
+//                }else if([code isEqualToString:@"cancel"]) {// code-cancel
+//                    //交易取消
+//                    [[NSNotificationCenter defaultCenter] postNotificationName:HXPayPushNotification object:nil userInfo:@{@"result":@"2"}];
+//                }else {// code-fail
+//                    //交易失败
+//                    [[NSNotificationCenter defaultCenter] postNotificationName:HXPayPushNotification object:nil userInfo:@{@"result":@"3"}];
+//                }
+//            }];
+//            return YES;
         }
     }
     return result;

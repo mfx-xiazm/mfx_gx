@@ -10,9 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^cashCall)(void);
 @interface GXCashVC : HXBaseViewController
 /* 可提现金额 */
 @property(nonatomic,copy) NSString *cashable;
+@property (nonatomic, copy) cashCall cashCall;
 @end
 
 NS_ASSUME_NONNULL_END

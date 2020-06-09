@@ -17,9 +17,10 @@
 #import "GXOrderPay.h"
 #import "GXPayType.h"
 #import <AlipaySDK/AlipaySDK.h>
-#import <WXApi.h>
+#import "WXApi.h"
 #import "GXPayResultVC.h"
 #import "UPPaymentControl.h"
+#import "UMSPPPayUnifyPayPlugin.h"
 
 static NSString *const PayTypeCell = @"PayTypeCell";
 @interface GXPayTypeVC ()<UITableViewDelegate,UITableViewDataSource>
@@ -68,7 +69,7 @@ static NSString *const PayTypeCell = @"PayTypeCell";
     if (_payTypes == nil) {
         NSArray *pays = @[@{@"payType":@"1",@"typeName":@"支付宝",@"typeImg":HXGetImage(@"支付宝")},
                           @{@"payType":@"2",@"typeName":@"微信支付",@"typeImg":HXGetImage(@"微信支付")},
-                    @{@"payType":@"3",@"typeName":@"网银线下支付",@"typeImg":HXGetImage(@"网商银行")},
+                          @{@"payType":@"3",@"typeName":@"网银线下支付",@"typeImg":HXGetImage(@"网商银行")},
                           @{@"payType":@"4",@"typeName":@"银联支付",@"typeImg":HXGetImage(@"银联")}
         ];
         _payTypes = [NSArray yy_modelArrayWithClass:[GXPayType class] json:pays];
@@ -161,14 +162,14 @@ static NSString *const PayTypeCell = @"PayTypeCell";
     parameters[@"pay_type"] = self.selectPayType.payType;//支付方式：1支付宝；2微信支付；3线下支付(后台审核)；4银联支付
 
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"admin/orderPay" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getOmniPay" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
-            //pay_type 支付方式：1支付宝；2微信支付；3线下支付(后台审核)
+            //pay_type 支付方式：1支付宝；2微信支付；3线下支付(后台审核) 4银联支付
             if ([strongSelf.selectPayType.payType isEqualToString:@"1"]) {
                 [strongSelf doAliPay:responseObject[@"data"]];
             }else if ([strongSelf.selectPayType.payType isEqualToString:@"2"]){
-                [strongSelf doWXPay:[responseObject[@"data"] dictionaryWithJsonString]];
+                [strongSelf doWXPay:responseObject[@"data"]];
             }else if ([strongSelf.selectPayType.payType isEqualToString:@"3"]){
                 [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
                 // 跳转支付结果页面
@@ -178,6 +179,7 @@ static NSString *const PayTypeCell = @"PayTypeCell";
                 [strongSelf.navigationController pushViewController:rvc animated:YES];
             }else{
                 // 银联支付
+                [strongSelf doUPPay:responseObject[@"data"]];
             }
         }else{
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
@@ -187,12 +189,13 @@ static NSString *const PayTypeCell = @"PayTypeCell";
     }];
 }
 // 支付宝支付
--(void)doAliPay:(NSString *)parameters
+-(void)doAliPay:(NSDictionary *)parameters
 {
+    /*
     NSString *appScheme = HXAliPayScheme;
     // NOTE: 将签名成功字符串格式化为订单字符串,请严格按照该格式
     NSString *orderString = parameters;
-    
+
     // NOTE: 调用支付结果开始支付
     [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
         if ([resultDic[@"resultStatus"] intValue] == 9000) {
@@ -205,58 +208,80 @@ static NSString *const PayTypeCell = @"PayTypeCell";
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"订单支付失败"];
         }
     }];
+     */
+    NSString *payDataJsonStr = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:parameters[@"appPayRequest"] options:NSJSONWritingPrettyPrinted error:nil] encoding:NSUTF8StringEncoding];
+    hx_weakify(self);
+    [UMSPPPayUnifyPayPlugin payWithPayChannel:CHANNEL_ALIPAY payData:payDataJsonStr callbackBlock:^(NSString *resultCode, NSString *resultInfo) {
+        hx_strongify(weakSelf);
+        [strongSelf doPayPushWithResultCode:resultCode resultInfo:resultInfo];
+    }];
 }
 // 微信支付
--(void)doWXPay:(NSDictionary *)dict
+-(void)doWXPay:(NSDictionary *)parameters
 {
+    /*
     if([WXApi isWXAppInstalled]) { // 判断 用户是否安装微信
 
         //需要创建这个支付对象
         PayReq *req   = [[PayReq alloc] init];
         //由用户微信号和AppID组成的唯一标识，用于校验微信用户
-        req.openID = dict[@"appid"];
+        req.openID = parameters[@"appid"];
         
         // 商家id，在注册的时候给的
-        req.partnerId = dict[@"partnerid"];
+        req.partnerId = parameters[@"partnerid"];
         
         // 预支付订单这个是后台跟微信服务器交互后，微信服务器传给你们服务器的，你们服务器再传给你
-        req.prepayId  = dict[@"prepayid"];
+        req.prepayId  = parameters[@"prepayid"];
         
         // 根据财付通文档填写的数据和签名
         //这个比较特殊，是固定的，只能是即req.package = Sign=WXPay
-        req.package   = dict[@"package"];
+        req.package   = parameters[@"package"];
         
         // 随机编码，为了防止重复的，在后台生成
-        req.nonceStr  = dict[@"noncestr"];
+        req.nonceStr  = parameters[@"noncestr"];
         
         // 这个是时间戳，也是在后台生成的，为了验证支付的
-        req.timeStamp = [dict[@"timestamp"] intValue];
+        req.timeStamp = [parameters[@"timestamp"] intValue];
         
         // 这个签名也是后台做的
-        req.sign = dict[@"sign"];
+        req.sign = parameters[@"sign"];
         
         //发送请求到微信，等待微信返回onResp
         [WXApi sendReq:req];
     }else{
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"未安装微信"];
     }
+     */
+    NSString *payDataJsonStr = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:parameters[@"appPayRequest"] options:NSJSONWritingPrettyPrinted error:nil] encoding:NSUTF8StringEncoding];
+    hx_weakify(self);
+    [UMSPPPayUnifyPayPlugin payWithPayChannel:CHANNEL_WEIXIN payData:payDataJsonStr callbackBlock:^(NSString *resultCode, NSString *resultInfo) {
+        hx_strongify(weakSelf);
+        [strongSelf doPayPushWithResultCode:resultCode resultInfo:resultInfo];
+    }];
 }
 // 银联支付
--(void)doUPPay:(NSString *)tn
+-(void)doUPPay:(NSDictionary *)parameters
 {
     //当获得的tn不为空时，调用支付接口
-    if (tn != nil && tn.length > 0) {
-        /**
-        *  支付接口
-        *
-        *  @param tn             订单信息
-        *  @param schemeStr      调用支付的app注册在info.plist中的scheme
-        *  @param mode           支付环境  "00"代表接入生产环境（正式版本需要）；"01"代表接入开发测试环境（测试版本需要）；
-        *  @param viewController 启动支付控件的viewController
-        *  @return 返回成功失败
-        */
-        [[UPPaymentControl defaultControl] startPay:tn fromScheme:HXUPPayScheme mode:@"00" viewController:self];
-    }
+//    if (tn != nil && tn.length > 0) {
+//        /**
+//        *  支付接口
+//        *
+//        *  @param tn             订单信息
+//        *  @param schemeStr      调用支付的app注册在info.plist中的scheme
+//        *  @param mode           支付环境  "00"代表接入生产环境（正式版本需要）；"01"代表接入开发测试环境（测试版本需要）；
+//        *  @param viewController 启动支付控件的viewController
+//        *  @return 返回成功失败
+//        */
+//        [[UPPaymentControl defaultControl] startPay:tn fromScheme:HXUPPayScheme mode:@"00" viewController:self];
+//    }
+    
+    NSString *payDataJsonStr = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:parameters[@"appPayRequest"] options:NSJSONWritingPrettyPrinted error:nil] encoding:NSUTF8StringEncoding];
+    hx_weakify(self);
+    [UMSPPPayUnifyPayPlugin cloudPayWithURLSchemes:HXUPPayScheme payData:payDataJsonStr viewController:self callbackBlock:^(NSString *resultCode, NSString *resultInfo) {
+        hx_strongify(weakSelf);
+        [strongSelf doPayPushWithResultCode:resultCode resultInfo:resultInfo];
+    }];
 }
 #pragma mark -- 支付回调处理
 -(void)doPayPush:(NSNotification *)note
@@ -273,6 +298,38 @@ static NSString *const PayTypeCell = @"PayTypeCell";
         if([note.userInfo[@"result"] isEqualToString:@"2"]) {
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"取消支付"];
         }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"支付失败"];
+        }
+        if (self.isOrderPush) {// 订单列表或者订单详情跳转
+            
+        }else{
+            GXOrderDetailVC *dvc = [GXOrderDetailVC new];
+            dvc.oid = self.oid;
+            [self.navigationController pushViewController:dvc animated:YES];
+        }
+    }
+}
+-(void)doPayPushWithResultCode:(NSString *)resultCode resultInfo:(NSString *)resultInfo
+{
+    if ([resultCode isEqualToString:@"0000"]) {//支付成功
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"支付成功"];
+        // 跳转支付结果页面
+        GXPayResultVC *rvc = [GXPayResultVC new];
+        rvc.orderPay = self.orderPay;
+        rvc.pay_type = self.selectPayType.payType;
+        [self.navigationController pushViewController:rvc animated:YES];
+    }else {
+        if ([resultCode isEqualToString:@"1000"]) {// 用户取消支付
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"取消支付"];
+        }else if ([resultCode isEqualToString:@"1001"]) {// 参数错误
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"参数错误"];
+        }else if ([resultCode isEqualToString:@"1002"]) {// 网络连接错误
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"网络连接错误"];
+        }else if ([resultCode isEqualToString:@"1003"]) {// 支付客户端未安装
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"支付客户端未安装"];
+        }else if ([resultCode isEqualToString:@"2002"]) {// 订单号重复
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"订单号重复"];
+        }else{// 统一按照失败处理
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"支付失败"];
         }
         if (self.isOrderPush) {// 订单列表或者订单详情跳转

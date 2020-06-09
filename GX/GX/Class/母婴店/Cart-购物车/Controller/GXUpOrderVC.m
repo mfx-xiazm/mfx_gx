@@ -176,15 +176,14 @@ static NSString *const UpOrderCell = @"UpOrderCell";
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"address_id"] = self.confirmOrder.defaultAddress.address_id;//选择的收货地址id
-    
     NSMutableString *skuDatas = [NSMutableString string];
     [skuDatas appendString:@"["];
     for (GXConfirmOrderData *orderData in self.confirmOrder.goodsData) {
         for (GXConfirmOrderGoods *orderGood in orderData.goods) {
             if (skuDatas.length == 1) {
-                [skuDatas appendFormat:@"{\"sku_id\":\"%@\",\"cart_num\":\"%@\"}",orderGood.sku_id,orderGood.cart_num];
+                [skuDatas appendFormat:@"{\"sku_id\":\"%@\",\"cart_num\":\"%@\",\"freight_template_id\":\"%@\"}",orderGood.sku_id,orderGood.cart_num,orderGood.freight_template_id];
             }else{
-                [skuDatas appendFormat:@",{\"sku_id\":\"%@\",\"cart_num\":\"%@\"}",orderGood.sku_id,orderGood.cart_num];
+                [skuDatas appendFormat:@",{\"sku_id\":\"%@\",\"cart_num\":\"%@\",\"freight_template_id\":\"%@\"}",orderGood.sku_id,orderGood.cart_num,orderGood.freight_template_id];
             }
         }
     }

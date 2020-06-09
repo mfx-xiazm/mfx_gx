@@ -16,7 +16,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *phone;
 @property (weak, nonatomic) IBOutlet UITextField *pwd;
 @property (weak, nonatomic) IBOutlet UITextField *code;
-@property (weak, nonatomic) IBOutlet UITextField *role;
 /* 验证码id */
 @property(nonatomic,copy) NSString *sms_id;
 @property (weak, nonatomic) IBOutlet UIButton *nextBtn;
@@ -58,10 +57,6 @@
         }
         if (![strongSelf.code hasText]) {
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请输入验证码"];
-            return NO;
-        }
-        if (![strongSelf.role hasText]) {
-            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请选择角色"];
             return NO;
         }
         return YES;

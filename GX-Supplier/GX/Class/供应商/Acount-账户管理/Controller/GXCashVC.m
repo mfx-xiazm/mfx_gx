@@ -76,6 +76,9 @@
         hx_strongify(weakSelf);
         [btn stopLoading:@"确定" image:nil textColor:nil backgroundColor:nil];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            if (strongSelf.cashCall) {
+                strongSelf.cashCall();
+            }
             [strongSelf showCashAlert];
         }else{
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];

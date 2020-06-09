@@ -12,8 +12,15 @@
 		494CC50A24849FC40032B553 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 494CC50924849FC40032B553 /* CFNetwork.framework */; };
 		494CC50C2484A0250032B553 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 494CC50B2484A0250032B553 /* SystemConfiguration.framework */; };
 		494CC50E2484A05F0032B553 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 494CC50D2484A0350032B553 /* libz.tbd */; };
+		49565F442488F9D900C9D43E /* libUMSPosPayOnly.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49565F412488F9D900C9D43E /* libUMSPosPayOnly.a */; };
+		49565F452488F9D900C9D43E /* PosPay_Resource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 49565F422488F9D900C9D43E /* PosPay_Resource.bundle */; };
+		49565F462488F9D900C9D43E /* UMSSecKeyboardLibResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 49565F432488F9D900C9D43E /* UMSSecKeyboardLibResource.bundle */; };
 		497AEBF1247E19AD00E0FACB /* GXStoreHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 497AEBF0247E19AD00E0FACB /* GXStoreHeader.m */; };
 		497AEBF3247E19B300E0FACB /* GXStoreHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 497AEBF2247E19B300E0FACB /* GXStoreHeader.xib */; };
+		49949B0C248B73B400EA60D4 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49949B0B248B73B400EA60D4 /* libWeChatSDK.a */; };
+		49949B0E248B76CC00EA60D4 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49949B0D248B76CC00EA60D4 /* Security.framework */; };
+		49949B10248B76DB00EA60D4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49949B0F248B76DA00EA60D4 /* CoreGraphics.framework */; };
+		49949B12248B76E300EA60D4 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49949B11248B76E300EA60D4 /* WebKit.framework */; };
 		900146A02384DDC600275DD9 /* SZUpdateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9001469D2384DDC500275DD9 /* SZUpdateView.xib */; };
 		900146A12384DDC600275DD9 /* SZUpdateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9001469F2384DDC600275DD9 /* SZUpdateView.m */; };
 		90067ECF2344356700628503 /* GXRegisterAuthVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 90067ECD2344356700628503 /* GXRegisterAuthVC.m */; };
@@ -454,9 +461,26 @@
 		494CC50924849FC40032B553 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		494CC50B2484A0250032B553 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		494CC50D2484A0350032B553 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		49565F3B2488F9D900C9D43E /* UMSPPPayUnifyPayPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSPPPayUnifyPayPlugin.h; sourceTree = "<group>"; };
+		49565F3C2488F9D900C9D43E /* UMSPPPayFastPay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSPPPayFastPay.h; sourceTree = "<group>"; };
+		49565F3D2488F9D900C9D43E /* UMSPPPayOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSPPPayOrder.h; sourceTree = "<group>"; };
+		49565F3E2488F9D900C9D43E /* UMSPPPayVersionsInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSPPPayVersionsInfo.h; sourceTree = "<group>"; };
+		49565F3F2488F9D900C9D43E /* UMSPPPayPluginSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSPPPayPluginSettings.h; sourceTree = "<group>"; };
+		49565F402488F9D900C9D43E /* UMSPPPayPosPay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSPPPayPosPay.h; sourceTree = "<group>"; };
+		49565F412488F9D900C9D43E /* libUMSPosPayOnly.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMSPosPayOnly.a; sourceTree = "<group>"; };
+		49565F422488F9D900C9D43E /* PosPay_Resource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = PosPay_Resource.bundle; sourceTree = "<group>"; };
+		49565F432488F9D900C9D43E /* UMSSecKeyboardLibResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UMSSecKeyboardLibResource.bundle; sourceTree = "<group>"; };
 		497AEBEF247E19AD00E0FACB /* GXStoreHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXStoreHeader.h; sourceTree = "<group>"; };
 		497AEBF0247E19AD00E0FACB /* GXStoreHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXStoreHeader.m; sourceTree = "<group>"; };
 		497AEBF2247E19B300E0FACB /* GXStoreHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXStoreHeader.xib; sourceTree = "<group>"; };
+		49949B08248B73B200EA60D4 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		49949B09248B73B300EA60D4 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		49949B0A248B73B300EA60D4 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
+		49949B0B248B73B400EA60D4 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		49949B0D248B76CC00EA60D4 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		49949B0F248B76DA00EA60D4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		49949B11248B76E300EA60D4 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		49949B13248B795100EA60D4 /* 呱选母婴店.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "呱选母婴店.entitlements"; sourceTree = "<group>"; };
 		7E67F6C2F7D067769D4BA925 /* libPods-GX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9001469D2384DDC500275DD9 /* SZUpdateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SZUpdateView.xib; sourceTree = "<group>"; };
 		9001469E2384DDC500275DD9 /* SZUpdateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZUpdateView.h; sourceTree = "<group>"; };
@@ -865,7 +889,7 @@
 		90BCED732345DCA6007B0F19 /* GXGoodsInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXGoodsInfoCell.xib; sourceTree = "<group>"; };
 		90BCED762345DF95007B0F19 /* GXWebContentVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXWebContentVC.h; sourceTree = "<group>"; };
 		90BCED772345DF95007B0F19 /* GXWebContentVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXWebContentVC.m; sourceTree = "<group>"; };
-		90C0B2CD2340B74900A8C55B /* GX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GX.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		90C0B2CD2340B74900A8C55B /* 呱选母婴店.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "呱选母婴店.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		90C0B2D02340B74900A8C55B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		90C0B2D12340B74900A8C55B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		90C0B2D92340B74B00A8C55B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -1148,12 +1172,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49565F442488F9D900C9D43E /* libUMSPosPayOnly.a in Frameworks */,
 				11AF349C58F7A342E9336E28 /* libPods-GX.a in Frameworks */,
+				49949B0C248B73B400EA60D4 /* libWeChatSDK.a in Frameworks */,
 				494CC50E2484A05F0032B553 /* libz.tbd in Frameworks */,
 				494CC50C2484A0250032B553 /* SystemConfiguration.framework in Frameworks */,
 				90363F9D23541EDC00A120AC /* AlipaySDK.framework in Frameworks */,
 				494CC50A24849FC40032B553 /* CFNetwork.framework in Frameworks */,
+				49949B0E248B76CC00EA60D4 /* Security.framework in Frameworks */,
+				49949B10248B76DB00EA60D4 /* CoreGraphics.framework in Frameworks */,
 				494CC50824849F9A0032B553 /* libPaymentControl.a in Frameworks */,
+				49949B12248B76E300EA60D4 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1181,6 +1210,41 @@
 				494CC50724849F9A0032B553 /* libPaymentControl.a */,
 			);
 			path = UPPaymentControl;
+			sourceTree = "<group>";
+		};
+		49565F392488F9D900C9D43E /* UMSPosPayOnly */ = {
+			isa = PBXGroup;
+			children = (
+				49565F3A2488F9D900C9D43E /* include */,
+				49565F412488F9D900C9D43E /* libUMSPosPayOnly.a */,
+				49565F422488F9D900C9D43E /* PosPay_Resource.bundle */,
+				49565F432488F9D900C9D43E /* UMSSecKeyboardLibResource.bundle */,
+			);
+			path = UMSPosPayOnly;
+			sourceTree = "<group>";
+		};
+		49565F3A2488F9D900C9D43E /* include */ = {
+			isa = PBXGroup;
+			children = (
+				49565F3B2488F9D900C9D43E /* UMSPPPayUnifyPayPlugin.h */,
+				49565F3C2488F9D900C9D43E /* UMSPPPayFastPay.h */,
+				49565F3D2488F9D900C9D43E /* UMSPPPayOrder.h */,
+				49565F3E2488F9D900C9D43E /* UMSPPPayVersionsInfo.h */,
+				49565F3F2488F9D900C9D43E /* UMSPPPayPluginSettings.h */,
+				49565F402488F9D900C9D43E /* UMSPPPayPosPay.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		49949B07248B703B00EA60D4 /* WechatOpenSDK */ = {
+			isa = PBXGroup;
+			children = (
+				49949B0B248B73B400EA60D4 /* libWeChatSDK.a */,
+				49949B0A248B73B300EA60D4 /* WechatAuthSDK.h */,
+				49949B08248B73B200EA60D4 /* WXApi.h */,
+				49949B09248B73B300EA60D4 /* WXApiObject.h */,
+			);
+			path = WechatOpenSDK;
 			sourceTree = "<group>";
 		};
 		9001469C2384DDB100275DD9 /* 版本更新 */ = {
@@ -1948,7 +2012,7 @@
 		90C0B2CE2340B74900A8C55B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				90C0B2CD2340B74900A8C55B /* GX.app */,
+				90C0B2CD2340B74900A8C55B /* 呱选母婴店.app */,
 				90C0B2E52340B74B00A8C55B /* GXTests.xctest */,
 				90C0B2F02340B74B00A8C55B /* GXUITests.xctest */,
 			);
@@ -1958,6 +2022,7 @@
 		90C0B2CF2340B74900A8C55B /* GX */ = {
 			isa = PBXGroup;
 			children = (
+				49949B13248B795100EA60D4 /* 呱选母婴店.entitlements */,
 				90C0B3F22340D27200A8C55B /* Class */,
 				90C0B33E2340CD7100A8C55B /* ThirdLib */,
 				90C0B3122340CD7100A8C55B /* Tool */,
@@ -2092,6 +2157,8 @@
 		90C0B33E2340CD7100A8C55B /* ThirdLib */ = {
 			isa = PBXGroup;
 			children = (
+				49949B07248B703B00EA60D4 /* WechatOpenSDK */,
+				49565F392488F9D900C9D43E /* UMSPosPayOnly */,
 				494CC50524849F9A0032B553 /* UPPaymentControl */,
 				90363F9923541EDC00A120AC /* AlipaySDK_No_UTDID */,
 				903C546E2349CCCD002743EE /* JJOptionView */,
@@ -2944,6 +3011,9 @@
 		A771BAC3BC0D20305F8CCC62 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				49949B11248B76E300EA60D4 /* WebKit.framework */,
+				49949B0F248B76DA00EA60D4 /* CoreGraphics.framework */,
+				49949B0D248B76CC00EA60D4 /* Security.framework */,
 				494CC50D2484A0350032B553 /* libz.tbd */,
 				494CC50B2484A0250032B553 /* SystemConfiguration.framework */,
 				494CC50924849FC40032B553 /* CFNetwork.framework */,
@@ -2980,7 +3050,7 @@
 			);
 			name = GX;
 			productName = GX;
-			productReference = 90C0B2CD2340B74900A8C55B /* GX.app */;
+			productReference = 90C0B2CD2340B74900A8C55B /* 呱选母婴店.app */;
 			productType = "com.apple.product-type.application";
 		};
 		90C0B2E42340B74B00A8C55B /* GXTests */ = {
@@ -3077,6 +3147,7 @@
 				909EAA5C2348636D00575FB8 /* GXPartnerDataVC.xib in Resources */,
 				9094F562234A073D00106699 /* GXMyOrderHeader.xib in Resources */,
 				906973D023448ED200D8A8FF /* GXDiscountGoodsCell2.xib in Resources */,
+				49565F452488F9D900C9D43E /* PosPay_Resource.bundle in Resources */,
 				90E57EDE234622B200F49834 /* GXChooseClassView.xib in Resources */,
 				905B3E142345C3DD00282515 /* GXGoodsDetailSectionHeader.xib in Resources */,
 				904AF271239B453300D8207D /* GXSearchTagHeader.xib in Resources */,
@@ -3165,6 +3236,7 @@
 				9094F56C234A0A5200106699 /* GXOrderDetailVC.xib in Resources */,
 				905B3E0B2345A40E00282515 /* GXAllCommentHeader.xib in Resources */,
 				902E88F82347685F00EFD0DF /* GXBrandDetailHeader.xib in Resources */,
+				49565F462488F9D900C9D43E /* UMSSecKeyboardLibResource.bundle in Resources */,
 				906974032344D22300D8A8FF /* GXStoreGoodsListVC.xib in Resources */,
 				907F2F8C234441D80067D16A /* GXRunCategoryView.xib in Resources */,
 				903C547B2349D18A002743EE /* GXOffLineReportVC.xib in Resources */,
@@ -3712,10 +3784,12 @@
 			baseConfigurationReference = 1330E51C61ADF8FC1AE77408 /* Pods-GX.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "GX/呱选母婴店.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 9AB2U8YRYY;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/GX/ThirdLib/AlipaySDK_No_UTDID",
@@ -3730,11 +3804,13 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/GX/ThirdLib/UPPaymentControl",
+					"$(PROJECT_DIR)/GX/ThirdLib/UMSPosPayOnly",
+					"$(PROJECT_DIR)/GX/ThirdLib/WechatOpenSDK",
 				);
 				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = guaxuan.mfxapp.com;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = dev_guaxuan.mfxapp.com_0529;
+				PRODUCT_NAME = "呱选母婴店";
+				PROVISIONING_PROFILE_SPECIFIER = dev_guaxuan.mfxapp.com_0605;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -3744,10 +3820,12 @@
 			baseConfigurationReference = 2975184EF33AC041D33915E0 /* Pods-GX.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "GX/呱选母婴店.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 9AB2U8YRYY;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/GX/ThirdLib/AlipaySDK_No_UTDID",
@@ -3762,11 +3840,13 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/GX/ThirdLib/UPPaymentControl",
+					"$(PROJECT_DIR)/GX/ThirdLib/UMSPosPayOnly",
+					"$(PROJECT_DIR)/GX/ThirdLib/WechatOpenSDK",
 				);
 				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = guaxuan.mfxapp.com;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = dev_guaxuan.mfxapp.com_0529;
+				PRODUCT_NAME = "呱选母婴店";
+				PROVISIONING_PROFILE_SPECIFIER = dev_guaxuan.mfxapp.com_0605;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

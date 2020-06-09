@@ -139,6 +139,7 @@ static NSString *const StoreCell = @"StoreCell";
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
+    [self getCatalogShopRequest:YES];
     return YES;
 }
 -(void)filterClicked

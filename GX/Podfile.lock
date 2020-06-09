@@ -33,7 +33,6 @@ PODS:
   - UMCShare/Social/ReducedWeChat (6.9.6):
     - UMCCommon
     - UMCShare/Core
-  - WechatOpenSDK (1.8.5)
   - YYCache (1.0.4)
   - YYModel (1.0.4)
   - YYText (1.0.7)
@@ -55,7 +54,6 @@ DEPENDENCIES:
   - UMCCommon
   - UMCSecurityPlugins
   - UMCShare/Social/ReducedWeChat
-  - WechatOpenSDK (< 1.8.6)
   - YYCache
   - YYModel
   - YYText
@@ -79,7 +77,6 @@ SPEC REPOS:
     - UMCCommon
     - UMCSecurityPlugins
     - UMCShare
-    - WechatOpenSDK
     - YYCache
     - YYModel
     - YYText
@@ -102,7 +99,6 @@ SPEC CHECKSUMS:
   UMCCommon: 971f324a5a99c9d662ae040a815e7e3d7ef8b2a8
   UMCSecurityPlugins: 0831a08f3988f3cea9f1d3a7626cd9bee4fef150
   UMCShare: e0cef55c0fd6051254c8cda1d0630eb578b27bad
-  WechatOpenSDK: 9b15110aba1d502456d8e83677357e6437f2e751
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
@@ -111,6 +107,6 @@ SPEC CHECKSUMS:
   ZLPhotoBrowser: 7e88434918366af98f8ebbaf5b94206985812ed6
   ZXEmptyView: 58adb5125e6ebdc51f68ef31885e62d99817a507
 
-PODFILE CHECKSUM: 27be702328a3da52c644614c80a98b8fa0e951e0
+PODFILE CHECKSUM: eaf301b77f224fad0faac35f75fcf42640d63722
 
 COCOAPODS: 1.9.1

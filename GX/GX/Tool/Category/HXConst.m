@@ -19,7 +19,7 @@ NSString * const HXQQKey = @"";
 // QQsecret
 NSString * const HXQQSecret = @"";
 // 友盟分享的key
-NSString * const HXUMengKey = @"";
+NSString * const HXUMengKey = @"5bd2902ff1f5561f22000079";
 // 腾讯Bugly的Key
 NSString * const HXBuglyKey = @"";
 
