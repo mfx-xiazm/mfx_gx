@@ -22,9 +22,9 @@
     if(zx_type == GYUINoDataState){
         //暂无数据的样式
         self.zx_topImageView.image = [UIImage imageNamed:@"no_data"];
-        self.zx_topImageView.zx_fixSize = CGSizeMake(80, 80);
+        self.zx_topImageView.zx_fixSize = CGSizeMake(160, 160);
         self.zx_titleLabel.zx_fixTop = 10;
-        self.zx_titleLabel.text = @"暂无数据";
+        //self.zx_titleLabel.text = @"暂无数据";
         self.zx_titleLabel.font = [UIFont boldSystemFontOfSize:16];
         
     }else if(zx_type == GYUIApiErrorState){

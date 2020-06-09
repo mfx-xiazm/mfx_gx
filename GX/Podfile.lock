@@ -14,6 +14,7 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
+  - HBDNavigationBar (1.7.5)
   - IQKeyboardManager (6.5.3)
   - JJFontFit (1.0.1)
   - JXCategoryView (1.5.2)
@@ -44,6 +45,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
+  - HBDNavigationBar
   - IQKeyboardManager
   - JJFontFit
   - JXCategoryView
@@ -65,6 +67,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - AFNetworking
+    - HBDNavigationBar
     - IQKeyboardManager
     - JJFontFit
     - JXCategoryView
@@ -87,6 +90,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  HBDNavigationBar: e802e7abf53c835abe7325aca9e6cff73ebe931d
   IQKeyboardManager: c2f901164d56807a35788483584d09fa69192e8e
   JJFontFit: 1332e4bf5b5d55d335ec1d6dd585d7f4da21c348
   JXCategoryView: b284d35a7a8772eada05dd78642233e1eb763ea8
@@ -107,6 +111,6 @@ SPEC CHECKSUMS:
   ZLPhotoBrowser: 7e88434918366af98f8ebbaf5b94206985812ed6
   ZXEmptyView: 58adb5125e6ebdc51f68ef31885e62d99817a507
 
-PODFILE CHECKSUM: eaf301b77f224fad0faac35f75fcf42640d63722
+PODFILE CHECKSUM: eee4de7e098e1f5885ddf0b53d2b39396e9f0fbb
 
 COCOAPODS: 1.9.1

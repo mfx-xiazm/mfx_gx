@@ -29,7 +29,7 @@
     UINavigationBar *bar = [UINavigationBar appearance];
     bar.barTintColor = UIColorFromRGB(0xEA4A5C);
     bar.translucent = NO;
-    [bar setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0xEA4A5C) size:CGSizeMake(1, 0.5)] forBarMetrics:UIBarMetricsDefault];
+    //[bar setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0xEA4A5C) size:CGSizeMake(1, 0.5)] forBarMetrics:UIBarMetricsDefault];
     [bar setShadowImage:[UIImage imageWithColor:UIColorFromRGB(0xEA4A5C) size:CGSizeMake(1, 1)]];
     //    如果如下设置，则所有的导航栏控制器都会生效，并不仅仅限于本导航栏控制器
     //    UINavigationBar *bar = [UINavigationBar appearance];
@@ -60,12 +60,12 @@
     // 关闭边缘触发手势 防止和原有边缘手势冲突
     [self.interactivePopGestureRecognizer setEnabled:NO];
 }
-- (UIViewController *)childViewControllerForStatusBarStyle{
-    return self.topViewController;
-}
-- (UIViewController *)childViewControllerForStatusBarHidden{
-    return self.topViewController;
-}
+//- (UIViewController *)childViewControllerForStatusBarStyle{
+//    return self.topViewController;
+//}
+//- (UIViewController *)childViewControllerForStatusBarHidden{
+//    return self.topViewController;
+//}
 #pragma mark - UIGestureRecognizerDelegate
 //  防止导航控制器只有一个rootViewcontroller时触发手势
 - (BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)gestureRecognizer {

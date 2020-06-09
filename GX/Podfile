@@ -20,4 +20,5 @@ target 'GX' do
     pod "ZLCollectionViewFlowLayout"
     pod "RollingNotice"
     pod "ZXEmptyView"
+    pod 'HBDNavigationBar'
 end

@@ -119,9 +119,18 @@
 }
 -(void)setUpNavBar
 {
+    self.hbd_barAlpha = 0.0;
+    self.hbd_barStyle = UIBarStyleDefault;
+    self.hbd_tintColor = [UIColor blackColor];
+//    self.hbd_titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor.whiteColor colorWithAlphaComponent:0.0]};
+    
+//    self.hbd_barStyle = UIBarStyleDefault;
+//    self.hbd_barTintColor = HXGlobalBg;
+//    self.hbd_tintColor = [UIColor blackColor];
+    
     [self.navigationItem setTitle:nil];
     
-    HXSearchBar *searchBar = [[HXSearchBar alloc] initWithFrame:CGRectMake(0, 0, HX_SCREEN_WIDTH - 70.f, 30.f)];
+    HXSearchBar *searchBar = [[HXSearchBar alloc] initWithFrame:CGRectMake(0, 0, HX_SCREEN_WIDTH - 55.f, 30.f)];
     searchBar.backgroundColor = [UIColor whiteColor];
     searchBar.layer.cornerRadius = 15.f;
     searchBar.layer.masksToBounds = YES;
@@ -233,6 +242,24 @@
             }
         }
     }
+
+    CGFloat headerHeight = CGRectGetHeight(self.header.frame);
+
+    CGFloat progress = scrollView.contentOffset.y + scrollView.contentInset.top;
+    CGFloat gradientProgress = MIN(1, MAX(0, progress  / headerHeight));
+//    gradientProgress = gradientProgress * gradientProgress * gradientProgress * gradientProgress;
+    
+//    if (gradientProgress < 0.1) {
+//        self.hbd_barStyle = UIBarStyleBlack;
+//        self.hbd_tintColor = UIColor.whiteColor;
+//    } else {
+//        self.hbd_barStyle = UIBarStyleDefault;
+//        self.hbd_tintColor = UIColor.blackColor;
+//    }
+    
+    self.hbd_barAlpha = gradientProgress;
+    [self hbd_setNeedsUpdateNavigationBar];
+
 }
 -(void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];

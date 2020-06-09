@@ -46,7 +46,7 @@ static NSString *const SearchTagHeader = @"SearchTagHeader";
     
     HXSearchBar *search = [HXSearchBar searchBar];
     search.backgroundColor = UIColorFromRGB(0xf5f5f5);
-    search.hxn_width = HX_SCREEN_WIDTH - 70.f;
+    search.hxn_width = HX_SCREEN_WIDTH - 50.f;
     search.hxn_height = 30.f;
     search.layer.cornerRadius = 15.f;
     search.layer.masksToBounds = YES;

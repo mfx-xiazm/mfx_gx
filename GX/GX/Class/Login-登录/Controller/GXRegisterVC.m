@@ -12,12 +12,12 @@
 #import "UITextField+GYExpand.h"
 
 @interface GXRegisterVC ()
-@property (weak, nonatomic) IBOutlet UITextField *name;
 @property (weak, nonatomic) IBOutlet UITextField *phone;
 @property (weak, nonatomic) IBOutlet UITextField *pwd;
 @property (weak, nonatomic) IBOutlet UITextField *code;
 /* 验证码id */
 @property(nonatomic,copy) NSString *sms_id;
+@property (weak, nonatomic) IBOutlet UITextField *inviteCode;
 @property (weak, nonatomic) IBOutlet UIButton *nextBtn;
 @end
 
@@ -39,10 +39,6 @@
     
     [self.nextBtn BindingBtnJudgeBlock:^BOOL{
         hx_strongify(weakSelf);
-        if (![strongSelf.name hasText]) {
-            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请输入姓名"];
-            return NO;
-        }
         if (![strongSelf.phone hasText] || strongSelf.phone.text.length != 11) {
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"手机格式有误"];
             return NO;
@@ -113,7 +109,7 @@
                 GXRegisterAuthVC *svc = [GXRegisterAuthVC new];
                 svc.phone = strongSelf.phone.text;
                 svc.pwd = strongSelf.pwd.text;
-                svc.username = strongSelf.name.text;
+                svc.inviteCode = [strongSelf.inviteCode hasText]?strongSelf.inviteCode.text:@"";
                 [strongSelf.navigationController pushViewController:svc animated:YES];
             });
         }else{
