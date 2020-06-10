@@ -30,6 +30,8 @@
 @property (copy, nonatomic) NSString *code_img_url;
 @property (copy, nonatomic) NSString *pay_paper_img_url;
 @property (copy, nonatomic) NSString *logistics_img_url;
+/* 提示框 */
+@property (nonatomic, strong) zhPopupController *alertPopVC;
 @end
 
 @implementation GXOnLineReportVC
@@ -146,13 +148,13 @@
                 zhAlertView *alert = [[zhAlertView alloc] initWithTitle:@"请打开相机权限" message:@"设置-隐私-相机" constantWidth:HX_SCREEN_WIDTH - 50*2];
                 zhAlertButton *okButton = [zhAlertButton buttonWithTitle:@"知道了" handler:^(zhAlertButton * _Nonnull button) {
                     hx_strongify(weakSelf);
-                    [strongSelf.zh_popupController dismiss];
+                    [strongSelf.alertPopVC dismiss];
                 }];
                 okButton.lineColor = UIColorFromRGB(0xDDDDDD);
                 [okButton setTitleColor:HXControlBg forState:UIControlStateNormal];
                 [alert addAction:okButton];
-                self.zh_popupController = [[zhPopupController alloc] init];
-                [self.zh_popupController presentContentView:alert duration:0.25 springAnimated:NO];
+                self.alertPopVC = [[zhPopupController alloc] initWithView:alert size:alert.bounds.size];
+                [self.alertPopVC show];
             }
         }else{
             [MBProgressHUD showTitleToView:self.view postion:NHHUDPostionTop title:@"相机不可用"];
@@ -181,13 +183,13 @@
                 zhAlertView *alert = [[zhAlertView alloc] initWithTitle:@"请打开相册权限" message:@"设置-隐私-相册" constantWidth:HX_SCREEN_WIDTH - 50*2];
                 zhAlertButton *okButton = [zhAlertButton buttonWithTitle:@"知道了" handler:^(zhAlertButton * _Nonnull button) {
                     hx_strongify(weakSelf);
-                    [strongSelf.zh_popupController dismiss];
+                    [strongSelf.alertPopVC dismiss];
                 }];
                 okButton.lineColor = UIColorFromRGB(0xDDDDDD);
                 [okButton setTitleColor:HXControlBg forState:UIControlStateNormal];
                 [alert addAction:okButton];
-                self.zh_popupController = [[zhPopupController alloc] init];
-                [self.zh_popupController presentContentView:alert duration:0.25 springAnimated:NO];
+                self.alertPopVC = [[zhPopupController alloc] initWithView:alert size:alert.bounds.size];
+                [self.alertPopVC show];
             }
         }else{
             [MBProgressHUD showTitleToView:self.view postion:NHHUDPostionTop title:@"相册不可用"];

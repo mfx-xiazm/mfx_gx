@@ -18,6 +18,8 @@ static NSString *const MyAddressCell = @"MyAddressCell";
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 /* 地址列表 */
 @property(nonatomic,strong) NSArray *addressList;
+/* 提示框 */
+@property (nonatomic, strong) zhPopupController *alertPopVC;
 @end
 
 @implementation GXMyAddressVC
@@ -143,11 +145,11 @@ static NSString *const MyAddressCell = @"MyAddressCell";
             hx_weakify(self);
             zhAlertButton *cancelButton = [zhAlertButton buttonWithTitle:@"取消" handler:^(zhAlertButton * _Nonnull button) {
                 hx_strongify(weakSelf);
-                [strongSelf.zh_popupController dismiss];
+                [strongSelf.alertPopVC dismiss];
             }];
             zhAlertButton *okButton = [zhAlertButton buttonWithTitle:@"删除" handler:^(zhAlertButton * _Nonnull button) {
                 hx_strongify(weakSelf);
-                [strongSelf.zh_popupController dismiss];
+                [strongSelf.alertPopVC dismiss];
                 [strongSelf delAddressRequest:address];
             }];
             cancelButton.lineColor = UIColorFromRGB(0xDDDDDD);
@@ -155,8 +157,8 @@ static NSString *const MyAddressCell = @"MyAddressCell";
             okButton.lineColor = UIColorFromRGB(0xDDDDDD);
             [okButton setTitleColor:UIColorFromRGB(0x1A1A1A) forState:UIControlStateNormal];
             [alert adjoinWithLeftAction:cancelButton rightAction:okButton];
-            strongSelf.zh_popupController = [[zhPopupController alloc] init];
-            [strongSelf.zh_popupController presentContentView:alert duration:0.25 springAnimated:NO];
+            strongSelf.alertPopVC = [[zhPopupController alloc] initWithView:alert size:alert.bounds.size];
+            [strongSelf.alertPopVC show];
         }else{
             GXEditAddressVC *avc = [GXEditAddressVC new];
             avc.address = address;

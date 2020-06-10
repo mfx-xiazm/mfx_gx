@@ -18,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *relu_txt;
 /* 邀请注册地址 */
 @property(nonatomic,copy) NSString *register_url;
+/* 分享弹框 */
+@property (nonatomic, strong) zhPopupController *sharePopVC;
 @end
 
 @implementation GXInviteVC
@@ -60,16 +62,16 @@
     hx_weakify(self);
     share.shareTypeCall = ^(NSInteger index) {
         hx_strongify(weakSelf);
-        [strongSelf.zh_popupController dismissWithDuration:0.25 springAnimated:NO];
+        [strongSelf.sharePopVC dismissWithDuration:0.25 completion:nil];
         if (index == 1) {
             [strongSelf shareImageToPlatformType:UMSocialPlatformType_WechatTimeLine];
         }else{
             [strongSelf shareImageToPlatformType:UMSocialPlatformType_WechatSession];
         }
     };
-    self.zh_popupController = [[zhPopupController alloc] init];
-    self.zh_popupController.layoutType = zhPopupLayoutTypeBottom;
-    [self.zh_popupController presentContentView:share duration:0.25 springAnimated:NO];
+    self.sharePopVC = [[zhPopupController alloc] initWithView:share size:share.bounds.size];
+    self.sharePopVC.layoutType = zhPopupLayoutTypeBottom;
+    [self.sharePopVC show];
 }
 - (void)shareImageToPlatformType:(UMSocialPlatformType)platformType
 {

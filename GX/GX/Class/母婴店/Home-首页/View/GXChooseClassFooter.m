@@ -8,11 +8,32 @@
 
 #import "GXChooseClassFooter.h"
 
+@interface GXChooseClassFooter ()<UITextFieldDelegate>
+
+@end
 @implementation GXChooseClassFooter
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    self.buy_num.delegate = self;
+}
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if (![textField hasText] || [textField.text integerValue] == 0) {
+        textField.text = @"1";
+    }
+    if ([textField.text integerValue] > self.stock_num) {
+        textField.text = [NSString stringWithFormat:@"%ld",(long)self.stock_num];
+    }
+    if (self.buyNumCall) {
+        self.buyNumCall([self.buy_num.text integerValue]);
+    }
+}
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
+           NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+    return [string isEqualToString:filtered];
 }
 - (IBAction)numChangeClicked:(UIButton *)sender {
     if (sender.tag) {// +

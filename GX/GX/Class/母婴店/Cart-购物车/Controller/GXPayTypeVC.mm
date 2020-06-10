@@ -35,6 +35,8 @@ static NSString *const PayTypeCell = @"PayTypeCell";
 @property(nonatomic,strong) GXPayType *selectPayType;
 /* 支付方式 */
 @property(nonatomic,strong) NSArray *payTypes;
+/* 提示框 */
+@property (nonatomic, strong) zhPopupController *alertPopVC;
 @end
 
 @implementation GXPayTypeVC
@@ -131,7 +133,7 @@ static NSString *const PayTypeCell = @"PayTypeCell";
     hx_weakify(self);
     zhAlertButton *cancelButton = [zhAlertButton buttonWithTitle:@"放弃" handler:^(zhAlertButton * _Nonnull button) {
         hx_strongify(weakSelf);
-        [strongSelf.zh_popupController dismiss];
+        [strongSelf.alertPopVC dismiss];
         if (strongSelf.isOrderPush) {
             [strongSelf.navigationController popViewControllerAnimated:YES];
         }else{
@@ -142,15 +144,15 @@ static NSString *const PayTypeCell = @"PayTypeCell";
     }];
     zhAlertButton *okButton = [zhAlertButton buttonWithTitle:@"继续支付" handler:^(zhAlertButton * _Nonnull button) {
         hx_strongify(weakSelf);
-        [strongSelf.zh_popupController dismiss];
+        [strongSelf.alertPopVC dismiss];
     }];
     cancelButton.lineColor = UIColorFromRGB(0xDDDDDD);
     [cancelButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
     okButton.lineColor = UIColorFromRGB(0xDDDDDD);
     [okButton setTitleColor:HXControlBg forState:UIControlStateNormal];
     [alert adjoinWithLeftAction:cancelButton rightAction:okButton];
-    self.zh_popupController = [[zhPopupController alloc] init];
-    [self.zh_popupController presentContentView:alert duration:0.25 springAnimated:NO];
+    self.alertPopVC = [[zhPopupController alloc] initWithView:alert size:alert.bounds.size];
+    [self.alertPopVC show];
 }
 - (IBAction)sureClicked:(UIButton *)sender {
     if (!self.selectPayType) {

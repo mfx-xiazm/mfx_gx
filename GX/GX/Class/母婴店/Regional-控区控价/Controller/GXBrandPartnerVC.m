@@ -27,6 +27,8 @@
 @property(nonatomic,strong) GXGoodsFilterView *fliterView;
 /* 分类id */
 @property (nonatomic, copy) NSString *catalog_id;
+/* 筛选弹框 */
+@property (nonatomic, strong) zhPopupController *fliterPopVC;
 @end
 
 @implementation GXBrandPartnerVC
@@ -159,14 +161,14 @@
     hx_weakify(self);
     self.fliterView.sureFilterCall = ^(NSString * _Nonnull cata_id) {
         hx_strongify(weakSelf);
-        [strongSelf.zh_popupController dismissWithDuration:0.25 springAnimated:NO];
+        [strongSelf.fliterPopVC dismissWithDuration:0.25 completion:nil];
         strongSelf.catalog_id = cata_id;
         GXBrandPartnerChildVC *brandVc = (GXBrandPartnerChildVC *)strongSelf.childVCs.lastObject;
         brandVc.catalog_id = cata_id;
     };
     
-    self.zh_popupController = [[zhPopupController alloc] init];
-    self.zh_popupController.layoutType = zhPopupLayoutTypeRight;
-    [self.zh_popupController presentContentView:self.fliterView duration:0.25 springAnimated:NO];
+    self.fliterPopVC = [[zhPopupController alloc] initWithView:self.fliterView size:self.fliterView.bounds.size];
+    self.fliterPopVC.layoutType = zhPopupLayoutTypeRight;
+    [self.fliterPopVC show];
 }
 @end

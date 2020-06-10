@@ -40,6 +40,8 @@ static NSString *const DiscountGoodsCell = @"DiscountGoodsCell";
 @property(nonatomic,strong) NSMutableArray *goods;
 /* 搜索的商品名 */
 @property(nonatomic,copy) NSString *goods_name;
+/* 筛选弹框 */
+@property (nonatomic, strong) zhPopupController *fliterPopVC;
 @end
 
 @implementation GXGoodsListVC
@@ -278,7 +280,7 @@ static NSString *const DiscountGoodsCell = @"DiscountGoodsCell";
     hx_weakify(self);
     self.fliterView.sureFilterCall = ^(NSString * _Nonnull cata_id) {
         hx_strongify(weakSelf);
-        [strongSelf.zh_popupController dismissWithDuration:0.25 springAnimated:NO];
+        [strongSelf.fliterPopVC dismissWithDuration:0.25 completion:nil];
         if (strongSelf.brands) {
             strongSelf.brand_id = cata_id;
         }else{
@@ -286,9 +288,9 @@ static NSString *const DiscountGoodsCell = @"DiscountGoodsCell";
         }
         [strongSelf getGoodsListDataRequest:YES];
     };
-    self.zh_popupController = [[zhPopupController alloc] init];
-    self.zh_popupController.layoutType = zhPopupLayoutTypeRight;
-    [self.zh_popupController presentContentView:self.fliterView duration:0.25 springAnimated:NO];
+    self.fliterPopVC = [[zhPopupController alloc] initWithView:self.fliterView size:self.fliterView.bounds.size];
+    self.fliterPopVC.layoutType = zhPopupLayoutTypeRight;
+    [self.fliterPopVC show];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

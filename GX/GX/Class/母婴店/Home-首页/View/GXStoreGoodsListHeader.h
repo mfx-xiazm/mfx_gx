@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 @class GXStore;
 typedef void(^storeMsgCall)(void);
-@interface GXStoreGoodsListHeader : UIView
+@interface GXStoreGoodsListHeader : UICollectionReusableView
 /** 店铺基本信息 */
 @property(nonatomic,strong) GXStore *storeInfo;
 /* 信息点击 */

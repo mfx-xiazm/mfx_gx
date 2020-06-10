@@ -36,6 +36,8 @@ static NSString *const SankPriceCell = @"SankPriceCell";
 @property (nonatomic,strong) NSMutableArray *goodsPrices;
 /** 页码 */
 @property(nonatomic,assign) NSInteger pagenum;
+/** 地址框 */
+@property (nonatomic, strong) zhPopupController *addressPopVC;
 @end
 
 @implementation GXSankPriceVC
@@ -258,20 +260,20 @@ static NSString *const SankPriceCell = @"SankPriceCell";
     hx_weakify(self);
     self.addressView.chooseAddressCall = ^(GXMyAddress * _Nullable address) {
         hx_strongify(weakSelf);
-        [strongSelf.zh_popupController dismissWithDuration:0.25 springAnimated:NO];
+        [strongSelf.addressPopVC dismissWithDuration:0.25 completion:nil];
         if (address) {
             strongSelf.addressText.text = [NSString stringWithFormat:@"配送至：%@",address.area_name];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 CGSize titleSize = [strongSelf.addressText sizeThatFits:CGSizeZero];
                 strongSelf.addressText.hxn_centerX = strongSelf.titileView.hxn_centerX;
                 strongSelf.addressText.hxn_width = (titleSize.width>200.f)?200.f:titleSize.width;
-                
+
                 strongSelf.addressImg.hxn_centerY = strongSelf.titileView.hxn_centerY;
                 strongSelf.addressImg.hxn_x = CGRectGetMinX(strongSelf.addressText.frame) - 20.f;
-                
+
                 strongSelf.expandImg.hxn_centerY = strongSelf.titileView.hxn_centerY;
                 strongSelf.expandImg.hxn_x = CGRectGetMaxX(strongSelf.addressText.frame) + 10.f;
-                
+
                 [strongSelf.titileView setNeedsLayout];
                 [strongSelf.titileView layoutIfNeeded];
             });
@@ -279,9 +281,9 @@ static NSString *const SankPriceCell = @"SankPriceCell";
             [strongSelf goodsSortByPriceRequest:YES];
         }
     };
-    self.zh_popupController = [[zhPopupController alloc] init];
-    self.zh_popupController.layoutType = zhPopupLayoutTypeBottom;
-    [self.zh_popupController presentContentView:self.addressView duration:0.25 springAnimated:NO];
+    self.addressPopVC = [[zhPopupController alloc] initWithView:self.addressView size:self.addressView.bounds.size];
+    self.addressPopVC.layoutType = zhPopupLayoutTypeBottom;
+    [self.addressPopVC show];
 }
 #pragma mark -- UITableView数据源和代理
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

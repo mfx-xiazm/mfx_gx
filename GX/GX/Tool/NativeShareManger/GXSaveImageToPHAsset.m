@@ -13,6 +13,8 @@
 
 @interface GXSaveImageToPHAsset()
 @property (nonatomic, strong) NSMutableArray *listOfDownLoadImageArr;
+/* 提示框 */
+@property (nonatomic, strong) zhPopupController *alertPopVC;
 @end
 
 @implementation GXSaveImageToPHAsset
@@ -55,13 +57,13 @@
         hx_weakify(self);
         zhAlertView *alert = [[zhAlertView alloc] initWithTitle:@"请打开相册权限" message:@"设置-隐私-相册" constantWidth:HX_SCREEN_WIDTH - 50*2];
         zhAlertButton *okButton = [zhAlertButton buttonWithTitle:@"知道了" handler:^(zhAlertButton * _Nonnull button) {
-            [weakSelf.targetVC.zh_popupController dismiss];
+            [weakSelf.alertPopVC dismiss];
         }];
         okButton.lineColor = UIColorFromRGB(0xDDDDDD);
         [okButton setTitleColor:HXControlBg forState:UIControlStateNormal];
         [alert addAction:okButton];
-        weakSelf.targetVC.zh_popupController = [[zhPopupController alloc] init];
-        [weakSelf.targetVC.zh_popupController presentContentView:alert duration:0.25 springAnimated:NO];
+        weakSelf.alertPopVC = [[zhPopupController alloc] initWithView:alert size:alert.bounds.size];
+        [weakSelf.alertPopVC show];
     }
 }
 - (void)CWWSavePhotos {

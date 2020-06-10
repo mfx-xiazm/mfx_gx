@@ -35,6 +35,8 @@
 @property(nonatomic,copy) NSString *district_id;
 /* 镇id*/
 @property(nonatomic,copy) NSString *town_id;
+/* 地址选择框 */
+@property (nonatomic, strong) zhPopupController *addressPopVC;
 @end
 
 @implementation GXEditAddressVC
@@ -110,7 +112,7 @@
         __weak __typeof(self) weakSelf = self;
         // 最后一列的行被点击的回调
         _addressView.lastComponentClickedBlock = ^(NSInteger type, GXSelectRegion * _Nullable region) {
-            [weakSelf.zh_popupController dismissWithDuration:0.25 springAnimated:NO];
+            [weakSelf.addressPopVC dismissWithDuration:0.25 completion:nil];
             if (type) {
                 weakSelf.area_name.text = [NSString stringWithFormat:@"%@%@%@%@",region.selectRegion.area_alias,region.selectCity.area_alias,region.selectArea.area_alias,region.selectTown.area_alias];
                 weakSelf.province_id = region.selectRegion.area_id;
@@ -122,6 +124,14 @@
     }
     return _addressView;
 }
+-(zhPopupController *)addressPopVC
+{
+    if (!_addressPopVC) {
+        _addressPopVC = [[zhPopupController alloc] initWithView:self.addressView size:self.addressView.bounds.size];
+        _addressPopVC.layoutType = zhPopupLayoutTypeBottom;
+    }
+    return _addressPopVC;
+}
 - (IBAction)defaultClicked:(UIButton *)sender {
     sender.selected = !sender.selected;
 }
@@ -131,11 +141,9 @@
         return;
     }
     [self.view endEditing:YES];
-    
+
     self.addressView.region = self.region;
-    self.zh_popupController = [[zhPopupController alloc] init];
-    self.zh_popupController.layoutType = zhPopupLayoutTypeBottom;
-    [self.zh_popupController presentContentView:self.addressView duration:0.25 springAnimated:NO];
+    [self.addressPopVC show];
 }
 
 -(void)getAllAreaRequest

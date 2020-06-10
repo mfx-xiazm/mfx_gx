@@ -9,7 +9,7 @@
 #import "GXSearchStoreVC.h"
 #import "HXSearchBar.h"
 #import "GXStoreCell.h"
-#import "GXStoreGoodsListVC.h"
+#import "GXStoreGoodsChildVC.h"
 #import "GXStoreMsgVC.h"
 #import "GXStore.h"
 
@@ -180,7 +180,7 @@ static NSString *const StoreCell = @"StoreCell";
             mvc.provider_uid = store.uid;
             [strongSelf.navigationController pushViewController:mvc animated:YES];
         }else{
-            GXStoreGoodsListVC *lvc = [GXStoreGoodsListVC new];
+            GXStoreGoodsChildVC *lvc = [GXStoreGoodsChildVC new];
             lvc.provider_uid = store.uid;
             [strongSelf.navigationController pushViewController:lvc animated:YES];
         }
@@ -200,7 +200,7 @@ static NSString *const StoreCell = @"StoreCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     GXStore *store = self.stores[indexPath.row];
-    GXStoreGoodsListVC *lvc = [GXStoreGoodsListVC new];
+    GXStoreGoodsChildVC *lvc = [GXStoreGoodsChildVC new];
     lvc.provider_uid = store.uid;
     [self.navigationController pushViewController:lvc animated:YES];
 }

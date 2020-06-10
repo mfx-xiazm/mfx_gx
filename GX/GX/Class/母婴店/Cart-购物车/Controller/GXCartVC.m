@@ -16,7 +16,7 @@
 #import "GXGetCouponView.h"
 #import "GXUpOrderVC.h"
 #import "GXCartData.h"
-#import "GXStoreGoodsListVC.h"
+#import "GXStoreGoodsChildVC.h"
 #import "GXMyCouponVC.h"
 #import "GXMyCoupon.h"
 
@@ -45,6 +45,10 @@ static NSString *const CartSectionHeader = @"CartSectionHeader";
 @property (nonatomic,strong) NSMutableArray *cartDataArr;
 /* 是否是提交订单 */
 @property(nonatomic,assign) BOOL isUpOrder;
+/* 提示框 */
+@property (nonatomic, strong) zhPopupController *alertPopVC;
+/* 优惠券 */
+@property (nonatomic, strong) zhPopupController *couponPopVC;
 @end
 
 @implementation GXCartVC
@@ -384,11 +388,11 @@ static NSString *const CartSectionHeader = @"CartSectionHeader";
         hx_weakify(self);
         zhAlertButton *cancelButton = [zhAlertButton buttonWithTitle:@"取消" handler:^(zhAlertButton * _Nonnull button) {
             hx_strongify(weakSelf);
-            [strongSelf.zh_popupController dismiss];
+            [strongSelf.alertPopVC dismiss];
         }];
         zhAlertButton *okButton = [zhAlertButton buttonWithTitle:@"删除" handler:^(zhAlertButton * _Nonnull button) {
             hx_strongify(weakSelf);
-            [strongSelf.zh_popupController dismiss];
+            [strongSelf.alertPopVC dismiss];
             [strongSelf delOrderCartRequest];
         }];
         cancelButton.lineColor = UIColorFromRGB(0xDDDDDD);
@@ -396,8 +400,8 @@ static NSString *const CartSectionHeader = @"CartSectionHeader";
         okButton.lineColor = UIColorFromRGB(0xDDDDDD);
         [okButton setTitleColor:HXControlBg forState:UIControlStateNormal];
         [alert adjoinWithLeftAction:cancelButton rightAction:okButton];
-        self.zh_popupController = [[zhPopupController alloc] init];
-        [self.zh_popupController presentContentView:alert duration:0.25 springAnimated:NO];
+        self.alertPopVC = [[zhPopupController alloc] initWithView:alert size:alert.bounds.size];
+        [self.alertPopVC show];
     }else{
         self.isUpOrder = YES;
         hx_weakify(self);
@@ -506,7 +510,7 @@ static NSString *const CartSectionHeader = @"CartSectionHeader";
                 [collectionView reloadData];
             }else if (index == 2) {
                 if (![cartData.provider_uid isEqualToString:@"0"]) {// 不是平台自营
-                    GXStoreGoodsListVC *gvc = [GXStoreGoodsListVC new];
+                    GXStoreGoodsChildVC *gvc = [GXStoreGoodsChildVC new];
                     gvc.provider_uid = cartData.provider_uid;
                     [strongSelf.navigationController pushViewController:gvc animated:YES];
                 }
@@ -516,22 +520,22 @@ static NSString *const CartSectionHeader = @"CartSectionHeader";
                     vdv.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 360);
                     vdv.cartData = cartData;
                     vdv.closeViewCall = ^{
-                        [strongSelf.zh_popupController dismissWithDuration:0.25 springAnimated:NO];
+                        [strongSelf.couponPopVC dismissWithDuration:0.25 completion:nil];
                     };
-                    strongSelf.zh_popupController = [[zhPopupController alloc] init];
-                    strongSelf.zh_popupController.layoutType = zhPopupLayoutTypeBottom;
-                    [strongSelf.zh_popupController presentContentView:vdv duration:0.25 springAnimated:NO];
+                    strongSelf.couponPopVC = [[zhPopupController alloc] initWithView:vdv size:vdv.bounds.size];
+                    strongSelf.couponPopVC.layoutType = zhPopupLayoutTypeBottom;
+                    [strongSelf.couponPopVC show];
                 }else{
                     [strongSelf getShopCouponRequest:cartData completedCall:^{
                         GXGetCouponView *vdv = [GXGetCouponView loadXibView];
                         vdv.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 360);
                         vdv.cartData = cartData;
                         vdv.closeViewCall = ^{
-                            [strongSelf.zh_popupController dismissWithDuration:0.25 springAnimated:NO];
+                            [strongSelf.couponPopVC dismissWithDuration:0.25 completion:nil];
                         };
-                        strongSelf.zh_popupController = [[zhPopupController alloc] init];
-                        strongSelf.zh_popupController.layoutType = zhPopupLayoutTypeBottom;
-                        [strongSelf.zh_popupController presentContentView:vdv duration:0.25 springAnimated:NO];
+                        strongSelf.couponPopVC = [[zhPopupController alloc] initWithView:vdv size:vdv.bounds.size];
+                        strongSelf.couponPopVC.layoutType = zhPopupLayoutTypeBottom;
+                        [strongSelf.couponPopVC show];
                     }];
                 }
             }

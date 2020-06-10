@@ -42,7 +42,7 @@ static NSString *const StoreCouponCell = @"StoreCouponCell";
 }
 - (IBAction)storeMsgClicked:(id)sender {
     if (self.storeMsgCall) {
-        self.storeMsgCall();
+     self.storeMsgCall();
     }
 }
 

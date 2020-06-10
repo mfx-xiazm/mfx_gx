@@ -61,6 +61,10 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
 @property(nonatomic,strong) GXGoodsDetail *goodsDetail;
 /** 分享数据模型 */
 @property (nonatomic,strong) GXGoodsMaterialLayout *shareModel;
+/** 规格弹框  */
+@property (nonatomic, strong) zhPopupController *classPopVC;
+/* 分享弹框 */
+@property (nonatomic, strong) zhPopupController *sharePopVC;
 @end
 
 @implementation GXGoodsDetailVC
@@ -102,7 +106,7 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
 {
     if (_chooseClassView == nil) {
         _chooseClassView = [GXChooseClassView loadXibView];
-        _chooseClassView.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 380);
+        _chooseClassView.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 420);
     }
     return _chooseClassView;
 }
@@ -128,6 +132,15 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
         [_footer addSubview:image];
     }
     return _footer;
+}
+-(zhPopupController *)classPopVC
+{
+    if (!_classPopVC) {
+        _classPopVC = [[zhPopupController alloc] initWithView:self.chooseClassView size:self.chooseClassView.bounds.size];
+        _classPopVC.layoutType = zhPopupLayoutTypeBottom;
+        _classPopVC.keyboardChangeFollowed = YES;
+    }
+    return _classPopVC;
 }
 #pragma mark -- 视图相关
 -(void)setUpNavBar
@@ -224,7 +237,7 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
     hx_weakify(self);
     self.chooseClassView.goodsHandleCall = ^(NSInteger type) {
         hx_strongify(weakSelf);
-        [strongSelf.zh_popupController dismissWithDuration:0.25 springAnimated:NO];
+        [strongSelf.classPopVC dismissWithDuration:0.25 completion:nil];
         if (type) {
             // 1加入购物车 2立即购买
             if (sender.tag == 1) {
@@ -259,9 +272,7 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
             }
         }
     };
-    self.zh_popupController = [[zhPopupController alloc] init];
-    self.zh_popupController.layoutType = zhPopupLayoutTypeBottom;
-    [self.zh_popupController presentContentView:self.chooseClassView duration:0.25 springAnimated:NO];
+    [self.classPopVC showInView:self.view.window completion:nil];
 }
 - (IBAction)applyJoinClicked:(UIButton *)sender {
     if (self.isBrandPush) {
@@ -719,7 +730,7 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
     hx_weakify(self);
     share.shareTypeCall = ^(NSInteger index) {
         hx_strongify(weakSelf);
-        [strongSelf.zh_popupController dismissWithDuration:0.25 springAnimated:NO];
+        [strongSelf.sharePopVC dismissWithDuration:0.25 completion:nil];
         [strongSelf shareNumRequest:strongSelf.shareModel.material.material_id];
 
         if (index == 0) {// 仅仅打开微信
@@ -759,9 +770,9 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
             }];
         }
     };
-    self.zh_popupController = [[zhPopupController alloc] init];
-    self.zh_popupController.layoutType = zhPopupLayoutTypeBottom;
-    [self.zh_popupController presentContentView:share duration:0.25 springAnimated:NO];
+    self.sharePopVC = [[zhPopupController alloc] initWithView:share size:share.bounds.size];
+    self.sharePopVC.layoutType = zhPopupLayoutTypeBottom;
+    [self.sharePopVC show];
 }
 #pragma mark -- GXGoodsCommentCellDelegate
 /** 点击了全文/收回 */

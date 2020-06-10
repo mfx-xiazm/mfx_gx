@@ -46,6 +46,8 @@ static NSString *const RunCategoryCell = @"RunCategoryCell";
 @property(nonatomic,strong) NSArray *catalogItem;
 /* 所有地区 */
 @property(nonatomic,strong) GXSelectRegion *region;
+/* 地址选择框 */
+@property (nonatomic, strong) zhPopupController *addressPopVC;
 @end
 
 @implementation GXApplySupplyVC
@@ -123,7 +125,7 @@ static NSString *const RunCategoryCell = @"RunCategoryCell";
         __weak __typeof(self) weakSelf = self;
         // 最后一列的行被点击的回调
         _addressView.lastComponentClickedBlock = ^(NSInteger type, GXSelectRegion * _Nullable region) {
-            [weakSelf.zh_popupController dismissWithDuration:0.25 springAnimated:NO];
+            [weakSelf.addressPopVC dismissWithDuration:0.25 completion:nil];
             if (type) {
                 weakSelf.area.text = [NSString stringWithFormat:@"%@%@%@",region.selectRegion.area_alias,region.selectCity.area_alias,region.selectArea.area_alias];
                 weakSelf.pro_id = region.selectRegion.area_id;
@@ -133,6 +135,14 @@ static NSString *const RunCategoryCell = @"RunCategoryCell";
         };
     }
     return _addressView;
+}
+-(zhPopupController *)addressPopVC
+{
+    if (!_addressPopVC) {
+        _addressPopVC = [[zhPopupController alloc] initWithView:self.addressView size:self.addressView.bounds.size];
+        _addressPopVC.layoutType = zhPopupLayoutTypeBottom;
+    }
+    return _addressPopVC;
 }
 - (WKWebView *)webView{
     if (_webView == nil) {
@@ -291,9 +301,7 @@ static NSString *const RunCategoryCell = @"RunCategoryCell";
         return;
     }
     self.addressView.region = self.region;
-    self.zh_popupController = [[zhPopupController alloc] init];
-    self.zh_popupController.layoutType = zhPopupLayoutTypeBottom;
-    [self.zh_popupController presentContentView:self.addressView duration:0.25 springAnimated:NO];
+    [self.addressPopVC show];
 }
 -(void)submitClicked:(UIButton *)btn
 {
@@ -341,7 +349,7 @@ static NSString *const RunCategoryCell = @"RunCategoryCell";
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     GXCatalogItem *logItem = self.catalogItem[indexPath.item];
-    return CGSizeMake([logItem.catalog_name boundingRectWithSize:CGSizeMake(1000000, 30) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:14]} context:nil].size.width + 20, 30);
+    return CGSizeMake([logItem.catalog_name boundingRectWithSize:CGSizeMake(1000000, 34) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:14]} context:nil].size.width + 20, 34);
 }
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     return 15.f;

@@ -25,7 +25,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *phone;
 @property (weak, nonatomic) IBOutlet UILabel *current_version;
 @property (weak, nonatomic) IBOutlet UILabel *cache;
-
+/* 提示框 */
+@property (nonatomic, strong) zhPopupController *alertPopVC;
 @end
 
 @implementation GXMySetVC
@@ -104,11 +105,11 @@
         hx_weakify(self);
         zhAlertButton *cancelButton = [zhAlertButton buttonWithTitle:@"取消" handler:^(zhAlertButton * _Nonnull button) {
             hx_strongify(weakSelf);
-            [strongSelf.zh_popupController dismiss];
+            [strongSelf.alertPopVC dismiss];
         }];
         zhAlertButton *okButton = [zhAlertButton buttonWithTitle:@"清除" handler:^(zhAlertButton * _Nonnull button) {
             hx_strongify(weakSelf);
-            [strongSelf.zh_popupController dismiss];
+            [strongSelf.alertPopVC dismiss];
             // 删除文件夹里面所有文件
             [HXCacheTool removeDirectoryPath:CachePath];
             strongSelf.cache.text = @"0.0K";
@@ -119,25 +120,25 @@
         okButton.lineColor = UIColorFromRGB(0xDDDDDD);
         [okButton setTitleColor:UIColorFromRGB(0x1A1A1A) forState:UIControlStateNormal];
         [alert adjoinWithLeftAction:cancelButton rightAction:okButton];
-        self.zh_popupController = [[zhPopupController alloc] init];
-        [self.zh_popupController presentContentView:alert duration:0.25 springAnimated:NO];
+        self.alertPopVC = [[zhPopupController alloc] initWithView:alert size:alert.bounds.size];
+        [self.alertPopVC show];
     }else{
         zhAlertView *alert = [[zhAlertView alloc] initWithTitle:@"提示" message:@"确定要退出登录？" constantWidth:HX_SCREEN_WIDTH - 50*2];
         hx_weakify(self);
         zhAlertButton *cancelButton = [zhAlertButton buttonWithTitle:@"取消" handler:^(zhAlertButton * _Nonnull button) {
             hx_strongify(weakSelf);
-            [strongSelf.zh_popupController dismiss];
+            [strongSelf.alertPopVC dismiss];
         }];
         zhAlertButton *okButton = [zhAlertButton buttonWithTitle:@"退出" handler:^(zhAlertButton * _Nonnull button) {
             hx_strongify(weakSelf);
-            [strongSelf.zh_popupController dismiss];
-            
+            [strongSelf.alertPopVC dismiss];
+
             [[MSUserManager sharedInstance] logout:nil];
-            
+
             GXLoginVC *lvc = [GXLoginVC new];
             HXNavigationController *nav = [[HXNavigationController alloc] initWithRootViewController:lvc];
             [UIApplication sharedApplication].keyWindow.rootViewController = nav;
-            
+
             //推出主界面出来
             CATransition *ca = [CATransition animation];
             ca.type = @"movein";
@@ -149,8 +150,8 @@
         okButton.lineColor = UIColorFromRGB(0xDDDDDD);
         [okButton setTitleColor:HXControlBg forState:UIControlStateNormal];
         [alert adjoinWithLeftAction:cancelButton rightAction:okButton];
-        self.zh_popupController = [[zhPopupController alloc] init];
-        [self.zh_popupController presentContentView:alert duration:0.25 springAnimated:NO];
+        self.alertPopVC = [[zhPopupController alloc] initWithView:alert size:alert.bounds.size];
+        [self.alertPopVC show];
     }
 }
 

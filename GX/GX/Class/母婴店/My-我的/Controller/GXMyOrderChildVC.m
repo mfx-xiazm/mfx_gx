@@ -34,6 +34,8 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
 @property(nonatomic,strong) NSMutableArray *refunds;
 /** 当前操作的订单 */
 @property(nonatomic,strong) GXMyOrder *currentOrder;
+/* 提示框 */
+@property (nonatomic, strong) zhPopupController *alertPopVC;
 @end
 
 @implementation GXMyOrderChildVC
@@ -432,10 +434,10 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
                     }else{
                         zhAlertView *alert = [[zhAlertView alloc] initWithTitle:@"提示" message:@"确定要确认收货吗？" constantWidth:HX_SCREEN_WIDTH - 50*2];
                         zhAlertButton *cancelButton = [zhAlertButton buttonWithTitle:@"取消" handler:^(zhAlertButton * _Nonnull button) {
-                            [strongSelf.zh_popupController dismiss];
+                            [strongSelf.alertPopVC dismiss];
                         }];
                         zhAlertButton *okButton = [zhAlertButton buttonWithTitle:@"确认" handler:^(zhAlertButton * _Nonnull button) {
-                            [strongSelf.zh_popupController dismiss];
+                            [strongSelf.alertPopVC dismiss];
                             [strongSelf confirmReceiveGoodRequest];
                         }];
                         cancelButton.lineColor = UIColorFromRGB(0xDDDDDD);
@@ -443,8 +445,8 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
                         okButton.lineColor = UIColorFromRGB(0xDDDDDD);
                         [okButton setTitleColor:HXControlBg forState:UIControlStateNormal];
                         [alert adjoinWithLeftAction:cancelButton rightAction:okButton];
-                        strongSelf.zh_popupController = [[zhPopupController alloc] init];
-                        [strongSelf.zh_popupController presentContentView:alert duration:0.25 springAnimated:NO];
+                        strongSelf.alertPopVC = [[zhPopupController alloc] initWithView:alert size:alert.bounds.size];
+                        [strongSelf.alertPopVC show];
                     }
                 }else if ([order.status isEqualToString:@"待评价"]) {
                     //HXLog(@"评价");

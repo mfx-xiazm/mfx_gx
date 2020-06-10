@@ -8,7 +8,7 @@
 
 #import "GXGoodStoreChildVC.h"
 #import "GXStoreCell.h"
-#import "GXStoreGoodsListVC.h"
+#import "GXStoreGoodsChildVC.h"
 #import "GXStoreMsgVC.h"
 #import "GXStore.h"
 #import "HXSearchBar.h"
@@ -32,6 +32,8 @@ static NSString *const StoreCell = @"StoreCell";
 @property(nonatomic,strong) NSArray *cateItems;
 /* 分类筛选视图 */
 @property(nonatomic,strong) GXGoodsFilterView *fliterView;
+/* 筛选弹框 */
+@property (nonatomic, strong) zhPopupController *fliterPopVC;
 @end
 
 @implementation GXGoodStoreChildVC
@@ -41,6 +43,7 @@ static NSString *const StoreCell = @"StoreCell";
     [self setUpNavBar];
     [self setUpTableView];
     [self setUpRefresh];
+    [self startShimmer];
     [self getShopCateRequest];
     [self getCatalogShopRequest:YES];
 }
@@ -155,15 +158,15 @@ static NSString *const StoreCell = @"StoreCell";
     hx_weakify(self);
     self.fliterView.filterCall = ^(NSString *logItemId, NSString  *brandItemId) {
         hx_strongify(weakSelf);
-        [strongSelf.zh_popupController dismissWithDuration:0.25 springAnimated:NO];
+        [strongSelf.fliterPopVC dismissWithDuration:0.25 completion:nil];
         strongSelf.catalog_id = logItemId;
         strongSelf.brand_id = brandItemId;
         [strongSelf getCatalogShopRequest:YES];
     };
     
-    self.zh_popupController = [[zhPopupController alloc] init];
-    self.zh_popupController.layoutType = zhPopupLayoutTypeRight;
-    [self.zh_popupController presentContentView:self.fliterView duration:0.25 springAnimated:NO];
+    self.fliterPopVC = [[zhPopupController alloc] initWithView:self.fliterView size:self.fliterView.bounds.size];
+    self.fliterPopVC.layoutType = zhPopupLayoutTypeRight;
+    [self.fliterPopVC show];
 }
 #pragma mark -- 数据请求
 -(void)getShopCateRequest
@@ -249,7 +252,7 @@ static NSString *const StoreCell = @"StoreCell";
             mvc.provider_uid = store.uid;
             [strongSelf.navigationController pushViewController:mvc animated:YES];
         }else{
-            GXStoreGoodsListVC *lvc = [GXStoreGoodsListVC new];
+            GXStoreGoodsChildVC *lvc = [GXStoreGoodsChildVC new];
             lvc.provider_uid = store.uid;
             [strongSelf.navigationController pushViewController:lvc animated:YES];
         }
@@ -269,7 +272,7 @@ static NSString *const StoreCell = @"StoreCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     GXStore *store = self.stores[indexPath.row];
-    GXStoreGoodsListVC *lvc = [GXStoreGoodsListVC new];
+    GXStoreGoodsChildVC *lvc = [GXStoreGoodsChildVC new];
     lvc.provider_uid = store.uid;
     [self.navigationController pushViewController:lvc animated:YES];
 }

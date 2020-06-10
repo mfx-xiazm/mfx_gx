@@ -45,6 +45,8 @@
 @property(nonatomic,copy) NSString *plan_id;
 /** 分享数据模型 */
 @property (nonatomic,strong) GXGoodsMaterialLayout *shareModel;
+/* 分享弹框 */
+@property (nonatomic, strong) zhPopupController *sharePopVC;
 @end
 
 @implementation GXSaleMaterialChildVC
@@ -442,7 +444,7 @@
     hx_weakify(self);
     share.shareTypeCall = ^(NSInteger index) {
         hx_strongify(weakSelf);
-        [strongSelf.zh_popupController dismissWithDuration:0.25 springAnimated:NO];
+        [strongSelf.sharePopVC dismissWithDuration:0.25 completion:nil];
         [strongSelf shareNumRequest:strongSelf.shareModel.material.material_id];
 
         if (index == 0) {// 仅仅打开微信
@@ -482,8 +484,8 @@
             }];
         }
     };
-    self.zh_popupController = [[zhPopupController alloc] init];
-    self.zh_popupController.layoutType = zhPopupLayoutTypeBottom;
-    [self.zh_popupController presentContentView:share duration:0.25 springAnimated:NO];
+    self.sharePopVC = [[zhPopupController alloc] initWithView:share size:share.bounds.size];
+    self.sharePopVC.layoutType = zhPopupLayoutTypeBottom;
+    [self.sharePopVC show];
 }
 @end

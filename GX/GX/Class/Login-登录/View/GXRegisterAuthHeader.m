@@ -37,6 +37,12 @@
 @property(nonatomic,strong) GXChooseAddressView *addressView;
 /* 类目view */
 @property(nonatomic,strong) GXRunCategoryView *cateItemView;
+/* 提示框 */
+@property (nonatomic, strong) zhPopupController *alertPopVC;
+/* 地址选择框 */
+@property (nonatomic, strong) zhPopupController *addressPopVC;
+/* 类目弹框 */
+@property (nonatomic, strong) zhPopupController *catePopVC;
 @end
 @implementation GXRegisterAuthHeader
 
@@ -68,7 +74,7 @@
         __weak __typeof(self) weakSelf = self;
         // 最后一列的行被点击的回调
         _addressView.lastComponentClickedBlock = ^(NSInteger type, GXSelectRegion * _Nullable region) {
-            [weakSelf.target.zh_popupController dismissWithDuration:0.25 springAnimated:NO];
+            [weakSelf.addressPopVC dismissWithDuration:0.25 completion:nil];
             if (type) {
                 weakSelf.shop_area.text = [NSString stringWithFormat:@"%@%@%@%@",region.selectRegion.area_alias,region.selectCity.area_alias,region.selectArea.area_alias,region.selectTown.area_alias];
                 weakSelf.mainStore.shop_area = weakSelf.shop_area.text;
@@ -77,6 +83,14 @@
         };
     }
     return _addressView;
+}
+-(zhPopupController *)addressPopVC
+{
+    if (!_addressPopVC) {
+        _addressPopVC = [[zhPopupController alloc] initWithView:self.addressView size:self.addressView.bounds.size];
+        _addressPopVC.layoutType = zhPopupLayoutTypeBottom;
+    }
+    return _addressPopVC;
 }
 -(GXRunCategoryView *)cateItemView
 {
@@ -110,9 +124,7 @@
         return;
     }
     self.addressView.region = self.region;
-    self.target.zh_popupController = [[zhPopupController alloc] init];
-    self.target.zh_popupController.layoutType = zhPopupLayoutTypeBottom;
-    [self.target.zh_popupController presentContentView:self.addressView duration:0.25 springAnimated:NO];
+    [self.addressPopVC show];
 }
 
 - (IBAction)chooseCateClicked:(UIButton *)sender {
@@ -121,7 +133,7 @@
     hx_weakify(self);
     self.cateItemView.runCateCall = ^(NSInteger index) {
         hx_strongify(weakSelf);
-        [strongSelf.target.zh_popupController dismissWithDuration:0.25 springAnimated:NO];
+        [strongSelf.catePopVC dismissWithDuration:0.25 completion:nil];
         if (index == 1) {
             NSMutableString *itemStr = [NSMutableString string];
             NSMutableString *itemids = [NSMutableString string];
@@ -140,9 +152,9 @@
             strongSelf.mainStore.catalogs = itemids;
         }
     };
-    self.target.zh_popupController = [[zhPopupController alloc] init];
-    self.target.zh_popupController.layoutType = zhPopupLayoutTypeCenter;
-    [self.target.zh_popupController presentContentView:self.cateItemView duration:0.25 springAnimated:NO];
+    self.catePopVC = [[zhPopupController alloc] initWithView:self.cateItemView size:self.cateItemView.bounds.size];
+    self.catePopVC.layoutType = zhPopupLayoutTypeCenter;
+    [self.catePopVC show];
 }
 - (IBAction)chooseImgClicked:(UIButton *)sender {
     
@@ -184,13 +196,13 @@
                 zhAlertView *alert = [[zhAlertView alloc] initWithTitle:@"请打开相机权限" message:@"设置-隐私-相机" constantWidth:HX_SCREEN_WIDTH - 50*2];
                 zhAlertButton *okButton = [zhAlertButton buttonWithTitle:@"知道了" handler:^(zhAlertButton * _Nonnull button) {
                     hx_strongify(weakSelf);
-                    [strongSelf.target.zh_popupController dismiss];
+                    [strongSelf.alertPopVC dismiss];
                 }];
                 okButton.lineColor = UIColorFromRGB(0xDDDDDD);
                 [okButton setTitleColor:HXControlBg forState:UIControlStateNormal];
                 [alert addAction:okButton];
-                self.target.zh_popupController = [[zhPopupController alloc] init];
-                [self.target.zh_popupController presentContentView:alert duration:0.25 springAnimated:NO];
+                self.alertPopVC = [[zhPopupController alloc] initWithView:alert size:alert.bounds.size];
+                [self.alertPopVC show];
             }
         }else{
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"相机不可用"];
@@ -219,13 +231,13 @@
                 zhAlertView *alert = [[zhAlertView alloc] initWithTitle:@"请打开相册权限" message:@"设置-隐私-相册" constantWidth:HX_SCREEN_WIDTH - 50*2];
                 zhAlertButton *okButton = [zhAlertButton buttonWithTitle:@"知道了" handler:^(zhAlertButton * _Nonnull button) {
                     hx_strongify(weakSelf);
-                    [strongSelf.target.zh_popupController dismiss];
+                    [strongSelf.alertPopVC dismiss];
                 }];
                 okButton.lineColor = UIColorFromRGB(0xDDDDDD);
                 [okButton setTitleColor:HXControlBg forState:UIControlStateNormal];
                 [alert addAction:okButton];
-                self.target.zh_popupController = [[zhPopupController alloc] init];
-                [self.target.zh_popupController presentContentView:alert duration:0.25 springAnimated:NO];
+                self.alertPopVC = [[zhPopupController alloc] initWithView:alert size:alert.bounds.size];
+                [self.alertPopVC show];
             }
         }else{
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"相册不可用"];

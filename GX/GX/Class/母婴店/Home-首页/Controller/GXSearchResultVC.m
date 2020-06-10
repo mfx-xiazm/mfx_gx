@@ -48,7 +48,7 @@ static NSString *const ShopGoodsCell = @"ShopGoodsCell";
 {
     [self.navigationItem setTitle:nil];
     
-    HXSearchBar *searchBar = [[HXSearchBar alloc] initWithFrame:CGRectMake(0, 0, HX_SCREEN_WIDTH - 70.f, 30.f)];
+    HXSearchBar *searchBar = [[HXSearchBar alloc] initWithFrame:CGRectMake(0, 0, HX_SCREEN_WIDTH - 55.f, 30.f)];
     searchBar.backgroundColor = [UIColor whiteColor];
     searchBar.layer.cornerRadius = 15.f;
     searchBar.layer.masksToBounds = YES;
@@ -56,7 +56,7 @@ static NSString *const ShopGoodsCell = @"ShopGoodsCell";
     searchBar.placeholder = @"请输入商品名称查询";
     searchBar.text = self.keyword;
     self.searchBar = searchBar;
-    self.navigationItem.titleView = searchBar;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
 }
 -(void)setUpCollectionView
 {

@@ -22,6 +22,10 @@
 @property (nonatomic, weak) IBOutlet UIImageView *business_license_img;//营业执照图片
 /* 地址 */
 @property(nonatomic,strong) GXChooseAddressView *addressView;
+/* 提示框 */
+@property (nonatomic, strong) zhPopupController *alertPopVC;
+/* 地址选择框 */
+@property (nonatomic, strong) zhPopupController *addressPopVC;
 @end
 @implementation GXRegisterAuthCell
 
@@ -66,7 +70,7 @@
         __weak __typeof(self) weakSelf = self;
         // 最后一列的行被点击的回调
         _addressView.lastComponentClickedBlock = ^(NSInteger type, GXSelectRegion * _Nullable region) {
-            [weakSelf.target.zh_popupController dismissWithDuration:0.25 springAnimated:NO];
+            [weakSelf.addressPopVC dismissWithDuration:0.25 completion:nil];
             if (type) {
                 weakSelf.shop_area.text = [NSString stringWithFormat:@"%@%@%@%@",region.selectRegion.area_alias,region.selectCity.area_alias,region.selectArea.area_alias,region.selectTown.area_alias];
                 weakSelf.store.shop_area = weakSelf.shop_area.text;
@@ -76,12 +80,18 @@
     }
     return _addressView;
 }
+-(zhPopupController *)addressPopVC
+{
+    if (!_addressPopVC) {
+        _addressPopVC = [[zhPopupController alloc] initWithView:self.addressView size:self.addressView.bounds.size];
+        _addressPopVC.layoutType = zhPopupLayoutTypeBottom;
+    }
+    return _addressPopVC;
+}
 - (IBAction)chooseAdressClicked:(UIButton *)sender {
    
     self.addressView.region = self.store.region;
-    self.target.zh_popupController = [[zhPopupController alloc] init];
-    self.target.zh_popupController.layoutType = zhPopupLayoutTypeBottom;
-    [self.target.zh_popupController presentContentView:self.addressView duration:0.25 springAnimated:NO];
+    [self.addressPopVC show];
 }
 - (IBAction)chooseImgClicked:(UIButton *)sender {
     FSActionSheet *as = [[FSActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:@"取消" highlightedButtonTitle:nil otherButtonTitles:@[@"拍照",@"从手机相册选择"]];
@@ -120,13 +130,13 @@
                 zhAlertView *alert = [[zhAlertView alloc] initWithTitle:@"请打开相机权限" message:@"设置-隐私-相机" constantWidth:HX_SCREEN_WIDTH - 50*2];
                 zhAlertButton *okButton = [zhAlertButton buttonWithTitle:@"知道了" handler:^(zhAlertButton * _Nonnull button) {
                     hx_strongify(weakSelf);
-                    [strongSelf.target.zh_popupController dismiss];
+                    [strongSelf.alertPopVC dismiss];
                 }];
                 okButton.lineColor = UIColorFromRGB(0xDDDDDD);
                 [okButton setTitleColor:HXControlBg forState:UIControlStateNormal];
                 [alert addAction:okButton];
-                self.target.zh_popupController = [[zhPopupController alloc] init];
-                [self.target.zh_popupController presentContentView:alert duration:0.25 springAnimated:NO];
+                self.alertPopVC = [[zhPopupController alloc] initWithView:alert size:alert.bounds.size];
+                [self.alertPopVC show];
             }
         }else{
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"相机不可用"];
@@ -155,13 +165,13 @@
                 zhAlertView *alert = [[zhAlertView alloc] initWithTitle:@"请打开相册权限" message:@"设置-隐私-相册" constantWidth:HX_SCREEN_WIDTH - 50*2];
                 zhAlertButton *okButton = [zhAlertButton buttonWithTitle:@"知道了" handler:^(zhAlertButton * _Nonnull button) {
                     hx_strongify(weakSelf);
-                    [strongSelf.target.zh_popupController dismiss];
+                    [strongSelf.alertPopVC dismiss];
                 }];
                 okButton.lineColor = UIColorFromRGB(0xDDDDDD);
                 [okButton setTitleColor:HXControlBg forState:UIControlStateNormal];
                 [alert addAction:okButton];
-                self.target.zh_popupController = [[zhPopupController alloc] init];
-                [self.target.zh_popupController presentContentView:alert duration:0.25 springAnimated:NO];
+                self.alertPopVC = [[zhPopupController alloc] initWithView:alert size:alert.bounds.size];
+                [self.alertPopVC show];
             }
         }else{
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"相册不可用"];

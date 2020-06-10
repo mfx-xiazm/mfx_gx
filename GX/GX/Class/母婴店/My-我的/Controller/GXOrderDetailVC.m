@@ -47,6 +47,8 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
 @property (weak, nonatomic) IBOutlet UIButton *thirdHandleBtn;
 /** vc控制器 */
 @property (nonatomic,strong) NSMutableArray *controllers;
+/* 提示框 */
+@property (nonatomic, strong) zhPopupController *alertPopVC;
 @end
 
 @implementation GXOrderDetailVC
@@ -441,13 +443,13 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
         hx_weakify(self);
         zhAlertButton *okButton = [zhAlertButton buttonWithTitle:@"我知道了" handler:^(zhAlertButton * _Nonnull button) {
             hx_strongify(weakSelf);
-            [strongSelf.zh_popupController dismiss];
+            [strongSelf.alertPopVC dismiss];
         }];
         okButton.lineColor = UIColorFromRGB(0xDDDDDD);
         [okButton setTitleColor:HXControlBg forState:UIControlStateNormal];
         [alert addAction:okButton];
-        self.zh_popupController = [[zhPopupController alloc] init];
-        [self.zh_popupController presentContentView:alert duration:0.25 springAnimated:NO];
+        self.alertPopVC = [[zhPopupController alloc] initWithView:alert size:alert.bounds.size];
+        [self.alertPopVC show];
     }else{
         if (sender.tag == 1) {
             if ([self.orderDetail.status isEqualToString:@"待收货"]) {
@@ -498,11 +500,11 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
                     hx_weakify(self);
                     zhAlertButton *cancelButton = [zhAlertButton buttonWithTitle:@"取消" handler:^(zhAlertButton * _Nonnull button) {
                         hx_strongify(weakSelf);
-                        [strongSelf.zh_popupController dismiss];
+                        [strongSelf.alertPopVC dismiss];
                     }];
                     zhAlertButton *okButton = [zhAlertButton buttonWithTitle:@"确认" handler:^(zhAlertButton * _Nonnull button) {
                         hx_strongify(weakSelf);
-                        [strongSelf.zh_popupController dismiss];
+                        [strongSelf.alertPopVC dismiss];
                         [strongSelf confirmReceiveGoodRequest];
                     }];
                     cancelButton.lineColor = UIColorFromRGB(0xDDDDDD);
@@ -510,8 +512,8 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
                     okButton.lineColor = UIColorFromRGB(0xDDDDDD);
                     [okButton setTitleColor:HXControlBg forState:UIControlStateNormal];
                     [alert adjoinWithLeftAction:cancelButton rightAction:okButton];
-                    self.zh_popupController = [[zhPopupController alloc] init];
-                    [self.zh_popupController presentContentView:alert duration:0.25 springAnimated:NO];
+                    self.alertPopVC = [[zhPopupController alloc] initWithView:alert size:alert.bounds.size];
+                    [self.alertPopVC show];
                 }
             }else if ([self.orderDetail.status isEqualToString:@"待评价"]) {
                 //HXLog(@"评价");

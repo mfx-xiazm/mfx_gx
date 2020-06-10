@@ -54,6 +54,8 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
 @property(nonatomic,strong) SPButton *msgBtn;
 /* 首页数据 */
 @property(nonatomic,strong) GXHomeData *homeData;
+/* 更新弹框 */
+@property (nonatomic, strong) zhPopupController *updatePopVC;
 @end
 
 @implementation GXHomeVC
@@ -88,16 +90,13 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
     self.navigationItem.titleView = searchBar;
     
     SPButton *msg = [SPButton buttonWithType:UIButtonTypeCustom];
-    msg.imagePosition = SPButtonImagePositionTop;
-    msg.imageTitleSpace = 2.f;
     msg.hxn_size = CGSizeMake(40, 40);
     msg.titleLabel.font = [UIFont systemFontOfSize:9];
     [msg setImage:HXGetImage(@"消息") forState:UIControlStateNormal];
-    [msg setTitle:@"消息" forState:UIControlStateNormal];
     [msg addTarget:self action:@selector(msgClicked) forControlEvents:UIControlEventTouchUpInside];
-    [msg setTitleColor:UIColorFromRGB(0XFFFFFF) forState:UIControlStateNormal];
     msg.badgeBgColor = [UIColor whiteColor];
-    msg.badgeCenterOffset = CGPointMake(-10, 5);
+    msg.badgeTextColor = HXControlBg;
+    msg.badgeCenterOffset = CGPointMake(-12, 8);
     self.msgBtn = msg;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:msg];
@@ -157,8 +156,8 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
     [HXNetworkTool POST:HXRC_M_URL action:@"admin/getHomeMsg" parameters:@{} success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
-            if ([responseObject[@"data"] boolValue]) {
-                [strongSelf.msgBtn showBadgeWithStyle:WBadgeStyleRedDot value:1 animationType:WBadgeAnimTypeNone];
+            if ([responseObject[@"data"] integerValue]) {
+                [strongSelf.msgBtn showBadgeWithStyle:WBadgeStyleNumber value:[responseObject[@"data"] integerValue] animationType:WBadgeAnimTypeNone];
             }else{
                 [strongSelf.msgBtn clearBadge];
             }
@@ -181,7 +180,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
             NSArray *tempArr = @[@{@"cate_name":@"精选好店",@"image_name":@"精选好店"},
                                  @{@"cate_name":@"品牌优选",@"image_name":@"品牌优选"},
                                  @{@"cate_name":@"控区控价",@"image_name":@"控区控价"},
-                                 @{@"cate_name":@"促销神器",@"image_name":@"促销神器"},
+                                 @{@"cate_name":@"预售专区",@"image_name":@"促销神器"},
                                  @{@"cate_name":@"卖货素材",@"image_name":@"卖货素材"}
                                  ];
             strongSelf.homeData.homeTopCate = [NSArray yy_modelArrayWithClass:[GYHomeTopCate class] json:tempArr];
@@ -238,12 +237,11 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
         if (index == 1) {// 强制更新不消失
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/cn/app/id1493878138?mt=8"]];
         }else{// 不强制更新消失
-            [strongSelf.zh_popupController dismiss];
+            [strongSelf.updatePopVC dismiss];
         }
     };
-    self.zh_popupController = [[zhPopupController alloc] init];
-    self.zh_popupController.dismissOnMaskTouched = NO;
-    [self.zh_popupController presentContentView:alert duration:0.25 springAnimated:NO];
+    self.updatePopVC = [[zhPopupController alloc] initWithView:alert size:alert.bounds.size];
+    [self.updatePopVC show];
 }
 #pragma mark -- UICollectionView 数据源和代理
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
