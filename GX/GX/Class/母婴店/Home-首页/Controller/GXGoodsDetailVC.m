@@ -14,7 +14,6 @@
 #import "GXAllMaterialVC.h"
 #import "GXAllCommentVC.h"
 #import "GXGoodsDetailSectionHeader.h"
-#import "GXGoodsDetailHeader.h"
 #import "GXGoodsInfoCell.h"
 #import "GXWebContentVC.h"
 #import <WebKit/WebKit.h>
@@ -31,10 +30,45 @@
 #import "GXApplySupplyVC.h"
 #import <ZLPhotoActionSheet.h>
 #import <UMShare/UMShare.h>
+#import <TYCyclePagerView.h>
+#import <TYPageControl.h>
+#import "GXHomePushCell.h"
+#import "XTimer.h"
+#import "GXShopGoodsCell.h"
+#import <ZLCollectionViewVerticalLayout.h>
+#import "GXHomeSectionHeader.h"
+#import "GXGoodsGiftCell.h"
+#import "GXRebateView.h"
+#import "GXFullGiftView.h"
 
+static NSString *const HomeSectionHeader = @"HomeSectionHeader";
+static NSString *const ShopGoodsCell = @"ShopGoodsCell";
 static NSString *const GoodsInfoCell = @"GoodsInfoCell";
-@interface GXGoodsDetailVC ()<UITableViewDelegate,UITableViewDataSource,GXGoodsMaterialCellDelegate,GXGoodsCommentCellDelegate>
+static NSString *const GoodsGiftCell = @"GoodsGiftCell";
+
+@interface GXGoodsDetailVC ()<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,GXGoodsMaterialCellDelegate,GXGoodsCommentCellDelegate,TYCyclePagerViewDataSource, TYCyclePagerViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,ZLCollectionViewBaseFlowLayoutDelegate>
+@property (weak, nonatomic) IBOutlet TYCyclePagerView *cyclePagerView;
+@property (nonatomic,strong) TYPageControl *pageControl;
+@property (weak, nonatomic) IBOutlet UILabel *shop_name;
+@property (weak, nonatomic) IBOutlet UILabel *price;
+@property (weak, nonatomic) IBOutlet UILabel *market_price;
+@property (weak, nonatomic) IBOutlet UILabel *cale_num;
+@property (weak, nonatomic) IBOutlet UILabel *notice;
+@property (weak, nonatomic) IBOutlet UILabel *rush_price;
+@property (weak, nonatomic) IBOutlet UILabel *rush_market_price;
+@property (weak, nonatomic) IBOutlet UILabel *rush_time;
+/** 倒计时 */
+@property (nonatomic,strong) XTimer *timer;
+@property (weak, nonatomic) IBOutlet UIView *rushView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *rushViewHeight;
+@property (weak, nonatomic) IBOutlet UIView *noticeView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *noticeViewHeight;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewHeight;
+@property (weak, nonatomic) IBOutlet UIView *webContentView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *webContentViewHeight;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewHeight;
 @property (weak, nonatomic) IBOutlet UIView *normal_tool;
 @property (weak, nonatomic) IBOutlet UIButton *normal_buy_btn;
 @property (weak, nonatomic) IBOutlet UIButton *normal_add_btn;
@@ -47,16 +81,10 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
 @property(nonatomic,weak) UIButton *materialBtn;
 /* 我要供货 */
 @property(nonatomic,weak) UIButton *applyBtn;
-/* 头视图 */
-@property(nonatomic,strong) GXGoodsDetailHeader *header;
 /* 规格视图 */
 @property(nonatomic,strong) GXChooseClassView *chooseClassView;
-/** 尾部视图 */
-@property(nonatomic,strong) UIView *footer;
 /* 详情 */
 @property(nonatomic,strong) WKWebView *webView;
-/* 缓存自适应的cell高度 */
-@property(nonatomic,strong) NSMutableDictionary *cellHeightsDictionary;
 /* 商品详情 */
 @property(nonatomic,strong) GXGoodsDetail *goodsDetail;
 /** 分享数据模型 */
@@ -72,7 +100,9 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavBar];
+    [self setUpCyclePageView];
     [self setUpTableView];
+    [self setUpCollectionView];
     [self startShimmer];
     [self getGoodDetailRequest];
 }
@@ -81,26 +111,7 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
     [super viewDidLayoutSubviews];
     self.materialBtn.layer.cornerRadius = self.materialBtn.hxn_height/2.0;
     self.applyBtn.layer.cornerRadius = self.applyBtn.hxn_height/2.0;
-}
--(NSMutableDictionary *)cellHeightsDictionary
-{
-    if (_cellHeightsDictionary == nil) {
-        _cellHeightsDictionary = [NSMutableDictionary dictionary];
-    }
-    return _cellHeightsDictionary;
-}
--(GXGoodsDetailHeader *)header
-{
-    if (_header == nil) {
-        _header = [GXGoodsDetailHeader loadXibView];
-        _header.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, HX_SCREEN_WIDTH*2/3.0 + 50.f + 150);
-        hx_weakify(self);
-        _header.bannerClickedCall = ^(NSInteger index) {
-            hx_strongify(weakSelf);
-            [strongSelf showBannerPic:index];
-        };
-    }
-    return _header;
+    self.webView.frame = self.webContentView.bounds;
 }
 -(GXChooseClassView *)chooseClassView
 {
@@ -115,23 +126,10 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
     if (_webView == nil) {
         _webView = [[WKWebView alloc] init];
         _webView.scrollView.scrollEnabled = NO;
-        [self.footer addSubview:_webView];
         [_webView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
+        [self.webContentView addSubview:_webView];
     }
     return _webView;
-}
--(UIView *)footer
-{
-    if (_footer == nil) {
-        _footer = [UIView new];
-        UIImageView *image = [[UIImageView alloc] init];
-        image.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, 60.f);
-        image.backgroundColor = [UIColor whiteColor];
-        image.contentMode = UIViewContentModeCenter;
-        image.image = HXGetImage(@"商品描述");
-        [_footer addSubview:image];
-    }
-    return _footer;
 }
 -(zhPopupController *)classPopVC
 {
@@ -145,36 +143,66 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
 #pragma mark -- 视图相关
 -(void)setUpNavBar
 {
+    self.hbd_barAlpha = 0.0;
+    self.hbd_barStyle = UIBarStyleDefault;
+    self.hbd_tintColor = [UIColor blackColor];
+    
     [self.navigationItem setTitle:nil];
     
-    UIBarButtonItem *cartItem = [UIBarButtonItem itemWithTarget:self action:@selector(cartClicked) image:HXGetImage(@"购物车白")];
-//    UIBarButtonItem *shareItem = [UIBarButtonItem itemWithTarget:self action:@selector(shareClicked) image:HXGetImage(@"分享白色")];
+    UIButton *cart = [UIButton buttonWithType:UIButtonTypeCustom];
+    cart.hxn_size = CGSizeMake(40, 40);
+    [cart setImage:HXGetImage(@"购物车白") forState:UIControlStateNormal];
+    [cart addTarget:self action:@selector(cartClicked) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *cartItem = [[UIBarButtonItem alloc] initWithCustomView:cart];
+
+    //    UIBarButtonItem *shareItem = [UIBarButtonItem itemWithTarget:self action:@selector(shareClicked) image:HXGetImage(@"分享白色")];
     
     UIButton *material = [UIButton buttonWithType:UIButtonTypeCustom];
     [material setTitle:@"卖货素材" forState:UIControlStateNormal];
-    [material setTitleColor:HXControlBg forState:UIControlStateNormal];
+    [material setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     material.titleLabel.font = [UIFont systemFontOfSize:12];
     material.hxn_size = CGSizeMake(70, 22);
     material.layer.cornerRadius = material.hxn_height/2.0;
     material.layer.masksToBounds = YES;
-    material.backgroundColor = [UIColor whiteColor];
+    material.backgroundColor = HXRGBAColor(0, 0, 0, 0.3);
     [material addTarget:self action:@selector(materialClicked) forControlEvents:UIControlEventTouchUpInside];
     self.materialBtn = material;
     UIBarButtonItem *materialItem = [[UIBarButtonItem alloc] initWithCustomView:material];
     
     UIButton *apply = [UIButton buttonWithType:UIButtonTypeCustom];
     [apply setTitle:@"我要供货" forState:UIControlStateNormal];
-    [apply setTitleColor:HXControlBg forState:UIControlStateNormal];
+    [apply setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     apply.titleLabel.font = [UIFont systemFontOfSize:12];
     apply.hxn_size = CGSizeMake(70, 22);
     apply.layer.cornerRadius = apply.hxn_height/2.0;
     apply.layer.masksToBounds = YES;
-    apply.backgroundColor = [UIColor whiteColor];
+    apply.backgroundColor = HXRGBAColor(0, 0, 0, 0.3);
     self.applyBtn = apply;
     [apply addTarget:self action:@selector(applyClicked) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *applyItem = [[UIBarButtonItem alloc] initWithCustomView:apply];
     
     self.navigationItem.rightBarButtonItems = @[cartItem,materialItem,applyItem];
+}
+-(void)setUpCyclePageView
+{
+    self.cyclePagerView.isInfiniteLoop = YES;
+    self.cyclePagerView.autoScrollInterval = 3.0;
+    self.cyclePagerView.dataSource = self;
+    self.cyclePagerView.delegate = self;
+    // registerClass or registerNib
+    [self.cyclePagerView registerNib:[UINib nibWithNibName:NSStringFromClass([GXHomePushCell class]) bundle:nil] forCellWithReuseIdentifier:@"TopBannerCell"];
+    
+    TYPageControl *pageControl = [[TYPageControl alloc]init];
+    pageControl.numberOfPages = 4;
+    pageControl.currentPageIndicatorSize = CGSizeMake(6, 6);
+    pageControl.pageIndicatorSize = CGSizeMake(6, 6);
+    //    pageControl.pageIndicatorImage = HXGetImage(@"轮播点灰");
+    //    pageControl.currentPageIndicatorImage = HXGetImage(@"轮播点黑");
+    pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
+    pageControl.currentPageIndicatorTintColor = HXControlBg;
+    pageControl.frame = CGRectMake(0, CGRectGetHeight(self.cyclePagerView.frame) - 20, CGRectGetWidth(self.cyclePagerView.frame), 20);
+    self.pageControl = pageControl;
+    [self.cyclePagerView addSubview:pageControl];
 }
 - (void)setUpTableView
 {
@@ -186,7 +214,7 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
         // 不要自动调整inset
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
-    self.tableView.estimatedRowHeight = 150;
+    self.tableView.estimatedRowHeight = 0;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedSectionHeaderHeight = 0;
     self.tableView.estimatedSectionFooterHeight = 0;
@@ -194,12 +222,26 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    
+    self.tableView.backgroundColor = UIColorFromRGB(0xF6F7F8);
     self.tableView.showsVerticalScrollIndicator = YES;
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GXGoodsInfoCell class]) bundle:nil] forCellReuseIdentifier:GoodsInfoCell];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GXGoodsGiftCell class]) bundle:nil] forCellReuseIdentifier:GoodsGiftCell];
+}
+-(void)setUpCollectionView
+{
+    ZLCollectionViewVerticalLayout *flowLayout = [[ZLCollectionViewVerticalLayout alloc] init];
+    flowLayout.delegate = self;
+    flowLayout.canDrag = NO;
+    flowLayout.header_suspension = NO;
+    self.collectionView.collectionViewLayout = flowLayout;
+    self.collectionView.dataSource = self;
+    self.collectionView.delegate = self;
+    
+    [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([GXShopGoodsCell class]) bundle:nil] forCellWithReuseIdentifier:ShopGoodsCell];
+    [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([GXHomeSectionHeader class]) bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HomeSectionHeader];
 }
 #pragma mark -- 点击事件
 -(void)cartClicked
@@ -351,45 +393,82 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
 }
 -(void)handleGoodsDetailData
 {
-    self.header.goodsDetail = self.goodsDetail;
+    self.pageControl.numberOfPages = _goodsDetail.good_adv.count;
+    [self.cyclePagerView reloadData];
     
-    CGFloat nameHeight = [self.goodsDetail.goods_name textHeightSize:CGSizeMake(HX_SCREEN_WIDTH-15*2.f, CGFLOAT_MAX) font:[UIFont systemFontOfSize:15] lineSpacing:5.f];
-    CGRect headerFrame = CGRectZero;
+    [self.shop_name setTextWithLineSpace:5.f withString:_goodsDetail.goods_name withFont:[UIFont systemFontOfSize:15]];
     if ([self.goodsDetail.rushbuy isEqualToString:@"1"]) {//抢购商品
-        self.header.rushView.hidden = NO;
-        self.header.rushViewHeight.constant = 50.f;
-        if (self.goodsDetail.important_notice && self.goodsDetail.important_notice.length) {// 有重要通知
-            self.header.noticeView.hidden = NO;
-            self.header.noticeViewHeight.constant = 40.f;
-            headerFrame = CGRectMake(0, 0, HX_SCREEN_WIDTH, HX_SCREEN_WIDTH*2/3.0 + 50.f + nameHeight + 100.f + 10.f);
-        }else{// 没有重要通知
-            self.header.noticeView.hidden = YES;
-            self.header.noticeViewHeight.constant = 0.f;
-            headerFrame = CGRectMake(0, 0, HX_SCREEN_WIDTH, HX_SCREEN_WIDTH*2/3.0 + 50.f + nameHeight + 50.f + 10.f);
-        }
-    }else{//非抢购商品
-        self.header.rushView.hidden = YES;
-        self.header.rushViewHeight.constant = 0.f;
+        self.rushView.hidden = NO;
+        self.rushViewHeight.constant = 50.f;
         
-        if (self.goodsDetail.important_notice && self.goodsDetail.important_notice.length) {// 有重要通知
-            self.header.noticeView.hidden = NO;
-            self.header.noticeViewHeight.constant = 40.f;
-            headerFrame = CGRectMake(0, 0, HX_SCREEN_WIDTH, HX_SCREEN_WIDTH*2/3.0 + nameHeight + 100.f + 10.f);
-        }else{// 没有重要通知
-            self.header.noticeView.hidden = YES;
-            self.header.noticeViewHeight.constant = 0.f;
-            headerFrame = CGRectMake(0, 0, HX_SCREEN_WIDTH, HX_SCREEN_WIDTH*2/3.0 + nameHeight + 50.f + 10.f);
+        if ([_goodsDetail.rush.rush_min_price floatValue] == [_goodsDetail.rush.rush_max_price floatValue]) {
+            self.rush_price.text = [NSString stringWithFormat:@"￥%@",_goodsDetail.rush.rush_min_price];
+        }else{
+            self.rush_price.text = [NSString stringWithFormat:@"￥%@-￥%@",_goodsDetail.rush.rush_min_price,_goodsDetail.rush.rush_max_price];
+        }
+        if ([_goodsDetail.min_price floatValue] == [_goodsDetail.max_price floatValue]) {
+            self.rush_market_price.text = [NSString stringWithFormat:@"￥%@",_goodsDetail.min_price];
+        }else{
+            self.rush_market_price.text = [NSString stringWithFormat:@"￥%@-￥%@",_goodsDetail.min_price,_goodsDetail.max_price];
+        }
+        /** 1未开始，2进行中；3已结束；4暂停 */
+        if ([_goodsDetail.rush.rushbuy_status isEqualToString:@"1"]) {
+            self.rush_time.text = @"未开始";
+        }else if ([_goodsDetail.rush.rushbuy_status isEqualToString:@"2"]) {
+            [self countTimeDown];
+            if (!self.timer) {
+                self.timer = [XTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(countTimeDown) userInfo:nil repeats:YES];
+            }
+        }else{
+            self.rush_time.text = @"已结束";
+        }
+        self.price.text = @"";
+        self.market_price.text = [NSString stringWithFormat:@"建议价:￥%@",_goodsDetail.suggest_price];
+    }else{//不抢购商品
+        self.rushView.hidden = YES;
+        self.rushViewHeight.constant = 0.f;
+        
+        if ([_goodsDetail.control_type isEqualToString:@"1"]) {
+            if ([_goodsDetail.min_price floatValue] == [_goodsDetail.max_price floatValue]) {
+                self.price.text = [NSString stringWithFormat:@"￥%@",_goodsDetail.min_price];
+            }else{
+                self.price.text = [NSString stringWithFormat:@"￥%@-￥%@",_goodsDetail.min_price,_goodsDetail.max_price];
+            }
+            self.market_price.text = [NSString stringWithFormat:@"建议价:￥%@",_goodsDetail.suggest_price];
+        }else{
+            self.price.text = [NSString stringWithFormat:@"￥%@  ",_goodsDetail.min_price];
+            self.market_price.text = @"";
         }
     }
-    
-    self.header.frame = headerFrame;
-    hx_weakify(self);
-    self.header.countDownCall = ^{// 倒计时结束，刷新页面
-        hx_strongify(weakSelf);
-        [strongSelf getGoodDetailRequest];
-    };
-    self.tableView.tableHeaderView = self.header;
+    self.cale_num.text = [NSString stringWithFormat:@"销量：%@",_goodsDetail.sale_num];
+        
+    if (self.goodsDetail.important_notice && self.goodsDetail.important_notice.length) {// 有重要通知
+        self.noticeView.hidden = NO;
+        self.noticeViewHeight.constant = 40.f;
+        self.notice.text = [NSString stringWithFormat:@"重要通知：%@",_goodsDetail.important_notice];
+    }else{// 没有重要通知
+        self.noticeView.hidden = YES;
+        self.noticeViewHeight.constant = 0.f;
+        self.notice.text = @"";
+    }
 
+    [self.tableView reloadData];
+    hx_weakify(self);
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        hx_strongify(weakSelf);
+        strongSelf.tableViewHeight.constant = strongSelf.tableView.contentSize.height;
+    });
+    
+    NSString *h5 = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"><style>img{width:100%%; height:auto;}body{margin:0 14px;}</style></head><body>%@</body></html>",self.goodsDetail.goods_desc];
+    [self.webView loadHTMLString:h5 baseURL:[NSURL URLWithString:HXRC_URL_HEADER]];
+    
+    
+    [self.collectionView reloadData];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        hx_strongify(weakSelf);
+        strongSelf.collectionViewHeight.constant = strongSelf.collectionView.contentSize.height;
+    });
+    
     if ([self.goodsDetail.control_type isEqualToString:@"1"]) {// 常规
         self.normal_tool.hidden = NO;
         self.try_tool.hidden = YES;
@@ -438,10 +517,6 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
             }
         }
     }
-    NSString *h5 = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"><style>img{width:100%%; height:auto;}body{margin:0 14px;}</style></head><body>%@</body></html>",self.goodsDetail.goods_desc];
-    [self.webView loadHTMLString:h5 baseURL:[NSURL URLWithString:HXRC_URL_HEADER]];
-
-    [self.tableView reloadData];
 }
 -(void)setCollectGoodsRequest
 {
@@ -522,17 +597,76 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
     }];
 }
+#pragma mark -- 倒计时
+-(void)countTimeDown
+{
+    if (self.goodsDetail.rush.countDown >0) {
+        if ((self.goodsDetail.rush.countDown/3600)/24) {
+            NSString *str_day = [NSString stringWithFormat:@"%02ld",(self.goodsDetail.rush.countDown/3600)/24];
+            NSString *str_hour = [NSString stringWithFormat:@"%02ld",self.goodsDetail.rush.countDown/3600%24];
+            NSString *str_minute = [NSString stringWithFormat:@"%02ld",(self.goodsDetail.rush.countDown%(60*60))/60];
+            NSString *str_second = [NSString stringWithFormat:@"%02ld",self.goodsDetail.rush.countDown%60];
+            NSString *format_time = [NSString stringWithFormat:@"%@天%@:%@:%@",str_day,str_hour,str_minute,str_second];
+            //设置文字显示 根据自己需求设置
+            self.rush_time.text = [NSString stringWithFormat:@"距结束 %@",format_time];
+        }else{
+            NSString *str_hour = [NSString stringWithFormat:@"%02ld",self.goodsDetail.rush.countDown/3600%24];
+            NSString *str_minute = [NSString stringWithFormat:@"%02ld",(self.goodsDetail.rush.countDown%(60*60))/60];
+            NSString *str_second = [NSString stringWithFormat:@"%02ld",self.goodsDetail.rush.countDown%60];
+            NSString *format_time = [NSString stringWithFormat:@"%@:%@:%@",str_hour,str_minute,str_second];
+            //设置文字显示 根据自己需求设置
+            self.rush_time.text = [NSString stringWithFormat:@"距结束 %@",format_time];
+        }
+        
+        self.goodsDetail.rush.countDown -= 1;
+    }else{
+        // 移除倒计时，发出通知并刷新页面
+        self.goodsDetail.rush.countDown = 0;
+        [self.timer invalidate];
+        self.timer = nil;
+        
+        // 倒计时结束，刷新页面
+        [self getGoodDetailRequest];
+    }
+}
 #pragma mark -- 事件监听
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    // CGFloat headerHeight = CGRectGetHeight(self.header.frame);
+    CGFloat headerHeight = HX_SCREEN_WIDTH;
+    CGFloat progress = scrollView.contentOffset.y;
+    CGFloat gradientProgress = MIN(1, MAX(0, progress  / headerHeight));
+    gradientProgress = gradientProgress * gradientProgress * gradientProgress * gradientProgress;
+    if (gradientProgress < 0.1) {
+        self.hbd_barStyle = UIBarStyleDefault;
+        self.hbd_tintColor = UIColor.blackColor;
+        [self.materialBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        self.materialBtn.backgroundColor = HXRGBAColor(0, 0, 0, 0.3);
+        [self.applyBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        self.applyBtn.backgroundColor = HXRGBAColor(0, 0, 0, 0.3);
+    } else {
+        self.hbd_barStyle = UIBarStyleBlack;
+        self.hbd_tintColor = UIColor.whiteColor;
+        [self.materialBtn setTitleColor:HXControlBg forState:UIControlStateNormal];
+        self.materialBtn.backgroundColor = HXRGBAColor(255, 255, 255, 1);
+        [self.applyBtn setTitleColor:HXControlBg forState:UIControlStateNormal];
+        self.applyBtn.backgroundColor = HXRGBAColor(255, 255, 255, 1);
+    }
+    self.hbd_barAlpha = gradientProgress;
+    [self hbd_setNeedsUpdateNavigationBar];
+}
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
 {
     if ([keyPath isEqualToString:@"contentSize"]) {
-        self.webView.frame = CGRectMake(0, 60.f, HX_SCREEN_WIDTH, self.webView.scrollView.contentSize.height);
-        self.footer.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, self.webView.scrollView.contentSize.height + 60.f);
-        self.tableView.tableFooterView = self.footer;
+        self.webContentViewHeight.constant = self.webView.scrollView.contentSize.height;
+        self.webView.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, self.webView.scrollView.contentSize.height);
     }
 }
 -(void)dealloc
 {
+    if (self.timer) {
+        [self.timer invalidate];
+        self.timer = nil;
+    }
     @try {
         [self.webView.scrollView removeObserver:self forKeyPath:@"contentSize"];
     }
@@ -543,44 +677,75 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
         HXLog(@"多次删除了");
     }
 }
+#pragma mark -- TYCyclePagerView代理
+- (NSInteger)numberOfItemsInPagerView:(TYCyclePagerView *)pageView {
+    return self.goodsDetail.good_adv.count;
+}
+
+- (UICollectionViewCell *)pagerView:(TYCyclePagerView *)pagerView cellForItemAtIndex:(NSInteger)index {
+    GXHomePushCell *cell = [pagerView dequeueReusableCellWithReuseIdentifier:@"TopBannerCell" forIndex:index];
+    GXGoodsDetailAdv *adv = self.goodsDetail.good_adv[index];
+    cell.adv = adv;
+    return cell;
+}
+
+- (TYCyclePagerViewLayout *)layoutForPagerView:(TYCyclePagerView *)pageView {
+    TYCyclePagerViewLayout *layout = [[TYCyclePagerViewLayout alloc]init];
+    layout.itemSize = CGSizeMake(HX_SCREEN_WIDTH, HX_SCREEN_WIDTH);
+    layout.itemSpacing = 0;
+    layout.itemHorizontalCenter = YES;
+    return layout;
+}
+
+- (void)pagerView:(TYCyclePagerView *)pageView didScrollFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex {
+    self.pageControl.currentPage = toIndex;
+    //[_pageControl setCurrentPage:newIndex animate:YES];
+}
+
+- (void)pagerView:(TYCyclePagerView *)pageView didSelectedItemCell:(__kindof UICollectionViewCell *)cell atIndex:(NSInteger)index
+{
+    [self showBannerPic:index];
+}
+
 #pragma mark -- TableViewDelegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 4;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0) {
-        return self.goodsDetail.materialLayout.count;
+        return 2;
     }else if (section == 1) {
+        return self.goodsDetail.materialLayout.count;
+    }else if (section == 2) {
         return self.goodsDetail.evaLayout.count;
     }else{
         return self.goodsDetail.good_param.count;
     }
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 2) {
-        [self.cellHeightsDictionary setObject:@(cell.frame.size.height) forKey:indexPath];
-    }
-}
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
+        return 50.f;
+    }else if (indexPath.section == 1) {
         GXGoodsMaterialLayout *layout = self.goodsDetail.materialLayout[indexPath.row];
         return layout.height;
-    }else if (indexPath.section == 1) {
+    }else if (indexPath.section == 2) {
         GXGoodsCommentLayout *layout = self.goodsDetail.evaLayout[indexPath.row];
         return layout.height;
     }else{
-        NSNumber *height = [self.cellHeightsDictionary objectForKey:indexPath];
-        if (height) return height.doubleValue;
         return UITableViewAutomaticDimension;
     }
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
+        GXGoodsGiftCell *cell = [tableView dequeueReusableCellWithIdentifier:GoodsGiftCell forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+    }else if (indexPath.section == 1) {
         GXGoodsMaterialCell * cell = [GXGoodsMaterialCell cellWithTableView:tableView];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.targetVc = self;
@@ -588,7 +753,7 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
         cell.materialLayout = layout;
         cell.delegate = self;
         return cell;
-    }else if (indexPath.section == 1){
+    }else if (indexPath.section == 2){
         GXGoodsCommentCell * cell = [GXGoodsCommentCell cellWithTableView:tableView];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.targetVc = self;
@@ -607,8 +772,10 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
-        return self.goodsDetail.materialLayout.count?44.f:CGFLOAT_MIN;
+        return CGFLOAT_MIN;
     }else if (section == 1) {
+        return self.goodsDetail.materialLayout.count?44.f:CGFLOAT_MIN;
+    }else if (section == 2) {
         return self.goodsDetail.evaLayout.count?44.f:CGFLOAT_MIN;
     }else{
         return self.goodsDetail.good_param.count?44.f:CGFLOAT_MIN;
@@ -617,56 +784,84 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     if (section == 0) {
-        return self.goodsDetail.materialLayout.count?10.f:CGFLOAT_MIN;
+        return 10.f;
     }else if (section == 1) {
+        return self.goodsDetail.materialLayout.count?10.f:CGFLOAT_MIN;
+    }else if (section == 2) {
         return self.goodsDetail.evaLayout.count?10.f:CGFLOAT_MIN;
     }else{
         return self.goodsDetail.good_param.count?10.f:CGFLOAT_MIN;
     }
 }
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    UIView *footer = [[UIView alloc] init];
+    footer.backgroundColor = UIColorFromRGB(0xF6F7F8);
+    return footer;
+}
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    GXGoodsDetailSectionHeader *header = [GXGoodsDetailSectionHeader loadXibView];
-    header.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 44.f);
     if (section == 0) {
-        header.titleLabel.text = @"素材";
-        header.moreImg.hidden = NO;
-        header.moreTitle.hidden = NO;
-    }else if (section == 1){
-        header.titleLabel.text = @"评价";
-        header.moreImg.hidden = NO;
-        header.moreTitle.hidden = NO;
-    }else{
-        header.titleLabel.text = @"商品规格";
-        header.moreImg.hidden = YES;
-        header.moreTitle.hidden = YES;
-    }
-    hx_weakify(self);
-    header.sectionClickCall = ^{
-        hx_strongify(weakSelf);
-        if (section == 0) {
-            GXAllMaterialVC *mvc = [GXAllMaterialVC new];
-            mvc.goods_id = strongSelf.goods_id;
-            [strongSelf.navigationController pushViewController:mvc animated:YES];
-        }else if (section == 1) {
-            GXAllCommentVC *mvc = [GXAllCommentVC new];
-            mvc.goods_id = strongSelf.goods_id;
-            mvc.evaCount = strongSelf.goodsDetail.evaCount;
-            mvc.goodsDetail = strongSelf.goodsDetail;
-            [strongSelf.navigationController pushViewController:mvc animated:YES];
+        return nil;
+    }else {
+        GXGoodsDetailSectionHeader *header = [GXGoodsDetailSectionHeader loadXibView];
+        header.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 44.f);
+        if (section == 1) {
+            header.titleLabel.text = @"素材";
+            header.moreImg.hidden = NO;
+            header.moreTitle.hidden = NO;
+        }else if (section == 2){
+            header.titleLabel.text = @"评价";
+            header.moreImg.hidden = NO;
+            header.moreTitle.hidden = NO;
+        }else{
+            header.titleLabel.text = @"商品规格";
+            header.moreImg.hidden = YES;
+            header.moreTitle.hidden = YES;
         }
-    };
-    if (section == 0) {
-        return self.goodsDetail.materialLayout.count?header:nil;
-    }else if (section == 1) {
-        return self.goodsDetail.evaLayout.count?header:nil;
-    }else{
-        return self.goodsDetail.good_param.count?header:nil;
+        hx_weakify(self);
+        header.sectionClickCall = ^{
+            hx_strongify(weakSelf);
+            if (section == 1) {
+                GXAllMaterialVC *mvc = [GXAllMaterialVC new];
+                mvc.goods_id = strongSelf.goods_id;
+                [strongSelf.navigationController pushViewController:mvc animated:YES];
+            }else if (section == 2) {
+                GXAllCommentVC *mvc = [GXAllCommentVC new];
+                mvc.goods_id = strongSelf.goods_id;
+                mvc.evaCount = strongSelf.goodsDetail.evaCount;
+                mvc.goodsDetail = strongSelf.goodsDetail;
+                [strongSelf.navigationController pushViewController:mvc animated:YES];
+            }
+        };
+        if (section == 1) {
+            return self.goodsDetail.materialLayout.count?header:nil;
+        }else if (section == 2) {
+            return self.goodsDetail.evaLayout.count?header:nil;
+        }else{
+            return self.goodsDetail.good_param.count?header:nil;
+        }
     }
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            GXRebateView *rebateView = [GXRebateView loadXibView];
+            rebateView.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 400.f);
+            
+            self.sharePopVC = [[zhPopupController alloc] initWithView:rebateView size:rebateView.bounds.size];
+            self.sharePopVC.layoutType = zhPopupLayoutTypeBottom;
+            [self.sharePopVC show];
+        }else{
+            GXFullGiftView *giftView = [GXFullGiftView loadXibView];
+            giftView.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 300.f);
+            
+            self.sharePopVC = [[zhPopupController alloc] initWithView:giftView size:giftView.bounds.size];
+            self.sharePopVC.layoutType = zhPopupLayoutTypeBottom;
+            [self.sharePopVC show];
+        }
+    }
 }
 #pragma mark -- GXGoodsMaterialCellDelegate
 /** 点击了全文/收回 */
@@ -721,7 +916,7 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
 -(void)showShareView:(BOOL)isMorePicture
 {
     GXShareView *share  = [GXShareView loadXibView];
-    share.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 180.f);
+    share.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 400.f);
     if (isMorePicture) {
         share.onlyWxView.hidden = NO;
     }else{
@@ -731,43 +926,45 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
     share.shareTypeCall = ^(NSInteger index) {
         hx_strongify(weakSelf);
         [strongSelf.sharePopVC dismissWithDuration:0.25 completion:nil];
-        [strongSelf shareNumRequest:strongSelf.shareModel.material.material_id];
 
-        if (index == 0) {// 仅仅打开微信
-            NSURL *url = [NSURL URLWithString:@"weixin://"];
-            BOOL canOpen = [[UIApplication sharedApplication] canOpenURL:url];
-            //先判断是否能打开该url
-            if (canOpen) {//打开微信
-                [[UIApplication sharedApplication] openURL:url];
-            }else {
-                [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"您的设备未安装微信APP"];
-            }
-        }else{
-            //创建分享消息对象
-            NSData *data = [NSData dataWithContentsOfURL:[NSURL  URLWithString:strongSelf.shareModel.material.photos.firstObject]];
-            UIImage *image = [UIImage imageWithData:data]; // 取得图片
-            
-            UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
-            UMShareImageObject *shareObject = [UMShareImageObject shareObjectWithTitle:@"呱选-精品素材" descr:strongSelf.shareModel.material.dsp thumImage:image];
-            shareObject.shareImage = image;
-            messageObject.shareObject = shareObject;
-            //调用分享接口
-            [[UMSocialManager defaultManager] shareToPlatform:index==1?UMSocialPlatformType_WechatTimeLine:UMSocialPlatformType_WechatSession messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
-                if (error) {
-                    UMSocialLogInfo(@"************Share fail with error %@*********",error);
-                    [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
-                }else{
-                    if ([data isKindOfClass:[UMSocialShareResponse class]]) {
-                        UMSocialShareResponse *resp = data;
-                        //分享结果消息
-                        UMSocialLogInfo(@"response message is %@",resp.message);
-                        //第三方原始返回的数据
-                        UMSocialLogInfo(@"response originalResponse data is %@",resp.originalResponse);
-                    }else{
-                        UMSocialLogInfo(@"response data is %@",data);
-                    }
+        if (index != 3) {
+            [strongSelf shareNumRequest:strongSelf.shareModel.material.material_id];
+            if (index == 0) {// 仅仅打开微信
+                NSURL *url = [NSURL URLWithString:@"weixin://"];
+                BOOL canOpen = [[UIApplication sharedApplication] canOpenURL:url];
+                //先判断是否能打开该url
+                if (canOpen) {//打开微信
+                    [[UIApplication sharedApplication] openURL:url];
+                }else {
+                    [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"您的设备未安装微信APP"];
                 }
-            }];
+            }else{
+                //创建分享消息对象
+                NSData *data = [NSData dataWithContentsOfURL:[NSURL  URLWithString:strongSelf.shareModel.material.photos.firstObject]];
+                UIImage *image = [UIImage imageWithData:data]; // 取得图片
+                
+                UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+                UMShareImageObject *shareObject = [UMShareImageObject shareObjectWithTitle:@"呱选-精品素材" descr:strongSelf.shareModel.material.dsp thumImage:image];
+                shareObject.shareImage = image;
+                messageObject.shareObject = shareObject;
+                //调用分享接口
+                [[UMSocialManager defaultManager] shareToPlatform:index==1?UMSocialPlatformType_WechatTimeLine:UMSocialPlatformType_WechatSession messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+                    if (error) {
+                        UMSocialLogInfo(@"************Share fail with error %@*********",error);
+                        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+                    }else{
+                        if ([data isKindOfClass:[UMSocialShareResponse class]]) {
+                            UMSocialShareResponse *resp = data;
+                            //分享结果消息
+                            UMSocialLogInfo(@"response message is %@",resp.message);
+                            //第三方原始返回的数据
+                            UMSocialLogInfo(@"response originalResponse data is %@",resp.originalResponse);
+                        }else{
+                            UMSocialLogInfo(@"response data is %@",data);
+                        }
+                    }
+                }];
+            }
         }
     };
     self.sharePopVC = [[zhPopupController alloc] initWithView:share size:share.bounds.size];
@@ -783,5 +980,68 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
     
     [layout resetLayout];
     [self.tableView reloadData];
+}
+#pragma mark -- UICollectionView 数据源和代理
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    //为你推荐
+    //return self.homeData.home_recommend_goods.count;
+    return 4;
+}
+- (ZLLayoutType)collectionView:(UICollectionView *)collectionView layout:(ZLCollectionViewBaseFlowLayout *)collectionViewLayout typeOfLayout:(NSInteger)section {
+    //为你推荐
+    return ClosedLayout;
+}
+//如果是ClosedLayout样式的section，必须实现该代理，指定列数
+- (NSInteger)collectionView:(UICollectionView *)collectionView layout:(ZLCollectionViewBaseFlowLayout*)collectionViewLayout columnCountOfSection:(NSInteger)section {
+    //为你推荐
+    return 2;
+}
+- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    //为你推荐
+    GXShopGoodsCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:ShopGoodsCell forIndexPath:indexPath];
+//    GYHomePushGoods *goods = self.homeData.home_recommend_goods[indexPath.item];
+//    cell.goods = goods;
+    return cell;
+}
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
+{
+    return CGSizeMake(HX_SCREEN_WIDTH, 50.f);
+}
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader]){
+        GXHomeSectionHeader *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HomeSectionHeader forIndexPath:indexPath];
+        //为你推荐
+        header.recommendView.hidden = NO;
+        header.titleView.hidden = YES;
+        
+        return header;
+    }
+    return nil;
+}
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    //为你推荐
+//    GXGoodsDetailVC *dvc = [GXGoodsDetailVC new];
+//    GYHomePushGoods *goods = self.homeData.home_recommend_goods[indexPath.item];
+//    dvc.goods_id = goods.goods_id;
+//    [self.navigationController pushViewController:dvc animated:YES];
+}
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    //为你推荐
+    CGFloat width = (HX_SCREEN_WIDTH-10*3)/2.0;
+    CGFloat height = width+70.f;
+    return CGSizeMake(width, height);
+}
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    //为你推荐
+    return 5.f;
+}
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
+    //为你推荐
+    return 5.f;
+}
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    //为你推荐
+    return  UIEdgeInsetsMake(0.f, 5.f, 15.f, 5.f);
 }
 @end

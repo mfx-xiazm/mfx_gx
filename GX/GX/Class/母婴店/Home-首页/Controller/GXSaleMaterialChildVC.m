@@ -435,7 +435,7 @@
 -(void)showShareView:(BOOL)isMorePicture
 {
     GXShareView *share  = [GXShareView loadXibView];
-    share.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 180.f);
+    share.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 400.f);
     if (isMorePicture) {
         share.onlyWxView.hidden = NO;
     }else{
@@ -445,43 +445,44 @@
     share.shareTypeCall = ^(NSInteger index) {
         hx_strongify(weakSelf);
         [strongSelf.sharePopVC dismissWithDuration:0.25 completion:nil];
-        [strongSelf shareNumRequest:strongSelf.shareModel.material.material_id];
-
-        if (index == 0) {// 仅仅打开微信
-            NSURL *url = [NSURL URLWithString:@"weixin://"];
-            BOOL canOpen = [[UIApplication sharedApplication] canOpenURL:url];
-            //先判断是否能打开该url
-            if (canOpen) {//打开微信
-                [[UIApplication sharedApplication] openURL:url];
-            }else {
-                [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"您的设备未安装微信APP"];
-            }
-        }else{
-            //创建分享消息对象
-            NSData *data = [NSData dataWithContentsOfURL:[NSURL  URLWithString:strongSelf.shareModel.material.photos.firstObject]];
-            UIImage *image = [UIImage imageWithData:data]; // 取得图片
-            
-            UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
-            UMShareImageObject *shareObject = [UMShareImageObject shareObjectWithTitle:@"呱选-精品素材" descr:strongSelf.shareModel.material.dsp thumImage:image];
-            shareObject.shareImage = image;
-            messageObject.shareObject = shareObject;
-            //调用分享接口
-            [[UMSocialManager defaultManager] shareToPlatform:index==1?UMSocialPlatformType_WechatTimeLine:UMSocialPlatformType_WechatSession messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
-                if (error) {
-                    UMSocialLogInfo(@"************Share fail with error %@*********",error);
-                    [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
-                }else{
-                    if ([data isKindOfClass:[UMSocialShareResponse class]]) {
-                        UMSocialShareResponse *resp = data;
-                        //分享结果消息
-                        UMSocialLogInfo(@"response message is %@",resp.message);
-                        //第三方原始返回的数据
-                        UMSocialLogInfo(@"response originalResponse data is %@",resp.originalResponse);
-                    }else{
-                        UMSocialLogInfo(@"response data is %@",data);
-                    }
+        if (index != 3) {
+            [strongSelf shareNumRequest:strongSelf.shareModel.material.material_id];
+            if (index == 0) {// 仅仅打开微信
+                NSURL *url = [NSURL URLWithString:@"weixin://"];
+                BOOL canOpen = [[UIApplication sharedApplication] canOpenURL:url];
+                //先判断是否能打开该url
+                if (canOpen) {//打开微信
+                    [[UIApplication sharedApplication] openURL:url];
+                }else {
+                    [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"您的设备未安装微信APP"];
                 }
-            }];
+            }else{
+                //创建分享消息对象
+                NSData *data = [NSData dataWithContentsOfURL:[NSURL  URLWithString:strongSelf.shareModel.material.photos.firstObject]];
+                UIImage *image = [UIImage imageWithData:data]; // 取得图片
+                
+                UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+                UMShareImageObject *shareObject = [UMShareImageObject shareObjectWithTitle:@"呱选-精品素材" descr:strongSelf.shareModel.material.dsp thumImage:image];
+                shareObject.shareImage = image;
+                messageObject.shareObject = shareObject;
+                //调用分享接口
+                [[UMSocialManager defaultManager] shareToPlatform:index==1?UMSocialPlatformType_WechatTimeLine:UMSocialPlatformType_WechatSession messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+                    if (error) {
+                        UMSocialLogInfo(@"************Share fail with error %@*********",error);
+                        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+                    }else{
+                        if ([data isKindOfClass:[UMSocialShareResponse class]]) {
+                            UMSocialShareResponse *resp = data;
+                            //分享结果消息
+                            UMSocialLogInfo(@"response message is %@",resp.message);
+                            //第三方原始返回的数据
+                            UMSocialLogInfo(@"response originalResponse data is %@",resp.originalResponse);
+                        }else{
+                            UMSocialLogInfo(@"response data is %@",data);
+                        }
+                    }
+                }];
+            }
         }
     };
     self.sharePopVC = [[zhPopupController alloc] initWithView:share size:share.bounds.size];

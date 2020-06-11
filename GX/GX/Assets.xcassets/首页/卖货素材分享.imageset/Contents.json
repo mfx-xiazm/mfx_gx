@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "朋友圈.png",
+      "filename" : "卖货素材分享.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "朋友圈@2x.png",
+      "filename" : "卖货素材分享@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "朋友圈@3x.png",
+      "filename" : "卖货素材分享@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

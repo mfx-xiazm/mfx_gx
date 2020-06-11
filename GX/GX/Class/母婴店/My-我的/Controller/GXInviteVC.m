@@ -9,7 +9,7 @@
 #import "GXInviteVC.h"
 #import "SGQRCode.h"
 #import <UMShare/UMShare.h>
-#import "GXShareView.h"
+#import "GXShareCodeView.h"
 #import <zhPopupController.h>
 
 @interface GXInviteVC ()
@@ -57,7 +57,7 @@
     [self.relu_txt setTextWithLineSpace:5.f withString:result[@"act_rule"] withFont:[UIFont systemFontOfSize:13]];
 }
 - (IBAction)inviteClicked:(UIButton *)sender {
-    GXShareView *share  = [GXShareView loadXibView];
+    GXShareCodeView *share  = [GXShareCodeView loadXibView];
     share.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 180.f);
     hx_weakify(self);
     share.shareTypeCall = ^(NSInteger index) {

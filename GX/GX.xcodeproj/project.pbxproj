@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		11AF349C58F7A342E9336E28 /* libPods-GX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E67F6C2F7D067769D4BA925 /* libPods-GX.a */; };
+		49053C9E24921921004B4A62 /* GXGoodsGiftCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49053C9C24921921004B4A62 /* GXGoodsGiftCell.m */; };
+		49053C9F24921921004B4A62 /* GXGoodsGiftCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49053C9D24921921004B4A62 /* GXGoodsGiftCell.xib */; };
+		49053CA324922BA2004B4A62 /* GXShareCodeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49053CA024922BA1004B4A62 /* GXShareCodeView.xib */; };
+		49053CA424922BA2004B4A62 /* GXShareCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49053CA124922BA1004B4A62 /* GXShareCodeView.m */; };
+		49053CA7249241EC004B4A62 /* GXRebateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49053CA6249241EC004B4A62 /* GXRebateView.m */; };
+		49053CA9249241F4004B4A62 /* GXRebateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49053CA8249241F4004B4A62 /* GXRebateView.xib */; };
+		49053CAC249251DD004B4A62 /* GXFullGiftView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49053CAB249251DD004B4A62 /* GXFullGiftView.m */; };
+		49053CAE249251E4004B4A62 /* GXFullGiftView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49053CAD249251E3004B4A62 /* GXFullGiftView.xib */; };
 		494CC50824849F9A0032B553 /* libPaymentControl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 494CC50724849F9A0032B553 /* libPaymentControl.a */; };
 		494CC50A24849FC40032B553 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 494CC50924849FC40032B553 /* CFNetwork.framework */; };
 		494CC50C2484A0250032B553 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 494CC50B2484A0250032B553 /* SystemConfiguration.framework */; };
@@ -132,8 +140,6 @@
 		905B3E172345C59300282515 /* GXGoodsCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 905B3E162345C59300282515 /* GXGoodsCommentCell.m */; };
 		905B3E1A2345C5A800282515 /* GXGoodsComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 905B3E192345C5A800282515 /* GXGoodsComment.m */; };
 		905B3E1D2345C5B600282515 /* GXGoodsCommentLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 905B3E1C2345C5B600282515 /* GXGoodsCommentLayout.m */; };
-		905B3E222345D32800282515 /* GXGoodsDetailHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 905B3E212345D32800282515 /* GXGoodsDetailHeader.m */; };
-		905B3E242345D33800282515 /* GXGoodsDetailHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 905B3E232345D33800282515 /* GXGoodsDetailHeader.xib */; };
 		9069739B23444E8600D8A8FF /* SPPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9069739A23444E8600D8A8FF /* SPPickerView.m */; };
 		9069739E2344501100D8A8FF /* SPPageMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 9069739C2344501100D8A8FF /* SPPageMenu.m */; };
 		906973A12344504A00D8A8FF /* GXChooseAddressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 906973A02344504A00D8A8FF /* GXChooseAddressView.m */; };
@@ -453,6 +459,18 @@
 /* Begin PBXFileReference section */
 		1330E51C61ADF8FC1AE77408 /* Pods-GX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GX.debug.xcconfig"; path = "Target Support Files/Pods-GX/Pods-GX.debug.xcconfig"; sourceTree = "<group>"; };
 		2975184EF33AC041D33915E0 /* Pods-GX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GX.release.xcconfig"; path = "Target Support Files/Pods-GX/Pods-GX.release.xcconfig"; sourceTree = "<group>"; };
+		49053C9B24921921004B4A62 /* GXGoodsGiftCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXGoodsGiftCell.h; sourceTree = "<group>"; };
+		49053C9C24921921004B4A62 /* GXGoodsGiftCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXGoodsGiftCell.m; sourceTree = "<group>"; };
+		49053C9D24921921004B4A62 /* GXGoodsGiftCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXGoodsGiftCell.xib; sourceTree = "<group>"; };
+		49053CA024922BA1004B4A62 /* GXShareCodeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXShareCodeView.xib; sourceTree = "<group>"; };
+		49053CA124922BA1004B4A62 /* GXShareCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXShareCodeView.m; sourceTree = "<group>"; };
+		49053CA224922BA1004B4A62 /* GXShareCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXShareCodeView.h; sourceTree = "<group>"; };
+		49053CA5249241EC004B4A62 /* GXRebateView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXRebateView.h; sourceTree = "<group>"; };
+		49053CA6249241EC004B4A62 /* GXRebateView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXRebateView.m; sourceTree = "<group>"; };
+		49053CA8249241F4004B4A62 /* GXRebateView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXRebateView.xib; sourceTree = "<group>"; };
+		49053CAA249251DD004B4A62 /* GXFullGiftView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXFullGiftView.h; sourceTree = "<group>"; };
+		49053CAB249251DD004B4A62 /* GXFullGiftView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXFullGiftView.m; sourceTree = "<group>"; };
+		49053CAD249251E3004B4A62 /* GXFullGiftView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXFullGiftView.xib; sourceTree = "<group>"; };
 		494CC50624849F9A0032B553 /* UPPaymentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPPaymentControl.h; sourceTree = "<group>"; };
 		494CC50724849F9A0032B553 /* libPaymentControl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPaymentControl.a; sourceTree = "<group>"; };
 		494CC50924849FC40032B553 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -660,9 +678,6 @@
 		905B3E192345C5A800282515 /* GXGoodsComment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXGoodsComment.m; sourceTree = "<group>"; };
 		905B3E1B2345C5B600282515 /* GXGoodsCommentLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXGoodsCommentLayout.h; sourceTree = "<group>"; };
 		905B3E1C2345C5B600282515 /* GXGoodsCommentLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXGoodsCommentLayout.m; sourceTree = "<group>"; };
-		905B3E202345D32800282515 /* GXGoodsDetailHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXGoodsDetailHeader.h; sourceTree = "<group>"; };
-		905B3E212345D32800282515 /* GXGoodsDetailHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXGoodsDetailHeader.m; sourceTree = "<group>"; };
-		905B3E232345D33800282515 /* GXGoodsDetailHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXGoodsDetailHeader.xib; sourceTree = "<group>"; };
 		9069739923444E8600D8A8FF /* SPPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPPickerView.h; sourceTree = "<group>"; };
 		9069739A23444E8600D8A8FF /* SPPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPPickerView.m; sourceTree = "<group>"; };
 		9069739C2344501100D8A8FF /* SPPageMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPPageMenu.m; sourceTree = "<group>"; };
@@ -1507,9 +1522,6 @@
 		905B3DEF234597B200282515 /* 商品详情 */ = {
 			isa = PBXGroup;
 			children = (
-				905B3E202345D32800282515 /* GXGoodsDetailHeader.h */,
-				905B3E212345D32800282515 /* GXGoodsDetailHeader.m */,
-				905B3E232345D33800282515 /* GXGoodsDetailHeader.xib */,
 				905B3DF0234597DC00282515 /* GXGoodsMaterialCell.h */,
 				905B3DF1234597DC00282515 /* GXGoodsMaterialCell.m */,
 				905B3E152345C59300282515 /* GXGoodsCommentCell.h */,
@@ -1517,6 +1529,9 @@
 				90BCED712345DCA6007B0F19 /* GXGoodsInfoCell.h */,
 				90BCED722345DCA6007B0F19 /* GXGoodsInfoCell.m */,
 				90BCED732345DCA6007B0F19 /* GXGoodsInfoCell.xib */,
+				49053C9B24921921004B4A62 /* GXGoodsGiftCell.h */,
+				49053C9C24921921004B4A62 /* GXGoodsGiftCell.m */,
+				49053C9D24921921004B4A62 /* GXGoodsGiftCell.xib */,
 				905B3E102345C3D700282515 /* GXGoodsDetailSectionHeader.h */,
 				905B3E112345C3D700282515 /* GXGoodsDetailSectionHeader.m */,
 				905B3E132345C3DD00282515 /* GXGoodsDetailSectionHeader.xib */,
@@ -1547,6 +1562,15 @@
 				903D60E6237D69CE000231CC /* GXShareView.h */,
 				903D60E7237D69CE000231CC /* GXShareView.m */,
 				903D60E9237D69D7000231CC /* GXShareView.xib */,
+				49053CA224922BA1004B4A62 /* GXShareCodeView.h */,
+				49053CA124922BA1004B4A62 /* GXShareCodeView.m */,
+				49053CA024922BA1004B4A62 /* GXShareCodeView.xib */,
+				49053CAA249251DD004B4A62 /* GXFullGiftView.h */,
+				49053CAB249251DD004B4A62 /* GXFullGiftView.m */,
+				49053CAD249251E3004B4A62 /* GXFullGiftView.xib */,
+				49053CA5249241EC004B4A62 /* GXRebateView.h */,
+				49053CA6249241EC004B4A62 /* GXRebateView.m */,
+				49053CA8249241F4004B4A62 /* GXRebateView.xib */,
 			);
 			name = "商品详情";
 			sourceTree = "<group>";
@@ -3155,6 +3179,7 @@
 				909EAA4F23483C3200575FB8 /* GXTryApplyVC.xib in Resources */,
 				902E88DE234746E400EFD0DF /* GXBigCateCell.xib in Resources */,
 				90E57EEE2346D25900F49834 /* GXGoodBrandVC.xib in Resources */,
+				49053CA324922BA2004B4A62 /* GXShareCodeView.xib in Resources */,
 				902E88E32347481500EFD0DF /* GXSmallCateCell.xib in Resources */,
 				9096CC2D2369890E00D213DD /* GXSearchActivityVC.xib in Resources */,
 				9094F54C2349EFDF00106699 /* GXMyIdeaPhotoCell.xib in Resources */,
@@ -3169,6 +3194,7 @@
 				90E57F49234726C900F49834 /* GXMarketTrendCell.xib in Resources */,
 				90772B0B2372EDEC002EB3D4 /* GXActivityContentVC.xib in Resources */,
 				904F4A842348995B0056AF49 /* GXPayTypeHeader.xib in Resources */,
+				49053C9F24921921004B4A62 /* GXGoodsGiftCell.xib in Resources */,
 				90FCDF0523498EB600729A97 /* GXMyLicenceVC.xib in Resources */,
 				904F4A65234887010056AF49 /* GXUpOrderGoodsCell.xib in Resources */,
 				904F4A6F234891340056AF49 /* GXUpOrderFooter.xib in Resources */,
@@ -3198,7 +3224,6 @@
 				90FCDF342349BB7100729A97 /* GXMyAddressCell.xib in Resources */,
 				906973BC2344781A00D8A8FF /* GXShopGoodsCell.xib in Resources */,
 				909EAA752348739300575FB8 /* GXCartSectionHeader.xib in Resources */,
-				905B3E242345D33800282515 /* GXGoodsDetailHeader.xib in Resources */,
 				904F4A74234893C60056AF49 /* GXChooseCouponVC.xib in Resources */,
 				90067ED02344356700628503 /* GXRegisterAuthVC.xib in Resources */,
 				90E57F1F2346F29D00F49834 /* GXSankPriceCell.xib in Resources */,
@@ -3206,6 +3231,7 @@
 				9094F57B234A118800106699 /* GXRefundDetailFooter.xib in Resources */,
 				90E57F3823471C4200F49834 /* GXValidAddressCell.xib in Resources */,
 				906973C62344817A00D8A8FF /* GXHomePushCell.xib in Resources */,
+				49053CAE249251E4004B4A62 /* GXFullGiftView.xib in Resources */,
 				902E88F2234765F100EFD0DF /* GXGoodsListVC.xib in Resources */,
 				909EAA5523483CC100575FB8 /* GXTryApplyCell.xib in Resources */,
 				90FCDF3E2349C06600729A97 /* GXEditAddressVC.xib in Resources */,
@@ -3222,6 +3248,7 @@
 				90E57F4E23472AAF00F49834 /* GXMarketTrendSectionHeader.xib in Resources */,
 				90C0B4482340DA4600A8C55B /* GXCategoryVC.xib in Resources */,
 				90C0B4522340DA6B00A8C55B /* GXCartVC.xib in Resources */,
+				49053CA9249241F4004B4A62 /* GXRebateView.xib in Resources */,
 				9094F56C234A0A5200106699 /* GXOrderDetailVC.xib in Resources */,
 				905B3E0B2345A40E00282515 /* GXAllCommentHeader.xib in Resources */,
 				902E88F82347685F00EFD0DF /* GXBrandDetailHeader.xib in Resources */,
@@ -3447,9 +3474,9 @@
 				90C0B44C2340DA5700A8C55B /* GXRegionalVC.m in Sources */,
 				902413432366C24D0069DDCA /* GXRegisterAddStoreFooter.m in Sources */,
 				909EAA48234838B600575FB8 /* GXBrandPartnerCell.m in Sources */,
+				49053CAC249251DD004B4A62 /* GXFullGiftView.m in Sources */,
 				90FCDF332349BB7100729A97 /* GXMyAddressCell.m in Sources */,
 				9088421923743350005D4382 /* GXRegisterData.m in Sources */,
-				905B3E222345D32800282515 /* GXGoodsDetailHeader.m in Sources */,
 				906973A12344504A00D8A8FF /* GXChooseAddressView.m in Sources */,
 				90E57F082346DEA100F49834 /* GXActivityBannerHeader.m in Sources */,
 				90E57F3723471C4200F49834 /* GXValidAddressCell.m in Sources */,
@@ -3484,6 +3511,7 @@
 				90C0B3CC2340CD7200A8C55B /* UIView+Extension.m in Sources */,
 				906973D42344906600D8A8FF /* GXHomeCateCell.m in Sources */,
 				90772B022372B4DF002EB3D4 /* GXPayResultVC.m in Sources */,
+				49053CA424922BA2004B4A62 /* GXShareCodeView.m in Sources */,
 				9094F5462349EFC800106699 /* GXMyIdeaTypeCell.m in Sources */,
 				902E88F72347685F00EFD0DF /* GXBrandDetailHeader.m in Sources */,
 				90C4FA112371206F007A5B6A /* GXConfirmOrder.m in Sources */,
@@ -3514,6 +3542,7 @@
 				9096CC342369A4DB00D213DD /* GXTopSaleMaterial.m in Sources */,
 				90C0B3EC2340CD7200A8C55B /* CAAnimation+WAnimation.m in Sources */,
 				90C0B4562340DA9500A8C55B /* GXMyVC.m in Sources */,
+				49053CA7249241EC004B4A62 /* GXRebateView.m in Sources */,
 				9094F556234A040800106699 /* GXMyOrderChildVC.m in Sources */,
 				90C0B3EF2340CD7200A8C55B /* NSObject+LMRuntime.m in Sources */,
 				90C0B3C02340CD7200A8C55B /* HXNetworkTool.m in Sources */,
@@ -3578,6 +3607,7 @@
 				905B3DFC2345999D00282515 /* GXGoodsMaterial.m in Sources */,
 				9096CC1423692BA600D213DD /* GXGoodBrand.m in Sources */,
 				903C54752349D167002743EE /* GXOnLineReportVC.m in Sources */,
+				49053C9E24921921004B4A62 /* GXGoodsGiftCell.m in Sources */,
 				497AEBF1247E19AD00E0FACB /* GXStoreHeader.m in Sources */,
 				90C0B3E82340CD7200A8C55B /* UIView+ForLMJVerticalScrollText.m in Sources */,
 				90FCDF202349966500729A97 /* GXMyCouponChildVC.m in Sources */,
