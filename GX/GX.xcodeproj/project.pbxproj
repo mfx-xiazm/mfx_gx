@@ -889,7 +889,7 @@
 		90BCED732345DCA6007B0F19 /* GXGoodsInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXGoodsInfoCell.xib; sourceTree = "<group>"; };
 		90BCED762345DF95007B0F19 /* GXWebContentVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXWebContentVC.h; sourceTree = "<group>"; };
 		90BCED772345DF95007B0F19 /* GXWebContentVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXWebContentVC.m; sourceTree = "<group>"; };
-		90C0B2CD2340B74900A8C55B /* 呱选母婴店.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "呱选母婴店.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		90C0B2CD2340B74900A8C55B /* 呱选.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "呱选.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		90C0B2D02340B74900A8C55B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		90C0B2D12340B74900A8C55B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		90C0B2D92340B74B00A8C55B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -2012,7 +2012,7 @@
 		90C0B2CE2340B74900A8C55B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				90C0B2CD2340B74900A8C55B /* 呱选母婴店.app */,
+				90C0B2CD2340B74900A8C55B /* 呱选.app */,
 				90C0B2E52340B74B00A8C55B /* GXTests.xctest */,
 				90C0B2F02340B74B00A8C55B /* GXUITests.xctest */,
 			);
@@ -3050,7 +3050,7 @@
 			);
 			name = GX;
 			productName = GX;
-			productReference = 90C0B2CD2340B74900A8C55B /* 呱选母婴店.app */;
+			productReference = 90C0B2CD2340B74900A8C55B /* 呱选.app */;
 			productType = "com.apple.product-type.application";
 		};
 		90C0B2E42340B74B00A8C55B /* GXTests */ = {
@@ -3787,7 +3787,7 @@
 				CODE_SIGN_ENTITLEMENTS = "GX/呱选母婴店.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 9AB2U8YRYY;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3807,9 +3807,9 @@
 					"$(PROJECT_DIR)/GX/ThirdLib/UMSPosPayOnly",
 					"$(PROJECT_DIR)/GX/ThirdLib/WechatOpenSDK",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = guaxuan.mfxapp.com;
-				PRODUCT_NAME = "呱选母婴店";
+				PRODUCT_NAME = "呱选";
 				PROVISIONING_PROFILE_SPECIFIER = dev_guaxuan.mfxapp.com_0605;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -3823,7 +3823,7 @@
 				CODE_SIGN_ENTITLEMENTS = "GX/呱选母婴店.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 9AB2U8YRYY;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3843,9 +3843,9 @@
 					"$(PROJECT_DIR)/GX/ThirdLib/UMSPosPayOnly",
 					"$(PROJECT_DIR)/GX/ThirdLib/WechatOpenSDK",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = guaxuan.mfxapp.com;
-				PRODUCT_NAME = "呱选母婴店";
+				PRODUCT_NAME = "呱选";
 				PROVISIONING_PROFILE_SPECIFIER = dev_guaxuan.mfxapp.com_0605;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
