@@ -15,6 +15,7 @@
 		49565F442488F9D900C9D43E /* libUMSPosPayOnly.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49565F412488F9D900C9D43E /* libUMSPosPayOnly.a */; };
 		49565F452488F9D900C9D43E /* PosPay_Resource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 49565F422488F9D900C9D43E /* PosPay_Resource.bundle */; };
 		49565F462488F9D900C9D43E /* UMSSecKeyboardLibResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 49565F432488F9D900C9D43E /* UMSSecKeyboardLibResource.bundle */; };
+		4975FD102493220900E5AEF2 /* UICKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 4975FD0D2493220900E5AEF2 /* UICKeyChainStore.m */; };
 		497AEBF1247E19AD00E0FACB /* GXStoreHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 497AEBF0247E19AD00E0FACB /* GXStoreHeader.m */; };
 		497AEBF3247E19B300E0FACB /* GXStoreHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 497AEBF2247E19B300E0FACB /* GXStoreHeader.xib */; };
 		49949B0C248B73B400EA60D4 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49949B0B248B73B400EA60D4 /* libWeChatSDK.a */; };
@@ -470,6 +471,8 @@
 		49565F412488F9D900C9D43E /* libUMSPosPayOnly.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMSPosPayOnly.a; sourceTree = "<group>"; };
 		49565F422488F9D900C9D43E /* PosPay_Resource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = PosPay_Resource.bundle; sourceTree = "<group>"; };
 		49565F432488F9D900C9D43E /* UMSSecKeyboardLibResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UMSSecKeyboardLibResource.bundle; sourceTree = "<group>"; };
+		4975FD0D2493220900E5AEF2 /* UICKeyChainStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICKeyChainStore.m; sourceTree = "<group>"; };
+		4975FD0E2493220900E5AEF2 /* UICKeyChainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICKeyChainStore.h; sourceTree = "<group>"; };
 		497AEBEF247E19AD00E0FACB /* GXStoreHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXStoreHeader.h; sourceTree = "<group>"; };
 		497AEBF0247E19AD00E0FACB /* GXStoreHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXStoreHeader.m; sourceTree = "<group>"; };
 		497AEBF2247E19B300E0FACB /* GXStoreHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXStoreHeader.xib; sourceTree = "<group>"; };
@@ -1234,6 +1237,15 @@
 				49565F402488F9D900C9D43E /* UMSPPPayPosPay.h */,
 			);
 			path = include;
+			sourceTree = "<group>";
+		};
+		4975FD0C2493220900E5AEF2 /* UICKeyChainStore */ = {
+			isa = PBXGroup;
+			children = (
+				4975FD0E2493220900E5AEF2 /* UICKeyChainStore.h */,
+				4975FD0D2493220900E5AEF2 /* UICKeyChainStore.m */,
+			);
+			path = UICKeyChainStore;
 			sourceTree = "<group>";
 		};
 		49949B07248B703B00EA60D4 /* WechatOpenSDK */ = {
@@ -2157,6 +2169,7 @@
 		90C0B33E2340CD7100A8C55B /* ThirdLib */ = {
 			isa = PBXGroup;
 			children = (
+				4975FD0C2493220900E5AEF2 /* UICKeyChainStore */,
 				49949B07248B703B00EA60D4 /* WechatOpenSDK */,
 				49565F392488F9D900C9D43E /* UMSPosPayOnly */,
 				494CC50524849F9A0032B553 /* UPPaymentControl */,
@@ -3480,6 +3493,7 @@
 				90BCED782345DF95007B0F19 /* GXWebContentVC.m in Sources */,
 				90C0B3E22340CD7200A8C55B /* LYEmptyBaseView.m in Sources */,
 				90C0B4512340DA6B00A8C55B /* GXCartVC.m in Sources */,
+				4975FD102493220900E5AEF2 /* UICKeyChainStore.m in Sources */,
 				9096CC2C2369890E00D213DD /* GXSearchActivityVC.m in Sources */,
 				902E88D82347432800EFD0DF /* GXMessageCell.m in Sources */,
 				909EAA5B2348636D00575FB8 /* GXPartnerDataVC.m in Sources */,
