@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		11AF349C58F7A342E9336E28 /* libPods-GX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E67F6C2F7D067769D4BA925 /* libPods-GX.a */; };
 		4975FD162493263F00E5AEF2 /* UICKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 4975FD132493263F00E5AEF2 /* UICKeyChainStore.m */; };
-		4975FD172493263F00E5AEF2 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4975FD152493263F00E5AEF2 /* Info.plist */; };
 		4994C48E2480FEE400A9A239 /* GXAccountManageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4994C47E2480FEE400A9A239 /* GXAccountManageVC.xib */; };
 		4994C48F2480FEE400A9A239 /* GXCashVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4994C47F2480FEE400A9A239 /* GXCashVC.m */; };
 		4994C4902480FEE400A9A239 /* GXAccountManageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4994C4822480FEE400A9A239 /* GXAccountManageVC.m */; };
@@ -49,6 +48,8 @@
 		4994C4E32481046400A9A239 /* GXMyCoupon.m in Sources */ = {isa = PBXBuildFile; fileRef = 4994C4E12481046300A9A239 /* GXMyCoupon.m */; };
 		4994C4E72481046C00A9A239 /* GXMyCouponCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4994C4E42481046A00A9A239 /* GXMyCouponCell.xib */; };
 		4994C4E82481046C00A9A239 /* GXMyCouponCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4994C4E62481046C00A9A239 /* GXMyCouponCell.m */; };
+		49B053EE2493551900ED6FF6 /* NSString+BankInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B053EA2493551800ED6FF6 /* NSString+BankInfo.m */; };
+		49B053EF2493551900ED6FF6 /* FCTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B053ED2493551800ED6FF6 /* FCTextField.m */; };
 		903C54712349CCCD002743EE /* JJOptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 903C54702349CCCD002743EE /* JJOptionView.m */; };
 		903D60DF237D4156000231CC /* GLLShareManger.m in Sources */ = {isa = PBXBuildFile; fileRef = 903D60DD237D4156000231CC /* GLLShareManger.m */; };
 		903D60E2237D418C000231CC /* GLLShareItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 903D60E1237D418C000231CC /* GLLShareItem.m */; };
@@ -169,7 +170,6 @@
 		2975184EF33AC041D33915E0 /* Pods-GX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GX.release.xcconfig"; path = "Target Support Files/Pods-GX/Pods-GX.release.xcconfig"; sourceTree = "<group>"; };
 		4975FD132493263F00E5AEF2 /* UICKeyChainStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICKeyChainStore.m; sourceTree = "<group>"; };
 		4975FD142493263F00E5AEF2 /* UICKeyChainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICKeyChainStore.h; sourceTree = "<group>"; };
-		4975FD152493263F00E5AEF2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4994C47E2480FEE400A9A239 /* GXAccountManageVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXAccountManageVC.xib; sourceTree = "<group>"; };
 		4994C47F2480FEE400A9A239 /* GXCashVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXCashVC.m; sourceTree = "<group>"; };
 		4994C4802480FEE400A9A239 /* GXAccountManageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXAccountManageVC.h; sourceTree = "<group>"; };
@@ -231,6 +231,10 @@
 		4994C4E42481046A00A9A239 /* GXMyCouponCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXMyCouponCell.xib; sourceTree = "<group>"; };
 		4994C4E52481046B00A9A239 /* GXMyCouponCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXMyCouponCell.h; sourceTree = "<group>"; };
 		4994C4E62481046C00A9A239 /* GXMyCouponCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXMyCouponCell.m; sourceTree = "<group>"; };
+		49B053EA2493551800ED6FF6 /* NSString+BankInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+BankInfo.m"; sourceTree = "<group>"; };
+		49B053EB2493551800ED6FF6 /* FCTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCTextField.h; sourceTree = "<group>"; };
+		49B053EC2493551800ED6FF6 /* NSString+BankInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+BankInfo.h"; sourceTree = "<group>"; };
+		49B053ED2493551800ED6FF6 /* FCTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCTextField.m; sourceTree = "<group>"; };
 		7E67F6C2F7D067769D4BA925 /* libPods-GX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		903C546F2349CCCD002743EE /* JJOptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJOptionView.h; sourceTree = "<group>"; };
 		903C54702349CCCD002743EE /* JJOptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJOptionView.m; sourceTree = "<group>"; };
@@ -450,7 +454,6 @@
 			children = (
 				4975FD132493263F00E5AEF2 /* UICKeyChainStore.m */,
 				4975FD142493263F00E5AEF2 /* UICKeyChainStore.h */,
-				4975FD152493263F00E5AEF2 /* Info.plist */,
 			);
 			path = UICKeyChainStore;
 			sourceTree = "<group>";
@@ -620,6 +623,10 @@
 		90C0B3132340CD7100A8C55B /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				49B053EB2493551800ED6FF6 /* FCTextField.h */,
+				49B053ED2493551800ED6FF6 /* FCTextField.m */,
+				49B053EC2493551800ED6FF6 /* NSString+BankInfo.h */,
+				49B053EA2493551800ED6FF6 /* NSString+BankInfo.m */,
 				90C0B3142340CD7100A8C55B /* NSString+HXNExtension.h */,
 				90C0B3202340CD7100A8C55B /* NSString+HXNExtension.m */,
 				90C0B31F2340CD7100A8C55B /* UIButton+HXCode.h */,
@@ -1321,7 +1328,6 @@
 				4994C4BE2481017A00A9A239 /* GXOrderDetailFooter.xib in Resources */,
 				4994C4B52481017A00A9A239 /* GXExpressDetailCell.xib in Resources */,
 				4994C4B72481017A00A9A239 /* GXMyOrderHeader.xib in Resources */,
-				4975FD172493263F00E5AEF2 /* Info.plist in Resources */,
 				4994C49B2481006C00A9A239 /* GXUpOrderGoodsCell.xib in Resources */,
 				4994C4DF2481041E00A9A239 /* GXMyCouponChildVC.xib in Resources */,
 				90BB98DC234DB3EF00444ACC /* GXSalerMyVC.xib in Resources */,
@@ -1458,9 +1464,11 @@
 				90C0B2E02340B74B00A8C55B /* main.m in Sources */,
 				90C0B3E12340CD7200A8C55B /* SGQRCodeScanView.m in Sources */,
 				90C0B3ED2340CD7200A8C55B /* UIView+WZLBadge.m in Sources */,
+				49B053EE2493551900ED6FF6 /* NSString+BankInfo.m in Sources */,
 				90C0B2D22340B74900A8C55B /* AppDelegate.m in Sources */,
 				4994C4962480FEE400A9A239 /* GXCashAlert.m in Sources */,
 				90BB98E0234DB81300444ACC /* GXClientManageChildVC.m in Sources */,
+				49B053EF2493551900ED6FF6 /* FCTextField.m in Sources */,
 				90BB98DB234DB3EF00444ACC /* GXSalerMyVC.m in Sources */,
 				90C0B3C62340CD7200A8C55B /* YCMenuView.m in Sources */,
 				90C0B3DD2340CD7200A8C55B /* FSActionSheetItem.m in Sources */,

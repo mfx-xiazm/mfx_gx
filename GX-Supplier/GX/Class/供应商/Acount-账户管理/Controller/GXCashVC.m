@@ -9,6 +9,7 @@
 #import "GXCashVC.h"
 #import "GXCashAlert.h"
 #import <zhPopupController.h>
+#import "NSString+BankInfo.h"
 
 @interface GXCashVC ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *card_owner;
@@ -26,6 +27,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationItem setTitle:@"提现"];
+    self.card_no.delegate = self;
+    [self.card_no addTarget:self action:@selector(cardNoChanged:) forControlEvents:UIControlEventEditingChanged];
     self.apply_amount.delegate = self;
     self.ableLabel.text = [NSString stringWithFormat:@"可提现金额：%@",self.cashable];
     hx_weakify(self);
@@ -35,16 +38,20 @@
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请输入持卡人姓名"];
             return NO;
         }
+        if (![strongSelf.card_no hasText]) {
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请输入银行卡号"];
+            return NO;
+        }
+        if (![strongSelf.card_no.text checkCardNo]) {
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"银行卡号有误"];
+            return NO;
+        }
         if (![strongSelf.bank_name hasText]) {
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请输入银行名称"];
             return NO;
         }
         if (![strongSelf.sub_bank_name hasText]) {
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请输入开户网点"];
-            return NO;
-        }
-        if (![strongSelf.card_no hasText]) {
-            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请输入银行卡号"];
             return NO;
         }
         if (![strongSelf.apply_amount hasText]) {
@@ -61,7 +68,19 @@
         [strongSelf applyCashRequest:button];
     }];
 }
-
+-(void)cardNoChanged:(UITextField *)card
+{
+    if ([card hasText]) {
+        if (card.text.length < 8) {
+            self.bank_name.text = @"";
+        }else if (card.text.length == 8){
+            NSString *cardName = [[card.text getBankName] componentsSeparatedByString:@"·"].firstObject;
+            self.bank_name.text = cardName;
+        }
+    }else{
+        self.bank_name.text = @"";
+    }
+}
 -(void)applyCashRequest:(UIButton *)btn
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
@@ -109,27 +128,32 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range
 replacementString:(NSString *)string
 {
-    //新输入的
-    if (string.length == 0) {
-        return YES;
-    }
+    if (textField == self.card_no) {
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        return [string isEqualToString:filtered];
+    }else{
+       //新输入的
+        if (string.length == 0) {
+            return YES;
+        }
 
-   //第一个参数，被替换字符串的range
-   //第二个参数，即将键入或者粘贴的string
-   //返回的是改变过后的新str，即textfield的新的文本内容
-    NSString *checkStr = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    
-   if (checkStr.length > 0) {
-       if ([checkStr doubleValue] == 0) {
-         //判断首位不能为零
-           return NO;
+       //第一个参数，被替换字符串的range
+       //第二个参数，即将键入或者粘贴的string
+       //返回的是改变过后的新str，即textfield的新的文本内容
+        NSString *checkStr = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        
+       if (checkStr.length > 0) {
+           if ([checkStr doubleValue] == 0) {
+             //判断首位不能为零
+               return NO;
+           }
        }
-   }
-    //正则表达式（只支持两位小数）
-    NSString *regex = @"^\\-?([1-9]\\d*|0)(\\.\\d{0,2})?$";
-   //判断新的文本内容是否符合要求
-    return [self isValid:checkStr withRegex:regex];
-
+        //正则表达式（只支持两位小数）
+        NSString *regex = @"^\\-?([1-9]\\d*|0)(\\.\\d{0,2})?$";
+       //判断新的文本内容是否符合要求
+        return [self isValid:checkStr withRegex:regex];
+    }
 }
 
 //检测改变过的文本是否匹配正则表达式，如果匹配表示可以键入，否则不能键入
