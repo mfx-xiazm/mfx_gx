@@ -62,14 +62,17 @@ static NSString *const StoreCouponCell = @"StoreCouponCell";
             UIImageView *img = self.shop_goods_imgs[i];
             if (_store.goods.count >= i+1) {
                 GXStoreGoods *goods = _store.goods[i];
+                img.hidden = NO;
                 [img sd_setImageWithURL:[NSURL URLWithString:goods.cover_img]];
             }else{
+                img.hidden = YES;
                 [img setImage:nil];
             }
         }
     }else{
         for (int i=0;i<self.shop_goods_imgs.count;i++) {
             UIImageView *img = self.shop_goods_imgs[i];
+            img.hidden = YES;
             [img setImage:nil];
         }
     }
@@ -120,7 +123,7 @@ static NSString *const StoreCouponCell = @"StoreCouponCell";
     }];
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(125, 40);
+    return CGSizeMake(125, 50);
 }
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
@@ -130,7 +133,7 @@ static NSString *const StoreCouponCell = @"StoreCouponCell";
     return 10.f;
 }
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return  UIEdgeInsetsMake(10, 10, 10, 10);
+    return  UIEdgeInsetsMake(0, 10, 10, 10);
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

@@ -73,10 +73,10 @@
 /**获取图片资源*/
 #define HXGetImage(imageName) [UIImage imageNamed:[NSString stringWithFormat:@"%@",imageName]]
 // http://guaxuanapi.guaxuan.cn  http://guaxuan.mfxapp.com
-#define HXRC_M_URL @"http://guaxuanapi.guaxuan.cn/api/"
-//#define HXRC_M_URL @"http://guaxuan.mfxapp.com/api/"
+//#define HXRC_M_URL @"http://guaxuanapi.guaxuan.cn/api/"
+#define HXRC_M_URL @"http://guaxuan.mfxapp.com/api/"
 
-#define HXRC_URL_HEADER @"http://guaxuanapi.guaxuan.cn/"
-//#define HXRC_URL_HEADER @"http://guaxuan.mfxapp.com/"
+//#define HXRC_URL_HEADER @"http://guaxuanapi.guaxuan.cn/"
+#define HXRC_URL_HEADER @"http://guaxuan.mfxapp.com/"
 
 #endif /* GXPrefixHeader_pch */
