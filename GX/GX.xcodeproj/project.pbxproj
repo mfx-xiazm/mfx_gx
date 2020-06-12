@@ -23,6 +23,11 @@
 		49565F442488F9D900C9D43E /* libUMSPosPayOnly.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49565F412488F9D900C9D43E /* libUMSPosPayOnly.a */; };
 		49565F452488F9D900C9D43E /* PosPay_Resource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 49565F422488F9D900C9D43E /* PosPay_Resource.bundle */; };
 		49565F462488F9D900C9D43E /* UMSSecKeyboardLibResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 49565F432488F9D900C9D43E /* UMSSecKeyboardLibResource.bundle */; };
+		4975FD072493160600E5AEF2 /* JXPagerListContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4975FCFE2493160600E5AEF2 /* JXPagerListContainerView.m */; };
+		4975FD082493160600E5AEF2 /* JXPagerMainTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4975FCFF2493160600E5AEF2 /* JXPagerMainTableView.m */; };
+		4975FD092493160600E5AEF2 /* JXPagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4975FD002493160600E5AEF2 /* JXPagerView.m */; };
+		4975FD0A2493160600E5AEF2 /* JXPagerSmoothView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4975FD022493160600E5AEF2 /* JXPagerSmoothView.m */; };
+		4975FD0B2493160600E5AEF2 /* JXPagerListRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4975FD062493160600E5AEF2 /* JXPagerListRefreshView.m */; };
 		497AEBF1247E19AD00E0FACB /* GXStoreHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 497AEBF0247E19AD00E0FACB /* GXStoreHeader.m */; };
 		497AEBF3247E19B300E0FACB /* GXStoreHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 497AEBF2247E19B300E0FACB /* GXStoreHeader.xib */; };
 		49949B0C248B73B400EA60D4 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49949B0B248B73B400EA60D4 /* libWeChatSDK.a */; };
@@ -485,6 +490,16 @@
 		49565F412488F9D900C9D43E /* libUMSPosPayOnly.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMSPosPayOnly.a; sourceTree = "<group>"; };
 		49565F422488F9D900C9D43E /* PosPay_Resource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = PosPay_Resource.bundle; sourceTree = "<group>"; };
 		49565F432488F9D900C9D43E /* UMSSecKeyboardLibResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UMSSecKeyboardLibResource.bundle; sourceTree = "<group>"; };
+		4975FCFD2493160600E5AEF2 /* JXPagerSmoothView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JXPagerSmoothView.h; sourceTree = "<group>"; };
+		4975FCFE2493160600E5AEF2 /* JXPagerListContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JXPagerListContainerView.m; sourceTree = "<group>"; };
+		4975FCFF2493160600E5AEF2 /* JXPagerMainTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JXPagerMainTableView.m; sourceTree = "<group>"; };
+		4975FD002493160600E5AEF2 /* JXPagerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JXPagerView.m; sourceTree = "<group>"; };
+		4975FD012493160600E5AEF2 /* JXPagerListRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JXPagerListRefreshView.h; sourceTree = "<group>"; };
+		4975FD022493160600E5AEF2 /* JXPagerSmoothView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JXPagerSmoothView.m; sourceTree = "<group>"; };
+		4975FD032493160600E5AEF2 /* JXPagerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JXPagerView.h; sourceTree = "<group>"; };
+		4975FD042493160600E5AEF2 /* JXPagerListContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JXPagerListContainerView.h; sourceTree = "<group>"; };
+		4975FD052493160600E5AEF2 /* JXPagerMainTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JXPagerMainTableView.h; sourceTree = "<group>"; };
+		4975FD062493160600E5AEF2 /* JXPagerListRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JXPagerListRefreshView.m; sourceTree = "<group>"; };
 		497AEBEF247E19AD00E0FACB /* GXStoreHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXStoreHeader.h; sourceTree = "<group>"; };
 		497AEBF0247E19AD00E0FACB /* GXStoreHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXStoreHeader.m; sourceTree = "<group>"; };
 		497AEBF2247E19B300E0FACB /* GXStoreHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXStoreHeader.xib; sourceTree = "<group>"; };
@@ -1242,6 +1257,23 @@
 				49565F402488F9D900C9D43E /* UMSPPPayPosPay.h */,
 			);
 			path = include;
+			sourceTree = "<group>";
+		};
+		4975FCFC2493160600E5AEF2 /* JXPagerView */ = {
+			isa = PBXGroup;
+			children = (
+				4975FCFD2493160600E5AEF2 /* JXPagerSmoothView.h */,
+				4975FCFE2493160600E5AEF2 /* JXPagerListContainerView.m */,
+				4975FCFF2493160600E5AEF2 /* JXPagerMainTableView.m */,
+				4975FD002493160600E5AEF2 /* JXPagerView.m */,
+				4975FD012493160600E5AEF2 /* JXPagerListRefreshView.h */,
+				4975FD022493160600E5AEF2 /* JXPagerSmoothView.m */,
+				4975FD032493160600E5AEF2 /* JXPagerView.h */,
+				4975FD042493160600E5AEF2 /* JXPagerListContainerView.h */,
+				4975FD052493160600E5AEF2 /* JXPagerMainTableView.h */,
+				4975FD062493160600E5AEF2 /* JXPagerListRefreshView.m */,
+			);
+			path = JXPagerView;
 			sourceTree = "<group>";
 		};
 		49949B07248B703B00EA60D4 /* WechatOpenSDK */ = {
@@ -2170,6 +2202,7 @@
 		90C0B33E2340CD7100A8C55B /* ThirdLib */ = {
 			isa = PBXGroup;
 			children = (
+				4975FCFC2493160600E5AEF2 /* JXPagerView */,
 				49949B07248B703B00EA60D4 /* WechatOpenSDK */,
 				49565F392488F9D900C9D43E /* UMSPosPayOnly */,
 				494CC50524849F9A0032B553 /* UPPaymentControl */,
@@ -3457,6 +3490,7 @@
 				904F4A82234899550056AF49 /* GXPayTypeHeader.m in Sources */,
 				90772B062372E552002EB3D4 /* GXTryGoods.m in Sources */,
 				90C0B3BE2340CD7200A8C55B /* UIView+HXNExtension.m in Sources */,
+				4975FD0A2493160600E5AEF2 /* JXPagerSmoothView.m in Sources */,
 				90C0B3E62340CD7200A8C55B /* HXSearchBar.m in Sources */,
 				905B3E052345A3ED00282515 /* GXAllCommentVC.m in Sources */,
 				903C547A2349D18A002743EE /* GXOffLineReportVC.m in Sources */,
@@ -3496,6 +3530,7 @@
 				902E88D82347432800EFD0DF /* GXMessageCell.m in Sources */,
 				909EAA5B2348636D00575FB8 /* GXPartnerDataVC.m in Sources */,
 				902E890A2347749800EFD0DF /* GXSaleMaterialChildVC.m in Sources */,
+				4975FD0B2493160600E5AEF2 /* JXPagerListRefreshView.m in Sources */,
 				902E88D2234742F700EFD0DF /* GXMessageVC.m in Sources */,
 				9099EE83236838780088D80C /* GXStore.m in Sources */,
 				90227E902370088A007CC48A /* GXSankPrice.m in Sources */,
@@ -3556,6 +3591,7 @@
 				909A77FB236ADD0100562435 /* GXMarketTrend.m in Sources */,
 				90FCDF1B2349964F00729A97 /* GXMyCouponVC.m in Sources */,
 				905B3E092345A40600282515 /* GXAllCommentHeader.m in Sources */,
+				4975FD082493160600E5AEF2 /* JXPagerMainTableView.m in Sources */,
 				904F4A6823488DAE0056AF49 /* GXUpOrderHeader.m in Sources */,
 				905B3E0F2345A50000282515 /* HCSStarRatingView.m in Sources */,
 				906973E32344A96700D8A8FF /* GXHomeSectionBgReusableView2.m in Sources */,
@@ -3608,9 +3644,11 @@
 				9096CC1423692BA600D213DD /* GXGoodBrand.m in Sources */,
 				903C54752349D167002743EE /* GXOnLineReportVC.m in Sources */,
 				49053C9E24921921004B4A62 /* GXGoodsGiftCell.m in Sources */,
+				4975FD092493160600E5AEF2 /* JXPagerView.m in Sources */,
 				497AEBF1247E19AD00E0FACB /* GXStoreHeader.m in Sources */,
 				90C0B3E82340CD7200A8C55B /* UIView+ForLMJVerticalScrollText.m in Sources */,
 				90FCDF202349966500729A97 /* GXMyCouponChildVC.m in Sources */,
+				4975FD072493160600E5AEF2 /* JXPagerListContainerView.m in Sources */,
 				90C0B3E42340CD7200A8C55B /* UIView+LYExtension.m in Sources */,
 				906974062344D27F00D8A8FF /* GXStoreGoodsListHeader.m in Sources */,
 				9094F5352349DFFB00106699 /* GXMemberRankCell.m in Sources */,

@@ -9,8 +9,8 @@
 #import "GXSankPriceSectionFooter.h"
 #import "GXSankPrice.h"
 
-@interface GXSankPriceSectionFooter ()
-@property (weak, nonatomic) IBOutlet UILabel *cart_num;
+@interface GXSankPriceSectionFooter ()<UITextFieldDelegate>
+@property (weak, nonatomic) IBOutlet UITextField *cart_num;
 @property (weak, nonatomic) IBOutlet UILabel *price;
 @end
 @implementation GXSankPriceSectionFooter
@@ -18,6 +18,25 @@
 -(void)awakeFromNib
 {
     [super awakeFromNib];
+    self.cart_num.delegate = self;
+}
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if (![textField hasText] || [textField.text integerValue] == 0) {
+        textField.text = @"1";
+    }
+    if ([textField.text integerValue] > [_sank.stock integerValue]) {
+        textField.text = _sank.stock;
+    }
+    _sank.buy_num = [textField.text integerValue];
+    _sank.toatlPrice = [NSString stringWithFormat:@"%.2f",_sank.buy_num * [_sank.price floatValue]];
+    [self.price setColorAttributedText:[NSString stringWithFormat:@"总计：￥%@",_sank.toatlPrice] andChangeStr:[NSString stringWithFormat:@"￥%@",_sank.toatlPrice] andColor:HXControlBg];
+}
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
+           NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+    return [string isEqualToString:filtered];
 }
 -(void)setSank:(GXSankPrice *)sank
 {

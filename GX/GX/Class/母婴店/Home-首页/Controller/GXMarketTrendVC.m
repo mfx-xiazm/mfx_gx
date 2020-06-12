@@ -50,13 +50,23 @@
 }
 -(void)setUpNavBar
 {
+    self.hbd_barAlpha = 0.0;
+    self.hbd_barStyle = UIBarStyleBlack;
+    self.hbd_tintColor = [UIColor whiteColor];
+    
     [self.navigationItem setTitle:@"通货行情"];
     
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithTarget:self action:@selector(cartClicked) image:HXGetImage(@"购物车白")];
+    UIButton *cart = [UIButton buttonWithType:UIButtonTypeCustom];
+    cart.hxn_size = CGSizeMake(40, 40);
+    [cart setImage:HXGetImage(@"购物车白") forState:UIControlStateNormal];
+    [cart addTarget:self action:@selector(cartClicked) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *cartItem = [[UIBarButtonItem alloc] initWithCustomView:cart];
+        
+    self.navigationItem.rightBarButtonItem = cartItem;
 }
 -(void)setUpCategoryView
 {
-    _categoryView.backgroundColor = [UIColor whiteColor];
+    _categoryView.backgroundColor = [UIColor clearColor];
     _categoryView.titleLabelZoomEnabled = NO;
     _categoryView.titles = @[@"奶粉", @"纸尿裤"];
     _categoryView.titleFont = [UIFont systemFontOfSize:14 weight:UIFontWeightMedium];

@@ -41,7 +41,7 @@ static NSString *const MarketTrendCell = @"MarketTrendCell";
 {
     [super viewDidLayoutSubviews];
     self.view.hxn_width = HX_SCREEN_WIDTH;
-    self.header.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, 140.f);
+    self.header.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, 240.f);
 }
 -(NSMutableArray *)showTrends
 {
@@ -54,7 +54,7 @@ static NSString *const MarketTrendCell = @"MarketTrendCell";
 {
     if (_header == nil) {
         _header = [GXMarketTrendHeader loadXibView];
-        _header.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, 140.f);
+        _header.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, 240.f);
         [_header.topImg sd_setImageWithURL:[NSURL URLWithString:self.trend_img]];
         hx_weakify(self);
         _header.cateClickedCall = ^(NSInteger index) {
