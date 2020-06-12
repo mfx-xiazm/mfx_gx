@@ -10,6 +10,7 @@
 #import "HXTabBarController.h"
 #import "GXChangePwdVC.h"
 #import "UITextField+GYExpand.h"
+#import "UICKeyChainStore.h"
 
 @interface GXLoginVC ()
 @property (weak, nonatomic) IBOutlet UITextField *phone;
@@ -22,6 +23,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationItem setTitle:@"登录"];
+    
+    UICKeyChainStore *keychain = [UICKeyChainStore keyChainStoreWithService:@"guaxuanxsy.mfxapp.com"];
+    NSString *phone = [keychain stringForKey:@"phone"];
+    NSString *password = [keychain stringForKey:@"pwd"];
+    if (phone && phone.length) {
+        self.phone.text = phone;
+    }
+    if (password && password.length) {
+        self.pwd.text = password;
+    }
     
     hx_weakify(self);
     [self.phone lengthLimit:^{
@@ -59,10 +70,15 @@
     /** 1 母婴店 2供应商 3销售员 */
     parameters[@"utype"] = @"3";
     
-    //hx_weakify(self);
+    hx_weakify(self);
     [HXNetworkTool POST:HXRC_M_URL action:@"program/userLogin" parameters:parameters success:^(id responseObject) {
+        hx_strongify(weakSelf);
         [sender stopLoading:@"登录" image:nil textColor:nil backgroundColor:nil];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            UICKeyChainStore *keychain = [UICKeyChainStore keyChainStoreWithService:@"guaxuanxsy.mfxapp.com"];
+            [keychain setString:strongSelf.phone.text forKey:@"phone"];
+            [keychain setString:strongSelf.pwd.text forKey:@"pwd"];
+            
             MSUserInfo *info = [MSUserInfo yy_modelWithDictionary:responseObject[@"data"]];
             [MSUserManager sharedInstance].curUserInfo = info;
             [[MSUserManager sharedInstance] saveUserInfo];

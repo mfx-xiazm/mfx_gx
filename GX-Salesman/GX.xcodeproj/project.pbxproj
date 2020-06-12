@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		11AF349C58F7A342E9336E28 /* libPods-GX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E67F6C2F7D067769D4BA925 /* libPods-GX.a */; };
+		4975FD162493263F00E5AEF2 /* UICKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 4975FD132493263F00E5AEF2 /* UICKeyChainStore.m */; };
+		4975FD172493263F00E5AEF2 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4975FD152493263F00E5AEF2 /* Info.plist */; };
 		4994C48E2480FEE400A9A239 /* GXAccountManageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4994C47E2480FEE400A9A239 /* GXAccountManageVC.xib */; };
 		4994C48F2480FEE400A9A239 /* GXCashVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4994C47F2480FEE400A9A239 /* GXCashVC.m */; };
 		4994C4902480FEE400A9A239 /* GXAccountManageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4994C4822480FEE400A9A239 /* GXAccountManageVC.m */; };
@@ -165,6 +167,9 @@
 /* Begin PBXFileReference section */
 		1330E51C61ADF8FC1AE77408 /* Pods-GX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GX.debug.xcconfig"; path = "Target Support Files/Pods-GX/Pods-GX.debug.xcconfig"; sourceTree = "<group>"; };
 		2975184EF33AC041D33915E0 /* Pods-GX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GX.release.xcconfig"; path = "Target Support Files/Pods-GX/Pods-GX.release.xcconfig"; sourceTree = "<group>"; };
+		4975FD132493263F00E5AEF2 /* UICKeyChainStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICKeyChainStore.m; sourceTree = "<group>"; };
+		4975FD142493263F00E5AEF2 /* UICKeyChainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICKeyChainStore.h; sourceTree = "<group>"; };
+		4975FD152493263F00E5AEF2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4994C47E2480FEE400A9A239 /* GXAccountManageVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXAccountManageVC.xib; sourceTree = "<group>"; };
 		4994C47F2480FEE400A9A239 /* GXCashVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXCashVC.m; sourceTree = "<group>"; };
 		4994C4802480FEE400A9A239 /* GXAccountManageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXAccountManageVC.h; sourceTree = "<group>"; };
@@ -440,6 +445,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4975FD122493263F00E5AEF2 /* UICKeyChainStore */ = {
+			isa = PBXGroup;
+			children = (
+				4975FD132493263F00E5AEF2 /* UICKeyChainStore.m */,
+				4975FD142493263F00E5AEF2 /* UICKeyChainStore.h */,
+				4975FD152493263F00E5AEF2 /* Info.plist */,
+			);
+			path = UICKeyChainStore;
+			sourceTree = "<group>";
+		};
 		4994C47C2480FEE400A9A239 /* Acount-账户管理 */ = {
 			isa = PBXGroup;
 			children = (
@@ -686,6 +701,7 @@
 		90C0B33E2340CD7100A8C55B /* ThirdLib */ = {
 			isa = PBXGroup;
 			children = (
+				4975FD122493263F00E5AEF2 /* UICKeyChainStore */,
 				903C546E2349CCCD002743EE /* JJOptionView */,
 				905B3DF52345989900282515 /* WXPhotoContainerView */,
 				9069739823444E8600D8A8FF /* SPPickerView */,
@@ -1305,6 +1321,7 @@
 				4994C4BE2481017A00A9A239 /* GXOrderDetailFooter.xib in Resources */,
 				4994C4B52481017A00A9A239 /* GXExpressDetailCell.xib in Resources */,
 				4994C4B72481017A00A9A239 /* GXMyOrderHeader.xib in Resources */,
+				4975FD172493263F00E5AEF2 /* Info.plist in Resources */,
 				4994C49B2481006C00A9A239 /* GXUpOrderGoodsCell.xib in Resources */,
 				4994C4DF2481041E00A9A239 /* GXMyCouponChildVC.xib in Resources */,
 				90BB98DC234DB3EF00444ACC /* GXSalerMyVC.xib in Resources */,
@@ -1472,6 +1489,7 @@
 				90BB98E5234DBBE300444ACC /* GXClientManageCell.m in Sources */,
 				4994C49A2481006C00A9A239 /* GXUpOrderGoodsCell.m in Sources */,
 				90C0B3C42340CD7200A8C55B /* MSUserManager.m in Sources */,
+				4975FD162493263F00E5AEF2 /* UICKeyChainStore.m in Sources */,
 				90C0B4342340D27200A8C55B /* HXTabBarController.m in Sources */,
 				4994C4B92481017A00A9A239 /* GXMyOrderFooter.m in Sources */,
 				90C0B3BF2340CD7200A8C55B /* HXLocationTool_.m in Sources */,
