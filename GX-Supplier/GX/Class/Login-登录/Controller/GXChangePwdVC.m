@@ -7,6 +7,7 @@
 //
 
 #import "GXChangePwdVC.h"
+#import "UICKeyChainStore.h"
 
 @interface GXChangePwdVC ()
 @property (weak, nonatomic) IBOutlet UITextField *phone;
@@ -102,6 +103,9 @@
         hx_strongify(weakSelf);
         [btn stopLoading:@"确定" image:nil textColor:nil backgroundColor:nil];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            UICKeyChainStore *keychain = [UICKeyChainStore keyChainStoreWithService:@"guaxuangys.mfxapp.com"];
+            [keychain setString:strongSelf.confirmPwd.text forKey:@"pwd"];
+            
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
             [strongSelf.navigationController popViewControllerAnimated:YES];
         }else{

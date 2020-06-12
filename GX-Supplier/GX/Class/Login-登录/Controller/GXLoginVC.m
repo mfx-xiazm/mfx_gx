@@ -16,6 +16,7 @@
 #import "GXAuthStep2VC.h"
 #import "GXAuthStep3VC.h"
 #import "GXAuthStep4VC.h"
+#import "UICKeyChainStore.h"
 
 @interface GXLoginVC ()
 @property (weak, nonatomic) IBOutlet UITextField *phone;
@@ -28,6 +29,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationItem setTitle:@"登录"];
+    
+    UICKeyChainStore *keychain = [UICKeyChainStore keyChainStoreWithService:@"guaxuangys.mfxapp.com"];
+    NSString *phone = [keychain stringForKey:@"phone"];
+    NSString *password = [keychain stringForKey:@"pwd"];
+    if (phone && phone.length) {
+        self.phone.text = phone;
+    }
+    if (password && password.length) {
+        self.pwd.text = password;
+    }
     
     hx_weakify(self);
     [self.phone lengthLimit:^{
@@ -70,6 +81,10 @@
         hx_strongify(weakSelf);
         [sender stopLoading:@"登录" image:nil textColor:nil backgroundColor:nil];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            UICKeyChainStore *keychain = [UICKeyChainStore keyChainStoreWithService:@"guaxuangys.mfxapp.com"];
+            [keychain setString:strongSelf.phone.text forKey:@"phone"];
+            [keychain setString:strongSelf.pwd.text forKey:@"pwd"];
+            
             if ([responseObject[@"data"][@"is_register"] integerValue] == 0) {
                 if ([responseObject[@"data"][@"step"] integerValue] == 1) {
                     GXAuthStep1VC *svc = [GXAuthStep1VC new];

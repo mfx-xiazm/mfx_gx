@@ -7,6 +7,7 @@
 //
 
 #import "GXChangeBindVC.h"
+#import "UICKeyChainStore.h"
 
 @interface GXChangeBindVC ()
 @property (weak, nonatomic) IBOutlet UITextField *oldPhone;
@@ -63,6 +64,9 @@
         hx_strongify(weakSelf);
         [btn stopLoading:@"确定修改" image:nil textColor:nil backgroundColor:nil];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            UICKeyChainStore *keychain = [UICKeyChainStore keyChainStoreWithService:@"guaxuangys.mfxapp.com"];
+            [keychain setString:strongSelf.phone.text forKey:@"phone"];
+            
             if (strongSelf.changeSuccessCall) {
                 strongSelf.changeSuccessCall(strongSelf.phone.text);
             }

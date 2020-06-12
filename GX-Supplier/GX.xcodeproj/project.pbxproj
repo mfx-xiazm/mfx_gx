@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		11AF349C58F7A342E9336E28 /* libPods-GX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E67F6C2F7D067769D4BA925 /* libPods-GX.a */; };
 		491840232485E9700031F258 /* areaData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 491840222485E9700031F258 /* areaData.txt */; };
+		4975FD1C2493275600E5AEF2 /* UICKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 4975FD192493275600E5AEF2 /* UICKeyChainStore.m */; };
+		4975FD1D2493275600E5AEF2 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4975FD1B2493275600E5AEF2 /* Info.plist */; };
 		497AEBEC247DFC9E00E0FACB /* GXCashAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 497AEBEB247DFC9E00E0FACB /* GXCashAlert.m */; };
 		497AEBEE247DFCBA00E0FACB /* GXCashAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = 497AEBED247DFCBA00E0FACB /* GXCashAlert.xib */; };
 		4994C4EB24810B5800A9A239 /* GXTopSaleMaterial.m in Sources */ = {isa = PBXBuildFile; fileRef = 4994C4EA24810B5800A9A239 /* GXTopSaleMaterial.m */; };
@@ -197,6 +199,9 @@
 		1330E51C61ADF8FC1AE77408 /* Pods-GX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GX.debug.xcconfig"; path = "Target Support Files/Pods-GX/Pods-GX.debug.xcconfig"; sourceTree = "<group>"; };
 		2975184EF33AC041D33915E0 /* Pods-GX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GX.release.xcconfig"; path = "Target Support Files/Pods-GX/Pods-GX.release.xcconfig"; sourceTree = "<group>"; };
 		491840222485E9700031F258 /* areaData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = areaData.txt; sourceTree = "<group>"; };
+		4975FD192493275600E5AEF2 /* UICKeyChainStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICKeyChainStore.m; sourceTree = "<group>"; };
+		4975FD1A2493275600E5AEF2 /* UICKeyChainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICKeyChainStore.h; sourceTree = "<group>"; };
+		4975FD1B2493275600E5AEF2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		497AEBEA247DFC9E00E0FACB /* GXCashAlert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXCashAlert.h; sourceTree = "<group>"; };
 		497AEBEB247DFC9E00E0FACB /* GXCashAlert.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXCashAlert.m; sourceTree = "<group>"; };
 		497AEBED247DFCBA00E0FACB /* GXCashAlert.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXCashAlert.xib; sourceTree = "<group>"; };
@@ -520,6 +525,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4975FD182493275600E5AEF2 /* UICKeyChainStore */ = {
+			isa = PBXGroup;
+			children = (
+				4975FD192493275600E5AEF2 /* UICKeyChainStore.m */,
+				4975FD1A2493275600E5AEF2 /* UICKeyChainStore.h */,
+				4975FD1B2493275600E5AEF2 /* Info.plist */,
+			);
+			path = UICKeyChainStore;
+			sourceTree = "<group>";
+		};
 		903C546E2349CCCD002743EE /* JJOptionView */ = {
 			isa = PBXGroup;
 			children = (
@@ -730,6 +745,7 @@
 		90C0B33E2340CD7100A8C55B /* ThirdLib */ = {
 			isa = PBXGroup;
 			children = (
+				4975FD182493275600E5AEF2 /* UICKeyChainStore */,
 				903C546E2349CCCD002743EE /* JJOptionView */,
 				905B3E0C2345A50000282515 /* HXShowStarView */,
 				905B3DF52345989900282515 /* WXPhotoContainerView */,
@@ -1380,6 +1396,7 @@
 				491840232485E9700031F258 /* areaData.txt in Resources */,
 				90E7C9082341A7EF00D46E19 /* GXRegisterVC.xib in Resources */,
 				4994C50424810CEB00A9A239 /* GXChangeBindVC.xib in Resources */,
+				4975FD1D2493275600E5AEF2 /* Info.plist in Resources */,
 				90BB98C3234DAE6C00444ACC /* GXAccountManageCell.xib in Resources */,
 				90FFBD8323ACA0260093A3FE /* GXAboutUsVC.xib in Resources */,
 				4994C52424810E5000A9A239 /* GXOrderDetailVC.xib in Resources */,
@@ -1504,6 +1521,7 @@
 				90067ED923443A1300628503 /* GXRegisterAuthCell.m in Sources */,
 				4994C53D24810F6600A9A239 /* GXMyCouponChildVC.m in Sources */,
 				905B3DF82345989900282515 /* SDWeiXinPhotoContainerView.m in Sources */,
+				4975FD1C2493275600E5AEF2 /* UICKeyChainStore.m in Sources */,
 				90C0B3C72340CD7200A8C55B /* HXDropMenuView.m in Sources */,
 				90C0B3C22340CD7200A8C55B /* HXTopWindow.m in Sources */,
 				90C0B3DC2340CD7200A8C55B /* FSActionSheetCell.m in Sources */,
