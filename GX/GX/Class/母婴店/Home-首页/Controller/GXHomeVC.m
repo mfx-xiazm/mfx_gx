@@ -37,6 +37,7 @@
 #import "GXActivityContentVC.h"
 #import "SZUpdateView.h"
 #import <zhPopupController.h>
+#import "GXTestViewController.h"
 
 static NSString *const HomeCateCell = @"HomeCateCell";
 static NSString *const ShopGoodsCell = @"ShopGoodsCell";
@@ -140,8 +141,10 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
 #pragma mark -- 点击事件
 -(void)msgClicked
 {
-    GXMessageVC *mvc = [GXMessageVC new];
-    [self.navigationController pushViewController:mvc animated:YES];
+//    GXMessageVC *mvc = [GXMessageVC new];
+//    [self.navigationController pushViewController:mvc animated:YES];
+    GXTestViewController *tvc = [GXTestViewController new];
+    [self.navigationController pushViewController:tvc animated:YES];
 }
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {

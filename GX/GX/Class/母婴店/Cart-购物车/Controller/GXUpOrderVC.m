@@ -358,9 +358,9 @@ static NSString *const UpOrderCell = @"UpOrderCell";
     // 返回这个模型对应的cell高度
     GXConfirmOrderData *orderData = self.confirmOrder.goodsData[indexPath.row];
     if ([orderData.provider_uid isEqualToString:@"0"]) {
-        return 40.f*3 + 110.f*orderData.goods.count + 10.f;
+        return 5.f + 40.f + 110.f*orderData.goods.count + 160.f + 80.f + 5.f;
     }else{
-        return 40.f*4 + 110.f*orderData.goods.count + 10.f;
+        return 5.f + 40.f + 110.f*orderData.goods.count + 160.f + 120.f + 5.f;
     }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

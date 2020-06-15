@@ -80,7 +80,7 @@ static NSString *const MarketTrendCell = @"MarketTrendCell";
     self.tableView.estimatedSectionHeaderHeight = 0;
     self.tableView.estimatedSectionFooterHeight = 0;
     
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(-self.HXNavBarHeight, 0, 0, 0);
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     

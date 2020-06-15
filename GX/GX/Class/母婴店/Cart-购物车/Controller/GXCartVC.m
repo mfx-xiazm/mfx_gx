@@ -7,10 +7,7 @@
 //
 
 #import "GXCartVC.h"
-#import "GXCartCell.h"
-#import <ZLCollectionViewVerticalLayout.h>
-#import "GXCartSectionHeader.h"
-#import "GXCartSectionBgReusableView.h"
+#import "GXRenewCartCell.h"
 #import "zhAlertView.h"
 #import <zhPopupController.h>
 #import "GXGetCouponView.h"
@@ -20,11 +17,10 @@
 #import "GXMyCouponVC.h"
 #import "GXMyCoupon.h"
 
-static NSString *const CartCell = @"CartCell";
-static NSString *const CartSectionHeader = @"CartSectionHeader";
+static NSString *const RenewCartCell = @"RenewCartCell";
 
-@interface GXCartVC ()<UICollectionViewDelegate,UICollectionViewDataSource,ZLCollectionViewBaseFlowLayoutDelegate>
-@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@interface GXCartVC ()<UITableViewDelegate,UITableViewDataSource>
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *top_coupon_view_height;
 @property (weak, nonatomic) IBOutlet UIButton *top_coupon_btn;
 /* 编辑 */
@@ -56,7 +52,7 @@ static NSString *const CartSectionHeader = @"CartSectionHeader";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavBar];
-    [self setUpCollectionView];
+    [self setUpTableView];
     [self setUpRefresh];
     [self startShimmer];
     [self getOrderCartListRequest:YES];
@@ -113,28 +109,35 @@ static NSString *const CartSectionHeader = @"CartSectionHeader";
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:edit];
 }
--(void)setUpCollectionView
+-(void)setUpTableView
 {
     // 针对 11.0 以上的iOS系统进行处理
     if (@available(iOS 11.0, *)) {
-        self.collectionView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentAutomatic;
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentAutomatic;
     } else {
         // 针对 11.0 以下的iOS系统进行处理
         // 不要自动调整inset
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
-    ZLCollectionViewVerticalLayout *flowLayout = [[ZLCollectionViewVerticalLayout alloc] init];
-    flowLayout.delegate = self;
-    flowLayout.canDrag = NO;
-    flowLayout.header_suspension = NO;
-    self.collectionView.collectionViewLayout = flowLayout;
-    self.collectionView.dataSource = self;
-    self.collectionView.delegate = self;
-    [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([GXCartCell class]) bundle:nil] forCellWithReuseIdentifier:CartCell];
-    [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([GXCartSectionHeader class]) bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CartSectionHeader];
+    self.tableView.rowHeight = 0;
+    self.tableView.estimatedSectionHeaderHeight = 0;
+    self.tableView.estimatedSectionFooterHeight = 0;
+    
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    
+    self.tableView.showsVerticalScrollIndicator = NO;
+    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    // 设置背景色为clear
+    self.tableView.backgroundColor = UIColorFromRGB(0xf5f6f7);
+    
+    // 注册cell
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GXRenewCartCell class]) bundle:nil] forCellReuseIdentifier:RenewCartCell];
     
     hx_weakify(self);
-    [self.collectionView zx_setEmptyView:[GYEmptyView class] isFull:YES clickedBlock:^(UIButton * _Nullable btn) {
+    [self.tableView zx_setEmptyView:[GYEmptyView class] isFull:YES clickedBlock:^(UIButton * _Nullable btn) {
         [weakSelf startShimmer];
         [weakSelf getOrderCartListRequest:YES];
     }];
@@ -143,14 +146,14 @@ static NSString *const CartSectionHeader = @"CartSectionHeader";
 -(void)setUpRefresh
 {
     hx_weakify(self);
-    self.collectionView.mj_header.automaticallyChangeAlpha = YES;
-    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    self.tableView.mj_header.automaticallyChangeAlpha = YES;
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         hx_strongify(weakSelf);
-        [strongSelf.collectionView.mj_footer resetNoMoreData];
+        [strongSelf.tableView.mj_footer resetNoMoreData];
         [strongSelf getOrderCartListRequest:YES];
     }];
     //追加尾部刷新
-    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         hx_strongify(weakSelf);
         [strongSelf getOrderCartListRequest:NO];
     }];
@@ -171,30 +174,30 @@ static NSString *const CartSectionHeader = @"CartSectionHeader";
         [strongSelf stopShimmer];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             if (isRefresh) {
-                [strongSelf.collectionView.mj_header endRefreshing];
+                [strongSelf.tableView.mj_header endRefreshing];
                 strongSelf.pagenum = 1;
                 
                 [strongSelf.cartDataArr removeAllObjects];
                 NSArray *arrt = [NSArray yy_modelArrayWithClass:[GXCartData class] json:responseObject[@"data"][@"cartData"]];
                 [strongSelf.cartDataArr addObjectsFromArray:arrt];
             }else{
-                [strongSelf.collectionView.mj_footer endRefreshing];
+                [strongSelf.tableView.mj_footer endRefreshing];
                 strongSelf.pagenum ++;
                 
                 if ([responseObject[@"data"][@"cartData"] isKindOfClass:[NSArray class]] && ((NSArray *)responseObject[@"data"][@"cartData"]).count){
                     NSArray *arrt = [NSArray yy_modelArrayWithClass:[GXCartData class] json:responseObject[@"data"][@"cartData"]];
                     [strongSelf.cartDataArr addObjectsFromArray:arrt];
                 }else{// 提示没有更多数据
-                    [strongSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
+                    [strongSelf.tableView.mj_footer endRefreshingWithNoMoreData];
                 }
             }
             dispatch_async(dispatch_get_main_queue(), ^{
                 // 刷新界面
                 hx_strongify(weakSelf);
-                strongSelf.collectionView.hidden = NO;
+                strongSelf.tableView.hidden = NO;
                 if ([responseObject[@"data"][@"coupon"] integerValue] == 1) {
                     strongSelf.top_coupon_btn.hidden = NO;
-                    strongSelf.top_coupon_view_height.constant = 48.f;
+                    strongSelf.top_coupon_view_height.constant = 42.f;
                 }else{
                     strongSelf.top_coupon_btn.hidden = YES;
                     strongSelf.top_coupon_view_height.constant = 10.f;
@@ -204,7 +207,7 @@ static NSString *const CartSectionHeader = @"CartSectionHeader";
                 strongSelf.handleViewHeight.constant = strongSelf.cartDataArr.count?44.f:0.f;
                 [strongSelf checkIsAllSelect];
                 [strongSelf calculateGoodsPrice];
-                [strongSelf.collectionView reloadData];
+                [strongSelf.tableView reloadData];
             });
         }else{
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
@@ -212,8 +215,8 @@ static NSString *const CartSectionHeader = @"CartSectionHeader";
     } failure:^(NSError *error) {
         hx_strongify(weakSelf);
         [strongSelf stopShimmer];
-        [strongSelf.collectionView.mj_header endRefreshing];
-        [strongSelf.collectionView.mj_footer endRefreshing];
+        [strongSelf.tableView.mj_header endRefreshing];
+        [strongSelf.tableView.mj_footer endRefreshing];
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
     }];
 }
@@ -271,19 +274,23 @@ static NSString *const CartSectionHeader = @"CartSectionHeader";
     self.totalPrice.text = [NSString stringWithFormat:@"%.2f元",fabs(price)];
     self.goods_num.text = [NSString stringWithFormat:@"%ld个商品",(long)goodsNum];
 }
--(void)delOrderCartRequest
+-(void)delOrderCartRequest:(NSString *)cart_id
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
 
-    NSMutableString *cartIds = [NSMutableString string];
-    for (GXCartData *cart in self.cartDataArr) {
-        [cart.goodsData enumerateObjectsUsingBlock:^(GXCartShopGoods * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            if (obj.is_checked) {
-                [cartIds appendFormat:@"%@",cartIds.length?[NSString stringWithFormat:@",%@",obj.cart_id]:[NSString stringWithFormat:@"%@",obj.cart_id]];
-            }
-        }];
+    if (cart_id && cart_id.length) {
+        parameters[@"cartIds"] = cart_id;//删除多个id间用逗号隔开
+    }else{
+        NSMutableString *cartIds = [NSMutableString string];
+        for (GXCartData *cart in self.cartDataArr) {
+            [cart.goodsData enumerateObjectsUsingBlock:^(GXCartShopGoods * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if (obj.is_checked) {
+                    [cartIds appendFormat:@"%@",cartIds.length?[NSString stringWithFormat:@",%@",obj.cart_id]:[NSString stringWithFormat:@"%@",obj.cart_id]];
+                }
+            }];
+        }
+        parameters[@"cartIds"] = cartIds;//删除多个id间用逗号隔开
     }
-    parameters[@"cartIds"] = cartIds;//删除多个id间用逗号隔开
 
     hx_weakify(self);
     [HXNetworkTool POST:HXRC_M_URL action:@"admin/delOrderCart" parameters:parameters success:^(id responseObject) {
@@ -375,7 +382,7 @@ static NSString *const CartSectionHeader = @"CartSectionHeader";
     
     [self calculateGoodsPrice];
 
-    [self.collectionView reloadData];
+    [self.tableView reloadData];
 }
 - (IBAction)upLoadOrderClicked:(UIButton *)sender {
     if (![self checkIsHaveSelect]) {
@@ -393,7 +400,7 @@ static NSString *const CartSectionHeader = @"CartSectionHeader";
         zhAlertButton *okButton = [zhAlertButton buttonWithTitle:@"删除" handler:^(zhAlertButton * _Nonnull button) {
             hx_strongify(weakSelf);
             [strongSelf.alertPopVC dismiss];
-            [strongSelf delOrderCartRequest];
+            [strongSelf delOrderCartRequest:nil];
         }];
         cancelButton.lineColor = UIColorFromRGB(0xDDDDDD);
         [cancelButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
@@ -427,95 +434,53 @@ static NSString *const CartSectionHeader = @"CartSectionHeader";
         }];
     }
 }
-
-#pragma mark -- UICollectionView 数据源和代理
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+#pragma mark -- UITableView数据源和代理
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.cartDataArr.count;
 }
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    GXCartData *cartData = self.cartDataArr[section];
-    return cartData.goodsData.count;
-}
-- (ZLLayoutType)collectionView:(UICollectionView *)collectionView layout:(ZLCollectionViewBaseFlowLayout *)collectionViewLayout typeOfLayout:(NSInteger)section {
-    return ClosedLayout;
-}
-//如果是ClosedLayout样式的section，必须实现该代理，指定列数
-- (NSInteger)collectionView:(UICollectionView *)collectionView layout:(ZLCollectionViewBaseFlowLayout*)collectionViewLayout columnCountOfSection:(NSInteger)section {
-    return 1;
-}
-- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    GXCartCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CartCell forIndexPath:indexPath];
-    GXCartData *cartData = self.cartDataArr[indexPath.section];
-    GXCartShopGoods *goods = cartData.goodsData[indexPath.row];
-    cell.goods = goods;
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    GXRenewCartCell *cell = [tableView dequeueReusableCellWithIdentifier:RenewCartCell forIndexPath:indexPath];
+    //无色
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    GXCartData *cartData = self.cartDataArr[indexPath.row];
+    cell.cartData = cartData;
     hx_weakify(self);
-    cell.cartHandleCall = ^(NSInteger index) {
+    cell.renewCartHeaderClickedCall = ^(NSInteger index) {
         hx_strongify(weakSelf);
-        if (index == 2) {
-            if (!goods.is_checked) {//取消选中
-                cartData.is_checked = NO;
+        if (index == 1) {
+            // 改变该店铺商品的选中状态
+            [cartData.goodsData enumerateObjectsUsingBlock:^(GXCartShopGoods * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                obj.is_checked = cartData.is_checked;
+            }];
+            if (!cartData.is_checked) { // 取消选中
+                strongSelf.selectAllBtn.selected = cartData.is_checked;
             }else{//选中
-                // 判断店铺要选中
-                __block BOOL isStoreSelect = YES;
-                [cartData.goodsData enumerateObjectsUsingBlock:^(GXCartShopGoods * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    if (!obj.is_checked) {
-                        isStoreSelect = NO;
-                        *stop = YES;
-                    }
-                }];
-                cartData.is_checked = isStoreSelect;
+                // 判断是否全选
+                [strongSelf checkIsAllSelect];
             }
-            // 判断是否全选
-            [strongSelf checkIsAllSelect];
             // 计算商品价格
             [strongSelf calculateGoodsPrice];
-            
-            [collectionView reloadData];
+            [tableView reloadData];
+        }else if (index == 2) {
+            if (![cartData.provider_uid isEqualToString:@"0"]) {// 不是平台自营
+                GXStoreGoodsChildVC *gvc = [GXStoreGoodsChildVC new];
+                gvc.provider_uid = cartData.provider_uid;
+                [strongSelf.navigationController pushViewController:gvc animated:YES];
+            }
         }else{
-            [strongSelf calculateGoodsPrice];
-        }
-    };
-    return cell;
-}
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-   
-}
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
-{
-    return CGSizeMake(collectionView.hxn_width, 40.f);
-}
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
-{
-    if ([kind isEqualToString:UICollectionElementKindSectionHeader]){
-        GXCartSectionHeader *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CartSectionHeader forIndexPath:indexPath];
-        GXCartData *cartData = self.cartDataArr[indexPath.section];
-        header.cartData = cartData;
-        hx_weakify(self);
-        header.cartHeaderClickedCall = ^(NSInteger index) {
-            hx_strongify(weakSelf);
-            if (index == 1) {
-                // 改变该店铺商品的选中状态
-                [cartData.goodsData enumerateObjectsUsingBlock:^(GXCartShopGoods * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    obj.is_checked = cartData.is_checked;
-                }];
-                if (!cartData.is_checked) { // 取消选中
-                    strongSelf.selectAllBtn.selected = cartData.is_checked;
-                }else{//选中
-                    // 判断是否全选
-                    [strongSelf checkIsAllSelect];
-                }
-                // 计算商品价格
-                [strongSelf calculateGoodsPrice];
-                [collectionView reloadData];
-            }else if (index == 2) {
-                if (![cartData.provider_uid isEqualToString:@"0"]) {// 不是平台自营
-                    GXStoreGoodsChildVC *gvc = [GXStoreGoodsChildVC new];
-                    gvc.provider_uid = cartData.provider_uid;
-                    [strongSelf.navigationController pushViewController:gvc animated:YES];
-                }
+            if (cartData.coupons && cartData.coupons.count) {
+                GXGetCouponView *vdv = [GXGetCouponView loadXibView];
+                vdv.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 360);
+                vdv.cartData = cartData;
+                vdv.closeViewCall = ^{
+                    [strongSelf.couponPopVC dismissWithDuration:0.25 completion:nil];
+                };
+                strongSelf.couponPopVC = [[zhPopupController alloc] initWithView:vdv size:vdv.bounds.size];
+                strongSelf.couponPopVC.layoutType = zhPopupLayoutTypeBottom;
+                [strongSelf.couponPopVC show];
             }else{
-                if (cartData.coupons && cartData.coupons.count) {
+                [strongSelf getShopCouponRequest:cartData completedCall:^{
                     GXGetCouponView *vdv = [GXGetCouponView loadXibView];
                     vdv.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 360);
                     vdv.cartData = cartData;
@@ -525,43 +490,37 @@ static NSString *const CartSectionHeader = @"CartSectionHeader";
                     strongSelf.couponPopVC = [[zhPopupController alloc] initWithView:vdv size:vdv.bounds.size];
                     strongSelf.couponPopVC.layoutType = zhPopupLayoutTypeBottom;
                     [strongSelf.couponPopVC show];
-                }else{
-                    [strongSelf getShopCouponRequest:cartData completedCall:^{
-                        GXGetCouponView *vdv = [GXGetCouponView loadXibView];
-                        vdv.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 360);
-                        vdv.cartData = cartData;
-                        vdv.closeViewCall = ^{
-                            [strongSelf.couponPopVC dismissWithDuration:0.25 completion:nil];
-                        };
-                        strongSelf.couponPopVC = [[zhPopupController alloc] initWithView:vdv size:vdv.bounds.size];
-                        strongSelf.couponPopVC.layoutType = zhPopupLayoutTypeBottom;
-                        [strongSelf.couponPopVC show];
-                    }];
-                }
+                }];
             }
-        };
-        return header;
-    }
-    return nil;
+        }
+    };
+    cell.renewCartNumHandleCall = ^(NSInteger index) {
+        hx_strongify(weakSelf);
+        if (index == 2) {
+            // 判断是否全选
+            [strongSelf checkIsAllSelect];
+            // 计算商品价格
+            [strongSelf calculateGoodsPrice];
+            
+            [tableView reloadData];
+        }else{
+            [strongSelf calculateGoodsPrice];
+        }
+    };
+    cell.renewCartDelCall = ^(NSString * _Nonnull cart_id) {
+        hx_strongify(weakSelf);
+        [strongSelf delOrderCartRequest:cart_id];
+    };
+    return cell;
 }
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    CGFloat width = collectionView.hxn_width-20.f;
-    CGFloat height = 110.f;
-    return CGSizeMake(width, height);
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // 返回这个模型对应的cell高度
+    GXCartData *cartData = self.cartDataArr[indexPath.row];
+    return  6.f + 40.f + 40.f*2 + 110.f*cartData.goodsData.count + 6.f;
 }
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    return 0.f;
-}
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
-    return 0.f;
-}
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return  UIEdgeInsetsMake(0.f, 10.f, 10.f, 10.f);
-}
-- (NSString*)collectionView:(UICollectionView *)collectionView layout:(ZLCollectionViewBaseFlowLayout *)collectionViewLayout registerBackView:(NSInteger)section {
-    return @"GXCartSectionBgReusableView";
-}
-- (BOOL)collectionView:(UICollectionView *)collectionView layout:(ZLCollectionViewBaseFlowLayout *)collectionViewLayout attachToTop:(NSInteger)section {
-    return YES;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
 }
 @end

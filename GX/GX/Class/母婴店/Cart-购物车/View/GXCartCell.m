@@ -2,8 +2,8 @@
 //  GXCartCell.m
 //  GX
 //
-//  Created by 夏增明 on 2019/10/5.
-//  Copyright © 2019 夏增明. All rights reserved.
+//  Created by huaxin-01 on 2020/6/15.
+//  Copyright © 2020 夏增明. All rights reserved.
 //
 
 #import "GXCartCell.h"
@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *spec_value;
 @property (weak, nonatomic) IBOutlet UILabel *cart_num;
 @end
+
 @implementation GXCartCell
 
 - (void)awakeFromNib {
@@ -63,4 +64,10 @@
         self.cartHandleCall(sender.tag);
     }
 }
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+
+    // Configure the view for the selected state
+}
+
 @end

@@ -62,7 +62,7 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
 @property (weak, nonatomic) IBOutlet UIView *rushView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *rushViewHeight;
 @property (weak, nonatomic) IBOutlet UIView *noticeView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *noticeViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *noticeViewButtom;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewHeight;
 @property (weak, nonatomic) IBOutlet UIView *webContentView;
@@ -444,11 +444,11 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
         
     if (self.goodsDetail.important_notice && self.goodsDetail.important_notice.length) {// 有重要通知
         self.noticeView.hidden = NO;
-        self.noticeViewHeight.constant = 40.f;
+        self.noticeViewButtom.constant = 12.f;
         self.notice.text = [NSString stringWithFormat:@"重要通知：%@",_goodsDetail.important_notice];
     }else{// 没有重要通知
         self.noticeView.hidden = YES;
-        self.noticeViewHeight.constant = 0.f;
+        self.noticeViewButtom.constant = 0.f;
         self.notice.text = @"";
     }
 

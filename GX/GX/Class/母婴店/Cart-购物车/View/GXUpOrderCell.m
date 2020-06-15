@@ -10,18 +10,15 @@
 #import "GXUpOrderGoodsCell.h"
 #import "GXConfirmOrder.h"
 #import "GXMyCoupon.h"
+#import "GXUpOrderCellHeader.h"
+#import "GXUpOrderCellSectionFooter.h"
+#import "GXUpOrderCellFooter.h"
 
 static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
 @interface GXUpOrderCell ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UILabel *shop_name;
-@property (weak, nonatomic) IBOutlet UILabel *totalFreight;
-@property (weak, nonatomic) IBOutlet UILabel *couponAmount;
-@property (weak, nonatomic) IBOutlet UILabel *totalAmount;
-@property (weak, nonatomic) IBOutlet UILabel *goodsNum;
-@property (weak, nonatomic) IBOutlet UIView *couponView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *couponViewHeight;
-
+@property (nonatomic, strong) GXUpOrderCellHeader *header;
+@property (nonatomic, strong) GXUpOrderCellFooter *footer;
 @end
 @implementation GXUpOrderCell
 
@@ -40,46 +37,59 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // 设置背景色为clear
-    self.tableView.backgroundColor = HXGlobalBg;
-    
+    self.tableView.backgroundColor = [UIColor whiteColor];
+    self.tableView.scrollEnabled = NO;
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GXUpOrderGoodsCell class]) bundle:nil] forCellReuseIdentifier:UpOrderGoodsCell];
+    
+    self.tableView.tableHeaderView = self.header;
+    self.tableView.tableFooterView = self.footer;
 }
-- (IBAction)couponClicked:(UIButton *)sender {
-    if (self.chooseCouponCall) {
-        self.chooseCouponCall();
+-(void)layoutSubviews
+{
+    [super layoutSubviews];
+    self.header.frame = CGRectMake(0, 0, self.tableView.hxn_width, 40.f);
+    self.footer.frame = CGRectMake(0, 0, self.tableView.hxn_width, 120.f);
+}
+-(GXUpOrderCellHeader *)header
+{
+    if (!_header) {
+        _header = [GXUpOrderCellHeader loadXibView];
+        _header.frame = CGRectMake(0, 0, self.tableView.hxn_width, 40.f);
     }
+    return _header;
 }
-
+-(GXUpOrderCellFooter *)footer
+{
+    if (!_footer) {
+        _footer = [GXUpOrderCellFooter loadXibView];
+        _footer.frame = CGRectMake(0, 0, self.tableView.hxn_width, 120.f);
+        hx_weakify(self);
+        _footer.couponCall = ^{
+            hx_strongify(weakSelf);
+            if (strongSelf.chooseCouponCall) {
+                strongSelf.chooseCouponCall();
+            }
+        };
+    }
+    return _footer;
+}
 -(void)setOrderData:(GXConfirmOrderData *)orderData
 {
     _orderData = orderData;
-    
-    self.shop_name.text = _orderData.shop_name;
-    self.totalFreight.text = [NSString stringWithFormat:@"￥%@",_orderData.shopActTotalFreight];
-    
-    if ([_orderData.provider_uid isEqualToString:@"0"]) {// 平台自营
-        self.couponView.hidden = YES;
-        self.couponViewHeight.constant = 0.f;
-        self.couponAmount.text = @"";
-        
-        self.totalAmount.text = [NSString stringWithFormat:@"￥%.2f",[_orderData.shopActTotalAmount floatValue]];
+    self.header.shop_name.text = _orderData.shop_name;
+
+    if ([_orderData.provider_uid isEqualToString:@"0"]) {
+        self.footer.hxn_size = CGSizeMake(self.tableView.hxn_width, 80.f);
     }else{
-        self.couponView.hidden = NO;
-        self.couponViewHeight.constant = 40.f;
-        
-        // shopActTotalAmount - 优惠
-        if (_orderData.selectedCoupon) {// 存在优惠
-            self.totalAmount.text = [NSString stringWithFormat:@"￥%.2f",[_orderData.shopActTotalAmount floatValue] - [_orderData.selectedCoupon.coupon_amount floatValue]];
-            self.couponAmount.text = [NSString stringWithFormat:@"-￥%@",_orderData.selectedCoupon.coupon_amount];
-        }else{
-           self.totalAmount.text = [NSString stringWithFormat:@"￥%.2f",[_orderData.shopActTotalAmount floatValue]];
-           self.couponAmount.text = @"";
-        }
+        self.footer.hxn_size = CGSizeMake(self.tableView.hxn_width, 120.f);
     }
-    self.goodsNum.text = [NSString stringWithFormat:@"共%lu件商品",(unsigned long)_orderData.goods.count];
+    self.footer.orderData = _orderData;
     
-    [self.tableView reloadData];
+    hx_weakify(self);
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [weakSelf.tableView reloadData];
+    });
 }
 #pragma mark -- UITableView数据源和代理
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -98,6 +108,17 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
 {
     // 返回这个模型对应的cell高度
     return 110.f;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 160.f;
+}
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    GXUpOrderCellSectionFooter *footer = [GXUpOrderCellSectionFooter loadXibView];
+    footer.orderData = self.orderData;
+    footer.hxn_size = CGSizeMake(tableView.hxn_width, 160.f);
+    return footer;
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
