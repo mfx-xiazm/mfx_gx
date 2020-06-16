@@ -31,6 +31,7 @@
 #import "GXApplySupplyVC.h"
 #import <ZLPhotoActionSheet.h>
 #import <UMShare/UMShare.h>
+#import "zhAlertView.h"
 
 static NSString *const GoodsInfoCell = @"GoodsInfoCell";
 @interface GXGoodsDetailVC ()<UITableViewDelegate,UITableViewDataSource,GXGoodsMaterialCellDelegate,GXGoodsCommentCellDelegate>
@@ -684,20 +685,34 @@ static NSString *const GoodsInfoCell = @"GoodsInfoCell";
             hx_strongify(weakSelf);
             GXSaveImageToPHAsset *savePh = [[GXSaveImageToPHAsset alloc] init];
             savePh.targetVC = strongSelf;
-            [savePh saveImages:Cell.materialLayout.material.photos comletedCall:^{
+            [savePh saveImages:Cell.materialLayout.material.photos comletedCall:^(NSInteger result) {
                 // 复制文本
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [MBProgressHUD hideHUD];
-                    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-                    pasteboard.string = Cell.materialLayout.material.dsp;
-                    
-                    if (Cell.materialLayout.material.photos.count > 1) {
-                        [strongSelf showShareView:YES];
+                    if (result != 0) {
+                        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+                        pasteboard.string = Cell.materialLayout.material.dsp;
+                        if (Cell.materialLayout.material.photos.count > 1) {
+                            [strongSelf showShareView:YES];
+                        }else{
+                            [strongSelf showShareView:NO];
+                        }
                     }else{
-                        [strongSelf showShareView:NO];
+                        zhAlertView *alert = [[zhAlertView alloc] initWithTitle:@"请打开相册权限" message:@"设置-隐私-相册" constantWidth:HX_SCREEN_WIDTH - 50*2];
+                        zhAlertButton *okButton = [zhAlertButton buttonWithTitle:@"知道了" handler:^(zhAlertButton * _Nonnull button) {
+                            [strongSelf.zh_popupController dismiss];
+                            NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];//跳转到本应用的设置页面
+                            if ([[UIApplication sharedApplication] canOpenURL:url]) {
+                                [[UIApplication sharedApplication] openURL:url];
+                            }
+                        }];
+                        okButton.lineColor = UIColorFromRGB(0xDDDDDD);
+                        [okButton setTitleColor:HXControlBg forState:UIControlStateNormal];
+                        [alert addAction:okButton];
+                        strongSelf.zh_popupController = [[zhPopupController alloc] init];
+                        [strongSelf.zh_popupController presentContentView:alert duration:0.25 springAnimated:NO];
                     }
                 });
-                
             }];
         });
     }else{
