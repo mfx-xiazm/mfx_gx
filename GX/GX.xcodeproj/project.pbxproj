@@ -30,6 +30,7 @@
 		4975FD0B2493160600E5AEF2 /* JXPagerListRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4975FD062493160600E5AEF2 /* JXPagerListRefreshView.m */; };
 		497AEBF1247E19AD00E0FACB /* GXStoreHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 497AEBF0247E19AD00E0FACB /* GXStoreHeader.m */; };
 		497AEBF3247E19B300E0FACB /* GXStoreHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 497AEBF2247E19B300E0FACB /* GXStoreHeader.xib */; };
+		49838929249869DA0051D00B /* UICKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 49838927249869DA0051D00B /* UICKeyChainStore.m */; };
 		49949B0C248B73B400EA60D4 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49949B0B248B73B400EA60D4 /* libWeChatSDK.a */; };
 		49949B0E248B76CC00EA60D4 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49949B0D248B76CC00EA60D4 /* Security.framework */; };
 		49949B10248B76DB00EA60D4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49949B0F248B76DA00EA60D4 /* CoreGraphics.framework */; };
@@ -517,6 +518,8 @@
 		497AEBEF247E19AD00E0FACB /* GXStoreHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXStoreHeader.h; sourceTree = "<group>"; };
 		497AEBF0247E19AD00E0FACB /* GXStoreHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXStoreHeader.m; sourceTree = "<group>"; };
 		497AEBF2247E19B300E0FACB /* GXStoreHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXStoreHeader.xib; sourceTree = "<group>"; };
+		49838927249869DA0051D00B /* UICKeyChainStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICKeyChainStore.m; sourceTree = "<group>"; };
+		49838928249869DA0051D00B /* UICKeyChainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICKeyChainStore.h; sourceTree = "<group>"; };
 		49949B08248B73B200EA60D4 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		49949B09248B73B300EA60D4 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		49949B0A248B73B300EA60D4 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
@@ -1310,6 +1313,15 @@
 				4975FD062493160600E5AEF2 /* JXPagerListRefreshView.m */,
 			);
 			path = JXPagerView;
+			sourceTree = "<group>";
+		};
+		49838926249869DA0051D00B /* UICKeyChainStore */ = {
+			isa = PBXGroup;
+			children = (
+				49838928249869DA0051D00B /* UICKeyChainStore.h */,
+				49838927249869DA0051D00B /* UICKeyChainStore.m */,
+			);
+			path = UICKeyChainStore;
 			sourceTree = "<group>";
 		};
 		49949B07248B703B00EA60D4 /* WechatOpenSDK */ = {
@@ -2264,6 +2276,7 @@
 		90C0B33E2340CD7100A8C55B /* ThirdLib */ = {
 			isa = PBXGroup;
 			children = (
+				49838926249869DA0051D00B /* UICKeyChainStore */,
 				49A63AED24974AA600BCC8C8 /* MGSwipeTableCell */,
 				4975FCFC2493160600E5AEF2 /* JXPagerView */,
 				49949B07248B703B00EA60D4 /* WechatOpenSDK */,
@@ -3595,6 +3608,7 @@
 				9043B5B7236C2E4E00731C6F /* GXMyCollect.m in Sources */,
 				9094F579234A118100106699 /* GXRefundDetailFooter.m in Sources */,
 				909EAA5423483CC100575FB8 /* GXTryApplyCell.m in Sources */,
+				49838929249869DA0051D00B /* UICKeyChainStore.m in Sources */,
 				904AF264239B446100D8207D /* GXSearchTagVC.m in Sources */,
 				90C0B3C62340CD7200A8C55B /* YCMenuView.m in Sources */,
 				902E88E723474BF800EFD0DF /* GXSmallCateHeaderView.m in Sources */,
