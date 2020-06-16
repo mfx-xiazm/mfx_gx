@@ -10,10 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void(^saveComletedCall)(void);
+typedef void(^saveComletedCall)(NSInteger result);
 @interface GXSaveImageToPHAsset : NSObject
 /* 控制器 */
-@property(nonatomic,weak) UIViewController *targetVC;
+@property(nonatomic,strong) UIViewController *targetVC;
 /* 保存成功 */
 @property(nonatomic,copy) saveComletedCall saveComletedCall;
 /**保存图片到自定义相册*/

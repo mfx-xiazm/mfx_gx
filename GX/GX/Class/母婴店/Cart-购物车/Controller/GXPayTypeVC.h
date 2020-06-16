@@ -10,11 +10,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^paySuccessCall)(void);
 @interface GXPayTypeVC : HXBaseViewController
 /* 订单号 */
 @property(nonatomic,copy) NSString *order_no;
 /* 订单id */
 @property(nonatomic,copy) NSString *oid;
+/* 支付结果回调 */
+@property (nonatomic, copy) paySuccessCall paySuccessCall;
 /* 订单列表y跳转 */
 @property(nonatomic,assign) BOOL isOrderPush;
 @end

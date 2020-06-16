@@ -21,6 +21,7 @@
 #import "GXPayResultVC.h"
 #import "UPPaymentControl.h"
 #import "UMSPPPayUnifyPayPlugin.h"
+#import "XTimer.h"
 
 static NSString *const PayTypeCell = @"PayTypeCell";
 @interface GXPayTypeVC ()<UITableViewDelegate,UITableViewDataSource>
@@ -37,6 +38,10 @@ static NSString *const PayTypeCell = @"PayTypeCell";
 @property(nonatomic,strong) NSArray *payTypes;
 /* 提示框 */
 @property (nonatomic, strong) zhPopupController *alertPopVC;
+/* 是否调起了第三方支付应用 */
+@property (nonatomic, assign) BOOL isCallPayApp;
+/* 轮询计时器 */
+@property (nonatomic, strong) XTimer *timer;
 @end
 
 @implementation GXPayTypeVC
@@ -59,6 +64,72 @@ static NSString *const PayTypeCell = @"PayTypeCell";
     [self setUpTableView];
     
     [self getPayOrderDataRequest];
+}
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+        
+    if (self.timer) {
+        [self.timer stop];
+        [self.timer invalidate];
+        self.timer = nil;
+    }
+}
+-(XTimer *)timer
+{
+    if (!_timer) {
+       _timer = [XTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(searchOrderStatus) userInfo:nil repeats:YES];
+    }
+    return _timer;
+}
+-(void)setIsCallPayApp:(BOOL)isCallPayApp
+{
+    _isCallPayApp = isCallPayApp;
+    if (_isCallPayApp) {
+        [self.timer reStart];
+    }
+}
+-(void)searchOrderStatus
+{
+    if (self.isCallPayApp) {// 如果不是订单列表或者订单详情里面跳转进来的就查询支付结果并作出调转
+        NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+        parameters[@"order_no"] = self.order_no;
+        
+        hx_weakify(self);
+        [HXNetworkTool POST:HXRC_M_URL action:@"admin/searchOrderStatus" parameters:parameters success:^(id responseObject) {
+            hx_strongify(weakSelf);
+            if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+                NSInteger payResult = [[responseObject objectForKey:@"data"] integerValue];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (payResult == 1 && ![strongSelf.selectPayType.payType isEqualToString:@"3"] && ![strongSelf.selectPayType.payType isEqualToString:@"4"]) {//支付成功
+                        if (strongSelf.timer) {
+                            [strongSelf.timer stop];
+                            [strongSelf.timer invalidate];
+                            strongSelf.timer = nil;
+                        }
+                       if (strongSelf.isOrderPush) {// 订单列表或者订单详情跳转
+                            if (strongSelf.paySuccessCall) {
+                                strongSelf.paySuccessCall();
+                            }
+                            [strongSelf.navigationController popViewControllerAnimated:YES];
+                        }else{
+                            // 跳转支付结果页面
+                            GXPayResultVC *rvc = [GXPayResultVC new];
+                            rvc.orderPay = strongSelf.orderPay;
+                            rvc.pay_type = strongSelf.selectPayType.payType;
+                            [strongSelf.navigationController pushViewController:rvc animated:YES];
+                        }
+                    }else {
+                        // 支付失败或支付取消
+                    }
+                });
+            }else{
+                [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+            }
+        } failure:^(NSError *error) {
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+        }];
+    }
 }
 - (NSMutableArray *)controllers {
     if (!_controllers) {
@@ -211,6 +282,8 @@ static NSString *const PayTypeCell = @"PayTypeCell";
         }
     }];
      */
+    self.isCallPayApp = YES;
+    
     NSString *payDataJsonStr = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:parameters[@"appPayRequest"] options:NSJSONWritingPrettyPrinted error:nil] encoding:NSUTF8StringEncoding];
     hx_weakify(self);
     [UMSPPPayUnifyPayPlugin payWithPayChannel:CHANNEL_ALIPAY payData:payDataJsonStr callbackBlock:^(NSString *resultCode, NSString *resultInfo) {
@@ -254,6 +327,8 @@ static NSString *const PayTypeCell = @"PayTypeCell";
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"未安装微信"];
     }
      */
+    self.isCallPayApp = YES;
+    
     NSString *payDataJsonStr = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:parameters[@"appPayRequest"] options:NSJSONWritingPrettyPrinted error:nil] encoding:NSUTF8StringEncoding];
     hx_weakify(self);
     [UMSPPPayUnifyPayPlugin payWithPayChannel:CHANNEL_WEIXIN payData:payDataJsonStr callbackBlock:^(NSString *resultCode, NSString *resultInfo) {
@@ -291,24 +366,31 @@ static NSString *const PayTypeCell = @"PayTypeCell";
     if ([note.userInfo[@"result"] isEqualToString:@"1"]) {//支付成功
         //1成功 2取消支付 3支付失败
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"支付成功"];
-        // 跳转支付结果页面
-        GXPayResultVC *rvc = [GXPayResultVC new];
-        rvc.orderPay = self.orderPay;
-        rvc.pay_type = self.selectPayType.payType;
-        [self.navigationController pushViewController:rvc animated:YES];
+        if (self.isOrderPush) {// 订单列表或者订单详情跳转
+            if (self.paySuccessCall) {
+                self.paySuccessCall();
+            }
+            [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            // 跳转支付结果页面
+            GXPayResultVC *rvc = [GXPayResultVC new];
+            rvc.orderPay = self.orderPay;
+            rvc.pay_type = self.selectPayType.payType;
+            [self.navigationController pushViewController:rvc animated:YES];
+        }
     }else {
         if([note.userInfo[@"result"] isEqualToString:@"2"]) {
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"取消支付"];
         }else{
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"支付失败"];
         }
-        if (self.isOrderPush) {// 订单列表或者订单详情跳转
-            
-        }else{
-            GXOrderDetailVC *dvc = [GXOrderDetailVC new];
-            dvc.oid = self.oid;
-            [self.navigationController pushViewController:dvc animated:YES];
-        }
+//        if (self.isOrderPush) {// 订单列表或者订单详情跳转
+//            
+//        }else{
+//            GXOrderDetailVC *dvc = [GXOrderDetailVC new];
+//            dvc.oid = self.oid;
+//            [self.navigationController pushViewController:dvc animated:YES];
+//        }
     }
 }
 -(void)doPayPushWithResultCode:(NSString *)resultCode resultInfo:(NSString *)resultInfo
@@ -316,10 +398,18 @@ static NSString *const PayTypeCell = @"PayTypeCell";
     if ([resultCode isEqualToString:@"0000"]) {//支付成功
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"支付成功"];
         // 跳转支付结果页面
-        GXPayResultVC *rvc = [GXPayResultVC new];
-        rvc.orderPay = self.orderPay;
-        rvc.pay_type = self.selectPayType.payType;
-        [self.navigationController pushViewController:rvc animated:YES];
+        if (self.isOrderPush) {// 订单列表或者订单详情跳转
+            if (self.paySuccessCall) {
+                self.paySuccessCall();
+            }
+            [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            // 跳转支付结果页面
+            GXPayResultVC *rvc = [GXPayResultVC new];
+            rvc.orderPay = self.orderPay;
+            rvc.pay_type = self.selectPayType.payType;
+            [self.navigationController pushViewController:rvc animated:YES];
+        }
     }else {
         if ([resultCode isEqualToString:@"1000"]) {// 用户取消支付
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"取消支付"];
@@ -334,13 +424,13 @@ static NSString *const PayTypeCell = @"PayTypeCell";
         }else{// 统一按照失败处理
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"支付失败"];
         }
-        if (self.isOrderPush) {// 订单列表或者订单详情跳转
-            
-        }else{
-            GXOrderDetailVC *dvc = [GXOrderDetailVC new];
-            dvc.oid = self.oid;
-            [self.navigationController pushViewController:dvc animated:YES];
-        }
+//        if (self.isOrderPush) {// 订单列表或者订单详情跳转
+//            
+//        }else{
+//            GXOrderDetailVC *dvc = [GXOrderDetailVC new];
+//            dvc.oid = self.oid;
+//            [self.navigationController pushViewController:dvc animated:YES];
+//        }
     }
 }
 -(void)dealloc

@@ -8,7 +8,7 @@
 
 #import "GXMyOrderChildVC.h"
 #import "GXUpOrderGoodsCell.h"
-#import "GXMyOrderHeader.h"
+#import "GXRenewMyOrderHeader.h"
 #import "GXMyOrderFooter.h"
 #import "GXOrderDetailVC.h"
 #import "GXMyOrder.h"
@@ -308,7 +308,7 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    GXMyOrderHeader *header = [GXMyOrderHeader loadXibView];
+    GXRenewMyOrderHeader *header = [GXRenewMyOrderHeader loadXibView];
     header.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 44.f);
     if (self.status !=6) {
         GXMyOrder *order = self.orders[section];
@@ -419,6 +419,9 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
                     pvc.oid = order.oid;
                     pvc.order_no = order.order_no;
                     pvc.isOrderPush = YES;
+                    pvc.paySuccessCall = ^{
+                        [strongSelf getOrderDataRequest:YES];
+                    };
                     [strongSelf.navigationController pushViewController:pvc animated:YES];
                 }else if ([order.status isEqualToString:@"待发货"]) {
                     //HXLog(@"申请退款");

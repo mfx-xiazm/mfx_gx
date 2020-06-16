@@ -49,7 +49,7 @@
 {
     _categoryView.backgroundColor = [UIColor whiteColor];
     _categoryView.titleLabelZoomEnabled = NO;
-    _categoryView.titles = @[@"A类数据", @"B类数据"];
+    _categoryView.titles = @[@"非控区控价数据", @"控区控价数据"];
     _categoryView.titleFont = [UIFont systemFontOfSize:14 weight:UIFontWeightMedium];
     _categoryView.titleColor = [UIColor blackColor];
     _categoryView.titleSelectedColor = HXControlBg;

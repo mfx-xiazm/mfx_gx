@@ -30,6 +30,11 @@
 		4975FD0B2493160600E5AEF2 /* JXPagerListRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4975FD062493160600E5AEF2 /* JXPagerListRefreshView.m */; };
 		497AEBF1247E19AD00E0FACB /* GXStoreHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 497AEBF0247E19AD00E0FACB /* GXStoreHeader.m */; };
 		497AEBF3247E19B300E0FACB /* GXStoreHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 497AEBF2247E19B300E0FACB /* GXStoreHeader.xib */; };
+		4983892D249879620051D00B /* UICKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 4983892B249879620051D00B /* UICKeyChainStore.m */; };
+		498389352498A51C0051D00B /* GXRenewMyOrderHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 498389342498A51C0051D00B /* GXRenewMyOrderHeader.m */; };
+		498389372498A5270051D00B /* GXRenewMyOrderHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 498389362498A5270051D00B /* GXRenewMyOrderHeader.xib */; };
+		4983893B2498A6A90051D00B /* GXRenewMyOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 498389392498A6A90051D00B /* GXRenewMyOrderCell.m */; };
+		4983893C2498A6A90051D00B /* GXRenewMyOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4983893A2498A6A90051D00B /* GXRenewMyOrderCell.xib */; };
 		49949B0C248B73B400EA60D4 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49949B0B248B73B400EA60D4 /* libWeChatSDK.a */; };
 		49949B0E248B76CC00EA60D4 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49949B0D248B76CC00EA60D4 /* Security.framework */; };
 		49949B10248B76DB00EA60D4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49949B0F248B76DA00EA60D4 /* CoreGraphics.framework */; };
@@ -517,6 +522,14 @@
 		497AEBEF247E19AD00E0FACB /* GXStoreHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXStoreHeader.h; sourceTree = "<group>"; };
 		497AEBF0247E19AD00E0FACB /* GXStoreHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXStoreHeader.m; sourceTree = "<group>"; };
 		497AEBF2247E19B300E0FACB /* GXStoreHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXStoreHeader.xib; sourceTree = "<group>"; };
+		4983892B249879620051D00B /* UICKeyChainStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICKeyChainStore.m; sourceTree = "<group>"; };
+		4983892C249879620051D00B /* UICKeyChainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICKeyChainStore.h; sourceTree = "<group>"; };
+		498389332498A51C0051D00B /* GXRenewMyOrderHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXRenewMyOrderHeader.h; sourceTree = "<group>"; };
+		498389342498A51C0051D00B /* GXRenewMyOrderHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXRenewMyOrderHeader.m; sourceTree = "<group>"; };
+		498389362498A5270051D00B /* GXRenewMyOrderHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXRenewMyOrderHeader.xib; sourceTree = "<group>"; };
+		498389382498A6A90051D00B /* GXRenewMyOrderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXRenewMyOrderCell.h; sourceTree = "<group>"; };
+		498389392498A6A90051D00B /* GXRenewMyOrderCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXRenewMyOrderCell.m; sourceTree = "<group>"; };
+		4983893A2498A6A90051D00B /* GXRenewMyOrderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXRenewMyOrderCell.xib; sourceTree = "<group>"; };
 		49949B08248B73B200EA60D4 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		49949B09248B73B300EA60D4 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		49949B0A248B73B300EA60D4 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
@@ -1312,6 +1325,15 @@
 			path = JXPagerView;
 			sourceTree = "<group>";
 		};
+		4983892A249879620051D00B /* UICKeyChainStore */ = {
+			isa = PBXGroup;
+			children = (
+				4983892C249879620051D00B /* UICKeyChainStore.h */,
+				4983892B249879620051D00B /* UICKeyChainStore.m */,
+			);
+			path = UICKeyChainStore;
+			sourceTree = "<group>";
+		};
 		49949B07248B703B00EA60D4 /* WechatOpenSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -1873,6 +1895,12 @@
 		9094F558234A06F200106699 /* 我的订单 */ = {
 			isa = PBXGroup;
 			children = (
+				498389332498A51C0051D00B /* GXRenewMyOrderHeader.h */,
+				498389342498A51C0051D00B /* GXRenewMyOrderHeader.m */,
+				498389362498A5270051D00B /* GXRenewMyOrderHeader.xib */,
+				498389382498A6A90051D00B /* GXRenewMyOrderCell.h */,
+				498389392498A6A90051D00B /* GXRenewMyOrderCell.m */,
+				4983893A2498A6A90051D00B /* GXRenewMyOrderCell.xib */,
 				9094F55E234A073700106699 /* GXMyOrderHeader.h */,
 				9094F55F234A073700106699 /* GXMyOrderHeader.m */,
 				9094F561234A073D00106699 /* GXMyOrderHeader.xib */,
@@ -2264,6 +2292,7 @@
 		90C0B33E2340CD7100A8C55B /* ThirdLib */ = {
 			isa = PBXGroup;
 			children = (
+				4983892A249879620051D00B /* UICKeyChainStore */,
 				49A63AED24974AA600BCC8C8 /* MGSwipeTableCell */,
 				4975FCFC2493160600E5AEF2 /* JXPagerView */,
 				49949B07248B703B00EA60D4 /* WechatOpenSDK */,
@@ -3313,6 +3342,7 @@
 				9094F5362349DFFB00106699 /* GXMemberRankCell.xib in Resources */,
 				903D60EA237D69D7000231CC /* GXShareView.xib in Resources */,
 				90E57F002346DD2800F49834 /* GXActivityCell.xib in Resources */,
+				4983893C2498A6A90051D00B /* GXRenewMyOrderCell.xib in Resources */,
 				9099EE8B23685BCE0088D80C /* GXSearchStoreVC.xib in Resources */,
 				90FCDF0023498BC900729A97 /* GXChangeBindVC.xib in Resources */,
 				902E88ED234763CF00EFD0DF /* GXBrandDetailVC.xib in Resources */,
@@ -3376,6 +3406,7 @@
 				90FCDF122349949D00729A97 /* GXMyBusinessVC.xib in Resources */,
 				90E57F3323471B3900F49834 /* GXChooseValidAddressView.xib in Resources */,
 				90363F9C23541EDC00A120AC /* AlipaySDK.bundle in Resources */,
+				498389372498A5270051D00B /* GXRenewMyOrderHeader.xib in Resources */,
 				9094F576234A0EBC00106699 /* GXOrderDetailFooter.xib in Resources */,
 				90C0B3D92340CD7200A8C55B /* FSActionSheet_cancel@2x.png in Resources */,
 				906973FE2344CC1F00D8A8FF /* GXStoreCouponCell.xib in Resources */,
@@ -3595,6 +3626,7 @@
 				9043B5B7236C2E4E00731C6F /* GXMyCollect.m in Sources */,
 				9094F579234A118100106699 /* GXRefundDetailFooter.m in Sources */,
 				909EAA5423483CC100575FB8 /* GXTryApplyCell.m in Sources */,
+				4983892D249879620051D00B /* UICKeyChainStore.m in Sources */,
 				904AF264239B446100D8207D /* GXSearchTagVC.m in Sources */,
 				90C0B3C62340CD7200A8C55B /* YCMenuView.m in Sources */,
 				902E88E723474BF800EFD0DF /* GXSmallCateHeaderView.m in Sources */,
@@ -3681,6 +3713,7 @@
 				90C0B3BF2340CD7200A8C55B /* HXLocationTool_.m in Sources */,
 				90C0B3E72340CD7200A8C55B /* zhAlertView.m in Sources */,
 				902413402366C1210069DDCA /* GXRegisterStore.m in Sources */,
+				4983893B2498A6A90051D00B /* GXRenewMyOrderCell.m in Sources */,
 				903C54712349CCCD002743EE /* JJOptionView.m in Sources */,
 				9096CC1723692F5600D213DD /* GXBrandGoods.m in Sources */,
 				90C0B3EA2340CD7200A8C55B /* UILabel+ForLMJVerticalScrollText.m in Sources */,
@@ -3741,6 +3774,7 @@
 				90E57F222346F51600F49834 /* GXSankPriceSectionFooter.m in Sources */,
 				906973B1234450F500D8A8FF /* GXAddressCell.m in Sources */,
 				90FCDF442349C5F100729A97 /* GXHelpVC.m in Sources */,
+				498389352498A51C0051D00B /* GXRenewMyOrderHeader.m in Sources */,
 				909A77F1236A6D3300562435 /* GXSaleMaterialFilerView.m in Sources */,
 				909EAA642348693D00575FB8 /* GXPartnerDataSectionHeader.m in Sources */,
 				90FCDF16234994A900729A97 /* GXMyBusinessChildVC.m in Sources */,

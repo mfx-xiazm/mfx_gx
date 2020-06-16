@@ -1,46 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="GXMyOrderHeader">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="74"/>
+            <rect key="frame" x="0.0" y="0.0" width="448" height="51"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZVk-mu-BbJ">
-                    <rect key="frame" x="0.0" y="10" width="414" height="64"/>
+                <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZVk-mu-BbJ">
+                    <rect key="frame" x="0.0" y="0.0" width="448" height="51"/>
                     <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="阴影上" translatesAutoresizingMaskIntoConstraints="NO" id="iBe-O1-nH7">
+                            <rect key="frame" x="0.0" y="0.0" width="448" height="51"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HPC225697744352" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TkZ-9H-lp9">
-                            <rect key="frame" x="10" y="24" width="121.5" height="16"/>
+                            <rect key="frame" x="10" y="17.5" width="121.5" height="16"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="订单状态" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fy5-Wg-2XR">
-                            <rect key="frame" x="350" y="24" width="54" height="16"/>
+                            <rect key="frame" x="384" y="17.5" width="54" height="16"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <color key="textColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rmg-ah-i8u" userLabel="分割线">
-                            <rect key="frame" x="10" y="63" width="394" height="1"/>
+                            <rect key="frame" x="10" y="50" width="428" height="1"/>
                             <color key="backgroundColor" red="0.96470588239999999" green="0.96862745100000003" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="mLm-8k-1he"/>
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstItem="iBe-O1-nH7" firstAttribute="leading" secondItem="ZVk-mu-BbJ" secondAttribute="leading" id="4rJ-bC-ZI4"/>
+                        <constraint firstAttribute="trailing" secondItem="iBe-O1-nH7" secondAttribute="trailing" id="5dT-vG-3hx"/>
                         <constraint firstAttribute="trailing" secondItem="rmg-ah-i8u" secondAttribute="trailing" constant="10" id="AOm-DO-pEc"/>
                         <constraint firstItem="rmg-ah-i8u" firstAttribute="leading" secondItem="ZVk-mu-BbJ" secondAttribute="leading" constant="10" id="CwU-mp-0dm"/>
+                        <constraint firstAttribute="bottom" secondItem="iBe-O1-nH7" secondAttribute="bottom" id="FVe-hb-7bp"/>
                         <constraint firstAttribute="trailing" secondItem="Fy5-Wg-2XR" secondAttribute="trailing" constant="10" id="GuI-Cb-BqQ"/>
+                        <constraint firstItem="iBe-O1-nH7" firstAttribute="top" secondItem="ZVk-mu-BbJ" secondAttribute="top" id="KTu-js-1dy"/>
                         <constraint firstItem="Fy5-Wg-2XR" firstAttribute="centerY" secondItem="ZVk-mu-BbJ" secondAttribute="centerY" id="OzB-v1-G5G"/>
                         <constraint firstAttribute="bottom" secondItem="rmg-ah-i8u" secondAttribute="bottom" id="Ynv-UL-Nrk"/>
                         <constraint firstItem="TkZ-9H-lp9" firstAttribute="leading" secondItem="ZVk-mu-BbJ" secondAttribute="leading" constant="10" id="ePE-lX-Ypt"/>
@@ -48,11 +56,11 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="ZVk-mu-BbJ" secondAttribute="trailing" id="LfE-TC-tT9"/>
                 <constraint firstItem="ZVk-mu-BbJ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="QKH-Ii-Vbh"/>
-                <constraint firstItem="ZVk-mu-BbJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="RG0-pu-ksw"/>
+                <constraint firstItem="ZVk-mu-BbJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="RG0-pu-ksw"/>
                 <constraint firstAttribute="bottom" secondItem="ZVk-mu-BbJ" secondAttribute="bottom" id="d5d-8Z-wH6"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -60,7 +68,10 @@
                 <outlet property="order_no" destination="TkZ-9H-lp9" id="xqN-K0-LbV"/>
                 <outlet property="order_state" destination="Fy5-Wg-2XR" id="PqF-dB-4ni"/>
             </connections>
-            <point key="canvasLocation" x="79.710144927536234" y="223.66071428571428"/>
+            <point key="canvasLocation" x="-86.956521739130437" y="128.90625"/>
         </view>
     </objects>
+    <resources>
+        <image name="阴影上" width="66" height="17"/>
+    </resources>
 </document>

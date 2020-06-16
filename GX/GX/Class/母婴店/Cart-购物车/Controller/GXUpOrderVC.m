@@ -253,9 +253,9 @@ static NSString *const UpOrderCell = @"UpOrderCell";
         for (GXConfirmOrderData *orderData in self.confirmOrder.goodsData) {
             for (GXConfirmOrderGoods *orderGood in orderData.goods) {
                 if (skuDatas.length == 1) {
-                    [skuDatas appendFormat:@"{\"sku_id\":\"%@\",\"cart_num\":\"%@\"}",orderGood.sku_id,orderGood.cart_num];
+                    [skuDatas appendFormat:@"{\"sku_id\":\"%@\",\"cart_num\":\"%@\",\"freight_template_id\":\"%@\"}",orderGood.sku_id,orderGood.cart_num,orderGood.freight_template_id];
                 }else{
-                    [skuDatas appendFormat:@",{\"sku_id\":\"%@\",\"cart_num\":\"%@\"}",orderGood.sku_id,orderGood.cart_num];
+                    [skuDatas appendFormat:@",{\"sku_id\":\"%@\",\"cart_num\":\"%@\",\"freight_template_id\":\"%@\"}",orderGood.sku_id,orderGood.cart_num,orderGood.freight_template_id];
                 }
             }
         }

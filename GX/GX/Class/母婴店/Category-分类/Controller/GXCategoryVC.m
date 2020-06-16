@@ -188,8 +188,10 @@ static NSString *const SmallCateHeaderView = @"SmallCateHeaderView";
         parameters[@"catalog_id"] = catalog_id;
     }
     hx_weakify(self);
+    [MBProgressHUD showLoadToView:nil title:nil];
     [HXNetworkTool POST:HXRC_M_URL action:@"admin/getCatalogBrand" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
+        [MBProgressHUD hideHUD];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             strongSelf.currentCatalogItem.catalog = [NSArray yy_modelArrayWithClass:[GXCatalogItem class] json:responseObject[@"data"][@"catalog"]];
             strongSelf.currentCatalogItem.control = [NSArray yy_modelArrayWithClass:[GXBrandItem class] json:responseObject[@"data"][@"control"]];
@@ -200,6 +202,7 @@ static NSString *const SmallCateHeaderView = @"SmallCateHeaderView";
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
         }
     } failure:^(NSError *error) {
+        [MBProgressHUD hideHUD];
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
     }];
 }
