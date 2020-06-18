@@ -312,6 +312,13 @@
 //    }];
 }
 #pragma mark -- 点击事件
+- (IBAction)signNoticeClicked:(UIButton *)sender {
+    GXWebContentVC *wvc = [GXWebContentVC new];
+    wvc.navTitle = @"银联签约资质说明";
+    wvc.isNeedRequest = NO;
+    wvc.url = @"http://guaxuanapi.guaxuan.cn/unionDesc.jpg";
+    [self.navigationController pushViewController:wvc animated:YES];
+}
 - (IBAction)resubmitClicked:(UIButton *)sender {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"uid"] = self.uid;//用户id

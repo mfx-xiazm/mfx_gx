@@ -11,10 +11,10 @@
 #import "UITextField+GYExpand.h"
 
 @interface GXRegisterVC ()
-@property (weak, nonatomic) IBOutlet UITextField *name;
 @property (weak, nonatomic) IBOutlet UITextField *phone;
 @property (weak, nonatomic) IBOutlet UITextField *pwd;
 @property (weak, nonatomic) IBOutlet UITextField *code;
+@property (weak, nonatomic) IBOutlet UITextField *shareCode;
 /* 验证码id */
 @property(nonatomic,copy) NSString *sms_id;
 @property (weak, nonatomic) IBOutlet UIButton *nextBtn;
@@ -37,10 +37,6 @@
     
     [self.nextBtn BindingBtnJudgeBlock:^BOOL{
         hx_strongify(weakSelf);
-        if (![strongSelf.name hasText]) {
-            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请输入姓名"];
-            return NO;
-        }
         if (![strongSelf.phone hasText] || strongSelf.phone.text.length != 11) {
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"手机格式有误"];
             return NO;
@@ -96,7 +92,6 @@
 }
 - (void)nextBtnClicked:(UIButton *)sender {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    parameters[@"username"] = self.name.text;
     parameters[@"phone"] = self.phone.text;//手机号
     parameters[@"pwd"] = self.pwd.text;
     parameters[@"sms_id"] = self.sms_id;//短信验证码id

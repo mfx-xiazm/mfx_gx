@@ -10,6 +10,7 @@
 #import "GXCashAlert.h"
 #import <zhPopupController.h>
 #import "NSString+BankInfo.h"
+#import "GXCashNoteVC.h"
 
 @interface GXCashVC ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *card_owner;
@@ -27,6 +28,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationItem setTitle:@"提现"];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithTarget:self action:@selector(cashNoteClicked) image:HXGetImage(@"提现记录")];
+
     self.card_no.delegate = self;
     [self.card_no addTarget:self action:@selector(cardNoChanged:) forControlEvents:UIControlEventEditingChanged];
     self.apply_amount.delegate = self;
@@ -80,6 +83,11 @@
     }else{
         self.bank_name.text = @"";
     }
+}
+-(void)cashNoteClicked
+{
+    GXCashNoteVC *nvc = [GXCashNoteVC new];
+    [self.navigationController pushViewController:nvc animated:YES];
 }
 -(void)applyCashRequest:(UIButton *)btn
 {

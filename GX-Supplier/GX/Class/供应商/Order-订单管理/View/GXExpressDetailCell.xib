@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="103" id="KGk-i7-Jjw" customClass="GXExpressDetailCell">
+            <rect key="frame" x="0.0" y="0.0" width="353" height="103"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="353" height="103"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w0Q-tQ-Xus">
+                        <rect key="frame" x="20" y="6" width="2" height="97"/>
+                        <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="2" id="dyI-wH-SFT"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D6j-zn-Uli">
+                        <rect key="frame" x="15" y="0.0" width="12" height="12"/>
+                        <color key="backgroundColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="12" id="Odb-cf-uZN"/>
+                            <constraint firstAttribute="height" constant="12" id="ky2-0m-8lH"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="6"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nXK-FY-pmS">
+                        <rect key="frame" x="37" y="0.0" width="301" height="68.5"/>
+                        <attributedString key="attributedText">
+                            <fragment>
+                                <string key="content">快件已到达黄金口岸5栋聚天下超市妈妈驿站待收 已签收 感谢使用申通快递，期待再次为您服务</string>
+                                <attributes>
+                                    <font key="NSFont" metaFont="system"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2019-04-17 17:44:26" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rFN-er-sbz">
+                        <rect key="frame" x="37" y="78.5" width="120.5" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="nXK-FY-pmS" firstAttribute="leading" secondItem="D6j-zn-Uli" secondAttribute="trailing" constant="10" id="8cY-Un-03n"/>
+                    <constraint firstAttribute="trailing" secondItem="nXK-FY-pmS" secondAttribute="trailing" constant="15" id="Ev8-wf-Slo"/>
+                    <constraint firstItem="D6j-zn-Uli" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Ldh-7r-mjI"/>
+                    <constraint firstItem="nXK-FY-pmS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="NC7-bN-9fI"/>
+                    <constraint firstItem="rFN-er-sbz" firstAttribute="leading" secondItem="D6j-zn-Uli" secondAttribute="trailing" constant="10" id="Pfm-KU-tfR"/>
+                    <constraint firstItem="D6j-zn-Uli" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="XPb-Ly-Jvh"/>
+                    <constraint firstItem="rFN-er-sbz" firstAttribute="top" secondItem="nXK-FY-pmS" secondAttribute="bottom" constant="10" id="ZTX-7q-y1i"/>
+                    <constraint firstItem="w0Q-tQ-Xus" firstAttribute="top" secondItem="D6j-zn-Uli" secondAttribute="bottom" constant="-6" id="it2-e1-j1P"/>
+                    <constraint firstItem="w0Q-tQ-Xus" firstAttribute="centerX" secondItem="D6j-zn-Uli" secondAttribute="centerX" id="pri-D0-R2g"/>
+                    <constraint firstAttribute="bottom" secondItem="rFN-er-sbz" secondAttribute="bottom" constant="10" id="wRY-ST-K0n"/>
+                    <constraint firstAttribute="bottom" secondItem="w0Q-tQ-Xus" secondAttribute="bottom" id="wri-ur-exT"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <point key="canvasLocation" x="162" y="122"/>
+        </tableViewCell>
+    </objects>
+</document>

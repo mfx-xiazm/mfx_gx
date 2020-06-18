@@ -17,6 +17,7 @@
 #import "zhAlertView.h"
 #import <zhPopupController.h>
 #import "GXMyRefund.h"
+#import "GXUpOrderCellSectionFooter.h"
 
 static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
 @interface GXOrderDetailVC ()<UITableViewDelegate,UITableViewDataSource>
@@ -53,14 +54,14 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    self.header.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 225);
-    self.footer.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 110);
+    self.header.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 275);
+    self.footer.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 130);
 }
 -(GXOrderDetailHeader *)header
 {
     if (_header == nil) {
         _header = [GXOrderDetailHeader loadXibView];
-        _header.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, 225);
+        _header.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, 275);
     }
     return _header;
 }
@@ -68,7 +69,7 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
 {
     if (_footer == nil) {
         _footer = [GXRefundDetailFooter loadXibView];
-        _footer.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, 110);
+        _footer.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, 130);
     }
     return _footer;
 }
@@ -135,6 +136,12 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
 -(void)handleOrderDetailData
 {
     self.tableView.hidden = NO;
+    
+    if (self.refund_id && self.refund_id.length) {
+        self.refundDetail.isRefundDetail = YES;
+    }else{
+        self.orderDetail.isDetailOrder = YES;
+    }
     
     if ([[MSUserManager sharedInstance].curUserInfo.utype isEqualToString:@"1"]) {//母婴店
         if (self.refund_id && self.refund_id.length) {
@@ -350,12 +357,20 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
   
 }
 #pragma mark -- UITableView数据源和代理
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;//根据实际情况数量要加1
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (self.refund_id && self.refund_id.length) {
-        return self.refundDetail.goods.count;
-    }else{
-        return self.orderDetail.goods.count;
+    if (section != 1) {//不是最后一组
+        if (self.refund_id && self.refund_id.length) {
+            return self.refundDetail.goods.count;
+        }else{
+            return self.orderDetail.goods.count;
+        }
+    }else{//最后一组
+        return 0;
     }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -380,12 +395,16 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 44.f;
+    if (section != 1) {//不是最后一组
+        return 40.f;
+    }else{//最后一组
+        return CGFLOAT_MIN;
+    }
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     GXMyOrderHeader *header = [GXMyOrderHeader loadXibView];
-    header.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 44.f);
+    header.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 40.f);
     if (self.refund_id && self.refund_id.length) {
         self.refundDetail.isRefundDetail = YES;
         header.refund = self.refundDetail;
@@ -393,22 +412,36 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
         self.orderDetail.isDetailOrder = YES;
         header.order = self.orderDetail;
     }
-    return header;
+    if (section != 1) {//不是最后一组
+        return header;
+    }else{//最后一组
+        return nil;
+    }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 230.f;
+    if (section != 1) {//不是最后一组
+        return 160.f;
+    }else{//最后一组
+        return 250.f;
+    }
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    GXOrderDetailFooter *footer = [GXOrderDetailFooter loadXibView];
-    footer.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 230.f);
-    if (self.refund_id && self.refund_id.length) {
-        footer.refundDetail = self.refundDetail;
-    }else{
-        footer.orderDetail = self.orderDetail;
+    if (section != 1) {//不是最后一组
+        GXUpOrderCellSectionFooter *footer = [GXUpOrderCellSectionFooter loadXibView];
+        footer.hxn_size = CGSizeMake(tableView.hxn_width, 160.f);
+        return footer;
+    }else{//最后一组
+        GXOrderDetailFooter *footer = [GXOrderDetailFooter loadXibView];
+        footer.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 230.f);
+        if (self.refund_id && self.refund_id.length) {
+            footer.refundDetail = self.refundDetail;
+        }else{
+            footer.orderDetail = self.orderDetail;
+        }
+        return footer;
     }
-    return footer;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

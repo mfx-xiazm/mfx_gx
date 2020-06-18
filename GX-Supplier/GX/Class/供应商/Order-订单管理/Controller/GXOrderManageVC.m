@@ -13,7 +13,6 @@
 #import "HXSearchBar.h"
 #import "GXMessageVC.h"
 #import "GXMySetVC.h"
-#import "GXMineData.h"
 #import "UIView+WZLBadge.h"
 
 @interface GXOrderManageVC ()<JXCategoryViewDelegate,UIScrollViewDelegate,UITextFieldDelegate>
@@ -25,8 +24,6 @@
 @property(nonatomic,strong) HXSearchBar *searchBar;
 /* 消息 */
 @property(nonatomic,strong) SPButton *msgBtn;
-/* 个人信息 */
-@property(nonatomic,strong) GXMineData *mineData;
 @end
 
 @implementation GXOrderManageVC
@@ -35,7 +32,6 @@
     [super viewDidLoad];
     [self setUpNavBar];
     [self setUpCategoryView];
-    [self getMemberRequest];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -66,41 +62,26 @@
 {
     [self.navigationItem setTitle:nil];
     
-    HXSearchBar *searchBar = [[HXSearchBar alloc] initWithFrame:CGRectMake(0, 0, HX_SCREEN_WIDTH - 100.f, 30.f)];
+    HXSearchBar *searchBar = [[HXSearchBar alloc] initWithFrame:CGRectMake(0, 0, HX_SCREEN_WIDTH - 70.f, 30.f)];
     searchBar.backgroundColor = [UIColor whiteColor];
     searchBar.layer.cornerRadius = 15.f;
     searchBar.layer.masksToBounds = YES;
     searchBar.placeholder = @"请输入商品名称查询";
     searchBar.delegate = self;
     self.searchBar = searchBar;
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
-    
+    self.navigationItem.titleView = searchBar;
+
     SPButton *msg = [SPButton buttonWithType:UIButtonTypeCustom];
-    msg.imagePosition = SPButtonImagePositionTop;
-    msg.imageTitleSpace = 2.f;
     msg.hxn_size = CGSizeMake(40, 40);
     msg.titleLabel.font = [UIFont systemFontOfSize:9];
     [msg setImage:HXGetImage(@"消息") forState:UIControlStateNormal];
-    [msg setTitle:@"消息" forState:UIControlStateNormal];
     [msg addTarget:self action:@selector(msgClicked) forControlEvents:UIControlEventTouchUpInside];
-    [msg setTitleColor:UIColorFromRGB(0XFFFFFF) forState:UIControlStateNormal];
     msg.badgeBgColor = [UIColor whiteColor];
-    msg.badgeCenterOffset = CGPointMake(-10, 5);
+    msg.badgeTextColor = HXControlBg;
+    msg.badgeCenterOffset = CGPointMake(-12, 8);
     self.msgBtn = msg;
-    UIBarButtonItem *msgItem = [[UIBarButtonItem alloc] initWithCustomView:msg];
     
-    SPButton *set = [SPButton buttonWithType:UIButtonTypeCustom];
-    set.imagePosition = SPButtonImagePositionTop;
-    set.imageTitleSpace = 2.f;
-    set.hxn_size = CGSizeMake(40, 40);
-    set.titleLabel.font = [UIFont systemFontOfSize:9];
-    [set setImage:HXGetImage(@"管理设置") forState:UIControlStateNormal];
-    [set setTitle:@"设置" forState:UIControlStateNormal];
-    [set addTarget:self action:@selector(setClicked) forControlEvents:UIControlEventTouchUpInside];
-    [set setTitleColor:UIColorFromRGB(0XFFFFFF) forState:UIControlStateNormal];
-    UIBarButtonItem *setItem = [[UIBarButtonItem alloc] initWithCustomView:set];
-
-    self.navigationItem.rightBarButtonItems = @[msgItem,setItem];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:msg];
 }
 -(void)setUpCategoryView
 {
@@ -145,12 +126,6 @@
     GXMessageVC *mvc = [GXMessageVC new];
     [self.navigationController pushViewController:mvc animated:YES];
 }
--(void)setClicked
-{
-    GXMySetVC *mvc = [GXMySetVC new];
-    mvc.mineData = self.mineData;
-    [self.navigationController pushViewController:mvc animated:YES];
-}
 #pragma mark -- JXCategoryViewDelegate
 // 滚动和点击选中
 - (void)categoryView:(JXCategoryBaseView *)categoryView didSelectedItemAtIndex:(NSInteger)index
@@ -169,20 +144,6 @@
     [self.scrollView addSubview:targetViewController.view];
 }
 #pragma mark -- 接口
--(void)getMemberRequest
-{
-    hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getMineData" parameters:@{} success:^(id responseObject) {
-        hx_strongify(weakSelf);
-        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
-            strongSelf.mineData = [GXMineData yy_modelWithDictionary:responseObject[@"data"]];
-        }else{
-            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
-        }
-    } failure:^(NSError *error) {
-        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
-    }];
-}
 -(void)getHomeUnReadMsg
 {
     hx_weakify(self);
@@ -190,7 +151,7 @@
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             if ([responseObject[@"data"] boolValue]) {
-                [strongSelf.msgBtn showBadgeWithStyle:WBadgeStyleRedDot value:1 animationType:WBadgeAnimTypeNone];
+                [strongSelf.msgBtn showBadgeWithStyle:WBadgeStyleNumber value:[responseObject[@"data"] integerValue] animationType:WBadgeAnimTypeNone];
             }else{
                 [strongSelf.msgBtn clearBadge];
             }

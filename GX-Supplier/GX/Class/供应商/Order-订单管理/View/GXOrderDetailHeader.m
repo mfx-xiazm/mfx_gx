@@ -18,12 +18,19 @@
 @property (weak, nonatomic) IBOutlet UILabel *logistics_no;
 @property (weak, nonatomic) IBOutlet UILabel *receiver;
 @property (weak, nonatomic) IBOutlet UILabel *receive_address;
+@property (weak, nonatomic) IBOutlet UILabel *order_no;
+@property (weak, nonatomic) IBOutlet UILabel *order_state;
 @end
 @implementation GXOrderDetailHeader
 
 -(void)awakeFromNib
 {
     [super awakeFromNib];
+}
+-(void)layoutSubviews
+{
+    [super layoutSubviews];
+    self.hxn_height = 275.f;
 }
 -(void)setOrderDetail:(GXMyOrder *)orderDetail
 {
@@ -82,6 +89,14 @@
     
     self.receiver.text = [NSString stringWithFormat:@"%@  %@",_orderDetail.receiver,_orderDetail.receiver_phone];
     self.receive_address.text = [NSString stringWithFormat:@"%@%@",_orderDetail.area_name,_orderDetail.address_detail];
+    
+    if (_orderDetail.isDetailOrder) {
+        self.order_state.text = @"";
+        self.order_no.text = [NSString stringWithFormat:@"%@",_orderDetail.provider_no];
+    }else{
+        self.order_state.text = _orderDetail.status;
+        self.order_no.text = [NSString stringWithFormat:@"%@",_orderDetail.order_no];
+    }
 }
 -(void)setRefundDetail:(GXMyRefund *)refundDetail
 {
@@ -129,6 +144,27 @@
     
     self.receiver.text = [NSString stringWithFormat:@"%@  %@",_refundDetail.receiver,_refundDetail.receiver_phone];
     self.receive_address.text = [NSString stringWithFormat:@"%@%@",_refundDetail.area_name,_refundDetail.address_detail];
+    
+    /** 1等待供应商审核；2等待平台审核；3退款成功；4退款驳回 5供应商同意 6供应商不同意 */
+    if (_refundDetail.isRefundDetail) {
+        self.order_state.text = @"";
+        self.order_no.text = [NSString stringWithFormat:@"%@",_refundDetail.provider_no];
+    }else{
+        self.order_no.text = [NSString stringWithFormat:@"%@",_refundDetail.order_no];
+        if ([_refundDetail.refund_status isEqualToString:@"1"]) {
+            self.order_state.text = @"等待供应商审核";
+        }else if ([_refundDetail.refund_status isEqualToString:@"2"]){
+            self.order_state.text = @"等待平台审核";
+        }else if ([_refundDetail.refund_status isEqualToString:@"3"]){
+            self.order_state.text = @"退款成功";
+        }else if ([_refundDetail.refund_status isEqualToString:@"4"]){
+            self.order_state.text = @"退款驳回";
+        }else if ([_refundDetail.refund_status isEqualToString:@"5"]){
+            self.order_state.text = @"供应商同意";
+        }else{
+            self.order_state.text = @"供应商不同意";
+        }
+    }
 }
 - (IBAction)lookLogisClicked:(UIButton *)sender {
     if (self.refundDetail) {

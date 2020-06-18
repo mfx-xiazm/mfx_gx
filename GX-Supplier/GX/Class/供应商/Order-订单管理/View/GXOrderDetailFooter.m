@@ -37,9 +37,9 @@
     self.goods_num.text = [NSString stringWithFormat:@"共%zd件商品",_orderDetail.goods.count];
     
     if (_orderDetail.username && _orderDetail.username.length) {
-        [self.order_desc setTextWithLineSpace:5.f withString:[NSString stringWithFormat:@"订单编号：%@\n下单时间：%@\n发货商家：%@\n推广店员：%@（%@）",_orderDetail.order_no,_orderDetail.create_time,_orderDetail.provider_no,_orderDetail.username,_orderDetail.saleman_code] withFont:[UIFont systemFontOfSize:13]];
+        [self.order_desc setTextWithLineSpace:10.f withString:[NSString stringWithFormat:@"订单编号：%@\n下单时间：%@\n发货商家：%@\n推广店员：%@（%@）",_orderDetail.order_no,_orderDetail.create_time,_orderDetail.provider_no,_orderDetail.username,_orderDetail.saleman_code] withFont:[UIFont systemFontOfSize:13]];
     }else{
-        [self.order_desc setTextWithLineSpace:5.f withString:[NSString stringWithFormat:@"订单编号：%@\n下单时间：%@\n发货商家：%@\n",_orderDetail.order_no,_orderDetail.create_time,_orderDetail.provider_no] withFont:[UIFont systemFontOfSize:13]];
+        [self.order_desc setTextWithLineSpace:10.f withString:[NSString stringWithFormat:@"订单编号：%@\n下单时间：%@\n发货商家：%@\n",_orderDetail.order_no,_orderDetail.create_time,_orderDetail.provider_no] withFont:[UIFont systemFontOfSize:13]];
     }
 }
 -(void)setRefundDetail:(GXMyRefund *)refundDetail
@@ -52,9 +52,9 @@
     self.pay_amount.text = [NSString stringWithFormat:@"￥%@",_refundDetail.pay_amount];
     
     if (_refundDetail.username && _refundDetail.username.length) {
-        [self.order_desc setTextWithLineSpace:5.f withString:[NSString stringWithFormat:@"订单编号：%@\n下单时间：%@\n发货商家：%@\n推广店员：%@（%@）",_refundDetail.order_no,_refundDetail.create_time,_refundDetail.provider_no,_refundDetail.username,_refundDetail.saleman_code] withFont:[UIFont systemFontOfSize:13]];
+        [self.order_desc setTextWithLineSpace:10.f withString:[NSString stringWithFormat:@"订单编号：%@\n下单时间：%@\n发货商家：%@\n推广店员：%@（%@）",_refundDetail.order_no,_refundDetail.create_time,_refundDetail.provider_no,_refundDetail.username,_refundDetail.saleman_code] withFont:[UIFont systemFontOfSize:13]];
     }else{
-        [self.order_desc setTextWithLineSpace:5.f withString:[NSString stringWithFormat:@"订单编号：%@\n下单时间：%@\n发货商家：%@\n",_refundDetail.order_no,_refundDetail.create_time,_refundDetail.provider_no] withFont:[UIFont systemFontOfSize:13]];
+        [self.order_desc setTextWithLineSpace:10.f withString:[NSString stringWithFormat:@"订单编号：%@\n下单时间：%@\n发货商家：%@\n",_refundDetail.order_no,_refundDetail.create_time,_refundDetail.provider_no] withFont:[UIFont systemFontOfSize:13]];
     }
 }
 - (IBAction)orderNoCopy:(id)sender {

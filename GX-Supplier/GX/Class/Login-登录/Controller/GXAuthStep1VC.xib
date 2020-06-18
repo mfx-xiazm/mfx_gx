@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -99,10 +99,21 @@
                     <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c7l-CB-f0e">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="1214"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="1304"/>
                             <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htJ-3x-BqC">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="100" id="oKz-oT-6GI"/>
+                                    </constraints>
+                                    <state key="normal" backgroundImage="签约资质"/>
+                                    <connections>
+                                        <action selector="signNoticeClicked:" destination="-1" eventType="touchUpInside" id="qfB-gQ-c3y"/>
+                                    </connections>
+                                </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MJm-74-IHW">
-                                    <rect key="frame" x="0.0" y="10" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="100" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="供货类型" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FN9-ne-yoF">
                                             <rect key="frame" x="0.0" y="16.5" width="80" height="17"/>
@@ -169,7 +180,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OPG-kK-xfA">
-                                    <rect key="frame" x="0.0" y="60" width="414" height="100"/>
+                                    <rect key="frame" x="0.0" y="150" width="414" height="100"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="是否与呱选采购已沟通一致，约定销售区域和定制商品？" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="spx-aM-n2Y">
                                             <rect key="frame" x="80" y="15" width="324" height="33.5"/>
@@ -225,7 +236,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mnL-XS-V6c">
-                                    <rect key="frame" x="0.0" y="160" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="250" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="对接人" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nKO-D5-SLy">
                                             <rect key="frame" x="0.0" y="16.5" width="80" height="17"/>
@@ -278,7 +289,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="adJ-Rf-X5i">
-                                    <rect key="frame" x="0.0" y="210" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="300" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="供应商类型" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iqd-oR-FPX">
                                             <rect key="frame" x="0.0" y="16.5" width="80" height="17"/>
@@ -345,7 +356,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8jk-S8-2Tj">
-                                    <rect key="frame" x="0.0" y="260" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="350" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="经营类目" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LlW-sj-E9u">
                                             <rect key="frame" x="0.0" y="16.5" width="80" height="17"/>
@@ -412,7 +423,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Len-dc-URj">
-                                    <rect key="frame" x="0.0" y="320" width="414" height="44"/>
+                                    <rect key="frame" x="0.0" y="410" width="414" height="44"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UDj-N0-rNw">
                                             <rect key="frame" x="10" y="12" width="4" height="20"/>
@@ -439,7 +450,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="snd-MR-u4i">
-                                    <rect key="frame" x="0.0" y="364" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="454" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="公司名称" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Vf-k4-PPB">
                                             <rect key="frame" x="0.0" y="16.5" width="80" height="17"/>
@@ -492,7 +503,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OzA-L4-vNh">
-                                    <rect key="frame" x="0.0" y="414" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="504" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="法人姓名" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fzh-Bx-OHh">
                                             <rect key="frame" x="0.0" y="16.5" width="80" height="17"/>
@@ -545,7 +556,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dix-Oy-tmq">
-                                    <rect key="frame" x="0.0" y="464" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="554" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="身份证号" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ca9-Jx-XdX">
                                             <rect key="frame" x="0.0" y="16.5" width="80" height="17"/>
@@ -598,7 +609,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="az8-bI-6a9">
-                                    <rect key="frame" x="0.0" y="514" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="604" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="统一社会 信用代码" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n39-4R-wzG">
                                             <rect key="frame" x="0.0" y="8.5" width="80" height="33.5"/>
@@ -651,7 +662,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wam-Zv-wZ8">
-                                    <rect key="frame" x="0.0" y="564" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="654" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="店铺名称" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="433-it-x12">
                                             <rect key="frame" x="0.0" y="16.5" width="80" height="17"/>
@@ -704,7 +715,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O6u-f3-6Do">
-                                    <rect key="frame" x="0.0" y="614" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="704" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="开店时间" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YJ2-dV-2e9">
                                             <rect key="frame" x="0.0" y="16.5" width="80" height="17"/>
@@ -768,7 +779,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TOp-7s-us0">
-                                    <rect key="frame" x="0.0" y="614" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="704" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="所在地区" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gNG-7D-2xU">
                                             <rect key="frame" x="0.0" y="16.5" width="80" height="17"/>
@@ -835,7 +846,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gi5-cy-3AJ">
-                                    <rect key="frame" x="0.0" y="664" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="754" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="详细地址" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XgS-d7-6ai">
                                             <rect key="frame" x="0.0" y="16.5" width="80" height="17"/>
@@ -888,7 +899,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EkN-DJ-qxL">
-                                    <rect key="frame" x="0.0" y="714" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="804" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="年营业额" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aNN-2K-MXQ">
                                             <rect key="frame" x="0.0" y="16.5" width="80" height="17"/>
@@ -941,7 +952,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hsy-a8-JEC">
-                                    <rect key="frame" x="0.0" y="764" width="414" height="180"/>
+                                    <rect key="frame" x="0.0" y="854" width="414" height="180"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上传资质" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3xc-0Z-kVF">
                                             <rect key="frame" x="0.0" y="16.5" width="80" height="17"/>
@@ -1077,7 +1088,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rhj-Lo-igr">
-                                    <rect key="frame" x="0.0" y="954" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="1044" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="职务" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="btM-qP-moH">
                                             <rect key="frame" x="0.0" y="16.5" width="80" height="17"/>
@@ -1130,7 +1141,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fgA-xy-e2u">
-                                    <rect key="frame" x="0.0" y="1004" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="1094" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="微信号" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B3f-eh-C1a">
                                             <rect key="frame" x="0.0" y="16.5" width="80" height="17"/>
@@ -1183,7 +1194,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EAs-i8-Ulh">
-                                    <rect key="frame" x="0.0" y="1054" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="1144" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="备注" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3su-Bm-9Jj">
                                             <rect key="frame" x="0.0" y="16.5" width="80" height="17"/>
@@ -1236,7 +1247,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M17-Pz-Lvy">
-                                    <rect key="frame" x="0.0" y="1104" width="414" height="110"/>
+                                    <rect key="frame" x="0.0" y="1194" width="414" height="110"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X5U-UJ-dDO">
                                             <rect key="frame" x="15" y="15" width="17" height="22"/>
@@ -1306,22 +1317,25 @@
                                 <constraint firstItem="MJm-74-IHW" firstAttribute="leading" secondItem="c7l-CB-f0e" secondAttribute="leading" id="2An-9D-Mbm"/>
                                 <constraint firstItem="EAs-i8-Ulh" firstAttribute="leading" secondItem="c7l-CB-f0e" secondAttribute="leading" id="2ee-t0-XU5"/>
                                 <constraint firstItem="Len-dc-URj" firstAttribute="leading" secondItem="c7l-CB-f0e" secondAttribute="leading" id="3tu-Y9-smH"/>
+                                <constraint firstItem="htJ-3x-BqC" firstAttribute="leading" secondItem="c7l-CB-f0e" secondAttribute="leading" id="5zX-hm-BKR"/>
                                 <constraint firstItem="rhj-Lo-igr" firstAttribute="top" secondItem="hsy-a8-JEC" secondAttribute="bottom" constant="10" id="72Q-xi-o7J"/>
+                                <constraint firstItem="htJ-3x-BqC" firstAttribute="top" secondItem="c7l-CB-f0e" secondAttribute="top" id="7OG-RA-JBp"/>
                                 <constraint firstItem="az8-bI-6a9" firstAttribute="leading" secondItem="c7l-CB-f0e" secondAttribute="leading" id="8OT-5T-Vrv"/>
                                 <constraint firstItem="EkN-DJ-qxL" firstAttribute="leading" secondItem="c7l-CB-f0e" secondAttribute="leading" id="92m-tC-PUM"/>
                                 <constraint firstItem="EAs-i8-Ulh" firstAttribute="top" secondItem="fgA-xy-e2u" secondAttribute="bottom" id="Ac1-Pp-df1"/>
                                 <constraint firstItem="TOp-7s-us0" firstAttribute="leading" secondItem="c7l-CB-f0e" secondAttribute="leading" id="AiX-vI-CBE"/>
                                 <constraint firstItem="OPG-kK-xfA" firstAttribute="top" secondItem="MJm-74-IHW" secondAttribute="bottom" id="B3c-i6-muV"/>
                                 <constraint firstItem="M17-Pz-Lvy" firstAttribute="top" secondItem="EAs-i8-Ulh" secondAttribute="bottom" id="BFl-0Y-Krl"/>
-                                <constraint firstItem="MJm-74-IHW" firstAttribute="top" secondItem="c7l-CB-f0e" secondAttribute="top" constant="10" id="CJq-0K-ckm"/>
                                 <constraint firstItem="gi5-cy-3AJ" firstAttribute="top" secondItem="TOp-7s-us0" secondAttribute="bottom" id="E17-Fq-gPz"/>
                                 <constraint firstItem="OPG-kK-xfA" firstAttribute="leading" secondItem="c7l-CB-f0e" secondAttribute="leading" id="FGM-bw-rak"/>
                                 <constraint firstItem="Wam-Zv-wZ8" firstAttribute="leading" secondItem="c7l-CB-f0e" secondAttribute="leading" id="FXK-ht-XJQ"/>
                                 <constraint firstItem="fgA-xy-e2u" firstAttribute="leading" secondItem="c7l-CB-f0e" secondAttribute="leading" id="FuU-gE-J1A"/>
                                 <constraint firstAttribute="trailing" secondItem="adJ-Rf-X5i" secondAttribute="trailing" id="Jqa-hM-kko"/>
                                 <constraint firstItem="gi5-cy-3AJ" firstAttribute="leading" secondItem="c7l-CB-f0e" secondAttribute="leading" id="JxM-rL-MdG"/>
+                                <constraint firstItem="MJm-74-IHW" firstAttribute="top" secondItem="htJ-3x-BqC" secondAttribute="bottom" id="K7K-3D-Gfs"/>
                                 <constraint firstItem="OzA-L4-vNh" firstAttribute="top" secondItem="snd-MR-u4i" secondAttribute="bottom" id="K95-8m-uz1"/>
                                 <constraint firstItem="TOp-7s-us0" firstAttribute="top" secondItem="Wam-Zv-wZ8" secondAttribute="bottom" id="Mf9-Tw-hjj"/>
+                                <constraint firstAttribute="trailing" secondItem="htJ-3x-BqC" secondAttribute="trailing" id="OnV-oe-bra"/>
                                 <constraint firstItem="hsy-a8-JEC" firstAttribute="leading" secondItem="c7l-CB-f0e" secondAttribute="leading" id="PLp-0O-Cp8"/>
                                 <constraint firstItem="fgA-xy-e2u" firstAttribute="top" secondItem="rhj-Lo-igr" secondAttribute="bottom" id="PaS-Qp-Gdg"/>
                                 <constraint firstAttribute="trailing" secondItem="M17-Pz-Lvy" secondAttribute="trailing" id="PgT-eO-2dj"/>
@@ -1387,7 +1401,7 @@
                 <constraint firstItem="IdZ-XS-pL8" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="yYK-er-zBu"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
-            <point key="canvasLocation" x="139" y="113"/>
+            <point key="canvasLocation" x="-25" y="83"/>
         </view>
     </objects>
     <resources>
@@ -1395,6 +1409,7 @@
         <image name="icon_kh_down" width="18" height="18"/>
         <image name="协议未选" width="17" height="17"/>
         <image name="协议选择" width="16.5" height="16.5"/>
+        <image name="签约资质" width="364" height="93"/>
         <image name="营业执照" width="80" height="80"/>
         <image name="门店内部照" width="80" height="80"/>
         <image name="门店正面照" width="80" height="80"/>

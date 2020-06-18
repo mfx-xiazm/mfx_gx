@@ -13,14 +13,15 @@
 #import "zhAlertView.h"
 #import <zhPopupController.h>
 #import "GXOrderDetailVC.h"
+#import "GXMineData.h"
+#import "GXMySetVC.h"
+#import "GXMyHeader.h"
+#import "GXBalanceNoteVC.h"
 
 static NSString *const AccountManageCell = @"AccountManageCell";
 @interface GXAccountManageVC ()<UITableViewDelegate,UITableViewDataSource>
-@property (weak, nonatomic) IBOutlet UIScrollView *content_scroll;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewHeight;
-@property (weak, nonatomic) IBOutlet UILabel *balance;
-@property (weak, nonatomic) IBOutlet UILabel *cash_balance;
+@property (nonatomic, strong) GXMyHeader *header;
 /** 页码 */
 @property(nonatomic,assign) NSInteger pagenum;
 /** 订单列表 */
@@ -29,21 +30,31 @@ static NSString *const AccountManageCell = @"AccountManageCell";
 @property(nonatomic,strong) NSDictionary *accountData;
 /* 提现天数 */
 @property(nonatomic,copy) NSString *cashable_day;
+/* 个人信息 */
+@property(nonatomic,strong) GXMineData *mineData;
+/* 设置 */
+@property (nonatomic, strong) SPButton *setBtn;
 @end
 
 @implementation GXAccountManageVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setUpNavbar];
     [self setUpTableView];
-    [self setUpRefresh];
     [self startShimmer];
+    [self getMemberRequest];
     [self getFinanceLogRequest:YES];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self getUserBalanceRequest];
+}
+-(void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    self.header.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, 300);
 }
 -(NSMutableArray *)logs
 {
@@ -52,9 +63,49 @@ static NSString *const AccountManageCell = @"AccountManageCell";
     }
     return _logs;
 }
+-(GXMyHeader *)header
+{
+    if (!_header) {
+        _header = [GXMyHeader loadXibView];
+        _header.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, 300);
+        hx_weakify(self);
+        _header.headerBtnClicked = ^(NSInteger index) {
+            hx_strongify(weakSelf);
+            if (index == 0) {
+                [strongSelf cashNoticeClicked:nil];
+            }else if (index == 1) {
+                GXBalanceNoteVC *nvc = [GXBalanceNoteVC new];
+                [strongSelf.navigationController pushViewController:nvc animated:YES];
+            }else{
+                [strongSelf cashBtnClicked:nil];
+            }
+        };
+    }
+    return _header;
+}
+-(void)setUpNavbar
+{
+    self.hbd_barAlpha = 0.0;
+    
+    SPButton *set = [SPButton buttonWithType:UIButtonTypeCustom];
+    set.hxn_size = CGSizeMake(40, 40);
+    set.titleLabel.font = [UIFont systemFontOfSize:9];
+    [set setImage:HXGetImage(@"设置") forState:UIControlStateNormal];
+    [set addTarget:self action:@selector(setClicked) forControlEvents:UIControlEventTouchUpInside];
+    self.setBtn = set;
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:set];
+}
 -(void)setUpTableView
 {
-    self.tableView.scrollEnabled = NO;
+    // 针对 11.0 以上的iOS系统进行处理
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        // 针对 11.0 以下的iOS系统进行处理
+        // 不要自动调整inset
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
     self.tableView.estimatedRowHeight = 85.f;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedSectionHeaderHeight = 0;
@@ -63,44 +114,29 @@ static NSString *const AccountManageCell = @"AccountManageCell";
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    self.tableView.scrollEnabled = NO;
     self.tableView.showsVerticalScrollIndicator = NO;
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GXAccountManageCell class]) bundle:nil] forCellReuseIdentifier:AccountManageCell];
-}
-/** 添加刷新控件 */
--(void)setUpRefresh
-{
-    hx_weakify(self);
-    self.content_scroll.mj_header.automaticallyChangeAlpha = YES;
-    self.content_scroll.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        hx_strongify(weakSelf);
-        [strongSelf.content_scroll.mj_footer resetNoMoreData];
-        [strongSelf getFinanceLogRequest:YES];
-    }];
-    //追加尾部刷新
-    self.content_scroll.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-        hx_strongify(weakSelf);
-        [strongSelf getFinanceLogRequest:NO];
-    }];
-}
--(IBAction)cashNoticeClicked:(UIButton *)sender
-{
-    zhAlertView *alert = [[zhAlertView alloc] initWithTitle:@"提现说明" message:[NSString stringWithFormat:@"订单确认收货后，%@天后才能申请提现",self.cashable_day] constantWidth:HX_SCREEN_WIDTH - 50*2];
-    hx_weakify(self);
-    zhAlertButton *okButton = [zhAlertButton buttonWithTitle:@"我知道了" handler:^(zhAlertButton * _Nonnull button) {
-        hx_strongify(weakSelf);
-        [strongSelf.zh_popupController dismiss];
-    }];
-    okButton.lineColor = UIColorFromRGB(0xDDDDDD);
-    [okButton setTitleColor:HXControlBg forState:UIControlStateNormal];
-    [alert addAction:okButton];
-    self.zh_popupController = [[zhPopupController alloc] init];
-    [self.zh_popupController presentContentView:alert duration:0.25 springAnimated:NO];
+    
+    self.tableView.tableHeaderView = self.header;
 }
 #pragma mark -- 数据请求
+-(void)getMemberRequest
+{
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getMineData" parameters:@{} success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            strongSelf.mineData = [GXMineData yy_modelWithDictionary:responseObject[@"data"]];
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
+}
 -(void)getFinanceLogRequest:(BOOL)isRefresh
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
@@ -118,29 +154,25 @@ static NSString *const AccountManageCell = @"AccountManageCell";
         [strongSelf stopShimmer];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             if (isRefresh) {
-                [strongSelf.content_scroll.mj_header endRefreshing];
+                [strongSelf.tableView.mj_header endRefreshing];
                 strongSelf.pagenum = 1;
                 [strongSelf.logs removeAllObjects];
                 NSArray *arrt = [NSArray yy_modelArrayWithClass:[GXFinanceLog class] json:responseObject[@"data"]];
                 [strongSelf.logs addObjectsFromArray:arrt];
             }else{
-                [strongSelf.content_scroll.mj_footer endRefreshing];
+                [strongSelf.tableView.mj_footer endRefreshing];
                 strongSelf.pagenum ++;
 
                 if ([responseObject[@"data"] isKindOfClass:[NSArray class]] && ((NSArray *)responseObject[@"data"]).count){
                     NSArray *arrt = [NSArray yy_modelArrayWithClass:[GXFinanceLog class] json:responseObject[@"data"]];
                     [strongSelf.logs addObjectsFromArray:arrt];
                 }else{// 提示没有更多数据
-                    [strongSelf.content_scroll.mj_footer endRefreshingWithNoMoreData];
+                    [strongSelf.tableView.mj_footer endRefreshingWithNoMoreData];
                 }
             }
             dispatch_async(dispatch_get_main_queue(), ^{
-                strongSelf.content_scroll.hidden = NO;
+                strongSelf.tableView.hidden = NO;
                 [strongSelf.tableView reloadData];
-                strongSelf.tableView.hidden = !strongSelf.logs.count;
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    strongSelf.tableViewHeight.constant = strongSelf.tableView.contentSize.height + 30.f;
-                });
             });
         }else{
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
@@ -148,8 +180,8 @@ static NSString *const AccountManageCell = @"AccountManageCell";
     } failure:^(NSError *error) {
         hx_strongify(weakSelf);
         [strongSelf stopShimmer];
-        [strongSelf.content_scroll.mj_header endRefreshing];
-        [strongSelf.content_scroll.mj_footer endRefreshing];
+        [strongSelf.tableView.mj_header endRefreshing];
+        [strongSelf.tableView.mj_footer endRefreshing];
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
     }];
 }
@@ -166,8 +198,8 @@ static NSString *const AccountManageCell = @"AccountManageCell";
                 strongSelf.cashable_day = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"saleman_cashable_day"]];
             }
             dispatch_async(dispatch_get_main_queue(), ^{
-                strongSelf.balance.text = [NSString stringWithFormat:@"%@元",responseObject[@"data"][@"balance"]];
-                strongSelf.cash_balance.text = [NSString stringWithFormat:@"%@元",responseObject[@"data"][@"cashable_balance"]];
+                strongSelf.header.balance.text = [NSString stringWithFormat:@"%@元",responseObject[@"data"][@"balance"]];
+                strongSelf.header.cash_balance.text = [NSString stringWithFormat:@"%@元",responseObject[@"data"][@"cashable_balance"]];
             });
         }else{
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
@@ -177,7 +209,13 @@ static NSString *const AccountManageCell = @"AccountManageCell";
     }];
 }
 #pragma mark -- 点击事件
-- (IBAction)cashBtnClicked:(UIButton *)sender {
+-(void)setClicked
+{
+    GXMySetVC *mvc = [GXMySetVC new];
+    mvc.mineData = self.mineData;
+    [self.navigationController pushViewController:mvc animated:YES];
+}
+- (void)cashBtnClicked:(UIButton *)sender {
     GXCashVC *cvc = [GXCashVC new];
     cvc.cashable = [NSString stringWithFormat:@"%@",self.accountData[@"cashable_balance"]];
     hx_weakify(self);
@@ -187,7 +225,35 @@ static NSString *const AccountManageCell = @"AccountManageCell";
     };
     [self.navigationController pushViewController:cvc animated:YES];
 }
-
+-(void)cashNoticeClicked:(UIButton *)sender
+{
+    zhAlertView *alert = [[zhAlertView alloc] initWithTitle:@"提现说明" message:[NSString stringWithFormat:@"订单确认收货后，%@天后才能申请提现",self.cashable_day] constantWidth:HX_SCREEN_WIDTH - 50*2];
+    hx_weakify(self);
+    zhAlertButton *okButton = [zhAlertButton buttonWithTitle:@"我知道了" handler:^(zhAlertButton * _Nonnull button) {
+        hx_strongify(weakSelf);
+        [strongSelf.zh_popupController dismiss];
+    }];
+    okButton.lineColor = UIColorFromRGB(0xDDDDDD);
+    [okButton setTitleColor:HXControlBg forState:UIControlStateNormal];
+    [alert addAction:okButton];
+    self.zh_popupController = [[zhPopupController alloc] init];
+    [self.zh_popupController presentContentView:alert duration:0.25 springAnimated:NO];
+}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    // CGFloat headerHeight = CGRectGetHeight(self.header.frame);
+    CGFloat headerHeight = 200.f;
+    CGFloat progress = scrollView.contentOffset.y;
+    //HXLog(@"便宜量-%.2f",progress);
+    CGFloat gradientProgress = MIN(1, MAX(0, progress  / headerHeight));
+    gradientProgress = gradientProgress * gradientProgress * gradientProgress * gradientProgress;
+    self.hbd_barAlpha = gradientProgress;
+    [self hbd_setNeedsUpdateNavigationBar];
+    
+    CGRect frame = self.header.imageViewFrame;
+    frame.size.height -= progress;
+    frame.origin.y = progress;
+    self.header.imageView.frame = frame;
+}
 #pragma mark -- UITableView数据源和代理
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
