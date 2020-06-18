@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="GXPresellHeader">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="预售专区背景" translatesAutoresizingMaskIntoConstraints="NO" id="ywt-6R-AHT">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yhu-6t-MrG">
+                    <rect key="frame" x="0.0" y="291" width="414" height="18"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="18" id="ssX-hq-Tc2"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="ywt-6R-AHT" secondAttribute="trailing" id="19R-Pp-fSy"/>
+                <constraint firstAttribute="bottom" secondItem="ywt-6R-AHT" secondAttribute="bottom" id="1NX-um-GvW"/>
+                <constraint firstItem="ywt-6R-AHT" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="QnI-TO-GQ7"/>
+                <constraint firstItem="yhu-6t-MrG" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Rmh-MP-VJw"/>
+                <constraint firstItem="ywt-6R-AHT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="TdQ-Aj-b6R"/>
+                <constraint firstAttribute="bottom" secondItem="yhu-6t-MrG" secondAttribute="bottom" constant="-9" id="i9l-2h-QJz"/>
+                <constraint firstAttribute="trailing" secondItem="yhu-6t-MrG" secondAttribute="trailing" id="xrb-gn-f2Z"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="buttomVoew" destination="yhu-6t-MrG" id="0lC-sN-4y0"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="315.40178571428572"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="预售专区背景" width="375" height="335"/>
+    </resources>
+</document>

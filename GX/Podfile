@@ -21,6 +21,4 @@ target 'GX' do
     pod "RollingNotice"
     pod "ZXEmptyView"
     pod 'HBDNavigationBar'
-    pod "ZFPlayer/AVPlayer"
-    pod "ZFPlayer/ControlView"
 end

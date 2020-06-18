@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -33,12 +33,6 @@
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="邀请有礼-1" translatesAutoresizingMaskIntoConstraints="NO" id="3pT-lm-DZw">
                                     <rect key="frame" x="94" y="50" width="226.5" height="59"/>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="每邀请一家 最高可得88元" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bnm-QD-DC7">
-                                    <rect key="frame" x="107.5" y="124" width="199" height="21"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4BE-w3-obU">
                                     <rect key="frame" x="137" y="190" width="140" height="140"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -118,7 +112,6 @@
                                 <constraint firstAttribute="trailing" secondItem="ad5-Ij-OpJ" secondAttribute="trailing" constant="15" id="0Me-vt-G3Q"/>
                                 <constraint firstItem="ipe-De-40m" firstAttribute="leading" secondItem="5Ih-L0-aAs" secondAttribute="leading" constant="15" id="1AH-wX-R0U"/>
                                 <constraint firstAttribute="bottomMargin" secondItem="ipe-De-40m" secondAttribute="bottom" constant="15" id="2hA-2V-iEL"/>
-                                <constraint firstItem="4BE-w3-obU" firstAttribute="top" secondItem="Bnm-QD-DC7" secondAttribute="bottom" constant="45" id="3ss-Fx-iNA"/>
                                 <constraint firstItem="4pd-Su-3gs" firstAttribute="centerX" secondItem="5Ih-L0-aAs" secondAttribute="centerX" id="Bxq-FS-i97"/>
                                 <constraint firstItem="4BE-w3-obU" firstAttribute="centerX" secondItem="5Ih-L0-aAs" secondAttribute="centerX" id="HNl-KF-OEW"/>
                                 <constraint firstItem="4pd-Su-3gs" firstAttribute="top" secondItem="4BE-w3-obU" secondAttribute="bottom" constant="30" id="NJi-Rm-MJv"/>
@@ -126,9 +119,8 @@
                                 <constraint firstItem="3pT-lm-DZw" firstAttribute="top" secondItem="5Ih-L0-aAs" secondAttribute="top" constant="50" id="Uj2-nq-H0F"/>
                                 <constraint firstItem="ad5-Ij-OpJ" firstAttribute="leading" secondItem="5Ih-L0-aAs" secondAttribute="leading" constant="15" id="Z7Y-U9-O9W"/>
                                 <constraint firstItem="ad5-Ij-OpJ" firstAttribute="top" secondItem="4pd-Su-3gs" secondAttribute="bottom" constant="10" id="dGI-CS-Wau"/>
-                                <constraint firstItem="Bnm-QD-DC7" firstAttribute="centerX" secondItem="5Ih-L0-aAs" secondAttribute="centerX" id="e7y-Vb-eFH"/>
+                                <constraint firstItem="4BE-w3-obU" firstAttribute="top" secondItem="3pT-lm-DZw" secondAttribute="bottom" constant="81" id="mpq-TN-igW"/>
                                 <constraint firstItem="ipe-De-40m" firstAttribute="top" secondItem="ad5-Ij-OpJ" secondAttribute="bottom" constant="30" id="ucE-nq-2Ig"/>
-                                <constraint firstItem="Bnm-QD-DC7" firstAttribute="top" secondItem="3pT-lm-DZw" secondAttribute="bottom" constant="15" id="xn3-uj-ky0"/>
                             </constraints>
                         </view>
                     </subviews>

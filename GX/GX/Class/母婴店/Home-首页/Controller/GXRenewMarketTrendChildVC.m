@@ -209,14 +209,14 @@ static NSString *const MarketTrendCell = @"MarketTrendCell";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     GXMarketTrendSeries *series = self.showTrends[section];
-    return series.goods.count*3;
+    return series.goods.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     GXMarketTrendCell *cell = [tableView dequeueReusableCellWithIdentifier:MarketTrendCell forIndexPath:indexPath];
     //无色
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     GXMarketTrendSeries *series = self.showTrends[indexPath.section];
-    GXSeriesGoods *goods = series.goods[0];
+    GXSeriesGoods *goods = series.goods[indexPath.row];
     cell.goods = goods;
     hx_weakify(self);
     cell.trendBtnCall = ^(NSInteger index) {

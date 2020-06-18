@@ -17,7 +17,7 @@
                 <outlet property="control_collect" destination="vXM-dJ-jsV" id="amA-tf-aYB"/>
                 <outlet property="control_tool" destination="dci-xu-NWx" id="ONG-L6-XLd"/>
                 <outlet property="currentPage" destination="7q2-LQ-9D5" id="0Cr-IS-xxW"/>
-                <outlet property="cyclePagerView" destination="JWp-5t-8uR" id="G3k-Lg-Xo5"/>
+                <outlet property="cyclePagerView" destination="JWp-5t-8uR" id="8bV-qq-XQR"/>
                 <outlet property="market_price" destination="XU5-V3-F1V" id="lWi-7R-cOZ"/>
                 <outlet property="normal_add_btn" destination="KkW-ND-l8c" id="Z7t-rP-Oot"/>
                 <outlet property="normal_buy_btn" destination="4KB-xH-ESk" id="cz0-xG-iPc"/>
@@ -53,7 +53,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bIb-J0-wtg">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="1070.5"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JWp-5t-8uR" customClass="TYCyclePagerView">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JWp-5t-8uR">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7q2-LQ-9D5">

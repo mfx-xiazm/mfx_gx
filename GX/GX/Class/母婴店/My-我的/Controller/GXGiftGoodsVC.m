@@ -9,7 +9,7 @@
 #import "GXGiftGoodsVC.h"
 #import "GXGiftGoodsCell.h"
 #import "GXGiftGoodsFooter.h"
-#import "GXRenewMyOrderHeader.h"
+#import "GXGiftGoodsHeader.h"
 #import "GXGiftGoodsDetailVC.h"
 
 static NSString *const GiftGoodsCell = @"GiftGoodsCell";
@@ -91,7 +91,7 @@ static NSString *const GiftGoodsCell = @"GiftGoodsCell";
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    GXRenewMyOrderHeader *header = [GXRenewMyOrderHeader loadXibView];
+    GXGiftGoodsHeader *header = [GXGiftGoodsHeader loadXibView];
     header.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 80.f);
     return header;
 }

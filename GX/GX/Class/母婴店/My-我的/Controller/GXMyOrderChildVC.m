@@ -7,7 +7,7 @@
 //
 
 #import "GXMyOrderChildVC.h"
-#import "GXRenewMyOrderCell.h"
+#import "GXRenewMyOrderBigCell.h"
 #import "GXRenewMyOrderHeader.h"
 #import "GXRenewMyOrderFooter.h"
 #import "GXOrderDetailVC.h"
@@ -99,7 +99,7 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
     self.tableView.backgroundColor = [UIColor clearColor];
     
     // 注册cell
-    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GXRenewMyOrderCell class]) bundle:nil] forCellReuseIdentifier:UpOrderGoodsCell];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GXRenewMyOrderBigCell class]) bundle:nil] forCellReuseIdentifier:UpOrderGoodsCell];
     
     hx_weakify(self);
     [self.tableView zx_setEmptyView:[GYEmptyView class] isFull:YES clickedBlock:^(UIButton * _Nullable btn) {
@@ -274,42 +274,76 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (self.status !=6) {
-        GXMyOrder *order = self.orders[section];
-        return order.goods.count;
-    }else{
-        return 1;
-    }
+    return 1;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    GXRenewMyOrderCell *cell = [tableView dequeueReusableCellWithIdentifier:UpOrderGoodsCell forIndexPath:indexPath];
+    GXRenewMyOrderBigCell *cell = [tableView dequeueReusableCellWithIdentifier:UpOrderGoodsCell forIndexPath:indexPath];
     //无色
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.status = self.status;
     if (self.status !=6) {
         GXMyOrder *order = self.orders[indexPath.section];
-        GXMyOrderGoods *goods = order.goods[indexPath.row];
-        goods.refund_status = order.refund_status;
-        goods.status = order.status;
-        cell.goods = goods;
+        cell.myOrder = order;
     }else{
         GXMyRefund *refund = self.refunds[indexPath.section];
-        cell.refund = refund;
+        cell.myRefund = refund;
     }
+    hx_weakify(self);
+    cell.cellClickedCall = ^{
+        hx_strongify(weakSelf);
+        GXOrderDetailVC *dvc = [GXOrderDetailVC new];
+        if (strongSelf.status != 6) {
+            GXMyOrder *order = strongSelf.orders[indexPath.section];
+            dvc.oid = order.oid;
+            dvc.orderHandleCall = ^(NSInteger type) {
+                if (strongSelf.status == 0) {
+                    /* 订单操作  0 取消订单 1支付订单 2申请退款 3确认收货 4评价 */
+                    if (type == 0) {
+                        order.status = @"已取消";
+                    }else if (type == 1) {
+                        order.status = @"待发货";
+                    }else if (type == 2) {
+                        if ([order.provider_uid  isEqualToString:@"0"]) {
+                            order.refund_status = @"2";
+                        }else{
+                            order.refund_status = @"1";
+                        }
+                    }else if (type == 3) {
+                        order.status = @"待评价";
+                    }else{
+                        order.status = @"已完成";
+                    }
+                }else{
+                    [strongSelf.orders removeObject:order];
+                }
+                [tableView reloadData];
+            };
+        }else{
+            GXMyRefund *refund = strongSelf.refunds[indexPath.section];
+            dvc.refund_id = refund.refund_id;
+        }
+        [strongSelf.navigationController pushViewController:dvc animated:YES];
+    };
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // 返回这个模型对应的cell高度
-    return 110.f;
+    if (self.status !=6) {
+        GXMyOrder *order = self.orders[indexPath.section];
+        return order.goods.count*110.f + 40.f;
+    }else{
+        return 110.f + 40.f;
+    }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 80.f;
+    return 44.f;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     GXRenewMyOrderHeader *header = [GXRenewMyOrderHeader loadXibView];
-    header.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 80.f);
+    header.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 44.f);
     if (self.status !=6) {
         GXMyOrder *order = self.orders[section];
         header.order = order;
@@ -477,41 +511,7 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    GXOrderDetailVC *dvc = [GXOrderDetailVC new];
-    if (self.status != 6) {
-        GXMyOrder *order = self.orders[indexPath.section];
-        dvc.oid = order.oid;
-        hx_weakify(self);
-        dvc.orderHandleCall = ^(NSInteger type) {
-            hx_strongify(weakSelf);
-            if (strongSelf.status == 0) {
-                /* 订单操作  0 取消订单 1支付订单 2申请退款 3确认收货 4评价 */
-                if (type == 0) {
-                    order.status = @"已取消";
-                }else if (type == 1) {
-                    order.status = @"待发货";
-                }else if (type == 2) {
-                    if ([order.provider_uid  isEqualToString:@"0"]) {
-                        order.refund_status = @"2";
-                    }else{
-                        order.refund_status = @"1";
-                    }
-                }else if (type == 3) {
-                    order.status = @"待评价";
-                }else{
-                    order.status = @"已完成";
-                }
-            }else{
-                [strongSelf.orders removeObject:order];
-            }
-            [tableView reloadData];
-        };
-    }else{
-        GXMyRefund *refund = self.refunds[indexPath.section];
-        dvc.refund_id = refund.refund_id;
-    }
     
-    [self.navigationController pushViewController:dvc animated:YES];
 }
 
 @end

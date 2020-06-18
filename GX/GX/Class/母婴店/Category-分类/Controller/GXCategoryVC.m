@@ -76,11 +76,11 @@ static NSString *const SmallCateHeaderView = @"SmallCateHeaderView";
     msg.hxn_size = CGSizeMake(40, 40);
     msg.titleLabel.font = [UIFont systemFontOfSize:9];
     [msg setImage:HXGetImage(@"消息") forState:UIControlStateNormal];
-    [msg setTitle:@"消息" forState:UIControlStateNormal];
     [msg addTarget:self action:@selector(msgClicked) forControlEvents:UIControlEventTouchUpInside];
     [msg setTitleColor:UIColorFromRGB(0XFFFFFF) forState:UIControlStateNormal];
     msg.badgeBgColor = [UIColor whiteColor];
-    msg.badgeCenterOffset = CGPointMake(-10, 5);
+    msg.badgeTextColor = HXControlBg;
+    msg.badgeCenterOffset = CGPointMake(-12, 8);
     self.msgBtn = msg;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:msg];
@@ -139,7 +139,7 @@ static NSString *const SmallCateHeaderView = @"SmallCateHeaderView";
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             if ([responseObject[@"data"] boolValue]) {
-                [strongSelf.msgBtn showBadgeWithStyle:WBadgeStyleRedDot value:1 animationType:WBadgeAnimTypeNone];
+                [strongSelf.msgBtn showBadgeWithStyle:WBadgeStyleNumber value:[responseObject[@"data"] integerValue] animationType:WBadgeAnimTypeNone];
             }else{
                 [strongSelf.msgBtn clearBadge];
             }

@@ -83,7 +83,7 @@ static NSString *const HomeSectionHeader = @"HomeSectionHeader";
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    self.header.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, 225);
+    self.header.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, 275);
     self.footer.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 130);
 }
 - (NSMutableArray *)controllers {
@@ -96,7 +96,7 @@ static NSString *const HomeSectionHeader = @"HomeSectionHeader";
 {
     if (_header == nil) {
         _header = [GXOrderDetailHeader loadXibView];
-        _header.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, 225);
+        _header.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, 275);
     }
     return _header;
 }
@@ -186,6 +186,12 @@ static NSString *const HomeSectionHeader = @"HomeSectionHeader";
 -(void)handleOrderDetailData
 {
     self.tableView.hidden = NO;
+    
+    if (self.refund_id && self.refund_id.length) {
+        self.refundDetail.isRefundDetail = YES;
+    }else{
+        self.orderDetail.isDetailOrder = YES;
+    }
     
     if ([[MSUserManager sharedInstance].curUserInfo.utype isEqualToString:@"1"]) {//母婴店
         if (self.refund_id && self.refund_id.length) {
@@ -610,20 +616,21 @@ static NSString *const HomeSectionHeader = @"HomeSectionHeader";
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return (section==0)?84.f:CGFLOAT_MIN;
+    if (section != 1) {//不是最后一组
+        return 40.f;
+    }else{//最后一组
+        return CGFLOAT_MIN;
+    }
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     GXMyOrderHeader *header = [GXMyOrderHeader loadXibView];
-    header.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 84.f);
-    if (self.refund_id && self.refund_id.length) {
-        self.refundDetail.isRefundDetail = YES;
-        header.refund = self.refundDetail;
-    }else{
-        self.orderDetail.isDetailOrder = YES;
-        header.order = self.orderDetail;
+    header.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 40.f);
+    if (section != 1) {//不是最后一组
+        return header;
+    }else{//最后一组
+        return nil;
     }
-    return (section==0)?header:nil;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {

@@ -30,14 +30,14 @@ static NSString *const GiftGoodsCell = @"GiftGoodsCell";
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    self.header.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 225);
+    self.header.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 275);
     self.footer.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 90.f);
 }
 -(GXOrderDetailHeader *)header
 {
     if (_header == nil) {
         _header = [GXOrderDetailHeader loadXibView];
-        _header.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, 225);
+        _header.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, 275);
     }
     return _header;
 }
@@ -89,12 +89,12 @@ static NSString *const GiftGoodsCell = @"GiftGoodsCell";
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 84.f;
+    return 40.f;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     GXMyOrderHeader *header = [GXMyOrderHeader loadXibView];
-    header.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 84.f);
+    header.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 40.f);
     return header;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section

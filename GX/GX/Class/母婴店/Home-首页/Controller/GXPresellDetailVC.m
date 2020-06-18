@@ -30,8 +30,6 @@
 #import "GXApplySupplyVC.h"
 #import <ZLPhotoActionSheet.h>
 #import <UMShare/UMShare.h>
-#import <TYCyclePagerView.h>
-#import <TYPageControl.h>
 #import "GXHomePushCell.h"
 #import "XTimer.h"
 #import "GXShopGoodsCell.h"
@@ -41,13 +39,14 @@
 #import "GXRebateView.h"
 #import "GXFullGiftView.h"
 #import "zhAlertView.h"
+#import "XQCarousel.h"
 
 static NSString *const HomeSectionHeader = @"HomeSectionHeader";
 static NSString *const ShopGoodsCell = @"ShopGoodsCell";
 static NSString *const GoodsInfoCell = @"GoodsInfoCell";
 static NSString *const GoodsGiftCell = @"GoodsGiftCell";
-@interface GXPresellDetailVC ()<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,GXGoodsMaterialCellDelegate,GXGoodsCommentCellDelegate,TYCyclePagerViewDataSource, TYCyclePagerViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,ZLCollectionViewBaseFlowLayoutDelegate>
-@property (weak, nonatomic) IBOutlet TYCyclePagerView *cyclePagerView;
+@interface GXPresellDetailVC ()<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,GXGoodsMaterialCellDelegate,GXGoodsCommentCellDelegate,UICollectionViewDelegate,UICollectionViewDataSource,ZLCollectionViewBaseFlowLayoutDelegate>
+@property (weak, nonatomic) IBOutlet UIView *cyclePagerView;
 @property (weak, nonatomic) IBOutlet UILabel *shop_name;
 @property (weak, nonatomic) IBOutlet UILabel *price;
 @property (weak, nonatomic) IBOutlet UILabel *market_price;
@@ -98,7 +97,6 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavBar];
-    [self setUpCyclePageView];
     [self setUpTableView];
     [self setUpCollectionView];
     [self startShimmer];
@@ -141,9 +139,9 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
 #pragma mark -- 视图相关
 -(void)setUpNavBar
 {
-    self.hbd_barAlpha = 0.0;
-    self.hbd_barStyle = UIBarStyleDefault;
-    self.hbd_tintColor = [UIColor blackColor];
+    self.hbd_barAlpha = 0.2;
+    self.hbd_barStyle = UIBarStyleBlack;
+    self.hbd_tintColor = [UIColor whiteColor];
     
     [self.navigationItem setTitle:nil];
     
@@ -184,15 +182,6 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
     UIBarButtonItem *applyItem = [[UIBarButtonItem alloc] initWithCustomView:apply];
     
     self.navigationItem.rightBarButtonItems = @[cartItem,shareItem,materialItem,applyItem];
-}
--(void)setUpCyclePageView
-{
-    self.cyclePagerView.isInfiniteLoop = YES;
-    self.cyclePagerView.autoScrollInterval = 3.0;
-    self.cyclePagerView.dataSource = self;
-    self.cyclePagerView.delegate = self;
-    // registerClass or registerNib
-    [self.cyclePagerView registerNib:[UINib nibWithNibName:NSStringFromClass([GXHomePushCell class]) bundle:nil] forCellWithReuseIdentifier:@"TopBannerCell"];
 }
 - (void)setUpTableView
 {
@@ -376,7 +365,14 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
 }
 -(void)handleGoodsDetailData
 {
-    [self.cyclePagerView reloadData];
+    NSMutableArray *bannerImgs = [NSMutableArray array];
+    for (GXGoodsDetailAdv *adv in self.goodsDetail.good_adv) {
+        [bannerImgs addObject:adv.adv_img];
+    }
+    [bannerImgs insertObject:@"http://tb-video.bdstatic.com/tieba-smallvideo-transcode/20985849_722f981a5ce0fc6d2a5a4f40cb0327a5_3.mp4" atIndex:0];
+    
+    XQCarousel *carousel = [XQCarousel scrollViewFrame:self.cyclePagerView.bounds imageStringGroup:bannerImgs];
+    [self.cyclePagerView addSubview:carousel];
     
     [self.shop_name setTextWithLineSpace:5.f withString:_goodsDetail.goods_name withFont:[UIFont systemFontOfSize:15]];
     
@@ -529,21 +525,19 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
     CGFloat gradientProgress = MIN(1, MAX(0, progress  / headerHeight));
     gradientProgress = gradientProgress * gradientProgress * gradientProgress * gradientProgress;
     if (gradientProgress < 0.1) {
-        self.hbd_barStyle = UIBarStyleDefault;
-        self.hbd_tintColor = UIColor.blackColor;
         [self.materialBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.materialBtn.backgroundColor = HXRGBAColor(0, 0, 0, 0.3);
         [self.applyBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.applyBtn.backgroundColor = HXRGBAColor(0, 0, 0, 0.3);
     } else {
-        self.hbd_barStyle = UIBarStyleBlack;
-        self.hbd_tintColor = UIColor.whiteColor;
         [self.materialBtn setTitleColor:HXControlBg forState:UIControlStateNormal];
         self.materialBtn.backgroundColor = HXRGBAColor(255, 255, 255, 1);
         [self.applyBtn setTitleColor:HXControlBg forState:UIControlStateNormal];
         self.applyBtn.backgroundColor = HXRGBAColor(255, 255, 255, 1);
     }
-    self.hbd_barAlpha = gradientProgress;
+    if (gradientProgress>0.2) {
+        self.hbd_barAlpha = gradientProgress;
+    }
     [self hbd_setNeedsUpdateNavigationBar];
 }
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
@@ -569,35 +563,6 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
         HXLog(@"多次删除了");
     }
 }
-#pragma mark -- TYCyclePagerView代理
-- (NSInteger)numberOfItemsInPagerView:(TYCyclePagerView *)pageView {
-    return self.goodsDetail.good_adv.count;
-}
-
-- (UICollectionViewCell *)pagerView:(TYCyclePagerView *)pagerView cellForItemAtIndex:(NSInteger)index {
-    GXHomePushCell *cell = [pagerView dequeueReusableCellWithReuseIdentifier:@"TopBannerCell" forIndex:index];
-    GXGoodsDetailAdv *adv = self.goodsDetail.good_adv[index];
-    cell.adv = adv;
-    return cell;
-}
-
-- (TYCyclePagerViewLayout *)layoutForPagerView:(TYCyclePagerView *)pageView {
-    TYCyclePagerViewLayout *layout = [[TYCyclePagerViewLayout alloc]init];
-    layout.itemSize = CGSizeMake(HX_SCREEN_WIDTH, HX_SCREEN_WIDTH);
-    layout.itemSpacing = 0;
-    layout.itemHorizontalCenter = YES;
-    return layout;
-}
-
-- (void)pagerView:(TYCyclePagerView *)pageView didScrollFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex {
-
-}
-
-- (void)pagerView:(TYCyclePagerView *)pageView didSelectedItemCell:(__kindof UICollectionViewCell *)cell atIndex:(NSInteger)index
-{
-    [self showBannerPic:index];
-}
-
 #pragma mark -- TableViewDelegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
