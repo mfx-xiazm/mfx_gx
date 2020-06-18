@@ -16,7 +16,7 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate,UNUserNotificationCenterDelegate,WXApiDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
+@property (nonatomic, assign) BOOL allowOrentitaionRotation;
 
 @end
 

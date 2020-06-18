@@ -13,6 +13,9 @@
 #import "GXUpOrderVC.h"
 #import "GXPayTypeVC.h"
 #import "GXPayResultVC.h"
+#import "GXApplyRefundVC.h"
+#import "GXGiftGoodsVC.h"
+#import "GXShowMoneyProofVC.h"
 
 @interface GXMyOrderVC ()<JXCategoryViewDelegate,UIScrollViewDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet JXCategoryTitleView *categoryView;
@@ -28,6 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationItem setTitle:@"我的订单"];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithTarget:self action:@selector(zpBtnClicked) image:HXGetImage(@"赠品") imageEdgeInsets:UIEdgeInsetsZero];
     hx_weakify(self);
     [self.navigationController.viewControllers enumerateObjectsUsingBlock:^(__kindof UIViewController * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj isKindOfClass:[GXUpOrderVC class]] || [obj isKindOfClass:[GXPayTypeVC class]] || [obj isKindOfClass:[GXPayResultVC class]]) {
@@ -90,6 +94,11 @@
     UIViewController *targetViewController = self.childVCs[self.selectIndex];
     targetViewController.view.frame = CGRectMake(self.selectIndex*HX_SCREEN_WIDTH, 0, HX_SCREEN_WIDTH, _scrollView.hxn_height);
     [_scrollView addSubview:targetViewController.view];
+}
+-(void)zpBtnClicked
+{
+    GXShowMoneyProofVC *rvc = [GXShowMoneyProofVC new];
+    [self.navigationController pushViewController:rvc animated:YES];
 }
 #pragma mark - JXCategoryViewDelegate
 // 滚动和点击选中

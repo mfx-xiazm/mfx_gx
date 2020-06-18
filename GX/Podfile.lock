@@ -37,6 +37,11 @@ PODS:
   - YYCache (1.0.4)
   - YYModel (1.0.4)
   - YYText (1.0.7)
+  - ZFPlayer/AVPlayer (3.3.3):
+    - ZFPlayer/Core
+  - ZFPlayer/ControlView (3.3.3):
+    - ZFPlayer/Core
+  - ZFPlayer/Core (3.3.3)
   - zhPopupController (2.0.0)
   - ZLCollectionViewFlowLayout (1.1.6)
   - ZLPhotoBrowser (3.1.2):
@@ -59,6 +64,8 @@ DEPENDENCIES:
   - YYCache
   - YYModel
   - YYText
+  - ZFPlayer/AVPlayer
+  - ZFPlayer/ControlView
   - zhPopupController
   - ZLCollectionViewFlowLayout
   - ZLPhotoBrowser
@@ -83,6 +90,7 @@ SPEC REPOS:
     - YYCache
     - YYModel
     - YYText
+    - ZFPlayer
     - zhPopupController
     - ZLCollectionViewFlowLayout
     - ZLPhotoBrowser
@@ -106,11 +114,12 @@ SPEC CHECKSUMS:
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
+  ZFPlayer: 1310252c253b9958e4fcd411e706b99c31834eaf
   zhPopupController: 600aee950c86442c5cca0b078d94c71fe0e1c51e
   ZLCollectionViewFlowLayout: 105020fbab88e3dc66ceebc307b36f2c363a8c1f
   ZLPhotoBrowser: 7e88434918366af98f8ebbaf5b94206985812ed6
   ZXEmptyView: 58adb5125e6ebdc51f68ef31885e62d99817a507
 
-PODFILE CHECKSUM: eee4de7e098e1f5885ddf0b53d2b39396e9f0fbb
+PODFILE CHECKSUM: 9c022456a66b10b2d1f97d9f2b97233d787da78d
 
 COCOAPODS: 1.9.1

@@ -23,10 +23,21 @@
 #import "GXPayTypeVC.h"
 #import "GXPayResultVC.h"
 #import "GXGoodsDetailVC.h"
+#import "GXUpOrderCellSectionFooter.h"
+#import "GXShopGoodsCell.h"
+#import <ZLCollectionViewVerticalLayout.h>
+#import "GXHomeSectionHeader.h"
+#import "GXExpressShowView.h"
 
 static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
-@interface GXOrderDetailVC ()<UITableViewDelegate,UITableViewDataSource>
+static NSString *const ShopGoodsCell = @"ShopGoodsCell";
+static NSString *const HomeSectionHeader = @"HomeSectionHeader";
+
+@interface GXOrderDetailVC ()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource,ZLCollectionViewBaseFlowLayoutDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewHeight;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewHeight;
 /* 头视图 */
 @property(nonatomic,strong) GXOrderDetailHeader *header;
 /* 退款状态尾部视图 */
@@ -65,15 +76,15 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
     }];
     [self.navigationController setViewControllers:self.controllers];
     [self setUpTableView];
+    [self setUpCollectionView];
     [self startShimmer];
     [self getOrderInfoRequest];
 }
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    self.header.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 225);
-    self.footer.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 110);
-
+    self.header.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, 225);
+    self.footer.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 130);
 }
 - (NSMutableArray *)controllers {
     if (!_controllers) {
@@ -93,13 +104,13 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
 {
     if (_footer == nil) {
         _footer = [GXRefundDetailFooter loadXibView];
-        _footer.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, 110);
+        _footer.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, 130);
     }
     return _footer;
 }
 -(void)setUpTableView
 {
-    self.tableView.rowHeight = 0;
+    self.tableView.estimatedRowHeight = 0;
     self.tableView.estimatedSectionHeaderHeight = 0;
     self.tableView.estimatedSectionFooterHeight = 0;
     
@@ -112,11 +123,26 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // 设置背景色为clear
     self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.scrollEnabled = NO;
     
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GXUpOrderGoodsCell class]) bundle:nil] forCellReuseIdentifier:UpOrderGoodsCell];
     
     self.tableView.tableHeaderView = self.header;
+}
+-(void)setUpCollectionView
+{
+    ZLCollectionViewVerticalLayout *flowLayout = [[ZLCollectionViewVerticalLayout alloc] init];
+    flowLayout.delegate = self;
+    flowLayout.canDrag = NO;
+    flowLayout.header_suspension = NO;
+    self.collectionView.collectionViewLayout = flowLayout;
+    self.collectionView.dataSource = self;
+    self.collectionView.delegate = self;
+    self.collectionView.scrollEnabled = NO;
+    
+    [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([GXShopGoodsCell class]) bundle:nil] forCellWithReuseIdentifier:ShopGoodsCell];
+    [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([GXHomeSectionHeader class]) bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HomeSectionHeader];
 }
 #pragma mark -- 接口请求
 -(void)getOrderInfoRequest
@@ -367,8 +393,17 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
             };
         }
     }
-    
     [self.tableView reloadData];
+    
+    [self.collectionView reloadData];
+    
+    hx_weakify(self);
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        weakSelf.tableViewHeight.constant = weakSelf.tableView.contentSize.height;
+        weakSelf.collectionViewHeight.constant = weakSelf.collectionView.contentSize.height;
+    });
+    [self.view layoutIfNeeded];
+    
 }
 #pragma mark -- 业务逻辑
 /** 取消订单 */
@@ -419,7 +454,6 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"oid"] = self.oid;
-    
     hx_weakify(self);
     [HXNetworkTool POST:HXRC_M_URL action:@"admin/confirmReceiveGood" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
@@ -538,12 +572,20 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
     }
 }
 #pragma mark -- UITableView数据源和代理
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;//根据实际情况数量要加1
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (self.refund_id && self.refund_id.length) {
-        return self.refundDetail.goods.count;
-    }else{
-        return self.orderDetail.goods.count;
+    if (section != 1) {//不是最后一组
+        if (self.refund_id && self.refund_id.length) {
+            return self.refundDetail.goods.count;
+        }else{
+            return self.orderDetail.goods.count;
+        }
+    }else{//最后一组
+        return 0;
     }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -568,12 +610,12 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 44.f;
+    return (section==0)?84.f:CGFLOAT_MIN;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     GXMyOrderHeader *header = [GXMyOrderHeader loadXibView];
-    header.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 44.f);
+    header.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 84.f);
     if (self.refund_id && self.refund_id.length) {
         self.refundDetail.isRefundDetail = YES;
         header.refund = self.refundDetail;
@@ -581,22 +623,32 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
         self.orderDetail.isDetailOrder = YES;
         header.order = self.orderDetail;
     }
-    return header;
+    return (section==0)?header:nil;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 230.f;
+    if (section != 1) {//不是最后一组
+        return 160.f;
+    }else{//最后一组
+        return 250.f;
+    }
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    GXOrderDetailFooter *footer = [GXOrderDetailFooter loadXibView];
-    footer.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 230.f);
-    if (self.refund_id && self.refund_id.length) {
-        footer.refundDetail = self.refundDetail;
-    }else{
-        footer.orderDetail = self.orderDetail;
+    if (section != 1) {//不是最后一组
+        GXUpOrderCellSectionFooter *footer = [GXUpOrderCellSectionFooter loadXibView];
+        footer.hxn_size = CGSizeMake(tableView.hxn_width, 160.f);
+        return footer;
+    }else{//最后一组
+        GXOrderDetailFooter *footer = [GXOrderDetailFooter loadXibView];
+        footer.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 250.f);
+        if (self.refund_id && self.refund_id.length) {
+            footer.refundDetail = self.refundDetail;
+        }else{
+            footer.orderDetail = self.orderDetail;
+        }
+        return footer;
     }
-    return footer;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -610,6 +662,68 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
 //    }
 //    [self.navigationController pushViewController:dvc animated:YES];
 }
-
+#pragma mark -- UICollectionView 数据源和代理
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    //为你推荐
+    //return self.homeData.home_recommend_goods.count;
+    return 4;
+}
+- (ZLLayoutType)collectionView:(UICollectionView *)collectionView layout:(ZLCollectionViewBaseFlowLayout *)collectionViewLayout typeOfLayout:(NSInteger)section {
+    //为你推荐
+    return ClosedLayout;
+}
+//如果是ClosedLayout样式的section，必须实现该代理，指定列数
+- (NSInteger)collectionView:(UICollectionView *)collectionView layout:(ZLCollectionViewBaseFlowLayout*)collectionViewLayout columnCountOfSection:(NSInteger)section {
+    //为你推荐
+    return 2;
+}
+- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    //为你推荐
+    GXShopGoodsCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:ShopGoodsCell forIndexPath:indexPath];
+//    GYHomePushGoods *goods = self.homeData.home_recommend_goods[indexPath.item];
+//    cell.goods = goods;
+    return cell;
+}
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
+{
+    return CGSizeMake(HX_SCREEN_WIDTH, 50.f);
+}
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader]){
+        GXHomeSectionHeader *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HomeSectionHeader forIndexPath:indexPath];
+        //为你推荐
+        header.recommendView.hidden = NO;
+        header.titleView.hidden = YES;
+        
+        return header;
+    }
+    return nil;
+}
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    //为你推荐
+//    GXGoodsDetailVC *dvc = [GXGoodsDetailVC new];
+//    GYHomePushGoods *goods = self.homeData.home_recommend_goods[indexPath.item];
+//    dvc.goods_id = goods.goods_id;
+//    [self.navigationController pushViewController:dvc animated:YES];
+}
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    //为你推荐
+    CGFloat width = (HX_SCREEN_WIDTH-10*3)/2.0;
+    CGFloat height = width+70.f;
+    return CGSizeMake(width, height);
+}
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    //为你推荐
+    return 5.f;
+}
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
+    //为你推荐
+    return 5.f;
+}
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    //为你推荐
+    return  UIEdgeInsetsMake(0.f, 5.f, 15.f, 5.f);
+}
 
 @end

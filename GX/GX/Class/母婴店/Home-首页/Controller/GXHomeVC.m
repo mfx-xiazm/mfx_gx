@@ -25,7 +25,6 @@
 #import "GXGoodBrandVC.h"
 #import "GXActivityVC.h"
 #import "GXDiscountVC.h"
-#import "GXMarketTrendVC.h"
 #import "GXSaleMaterialVC.h"
 #import "GXRegionalVC.h"
 #import "GXBrandPartnerVC.h"
@@ -37,7 +36,8 @@
 #import "GXActivityContentVC.h"
 #import "SZUpdateView.h"
 #import <zhPopupController.h>
-#import "GXTestViewController.h"
+#import "GXRenewMarketTrendVC.h"
+#import "GXPresellVC.h"
 
 static NSString *const HomeCateCell = @"HomeCateCell";
 static NSString *const ShopGoodsCell = @"ShopGoodsCell";
@@ -141,10 +141,8 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
 #pragma mark -- 点击事件
 -(void)msgClicked
 {
-//    GXMessageVC *mvc = [GXMessageVC new];
-//    [self.navigationController pushViewController:mvc animated:YES];
-    GXTestViewController *tvc = [GXTestViewController new];
-    [self.navigationController pushViewController:tvc animated:YES];
+    GXMessageVC *mvc = [GXMessageVC new];
+    [self.navigationController pushViewController:mvc animated:YES];
 }
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
@@ -443,11 +441,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
                         GXBrandPartnerVC *pvc = [GXBrandPartnerVC new];
                         [strongSelf.navigationController pushViewController:pvc animated:YES];
                     }else if (indexPath.section == 3) {//通货行情
-                        GXMarketTrendVC *tvc = [GXMarketTrendVC new];
-                        GYHomeMarketTrend *trend = strongSelf.homeData.currency_img.firstObject;
-                        tvc.left_trend_img = trend.trade_img;
-                        GYHomeMarketTrend *trend1 = strongSelf.homeData.currency_img.lastObject;
-                        tvc.right_trend_img = trend1.trade_img;
+                        GXRenewMarketTrendVC *tvc = [GXRenewMarketTrendVC new];
                         tvc.selectIndex = 0;
                         [strongSelf.navigationController pushViewController:tvc animated:YES];
                     }else if (indexPath.section == 4) {//品牌优选
@@ -480,8 +474,8 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
             GXRegionalVC *rvc = [GXRegionalVC new];
             [self.navigationController pushViewController:rvc animated:YES];
         }else if (indexPath.item == 3) {
-            GXActivityVC *avc = [GXActivityVC new];
-            [self.navigationController pushViewController:avc animated:YES];
+            GXPresellVC *rvc = [GXPresellVC new];
+            [self.navigationController pushViewController:rvc animated:YES];
         }else{
             GXSaleMaterialVC *mvc = [GXSaleMaterialVC new];
             [self.navigationController pushViewController:mvc animated:YES];
@@ -498,11 +492,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
         dvc.brand_id = regional.ref_id;
         [self.navigationController pushViewController:dvc animated:YES];
     }else if (indexPath.section == 3) {//通货行情
-        GXMarketTrendVC *tvc = [GXMarketTrendVC new];
-        GYHomeMarketTrend *trend = self.homeData.currency_img.firstObject;
-        tvc.left_trend_img = trend.trade_img;
-        GYHomeMarketTrend *trend1 = self.homeData.currency_img.lastObject;
-        tvc.right_trend_img = trend1.trade_img;
+        GXRenewMarketTrendVC *tvc = [GXRenewMarketTrendVC new];
         tvc.selectIndex = indexPath.item;
         [self.navigationController pushViewController:tvc animated:YES];
     }else if (indexPath.section == 4) {//品牌优选

@@ -221,7 +221,8 @@
     if (scrollView == self.tableView) {
         CGFloat tabOffsetY = [self.tableView rectForSection:0].origin.y;
         CGFloat offsetY = scrollView.contentOffset.y;
-        if (offsetY>=tabOffsetY) {
+        HXLog(@"便宜%.2f - 打印%.2f",offsetY,tabOffsetY);
+        if (offsetY>=tabOffsetY) {//主视图滑动距离超过头部视图高度
             self.isCanScroll = NO;
             scrollView.contentOffset = CGPointMake(0, 0);
             [[NSNotificationCenter defaultCenter] postNotificationName:@"childScrollCan" object:nil];

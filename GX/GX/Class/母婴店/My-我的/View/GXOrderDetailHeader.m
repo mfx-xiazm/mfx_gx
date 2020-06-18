@@ -25,6 +25,11 @@
 {
     [super awakeFromNib];
 }
+-(void)layoutSubviews
+{
+    [super layoutSubviews];
+    self.hxn_height = 225.f;
+}
 -(void)setOrderDetail:(GXMyOrder *)orderDetail
 {
     _orderDetail = orderDetail;
