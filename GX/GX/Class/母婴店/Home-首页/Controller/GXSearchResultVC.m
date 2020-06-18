@@ -30,6 +30,7 @@ static NSString *const ShopGoodsCell = @"ShopGoodsCell";
     [super viewDidLoad];
     [self setUpNavBar];
     [self setUpCollectionView];
+    [self setUpRefresh];
     [self startShimmer];
     [self getSearchGoodsRequest:YES];
 }
