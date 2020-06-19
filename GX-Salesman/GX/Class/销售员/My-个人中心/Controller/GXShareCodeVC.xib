@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GXShareCodeVC">
+            <connections>
+                <outlet property="shareCodeImg" destination="FbC-UZ-OSQ" id="nfm-HV-dlm"/>
+                <outlet property="shareCodeLabel" destination="mZE-uF-tb5" id="pyv-gH-cab"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="邀请背景" translatesAutoresizingMaskIntoConstraints="NO" id="1bM-3F-ddD">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="红包" translatesAutoresizingMaskIntoConstraints="NO" id="fTj-YB-47M">
+                    <rect key="frame" x="15" y="196" width="384" height="514"/>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TGz-pT-bJ6">
+                    <rect key="frame" x="119.5" y="365.5" width="175" height="175"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="二维码外框" translatesAutoresizingMaskIntoConstraints="NO" id="grO-7p-XFW">
+                            <rect key="frame" x="0.0" y="0.0" width="175" height="175"/>
+                        </imageView>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FbC-UZ-OSQ">
+                            <rect key="frame" x="20" y="20" width="135" height="135"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="FbC-UZ-OSQ" firstAttribute="leading" secondItem="TGz-pT-bJ6" secondAttribute="leading" constant="20" id="1jD-Hf-Top"/>
+                        <constraint firstAttribute="bottom" secondItem="FbC-UZ-OSQ" secondAttribute="bottom" constant="20" id="2pY-Wn-7E5"/>
+                        <constraint firstItem="grO-7p-XFW" firstAttribute="leading" secondItem="TGz-pT-bJ6" secondAttribute="leading" id="3NZ-it-E9Y"/>
+                        <constraint firstAttribute="height" constant="175" id="Ere-iO-Vsg"/>
+                        <constraint firstAttribute="width" constant="175" id="FbK-8h-BXU"/>
+                        <constraint firstAttribute="trailing" secondItem="FbC-UZ-OSQ" secondAttribute="trailing" constant="20" id="IrJ-mX-JFZ"/>
+                        <constraint firstItem="grO-7p-XFW" firstAttribute="top" secondItem="TGz-pT-bJ6" secondAttribute="top" id="S1g-3s-pfa"/>
+                        <constraint firstItem="FbC-UZ-OSQ" firstAttribute="top" secondItem="TGz-pT-bJ6" secondAttribute="top" constant="20" id="W3d-QA-Dzj"/>
+                        <constraint firstAttribute="bottom" secondItem="grO-7p-XFW" secondAttribute="bottom" id="iGa-Su-7aa"/>
+                        <constraint firstAttribute="trailing" secondItem="grO-7p-XFW" secondAttribute="trailing" id="oZX-W0-Zmb"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="邀请码：16546853" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mZE-uF-tb5">
+                    <rect key="frame" x="135" y="550.5" width="144" height="20"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0AS-bf-i4E">
+                    <rect key="frame" x="132" y="600" width="150" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="1hd-Hb-3i5"/>
+                        <constraint firstAttribute="width" constant="150" id="rQi-Es-36U"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                    <state key="normal" title="保存二维码" backgroundImage="提现背景">
+                        <color key="titleColor" red="0.1019607843" green="0.1019607843" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="1bM-3F-ddD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="0v7-QA-lVC"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="fTj-YB-47M" secondAttribute="trailing" constant="15" id="186-Ts-NZn"/>
+                <constraint firstAttribute="bottom" secondItem="1bM-3F-ddD" secondAttribute="bottom" id="1H0-pV-5cD"/>
+                <constraint firstItem="mZE-uF-tb5" firstAttribute="top" secondItem="TGz-pT-bJ6" secondAttribute="bottom" constant="10" id="8c7-Cb-YXZ"/>
+                <constraint firstItem="fTj-YB-47M" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="15" id="GZH-lV-Z1J"/>
+                <constraint firstItem="0AS-bf-i4E" firstAttribute="centerX" secondItem="TGz-pT-bJ6" secondAttribute="centerX" id="P1W-Ee-fco"/>
+                <constraint firstItem="fTj-YB-47M" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="TN5-8S-oty"/>
+                <constraint firstItem="fTj-YB-47M" firstAttribute="centerY" secondItem="Q5M-cg-NOt" secondAttribute="centerY" id="bJa-aQ-qub"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="1bM-3F-ddD" secondAttribute="trailing" id="h0i-4L-18g"/>
+                <constraint firstItem="mZE-uF-tb5" firstAttribute="centerX" secondItem="TGz-pT-bJ6" secondAttribute="centerX" id="i7Y-zD-gEs"/>
+                <constraint firstItem="TGz-pT-bJ6" firstAttribute="centerY" secondItem="fTj-YB-47M" secondAttribute="centerY" id="ibb-un-FP3"/>
+                <constraint firstItem="1bM-3F-ddD" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="lnA-hP-hSo"/>
+                <constraint firstItem="TGz-pT-bJ6" firstAttribute="centerX" secondItem="fTj-YB-47M" secondAttribute="centerX" id="qRs-I9-k2y"/>
+                <constraint firstItem="0AS-bf-i4E" firstAttribute="bottom" secondItem="fTj-YB-47M" secondAttribute="bottom" constant="-70" id="uRW-7K-84j"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="137.68115942028987" y="114.50892857142857"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="二维码外框" width="175" height="175"/>
+        <image name="提现背景" width="130" height="34"/>
+        <image name="红包" width="375" height="514"/>
+        <image name="邀请背景" width="375" height="666.5"/>
+    </resources>
+</document>

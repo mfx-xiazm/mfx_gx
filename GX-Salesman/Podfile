@@ -15,4 +15,6 @@ target 'GX' do
     pod "JXCategoryView"
     pod "ZLCollectionViewFlowLayout"
     pod "ZXEmptyView"
+    pod "HBDNavigationBar"
+    pod "WMZDropDownMenu"
 end

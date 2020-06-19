@@ -27,7 +27,7 @@
     UINavigationBar *bar = [UINavigationBar appearance];
     bar.barTintColor = UIColorFromRGB(0xEA4A5C);
     bar.translucent = NO;
-    [bar setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0xEA4A5C) size:CGSizeMake(1, 0.5)] forBarMetrics:UIBarMetricsDefault];
+//    [bar setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0xEA4A5C) size:CGSizeMake(1, 0.5)] forBarMetrics:UIBarMetricsDefault];
     [bar setShadowImage:[UIImage imageWithColor:UIColorFromRGB(0xEA4A5C) size:CGSizeMake(1, 1)]];
     //    如果如下设置，则所有的导航栏控制器都会生效，并不仅仅限于本导航栏控制器
     //    UINavigationBar *bar = [UINavigationBar appearance];

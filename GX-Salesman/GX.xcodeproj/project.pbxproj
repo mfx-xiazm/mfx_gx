@@ -9,31 +9,80 @@
 /* Begin PBXBuildFile section */
 		11AF349C58F7A342E9336E28 /* libPods-GX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E67F6C2F7D067769D4BA925 /* libPods-GX.a */; };
 		4975FD162493263F00E5AEF2 /* UICKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 4975FD132493263F00E5AEF2 /* UICKeyChainStore.m */; };
+		4982897D249C92BC0064B4C1 /* GXShareCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4982897B249C92BC0064B4C1 /* GXShareCodeVC.m */; };
+		4982897E249C92BC0064B4C1 /* GXShareCodeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4982897C249C92BC0064B4C1 /* GXShareCodeVC.xib */; };
+		49828988249C9B090064B4C1 /* FCDropMenuRangeCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49828980249C9B040064B4C1 /* FCDropMenuRangeCollectionCell.m */; };
+		49828989249C9B090064B4C1 /* GXAccountManageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49828981249C9B050064B4C1 /* GXAccountManageCell.m */; };
+		4982898A249C9B090064B4C1 /* GXAccountManageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49828982249C9B060064B4C1 /* GXAccountManageCell.xib */; };
+		4982898B249C9B090064B4C1 /* FCDropMenuCollectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 49828985249C9B070064B4C1 /* FCDropMenuCollectionHeader.m */; };
+		4982898C249C9B090064B4C1 /* FCDropMenuCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49828987249C9B090064B4C1 /* FCDropMenuCollectionCell.m */; };
+		49828990249C9B180064B4C1 /* GXBalanceNoteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4982898E249C9B180064B4C1 /* GXBalanceNoteVC.m */; };
+		49828991249C9B180064B4C1 /* GXBalanceNoteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4982898E249C9B180064B4C1 /* GXBalanceNoteVC.m */; };
+		49828992249C9B180064B4C1 /* GXBalanceNoteVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4982898F249C9B180064B4C1 /* GXBalanceNoteVC.xib */; };
+		49828993249C9B180064B4C1 /* GXBalanceNoteVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4982898F249C9B180064B4C1 /* GXBalanceNoteVC.xib */; };
+		49828997249C9B240064B4C1 /* GXCashNoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49828995249C9B230064B4C1 /* GXCashNoteCell.m */; };
+		49828998249C9B240064B4C1 /* GXCashNoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49828995249C9B230064B4C1 /* GXCashNoteCell.m */; };
+		49828999249C9B240064B4C1 /* GXCashNoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49828996249C9B240064B4C1 /* GXCashNoteCell.xib */; };
+		4982899A249C9B240064B4C1 /* GXCashNoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49828996249C9B240064B4C1 /* GXCashNoteCell.xib */; };
+		498289A6249C9B310064B4C1 /* GXCashNoteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4982899C249C9B2D0064B4C1 /* GXCashNoteVC.m */; };
+		498289A7249C9B310064B4C1 /* GXCashNoteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4982899C249C9B2D0064B4C1 /* GXCashNoteVC.m */; };
+		498289A8249C9B310064B4C1 /* GXCashNoteVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4982899D249C9B2E0064B4C1 /* GXCashNoteVC.xib */; };
+		498289A9249C9B310064B4C1 /* GXCashNoteVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4982899D249C9B2E0064B4C1 /* GXCashNoteVC.xib */; };
+		498289AC249C9B310064B4C1 /* GXCashNoteDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 498289A1249C9B300064B4C1 /* GXCashNoteDetailVC.xib */; };
+		498289AD249C9B310064B4C1 /* GXCashNoteDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 498289A1249C9B300064B4C1 /* GXCashNoteDetailVC.xib */; };
+		498289AE249C9B310064B4C1 /* GXCashNoteDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 498289A2249C9B310064B4C1 /* GXCashNoteDetailVC.m */; };
+		498289AF249C9B310064B4C1 /* GXCashNoteDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 498289A2249C9B310064B4C1 /* GXCashNoteDetailVC.m */; };
+		498289B7249C9F790064B4C1 /* GXCashVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 498289B5249C9F780064B4C1 /* GXCashVC.m */; };
+		498289B8249C9F790064B4C1 /* GXCashVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 498289B6249C9F790064B4C1 /* GXCashVC.xib */; };
+		498289C5249CAB750064B4C1 /* GXMyTeamVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 498289C3249CAB750064B4C1 /* GXMyTeamVC.m */; };
+		498289C6249CAB750064B4C1 /* GXMyTeamVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 498289C4249CAB750064B4C1 /* GXMyTeamVC.xib */; };
+		498289CA249CAB8A0064B4C1 /* GXMyTeamCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 498289C8249CAB8A0064B4C1 /* GXMyTeamCell.m */; };
+		498289CB249CAB8A0064B4C1 /* GXMyTeamCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 498289C9249CAB8A0064B4C1 /* GXMyTeamCell.xib */; };
+		498289CE249CACF30064B4C1 /* GXMyTeamHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 498289CD249CACF30064B4C1 /* GXMyTeamHeader.m */; };
+		498289D0249CAD0D0064B4C1 /* GXMyTeamHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 498289CF249CAD0D0064B4C1 /* GXMyTeamHeader.xib */; };
+		498289D5249CB4C10064B4C1 /* GXPartnerIncomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 498289D3249CB4C10064B4C1 /* GXPartnerIncomeVC.m */; };
+		498289D6249CB4C10064B4C1 /* GXPartnerIncomeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 498289D4249CB4C10064B4C1 /* GXPartnerIncomeVC.xib */; };
+		498289DB249CB5590064B4C1 /* GXPartnerIncomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 498289D9249CB5590064B4C1 /* GXPartnerIncomeCell.m */; };
+		498289DC249CB5590064B4C1 /* GXPartnerIncomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 498289DA249CB5590064B4C1 /* GXPartnerIncomeCell.xib */; };
+		49828A07249CBF710064B4C1 /* GXMyOrderHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 498289E0249CBF5E0064B4C1 /* GXMyOrderHeader.xib */; };
+		49828A08249CBF710064B4C1 /* GXOrderDetailHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 498289E1249CBF5F0064B4C1 /* GXOrderDetailHeader.m */; };
+		49828A09249CBF710064B4C1 /* GXMyIdeaPhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 498289E3249CBF610064B4C1 /* GXMyIdeaPhotoCell.xib */; };
+		49828A0A249CBF710064B4C1 /* GXMyOrderHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 498289E4249CBF610064B4C1 /* GXMyOrderHeader.m */; };
+		49828A0B249CBF710064B4C1 /* GXUpOrderCellSectionFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 498289E6249CBF630064B4C1 /* GXUpOrderCellSectionFooter.xib */; };
+		49828A0C249CBF710064B4C1 /* GXRenewMyOrderBigCellHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 498289E7249CBF640064B4C1 /* GXRenewMyOrderBigCellHeader.m */; };
+		49828A0D249CBF710064B4C1 /* GXOrderDetailFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 498289E9249CBF650064B4C1 /* GXOrderDetailFooter.xib */; };
+		49828A0E249CBF710064B4C1 /* GXExpressShowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 498289EA249CBF650064B4C1 /* GXExpressShowView.xib */; };
+		49828A0F249CBF710064B4C1 /* GXOrderDetailFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 498289EB249CBF660064B4C1 /* GXOrderDetailFooter.m */; };
+		49828A10249CBF710064B4C1 /* GXRenewMyOrderBigCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 498289ED249CBF670064B4C1 /* GXRenewMyOrderBigCell.m */; };
+		49828A11249CBF710064B4C1 /* GXRefundDetailFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 498289F2249CBF680064B4C1 /* GXRefundDetailFooter.m */; };
+		49828A12249CBF710064B4C1 /* GXExpressShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 498289F3249CBF690064B4C1 /* GXExpressShowView.m */; };
+		49828A13249CBF710064B4C1 /* GXExpressShowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 498289F4249CBF690064B4C1 /* GXExpressShowCell.m */; };
+		49828A14249CBF710064B4C1 /* GXRenewMyOrderFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 498289F5249CBF6A0064B4C1 /* GXRenewMyOrderFooter.m */; };
+		49828A15249CBF710064B4C1 /* GXOrderDetailHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 498289F6249CBF6A0064B4C1 /* GXOrderDetailHeader.xib */; };
+		49828A16249CBF710064B4C1 /* GXRenewMyOrderBigCellHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 498289F7249CBF6A0064B4C1 /* GXRenewMyOrderBigCellHeader.xib */; };
+		49828A17249CBF710064B4C1 /* GXRenewMyOrderFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 498289F8249CBF6B0064B4C1 /* GXRenewMyOrderFooter.xib */; };
+		49828A18249CBF710064B4C1 /* GXRenewMyOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 498289F9249CBF6B0064B4C1 /* GXRenewMyOrderCell.xib */; };
+		49828A19249CBF710064B4C1 /* GXRefundDetailFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 498289FA249CBF6C0064B4C1 /* GXRefundDetailFooter.xib */; };
+		49828A1A249CBF710064B4C1 /* GXRenewMyOrderBigCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 498289FB249CBF6C0064B4C1 /* GXRenewMyOrderBigCell.xib */; };
+		49828A1B249CBF710064B4C1 /* GXRenewMyOrderHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 498289FD249CBF6D0064B4C1 /* GXRenewMyOrderHeader.m */; };
+		49828A1C249CBF710064B4C1 /* GXMyIdeaPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 498289FE249CBF6D0064B4C1 /* GXMyIdeaPhotoCell.m */; };
+		49828A1D249CBF710064B4C1 /* GXExpressShowCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 498289FF249CBF6E0064B4C1 /* GXExpressShowCell.xib */; };
+		49828A1E249CBF710064B4C1 /* GXRenewMyOrderHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49828A01249CBF6E0064B4C1 /* GXRenewMyOrderHeader.xib */; };
+		49828A1F249CBF710064B4C1 /* GXUpOrderCellSectionFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 49828A03249CBF6F0064B4C1 /* GXUpOrderCellSectionFooter.m */; };
+		49828A20249CBF710064B4C1 /* GXRenewMyOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49828A05249CBF710064B4C1 /* GXRenewMyOrderCell.m */; };
+		49828A24249CBF8D0064B4C1 /* GXShowMoneyProofVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49828A21249CBF8B0064B4C1 /* GXShowMoneyProofVC.xib */; };
+		49828A25249CBF8D0064B4C1 /* GXShowMoneyProofVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 49828A22249CBF8C0064B4C1 /* GXShowMoneyProofVC.m */; };
 		4994C48E2480FEE400A9A239 /* GXAccountManageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4994C47E2480FEE400A9A239 /* GXAccountManageVC.xib */; };
-		4994C48F2480FEE400A9A239 /* GXCashVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4994C47F2480FEE400A9A239 /* GXCashVC.m */; };
 		4994C4902480FEE400A9A239 /* GXAccountManageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4994C4822480FEE400A9A239 /* GXAccountManageVC.m */; };
-		4994C4912480FEE400A9A239 /* GXCashVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4994C4832480FEE400A9A239 /* GXCashVC.xib */; };
 		4994C4922480FEE400A9A239 /* GXFinanceLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 4994C4862480FEE400A9A239 /* GXFinanceLog.m */; };
 		4994C4932480FEE400A9A239 /* GXCashAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4994C4882480FEE400A9A239 /* GXCashAlert.xib */; };
-		4994C4942480FEE400A9A239 /* GXAccountManageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4994C4892480FEE400A9A239 /* GXAccountManageCell.xib */; };
-		4994C4952480FEE400A9A239 /* GXAccountManageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4994C48A2480FEE400A9A239 /* GXAccountManageCell.m */; };
 		4994C4962480FEE400A9A239 /* GXCashAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 4994C48D2480FEE400A9A239 /* GXCashAlert.m */; };
 		4994C49A2481006C00A9A239 /* GXUpOrderGoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4994C4972481006A00A9A239 /* GXUpOrderGoodsCell.m */; };
 		4994C49B2481006C00A9A239 /* GXUpOrderGoodsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4994C4982481006B00A9A239 /* GXUpOrderGoodsCell.xib */; };
 		4994C49F248100E400A9A239 /* GXOrderDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4994C49C248100E300A9A239 /* GXOrderDetailVC.m */; };
 		4994C4A0248100E400A9A239 /* GXOrderDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4994C49D248100E400A9A239 /* GXOrderDetailVC.xib */; };
-		4994C4B32481017A00A9A239 /* GXRefundDetailFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4994C4A22481017000A9A239 /* GXRefundDetailFooter.m */; };
-		4994C4B42481017A00A9A239 /* GXRefundDetailFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4994C4A32481017100A9A239 /* GXRefundDetailFooter.xib */; };
 		4994C4B52481017A00A9A239 /* GXExpressDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4994C4A42481017200A9A239 /* GXExpressDetailCell.xib */; };
 		4994C4B62481017A00A9A239 /* GXExpressDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4994C4A52481017200A9A239 /* GXExpressDetailCell.m */; };
-		4994C4B72481017A00A9A239 /* GXMyOrderHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4994C4A62481017300A9A239 /* GXMyOrderHeader.xib */; };
-		4994C4B82481017A00A9A239 /* GXMyOrderFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4994C4A82481017400A9A239 /* GXMyOrderFooter.xib */; };
-		4994C4B92481017A00A9A239 /* GXMyOrderFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4994C4AA2481017600A9A239 /* GXMyOrderFooter.m */; };
-		4994C4BA2481017A00A9A239 /* GXOrderDetailHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 4994C4AB2481017600A9A239 /* GXOrderDetailHeader.m */; };
-		4994C4BB2481017A00A9A239 /* GXOrderDetailFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4994C4AC2481017700A9A239 /* GXOrderDetailFooter.m */; };
-		4994C4BC2481017A00A9A239 /* GXOrderDetailHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4994C4AD2481017700A9A239 /* GXOrderDetailHeader.xib */; };
-		4994C4BD2481017A00A9A239 /* GXMyOrderHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 4994C4AE2481017800A9A239 /* GXMyOrderHeader.m */; };
-		4994C4BE2481017A00A9A239 /* GXOrderDetailFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4994C4B22481017A00A9A239 /* GXOrderDetailFooter.xib */; };
 		4994C4C32481023B00A9A239 /* GXMyOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4994C4C12481023A00A9A239 /* GXMyOrder.m */; };
 		4994C4C42481023B00A9A239 /* GXMyRefund.m in Sources */ = {isa = PBXBuildFile; fileRef = 4994C4C22481023B00A9A239 /* GXMyRefund.m */; };
 		4994C4C82481029000A9A239 /* GXMessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4994C4C52481028F00A9A239 /* GXMessageVC.m */; };
@@ -170,19 +219,97 @@
 		2975184EF33AC041D33915E0 /* Pods-GX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GX.release.xcconfig"; path = "Target Support Files/Pods-GX/Pods-GX.release.xcconfig"; sourceTree = "<group>"; };
 		4975FD132493263F00E5AEF2 /* UICKeyChainStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICKeyChainStore.m; sourceTree = "<group>"; };
 		4975FD142493263F00E5AEF2 /* UICKeyChainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICKeyChainStore.h; sourceTree = "<group>"; };
+		4982897A249C92BC0064B4C1 /* GXShareCodeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXShareCodeVC.h; sourceTree = "<group>"; };
+		4982897B249C92BC0064B4C1 /* GXShareCodeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXShareCodeVC.m; sourceTree = "<group>"; };
+		4982897C249C92BC0064B4C1 /* GXShareCodeVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXShareCodeVC.xib; sourceTree = "<group>"; };
+		4982897F249C9B030064B4C1 /* FCDropMenuCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCDropMenuCollectionCell.h; sourceTree = "<group>"; };
+		49828980249C9B040064B4C1 /* FCDropMenuRangeCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCDropMenuRangeCollectionCell.m; sourceTree = "<group>"; };
+		49828981249C9B050064B4C1 /* GXAccountManageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXAccountManageCell.m; sourceTree = "<group>"; };
+		49828982249C9B060064B4C1 /* GXAccountManageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXAccountManageCell.xib; sourceTree = "<group>"; };
+		49828983249C9B060064B4C1 /* FCDropMenuCollectionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCDropMenuCollectionHeader.h; sourceTree = "<group>"; };
+		49828984249C9B070064B4C1 /* FCDropMenuRangeCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCDropMenuRangeCollectionCell.h; sourceTree = "<group>"; };
+		49828985249C9B070064B4C1 /* FCDropMenuCollectionHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCDropMenuCollectionHeader.m; sourceTree = "<group>"; };
+		49828986249C9B080064B4C1 /* GXAccountManageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXAccountManageCell.h; sourceTree = "<group>"; };
+		49828987249C9B090064B4C1 /* FCDropMenuCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCDropMenuCollectionCell.m; sourceTree = "<group>"; };
+		4982898D249C9B170064B4C1 /* GXBalanceNoteVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXBalanceNoteVC.h; sourceTree = "<group>"; };
+		4982898E249C9B180064B4C1 /* GXBalanceNoteVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXBalanceNoteVC.m; sourceTree = "<group>"; };
+		4982898F249C9B180064B4C1 /* GXBalanceNoteVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXBalanceNoteVC.xib; sourceTree = "<group>"; };
+		49828994249C9B230064B4C1 /* GXCashNoteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXCashNoteCell.h; sourceTree = "<group>"; };
+		49828995249C9B230064B4C1 /* GXCashNoteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXCashNoteCell.m; sourceTree = "<group>"; };
+		49828996249C9B240064B4C1 /* GXCashNoteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXCashNoteCell.xib; sourceTree = "<group>"; };
+		4982899C249C9B2D0064B4C1 /* GXCashNoteVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXCashNoteVC.m; sourceTree = "<group>"; };
+		4982899D249C9B2E0064B4C1 /* GXCashNoteVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXCashNoteVC.xib; sourceTree = "<group>"; };
+		498289A0249C9B2F0064B4C1 /* GXCashNoteVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXCashNoteVC.h; sourceTree = "<group>"; };
+		498289A1249C9B300064B4C1 /* GXCashNoteDetailVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXCashNoteDetailVC.xib; sourceTree = "<group>"; };
+		498289A2249C9B310064B4C1 /* GXCashNoteDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXCashNoteDetailVC.m; sourceTree = "<group>"; };
+		498289A3249C9B310064B4C1 /* GXCashNoteDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXCashNoteDetailVC.h; sourceTree = "<group>"; };
+		498289B4249C9F780064B4C1 /* GXCashVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXCashVC.h; sourceTree = "<group>"; };
+		498289B5249C9F780064B4C1 /* GXCashVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXCashVC.m; sourceTree = "<group>"; };
+		498289B6249C9F790064B4C1 /* GXCashVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXCashVC.xib; sourceTree = "<group>"; };
+		498289C2249CAB750064B4C1 /* GXMyTeamVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXMyTeamVC.h; sourceTree = "<group>"; };
+		498289C3249CAB750064B4C1 /* GXMyTeamVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXMyTeamVC.m; sourceTree = "<group>"; };
+		498289C4249CAB750064B4C1 /* GXMyTeamVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXMyTeamVC.xib; sourceTree = "<group>"; };
+		498289C7249CAB8A0064B4C1 /* GXMyTeamCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXMyTeamCell.h; sourceTree = "<group>"; };
+		498289C8249CAB8A0064B4C1 /* GXMyTeamCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXMyTeamCell.m; sourceTree = "<group>"; };
+		498289C9249CAB8A0064B4C1 /* GXMyTeamCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXMyTeamCell.xib; sourceTree = "<group>"; };
+		498289CC249CACF30064B4C1 /* GXMyTeamHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXMyTeamHeader.h; sourceTree = "<group>"; };
+		498289CD249CACF30064B4C1 /* GXMyTeamHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXMyTeamHeader.m; sourceTree = "<group>"; };
+		498289CF249CAD0D0064B4C1 /* GXMyTeamHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXMyTeamHeader.xib; sourceTree = "<group>"; };
+		498289D2249CB4C10064B4C1 /* GXPartnerIncomeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXPartnerIncomeVC.h; sourceTree = "<group>"; };
+		498289D3249CB4C10064B4C1 /* GXPartnerIncomeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXPartnerIncomeVC.m; sourceTree = "<group>"; };
+		498289D4249CB4C10064B4C1 /* GXPartnerIncomeVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXPartnerIncomeVC.xib; sourceTree = "<group>"; };
+		498289D8249CB5590064B4C1 /* GXPartnerIncomeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXPartnerIncomeCell.h; sourceTree = "<group>"; };
+		498289D9249CB5590064B4C1 /* GXPartnerIncomeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXPartnerIncomeCell.m; sourceTree = "<group>"; };
+		498289DA249CB5590064B4C1 /* GXPartnerIncomeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXPartnerIncomeCell.xib; sourceTree = "<group>"; };
+		498289E0249CBF5E0064B4C1 /* GXMyOrderHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXMyOrderHeader.xib; sourceTree = "<group>"; };
+		498289E1249CBF5F0064B4C1 /* GXOrderDetailHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXOrderDetailHeader.m; sourceTree = "<group>"; };
+		498289E2249CBF600064B4C1 /* GXMyOrderHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXMyOrderHeader.h; sourceTree = "<group>"; };
+		498289E3249CBF610064B4C1 /* GXMyIdeaPhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXMyIdeaPhotoCell.xib; sourceTree = "<group>"; };
+		498289E4249CBF610064B4C1 /* GXMyOrderHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXMyOrderHeader.m; sourceTree = "<group>"; };
+		498289E5249CBF620064B4C1 /* GXRefundDetailFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXRefundDetailFooter.h; sourceTree = "<group>"; };
+		498289E6249CBF630064B4C1 /* GXUpOrderCellSectionFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXUpOrderCellSectionFooter.xib; sourceTree = "<group>"; };
+		498289E7249CBF640064B4C1 /* GXRenewMyOrderBigCellHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXRenewMyOrderBigCellHeader.m; sourceTree = "<group>"; };
+		498289E8249CBF650064B4C1 /* GXOrderDetailHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXOrderDetailHeader.h; sourceTree = "<group>"; };
+		498289E9249CBF650064B4C1 /* GXOrderDetailFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXOrderDetailFooter.xib; sourceTree = "<group>"; };
+		498289EA249CBF650064B4C1 /* GXExpressShowView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXExpressShowView.xib; sourceTree = "<group>"; };
+		498289EB249CBF660064B4C1 /* GXOrderDetailFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXOrderDetailFooter.m; sourceTree = "<group>"; };
+		498289EC249CBF660064B4C1 /* GXExpressShowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXExpressShowView.h; sourceTree = "<group>"; };
+		498289ED249CBF670064B4C1 /* GXRenewMyOrderBigCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXRenewMyOrderBigCell.m; sourceTree = "<group>"; };
+		498289EE249CBF670064B4C1 /* GXMyIdeaPhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXMyIdeaPhotoCell.h; sourceTree = "<group>"; };
+		498289EF249CBF670064B4C1 /* GXOrderDetailFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXOrderDetailFooter.h; sourceTree = "<group>"; };
+		498289F0249CBF680064B4C1 /* GXRenewMyOrderBigCellHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXRenewMyOrderBigCellHeader.h; sourceTree = "<group>"; };
+		498289F1249CBF680064B4C1 /* GXExpressShowCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXExpressShowCell.h; sourceTree = "<group>"; };
+		498289F2249CBF680064B4C1 /* GXRefundDetailFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXRefundDetailFooter.m; sourceTree = "<group>"; };
+		498289F3249CBF690064B4C1 /* GXExpressShowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXExpressShowView.m; sourceTree = "<group>"; };
+		498289F4249CBF690064B4C1 /* GXExpressShowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXExpressShowCell.m; sourceTree = "<group>"; };
+		498289F5249CBF6A0064B4C1 /* GXRenewMyOrderFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXRenewMyOrderFooter.m; sourceTree = "<group>"; };
+		498289F6249CBF6A0064B4C1 /* GXOrderDetailHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXOrderDetailHeader.xib; sourceTree = "<group>"; };
+		498289F7249CBF6A0064B4C1 /* GXRenewMyOrderBigCellHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXRenewMyOrderBigCellHeader.xib; sourceTree = "<group>"; };
+		498289F8249CBF6B0064B4C1 /* GXRenewMyOrderFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXRenewMyOrderFooter.xib; sourceTree = "<group>"; };
+		498289F9249CBF6B0064B4C1 /* GXRenewMyOrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXRenewMyOrderCell.xib; sourceTree = "<group>"; };
+		498289FA249CBF6C0064B4C1 /* GXRefundDetailFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXRefundDetailFooter.xib; sourceTree = "<group>"; };
+		498289FB249CBF6C0064B4C1 /* GXRenewMyOrderBigCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXRenewMyOrderBigCell.xib; sourceTree = "<group>"; };
+		498289FC249CBF6C0064B4C1 /* GXRenewMyOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXRenewMyOrderCell.h; sourceTree = "<group>"; };
+		498289FD249CBF6D0064B4C1 /* GXRenewMyOrderHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXRenewMyOrderHeader.m; sourceTree = "<group>"; };
+		498289FE249CBF6D0064B4C1 /* GXMyIdeaPhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXMyIdeaPhotoCell.m; sourceTree = "<group>"; };
+		498289FF249CBF6E0064B4C1 /* GXExpressShowCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXExpressShowCell.xib; sourceTree = "<group>"; };
+		49828A00249CBF6E0064B4C1 /* GXRenewMyOrderHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXRenewMyOrderHeader.h; sourceTree = "<group>"; };
+		49828A01249CBF6E0064B4C1 /* GXRenewMyOrderHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXRenewMyOrderHeader.xib; sourceTree = "<group>"; };
+		49828A02249CBF6F0064B4C1 /* GXRenewMyOrderFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXRenewMyOrderFooter.h; sourceTree = "<group>"; };
+		49828A03249CBF6F0064B4C1 /* GXUpOrderCellSectionFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXUpOrderCellSectionFooter.m; sourceTree = "<group>"; };
+		49828A04249CBF700064B4C1 /* GXRenewMyOrderBigCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXRenewMyOrderBigCell.h; sourceTree = "<group>"; };
+		49828A05249CBF710064B4C1 /* GXRenewMyOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXRenewMyOrderCell.m; sourceTree = "<group>"; };
+		49828A06249CBF710064B4C1 /* GXUpOrderCellSectionFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXUpOrderCellSectionFooter.h; sourceTree = "<group>"; };
+		49828A21249CBF8B0064B4C1 /* GXShowMoneyProofVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXShowMoneyProofVC.xib; sourceTree = "<group>"; };
+		49828A22249CBF8C0064B4C1 /* GXShowMoneyProofVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXShowMoneyProofVC.m; sourceTree = "<group>"; };
+		49828A23249CBF8D0064B4C1 /* GXShowMoneyProofVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXShowMoneyProofVC.h; sourceTree = "<group>"; };
 		4994C47E2480FEE400A9A239 /* GXAccountManageVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXAccountManageVC.xib; sourceTree = "<group>"; };
-		4994C47F2480FEE400A9A239 /* GXCashVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXCashVC.m; sourceTree = "<group>"; };
 		4994C4802480FEE400A9A239 /* GXAccountManageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXAccountManageVC.h; sourceTree = "<group>"; };
-		4994C4812480FEE400A9A239 /* GXCashVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXCashVC.h; sourceTree = "<group>"; };
 		4994C4822480FEE400A9A239 /* GXAccountManageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXAccountManageVC.m; sourceTree = "<group>"; };
-		4994C4832480FEE400A9A239 /* GXCashVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXCashVC.xib; sourceTree = "<group>"; };
 		4994C4852480FEE400A9A239 /* GXFinanceLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXFinanceLog.h; sourceTree = "<group>"; };
 		4994C4862480FEE400A9A239 /* GXFinanceLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXFinanceLog.m; sourceTree = "<group>"; };
 		4994C4882480FEE400A9A239 /* GXCashAlert.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXCashAlert.xib; sourceTree = "<group>"; };
-		4994C4892480FEE400A9A239 /* GXAccountManageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXAccountManageCell.xib; sourceTree = "<group>"; };
-		4994C48A2480FEE400A9A239 /* GXAccountManageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXAccountManageCell.m; sourceTree = "<group>"; };
 		4994C48B2480FEE400A9A239 /* GXCashAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXCashAlert.h; sourceTree = "<group>"; };
-		4994C48C2480FEE400A9A239 /* GXAccountManageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXAccountManageCell.h; sourceTree = "<group>"; };
 		4994C48D2480FEE400A9A239 /* GXCashAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXCashAlert.m; sourceTree = "<group>"; };
 		4994C4972481006A00A9A239 /* GXUpOrderGoodsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXUpOrderGoodsCell.m; sourceTree = "<group>"; };
 		4994C4982481006B00A9A239 /* GXUpOrderGoodsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXUpOrderGoodsCell.xib; sourceTree = "<group>"; };
@@ -190,24 +317,9 @@
 		4994C49C248100E300A9A239 /* GXOrderDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXOrderDetailVC.m; sourceTree = "<group>"; };
 		4994C49D248100E400A9A239 /* GXOrderDetailVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXOrderDetailVC.xib; sourceTree = "<group>"; };
 		4994C49E248100E400A9A239 /* GXOrderDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXOrderDetailVC.h; sourceTree = "<group>"; };
-		4994C4A12481017000A9A239 /* GXOrderDetailHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXOrderDetailHeader.h; sourceTree = "<group>"; };
-		4994C4A22481017000A9A239 /* GXRefundDetailFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXRefundDetailFooter.m; sourceTree = "<group>"; };
-		4994C4A32481017100A9A239 /* GXRefundDetailFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXRefundDetailFooter.xib; sourceTree = "<group>"; };
 		4994C4A42481017200A9A239 /* GXExpressDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXExpressDetailCell.xib; sourceTree = "<group>"; };
 		4994C4A52481017200A9A239 /* GXExpressDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXExpressDetailCell.m; sourceTree = "<group>"; };
-		4994C4A62481017300A9A239 /* GXMyOrderHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXMyOrderHeader.xib; sourceTree = "<group>"; };
-		4994C4A72481017400A9A239 /* GXMyOrderFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXMyOrderFooter.h; sourceTree = "<group>"; };
-		4994C4A82481017400A9A239 /* GXMyOrderFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXMyOrderFooter.xib; sourceTree = "<group>"; };
-		4994C4A92481017500A9A239 /* GXOrderDetailFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXOrderDetailFooter.h; sourceTree = "<group>"; };
-		4994C4AA2481017600A9A239 /* GXMyOrderFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXMyOrderFooter.m; sourceTree = "<group>"; };
-		4994C4AB2481017600A9A239 /* GXOrderDetailHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXOrderDetailHeader.m; sourceTree = "<group>"; };
-		4994C4AC2481017700A9A239 /* GXOrderDetailFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXOrderDetailFooter.m; sourceTree = "<group>"; };
-		4994C4AD2481017700A9A239 /* GXOrderDetailHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXOrderDetailHeader.xib; sourceTree = "<group>"; };
-		4994C4AE2481017800A9A239 /* GXMyOrderHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXMyOrderHeader.m; sourceTree = "<group>"; };
 		4994C4AF2481017900A9A239 /* GXExpressDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXExpressDetailCell.h; sourceTree = "<group>"; };
-		4994C4B02481017900A9A239 /* GXRefundDetailFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXRefundDetailFooter.h; sourceTree = "<group>"; };
-		4994C4B12481017A00A9A239 /* GXMyOrderHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXMyOrderHeader.h; sourceTree = "<group>"; };
-		4994C4B22481017A00A9A239 /* GXOrderDetailFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXOrderDetailFooter.xib; sourceTree = "<group>"; };
 		4994C4BF2481023900A9A239 /* GXMyRefund.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXMyRefund.h; sourceTree = "<group>"; };
 		4994C4C02481023A00A9A239 /* GXMyOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXMyOrder.h; sourceTree = "<group>"; };
 		4994C4C12481023A00A9A239 /* GXMyOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXMyOrder.m; sourceTree = "<group>"; };
@@ -458,6 +570,232 @@
 			path = UICKeyChainStore;
 			sourceTree = "<group>";
 		};
+		498289B0249C9D910064B4C1 /* 邀请好友 */ = {
+			isa = PBXGroup;
+			children = (
+				4982897A249C92BC0064B4C1 /* GXShareCodeVC.h */,
+				4982897B249C92BC0064B4C1 /* GXShareCodeVC.m */,
+				4982897C249C92BC0064B4C1 /* GXShareCodeVC.xib */,
+			);
+			name = "邀请好友";
+			sourceTree = "<group>";
+		};
+		498289B1249C9DA00064B4C1 /* 余额记录 */ = {
+			isa = PBXGroup;
+			children = (
+				4982898D249C9B170064B4C1 /* GXBalanceNoteVC.h */,
+				4982898E249C9B180064B4C1 /* GXBalanceNoteVC.m */,
+				4982898F249C9B180064B4C1 /* GXBalanceNoteVC.xib */,
+			);
+			name = "余额记录";
+			sourceTree = "<group>";
+		};
+		498289B2249C9DB80064B4C1 /* 提现记录 */ = {
+			isa = PBXGroup;
+			children = (
+				498289A3249C9B310064B4C1 /* GXCashNoteDetailVC.h */,
+				498289A2249C9B310064B4C1 /* GXCashNoteDetailVC.m */,
+				498289A1249C9B300064B4C1 /* GXCashNoteDetailVC.xib */,
+				498289A0249C9B2F0064B4C1 /* GXCashNoteVC.h */,
+				4982899C249C9B2D0064B4C1 /* GXCashNoteVC.m */,
+				4982899D249C9B2E0064B4C1 /* GXCashNoteVC.xib */,
+				498289B4249C9F780064B4C1 /* GXCashVC.h */,
+				498289B5249C9F780064B4C1 /* GXCashVC.m */,
+				498289B6249C9F790064B4C1 /* GXCashVC.xib */,
+			);
+			name = "提现记录";
+			sourceTree = "<group>";
+		};
+		498289B9249C9FB20064B4C1 /* 余额|提现 */ = {
+			isa = PBXGroup;
+			children = (
+				4982897F249C9B030064B4C1 /* FCDropMenuCollectionCell.h */,
+				49828987249C9B090064B4C1 /* FCDropMenuCollectionCell.m */,
+				49828983249C9B060064B4C1 /* FCDropMenuCollectionHeader.h */,
+				49828985249C9B070064B4C1 /* FCDropMenuCollectionHeader.m */,
+				49828984249C9B070064B4C1 /* FCDropMenuRangeCollectionCell.h */,
+				49828980249C9B040064B4C1 /* FCDropMenuRangeCollectionCell.m */,
+				49828994249C9B230064B4C1 /* GXCashNoteCell.h */,
+				49828995249C9B230064B4C1 /* GXCashNoteCell.m */,
+				49828996249C9B240064B4C1 /* GXCashNoteCell.xib */,
+				49828986249C9B080064B4C1 /* GXAccountManageCell.h */,
+				49828981249C9B050064B4C1 /* GXAccountManageCell.m */,
+				49828982249C9B060064B4C1 /* GXAccountManageCell.xib */,
+				4994C48B2480FEE400A9A239 /* GXCashAlert.h */,
+				4994C48D2480FEE400A9A239 /* GXCashAlert.m */,
+				4994C4882480FEE400A9A239 /* GXCashAlert.xib */,
+			);
+			name = "余额|提现";
+			sourceTree = "<group>";
+		};
+		498289BB249CA46A0064B4C1 /* 客户管理 */ = {
+			isa = PBXGroup;
+			children = (
+				90BB98C9234DB36400444ACC /* GXClientManageVC.h */,
+				90BB98CA234DB36400444ACC /* GXClientManageVC.m */,
+				90BB98CB234DB36400444ACC /* GXClientManageVC.xib */,
+				90BB98DD234DB81300444ACC /* GXClientManageChildVC.h */,
+				90BB98DE234DB81300444ACC /* GXClientManageChildVC.m */,
+				90BB98DF234DB81300444ACC /* GXClientManageChildVC.xib */,
+			);
+			name = "客户管理";
+			sourceTree = "<group>";
+		};
+		498289BD249CA4AA0064B4C1 /* 余额记录 */ = {
+			isa = PBXGroup;
+			children = (
+				4994C4852480FEE400A9A239 /* GXFinanceLog.h */,
+				4994C4862480FEE400A9A239 /* GXFinanceLog.m */,
+			);
+			name = "余额记录";
+			sourceTree = "<group>";
+		};
+		498289BE249CA4B60064B4C1 /* 客户管理 */ = {
+			isa = PBXGroup;
+			children = (
+				9088421D2375190F005D4382 /* GXClient.h */,
+				9088421E2375190F005D4382 /* GXClient.m */,
+			);
+			name = "客户管理";
+			sourceTree = "<group>";
+		};
+		498289BF249CA4CD0064B4C1 /* 客户管理 */ = {
+			isa = PBXGroup;
+			children = (
+				90BB98E2234DBBE300444ACC /* GXClientManageCell.h */,
+				90BB98E3234DBBE300444ACC /* GXClientManageCell.m */,
+				90BB98E4234DBBE300444ACC /* GXClientManageCell.xib */,
+			);
+			name = "客户管理";
+			sourceTree = "<group>";
+		};
+		498289C0249CAB0F0064B4C1 /* 我的团队 */ = {
+			isa = PBXGroup;
+			children = (
+				498289C2249CAB750064B4C1 /* GXMyTeamVC.h */,
+				498289C3249CAB750064B4C1 /* GXMyTeamVC.m */,
+				498289C4249CAB750064B4C1 /* GXMyTeamVC.xib */,
+			);
+			name = "我的团队";
+			sourceTree = "<group>";
+		};
+		498289C1249CAB180064B4C1 /* 我的团队 */ = {
+			isa = PBXGroup;
+			children = (
+				498289C7249CAB8A0064B4C1 /* GXMyTeamCell.h */,
+				498289C8249CAB8A0064B4C1 /* GXMyTeamCell.m */,
+				498289C9249CAB8A0064B4C1 /* GXMyTeamCell.xib */,
+				498289CC249CACF30064B4C1 /* GXMyTeamHeader.h */,
+				498289CD249CACF30064B4C1 /* GXMyTeamHeader.m */,
+				498289CF249CAD0D0064B4C1 /* GXMyTeamHeader.xib */,
+			);
+			name = "我的团队";
+			sourceTree = "<group>";
+		};
+		498289D1249CB4A20064B4C1 /* 数据统计 */ = {
+			isa = PBXGroup;
+			children = (
+				498289D2249CB4C10064B4C1 /* GXPartnerIncomeVC.h */,
+				498289D3249CB4C10064B4C1 /* GXPartnerIncomeVC.m */,
+				498289D4249CB4C10064B4C1 /* GXPartnerIncomeVC.xib */,
+			);
+			name = "数据统计";
+			sourceTree = "<group>";
+		};
+		498289D7249CB5420064B4C1 /* 数据统计 */ = {
+			isa = PBXGroup;
+			children = (
+				498289D8249CB5590064B4C1 /* GXPartnerIncomeCell.h */,
+				498289D9249CB5590064B4C1 /* GXPartnerIncomeCell.m */,
+				498289DA249CB5590064B4C1 /* GXPartnerIncomeCell.xib */,
+			);
+			name = "数据统计";
+			sourceTree = "<group>";
+		};
+		498289DD249CBB830064B4C1 /* 订单管理 */ = {
+			isa = PBXGroup;
+			children = (
+				90BB98CE234DB3B500444ACC /* GXSalerOrderManageVC.h */,
+				90BB98CF234DB3B500444ACC /* GXSalerOrderManageVC.m */,
+				90BB98D0234DB3B500444ACC /* GXSalerOrderManageVC.xib */,
+				90BB98D3234DB3C400444ACC /* GXSalerOrderManageChildVC.h */,
+				90BB98D4234DB3C400444ACC /* GXSalerOrderManageChildVC.m */,
+				90BB98D5234DB3C400444ACC /* GXSalerOrderManageChildVC.xib */,
+				4994C49E248100E400A9A239 /* GXOrderDetailVC.h */,
+				4994C49C248100E300A9A239 /* GXOrderDetailVC.m */,
+				4994C49D248100E400A9A239 /* GXOrderDetailVC.xib */,
+				49828A23249CBF8D0064B4C1 /* GXShowMoneyProofVC.h */,
+				49828A22249CBF8C0064B4C1 /* GXShowMoneyProofVC.m */,
+				49828A21249CBF8B0064B4C1 /* GXShowMoneyProofVC.xib */,
+			);
+			name = "订单管理";
+			sourceTree = "<group>";
+		};
+		498289DE249CBB900064B4C1 /* 订单管理 */ = {
+			isa = PBXGroup;
+			children = (
+				9088422023753E9E005D4382 /* GXSalerOrder.h */,
+				9088422123753E9E005D4382 /* GXSalerOrder.m */,
+				4994C4C02481023A00A9A239 /* GXMyOrder.h */,
+				4994C4C12481023A00A9A239 /* GXMyOrder.m */,
+				4994C4BF2481023900A9A239 /* GXMyRefund.h */,
+				4994C4C22481023B00A9A239 /* GXMyRefund.m */,
+			);
+			name = "订单管理";
+			sourceTree = "<group>";
+		};
+		498289DF249CBB990064B4C1 /* 订单管理 */ = {
+			isa = PBXGroup;
+			children = (
+				4994C4AF2481017900A9A239 /* GXExpressDetailCell.h */,
+				4994C4A52481017200A9A239 /* GXExpressDetailCell.m */,
+				4994C4A42481017200A9A239 /* GXExpressDetailCell.xib */,
+				4994C4992481006C00A9A239 /* GXUpOrderGoodsCell.h */,
+				4994C4972481006A00A9A239 /* GXUpOrderGoodsCell.m */,
+				4994C4982481006B00A9A239 /* GXUpOrderGoodsCell.xib */,
+				498289F1249CBF680064B4C1 /* GXExpressShowCell.h */,
+				498289F4249CBF690064B4C1 /* GXExpressShowCell.m */,
+				498289FF249CBF6E0064B4C1 /* GXExpressShowCell.xib */,
+				498289EC249CBF660064B4C1 /* GXExpressShowView.h */,
+				498289F3249CBF690064B4C1 /* GXExpressShowView.m */,
+				498289EA249CBF650064B4C1 /* GXExpressShowView.xib */,
+				498289EE249CBF670064B4C1 /* GXMyIdeaPhotoCell.h */,
+				498289FE249CBF6D0064B4C1 /* GXMyIdeaPhotoCell.m */,
+				498289E3249CBF610064B4C1 /* GXMyIdeaPhotoCell.xib */,
+				498289E2249CBF600064B4C1 /* GXMyOrderHeader.h */,
+				498289E4249CBF610064B4C1 /* GXMyOrderHeader.m */,
+				498289E0249CBF5E0064B4C1 /* GXMyOrderHeader.xib */,
+				498289EF249CBF670064B4C1 /* GXOrderDetailFooter.h */,
+				498289EB249CBF660064B4C1 /* GXOrderDetailFooter.m */,
+				498289E9249CBF650064B4C1 /* GXOrderDetailFooter.xib */,
+				498289E8249CBF650064B4C1 /* GXOrderDetailHeader.h */,
+				498289E1249CBF5F0064B4C1 /* GXOrderDetailHeader.m */,
+				498289F6249CBF6A0064B4C1 /* GXOrderDetailHeader.xib */,
+				498289E5249CBF620064B4C1 /* GXRefundDetailFooter.h */,
+				498289F2249CBF680064B4C1 /* GXRefundDetailFooter.m */,
+				498289FA249CBF6C0064B4C1 /* GXRefundDetailFooter.xib */,
+				49828A04249CBF700064B4C1 /* GXRenewMyOrderBigCell.h */,
+				498289ED249CBF670064B4C1 /* GXRenewMyOrderBigCell.m */,
+				498289FB249CBF6C0064B4C1 /* GXRenewMyOrderBigCell.xib */,
+				498289F0249CBF680064B4C1 /* GXRenewMyOrderBigCellHeader.h */,
+				498289E7249CBF640064B4C1 /* GXRenewMyOrderBigCellHeader.m */,
+				498289F7249CBF6A0064B4C1 /* GXRenewMyOrderBigCellHeader.xib */,
+				498289FC249CBF6C0064B4C1 /* GXRenewMyOrderCell.h */,
+				49828A05249CBF710064B4C1 /* GXRenewMyOrderCell.m */,
+				498289F9249CBF6B0064B4C1 /* GXRenewMyOrderCell.xib */,
+				49828A02249CBF6F0064B4C1 /* GXRenewMyOrderFooter.h */,
+				498289F5249CBF6A0064B4C1 /* GXRenewMyOrderFooter.m */,
+				498289F8249CBF6B0064B4C1 /* GXRenewMyOrderFooter.xib */,
+				49828A00249CBF6E0064B4C1 /* GXRenewMyOrderHeader.h */,
+				498289FD249CBF6D0064B4C1 /* GXRenewMyOrderHeader.m */,
+				49828A01249CBF6E0064B4C1 /* GXRenewMyOrderHeader.xib */,
+				49828A06249CBF710064B4C1 /* GXUpOrderCellSectionFooter.h */,
+				49828A03249CBF6F0064B4C1 /* GXUpOrderCellSectionFooter.m */,
+				498289E6249CBF630064B4C1 /* GXUpOrderCellSectionFooter.xib */,
+			);
+			name = "订单管理";
+			sourceTree = "<group>";
+		};
 		4994C47C2480FEE400A9A239 /* Acount-账户管理 */ = {
 			isa = PBXGroup;
 			children = (
@@ -474,9 +812,6 @@
 				4994C4802480FEE400A9A239 /* GXAccountManageVC.h */,
 				4994C4822480FEE400A9A239 /* GXAccountManageVC.m */,
 				4994C47E2480FEE400A9A239 /* GXAccountManageVC.xib */,
-				4994C4812480FEE400A9A239 /* GXCashVC.h */,
-				4994C47F2480FEE400A9A239 /* GXCashVC.m */,
-				4994C4832480FEE400A9A239 /* GXCashVC.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -484,8 +819,6 @@
 		4994C4842480FEE400A9A239 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				4994C4852480FEE400A9A239 /* GXFinanceLog.h */,
-				4994C4862480FEE400A9A239 /* GXFinanceLog.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -493,12 +826,6 @@
 		4994C4872480FEE400A9A239 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				4994C4882480FEE400A9A239 /* GXCashAlert.xib */,
-				4994C4892480FEE400A9A239 /* GXAccountManageCell.xib */,
-				4994C48A2480FEE400A9A239 /* GXAccountManageCell.m */,
-				4994C48B2480FEE400A9A239 /* GXCashAlert.h */,
-				4994C48C2480FEE400A9A239 /* GXAccountManageCell.h */,
-				4994C48D2480FEE400A9A239 /* GXCashAlert.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1011,6 +1338,13 @@
 				90BB98D8234DB3EF00444ACC /* GXSalerMyVC.h */,
 				90BB98D9234DB3EF00444ACC /* GXSalerMyVC.m */,
 				90BB98DA234DB3EF00444ACC /* GXSalerMyVC.xib */,
+				498289DD249CBB830064B4C1 /* 订单管理 */,
+				498289D1249CB4A20064B4C1 /* 数据统计 */,
+				498289C0249CAB0F0064B4C1 /* 我的团队 */,
+				498289BB249CA46A0064B4C1 /* 客户管理 */,
+				498289B0249C9D910064B4C1 /* 邀请好友 */,
+				498289B1249C9DA00064B4C1 /* 余额记录 */,
+				498289B2249C9DB80064B4C1 /* 提现记录 */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1018,6 +1352,9 @@
 		90C0B4292340D27200A8C55B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				498289DE249CBB900064B4C1 /* 订单管理 */,
+				498289BE249CA4B60064B4C1 /* 客户管理 */,
+				498289BD249CA4AA0064B4C1 /* 余额记录 */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1025,6 +1362,11 @@
 		90C0B42A2340D27200A8C55B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				498289DF249CBB990064B4C1 /* 订单管理 */,
+				498289D7249CB5420064B4C1 /* 数据统计 */,
+				498289C1249CAB180064B4C1 /* 我的团队 */,
+				498289BF249CA4CD0064B4C1 /* 客户管理 */,
+				498289B9249C9FB20064B4C1 /* 余额|提现 */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1042,15 +1384,6 @@
 		90C0B42C2340D27200A8C55B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				90BB98CE234DB3B500444ACC /* GXSalerOrderManageVC.h */,
-				90BB98CF234DB3B500444ACC /* GXSalerOrderManageVC.m */,
-				90BB98D0234DB3B500444ACC /* GXSalerOrderManageVC.xib */,
-				90BB98D3234DB3C400444ACC /* GXSalerOrderManageChildVC.h */,
-				90BB98D4234DB3C400444ACC /* GXSalerOrderManageChildVC.m */,
-				90BB98D5234DB3C400444ACC /* GXSalerOrderManageChildVC.xib */,
-				4994C49E248100E400A9A239 /* GXOrderDetailVC.h */,
-				4994C49C248100E300A9A239 /* GXOrderDetailVC.m */,
-				4994C49D248100E400A9A239 /* GXOrderDetailVC.xib */,
 				4994C4C72481029000A9A239 /* GXMessageVC.h */,
 				4994C4C52481028F00A9A239 /* GXMessageVC.m */,
 				4994C4C62481029000A9A239 /* GXMessageVC.xib */,
@@ -1071,12 +1404,6 @@
 				4994C4E12481046300A9A239 /* GXMyCoupon.m */,
 				4994C4CA248102DC00A9A239 /* GXMessage.h */,
 				4994C4CB248102DC00A9A239 /* GXMessage.m */,
-				9088422023753E9E005D4382 /* GXSalerOrder.h */,
-				9088422123753E9E005D4382 /* GXSalerOrder.m */,
-				4994C4C02481023A00A9A239 /* GXMyOrder.h */,
-				4994C4C12481023A00A9A239 /* GXMyOrder.m */,
-				4994C4BF2481023900A9A239 /* GXMyRefund.h */,
-				4994C4C22481023B00A9A239 /* GXMyRefund.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1090,27 +1417,6 @@
 				4994C4CF248102EA00A9A239 /* GXMessageCell.h */,
 				4994C4CD248102E900A9A239 /* GXMessageCell.m */,
 				4994C4CE248102E900A9A239 /* GXMessageCell.xib */,
-				4994C4AF2481017900A9A239 /* GXExpressDetailCell.h */,
-				4994C4A52481017200A9A239 /* GXExpressDetailCell.m */,
-				4994C4A42481017200A9A239 /* GXExpressDetailCell.xib */,
-				4994C4A72481017400A9A239 /* GXMyOrderFooter.h */,
-				4994C4AA2481017600A9A239 /* GXMyOrderFooter.m */,
-				4994C4A82481017400A9A239 /* GXMyOrderFooter.xib */,
-				4994C4B12481017A00A9A239 /* GXMyOrderHeader.h */,
-				4994C4AE2481017800A9A239 /* GXMyOrderHeader.m */,
-				4994C4A62481017300A9A239 /* GXMyOrderHeader.xib */,
-				4994C4A92481017500A9A239 /* GXOrderDetailFooter.h */,
-				4994C4AC2481017700A9A239 /* GXOrderDetailFooter.m */,
-				4994C4B22481017A00A9A239 /* GXOrderDetailFooter.xib */,
-				4994C4A12481017000A9A239 /* GXOrderDetailHeader.h */,
-				4994C4AB2481017600A9A239 /* GXOrderDetailHeader.m */,
-				4994C4AD2481017700A9A239 /* GXOrderDetailHeader.xib */,
-				4994C4B02481017900A9A239 /* GXRefundDetailFooter.h */,
-				4994C4A22481017000A9A239 /* GXRefundDetailFooter.m */,
-				4994C4A32481017100A9A239 /* GXRefundDetailFooter.xib */,
-				4994C4992481006C00A9A239 /* GXUpOrderGoodsCell.h */,
-				4994C4972481006A00A9A239 /* GXUpOrderGoodsCell.m */,
-				4994C4982481006B00A9A239 /* GXUpOrderGoodsCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1128,12 +1434,6 @@
 		90C0B4302340D27200A8C55B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				90BB98C9234DB36400444ACC /* GXClientManageVC.h */,
-				90BB98CA234DB36400444ACC /* GXClientManageVC.m */,
-				90BB98CB234DB36400444ACC /* GXClientManageVC.xib */,
-				90BB98DD234DB81300444ACC /* GXClientManageChildVC.h */,
-				90BB98DE234DB81300444ACC /* GXClientManageChildVC.m */,
-				90BB98DF234DB81300444ACC /* GXClientManageChildVC.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1141,8 +1441,6 @@
 		90C0B4312340D27200A8C55B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				9088421D2375190F005D4382 /* GXClient.h */,
-				9088421E2375190F005D4382 /* GXClient.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1150,9 +1448,6 @@
 		90C0B4322340D27200A8C55B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				90BB98E2234DBBE300444ACC /* GXClientManageCell.h */,
-				90BB98E3234DBBE300444ACC /* GXClientManageCell.m */,
-				90BB98E4234DBBE300444ACC /* GXClientManageCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1320,37 +1615,56 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49828A17249CBF710064B4C1 /* GXRenewMyOrderFooter.xib in Resources */,
+				4982898A249C9B090064B4C1 /* GXAccountManageCell.xib in Resources */,
+				49828A16249CBF710064B4C1 /* GXRenewMyOrderBigCellHeader.xib in Resources */,
 				90BB98D2234DB3B500444ACC /* GXSalerOrderManageVC.xib in Resources */,
-				4994C4BC2481017A00A9A239 /* GXOrderDetailHeader.xib in Resources */,
+				49828A07249CBF710064B4C1 /* GXMyOrderHeader.xib in Resources */,
 				90C0B2DD2340B74B00A8C55B /* LaunchScreen.storyboard in Resources */,
 				4994C4A0248100E400A9A239 /* GXOrderDetailVC.xib in Resources */,
+				498289AC249C9B310064B4C1 /* GXCashNoteDetailVC.xib in Resources */,
 				4994C4C92481029000A9A239 /* GXMessageVC.xib in Resources */,
-				4994C4BE2481017A00A9A239 /* GXOrderDetailFooter.xib in Resources */,
 				4994C4B52481017A00A9A239 /* GXExpressDetailCell.xib in Resources */,
-				4994C4B72481017A00A9A239 /* GXMyOrderHeader.xib in Resources */,
+				49828A15249CBF710064B4C1 /* GXOrderDetailHeader.xib in Resources */,
+				49828A0D249CBF710064B4C1 /* GXOrderDetailFooter.xib in Resources */,
 				4994C49B2481006C00A9A239 /* GXUpOrderGoodsCell.xib in Resources */,
 				4994C4DF2481041E00A9A239 /* GXMyCouponChildVC.xib in Resources */,
 				90BB98DC234DB3EF00444ACC /* GXSalerMyVC.xib in Resources */,
-				4994C4912480FEE400A9A239 /* GXCashVC.xib in Resources */,
 				90BB98E6234DBBE300444ACC /* GXClientManageCell.xib in Resources */,
+				49828A0E249CBF710064B4C1 /* GXExpressShowView.xib in Resources */,
+				498289CB249CAB8A0064B4C1 /* GXMyTeamCell.xib in Resources */,
+				498289A8249C9B310064B4C1 /* GXCashNoteVC.xib in Resources */,
+				498289DC249CB5590064B4C1 /* GXPartnerIncomeCell.xib in Resources */,
+				498289D0249CAD0D0064B4C1 /* GXMyTeamHeader.xib in Resources */,
 				90C0B2DA2340B74B00A8C55B /* Assets.xcassets in Resources */,
 				4994C4D1248102EA00A9A239 /* GXMessageCell.xib in Resources */,
+				49828A18249CBF710064B4C1 /* GXRenewMyOrderCell.xib in Resources */,
 				90BB98E1234DB81300444ACC /* GXClientManageChildVC.xib in Resources */,
+				4982897E249C92BC0064B4C1 /* GXShareCodeVC.xib in Resources */,
 				90C0B3D92340CD7200A8C55B /* FSActionSheet_cancel@2x.png in Resources */,
+				498289B8249C9F790064B4C1 /* GXCashVC.xib in Resources */,
 				90E7C9032341934100D46E19 /* GXChangePwdVC.xib in Resources */,
 				4994C4DA248103FA00A9A239 /* GXMyCouponVC.xib in Resources */,
-				4994C4942480FEE400A9A239 /* GXAccountManageCell.xib in Resources */,
 				90E7C8FE23418E1000D46E19 /* GXLoginVC.xib in Resources */,
-				4994C4B42481017A00A9A239 /* GXRefundDetailFooter.xib in Resources */,
 				4994C4E72481046C00A9A239 /* GXMyCouponCell.xib in Resources */,
+				49828A1D249CBF710064B4C1 /* GXExpressShowCell.xib in Resources */,
 				90C0B3D82340CD7200A8C55B /* FSActionSheet_cancel@3x.png in Resources */,
+				49828A1E249CBF710064B4C1 /* GXRenewMyOrderHeader.xib in Resources */,
+				49828A0B249CBF710064B4C1 /* GXUpOrderCellSectionFooter.xib in Resources */,
+				49828A19249CBF710064B4C1 /* GXRefundDetailFooter.xib in Resources */,
 				90BB98D7234DB3C400444ACC /* GXSalerOrderManageChildVC.xib in Resources */,
+				49828A24249CBF8D0064B4C1 /* GXShowMoneyProofVC.xib in Resources */,
+				49828992249C9B180064B4C1 /* GXBalanceNoteVC.xib in Resources */,
 				4994C48E2480FEE400A9A239 /* GXAccountManageVC.xib in Resources */,
-				4994C4B82481017A00A9A239 /* GXMyOrderFooter.xib in Resources */,
+				498289C6249CAB750064B4C1 /* GXMyTeamVC.xib in Resources */,
+				49828A09249CBF710064B4C1 /* GXMyIdeaPhotoCell.xib in Resources */,
 				90C0B43E2340D9EF00A8C55B /* RCFilterCell.xib in Resources */,
+				498289D6249CB4C10064B4C1 /* GXPartnerIncomeVC.xib in Resources */,
 				90C0B3C92340CD7200A8C55B /* WSDatePickerView.xib in Resources */,
+				49828999249C9B240064B4C1 /* GXCashNoteCell.xib in Resources */,
 				90C0B3DE2340CD7200A8C55B /* SGQRCode.bundle in Resources */,
 				90BB98CD234DB36400444ACC /* GXClientManageVC.xib in Resources */,
+				49828A1A249CBF710064B4C1 /* GXRenewMyOrderBigCell.xib in Resources */,
 				4994C4932480FEE400A9A239 /* GXCashAlert.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1366,6 +1680,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				498289AD249C9B310064B4C1 /* GXCashNoteDetailVC.xib in Resources */,
+				49828993249C9B180064B4C1 /* GXBalanceNoteVC.xib in Resources */,
+				4982899A249C9B240064B4C1 /* GXCashNoteCell.xib in Resources */,
+				498289A9249C9B310064B4C1 /* GXCashNoteVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1419,24 +1737,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				90C0B3B82340CD7200A8C55B /* HXConst.m in Sources */,
+				498289D5249CB4C10064B4C1 /* GXPartnerIncomeVC.m in Sources */,
 				90C0B3B52340CD7200A8C55B /* UIImage+HXNExtension.m in Sources */,
+				4982898B249C9B090064B4C1 /* FCDropMenuCollectionHeader.m in Sources */,
 				90C0B3CB2340CD7200A8C55B /* NSDate+Extension.m in Sources */,
+				49828A20249CBF710064B4C1 /* GXRenewMyOrderCell.m in Sources */,
 				90C0B3B72340CD7200A8C55B /* Foundation+Log.m in Sources */,
 				90C0B3B62340CD7200A8C55B /* NSString+HXNExtension.m in Sources */,
+				498289A6249C9B310064B4C1 /* GXCashNoteVC.m in Sources */,
 				903D60E5237D56DB000231CC /* GXSaveImageToPHAsset.m in Sources */,
 				90C0B3C32340CD7200A8C55B /* MSUserInfo.m in Sources */,
 				4994C4D0248102EA00A9A239 /* GXMessageCell.m in Sources */,
 				4994C49F248100E400A9A239 /* GXOrderDetailVC.m in Sources */,
 				90C0B4332340D27200A8C55B /* HXBaseViewController.m in Sources */,
 				90C0B4362340D27200A8C55B /* HXNavigationController.m in Sources */,
+				49828988249C9B090064B4C1 /* FCDropMenuRangeCollectionCell.m in Sources */,
 				90C0B3DB2340CD7200A8C55B /* FSActionSheet.m in Sources */,
-				4994C4BB2481017A00A9A239 /* GXOrderDetailFooter.m in Sources */,
+				49828A0C249CBF710064B4C1 /* GXRenewMyOrderBigCellHeader.m in Sources */,
 				4994C4C82481029000A9A239 /* GXMessageVC.m in Sources */,
 				903D60DF237D4156000231CC /* GLLShareManger.m in Sources */,
 				90C0B4352340D27200A8C55B /* HXGuideViewController.m in Sources */,
 				90C0B3D32340CD7200A8C55B /* SPButton.m in Sources */,
+				49828A0F249CBF710064B4C1 /* GXOrderDetailFooter.m in Sources */,
 				9088422223753E9E005D4382 /* GXSalerOrder.m in Sources */,
 				4994C4C42481023B00A9A239 /* GXMyRefund.m in Sources */,
+				49828A11249CBF710064B4C1 /* GXRefundDetailFooter.m in Sources */,
 				90C0B3D72340CD7200A8C55B /* HXPlaceholderTextView.m in Sources */,
 				90C0B3C52340CD7200A8C55B /* HXCacheTool.m in Sources */,
 				4994C4CC248102DD00A9A239 /* GXMessage.m in Sources */,
@@ -1444,21 +1769,26 @@
 				905B3DF82345989900282515 /* SDWeiXinPhotoContainerView.m in Sources */,
 				90C0B3C72340CD7200A8C55B /* HXDropMenuView.m in Sources */,
 				90C0B3C22340CD7200A8C55B /* HXTopWindow.m in Sources */,
+				49828A13249CBF710064B4C1 /* GXExpressShowCell.m in Sources */,
+				49828A14249CBF710064B4C1 /* GXRenewMyOrderFooter.m in Sources */,
 				90C0B3DC2340CD7200A8C55B /* FSActionSheetCell.m in Sources */,
-				4994C4BD2481017A00A9A239 /* GXMyOrderHeader.m in Sources */,
 				90C0B3F02340CD7200A8C55B /* UINavigation+SXFixSpace.m in Sources */,
 				90C0B3BB2340CD7200A8C55B /* UILabel+HXNExtension.m in Sources */,
+				4982898C249C9B090064B4C1 /* FCDropMenuCollectionCell.m in Sources */,
 				90C0B3B92340CD7200A8C55B /* NSDate+HXNExtension.m in Sources */,
 				90C0B3EB2340CD7200A8C55B /* LMJHorizontalScrollText.m in Sources */,
 				4994C4B62481017A00A9A239 /* GXExpressDetailCell.m in Sources */,
+				49828A10249CBF710064B4C1 /* GXRenewMyOrderBigCell.m in Sources */,
 				4994C4902480FEE400A9A239 /* GXAccountManageVC.m in Sources */,
 				90C0B3C12340CD7200A8C55B /* HXNetworkCache.m in Sources */,
-				4994C48F2480FEE400A9A239 /* GXCashVC.m in Sources */,
 				90C0B3D42340CD7200A8C55B /* FBShimmeringLayer.m in Sources */,
 				90C0B3CA2340CD7200A8C55B /* WSDatePickerView.m in Sources */,
 				90C0B3E92340CD7200A8C55B /* LMJVerticalScrollText.m in Sources */,
 				90BB98D6234DB3C400444ACC /* GXSalerOrderManageChildVC.m in Sources */,
+				498289AE249C9B310064B4C1 /* GXCashNoteDetailVC.m in Sources */,
+				4982897D249C92BC0064B4C1 /* GXShareCodeVC.m in Sources */,
 				90C0B3E52340CD7200A8C55B /* LYEmptyView.m in Sources */,
+				49828997249C9B240064B4C1 /* GXCashNoteCell.m in Sources */,
 				90C0B3BE2340CD7200A8C55B /* UIView+HXNExtension.m in Sources */,
 				90C0B3E62340CD7200A8C55B /* HXSearchBar.m in Sources */,
 				90C0B2E02340B74B00A8C55B /* main.m in Sources */,
@@ -1470,36 +1800,43 @@
 				90BB98E0234DB81300444ACC /* GXClientManageChildVC.m in Sources */,
 				49B053EF2493551900ED6FF6 /* FCTextField.m in Sources */,
 				90BB98DB234DB3EF00444ACC /* GXSalerMyVC.m in Sources */,
+				498289DB249CB5590064B4C1 /* GXPartnerIncomeCell.m in Sources */,
 				90C0B3C62340CD7200A8C55B /* YCMenuView.m in Sources */,
 				90C0B3DD2340CD7200A8C55B /* FSActionSheetItem.m in Sources */,
+				498289B7249C9F790064B4C1 /* GXCashVC.m in Sources */,
+				49828A1F249CBF710064B4C1 /* GXUpOrderCellSectionFooter.m in Sources */,
 				90BCED782345DF95007B0F19 /* GXWebContentVC.m in Sources */,
 				90C0B3E22340CD7200A8C55B /* LYEmptyBaseView.m in Sources */,
 				90C0B3E32340CD7200A8C55B /* UIScrollView+Empty.m in Sources */,
 				90E7C9022341934100D46E19 /* GXChangePwdVC.m in Sources */,
+				498289CA249CAB8A0064B4C1 /* GXMyTeamCell.m in Sources */,
 				90BB98D1234DB3B500444ACC /* GXSalerOrderManageVC.m in Sources */,
 				90C0B3CC2340CD7200A8C55B /* UIView+Extension.m in Sources */,
 				90C0B3BC2340CD7200A8C55B /* ContactDataHelper.m in Sources */,
 				90C0B3DA2340CD7200A8C55B /* FSActionSheetConfig.m in Sources */,
-				4994C4B32481017A00A9A239 /* GXRefundDetailFooter.m in Sources */,
 				90C0B3DF2340CD7200A8C55B /* SGQRCodeObtainConfigure.m in Sources */,
 				4994C4DB248103FA00A9A239 /* GXMyCouponVC.m in Sources */,
+				49828A08249CBF710064B4C1 /* GXOrderDetailHeader.m in Sources */,
 				9069739B23444E8600D8A8FF /* SPPickerView.m in Sources */,
+				49828A0A249CBF710064B4C1 /* GXMyOrderHeader.m in Sources */,
 				90C0B45E2340DD1300A8C55B /* AppDelegate+MSPushService.m in Sources */,
 				90FD9205237E987000016EF7 /* UITextField+GYExpand.m in Sources */,
+				498289C5249CAB750064B4C1 /* GXMyTeamVC.m in Sources */,
 				90C0B3EC2340CD7200A8C55B /* CAAnimation+WAnimation.m in Sources */,
+				498289CE249CACF30064B4C1 /* GXMyTeamHeader.m in Sources */,
 				4994C4C32481023B00A9A239 /* GXMyOrder.m in Sources */,
 				90C0B3EF2340CD7200A8C55B /* NSObject+LMRuntime.m in Sources */,
 				90C0B3C02340CD7200A8C55B /* HXNetworkTool.m in Sources */,
 				90C0B3B42340CD7200A8C55B /* XTimer.m in Sources */,
+				49828989249C9B090064B4C1 /* GXAccountManageCell.m in Sources */,
 				90C0B43D2340D9EF00A8C55B /* RCFilterCell.m in Sources */,
-				4994C4BA2481017A00A9A239 /* GXOrderDetailHeader.m in Sources */,
 				4994C4E32481046400A9A239 /* GXMyCoupon.m in Sources */,
 				90BB98E5234DBBE300444ACC /* GXClientManageCell.m in Sources */,
 				4994C49A2481006C00A9A239 /* GXUpOrderGoodsCell.m in Sources */,
 				90C0B3C42340CD7200A8C55B /* MSUserManager.m in Sources */,
+				49828A1C249CBF710064B4C1 /* GXMyIdeaPhotoCell.m in Sources */,
 				4975FD162493263F00E5AEF2 /* UICKeyChainStore.m in Sources */,
 				90C0B4342340D27200A8C55B /* HXTabBarController.m in Sources */,
-				4994C4B92481017A00A9A239 /* GXMyOrderFooter.m in Sources */,
 				90C0B3BF2340CD7200A8C55B /* HXLocationTool_.m in Sources */,
 				90C0B3E72340CD7200A8C55B /* zhAlertView.m in Sources */,
 				4994C4E02481041E00A9A239 /* GXMyCouponChildVC.m in Sources */,
@@ -1507,16 +1844,19 @@
 				4994C4E82481046C00A9A239 /* GXMyCouponCell.m in Sources */,
 				90C0B3EA2340CD7200A8C55B /* UILabel+ForLMJVerticalScrollText.m in Sources */,
 				903D60ED237D7016000231CC /* GYEmptyView.m in Sources */,
+				49828A12249CBF710064B4C1 /* GXExpressShowView.m in Sources */,
 				9088421F2375190F005D4382 /* GXClient.m in Sources */,
-				4994C4952480FEE400A9A239 /* GXAccountManageCell.m in Sources */,
 				90C0B45D2340DD1300A8C55B /* AppDelegate+MSAppService.m in Sources */,
 				90C0B3EE2340CD7200A8C55B /* ZJPickerView.m in Sources */,
+				49828990249C9B180064B4C1 /* GXBalanceNoteVC.m in Sources */,
 				90E7C8FD23418E1000D46E19 /* GXLoginVC.m in Sources */,
+				49828A25249CBF8D0064B4C1 /* GXShowMoneyProofVC.m in Sources */,
 				90BB98CC234DB36400444ACC /* GXClientManageVC.m in Sources */,
 				903D60E2237D418C000231CC /* GLLShareItem.m in Sources */,
 				9069739E2344501100D8A8FF /* SPPageMenu.m in Sources */,
 				90C0B3B32340CD7200A8C55B /* UIButton+HXCode.m in Sources */,
 				4994C4922480FEE400A9A239 /* GXFinanceLog.m in Sources */,
+				49828A1B249CBF710064B4C1 /* GXRenewMyOrderHeader.m in Sources */,
 				90C0B3E82340CD7200A8C55B /* UIView+ForLMJVerticalScrollText.m in Sources */,
 				90C0B3E42340CD7200A8C55B /* UIView+LYExtension.m in Sources */,
 				90C0B3BA2340CD7200A8C55B /* UINavigationBar+ChangeColor.m in Sources */,
@@ -1537,6 +1877,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				498289AF249C9B310064B4C1 /* GXCashNoteDetailVC.m in Sources */,
+				49828998249C9B240064B4C1 /* GXCashNoteCell.m in Sources */,
+				49828991249C9B180064B4C1 /* GXBalanceNoteVC.m in Sources */,
+				498289A7249C9B310064B4C1 /* GXCashNoteVC.m in Sources */,
 				90C0B2F52340B74B00A8C55B /* GXUITests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1692,10 +2036,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9AB2U8YRYY;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/GX/ThirdLib/AlipaySDK_No_UTDID",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/GX/GXPrefixHeader.pch";
 				INFOPLIST_FILE = GX/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1720,10 +2061,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9AB2U8YRYY;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/GX/ThirdLib/AlipaySDK_No_UTDID",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/GX/GXPrefixHeader.pch";
 				INFOPLIST_FILE = GX/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
