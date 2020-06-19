@@ -25,6 +25,7 @@ PODS:
   - SDWebImage (5.2.5):
     - SDWebImage/Core (= 5.2.5)
   - SDWebImage/Core (5.2.5)
+  - WMZDropDownMenu (1.0.6)
   - YYCache (1.0.4)
   - YYModel (1.0.4)
   - YYText (1.0.7)
@@ -42,6 +43,7 @@ DEPENDENCIES:
   - JXCategoryView
   - MJRefresh
   - NHHUDExtend
+  - WMZDropDownMenu
   - YYCache
   - YYModel
   - YYText
@@ -61,6 +63,7 @@ SPEC REPOS:
     - MJRefresh
     - NHHUDExtend
     - SDWebImage
+    - WMZDropDownMenu
     - YYCache
     - YYModel
     - YYText
@@ -79,6 +82,7 @@ SPEC CHECKSUMS:
   MJRefresh: ed450d6eb9d3346a2cb033ab7eb6de090aeef437
   NHHUDExtend: 1fd914b12b93ac61c1cfdb04485c25db59f27627
   SDWebImage: 4eabf2fa6695c95c47724214417a9c036c965e4a
+  WMZDropDownMenu: 9fa426c0935a94fdd8152ace60956fac0abca812
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
@@ -87,6 +91,6 @@ SPEC CHECKSUMS:
   ZLPhotoBrowser: 7e88434918366af98f8ebbaf5b94206985812ed6
   ZXEmptyView: 58adb5125e6ebdc51f68ef31885e62d99817a507
 
-PODFILE CHECKSUM: be80f730e3205c0af68f4ef26329f467c4b14f50
+PODFILE CHECKSUM: 6718ac7478c727680bd4fd43a220fa97bc289f30
 
 COCOAPODS: 1.9.1

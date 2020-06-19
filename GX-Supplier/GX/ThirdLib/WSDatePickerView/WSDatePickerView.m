@@ -18,11 +18,11 @@
 // 判断是否是iPhone X
 #define isiPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
 // home indicator
-#define bottom_height (isiPhoneX ? 34.f : 0.f)
+#define bottom_height (isiPhoneX ? 34.f : 10.f)
 
 
 #define MAXYEAR 2099
-#define MINYEAR 1900
+#define MINYEAR 2000
 
 typedef void(^doneBlock)(NSDate *);
 
@@ -174,9 +174,9 @@ typedef void(^doneBlock)(NSDate *);
 }
 
 -(void)setupUI {
-    //self.buttomView.layer.cornerRadius = 10;
-    //self.buttomView.layer.masksToBounds = YES;
-    self.doneButtonColor = RGB(247, 133, 51);
+//    self.buttomView.layer.cornerRadius = 10;
+//    self.buttomView.layer.masksToBounds = YES;
+    self.doneButtonColor = HXControlBg;
     self.frame=CGRectMake(0, 0, kScreenWidth, kScreenHeight);
     
     //点击背景是否影藏
@@ -245,7 +245,7 @@ typedef void(^doneBlock)(NSDate *);
     }
     
     if (!_dateLabelColor) {
-        _dateLabelColor =  RGB(247, 133, 51);
+        _dateLabelColor =  HXControlBg;
     }
     
     for (int i=0; i<nameArr.count; i++) {
@@ -706,14 +706,14 @@ typedef void(^doneBlock)(NSDate *);
 -(void)show {
     
     [[UIApplication sharedApplication].keyWindow addSubview:self];
-    [UIView animateWithDuration:.3 animations:^{
+    [UIView animateWithDuration:.25 animations:^{
         self.bottomConstraint.constant = bottom_height;
-        self.backgroundColor = RGBA(0, 0, 0, 0.4);
+        self.backgroundColor = RGBA(0, 0, 0, 0.2);
         [self layoutIfNeeded];
     }];
 }
 -(void)dismiss {
-    [UIView animateWithDuration:.3 animations:^{
+    [UIView animateWithDuration:.25 animations:^{
         self.bottomConstraint.constant = -self.height;
         self.backgroundColor = RGBA(0, 0, 0, 0);
         [self layoutIfNeeded];
