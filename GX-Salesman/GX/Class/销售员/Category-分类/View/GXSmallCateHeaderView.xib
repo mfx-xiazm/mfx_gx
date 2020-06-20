@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR" customClass="GXSmallCateHeaderView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pTX-k5-LAd">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S3F-Iu-4OT">
+                            <rect key="frame" x="10" y="12" width="4" height="20"/>
+                            <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="4" id="8GY-li-hfK"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="二级分类" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xzD-ew-uIJ">
+                            <rect key="frame" x="24" y="13.5" width="57.5" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="xzD-ew-uIJ" firstAttribute="leading" secondItem="S3F-Iu-4OT" secondAttribute="trailing" constant="10" id="4Ma-sk-sLk"/>
+                        <constraint firstItem="S3F-Iu-4OT" firstAttribute="top" secondItem="pTX-k5-LAd" secondAttribute="top" constant="12" id="ICi-RH-hwr"/>
+                        <constraint firstAttribute="bottom" secondItem="S3F-Iu-4OT" secondAttribute="bottom" constant="12" id="YyF-49-Mxf"/>
+                        <constraint firstItem="S3F-Iu-4OT" firstAttribute="leading" secondItem="pTX-k5-LAd" secondAttribute="leading" constant="10" id="Zk9-Fc-PMU"/>
+                        <constraint firstItem="xzD-ew-uIJ" firstAttribute="centerY" secondItem="pTX-k5-LAd" secondAttribute="centerY" id="eZo-5h-3hn"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="pTX-k5-LAd" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="PW9-8O-9KL"/>
+                <constraint firstItem="pTX-k5-LAd" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="dAf-Ux-KUZ"/>
+                <constraint firstAttribute="trailing" secondItem="pTX-k5-LAd" secondAttribute="trailing" id="iNE-u9-Hcx"/>
+                <constraint firstAttribute="bottom" secondItem="pTX-k5-LAd" secondAttribute="bottom" id="v9R-PM-2rx"/>
+            </constraints>
+            <connections>
+                <outlet property="cate_name" destination="xzD-ew-uIJ" id="3Ou-Cv-0S7"/>
+            </connections>
+            <point key="canvasLocation" x="346" y="37"/>
+        </collectionReusableView>
+    </objects>
+</document>

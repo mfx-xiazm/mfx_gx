@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GXDiscountVC">
+            <connections>
+                <outlet property="categoryView" destination="UON-zx-KkJ" id="1kA-te-AuI"/>
+                <outlet property="scrollView" destination="JFR-AF-2SA" id="sau-zv-zFw"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UON-zx-KkJ" customClass="JXCategoryTitleView">
+                    <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Suu-d2-dpf" userLabel="分割线">
+                            <rect key="frame" x="0.0" y="43" width="414" height="1"/>
+                            <color key="backgroundColor" red="0.96470588239999999" green="0.96862745100000003" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="72k-JI-pvC"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="3Vf-Bi-cMu"/>
+                        <constraint firstAttribute="bottom" secondItem="Suu-d2-dpf" secondAttribute="bottom" id="RvG-oE-hoa"/>
+                        <constraint firstItem="Suu-d2-dpf" firstAttribute="leading" secondItem="UON-zx-KkJ" secondAttribute="leading" id="WDQ-eK-F50"/>
+                        <constraint firstAttribute="trailing" secondItem="Suu-d2-dpf" secondAttribute="trailing" id="t8n-pU-uC0"/>
+                    </constraints>
+                </view>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JFR-AF-2SA">
+                    <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="JFR-AF-2SA" firstAttribute="bottom" secondItem="Q5M-cg-NOt" secondAttribute="bottom" id="GEw-F4-gP2"/>
+                <constraint firstItem="JFR-AF-2SA" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="Jgh-sH-BLp"/>
+                <constraint firstItem="UON-zx-KkJ" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="QX0-dw-vjv"/>
+                <constraint firstItem="UON-zx-KkJ" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="Xqf-tc-UrB"/>
+                <constraint firstItem="UON-zx-KkJ" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="eT9-9X-6kd"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="JFR-AF-2SA" secondAttribute="trailing" id="hXn-gK-tyB"/>
+                <constraint firstItem="JFR-AF-2SA" firstAttribute="top" secondItem="UON-zx-KkJ" secondAttribute="bottom" id="uhr-lb-UXQ"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="139" y="115"/>
+        </view>
+    </objects>
+</document>
