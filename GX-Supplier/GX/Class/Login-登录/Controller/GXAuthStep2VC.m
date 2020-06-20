@@ -7,7 +7,7 @@
 //
 
 #import "GXAuthStep2VC.h"
-#import "GXAuthStep3VC.h"
+#import "GXAuthStep4VC.h"
 #import "UITextField+GYExpand.h"
 
 @interface GXAuthStep2VC ()
@@ -83,7 +83,7 @@
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
             dispatch_async(dispatch_get_main_queue(), ^{
-                GXAuthStep3VC *svc = [GXAuthStep3VC new];
+                GXAuthStep4VC *svc = [GXAuthStep4VC new];
                 svc.uid = strongSelf.uid;
                 svc.token = strongSelf.token;
                 [strongSelf.navigationController pushViewController:svc animated:YES];

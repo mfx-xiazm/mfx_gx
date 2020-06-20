@@ -20,7 +20,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *apply_amount;
 @property (weak, nonatomic) IBOutlet UIButton *sureBtn;
 @property (weak, nonatomic) IBOutlet UILabel *ableLabel;
-
+@property (nonatomic, strong) zhPopupController *alertPopVC;
 @end
 
 @implementation GXCashVC
@@ -123,12 +123,12 @@
     hx_weakify(self);
     alert.cashKnowCall = ^{
         hx_strongify(weakSelf);
-        [strongSelf.zh_popupController dismiss];
+        [strongSelf.alertPopVC dismiss];
         [strongSelf.navigationController popViewControllerAnimated:YES];
     };
-    self.zh_popupController = [[zhPopupController alloc] init];
-    self.zh_popupController.dismissOnMaskTouched = NO;
-    [self.zh_popupController presentContentView:alert duration:0.25 springAnimated:NO];
+    self.alertPopVC = [[zhPopupController alloc] initWithView:alert size:alert.bounds.size];
+    self.alertPopVC.dismissOnMaskTouched = NO;
+    [self.alertPopVC show];
 }
 //参数一：range，要被替换的字符串的range，如果是新输入的，就没有字符串被替换，range.length = 0
 //参数二：替换的字符串，即键盘即将输入或者即将粘贴到textField的string

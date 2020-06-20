@@ -17,6 +17,7 @@
 #import "GXClientManageVC.h"
 #import "GXMyTeamVC.h"
 #import "GXPartnerIncomeVC.h"
+#import "GXSalerOrderManageVC.h"
 
 @interface GXSalerMyVC ()
 @property (weak, nonatomic) IBOutlet UILabel *userName;
@@ -29,6 +30,7 @@
 @property(nonatomic,copy) NSString *cashable_day;
 @property (nonatomic, copy) NSString *shareCode;
 @property (nonatomic, copy) NSString *register_url;
+@property (nonatomic, strong) zhPopupController *alertPopVC;
 @end
 
 @implementation GXSalerMyVC
@@ -63,11 +65,11 @@
     hx_weakify(self);
     zhAlertButton *cancelButton = [zhAlertButton buttonWithTitle:@"取消" handler:^(zhAlertButton * _Nonnull button) {
         hx_strongify(weakSelf);
-        [strongSelf.zh_popupController dismiss];
+        [strongSelf.alertPopVC dismiss];
     }];
     zhAlertButton *okButton = [zhAlertButton buttonWithTitle:@"退出" handler:^(zhAlertButton * _Nonnull button) {
         hx_strongify(weakSelf);
-        [strongSelf.zh_popupController dismiss];
+        [strongSelf.alertPopVC dismiss];
         
         [[MSUserManager sharedInstance] logout:nil];
         
@@ -86,8 +88,8 @@
     okButton.lineColor = UIColorFromRGB(0xDDDDDD);
     [okButton setTitleColor:HXControlBg forState:UIControlStateNormal];
     [alert adjoinWithLeftAction:cancelButton rightAction:okButton];
-    self.zh_popupController = [[zhPopupController alloc] init];
-    [self.zh_popupController presentContentView:alert duration:0.25 springAnimated:NO];
+    self.alertPopVC = [[zhPopupController alloc] initWithView:alert size:alert.bounds.size];
+    [self.alertPopVC show];
 }
 - (IBAction)codeClicked:(UIButton *)sender {
     GXShareCodeVC *cvc = [GXShareCodeVC new];
@@ -109,13 +111,13 @@
     hx_weakify(self);
     zhAlertButton *okButton = [zhAlertButton buttonWithTitle:@"我知道了" handler:^(zhAlertButton * _Nonnull button) {
         hx_strongify(weakSelf);
-        [strongSelf.zh_popupController dismiss];
+        [strongSelf.alertPopVC dismiss];
     }];
     okButton.lineColor = UIColorFromRGB(0xDDDDDD);
     [okButton setTitleColor:HXControlBg forState:UIControlStateNormal];
     [alert addAction:okButton];
-    self.zh_popupController = [[zhPopupController alloc] init];
-    [self.zh_popupController presentContentView:alert duration:0.25 springAnimated:NO];
+    self.alertPopVC = [[zhPopupController alloc] initWithView:alert size:alert.bounds.size];
+    [self.alertPopVC show];
 }
 - (IBAction)clientManageClicked:(UIButton *)sender {
     GXClientManageVC *mvc = [GXClientManageVC new];
@@ -125,12 +127,14 @@
     GXPartnerIncomeVC *pvc = [GXPartnerIncomeVC new];
     [self.navigationController pushViewController:pvc animated:YES];
 }
-
 - (IBAction)myTeamClicked:(UIButton *)sender {
     GXMyTeamVC *tvc = [GXMyTeamVC new];
     [self.navigationController pushViewController:tvc animated:YES];
 }
-
+- (IBAction)orderManageClicked:(UIButton *)sender {
+    GXSalerOrderManageVC *ovc = [GXSalerOrderManageVC new];
+    [self.navigationController pushViewController:ovc animated:YES];
+}
 #pragma mark -- 接口
 -(void)getMemberRequest
 {

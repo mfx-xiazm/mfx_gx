@@ -13,6 +13,8 @@
 
 @interface GXSaveImageToPHAsset()
 @property (nonatomic, strong) NSMutableArray *listOfDownLoadImageArr;
+/* 提示框 */
+@property (nonatomic, strong) zhPopupController *alertPopVC;
 @end
 
 @implementation GXSaveImageToPHAsset
@@ -43,6 +45,10 @@
             if (status == PHAuthorizationStatusAuthorized) {
                 //调用存储图片的方法
                 [self CWWSavePhotos];
+            }else{
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [MBProgressHUD hideHUD];
+                });
             }
         }];
         //如果允许访问
@@ -52,16 +58,9 @@
         //如果权限是拒绝
     } else {
         // 使用第三方框架,弹出一个页面提示用户去打开授权
-        hx_weakify(self);
-        zhAlertView *alert = [[zhAlertView alloc] initWithTitle:@"请打开相册权限" message:@"设置-隐私-相册" constantWidth:HX_SCREEN_WIDTH - 50*2];
-        zhAlertButton *okButton = [zhAlertButton buttonWithTitle:@"知道了" handler:^(zhAlertButton * _Nonnull button) {
-            [weakSelf.targetVC.zh_popupController dismiss];
-        }];
-        okButton.lineColor = UIColorFromRGB(0xDDDDDD);
-        [okButton setTitleColor:HXControlBg forState:UIControlStateNormal];
-        [alert addAction:okButton];
-        weakSelf.targetVC.zh_popupController = [[zhPopupController alloc] init];
-        [weakSelf.targetVC.zh_popupController presentContentView:alert duration:0.25 springAnimated:NO];
+        if (self.saveComletedCall) {
+           self.saveComletedCall(0);
+        }
     }
 }
 - (void)CWWSavePhotos {
@@ -70,7 +69,7 @@
         [self savePhoto:image];
     }else {
         if (self.saveComletedCall) {
-            self.saveComletedCall();
+            self.saveComletedCall(1);
         }
     }
 }

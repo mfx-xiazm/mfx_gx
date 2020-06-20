@@ -107,11 +107,6 @@
                     svc.uid = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"uid"]];
                     svc.token = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"token"]];
                     [strongSelf.navigationController pushViewController:svc animated:YES];
-                }else if ([responseObject[@"data"][@"step"] integerValue] == 4) {
-                    GXAuthStep3VC *svc = [GXAuthStep3VC new];
-                    svc.uid = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"uid"]];
-                    svc.token = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"token"]];
-                    [strongSelf.navigationController pushViewController:svc animated:YES];
                 }else{
                     GXAuthStep4VC *svc = [GXAuthStep4VC new];
                     svc.uid = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"uid"]];

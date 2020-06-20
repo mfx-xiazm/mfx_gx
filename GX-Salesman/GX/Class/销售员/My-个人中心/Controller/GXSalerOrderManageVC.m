@@ -11,8 +11,6 @@
 #import <JXCategoryTitleView.h>
 #import <JXCategoryIndicatorLineView.h>
 #import "HXSearchBar.h"
-#import "GXMessageVC.h"
-#import "UIView+WZLBadge.h"
 
 @interface GXSalerOrderManageVC ()<JXCategoryViewDelegate,UIScrollViewDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet JXCategoryTitleView *categoryView;
@@ -35,7 +33,6 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self getHomeUnReadMsg];
 }
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -60,31 +57,23 @@
 -(void)setUpNavBar
 {
     [self.navigationItem setTitle:nil];
-    
-    HXSearchBar *searchBar = [[HXSearchBar alloc] initWithFrame:CGRectMake(0, 0, HX_SCREEN_WIDTH - 70.f, 30.f)];
+        
+    HXSearchBar *searchBar = [[HXSearchBar alloc] initWithFrame:CGRectMake(0, 0, HX_SCREEN_WIDTH - 88.f, 30.f)];
     searchBar.backgroundColor = [UIColor whiteColor];
     searchBar.layer.cornerRadius = 15.f;
     searchBar.layer.masksToBounds = YES;
     searchBar.delegate = self;
-    searchBar.placeholder = @"请输入订单号查询";
+    searchBar.placeholder = @"请输入店名/商品名称/订单编号";
     self.searchBar = searchBar;
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
+    self.navigationItem.titleView = searchBar;
     
-    SPButton *msg = [SPButton buttonWithType:UIButtonTypeCustom];
-    msg.imagePosition = SPButtonImagePositionTop;
-    msg.imageTitleSpace = 2.f;
-    msg.hxn_size = CGSizeMake(40, 40);
-    msg.titleLabel.font = [UIFont systemFontOfSize:9];
-    [msg setImage:HXGetImage(@"消息") forState:UIControlStateNormal];
-    [msg setTitle:@"消息" forState:UIControlStateNormal];
-    [msg addTarget:self action:@selector(msgClicked) forControlEvents:UIControlEventTouchUpInside];
-    [msg setTitleColor:UIColorFromRGB(0XFFFFFF) forState:UIControlStateNormal];
-    msg.badgeBgColor = [UIColor whiteColor];
-    msg.badgeCenterOffset = CGPointMake(-10, 5);
-    self.msgBtn = msg;
-    UIBarButtonItem *msgItem = [[UIBarButtonItem alloc] initWithCustomView:msg];
+    SPButton *filter = [SPButton buttonWithType:UIButtonTypeCustom];
+    filter.hxn_size = CGSizeMake(40, 40);
+    filter.titleLabel.font = [UIFont systemFontOfSize:9];
+    [filter setImage:HXGetImage(@"时间筛选") forState:UIControlStateNormal];
+    [filter addTarget:self action:@selector(filterClicked) forControlEvents:UIControlEventTouchUpInside];
     
-    self.navigationItem.rightBarButtonItem = msgItem;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:filter];
 }
 -(void)setUpCategoryView
 {
@@ -124,10 +113,9 @@
     }
     return YES;
 }
--(void)msgClicked
+-(void)filterClicked
 {
-    GXMessageVC *mvc = [GXMessageVC new];
-    [self.navigationController pushViewController:mvc animated:YES];
+    HXLog(@"筛选");
 }
 #pragma mark -- JXCategoryViewDelegate
 // 滚动和点击选中
@@ -145,24 +133,5 @@
     targetViewController.view.frame = CGRectMake(HX_SCREEN_WIDTH * index, 0, HX_SCREEN_WIDTH, self.scrollView.hxn_height);
     
     [self.scrollView addSubview:targetViewController.view];
-}
-#pragma mark -- 接口
--(void)getHomeUnReadMsg
-{
-    hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"program/getHomeMsg" parameters:@{} success:^(id responseObject) {
-        hx_strongify(weakSelf);
-        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
-            if ([responseObject[@"data"] boolValue]) {
-                [strongSelf.msgBtn showBadgeWithStyle:WBadgeStyleRedDot value:1 animationType:WBadgeAnimTypeNone];
-            }else{
-                [strongSelf.msgBtn clearBadge];
-            }
-        }else{
-            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
-        }
-    } failure:^(NSError *error) {
-        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
-    }];
 }
 @end

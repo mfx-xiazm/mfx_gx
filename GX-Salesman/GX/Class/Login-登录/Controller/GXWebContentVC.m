@@ -82,21 +82,21 @@
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     NSString *action = nil;
     if (self.requestType == 1) {
-        action = @"admin/getShopRegAgreement";
+        action = @"program/getShopRegAgreement";
     }else if (self.requestType == 2) {
-        action = @"admin/getSupplyIntroData";
+        action = @"program/getSupplyIntroData";
     }else if (self.requestType == 3) {
-        action = @"admin/getNoticeDetail";
+        action = @"program/getNoticeDetail";
         parameters[@"notice_id"] = self.notice_id;
     }else if (self.requestType == 4) {
-        action = @"admin/aboutUs";
+        action = @"program/aboutUs";
     }else if (self.requestType == 5) {
-        action = @"admin/saleStandard";
+        action = @"program/saleStandard";
     }else if (self.requestType == 6) {
-        action = @"admin/helpDataDetail";
+        action = @"program/helpDataDetail";
         parameters[@"help_id"] = self.help_id;
     }else if (self.requestType == 7) {
-        action = @"admin/complainChannelData";
+        action = @"program/complainChannelData";
     }else if (self.requestType == 8) {
         action = @"index/getProviderRegAgreement";
     }

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="GXDiscountGoodsCell">
+            <rect key="frame" x="0.0" y="0.0" width="315" height="100"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="315" height="100"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F3y-ar-s1M">
+                        <rect key="frame" x="0.0" y="0.0" width="315" height="100"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="J1Z-5n-7vC">
+                                <rect key="frame" x="10" y="10" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="J1Z-5n-7vC" secondAttribute="height" multiplier="1:1" id="Uca-wv-ets"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layerBoderCorner">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="自己想象这里是商品名字自己想象这里是商品名字" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Plb-M4-Isi">
+                                <rect key="frame" x="100" y="10" width="205" height="33.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥99.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="629-lC-K5t">
+                                <rect key="frame" x="100" y="66.5" width="50.5" height="23.5"/>
+                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="17"/>
+                                <color key="textColor" red="0.92549019610000005" green="0.078431372550000003" blue="0.1764705882" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥199.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sem-FX-BjQ">
+                                <rect key="frame" x="160.5" y="70.5" width="47" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="销量：1241" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cmI-sF-4yu">
+                                <rect key="frame" x="242" y="71" width="63" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OLD-w9-iIT" userLabel="分割线">
+                                <rect key="frame" x="10" y="99" width="295" height="1"/>
+                                <color key="backgroundColor" red="0.96470588239999999" green="0.96862745100000003" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="gIT-Ak-TtL"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="629-lC-K5t" secondAttribute="bottom" constant="10" id="8b0-BL-FQz"/>
+                            <constraint firstItem="629-lC-K5t" firstAttribute="leading" secondItem="J1Z-5n-7vC" secondAttribute="trailing" constant="10" id="GQZ-Xh-gLs"/>
+                            <constraint firstAttribute="bottom" secondItem="J1Z-5n-7vC" secondAttribute="bottom" constant="10" id="Gr5-s5-Jao"/>
+                            <constraint firstItem="cmI-sF-4yu" firstAttribute="centerY" secondItem="629-lC-K5t" secondAttribute="centerY" id="HyL-AH-TYB"/>
+                            <constraint firstItem="Plb-M4-Isi" firstAttribute="leading" secondItem="J1Z-5n-7vC" secondAttribute="trailing" constant="10" id="Jee-Gx-m89"/>
+                            <constraint firstItem="Plb-M4-Isi" firstAttribute="top" secondItem="F3y-ar-s1M" secondAttribute="top" constant="10" id="K4v-IH-SFC"/>
+                            <constraint firstItem="J1Z-5n-7vC" firstAttribute="top" secondItem="F3y-ar-s1M" secondAttribute="top" constant="10" id="PUj-Tb-9UX"/>
+                            <constraint firstAttribute="bottom" secondItem="OLD-w9-iIT" secondAttribute="bottom" id="Qyi-jf-NLX"/>
+                            <constraint firstAttribute="trailing" secondItem="Plb-M4-Isi" secondAttribute="trailing" constant="10" id="VQN-u4-39j"/>
+                            <constraint firstItem="OLD-w9-iIT" firstAttribute="leading" secondItem="F3y-ar-s1M" secondAttribute="leading" constant="10" id="WQr-mt-bPv"/>
+                            <constraint firstAttribute="trailing" secondItem="cmI-sF-4yu" secondAttribute="trailing" constant="10" id="fYs-1y-qaf"/>
+                            <constraint firstItem="Sem-FX-BjQ" firstAttribute="leading" secondItem="629-lC-K5t" secondAttribute="trailing" constant="10" id="hWP-9T-F63"/>
+                            <constraint firstItem="J1Z-5n-7vC" firstAttribute="leading" secondItem="F3y-ar-s1M" secondAttribute="leading" constant="10" id="pz8-cC-TCd"/>
+                            <constraint firstItem="Sem-FX-BjQ" firstAttribute="centerY" secondItem="629-lC-K5t" secondAttribute="centerY" id="vYe-mp-i9A"/>
+                            <constraint firstAttribute="trailing" secondItem="OLD-w9-iIT" secondAttribute="trailing" constant="10" id="zEQ-hW-uuG"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="F3y-ar-s1M" secondAttribute="bottom" id="Ge5-pV-0Ee"/>
+                <constraint firstItem="F3y-ar-s1M" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="OFf-l4-qLe"/>
+                <constraint firstAttribute="trailing" secondItem="F3y-ar-s1M" secondAttribute="trailing" id="oVi-x6-vuG"/>
+                <constraint firstItem="F3y-ar-s1M" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="zZS-9S-yHn"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <size key="customSize" width="315" height="100"/>
+            <connections>
+                <outlet property="cover_img" destination="J1Z-5n-7vC" id="yad-8C-lPq"/>
+                <outlet property="good_name" destination="Plb-M4-Isi" id="K8F-jy-9f6"/>
+                <outlet property="market_price" destination="Sem-FX-BjQ" id="UAz-ca-gfD"/>
+                <outlet property="price" destination="629-lC-K5t" id="K1V-sV-a89"/>
+                <outlet property="sale_num" destination="cmI-sF-4yu" id="D4e-D7-bEA"/>
+            </connections>
+            <point key="canvasLocation" x="-286.23188405797106" y="123.88392857142857"/>
+        </collectionViewCell>
+    </objects>
+</document>

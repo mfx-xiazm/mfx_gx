@@ -22,14 +22,23 @@ PODS:
   - MJRefresh (3.2.0)
   - NHHUDExtend (1.0.2):
     - MBProgressHUD
+  - RollingNotice (1.1.1)
   - SDWebImage (5.2.5):
     - SDWebImage/Core (= 5.2.5)
   - SDWebImage/Core (5.2.5)
+  - TYCyclePagerView (1.2.0)
+  - UMCCommon (7.1.0)
+  - UMCSecurityPlugins (1.0.6)
+  - UMCShare/Core (6.9.9):
+    - UMCCommon
+  - UMCShare/Social/ReducedWeChat (6.9.9):
+    - UMCCommon
+    - UMCShare/Core
   - WMZDropDownMenu (1.0.6)
   - YYCache (1.0.4)
   - YYModel (1.0.4)
   - YYText (1.0.7)
-  - zhPopupController (1.0.3)
+  - zhPopupController (2.0.0)
   - ZLCollectionViewFlowLayout (1.1.6)
   - ZLPhotoBrowser (3.1.2):
     - SDWebImage
@@ -43,6 +52,11 @@ DEPENDENCIES:
   - JXCategoryView
   - MJRefresh
   - NHHUDExtend
+  - RollingNotice
+  - TYCyclePagerView
+  - UMCCommon
+  - UMCSecurityPlugins
+  - UMCShare/Social/ReducedWeChat
   - WMZDropDownMenu
   - YYCache
   - YYModel
@@ -62,7 +76,12 @@ SPEC REPOS:
     - MBProgressHUD
     - MJRefresh
     - NHHUDExtend
+    - RollingNotice
     - SDWebImage
+    - TYCyclePagerView
+    - UMCCommon
+    - UMCSecurityPlugins
+    - UMCShare
     - WMZDropDownMenu
     - YYCache
     - YYModel
@@ -81,16 +100,21 @@ SPEC CHECKSUMS:
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MJRefresh: ed450d6eb9d3346a2cb033ab7eb6de090aeef437
   NHHUDExtend: 1fd914b12b93ac61c1cfdb04485c25db59f27627
+  RollingNotice: 1f14ea9d0157a7178bbfcae27bb7a4876f41b935
   SDWebImage: 4eabf2fa6695c95c47724214417a9c036c965e4a
+  TYCyclePagerView: 2b051dade0615c70784aa34f40c646feeddb7344
+  UMCCommon: 4e80f93492d300245683236668763dc5d0b04dbd
+  UMCSecurityPlugins: 0831a08f3988f3cea9f1d3a7626cd9bee4fef150
+  UMCShare: 52d9ee35f61c51eda3089a7961e1d04ce57b9d6a
   WMZDropDownMenu: 9fa426c0935a94fdd8152ace60956fac0abca812
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
-  zhPopupController: 4e6bd734062cb9c7ebe8113568550bade168bed7
+  zhPopupController: 600aee950c86442c5cca0b078d94c71fe0e1c51e
   ZLCollectionViewFlowLayout: 105020fbab88e3dc66ceebc307b36f2c363a8c1f
   ZLPhotoBrowser: 7e88434918366af98f8ebbaf5b94206985812ed6
   ZXEmptyView: 58adb5125e6ebdc51f68ef31885e62d99817a507
 
-PODFILE CHECKSUM: 6718ac7478c727680bd4fd43a220fa97bc289f30
+PODFILE CHECKSUM: e37845d53f7fee42a0734ace89df6a7cecb89494
 
 COCOAPODS: 1.9.1

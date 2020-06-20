@@ -106,7 +106,7 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
     }
     NSString *action = nil;
     if ([[MSUserManager sharedInstance].curUserInfo.utype isEqualToString:@"1"]) {//母婴店
-        action = (self.refund_id && self.refund_id.length)?@"admin/orderRefundInfo":@"admin/getOrderInfo";
+        action = (self.refund_id && self.refund_id.length)?@"program/orderRefundInfo":@"program/getOrderInfo";
     }else if ([[MSUserManager sharedInstance].curUserInfo.utype isEqualToString:@"2"]) {//供应商
         action = (self.refund_id && self.refund_id.length)?@"index/orderRefundInfo":@"index/getOrderInfo";
     }else{

@@ -362,6 +362,9 @@
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qyl-M0-mE8">
                                                     <rect key="frame" x="0.0" y="0.0" width="97.5" height="75"/>
+                                                    <connections>
+                                                        <action selector="orderManageClicked:" destination="-1" eventType="touchUpInside" id="ZeU-cX-XBt"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
