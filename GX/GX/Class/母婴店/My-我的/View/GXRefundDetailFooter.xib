@@ -10,7 +10,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="GXRefundDetailFooter">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="130"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="135"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="分割线" translatesAutoresizingMaskIntoConstraints="NO" id="5f6-HL-JV4">
@@ -20,10 +20,10 @@
                     </constraints>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="etc-u9-C9w">
-                    <rect key="frame" x="12" y="25" width="390" height="100"/>
+                    <rect key="frame" x="12" y="25" width="390" height="105"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="退货地址框" translatesAutoresizingMaskIntoConstraints="NO" id="1jp-Yc-auz">
-                            <rect key="frame" x="0.0" y="0.0" width="390" height="100"/>
+                            <rect key="frame" x="0.0" y="0.0" width="390" height="105"/>
                         </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6RU-Bf-ZOs">
                             <rect key="frame" x="0.0" y="0.0" width="390" height="40"/>
@@ -59,7 +59,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="湖北省武汉市汉阳区惠民园2#201" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KgP-gK-U6d">
-                            <rect key="frame" x="20" y="70.5" width="360" height="14.5"/>
+                            <rect key="frame" x="20" y="67" width="360" height="14.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -72,8 +72,8 @@
                         <constraint firstAttribute="bottom" secondItem="1jp-Yc-auz" secondAttribute="bottom" id="JN3-I3-fC7"/>
                         <constraint firstAttribute="trailing" secondItem="KgP-gK-U6d" secondAttribute="trailing" constant="10" id="SOJ-2P-x9n"/>
                         <constraint firstItem="KgP-gK-U6d" firstAttribute="leading" secondItem="etc-u9-C9w" secondAttribute="leading" constant="20" id="TfY-AA-Zlx"/>
-                        <constraint firstAttribute="bottom" secondItem="KgP-gK-U6d" secondAttribute="bottom" constant="15" id="XQF-p1-1Hi"/>
                         <constraint firstItem="1jp-Yc-auz" firstAttribute="top" secondItem="etc-u9-C9w" secondAttribute="top" id="XzS-Ex-SAd"/>
+                        <constraint firstItem="KgP-gK-U6d" firstAttribute="top" secondItem="ee1-T7-nmF" secondAttribute="bottom" constant="10" id="bJH-1X-zeL"/>
                         <constraint firstAttribute="trailing" secondItem="1jp-Yc-auz" secondAttribute="trailing" id="bgb-az-44r"/>
                         <constraint firstItem="6RU-Bf-ZOs" firstAttribute="leading" secondItem="etc-u9-C9w" secondAttribute="leading" id="eqb-Ud-a1B"/>
                         <constraint firstItem="1jp-Yc-auz" firstAttribute="leading" secondItem="etc-u9-C9w" secondAttribute="leading" id="vkV-WN-xde"/>

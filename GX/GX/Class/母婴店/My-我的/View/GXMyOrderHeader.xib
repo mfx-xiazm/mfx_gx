@@ -43,6 +43,9 @@
                 <constraint firstAttribute="bottom" secondItem="71Y-wF-558" secondAttribute="bottom" id="tsv-Q5-qvf"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="shop_name" destination="iZJ-Lr-VyI" id="bbp-Xr-aUp"/>
+            </connections>
             <point key="canvasLocation" x="107" y="228"/>
         </view>
     </objects>

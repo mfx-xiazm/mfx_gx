@@ -10,9 +10,28 @@
 
 @implementation GXCartData
 + (NSDictionary *)modelContainerPropertyGenericClass {
-    return @{@"goodsData":[GXCartShopGoods class]
+    return @{
+             @"sale_data":[GXCartSaleData class]
              };
 }
+@end
+
+@implementation GXCartSaleData
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    return @{
+             @"goodsData":[GXCartShopGoods class],
+             @"giftData":[GXCartGoodsGift class],
+             @"rebate":[GXCartGoodsRebate class]
+             };
+}
+@end
+
+@implementation GXCartGoodsGift
+
+@end
+
+@implementation GXCartGoodsRebate
+
 @end
 
 @implementation GXCartShopGoods

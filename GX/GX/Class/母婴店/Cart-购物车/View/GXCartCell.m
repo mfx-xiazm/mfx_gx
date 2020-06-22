@@ -9,20 +9,40 @@
 #import "GXCartCell.h"
 #import "GXCartData.h"
 
-@interface GXCartCell ()
+@interface GXCartCell ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *checkBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *cover_img;
 @property (weak, nonatomic) IBOutlet UILabel *goods_name;
 @property (weak, nonatomic) IBOutlet UILabel *price;
 @property (weak, nonatomic) IBOutlet UILabel *spec_value;
-@property (weak, nonatomic) IBOutlet UILabel *cart_num;
+@property (weak, nonatomic) IBOutlet UITextField *cart_num;
 @end
 
 @implementation GXCartCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    self.cart_num.delegate = self;
+}
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if (![textField hasText] || [textField.text integerValue] == 0) {
+        textField.text = @"1";
+    }
+    if ([textField.text integerValue] > [_goods.stock integerValue]) {
+        textField.text = [NSString stringWithFormat:@"%ld",(long)[_goods.stock integerValue]];
+    }
+    
+    _goods.cart_num = textField.text;
+    if (self.cartHandleCall) {
+        self.cartHandleCall(0);//0或1均可以，代表商品数量变化
+    }
+}
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
+           NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+    return [string isEqualToString:filtered];
 }
 -(void)setGoods:(GXCartShopGoods *)goods
 {

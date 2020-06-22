@@ -10,7 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXGiftGoods;
 @interface GXGiftGoodsCell : UITableViewCell
+@property (nonatomic, strong) GXGiftGoods *giftGoods;
+@property (weak, nonatomic) IBOutlet UIImageView *sharw_img;
 
 @end
 

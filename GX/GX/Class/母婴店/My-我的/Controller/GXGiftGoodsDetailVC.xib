@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GXGiftGoodsDetailVC">
             <connections>
+                <outlet property="handleView" destination="yvH-P9-HTd" id="UGk-RF-wul"/>
                 <outlet property="tableView" destination="Uib-Ap-ni0" id="FzQ-bx-RJy"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -20,7 +21,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Uib-Ap-ni0">
-                    <rect key="frame" x="0.0" y="44" width="414" height="768"/>
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yvH-P9-HTd">
@@ -33,7 +34,7 @@
                                 <constraint firstAttribute="height" constant="30" id="qnY-BF-mQo"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <state key="normal" title="订单操作">
+                            <state key="normal" title="查看物流">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <userDefinedRuntimeAttributes>
@@ -44,11 +45,14 @@
                                     <real key="value" value="1"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="color" keyPath="boderColor">
-                                    <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="value" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="orderBtnClicked:" destination="-1" eventType="touchUpInside" id="eA2-nR-ctx"/>
+                            </connections>
                         </button>
-                        <button opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3jK-Ln-NKx">
+                        <button opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3jK-Ln-NKx">
                             <rect key="frame" x="334" y="10" width="70" height="30"/>
                             <color key="backgroundColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
@@ -56,7 +60,7 @@
                                 <constraint firstAttribute="height" constant="30" id="NNO-px-Y9Q"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <state key="normal" title="订单操作">
+                            <state key="normal" title="确认收货">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <userDefinedRuntimeAttributes>
@@ -70,6 +74,9 @@
                                     <color key="value" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="orderBtnClicked:" destination="-1" eventType="touchUpInside" id="Iam-g0-1IR"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -87,8 +94,8 @@
                 <constraint firstItem="yvH-P9-HTd" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="4DJ-N9-zbj"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="yvH-P9-HTd" secondAttribute="bottom" id="F74-hP-Ls1"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="yvH-P9-HTd" secondAttribute="trailing" id="UMa-4S-xwl"/>
-                <constraint firstItem="yvH-P9-HTd" firstAttribute="top" secondItem="Uib-Ap-ni0" secondAttribute="bottom" id="WAA-B7-jmY"/>
                 <constraint firstItem="Uib-Ap-ni0" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="fYi-zj-cMP"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="Uib-Ap-ni0" secondAttribute="bottom" id="iMe-Xc-gNn"/>
                 <constraint firstItem="Uib-Ap-ni0" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="oTx-pN-Ttu"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="Uib-Ap-ni0" secondAttribute="trailing" id="vGO-wP-Qdx"/>
             </constraints>

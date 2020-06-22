@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,14 +14,14 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hFK-2K-Ila">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="160"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="180"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shop_info_bg" translatesAutoresizingMaskIntoConstraints="NO" id="iG2-Jz-8h1">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="160"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="180"/>
                             <color key="backgroundColor" red="0.96801567675774636" green="0.58088159776619719" blue="0.46804113588309865" alpha="1" colorSpace="calibratedRGB"/>
                         </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EAM-Kk-tOJ">
-                            <rect key="frame" x="10" y="100" width="394" height="50"/>
+                            <rect key="frame" x="10" y="120" width="394" height="50"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fw6-ts-W05">
                                     <rect key="frame" x="10" y="5" width="40" height="40"/>
@@ -93,14 +93,14 @@
                         <constraint firstItem="EAM-Kk-tOJ" firstAttribute="leading" secondItem="hFK-2K-Ila" secondAttribute="leading" constant="10" id="EpU-ds-JXu"/>
                         <constraint firstItem="iG2-Jz-8h1" firstAttribute="leading" secondItem="hFK-2K-Ila" secondAttribute="leading" id="HDa-8J-6U8"/>
                         <constraint firstAttribute="trailing" secondItem="iG2-Jz-8h1" secondAttribute="trailing" id="HPs-aq-h7h"/>
-                        <constraint firstAttribute="height" constant="160" id="SGG-3B-kDo"/>
+                        <constraint firstAttribute="height" constant="180" id="SGG-3B-kDo"/>
                         <constraint firstItem="iG2-Jz-8h1" firstAttribute="top" secondItem="hFK-2K-Ila" secondAttribute="top" id="cDq-g7-i0b"/>
                         <constraint firstAttribute="bottom" secondItem="iG2-Jz-8h1" secondAttribute="bottom" id="tHZ-cb-mcg"/>
                         <constraint firstAttribute="bottom" secondItem="EAM-Kk-tOJ" secondAttribute="bottom" constant="10" id="xgC-vk-dIw"/>
                     </constraints>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Py1-yC-ri5">
-                    <rect key="frame" x="0.0" y="160" width="414" height="81"/>
+                    <rect key="frame" x="0.0" y="180" width="414" height="61"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="sKX-LW-TPE">
                         <size key="itemSize" width="50" height="50"/>

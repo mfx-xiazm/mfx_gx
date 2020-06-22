@@ -23,7 +23,7 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="阴影中间" translatesAutoresizingMaskIntoConstraints="NO" id="1vE-3r-jRw">
                                 <rect key="frame" x="0.0" y="0.0" width="347" height="89"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jse-r1-Cib">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon-logo" translatesAutoresizingMaskIntoConstraints="NO" id="jse-r1-Cib">
                                 <rect key="frame" x="18" y="10" width="69" height="69"/>
                                 <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -32,6 +32,12 @@
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layerBoderCorner">
                                         <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layerBoderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="boderColor">
+                                        <color key="value" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
@@ -81,10 +87,17 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="coverImg" destination="jse-r1-Cib" id="cwh-u2-gSo"/>
+                <outlet property="gift_name" destination="Yyc-LH-zHS" id="rNb-mS-9fy"/>
+                <outlet property="gift_num" destination="hC8-V6-bfb" id="DBy-rh-gXt"/>
+                <outlet property="sharw_img" destination="1vE-3r-jRw" id="ufj-Qj-2tK"/>
+            </connections>
             <point key="canvasLocation" x="157.24637681159422" y="153.01339285714286"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="Icon-logo" width="60" height="60"/>
         <image name="阴影中间" width="363" height="5"/>
     </resources>
 </document>

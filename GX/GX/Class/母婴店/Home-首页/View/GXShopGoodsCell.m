@@ -11,6 +11,9 @@
 #import "GXSearchResult.h"
 #import "GXStore.h"
 #import "GXBrandGoods.h"
+#import "GXGoodsDetail.h"
+#import "GXMyOrder.h"
+#import "GXMyRefund.h"
 
 @interface GXShopGoodsCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *cover_img;
@@ -82,6 +85,52 @@
         }
     }else{
         self.price.text = [NSString stringWithFormat:@"￥%@",_brandGoods.min_price];
+    }
+}
+-(void)setRecommend:(GXGoodsRecommend *)recommend
+{
+    _recommend = recommend;
+    
+    [self.cover_img sd_setImageWithURL:[NSURL URLWithString:_recommend.cover_img]];
+    self.goods_name.text = _recommend.goods_name;
+    if ([_recommend.control_type isEqualToString:@"1"]) {
+        if ([_recommend.min_price floatValue] == [_recommend.max_price floatValue]) {
+            self.price.text = [NSString stringWithFormat:@"￥%@",_recommend.min_price];
+        }else{
+            self.price.text = [NSString stringWithFormat:@"￥%@-￥%@",_recommend.min_price,_recommend.max_price];
+        }
+    }else{
+        self.price.text = [NSString stringWithFormat:@"￥%@",_recommend.min_price];
+    }
+}
+-(void)setOrderRecommend:(GXMyOrderRecommend *)orderRecommend
+{
+    _orderRecommend = orderRecommend;
+    [self.cover_img sd_setImageWithURL:[NSURL URLWithString:_orderRecommend.cover_img]];
+    self.goods_name.text = _orderRecommend.goods_name;
+    if ([_orderRecommend.control_type isEqualToString:@"1"]) {
+        if ([_orderRecommend.min_price floatValue] == [_orderRecommend.max_price floatValue]) {
+            self.price.text = [NSString stringWithFormat:@"￥%@",_orderRecommend.min_price];
+        }else{
+            self.price.text = [NSString stringWithFormat:@"￥%@-￥%@",_orderRecommend.min_price,_orderRecommend.max_price];
+        }
+    }else{
+        self.price.text = [NSString stringWithFormat:@"￥%@",_orderRecommend.min_price];
+    }
+}
+-(void)setRefundRecommend:(GXMyRefundRecommend *)refundRecommend
+{
+    _refundRecommend = refundRecommend;
+    [self.cover_img sd_setImageWithURL:[NSURL URLWithString:_refundRecommend.cover_img]];
+    self.goods_name.text = _refundRecommend.goods_name;
+    if ([_refundRecommend.control_type isEqualToString:@"1"]) {
+        if ([_refundRecommend.min_price floatValue] == [_orderRecommend.max_price floatValue]) {
+            self.price.text = [NSString stringWithFormat:@"￥%@",_refundRecommend.min_price];
+        }else{
+            self.price.text = [NSString stringWithFormat:@"￥%@-￥%@",_refundRecommend.min_price,_refundRecommend.max_price];
+        }
+    }else{
+        self.price.text = [NSString stringWithFormat:@"￥%@",_refundRecommend.min_price];
     }
 }
 @end

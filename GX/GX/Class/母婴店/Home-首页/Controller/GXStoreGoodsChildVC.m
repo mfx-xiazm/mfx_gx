@@ -87,14 +87,14 @@ static NSString *const StoreGoodsListHeader = @"StoreGoodsListHeader";
 -(void)setUpRefresh
 {
     hx_weakify(self);
-    self.collectionView.mj_header.automaticallyChangeAlpha = YES;
-    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        hx_strongify(weakSelf);
-        [strongSelf.collectionView.mj_footer resetNoMoreData];
-        [strongSelf getCatalogGoodsDataRequest:YES completedCall:^{
-            [strongSelf.collectionView reloadData];
-        }];
-    }];
+//    self.collectionView.mj_header.automaticallyChangeAlpha = YES;
+//    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+//        hx_strongify(weakSelf);
+//        [strongSelf.collectionView.mj_footer resetNoMoreData];
+//        [strongSelf getCatalogGoodsDataRequest:YES completedCall:^{
+//            [strongSelf.collectionView reloadData];
+//        }];
+//    }];
     //追加尾部刷新
     self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         hx_strongify(weakSelf);
@@ -169,7 +169,6 @@ static NSString *const StoreGoodsListHeader = @"StoreGoodsListHeader";
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"provider_uid"] = self.provider_uid;
-    parameters[@"catalog_id"] = @"27";
     if (isRefresh) {
         parameters[@"page"] = @(1);//第几页
     }else{
@@ -260,9 +259,9 @@ static NSString *const StoreGoodsListHeader = @"StoreGoodsListHeader";
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
     if (self.storeInfo.coupon && self.storeInfo.coupon.count) {
-        return CGSizeMake(HX_SCREEN_WIDTH, 160.f+60.f);
+        return CGSizeMake(HX_SCREEN_WIDTH, 180.f+60.f);
     }else{
-        return CGSizeMake(HX_SCREEN_WIDTH, 160.f);
+        return CGSizeMake(HX_SCREEN_WIDTH, 180.f);
     }
 }
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath

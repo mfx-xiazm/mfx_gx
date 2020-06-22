@@ -7,6 +7,7 @@
 //
 
 #import "GXMyIdeaPhotoCell.h"
+#import "GXShowProof.h"
 
 @implementation GXMyIdeaPhotoCell
 
@@ -14,5 +15,9 @@
     [super awakeFromNib];
     // Initialization code
 }
-
+-(void)setProof:(GXShowProof *)proof
+{
+    _proof = proof;
+    [self.photoImg sd_setImageWithURL:[NSURL URLWithString:_proof.pay_img]];
+}
 @end

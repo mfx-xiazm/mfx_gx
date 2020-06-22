@@ -10,8 +10,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXMyOrderGoods;
+typedef void(^upProofCall)(void);
 @interface GXUpMoneyProofVC : HXBaseViewController
-
+@property (nonatomic, copy) upProofCall upProofCall;
+@property (nonatomic, copy) NSString *oid;
+@property (nonatomic, strong) GXMyOrderGoods *goods;
 @end
 
 NS_ASSUME_NONNULL_END

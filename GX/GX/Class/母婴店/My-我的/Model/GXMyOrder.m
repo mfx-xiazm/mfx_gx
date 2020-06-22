@@ -10,11 +10,25 @@
 
 @implementation GXMyOrder
 + (NSDictionary *)modelContainerPropertyGenericClass {
-    return @{@"goods":[GXMyOrderGoods class]
+    return @{@"goods":[GXMyOrderGoods class],
+             @"goods_recommend":[GXMyOrderRecommend class]
              };
+}
+-(void)setLogistics_no:(NSString *)logistics_no
+{
+    if (logistics_no.length) {
+        _logistics_nos = [logistics_no componentsSeparatedByString:@","];
+        _logistics_no = _logistics_nos.firstObject;
+    }else{
+        _logistics_no = @"";
+    }
 }
 @end
 
 @implementation GXMyOrderGoods
+
+@end
+
+@implementation GXMyOrderRecommend
 
 @end

@@ -14,4 +14,10 @@
 {
     [super awakeFromNib];
 }
+- (IBAction)btnClicked:(UIButton *)sender {
+    if (self.giftClickedCall) {
+        self.giftClickedCall(sender.tag);
+    }
+}
+
 @end

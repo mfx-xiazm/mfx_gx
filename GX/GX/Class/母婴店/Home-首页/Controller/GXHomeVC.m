@@ -63,6 +63,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self setUpNavBar];
     [self setUpCollectionView];
     [self setUpRefresh];

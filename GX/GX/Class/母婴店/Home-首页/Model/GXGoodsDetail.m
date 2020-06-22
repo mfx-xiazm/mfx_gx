@@ -20,6 +20,9 @@
              @"eva":[GXGoodsComment class],
              @"rush":[GXGoodsRush class],
              @"logistics":[GXGoodsLogisticst class],
+             @"goods_recommend":[GXGoodsRecommend class],
+             @"gift_rule":[GXGoodsGiftRule class],
+             @"rebate":[GXGoodsRebate class]
              };
 }
 
@@ -115,3 +118,14 @@
 @end
 
 
+@implementation GXGoodsRecommend
+
+@end
+
+@implementation GXGoodsGiftRule
+
+@end
+
+@implementation GXGoodsRebate
+
+@end

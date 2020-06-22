@@ -10,8 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^statusChangeCall)(void);
 @interface GXGiftGoodsDetailVC : HXBaseViewController
-
+@property (nonatomic, copy) NSString *gift_order_id;
+@property (nonatomic, copy) statusChangeCall statusChangeCall;
 @end
 
 NS_ASSUME_NONNULL_END

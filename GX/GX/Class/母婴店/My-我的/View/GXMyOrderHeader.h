@@ -10,12 +10,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class GXMyOrder,GXMyRefund;
+@class GXMyOrder,GXMyRefund,GXGiftGoods;
 @interface GXMyOrderHeader : UIView
 /* 订单 */
 @property(nonatomic,strong) GXMyOrder *order;
 /* 退款 */
 @property(nonatomic,strong) GXMyRefund *refund;
+/* 赠品订单 */
+@property (nonatomic, strong) GXGiftGoods *giftGoods;
 @end
 
 NS_ASSUME_NONNULL_END

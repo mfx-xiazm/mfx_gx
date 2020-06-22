@@ -250,6 +250,7 @@ static NSString *const MarketTrendCell = @"MarketTrendCell";
     header.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 40.f);
     GXMarketTrendSeries *series = self.showTrends[section];
     header.series = series;
+    header.bgView.backgroundColor = (self.dataType ==1)?UIColorFromRGB(0xFBDBDE):UIColorFromRGB(0xABD7F4);
     return header;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

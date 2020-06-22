@@ -10,8 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXGiftGoods;
 @interface GXGiftGoodsHeader : UIView
-
+@property (nonatomic, strong) GXGiftGoods *giftGoods;
 @end
 
 NS_ASSUME_NONNULL_END

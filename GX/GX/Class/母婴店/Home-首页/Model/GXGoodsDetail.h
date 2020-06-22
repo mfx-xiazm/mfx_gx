@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class GXGoodsDetailAdv,GXGoodsDetailParam,GXGoodsDetailSpec,GXGoodsDetailSubSpec,GXGoodsMaterial,GXGoodsMaterialLayout,GXGoodsComment,GXGoodsCommentLayout,GXGoodsLogisticst,GXGoodsDetailSku,GXGoodsRush;
+@class GXGoodsDetailAdv,GXGoodsDetailParam,GXGoodsDetailSpec,GXGoodsDetailSubSpec,GXGoodsMaterial,GXGoodsMaterialLayout,GXGoodsComment,GXGoodsCommentLayout,GXGoodsLogisticst,GXGoodsDetailSku,GXGoodsRush,GXGoodsRecommend,GXGoodsGiftRule,GXGoodsRebate;
 @interface GXGoodsDetail : NSObject
 @property(nonatomic,copy) NSString *goods_id;
 @property(nonatomic,copy) NSString *control_type;
@@ -31,6 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *desc_level;
 @property(nonatomic,copy) NSString *deliver_level;
 @property(nonatomic,copy) NSString *answer_level;
+/**线下支付审核状态：1待上传打款凭证；2审核通过；3审核驳回。4上传打款凭证审核中；线上支付不需要审核逻辑*/
 @property(nonatomic,copy) NSString *approve_status;
 @property(nonatomic,copy) NSString *reject_reason;
 @property(nonatomic,copy) NSString *rushbuy;
@@ -40,6 +41,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *evaCount;
 /** 购买的数量 */
 @property(nonatomic,assign) NSInteger buyNum;
+@property(nonatomic,strong) NSArray<GXGoodsRecommend *> *goods_recommend;
+@property(nonatomic,strong) NSArray<GXGoodsGiftRule *> *gift_rule;
+@property(nonatomic,strong) NSArray<GXGoodsRebate *> *rebate;
 @property(nonatomic,strong) NSArray<GXGoodsDetailAdv *> *good_adv;
 @property(nonatomic,strong) NSArray<GXGoodsDetailParam *> *good_param;
 @property(nonatomic,strong) NSArray<GXGoodsDetailSpec *> *spec;
@@ -59,7 +63,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *goods_adv_id;
 @property(nonatomic,copy) NSString *goods_id;
 @property(nonatomic,copy) NSString *adv_img;
-
+// 1图片 2视频
+@property(nonatomic,copy) NSString *adv_type;
 @end
 
 @interface GXGoodsDetailParam : NSObject
@@ -119,5 +124,36 @@ NS_ASSUME_NONNULL_BEGIN
 /** 倒计时 */
 @property (nonatomic,assign) NSInteger countDown;
 @end
+
+@interface GXGoodsRecommend : NSObject
+@property(nonatomic,copy) NSString *home_set_id;
+@property(nonatomic,copy) NSString *ref_id;
+@property(nonatomic,copy) NSString *goods_id;
+@property(nonatomic,copy) NSString *set_cover_img;
+@property(nonatomic,copy) NSString *hogoods_idme_set_id;
+@property(nonatomic,copy) NSString *goods_name;
+@property(nonatomic,copy) NSString *control_type;
+@property(nonatomic,copy) NSString *cover_img;
+@property(nonatomic,copy) NSString *brand_id;
+@property(nonatomic,copy) NSString *suggest_price;
+@property(nonatomic,copy) NSString *min_price;
+@property(nonatomic,copy) NSString *max_price;
+@end
+
+@interface GXGoodsGiftRule : NSObject
+@property(nonatomic,copy) NSString *gift_rule_interval_id;
+@property(nonatomic,copy) NSString *goods_gift_rule_id;
+@property(nonatomic,copy) NSString *begin_num;
+@property(nonatomic,copy) NSString *gift_type;
+@property(nonatomic,copy) NSString *gift_num;
+@property(nonatomic,copy) NSString *goods_name;
+@end
+
+@interface GXGoodsRebate : NSObject
+@property(nonatomic,copy) NSString *rebate_id;
+@property(nonatomic,copy) NSString *begin_price;
+@property(nonatomic,copy) NSString *percent;
+@end
+
 
 NS_ASSUME_NONNULL_END

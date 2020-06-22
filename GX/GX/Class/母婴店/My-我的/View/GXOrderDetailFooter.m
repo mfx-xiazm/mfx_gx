@@ -17,7 +17,6 @@
 @property(nonatomic,weak) IBOutlet UILabel *pay_amount;
 @property (weak, nonatomic) IBOutlet UILabel *order_desc;
 @property (weak, nonatomic) IBOutlet UILabel *goods_num;
-
 @end
 @implementation GXOrderDetailFooter
 
@@ -36,11 +35,45 @@
     self.pay_amount.text = [NSString stringWithFormat:@"￥%@",_orderDetail.pay_amount];
     self.goods_num.text = [NSString stringWithFormat:@"共%zd件商品",_orderDetail.goods.count];
     
-    if (_orderDetail.username && _orderDetail.username.length) {
-        [self.order_desc setTextWithLineSpace:10.f withString:[NSString stringWithFormat:@"订单编号：%@\n下单时间：%@\n发货商家：%@\n推广店员：%@（%@）",_orderDetail.order_no,_orderDetail.create_time,_orderDetail.provider_no,_orderDetail.username,_orderDetail.saleman_code] withFont:[UIFont systemFontOfSize:13]];
-    }else{
-        [self.order_desc setTextWithLineSpace:10.f withString:[NSString stringWithFormat:@"订单编号：%@\n下单时间：%@\n发货商家：%@\n",_orderDetail.order_no,_orderDetail.create_time,_orderDetail.provider_no] withFont:[UIFont systemFontOfSize:13]];
+    NSMutableString *infoStr = [NSMutableString string];
+    [infoStr appendFormat:@"%@",[NSString stringWithFormat:@"订单编号：%@\n下单时间：%@",_orderDetail.order_no,_orderDetail.create_time]];
+
+    // 1快递；2快运；3物流
+    if (_orderDetail.logistics_com_name && _orderDetail.logistics_com_name.length) {
+        if ([_orderDetail.send_freight_type isEqualToString:@"1"]) {
+            [infoStr appendFormat:@"\n快递公司：%@",_orderDetail.logistics_com_name];
+            if (_orderDetail.logistics_no && _orderDetail.logistics_no.length) {
+                [infoStr appendFormat:@"\n快递单号：%@",_orderDetail.logistics_no];
+            }else if (_orderDetail.driver_phone && _orderDetail.driver_phone.length) {
+                [infoStr appendFormat:@"\n司机电话：%@",_orderDetail.driver_phone];
+            }else{
+                
+            }
+        }else if ([_orderDetail.send_freight_type isEqualToString:@"2"]) {
+            [infoStr appendFormat:@"\n快运公司：%@",_orderDetail.logistics_com_name];
+            if (_orderDetail.logistics_no && _orderDetail.logistics_no.length) {
+                [infoStr appendFormat:@"\n快运单号：%@",_orderDetail.logistics_no];
+            }else if (_orderDetail.driver_phone && _orderDetail.driver_phone.length) {
+                [infoStr appendFormat:@"\n司机电话：%@",_orderDetail.driver_phone];
+            }else{
+                
+            }
+        }else {
+            [infoStr appendFormat:@"\n物流公司：%@",_orderDetail.logistics_com_name];
+            if (_orderDetail.logistics_no && _orderDetail.logistics_no.length) {
+                [infoStr appendFormat:@"\n物流单号：%@",_orderDetail.logistics_no];
+            }else if (_orderDetail.driver_phone && _orderDetail.driver_phone.length) {
+                [infoStr appendFormat:@"\n司机电话：%@",_orderDetail.driver_phone];
+            }else{
+                
+            }
+        }
     }
+    [infoStr appendFormat:@"%@",[NSString stringWithFormat:@"\n发货商家：%@",_orderDetail.provider_no]];
+    if (_orderDetail.username && _orderDetail.username.length) {
+        [infoStr appendFormat:@"\n推广店员：%@（%@）",_orderDetail.username,_orderDetail.saleman_code];
+    }
+    [self.order_desc setTextWithLineSpace:10.f withString:infoStr withFont:[UIFont systemFontOfSize:13]];
 }
 -(void)setRefundDetail:(GXMyRefund *)refundDetail
 {
@@ -51,11 +84,45 @@
     self.order_price_amount.text = [NSString stringWithFormat:@"￥%@",_refundDetail.total_pay_amount];
     self.pay_amount.text = [NSString stringWithFormat:@"￥%@",_refundDetail.pay_amount];
     
-    if (_refundDetail.username && _refundDetail.username.length) {
-        [self.order_desc setTextWithLineSpace:10.f withString:[NSString stringWithFormat:@"订单编号：%@\n下单时间：%@\n发货商家：%@\n推广店员：%@（%@）",_refundDetail.order_no,_refundDetail.create_time,_refundDetail.provider_no,_refundDetail.username,_refundDetail.saleman_code] withFont:[UIFont systemFontOfSize:13]];
-    }else{
-        [self.order_desc setTextWithLineSpace:10.f withString:[NSString stringWithFormat:@"订单编号：%@\n下单时间：%@\n发货商家：%@\n",_refundDetail.order_no,_refundDetail.create_time,_refundDetail.provider_no] withFont:[UIFont systemFontOfSize:13]];
+    NSMutableString *infoStr = [NSMutableString string];
+    [infoStr appendFormat:@"%@",[NSString stringWithFormat:@"订单编号：%@\n下单时间：%@\n发货商家：%@",_refundDetail.order_no,_refundDetail.create_time,_refundDetail.provider_no]];
+
+    // 1快递；2快运；3物流
+    if (_refundDetail.logistics_com_name && _refundDetail.logistics_com_name.length) {
+        if ([_refundDetail.send_freight_type isEqualToString:@"1"]) {
+            [infoStr appendFormat:@"\n快递公司：%@",_refundDetail.logistics_com_name];
+            if (_refundDetail.logistics_no && _refundDetail.logistics_no.length) {
+                [infoStr appendFormat:@"\n快递单号：%@",_refundDetail.logistics_no];
+            }else if (_refundDetail.driver_phone && _refundDetail.driver_phone.length) {
+                [infoStr appendFormat:@"\n司机电话：%@",_refundDetail.driver_phone];
+            }else{
+                
+            }
+        }else if ([_refundDetail.send_freight_type isEqualToString:@"2"]) {
+            [infoStr appendFormat:@"\n快运公司：%@",_refundDetail.logistics_com_name];
+            if (_refundDetail.logistics_no && _refundDetail.logistics_no.length) {
+                [infoStr appendFormat:@"\n快运单号：%@",_refundDetail.logistics_no];
+            }else if (_refundDetail.driver_phone && _refundDetail.driver_phone.length) {
+                [infoStr appendFormat:@"\n司机电话：%@",_refundDetail.driver_phone];
+            }else{
+                
+            }
+        }else {
+            [infoStr appendFormat:@"\n物流公司：%@",_refundDetail.logistics_com_name];
+            if (_refundDetail.logistics_no && _refundDetail.logistics_no.length) {
+                [infoStr appendFormat:@"\n物流单号：%@",_refundDetail.logistics_no];
+            }else if (_refundDetail.driver_phone && _refundDetail.driver_phone.length) {
+                [infoStr appendFormat:@"\n司机电话：%@",_refundDetail.driver_phone];
+            }else{
+                
+            }
+        }
     }
+    [infoStr appendFormat:@"%@",[NSString stringWithFormat:@"\n发货商家：%@",_refundDetail.provider_no]];
+    if (_refundDetail.username && _refundDetail.username.length) {
+        [infoStr appendFormat:@"\n推广店员：%@（%@）",_refundDetail.username,_refundDetail.saleman_code];
+    }
+    [self.order_desc setTextWithLineSpace:10.f withString:infoStr withFont:[UIFont systemFontOfSize:13]];
 }
 - (IBAction)orderNoCopy:(id)sender {
     if (self.refundDetail) {

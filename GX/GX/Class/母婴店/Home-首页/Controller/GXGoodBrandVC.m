@@ -14,7 +14,6 @@
 #import "HXDropMenuView.h"
 #import "GXWebContentVC.h"
 #import "GXCatalogItem.h"
-#import "GXGoodBrand.h"
 #import "GXBrandGoods.h"
 #import "GXSearchResultVC.h"
 #import "GXApplySupplyVC.h"
@@ -41,8 +40,12 @@ static NSString *const ShopGoodsCell = @"ShopGoodsCell";
 @property(nonatomic,strong) NSArray *goodsBrands;
 /* 分类id */
 @property(nonatomic,strong) NSString *catalog_id;
+/* 选中的分类 */
+@property (nonatomic, strong) GXCatalogItem *selectItem;
 /* 品牌id */
 @property(nonatomic,strong) NSString *brand_id;
+/* 选中的品牌 */
+@property (nonatomic, strong) GXBrandItem *selectBrand;
 /** 页码 */
 @property(nonatomic,assign) NSInteger pagenum;
 /** 列表 */
@@ -65,28 +68,6 @@ static NSString *const ShopGoodsCell = @"ShopGoodsCell";
 {
     [super viewDidLayoutSubviews];
     [self.applyBtn bezierPathByRoundingCorners:UIRectCornerTopLeft|UIRectCornerBottomLeft cornerRadii:CGSizeMake(15.f, 15.f)];
-}
--(void)setCatalog_id:(NSString *)catalog_id
-{
-    if (![_catalog_id isEqualToString:catalog_id]) {
-        _catalog_id = catalog_id;
-        hx_weakify(self);
-        [self getGoodsListDataRequest:YES completedCall:^{
-            hx_strongify(weakSelf);
-            [strongSelf.collectionView reloadData];
-        }];
-    }
-}
--(void)setBrand_id:(NSString *)brand_id
-{
-    if (![_brand_id isEqualToString:brand_id]) {
-        _brand_id = brand_id;
-        hx_weakify(self);
-        [self getGoodsListDataRequest:YES completedCall:^{
-            hx_strongify(weakSelf);
-            [strongSelf.collectionView reloadData];
-        }];
-    }
 }
 -(NSMutableArray *)goods
 {
@@ -176,7 +157,7 @@ static NSString *const ShopGoodsCell = @"ShopGoodsCell";
                 NSMutableArray *tampArr = [NSMutableArray arrayWithArray:[NSArray yy_modelArrayWithClass:[GXCatalogItem class] json:responseObject[@"data"]]];
                 GXCatalogItem *item = [[GXCatalogItem alloc] init];
                 item.catalog_id = @"";
-                item.catalog_name = @"全部";
+                item.catalog_name = @"全部分类";
                 [tampArr insertObject:item atIndex:0];
                 strongSelf.cataItems = tampArr;
             }else{
@@ -196,11 +177,11 @@ static NSString *const ShopGoodsCell = @"ShopGoodsCell";
         
         [HXNetworkTool POST:HXRC_M_URL action:@"admin/getAllCatalogBrand" parameters:parameters success:^(id responseObject) {
             if([[responseObject objectForKey:@"status"] integerValue] == 1) {
-                NSMutableArray *tampArr = [NSMutableArray arrayWithArray:[NSArray yy_modelArrayWithClass:[GXGoodBrand class] json:responseObject[@"data"]]];
+                NSMutableArray *tampArr = [NSMutableArray arrayWithArray:[NSArray yy_modelArrayWithClass:[GXBrandItem class] json:responseObject[@"data"]]];
                
-                GXGoodBrand *brand = [[GXGoodBrand alloc] init];
+                GXBrandItem *brand = [[GXBrandItem alloc] init];
                 brand.brand_id = @"";
-                brand.brand_name = @"全部";
+                brand.brand_name = @"全部品牌";
                 [tampArr insertObject:brand atIndex:0];
                 
                 strongSelf.goodsBrands = tampArr;
@@ -251,9 +232,15 @@ static NSString *const ShopGoodsCell = @"ShopGoodsCell";
         NSInteger page = self.pagenum+1;
         parameters[@"page"] = @(page);//第几页
     }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [MBProgressHUD showLoadToView:nil title:nil];
+    });
     hx_weakify(self);
     [HXNetworkTool POST:HXRC_M_URL action:@"admin/goodsList" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUD];
+        });
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             if (isRefresh) {
                 [strongSelf.collectionView.mj_header endRefreshing];
@@ -281,6 +268,9 @@ static NSString *const ShopGoodsCell = @"ShopGoodsCell";
         }
     } failure:^(NSError *error) {
         hx_strongify(weakSelf);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUD];
+        });
         [strongSelf.collectionView.mj_header endRefreshing];
         [strongSelf.collectionView.mj_footer endRefreshing];
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
@@ -347,25 +337,61 @@ static NSString *const ShopGoodsCell = @"ShopGoodsCell";
         GXCatalogItem *item = self.cataItems[row];
         return item.catalog_name;
     }else{
-        GXGoodBrand *brand = self.goodsBrands[row];
-        return brand.brand_name;
+        if (self.selectItem && self.selectItem.catalog_id.length) {// 如果选了分类，且不是全部分类
+            GXBrandItem *brand = self.selectItem.brandData[row];
+            return brand.brand_name;
+        }else{// 没有具体品牌。默认全部
+            GXBrandItem *brand = self.goodsBrands[row];
+            return brand.brand_name;
+        }
     }
 }
 -(NSInteger)menu_numberOfRows {
     if (self.selectBtn.tag == 1) {
         return self.cataItems.count;
     }else{
-        return self.goodsBrands.count;
+        if (self.selectItem && self.selectItem.catalog_id.length) {// 如果选了分类，且不是全部分类
+            GXBrandItem *firstBrand = self.selectItem.brandData.firstObject;
+            if (![firstBrand.brand_name isEqualToString:@"全部品牌"]) {
+                NSMutableArray *brandData = [NSMutableArray arrayWithArray:self.selectItem.brandData];
+                GXBrandItem *allBrand = [[GXBrandItem alloc] init];
+                allBrand.brand_id = @"";
+                allBrand.brand_name = @"全部品牌";
+                [brandData insertObject:allBrand atIndex:0];
+                self.selectItem.brandData = brandData;
+            }
+            return self.selectItem.brandData.count;
+        }else{// 没有具体品牌。默认全部
+            return self.goodsBrands.count;
+        }
     }
 }
 - (void)menu:(HXDropMenuView *)menu didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.selectBtn.tag == 1) {
         GXCatalogItem *item = self.cataItems[indexPath.row];
+        if (![item.catalog_id isEqualToString:self.catalog_id]) {
+            self.brandLabel.text = @"全部品牌";
+            self.brand_id = @"";
+        }
         self.catalog_id = item.catalog_id;
+        self.selectItem = item;
     }else{
-        GXGoodBrand *brand = self.goodsBrands[indexPath.row];
-        self.brand_id = brand.brand_id;
+        if (self.selectItem && self.selectItem.catalog_id.length) {// 如果选了分类，且不是全部分类
+            GXBrandItem *brand = self.selectItem.brandData[indexPath.row];
+            self.brand_id = brand.brand_id;
+            self.selectBrand = brand;
+        }else{
+            GXBrandItem *brand = self.goodsBrands[indexPath.row];
+            self.brand_id = brand.brand_id;
+            self.selectBrand = brand;
+        }
     }
+    
+    hx_weakify(self);
+    [self getGoodsListDataRequest:YES completedCall:^{
+        hx_strongify(weakSelf);
+        [strongSelf.collectionView reloadData];
+    }];
 }
 #pragma mark -- UICollectionView 数据源和代理
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{

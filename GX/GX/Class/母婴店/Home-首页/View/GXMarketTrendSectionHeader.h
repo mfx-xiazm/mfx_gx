@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface GXMarketTrendSectionHeader : UIView
 /* 系列 */
 @property(nonatomic,strong) GXMarketTrendSeries *series;
+@property (weak, nonatomic) IBOutlet UIView *bgView;
 @end
 
 NS_ASSUME_NONNULL_END

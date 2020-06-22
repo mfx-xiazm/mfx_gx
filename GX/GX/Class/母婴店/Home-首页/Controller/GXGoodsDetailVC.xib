@@ -16,7 +16,6 @@
                 <outlet property="contentScrollView" destination="S4W-dt-NZA" id="wYY-FD-eZl"/>
                 <outlet property="control_collect" destination="vXM-dJ-jsV" id="amA-tf-aYB"/>
                 <outlet property="control_tool" destination="dci-xu-NWx" id="ONG-L6-XLd"/>
-                <outlet property="currentPage" destination="7q2-LQ-9D5" id="0Cr-IS-xxW"/>
                 <outlet property="cyclePagerView" destination="JWp-5t-8uR" id="8bV-qq-XQR"/>
                 <outlet property="market_price" destination="XU5-V3-F1V" id="lWi-7R-cOZ"/>
                 <outlet property="normal_add_btn" destination="KkW-ND-l8c" id="Z7t-rP-Oot"/>
@@ -55,28 +54,8 @@
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JWp-5t-8uR">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
-                                    <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7q2-LQ-9D5">
-                                            <rect key="frame" x="360" y="382" width="42" height="20"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.30023107389999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="20" id="H4c-s3-AhC"/>
-                                                <constraint firstAttribute="width" constant="42" id="fBt-8d-LJC"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <nil key="highlightedColor"/>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="layerBoderCorner">
-                                                    <real key="value" value="10"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                        </label>
-                                    </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="7q2-LQ-9D5" secondAttribute="bottom" constant="12" id="2gf-cM-laa"/>
-                                        <constraint firstAttribute="trailing" secondItem="7q2-LQ-9D5" secondAttribute="trailing" constant="12" id="W52-IV-UP4"/>
                                         <constraint firstAttribute="width" secondItem="JWp-5t-8uR" secondAttribute="height" multiplier="1:1" id="rnA-Th-6fb"/>
                                     </constraints>
                                 </view>

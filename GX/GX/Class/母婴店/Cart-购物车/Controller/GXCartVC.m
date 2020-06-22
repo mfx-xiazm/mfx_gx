@@ -244,12 +244,17 @@ static NSString *const RenewCartCell = @"RenewCartCell";
 {
     __block BOOL isHaveSelect = NO;
     for (GXCartData *cart in self.cartDataArr) {
-        [cart.goodsData enumerateObjectsUsingBlock:^(GXCartShopGoods * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            if (obj.is_checked) {
-                isHaveSelect = YES;
-                *stop = YES;
+        for (GXCartSaleData *sale in cart.sale_data) {
+            [sale.goodsData enumerateObjectsUsingBlock:^(GXCartShopGoods * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if (obj.is_checked) {
+                    isHaveSelect = YES;
+                    *stop = YES;
+                }
+            }];
+            if (isHaveSelect) {
+                break;
             }
-        }];
+        }
         if (isHaveSelect) {
             break;
         }
@@ -264,12 +269,14 @@ static NSString *const RenewCartCell = @"RenewCartCell";
     __block CGFloat price = 0;
     __block NSInteger  goodsNum = 0;
     for (GXCartData *cart in self.cartDataArr) {
-        [cart.goodsData enumerateObjectsUsingBlock:^(GXCartShopGoods * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            if (obj.is_checked) {
-                price += ([obj.price floatValue])*[obj.cart_num integerValue];
-                goodsNum ++;
-            }
-        }];
+        for (GXCartSaleData *sale in cart.sale_data) {
+            [sale.goodsData enumerateObjectsUsingBlock:^(GXCartShopGoods * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if (obj.is_checked) {
+                    price += ([obj.price floatValue])*[obj.cart_num integerValue];
+                    goodsNum ++;
+                }
+            }];
+        }
     }
     self.totalPrice.text = [NSString stringWithFormat:@"%.2f元",fabs(price)];
     self.goods_num.text = [NSString stringWithFormat:@"%ld个商品",(long)goodsNum];
@@ -283,11 +290,13 @@ static NSString *const RenewCartCell = @"RenewCartCell";
     }else{
         NSMutableString *cartIds = [NSMutableString string];
         for (GXCartData *cart in self.cartDataArr) {
-            [cart.goodsData enumerateObjectsUsingBlock:^(GXCartShopGoods * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                if (obj.is_checked) {
-                    [cartIds appendFormat:@"%@",cartIds.length?[NSString stringWithFormat:@",%@",obj.cart_id]:[NSString stringWithFormat:@"%@",obj.cart_id]];
-                }
-            }];
+            for (GXCartSaleData *sale in cart.sale_data) {
+                [sale.goodsData enumerateObjectsUsingBlock:^(GXCartShopGoods * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    if (obj.is_checked) {
+                        [cartIds appendFormat:@"%@",cartIds.length?[NSString stringWithFormat:@",%@",obj.cart_id]:[NSString stringWithFormat:@"%@",obj.cart_id]];
+                    }
+                }];
+            }
         }
         parameters[@"cartIds"] = cartIds;//删除多个id间用逗号隔开
     }
@@ -311,13 +320,15 @@ static NSString *const RenewCartCell = @"RenewCartCell";
     NSMutableString *cartData = [NSMutableString string];
     [cartData appendString:@"["];
     for (GXCartData *cart in self.cartDataArr) {
-        [cart.goodsData enumerateObjectsUsingBlock:^(GXCartShopGoods * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            if (cartData.length == 1) {
-                [cartData appendFormat:@"{\"cart_id\":\"%@\",\"cart_num\":\"%@\",\"is_checked\":\"%@\"}",obj.cart_id,obj.cart_num,@(obj.is_checked)];
-            }else{
-                [cartData appendFormat:@",{\"cart_id\":\"%@\",\"cart_num\":\"%@\",\"is_checked\":\"%@\"}",obj.cart_id,obj.cart_num,@(obj.is_checked)];
-            }
-        }];
+        for (GXCartSaleData *sale in cart.sale_data) {
+            [sale.goodsData enumerateObjectsUsingBlock:^(GXCartShopGoods * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if (cartData.length == 1) {
+                    [cartData appendFormat:@"{\"cart_id\":\"%@\",\"cart_num\":\"%@\",\"is_checked\":\"%@\"}",obj.cart_id,obj.cart_num,@(obj.is_checked)];
+                }else{
+                    [cartData appendFormat:@",{\"cart_id\":\"%@\",\"cart_num\":\"%@\",\"is_checked\":\"%@\"}",obj.cart_id,obj.cart_num,@(obj.is_checked)];
+                }
+            }];
+        }
     }
     [cartData appendString:@"]"];
     parameters[@"cartData"] = cartData;//cartData
@@ -375,14 +386,18 @@ static NSString *const RenewCartCell = @"RenewCartCell";
     // 改变该商铺商品的选中状态
     for (GXCartData *cart in self.cartDataArr) {
         cart.is_checked = sender.selected;
-        [cart.goodsData enumerateObjectsUsingBlock:^(GXCartShopGoods * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            obj.is_checked = sender.selected;
-        }];
+        for (GXCartSaleData *sale in cart.sale_data) {
+            [sale.goodsData enumerateObjectsUsingBlock:^(GXCartShopGoods * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                obj.is_checked = sender.selected;
+            }];
+        }
     }
     
     [self calculateGoodsPrice];
 
     [self.tableView reloadData];
+    [self.view setNeedsLayout];
+    [self.view layoutIfNeeded];
 }
 - (IBAction)upLoadOrderClicked:(UIButton *)sender {
     if (![self checkIsHaveSelect]) {
@@ -418,11 +433,13 @@ static NSString *const RenewCartCell = @"RenewCartCell";
                 GXUpOrderVC *ovc = [GXUpOrderVC new];
                 NSMutableString *cart_id = [NSMutableString string];
                 for (GXCartData *cart in strongSelf.cartDataArr) {
-                    [cart.goodsData enumerateObjectsUsingBlock:^(GXCartShopGoods * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                        if (obj.is_checked) {
-                            [cart_id appendFormat:@"%@",cart_id.length?[NSString stringWithFormat:@",%@",obj.cart_id]:[NSString stringWithFormat:@"%@",obj.cart_id]];
-                        }
-                    }];
+                    for (GXCartSaleData *sale in cart.sale_data){
+                        [sale.goodsData enumerateObjectsUsingBlock:^(GXCartShopGoods * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                            if (obj.is_checked) {
+                                [cart_id appendFormat:@"%@",cart_id.length?[NSString stringWithFormat:@",%@",obj.cart_id]:[NSString stringWithFormat:@"%@",obj.cart_id]];
+                            }
+                        }];
+                    }
                 }
                 ovc.isCartPush = YES;
                 ovc.cart_ids = cart_id;//cart_id
@@ -450,9 +467,11 @@ static NSString *const RenewCartCell = @"RenewCartCell";
         hx_strongify(weakSelf);
         if (index == 1) {
             // 改变该店铺商品的选中状态
-            [cartData.goodsData enumerateObjectsUsingBlock:^(GXCartShopGoods * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                obj.is_checked = cartData.is_checked;
-            }];
+            for (GXCartSaleData *sale in cartData.sale_data) {
+                [sale.goodsData enumerateObjectsUsingBlock:^(GXCartShopGoods * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    obj.is_checked = cartData.is_checked;
+                }];
+            }
             if (!cartData.is_checked) { // 取消选中
                 strongSelf.selectAllBtn.selected = cartData.is_checked;
             }else{//选中
@@ -517,7 +536,20 @@ static NSString *const RenewCartCell = @"RenewCartCell";
 {
     // 返回这个模型对应的cell高度
     GXCartData *cartData = self.cartDataArr[indexPath.row];
-    return  6.f + 40.f + 40.f*2 + 110.f*cartData.goodsData.count + 6.f;
+    CGFloat cellHeight = 0;
+    for (GXCartSaleData *sale in cartData.sale_data) {
+        if ((sale.giftData && sale.giftData.count) && (sale.rebate && sale.rebate.count)) {
+            cellHeight += 40.f*2;
+        }else if (sale.giftData && sale.giftData.count) {
+            cellHeight += 40.f;
+        }else if (sale.rebate && sale.rebate.count) {
+            cellHeight += 40.f;
+        }else{
+            cellHeight += 0.f;
+        }
+        cellHeight += sale.goodsData.count*110;
+    }
+    return  6.f + 40.f + cellHeight + 6.f;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

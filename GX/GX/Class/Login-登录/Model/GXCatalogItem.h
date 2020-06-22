@@ -29,6 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *brand_id;
 @property (nonatomic, copy) NSString *brand_name;
 @property (nonatomic, copy) NSString *brand_img;
+@property (nonatomic, copy) NSString *catalog_id;
+@property (nonatomic, copy) NSString *control_type;
 /* 是否选中 */
 @property(nonatomic,assign) BOOL isSelected;
 @end

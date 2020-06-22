@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class GYMyRefundGoods,GYMyRefundAddress;
+@class GYMyRefundGoods,GYMyRefundAddress,GXMyRefundRecommend;
 @interface GXMyRefund : NSObject
 @property(nonatomic,copy) NSString *refund_id;
 @property(nonatomic,copy) NSString *oid;
@@ -38,7 +38,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *create_time;
 @property(nonatomic,copy) NSString *reject_reason;
 @property(nonatomic,copy) NSString *logistics_com_id;
+// 订单号可能存在多个
 @property(nonatomic,copy) NSString *logistics_no;
+@property(nonatomic,copy) NSArray *logistics_nos;
 @property(nonatomic,copy) NSString *logistics_com_name;
 @property(nonatomic,copy) NSString *driver_phone;
 @property(nonatomic,copy) NSString *receiver;
@@ -52,9 +54,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *provider_no;
 @property(nonatomic,copy) NSString *username;
 @property(nonatomic,copy) NSString *saleman_code;
+@property(nonatomic,copy) NSString *send_freight_type;
 /* 是退款详情数据 */
 @property(nonatomic,assign) BOOL isRefundDetail;
 @property(nonatomic,strong) NSArray<GYMyRefundGoods *> *goods;
+@property(nonatomic,strong) NSArray<GXMyRefundRecommend *> *goods_recommend;
 
 @property(nonatomic,strong) GYMyRefundAddress *address;
 
@@ -77,6 +81,21 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *receiver;
 @property(nonatomic,copy) NSString *receiver_phone;
 @property(nonatomic,copy) NSString *receiver_address;
+
+@end
+
+@interface GXMyRefundRecommend : NSObject
+@property(nonatomic,copy) NSString *home_set_id;
+@property(nonatomic,copy) NSString *ref_id;
+@property(nonatomic,copy) NSString *set_cover_img;
+@property(nonatomic,copy) NSString *goods_id;
+@property(nonatomic,copy) NSString *goods_name;
+@property(nonatomic,copy) NSString *control_type;
+@property(nonatomic,copy) NSString *cover_img;
+@property(nonatomic,copy) NSString *brand_id;
+@property(nonatomic,copy) NSString *suggest_price;
+@property(nonatomic,copy) NSString *min_price;
+@property(nonatomic,copy) NSString *max_price;
 
 @end
 

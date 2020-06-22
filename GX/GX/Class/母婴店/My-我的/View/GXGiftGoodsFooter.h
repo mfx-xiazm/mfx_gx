@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
+typedef void(^giftClickedCall)(NSInteger index);
 @interface GXGiftGoodsFooter : UIView
 @property (weak, nonatomic) IBOutlet UIView *handleView;
-
+@property (nonatomic, copy) giftClickedCall giftClickedCall;
 @end
 
 NS_ASSUME_NONNULL_END

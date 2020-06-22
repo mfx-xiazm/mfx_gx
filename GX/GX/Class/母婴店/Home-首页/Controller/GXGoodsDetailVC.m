@@ -47,10 +47,9 @@ static NSString *const ShopGoodsCell = @"ShopGoodsCell";
 static NSString *const GoodsInfoCell = @"GoodsInfoCell";
 static NSString *const GoodsGiftCell = @"GoodsGiftCell";
 
-@interface GXGoodsDetailVC ()<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,GXGoodsMaterialCellDelegate,GXGoodsCommentCellDelegate,UICollectionViewDelegate,UICollectionViewDataSource,ZLCollectionViewBaseFlowLayoutDelegate>
+@interface GXGoodsDetailVC ()<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,GXGoodsMaterialCellDelegate,GXGoodsCommentCellDelegate,UICollectionViewDelegate,UICollectionViewDataSource,ZLCollectionViewBaseFlowLayoutDelegate,XQCarouselDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *contentScrollView;
 @property (weak, nonatomic) IBOutlet UIView *cyclePagerView;
-@property (weak, nonatomic) IBOutlet UILabel *currentPage;
 @property (weak, nonatomic) IBOutlet UILabel *shop_name;
 @property (weak, nonatomic) IBOutlet UILabel *price;
 @property (weak, nonatomic) IBOutlet UILabel *market_price;
@@ -305,32 +304,6 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
         [self.navigationController pushViewController:bvc animated:YES];
     }
 }
--(void)showBannerPic:(NSInteger)index
-{
-    NSMutableArray *items = [NSMutableArray array];
-    for (int i = 0; i < self.goodsDetail.good_adv.count; i++) {
-        GXGoodsDetailAdv *adv = self.goodsDetail.good_adv[i];
-        
-        NSMutableDictionary *temp = [NSMutableDictionary dictionary];
-        temp[ZLPreviewPhotoObj] = [adv.adv_img hasPrefix:@"http"]?[NSURL URLWithString:adv.adv_img]:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HXRC_URL_HEADER,adv.adv_img]];
-        temp[ZLPreviewPhotoTyp] = @(ZLPreviewPhotoTypeURLImage);
-        [items addObject:temp];
-    }
-    
-    ZLPhotoActionSheet *actionSheet = [[ZLPhotoActionSheet alloc] init];
-    /**
-     导航条颜色
-     */
-    actionSheet.configuration.navBarColor = [UIColor clearColor];
-    /**
-     底部工具栏按钮 可交互 状态标题颜色
-     */
-    actionSheet.configuration.statusBarStyle = UIStatusBarStyleLightContent;
-    actionSheet.sender = self;
-    [actionSheet previewPhotos:items index:index hideToolBar:YES complete:^(NSArray * _Nonnull photos) {
-        
-    }];
-}
 #pragma mark -- 接口请求
 -(void)getGoodDetailRequest
 {
@@ -377,9 +350,8 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
     for (GXGoodsDetailAdv *adv in self.goodsDetail.good_adv) {
         [bannerImgs addObject:adv.adv_img];
     }
-    [bannerImgs insertObject:@"http://tb-video.bdstatic.com/tieba-smallvideo-transcode/20985849_722f981a5ce0fc6d2a5a4f40cb0327a5_3.mp4" atIndex:0];
-    
     XQCarousel *carousel = [XQCarousel scrollViewFrame:self.cyclePagerView.bounds imageStringGroup:bannerImgs];
+    carousel.delegate = self;
     [self.cyclePagerView addSubview:carousel];
     
     [self.shop_name setTextWithLineSpace:5.f withString:_goodsDetail.goods_name withFont:[UIFont systemFontOfSize:15]];
@@ -662,6 +634,36 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
         HXLog(@"多次删除了");
     }
 }
+#pragma mark -- XQCarousel代理
+-(void)XQCarouselDidClickedImageView:(XQCarousel *)carousel imageViewIndex:(NSInteger)imageViewIndex
+{
+    NSMutableArray *items = [NSMutableArray array];
+    for (int i = 0; i < self.goodsDetail.good_adv.count; i++) {
+        GXGoodsDetailAdv *adv = self.goodsDetail.good_adv[i];
+        if ([adv.adv_type isEqualToString:@"1"]) {// 图片类型
+            NSMutableDictionary *temp = [NSMutableDictionary dictionary];
+            temp[ZLPreviewPhotoObj] = [adv.adv_img hasPrefix:@"http"]?[NSURL URLWithString:adv.adv_img]:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HXRC_URL_HEADER,adv.adv_img]];
+            temp[ZLPreviewPhotoTyp] = @(ZLPreviewPhotoTypeURLImage);
+            [items addObject:temp];
+        }else{
+            imageViewIndex -= 1;// 如果存在视频类型，因为图片占第一位，图片的下标比正常情况会错位1
+        }
+    }
+    
+    ZLPhotoActionSheet *actionSheet = [[ZLPhotoActionSheet alloc] init];
+    /**
+     导航条颜色
+     */
+    actionSheet.configuration.navBarColor = [UIColor clearColor];
+    /**
+     底部工具栏按钮 可交互 状态标题颜色
+     */
+    actionSheet.configuration.statusBarStyle = UIStatusBarStyleLightContent;
+    actionSheet.sender = self;
+    [actionSheet previewPhotos:items index:imageViewIndex hideToolBar:YES complete:^(NSArray * _Nonnull photos) {
+        
+    }];
+}
 #pragma mark -- TableViewDelegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -670,7 +672,13 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0) {
-        return 2;
+        if ((self.goodsDetail.gift_rule && self.goodsDetail.gift_rule.count) && (self.goodsDetail.rebate && self.goodsDetail.rebate.count)) {
+            return 2;
+        }else if ((self.goodsDetail.gift_rule && self.goodsDetail.gift_rule.count) || (self.goodsDetail.rebate && self.goodsDetail.rebate.count)) {
+            return 1;
+        }else{
+            return 0;
+        }
     }else if (section == 1) {
         return self.goodsDetail.materialLayout.count;
     }else if (section == 2) {
@@ -699,6 +707,17 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
     if (indexPath.section == 0) {
         GXGoodsGiftCell *cell = [tableView dequeueReusableCellWithIdentifier:GoodsGiftCell forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        if ((self.goodsDetail.gift_rule && self.goodsDetail.gift_rule.count) && (self.goodsDetail.rebate && self.goodsDetail.rebate.count)) {
+            if (indexPath.row == 0) {
+                cell.gift_rule = self.goodsDetail.gift_rule;
+            }else{
+                cell.rebate = self.goodsDetail.rebate;
+            }
+        }else if ((self.goodsDetail.gift_rule && self.goodsDetail.gift_rule.count)) {
+            cell.gift_rule = self.goodsDetail.gift_rule;
+        }else if (self.goodsDetail.rebate && self.goodsDetail.rebate.count) {
+            cell.rebate = self.goodsDetail.rebate;
+        }
         return cell;
     }else if (indexPath.section == 1) {
         GXGoodsMaterialCell * cell = [GXGoodsMaterialCell cellWithTableView:tableView];
@@ -739,7 +758,11 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     if (section == 0) {
-        return 10.f;
+        if ((self.goodsDetail.gift_rule && self.goodsDetail.gift_rule.count) || (self.goodsDetail.rebate && self.goodsDetail.rebate.count)){
+            return 10.f;
+        }else{
+            return CGFLOAT_MIN;
+        }
     }else if (section == 1) {
         return self.goodsDetail.materialLayout.count?10.f:CGFLOAT_MIN;
     }else if (section == 2) {
@@ -801,21 +824,56 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        if (indexPath.row == 0) {
-            GXRebateView *rebateView = [GXRebateView loadXibView];
-            rebateView.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 400.f);
-            
-            self.sharePopVC = [[zhPopupController alloc] initWithView:rebateView size:rebateView.bounds.size];
-            self.sharePopVC.layoutType = zhPopupLayoutTypeBottom;
-            [self.sharePopVC show];
-        }else{
+        hx_weakify(self);
+        if ((self.goodsDetail.gift_rule && self.goodsDetail.gift_rule.count) && (self.goodsDetail.rebate && self.goodsDetail.rebate.count)) {
+            if (indexPath.row == 0) {
+                GXFullGiftView *giftView = [GXFullGiftView loadXibView];
+                giftView.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 300.f);
+                giftView.gift_rule = self.goodsDetail.gift_rule;
+                giftView.closeClickedCall = ^{
+                    hx_strongify(weakSelf);
+                    [strongSelf.sharePopVC dismiss];
+                };
+                self.sharePopVC = [[zhPopupController alloc] initWithView:giftView size:giftView.bounds.size];
+                self.sharePopVC.layoutType = zhPopupLayoutTypeBottom;
+                [self.sharePopVC show];
+               
+            }else{
+                GXRebateView *rebateView = [GXRebateView loadXibView];
+                rebateView.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 400.f);
+                rebateView.rebate = self.goodsDetail.rebate;
+                rebateView.closeClickedCall = ^{
+                    hx_strongify(weakSelf);
+                    [strongSelf.sharePopVC dismiss];
+                };
+                self.sharePopVC = [[zhPopupController alloc] initWithView:rebateView size:rebateView.bounds.size];
+                self.sharePopVC.layoutType = zhPopupLayoutTypeBottom;
+                [self.sharePopVC show];
+            }
+        }else if ((self.goodsDetail.gift_rule && self.goodsDetail.gift_rule.count)) {
             GXFullGiftView *giftView = [GXFullGiftView loadXibView];
             giftView.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 300.f);
-            
+            giftView.gift_rule = self.goodsDetail.gift_rule;
+            giftView.closeClickedCall = ^{
+                hx_strongify(weakSelf);
+                [strongSelf.sharePopVC dismiss];
+            };
             self.sharePopVC = [[zhPopupController alloc] initWithView:giftView size:giftView.bounds.size];
             self.sharePopVC.layoutType = zhPopupLayoutTypeBottom;
             [self.sharePopVC show];
+        }else if (self.goodsDetail.rebate && self.goodsDetail.rebate.count) {
+            GXRebateView *rebateView = [GXRebateView loadXibView];
+            rebateView.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 400.f);
+            rebateView.rebate = self.goodsDetail.rebate;
+            rebateView.closeClickedCall = ^{
+                hx_strongify(weakSelf);
+                [strongSelf.sharePopVC dismiss];
+            };
+            self.sharePopVC = [[zhPopupController alloc] initWithView:rebateView size:rebateView.bounds.size];
+            self.sharePopVC.layoutType = zhPopupLayoutTypeBottom;
+            [self.sharePopVC show];
         }
+        
     }
 }
 #pragma mark -- GXGoodsMaterialCellDelegate
@@ -954,8 +1012,7 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
 #pragma mark -- UICollectionView 数据源和代理
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     //为你推荐
-    //return self.homeData.home_recommend_goods.count;
-    return 4;
+    return self.goodsDetail.goods_recommend.count;
 }
 - (ZLLayoutType)collectionView:(UICollectionView *)collectionView layout:(ZLCollectionViewBaseFlowLayout *)collectionViewLayout typeOfLayout:(NSInteger)section {
     //为你推荐
@@ -969,8 +1026,8 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     //为你推荐
     GXShopGoodsCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:ShopGoodsCell forIndexPath:indexPath];
-//    GYHomePushGoods *goods = self.homeData.home_recommend_goods[indexPath.item];
-//    cell.goods = goods;
+    GXGoodsRecommend *recommend = self.goodsDetail.goods_recommend[indexPath.item];
+    cell.recommend = recommend;
     return cell;
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
@@ -991,10 +1048,10 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     //为你推荐
-//    GXGoodsDetailVC *dvc = [GXGoodsDetailVC new];
-//    GYHomePushGoods *goods = self.homeData.home_recommend_goods[indexPath.item];
-//    dvc.goods_id = goods.goods_id;
-//    [self.navigationController pushViewController:dvc animated:YES];
+    GXGoodsDetailVC *dvc = [GXGoodsDetailVC new];
+    GXGoodsRecommend *recommend = self.goodsDetail.goods_recommend[indexPath.item];
+    dvc.goods_id = recommend.goods_id;
+    [self.navigationController pushViewController:dvc animated:YES];
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     //为你推荐

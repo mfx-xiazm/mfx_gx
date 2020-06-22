@@ -45,19 +45,19 @@
     [self addSubview:self.scrollView];
     
     for (NSInteger index = 0; index < self.contentArray.count; index ++) {
-        UIImageView *img = [[UIImageView alloc]initWithFrame:CGRectMake(self.frame.size.width * index, 0, self.frame.size.width, self.frame.size.height)];
-        [img sd_setImageWithURL:[NSURL URLWithString:self.contentArray[index]]];
-        img.contentMode = UIViewContentModeScaleAspectFill;
-        img.userInteractionEnabled = YES;
-        img.clipsToBounds = YES;
-        /** 测试 **/
-        if (index == 0) {
-            self.videoView = [XQVideoView videoViewFrame:img.frame videoUrl:self.contentArray[index]];
+        NSString *content_str = self.contentArray[index];
+        if ([content_str hasSuffix:@"MOV"] || [content_str hasSuffix:@"MP4"] || [content_str hasSuffix:@"3GP"] || [content_str hasSuffix:@"MPV"] || [content_str hasSuffix:@"mov"] || [content_str hasSuffix:@"mp4"] || [content_str hasSuffix:@"3gp"] || [content_str hasSuffix:@"mpv"]) {           
+            self.videoView = [XQVideoView videoViewFrame:CGRectMake(self.frame.size.width * index, 0, self.frame.size.width, self.frame.size.height) videoUrl:self.contentArray[index]];
             self.videoView.videoUrl = self.contentArray[index];
             [self.scrollView addSubview:self.videoView];
         }else {
+            UIImageView *img = [[UIImageView alloc]initWithFrame:CGRectMake(self.frame.size.width * index, 0, self.frame.size.width, self.frame.size.height)];
+            [img sd_setImageWithURL:[NSURL URLWithString:self.contentArray[index]]];
+            img.contentMode = UIViewContentModeScaleAspectFill;
+            img.userInteractionEnabled = YES;
+            img.clipsToBounds = YES;
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imgtap:)];
-            img.tag = index-1;
+            img.tag = index;
             [img addGestureRecognizer:tap];
             [self.scrollView addSubview:img];
         }
@@ -77,7 +77,9 @@
 }
 -(void)imgtap:(UITapGestureRecognizer *)tap
 {
-    NSLog(@"点击图片第%zd张",tap.view.tag);
+    if ([self.delegate respondsToSelector:@selector(XQCarouselDidClickedImageView:imageViewIndex:)]) {
+        [self.delegate XQCarouselDidClickedImageView:self imageViewIndex:tap.view.tag];
+    }
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     NSInteger currentPage = round(scrollView.contentOffset.x / self.frame.size.width);

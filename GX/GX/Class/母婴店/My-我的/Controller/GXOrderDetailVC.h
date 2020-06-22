@@ -15,7 +15,7 @@ typedef void(^orderHandleCall)(NSInteger type);
 @property(nonatomic,copy) NSString *oid;
 /* 退款id */
 @property(nonatomic,copy) NSString *refund_id;
-/* 订单操作  0取消订单 1支付订单 2申请退款 3确认收货 4评价 */
+/* 订单操作  0取消订单 1支付订单 2申请退款 3确认收货 4评价 5已删除 6已上传打款凭证*/
 @property(nonatomic,copy) orderHandleCall orderHandleCall;
 @end
 

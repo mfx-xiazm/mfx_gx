@@ -10,8 +10,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GXUpMoneyProofVC">
             <connections>
+                <outlet property="cover_img" destination="fl4-JL-obY" id="f0v-eU-rPK"/>
+                <outlet property="goods_num" destination="puU-th-To0" id="GKP-Gj-xr2"/>
+                <outlet property="goods_spec" destination="UQf-VB-ovI" id="ddz-L5-UHQ"/>
+                <outlet property="goods_title" destination="4mS-ki-ZNj" id="u7M-ad-Jqy"/>
                 <outlet property="photoCollectionView" destination="MDD-Am-hRL" id="YBh-I5-Olu"/>
                 <outlet property="photoViewHeight" destination="fv3-jO-Ybb" id="J0t-Sx-GYN"/>
+                <outlet property="price" destination="HGY-zS-El4" id="avt-CB-QC6"/>
+                <outlet property="submitBtn" destination="POT-0Z-zrB" id="ScS-XA-BsA"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -28,7 +34,6 @@
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2eY-6q-eEE">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
-                                    <color key="backgroundColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="80" id="rIY-i0-Zfr"/>
                                     </constraints>
@@ -64,17 +69,33 @@
                                             <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥99.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HGY-zS-El4">
+                                            <rect key="frame" x="108" y="70.5" width="41.5" height="19.5"/>
+                                            <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
+                                            <color key="textColor" red="0.92549019610000005" green="0.078431372550000003" blue="0.1764705882" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="x1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="puU-th-To0">
+                                            <rect key="frame" x="366" y="72" width="14" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="4mS-ki-ZNj" firstAttribute="top" secondItem="TrK-IL-IIr" secondAttribute="top" constant="10" id="2P0-xg-s1o"/>
+                                        <constraint firstItem="HGY-zS-El4" firstAttribute="leading" secondItem="fl4-JL-obY" secondAttribute="trailing" constant="10" id="8bg-6e-Prs"/>
                                         <constraint firstItem="fl4-JL-obY" firstAttribute="leading" secondItem="TrK-IL-IIr" secondAttribute="leading" constant="18" id="AaH-VY-r8B"/>
                                         <constraint firstItem="UQf-VB-ovI" firstAttribute="top" secondItem="4mS-ki-ZNj" secondAttribute="bottom" constant="5" id="AjJ-Az-uag"/>
                                         <constraint firstItem="UQf-VB-ovI" firstAttribute="leading" secondItem="fl4-JL-obY" secondAttribute="trailing" constant="10" id="B1C-us-Wlj"/>
                                         <constraint firstItem="4mS-ki-ZNj" firstAttribute="leading" secondItem="fl4-JL-obY" secondAttribute="trailing" constant="10" id="HZu-dN-jRX"/>
                                         <constraint firstAttribute="height" constant="100" id="exG-Zi-bNG"/>
                                         <constraint firstAttribute="trailing" secondItem="UQf-VB-ovI" secondAttribute="trailing" constant="18" id="ph0-sD-mJY"/>
+                                        <constraint firstAttribute="bottom" secondItem="HGY-zS-El4" secondAttribute="bottom" constant="10" id="rT1-UX-Hnn"/>
+                                        <constraint firstAttribute="trailing" secondItem="puU-th-To0" secondAttribute="trailing" constant="10" id="rVw-t9-gTc"/>
                                         <constraint firstAttribute="bottom" secondItem="fl4-JL-obY" secondAttribute="bottom" constant="10" id="w53-fx-bN8"/>
+                                        <constraint firstItem="puU-th-To0" firstAttribute="centerY" secondItem="HGY-zS-El4" secondAttribute="centerY" id="wpu-p4-HSA"/>
                                         <constraint firstItem="fl4-JL-obY" firstAttribute="top" secondItem="TrK-IL-IIr" secondAttribute="top" constant="10" id="xfn-xJ-W3S"/>
                                         <constraint firstAttribute="trailing" secondItem="4mS-ki-ZNj" secondAttribute="trailing" constant="18" id="y3O-2W-KT0"/>
                                     </constraints>

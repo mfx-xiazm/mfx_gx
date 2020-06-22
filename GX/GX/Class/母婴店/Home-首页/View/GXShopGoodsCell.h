@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class GYHomePushGoods,GXSearchResult,GXStoreGoods,GXBrandGoods;
+@class GYHomePushGoods,GXSearchResult,GXStoreGoods,GXBrandGoods,GXGoodsRecommend,GXMyOrderRecommend,GXMyRefundRecommend;
 @interface GXShopGoodsCell : UICollectionViewCell
 /* 商品 */
 @property(nonatomic,strong) GYHomePushGoods *goods;
@@ -20,6 +20,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong) GXStoreGoods *storeGoods;
 /* 商品 */
 @property(nonatomic,strong) GXBrandGoods *brandGoods;
+/* 推荐 */
+@property (nonatomic, strong) GXGoodsRecommend *recommend;
+/* 推荐 */
+@property (nonatomic, strong) GXMyOrderRecommend *orderRecommend;
+/* 推荐 */
+@property (nonatomic, strong) GXMyRefundRecommend *refundRecommend;
+
 @end
 
 NS_ASSUME_NONNULL_END

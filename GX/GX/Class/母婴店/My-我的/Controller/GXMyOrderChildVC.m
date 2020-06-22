@@ -267,6 +267,26 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
     }];
 }
+-(void)deleteOrderRequest
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"oid"] = self.currentOrder.oid;
+    
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/delOrder" parameters:parameters success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [strongSelf.orders removeObject:strongSelf.currentOrder];
+                [strongSelf.tableView reloadData];
+            });
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
+}
 #pragma mark -- UITableView数据源和代理
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -297,7 +317,7 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
             dvc.oid = order.oid;
             dvc.orderHandleCall = ^(NSInteger type) {
                 if (strongSelf.status == 0) {
-                    /* 订单操作  0 取消订单 1支付订单 2申请退款 3确认收货 4评价 */
+                    /* 订单操作  0 取消订单 1支付订单 2申请退款 3确认收货 4评价 5已删除 6已上传打款凭证*/
                     if (type == 0) {
                         order.status = @"已取消";
                     }else if (type == 1) {
@@ -310,8 +330,12 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
                         }
                     }else if (type == 3) {
                         order.status = @"待评价";
-                    }else{
+                    }else if (type == 4){
                         order.status = @"已完成";
+                    }else if (type == 5){
+                        [strongSelf.orders removeObject:order];
+                    }else{
+                        order.approve_status = @"4";//已上传打款凭证
                     }
                 }else{
                     [strongSelf.orders removeObject:order];
@@ -433,7 +457,21 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
             }else if (index == 2){
                 if ([order.status isEqualToString:@"待付款"]) {
                     //HXLog(@"取消订单");
-                    [strongSelf cancelOrderRequest];
+                    zhAlertView *alert = [[zhAlertView alloc] initWithTitle:@"提示" message:@"确定要取消订单吗？" constantWidth:HX_SCREEN_WIDTH - 50*2];
+                    zhAlertButton *cancelButton = [zhAlertButton buttonWithTitle:@"取消" handler:^(zhAlertButton * _Nonnull button) {
+                        [strongSelf.alertPopVC dismiss];
+                    }];
+                    zhAlertButton *okButton = [zhAlertButton buttonWithTitle:@"确认" handler:^(zhAlertButton * _Nonnull button) {
+                        [strongSelf.alertPopVC dismiss];
+                        [strongSelf cancelOrderRequest];
+                    }];
+                    cancelButton.lineColor = UIColorFromRGB(0xDDDDDD);
+                    [cancelButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
+                    okButton.lineColor = UIColorFromRGB(0xDDDDDD);
+                    [okButton setTitleColor:HXControlBg forState:UIControlStateNormal];
+                    [alert adjoinWithLeftAction:cancelButton rightAction:okButton];
+                    strongSelf.alertPopVC = [[zhPopupController alloc] initWithView:alert size:alert.bounds.size];
+                    [strongSelf.alertPopVC show];
                 }else if ([order.status isEqualToString:@"待收货"]) {
                     //HXLog(@"查看物流");
                     if (order.logistics_no && order.logistics_no.length) {
@@ -498,6 +536,23 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
                         [tableView reloadData];
                     };
                     [strongSelf.navigationController pushViewController:evc animated:YES];
+                }else{
+                    //HXLog(@"删除订单");
+                    zhAlertView *alert = [[zhAlertView alloc] initWithTitle:@"提示" message:@"确定要删除该订单吗？" constantWidth:HX_SCREEN_WIDTH - 50*2];
+                    zhAlertButton *cancelButton = [zhAlertButton buttonWithTitle:@"取消" handler:^(zhAlertButton * _Nonnull button) {
+                        [strongSelf.alertPopVC dismiss];
+                    }];
+                    zhAlertButton *okButton = [zhAlertButton buttonWithTitle:@"确认" handler:^(zhAlertButton * _Nonnull button) {
+                        [strongSelf.alertPopVC dismiss];
+                        [strongSelf deleteOrderRequest];
+                    }];
+                    cancelButton.lineColor = UIColorFromRGB(0xDDDDDD);
+                    [cancelButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
+                    okButton.lineColor = UIColorFromRGB(0xDDDDDD);
+                    [okButton setTitleColor:HXControlBg forState:UIControlStateNormal];
+                    [alert adjoinWithLeftAction:cancelButton rightAction:okButton];
+                    strongSelf.alertPopVC = [[zhPopupController alloc] initWithView:alert size:alert.bounds.size];
+                    [strongSelf.alertPopVC show];
                 }
             }
         };

@@ -10,10 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXShowProof;
 @interface GXMyIdeaPhotoCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *photoImg;
-
+@property (nonatomic, strong) GXShowProof *proof;
 @end
 
 NS_ASSUME_NONNULL_END

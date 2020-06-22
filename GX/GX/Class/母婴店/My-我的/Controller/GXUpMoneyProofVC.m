@@ -11,6 +11,7 @@
 #import <ZLPhotoActionSheet.h>
 #import <AFNetworking.h>
 #import "GXMyIdeaPhotoCell.h"
+#import "GXMyOrder.h"
 
 static NSString *const MyIdeaPhotoCell = @"MyIdeaPhotoCell";
 @interface GXUpMoneyProofVC ()<UICollectionViewDelegate,UICollectionViewDataSource,ZLCollectionViewBaseFlowLayoutDelegate>
@@ -26,6 +27,13 @@ static NSString *const MyIdeaPhotoCell = @"MyIdeaPhotoCell";
 @property (nonatomic, assign) BOOL isSelect6;
 /** 模型数组 */
 @property (nonatomic,strong) NSMutableArray *showData;
+@property (weak, nonatomic) IBOutlet UIImageView *cover_img;
+@property (weak, nonatomic) IBOutlet UILabel *goods_title;
+@property (weak, nonatomic) IBOutlet UILabel *goods_spec;
+@property (weak, nonatomic) IBOutlet UILabel *price;
+@property (weak, nonatomic) IBOutlet UILabel *goods_num;
+@property (weak, nonatomic) IBOutlet UIButton *submitBtn;
+
 @end
 
 @implementation GXUpMoneyProofVC
@@ -33,7 +41,21 @@ static NSString *const MyIdeaPhotoCell = @"MyIdeaPhotoCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationItem setTitle:@"上传凭证"];
+    [self shoOrderInfo];
     [self setUpCollectionView];
+    
+    hx_weakify(self);
+    [self.submitBtn BindingBtnJudgeBlock:^BOOL{
+        hx_strongify(weakSelf);
+        if (strongSelf.showData.count == 1) {
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请选择要上传的打款凭证"];
+            return NO;
+        }
+        return YES;
+    } ActionBlock:^(UIButton * _Nullable button) {
+        hx_strongify(weakSelf);
+        [strongSelf submitClicked:button];
+    }];
 }
 -(NSMutableArray *)showData
 {
@@ -144,6 +166,14 @@ static NSString *const MyIdeaPhotoCell = @"MyIdeaPhotoCell";
     }];
     return actionSheet;
 }
+-(void)shoOrderInfo
+{
+    [self.cover_img sd_setImageWithURL:[NSURL URLWithString:_goods.cover_img]];
+    [self.goods_title setTextWithLineSpace:5.f withString:(_goods.goods_name)?_goods.goods_name:@"" withFont:[UIFont systemFontOfSize:13]];
+    self.price.text = [NSString stringWithFormat:@"￥%@",_goods.price];
+    self.goods_spec.text = (_goods.specs_attrs && _goods.specs_attrs.length)?[NSString stringWithFormat:@" %@ ",_goods.specs_attrs]:@"";
+    self.goods_num.text = [NSString stringWithFormat:@"x%@",_goods.goods_num];
+}
 -(void)setUpCollectionView
 {
     // 针对 11.0 以上的iOS系统进行处理
@@ -239,6 +269,50 @@ static NSString *const MyIdeaPhotoCell = @"MyIdeaPhotoCell";
     } completionHandler:completionBlock];
     
     return uploadTask;
+}
+- (void)submitClicked:(UIButton *)sender {
+    hx_weakify(self);
+    if (self.isSelect6) {
+        [self runUpLoadImages:self.showData completedCall:^(NSMutableArray *result) {
+            hx_strongify(weakSelf);
+            [strongSelf submitUpPayImgRequest:sender imageUrls:result];
+        }];
+    }else{
+        NSMutableArray *tempImgs = [NSMutableArray arrayWithArray:self.showData];
+        [tempImgs removeLastObject];
+        [self runUpLoadImages:tempImgs completedCall:^(NSMutableArray *result) {
+            hx_strongify(weakSelf);
+            [strongSelf submitUpPayImgRequest:sender imageUrls:result];
+        }];
+    }
+}
+-(void)submitUpPayImgRequest:(UIButton *)btn imageUrls:(NSArray *)imageUrls
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"oid"] = self.oid;//订单id
+    if (imageUrls) {
+        parameters[@"payImg"] = [imageUrls componentsJoinedByString:@","];//评价图片多个用逗号隔开
+    }else{
+        parameters[@"img_srcs"] = @"";//评价图片多个用逗号隔开
+    }
+    
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/upPayImg" parameters:parameters success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        [btn stopLoading:@"提交" image:nil textColor:nil backgroundColor:nil];
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+            if (strongSelf.upProofCall) {
+                strongSelf.upProofCall();
+            }
+            [strongSelf.navigationController popViewControllerAnimated:YES];
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [btn stopLoading:@"提交" image:nil textColor:nil backgroundColor:nil];
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
 }
 
 #pragma mark -- UICollectionView 数据源和代理

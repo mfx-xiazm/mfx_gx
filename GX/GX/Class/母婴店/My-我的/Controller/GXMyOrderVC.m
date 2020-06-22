@@ -15,7 +15,6 @@
 #import "GXPayResultVC.h"
 #import "GXApplyRefundVC.h"
 #import "GXGiftGoodsVC.h"
-#import "GXShowMoneyProofVC.h"
 
 @interface GXMyOrderVC ()<JXCategoryViewDelegate,UIScrollViewDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet JXCategoryTitleView *categoryView;
@@ -97,7 +96,7 @@
 }
 -(void)zpBtnClicked
 {
-    GXShowMoneyProofVC *rvc = [GXShowMoneyProofVC new];
+    GXGiftGoodsVC *rvc = [GXGiftGoodsVC new];
     [self.navigationController pushViewController:rvc animated:YES];
 }
 #pragma mark - JXCategoryViewDelegate

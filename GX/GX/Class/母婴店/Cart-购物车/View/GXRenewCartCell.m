@@ -9,7 +9,6 @@
 #import "GXRenewCartCell.h"
 #import "GXCartData.h"
 #import "GXCartCell.h"
-#import "GXRenewCartHeader.h"
 #import "GXRenewCartSectionHeader.h"
 #import <zhPopupController.h>
 #import "zhAlertView.h"
@@ -17,8 +16,10 @@
 static NSString *const CartCell = @"CartCell";
 @interface GXRenewCartCell ()<UITableViewDelegate,UITableViewDataSource,MGSwipeTableCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) GXRenewCartHeader *header;
 @property (nonatomic, strong) zhPopupController *alertPopVC;
+@property (weak, nonatomic) IBOutlet UIButton *checkBtn;
+@property (weak, nonatomic) IBOutlet UIButton *shopName;
+@property (weak, nonatomic) IBOutlet UIButton *getCouponBtn;
 @end
 @implementation GXRenewCartCell
 
@@ -42,51 +43,48 @@ static NSString *const CartCell = @"CartCell";
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GXCartCell class]) bundle:nil] forCellReuseIdentifier:CartCell];
     
-    self.tableView.tableHeaderView = self.header;
+//    self.tableView.tableHeaderView = self.header;
 }
 -(void)layoutSubviews
 {
     [super layoutSubviews];
-    self.header.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, 40.f);
-}
--(GXRenewCartHeader *)header
-{
-    if (!_header) {
-        _header = [GXRenewCartHeader loadXibView];
-        _header.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH, 40.f);
-        hx_weakify(self);
-        _header.cartHeaderClickedCall = ^(NSInteger index) {
-            hx_strongify(weakSelf);
-            if (strongSelf.renewCartHeaderClickedCall) {
-                strongSelf.renewCartHeaderClickedCall(index);
-            }
-        };
-    }
-    return _header;
 }
 -(void)setCartData:(GXCartData *)cartData
 {
     _cartData = cartData;
     
-    self.header.cartData = _cartData;
-    
+    self.checkBtn.selected = _cartData.is_checked;
+    [self.shopName setTitle:[NSString stringWithFormat:@"  %@",_cartData.shop_name] forState:UIControlStateNormal];
+    self.getCouponBtn.hidden = [_cartData.coupon isEqualToString:@"1"]?NO:YES;
+
     [self.tableView reloadData];
+}
+- (IBAction)cartHeaderClicked:(UIButton *)sender {
+    if (sender.tag == 1) {
+        sender.selected = !sender.selected;
+        _cartData.is_checked = sender.isSelected;
+    }
+   if (self.renewCartHeaderClickedCall) {
+       self.renewCartHeaderClickedCall(sender.tag);
+   }
 }
 #pragma mark -- UITableView数据源和代理
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return self.cartData.sale_data.count;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.cartData.goodsData.count;
+    GXCartSaleData *sale = self.cartData.sale_data[section];
+    return sale.goodsData.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     GXCartCell *cell = [tableView dequeueReusableCellWithIdentifier:CartCell forIndexPath:indexPath];
     //无色
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.delegate = self;
-    GXCartShopGoods *goods = self.cartData.goodsData[indexPath.row];
+    GXCartSaleData *sale = self.cartData.sale_data[indexPath.section];
+    GXCartShopGoods *goods = sale.goodsData[indexPath.row];
     cell.goods = goods;
     hx_weakify(self);
     cell.cartHandleCall = ^(NSInteger index) {
@@ -97,12 +95,14 @@ static NSString *const CartCell = @"CartCell";
             }else{//选中
                 // 判断店铺要选中
                 __block BOOL isStoreSelect = YES;
-                [strongSelf.cartData.goodsData enumerateObjectsUsingBlock:^(GXCartShopGoods * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    if (!obj.is_checked) {
-                        isStoreSelect = NO;
-                        *stop = YES;
-                    }
-                }];
+                for (GXCartSaleData *sale in self.cartData.sale_data) {
+                    [sale.goodsData enumerateObjectsUsingBlock:^(GXCartShopGoods * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                        if (!obj.is_checked) {
+                            isStoreSelect = NO;
+                            *stop = YES;
+                        }
+                    }];
+                }
                 strongSelf.cartData.is_checked = isStoreSelect;
             }
         }
@@ -141,14 +141,47 @@ static NSString *const CartCell = @"CartCell";
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 40.f*2;
+    GXCartSaleData *sale = self.cartData.sale_data[section];
+    if ((sale.giftData && sale.giftData.count) && (sale.rebate && sale.rebate.count)) {
+        return 40.f*2;
+    }else if (sale.giftData && sale.giftData.count) {
+        return 40.f;
+    }else if (sale.rebate && sale.rebate.count) {
+        return 40.f;
+    }else{
+        return 0.f;
+    }
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     GXRenewCartSectionHeader *header = [GXRenewCartSectionHeader loadXibView];
-    header.hxn_size = CGSizeMake(tableView.hxn_width, 40.f*2);
-    
-    return header;
+    GXCartSaleData *sale = self.cartData.sale_data[section];
+    if ((sale.giftData && sale.giftData.count) && (sale.rebate && sale.rebate.count)) {
+        header.hxn_size = CGSizeMake(tableView.hxn_width, 40.f*2);
+        header.dazengView.hidden = YES;
+        header.fanliView.hidden = YES;
+        header.doubleView.hidden = NO;
+        header.giftData = sale.giftData;
+        header.rebate = sale.rebate;
+        return header;
+    }else if (sale.giftData && sale.giftData.count) {
+        header.hxn_size = CGSizeMake(tableView.hxn_width, 40.f);
+        header.dazengView.hidden = NO;
+        header.fanliView.hidden = YES;
+        header.doubleView.hidden = YES;
+        header.giftData = sale.giftData;
+        return header;
+    }else if (sale.rebate && sale.rebate.count) {
+        header.hxn_size = CGSizeMake(tableView.hxn_width, 40.f);
+        header.dazengView.hidden = YES;
+        header.fanliView.hidden = NO;
+        header.doubleView.hidden = YES;
+        header.rebate = sale.rebate;
+        return header;
+    }else{
+        header.hxn_size = CGSizeMake(tableView.hxn_width, 0.f);
+        return nil;
+    }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {

@@ -68,7 +68,7 @@ static NSString *const SmallCateHeaderView = @"SmallCateHeaderView";
     searchBar.delegate = self;
     searchBar.placeholder = @"请输入商品名称查询";
     self.searchBar = searchBar;
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
+    self.navigationItem.titleView = searchBar;
     
     SPButton *msg = [SPButton buttonWithType:UIButtonTypeCustom];
     msg.imagePosition = SPButtonImagePositionTop;
@@ -193,7 +193,21 @@ static NSString *const SmallCateHeaderView = @"SmallCateHeaderView";
         hx_strongify(weakSelf);
         [MBProgressHUD hideHUD];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
-            strongSelf.currentCatalogItem.catalog = [NSArray yy_modelArrayWithClass:[GXCatalogItem class] json:responseObject[@"data"][@"catalog"]];
+            NSArray *cateItems = [NSArray yy_modelArrayWithClass:[GXCatalogItem class] json:responseObject[@"data"][@"catalog"]];
+            
+            if (![control isEqualToString:@"1"]) {
+                NSMutableArray *temp = [NSMutableArray arrayWithArray:cateItems];
+                GXCatalogItem *cate = [GXCatalogItem new];
+                cate.catalog_id = @"";
+                cate.catalog_name = @"全部";
+                cate.catalog_img = [NSString stringWithFormat:@"%@all.png",HXRC_URL_HEADER];
+                [temp insertObject:cate atIndex:0];
+                
+                strongSelf.currentCatalogItem.catalog = temp;
+            }else{
+                strongSelf.currentCatalogItem.catalog = cateItems;
+            }
+            
             strongSelf.currentCatalogItem.control = [NSArray yy_modelArrayWithClass:[GXBrandItem class] json:responseObject[@"data"][@"control"]];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [strongSelf.rightCollectionView reloadData];
