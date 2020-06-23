@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
+@class GXGiftGoods;
 @interface GXGiftGoodsDetailFooter : UIView
-
+/* 赠品订单 */
+@property (nonatomic, strong) GXGiftGoods *giftGoods;
 @end
 
 NS_ASSUME_NONNULL_END

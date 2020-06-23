@@ -81,6 +81,12 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="coverImg" destination="jse-r1-Cib" id="ARY-gj-bkP"/>
+                <outlet property="gift_name" destination="Yyc-LH-zHS" id="8DB-X4-Rgs"/>
+                <outlet property="gift_num" destination="hC8-V6-bfb" id="IUD-yR-PTk"/>
+                <outlet property="sharw_img" destination="1vE-3r-jRw" id="HIc-Z6-Rzh"/>
+            </connections>
             <point key="canvasLocation" x="157.24637681159422" y="153.01339285714286"/>
         </tableViewCell>
     </objects>

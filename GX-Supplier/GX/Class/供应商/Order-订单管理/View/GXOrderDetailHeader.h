@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class GXMyOrder,GXMyRefund;
+@class GXMyOrder,GXMyRefund,GXGiftGoods;
 typedef void(^lookLogisCall)(void);
 @interface GXOrderDetailHeader : UIView
 /* 订单详情 */
@@ -19,6 +19,8 @@ typedef void(^lookLogisCall)(void);
 @property(nonatomic,strong) GXMyRefund *refundDetail;
 /* 查看物流 */
 @property(nonatomic,copy) lookLogisCall lookLogisCall;
+/* 赠品订单 */
+@property (nonatomic, strong) GXGiftGoods *giftGoods;
 @end
 
 NS_ASSUME_NONNULL_END

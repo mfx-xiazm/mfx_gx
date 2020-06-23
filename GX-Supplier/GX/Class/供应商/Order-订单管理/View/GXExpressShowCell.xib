@@ -44,6 +44,9 @@
                                 <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
+                        <connections>
+                            <action selector="locNoCopy:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="qsu-ER-tTN"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>
@@ -54,6 +57,9 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="loc_no" destination="9lz-lq-gPX" id="zSq-MO-D1T"/>
+            </connections>
             <point key="canvasLocation" x="139" y="115"/>
         </tableViewCell>
     </objects>

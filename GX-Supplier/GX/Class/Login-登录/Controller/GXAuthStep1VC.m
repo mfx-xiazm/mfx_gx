@@ -316,7 +316,7 @@
     GXWebContentVC *wvc = [GXWebContentVC new];
     wvc.navTitle = @"银联签约资质说明";
     wvc.isNeedRequest = NO;
-    wvc.url = @"http://guaxuanapi.guaxuan.cn/unionDesc.jpg";
+    wvc.url = [NSString stringWithFormat:@"%@unionDesc.jpg",HXRC_URL_HEADER];
     [self.navigationController pushViewController:wvc animated:YES];
 }
 - (IBAction)resubmitClicked:(UIButton *)sender {

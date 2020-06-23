@@ -53,6 +53,9 @@
                             <state key="normal" title="关闭" image="弹框关闭">
                                 <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="closeClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="Hrd-US-8Xu"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -89,6 +92,7 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="tableView" destination="n29-mF-bvN" id="Vjn-E1-UCY"/>
+                <outlet property="titleLabel" destination="do2-Vl-axm" id="Vvi-aG-ZQV"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="256.13839285714283"/>
         </view>

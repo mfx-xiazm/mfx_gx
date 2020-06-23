@@ -11,7 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface GXGiftGoodsVC : HXBaseViewController
-
+/* 关键词 */
+@property(nonatomic,copy) NSString *seaKey;
 @end
 
 NS_ASSUME_NONNULL_END

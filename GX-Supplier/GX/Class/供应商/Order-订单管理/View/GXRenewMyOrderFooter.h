@@ -14,10 +14,6 @@ typedef void(^orderHandleCall)(NSInteger index);
 @interface GXRenewMyOrderFooter : UIView
 @property (weak, nonatomic) IBOutlet UIView *handleView;
 /* 订单 */
-@property(nonatomic,strong) GXMyOrder *order;
-/* 退款 */
-@property(nonatomic,strong) GXMyRefund *refund;
-/* 订单 */
 @property(nonatomic,strong) GXMyOrder *pOrder;
 /* 退款 */
 @property(nonatomic,strong) GXMyRefund *pRefund;

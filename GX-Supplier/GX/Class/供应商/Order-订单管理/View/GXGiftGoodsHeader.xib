@@ -29,7 +29,7 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HVj-kR-1Bh">
+                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HVj-kR-1Bh">
                                     <rect key="frame" x="149.5" y="19.5" width="56.5" height="15"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <state key="normal" title="  未打款" image="打款记录">
@@ -110,6 +110,11 @@
                 <constraint firstItem="Yy1-md-84v" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="vPy-gT-JL9"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="gift_order_no" destination="MZY-NI-Yqi" id="mEn-d0-K1p"/>
+                <outlet property="gift_order_status" destination="78s-Ix-Kz7" id="Aqg-Xg-L6C"/>
+                <outlet property="shop_name" destination="XgG-Gn-1on" id="qwa-Uf-Zu3"/>
+            </connections>
             <point key="canvasLocation" x="-1.4492753623188408" y="360.9375"/>
         </view>
     </objects>

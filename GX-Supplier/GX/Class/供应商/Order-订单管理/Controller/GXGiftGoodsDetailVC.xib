@@ -20,75 +20,14 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Uib-Ap-ni0">
-                    <rect key="frame" x="0.0" y="44" width="414" height="768"/>
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                 </tableView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yvH-P9-HTd">
-                    <rect key="frame" x="0.0" y="812" width="414" height="50"/>
-                    <subviews>
-                        <button opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YaJ-XE-kcd">
-                            <rect key="frame" x="254" y="10" width="70" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="70" id="60U-Va-YWI"/>
-                                <constraint firstAttribute="height" constant="30" id="qnY-BF-mQo"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <state key="normal" title="订单操作">
-                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </state>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="layerBoderCorner">
-                                    <real key="value" value="15"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="number" keyPath="layerBoderWidth">
-                                    <real key="value" value="1"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="color" keyPath="boderColor">
-                                    <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                        </button>
-                        <button opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3jK-Ln-NKx">
-                            <rect key="frame" x="334" y="10" width="70" height="30"/>
-                            <color key="backgroundColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="70" id="1gR-e9-uY9"/>
-                                <constraint firstAttribute="height" constant="30" id="NNO-px-Y9Q"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <state key="normal" title="订单操作">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </state>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="layerBoderCorner">
-                                    <real key="value" value="15"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="number" keyPath="layerBoderWidth">
-                                    <real key="value" value="1"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="color" keyPath="boderColor">
-                                    <color key="value" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="50" id="Grp-nJ-4Vm"/>
-                        <constraint firstItem="YaJ-XE-kcd" firstAttribute="centerY" secondItem="yvH-P9-HTd" secondAttribute="centerY" id="bC2-Ye-u4w"/>
-                        <constraint firstItem="3jK-Ln-NKx" firstAttribute="centerY" secondItem="yvH-P9-HTd" secondAttribute="centerY" id="cmG-SZ-FhM"/>
-                        <constraint firstItem="3jK-Ln-NKx" firstAttribute="leading" secondItem="YaJ-XE-kcd" secondAttribute="trailing" constant="10" id="fbK-Jq-10q"/>
-                        <constraint firstAttribute="trailing" secondItem="3jK-Ln-NKx" secondAttribute="trailing" constant="10" id="hYA-H1-JLY"/>
-                    </constraints>
-                </view>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
-                <constraint firstItem="yvH-P9-HTd" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="4DJ-N9-zbj"/>
-                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="yvH-P9-HTd" secondAttribute="bottom" id="F74-hP-Ls1"/>
-                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="yvH-P9-HTd" secondAttribute="trailing" id="UMa-4S-xwl"/>
-                <constraint firstItem="yvH-P9-HTd" firstAttribute="top" secondItem="Uib-Ap-ni0" secondAttribute="bottom" id="WAA-B7-jmY"/>
                 <constraint firstItem="Uib-Ap-ni0" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="fYi-zj-cMP"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="Uib-Ap-ni0" secondAttribute="bottom" id="iMe-Xc-gNn"/>
                 <constraint firstItem="Uib-Ap-ni0" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="oTx-pN-Ttu"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="Uib-Ap-ni0" secondAttribute="trailing" id="vGO-wP-Qdx"/>
             </constraints>

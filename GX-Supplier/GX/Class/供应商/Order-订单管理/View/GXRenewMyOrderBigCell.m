@@ -38,6 +38,16 @@ static NSString *const RenewMyOrderCell = @"RenewMyOrderCell";
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GXRenewMyOrderCell class]) bundle:nil] forCellReuseIdentifier:RenewMyOrderCell];
 }
+-(void)setMyOrder:(GXMyOrder *)myOrder
+{
+    _myOrder = myOrder;
+    [self.tableView reloadData];
+}
+-(void)setMyRefund:(GXMyRefund *)myRefund
+{
+    _myRefund = myRefund;
+    [self.tableView reloadData];
+}
 #pragma mark -- UITableView数据源和代理
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -79,13 +89,11 @@ static NSString *const RenewMyOrderCell = @"RenewMyOrderCell";
 {
     GXRenewMyOrderBigCellHeader *header = [GXRenewMyOrderBigCellHeader loadXibView];
     header.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 40.f);
-//    if (self.status !=5) {
-//        GXMyOrder *order = self.orders[section];
-//        header.order = order;
-//    }else{
-//        GXMyRefund *refund = self.refunds[section];
-//        header.refund = refund;
-//    }
+    if (self.status !=5) {
+        header.myOrder = self.myOrder;
+    }else{
+        header.myRefund = self.myRefund;
+    }
     return header;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section

@@ -11,68 +11,12 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="GXGiftGoodsFooter">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="63"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="22"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="阴影下" translatesAutoresizingMaskIntoConstraints="NO" id="XQM-Wb-ePk">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="63"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="22"/>
                 </imageView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jcZ-aJ-3pE">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="63"/>
-                    <subviews>
-                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RxR-px-Z8I">
-                            <rect key="frame" x="249" y="10.5" width="70" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="30" id="mJ7-fH-rIT"/>
-                                <constraint firstAttribute="width" constant="70" id="rLV-gK-Zqc"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <state key="normal" title="订单操作">
-                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </state>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="layerBoderCorner">
-                                    <real key="value" value="15"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="number" keyPath="layerBoderWidth">
-                                    <real key="value" value="1"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="color" keyPath="boderColor">
-                                    <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                        </button>
-                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xWc-H4-lH5">
-                            <rect key="frame" x="329" y="10.5" width="70" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="30" id="HKq-ZU-alW"/>
-                                <constraint firstAttribute="width" constant="70" id="lBV-an-2Rw"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <state key="normal" title="订单操作">
-                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </state>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="layerBoderCorner">
-                                    <real key="value" value="15"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="number" keyPath="layerBoderWidth">
-                                    <real key="value" value="1"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="color" keyPath="boderColor">
-                                    <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstItem="xWc-H4-lH5" firstAttribute="leading" secondItem="RxR-px-Z8I" secondAttribute="trailing" constant="10" id="3e7-7k-YRM"/>
-                        <constraint firstItem="xWc-H4-lH5" firstAttribute="centerY" secondItem="jcZ-aJ-3pE" secondAttribute="centerY" constant="-6" id="a0E-Kn-AJf"/>
-                        <constraint firstAttribute="trailing" secondItem="xWc-H4-lH5" secondAttribute="trailing" constant="15" id="c4N-0w-erD"/>
-                        <constraint firstItem="RxR-px-Z8I" firstAttribute="centerY" secondItem="jcZ-aJ-3pE" secondAttribute="centerY" constant="-6" id="gh8-ma-hyC"/>
-                    </constraints>
-                </view>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
@@ -80,17 +24,10 @@
                 <constraint firstItem="XQM-Wb-ePk" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="AXz-YR-36s"/>
                 <constraint firstItem="XQM-Wb-ePk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="BL8-ic-LZO"/>
                 <constraint firstAttribute="bottom" secondItem="XQM-Wb-ePk" secondAttribute="bottom" id="ChW-Mc-IVl"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="jcZ-aJ-3pE" secondAttribute="trailing" id="aS2-Q2-11q"/>
-                <constraint firstAttribute="bottom" secondItem="jcZ-aJ-3pE" secondAttribute="bottom" id="iPL-NX-IbE"/>
-                <constraint firstItem="jcZ-aJ-3pE" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="soz-l7-YjF"/>
-                <constraint firstItem="jcZ-aJ-3pE" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="vrn-4J-FcB"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <connections>
-                <outlet property="handleView" destination="jcZ-aJ-3pE" id="ThB-IX-NxQ"/>
-            </connections>
-            <point key="canvasLocation" x="104.34782608695653" y="289.62053571428572"/>
+            <point key="canvasLocation" x="146" y="180"/>
         </view>
     </objects>
     <resources>

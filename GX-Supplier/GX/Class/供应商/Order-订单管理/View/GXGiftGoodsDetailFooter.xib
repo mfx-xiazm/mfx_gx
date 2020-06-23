@@ -51,6 +51,9 @@
                             <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="noCopyClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="Dh0-cQ-BaC"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -62,6 +65,9 @@
                 <constraint firstItem="gpf-NK-zNM" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="eqw-PJ-ycP"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="giftInfo" destination="90M-L5-Iub" id="hM1-4Z-Tbo"/>
+            </connections>
             <point key="canvasLocation" x="137.68115942028987" y="384.70982142857139"/>
         </view>
     </objects>

@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface GXShowMoneyProofVC : HXBaseViewController
-
+@property (nonatomic, copy) NSString *oid;
 @end
 
 NS_ASSUME_NONNULL_END

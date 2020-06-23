@@ -163,6 +163,7 @@ static NSArray *_filtrationCacheKey;
         if (parameters) {
             NSMutableDictionary *tempParameters = [NSMutableDictionary dictionaryWithDictionary:parameters];
             tempParameters[@"token"] = [MSUserManager sharedInstance].curUserInfo.token;
+            tempParameters[@"utype"] = [MSUserManager sharedInstance].curUserInfo.utype;
             parameters = tempParameters;
         }
     }

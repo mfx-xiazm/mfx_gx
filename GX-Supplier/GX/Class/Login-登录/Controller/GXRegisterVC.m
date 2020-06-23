@@ -96,6 +96,7 @@
     parameters[@"pwd"] = self.pwd.text;
     parameters[@"sms_id"] = self.sms_id;//短信验证码id
     parameters[@"sms_code"] = self.code.text;//短信验证码
+    parameters[@"share_code"] = [self.shareCode hasText]?self.shareCode.text:@"";
     
     hx_weakify(self);
     [HXNetworkTool POST:HXRC_M_URL action:@"admin/supplierRegister" parameters:parameters success:^(id responseObject) {

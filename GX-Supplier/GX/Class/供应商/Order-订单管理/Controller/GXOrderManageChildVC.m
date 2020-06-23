@@ -217,7 +217,7 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
 {
     GXRenewMyOrderHeader *header = [GXRenewMyOrderHeader loadXibView];
     header.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 44.f);
-    if (self.status !=6) {
+    if (self.status !=5) {
         GXMyOrder *order = self.orders[section];
         header.order = order;
     }else{

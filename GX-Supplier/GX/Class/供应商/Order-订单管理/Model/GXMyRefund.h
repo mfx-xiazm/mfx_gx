@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *specs_attrs;
 @property(nonatomic,copy) NSString *price;
 @property(nonatomic,copy) NSString *control_type;
-
+@property(nonatomic,copy) NSString *send_freight_type;
 @property(nonatomic,copy) NSString *total_reduce_amount;
 @property(nonatomic,copy) NSString *total_pay_amount;
 @property(nonatomic,copy) NSString *pay_type;
@@ -38,7 +38,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *create_time;
 @property(nonatomic,copy) NSString *reject_reason;
 @property(nonatomic,copy) NSString *logistics_com_id;
+// 订单号可能存在多个
 @property(nonatomic,copy) NSString *logistics_no;
+@property(nonatomic,copy) NSArray *logistics_nos;
 @property(nonatomic,copy) NSString *logistics_com_name;
 @property(nonatomic,copy) NSString *driver_phone;
 @property(nonatomic,copy) NSString *receiver;
@@ -52,6 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *provider_no;
 @property(nonatomic,copy) NSString *username;
 @property(nonatomic,copy) NSString *saleman_code;
+@property(nonatomic,copy) NSString *shop_name;
 /* 是退款详情数据 */
 @property(nonatomic,assign) BOOL isRefundDetail;
 @property(nonatomic,strong) NSArray<GYMyRefundGoods *> *goods;

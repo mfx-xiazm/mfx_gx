@@ -63,6 +63,9 @@
                 <constraint firstItem="eyO-wJ-Dkm" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="uYm-Jt-UzQ"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="shop_name" destination="vgx-De-VA0" id="m69-2z-Zgi"/>
+            </connections>
             <point key="canvasLocation" x="79.710144927536234" y="264.84375"/>
         </view>
     </objects>

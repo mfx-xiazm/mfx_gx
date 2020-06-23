@@ -11,6 +11,10 @@
 #import "GXOrderDetailHeader.h"
 #import "GXMyOrderHeader.h"
 #import "GXGiftGoodsDetailFooter.h"
+#import "GXGiftGoods.h"
+#import "GXWebContentVC.h"
+#import "zhAlertView.h"
+#import <zhPopupController.h>
 
 static NSString *const GiftGoodsCell = @"GiftGoodsCell";
 @interface GXGiftGoodsDetailVC ()<UITableViewDelegate,UITableViewDataSource>
@@ -18,6 +22,7 @@ static NSString *const GiftGoodsCell = @"GiftGoodsCell";
 /* 头视图 */
 @property(nonatomic,strong) GXOrderDetailHeader *header;
 @property (nonatomic, strong) GXGiftGoodsDetailFooter *footer;
+@property (nonatomic, strong) GXGiftGoods *giftGoods;
 @end
 
 @implementation GXGiftGoodsDetailVC
@@ -26,6 +31,8 @@ static NSString *const GiftGoodsCell = @"GiftGoodsCell";
     [super viewDidLoad];
     [self.navigationItem setTitle:@"赠品订单详情"];
     [self setUpTableView];
+    [self startShimmer];
+    [self getGiftOrderInfoRequest];
 }
 -(void)viewDidLayoutSubviews
 {
@@ -71,6 +78,49 @@ static NSString *const GiftGoodsCell = @"GiftGoodsCell";
     self.tableView.tableHeaderView = self.header;
     self.tableView.tableFooterView = self.footer;
 }
+#pragma mark -- 接口请求
+-(void)getGiftOrderInfoRequest
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"gift_order_id"] = self.gift_order_id;
+
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"index/getGiftOrderDetail" parameters:parameters success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            strongSelf.giftGoods = [GXGiftGoods yy_modelWithDictionary:responseObject[@"data"]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [strongSelf handleOrderDetailData];
+            });
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
+}
+-(void)handleOrderDetailData
+{
+    self.header.giftGoods = self.giftGoods;
+    hx_weakify(self);
+    self.header.lookLogisCall = ^{
+        hx_strongify(weakSelf);
+        //HXLog(@"查看物流");
+        GXWebContentVC *cvc = [GXWebContentVC new];
+        cvc.navTitle = @"物流详情";
+        cvc.isNeedRequest = NO;
+        cvc.url = strongSelf.giftGoods.url;
+        [strongSelf.navigationController pushViewController:cvc animated:YES];
+    };
+    
+    self.footer.giftGoods = self.giftGoods;
+   
+    [self.tableView reloadData];
+}
+
 #pragma mark -- UITableView数据源和代理
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -80,6 +130,8 @@ static NSString *const GiftGoodsCell = @"GiftGoodsCell";
     GXGiftGoodsCell *cell = [tableView dequeueReusableCellWithIdentifier:GiftGoodsCell forIndexPath:indexPath];
     //无色
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.sharw_img.hidden = YES;
+    cell.giftGoods = self.giftGoods;
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -95,6 +147,7 @@ static NSString *const GiftGoodsCell = @"GiftGoodsCell";
 {
     GXMyOrderHeader *header = [GXMyOrderHeader loadXibView];
     header.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 40.f);
+    header.giftGoods = self.giftGoods;
     return header;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section

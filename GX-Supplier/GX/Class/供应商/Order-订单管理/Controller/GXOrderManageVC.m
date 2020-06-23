@@ -14,6 +14,7 @@
 #import "GXMessageVC.h"
 #import "GXMySetVC.h"
 #import "UIView+WZLBadge.h"
+#import "GXGiftGoodsVC.h"
 
 @interface GXOrderManageVC ()<JXCategoryViewDelegate,UIScrollViewDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet JXCategoryTitleView *categoryView;
@@ -49,10 +50,16 @@
     if (_childVCs == nil) {
         NSMutableArray *vcs = [NSMutableArray array];
         for (int i=0;i<self.categoryView.titles.count;i++) {
-            GXOrderManageChildVC *cvc0 = [GXOrderManageChildVC new];
-            cvc0.status = i+1;
-            [self addChildViewController:cvc0];
-            [vcs addObject:cvc0];
+            if ((i+1) == self.categoryView.titles.count) {
+                GXGiftGoodsVC *gvc = [GXGiftGoodsVC new];
+                [self addChildViewController:gvc];
+                [vcs addObject:gvc];
+            }else{
+                GXOrderManageChildVC *cvc0 = [GXOrderManageChildVC new];
+                cvc0.status = i+1;
+                [self addChildViewController:cvc0];
+                [vcs addObject:cvc0];
+            }
         }
         _childVCs = vcs;
     }
@@ -87,7 +94,7 @@
 {
     _categoryView.backgroundColor = [UIColor whiteColor];
     _categoryView.titleLabelZoomEnabled = NO;
-    _categoryView.titles = @[@"全部", @"待发货",@"待收货", @"待评价", @"售后退款"];
+    _categoryView.titles = @[@"全部", @"待发货",@"待收货", @"待评价", @"售后退款", @"赠品订单"];
     _categoryView.titleFont = [UIFont systemFontOfSize:14 weight:UIFontWeightMedium];
     _categoryView.titleColor = [UIColor blackColor];
     _categoryView.titleSelectedColor = HXControlBg;
@@ -112,11 +119,20 @@
 }
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    GXOrderManageChildVC *targetViewController = (GXOrderManageChildVC *)self.childVCs[self.categoryView.selectedIndex];
-    if ([textField hasText]) {
-        targetViewController.seaKey = textField.text;
+    if (self.categoryView.selectedIndex == 5) {
+        GXGiftGoodsVC *targetViewController = (GXGiftGoodsVC *)self.childVCs[self.categoryView.selectedIndex];
+        if ([textField hasText]) {
+            targetViewController.seaKey = textField.text;
+        }else{
+            targetViewController.seaKey = @"";
+        }
     }else{
-        targetViewController.seaKey = @"";
+        GXOrderManageChildVC *targetViewController = (GXOrderManageChildVC *)self.childVCs[self.categoryView.selectedIndex];
+        if ([textField hasText]) {
+            targetViewController.seaKey = textField.text;
+        }else{
+            targetViewController.seaKey = @"";
+        }
     }
     return YES;
 }

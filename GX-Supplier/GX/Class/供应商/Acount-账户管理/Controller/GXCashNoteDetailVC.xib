@@ -10,6 +10,17 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GXCashNoteDetailVC">
             <connections>
+                <outlet property="apply_amount" destination="5C7-2v-dW7" id="Omy-jI-3JV"/>
+                <outlet property="apply_status" destination="f9l-g2-d3d" id="CUT-LV-L6F"/>
+                <outlet property="approve_time" destination="2Ne-ai-BfV" id="8Xg-kJ-aVJ"/>
+                <outlet property="cash_info" destination="P1Y-bt-DiY" id="f3M-zr-gZ4"/>
+                <outlet property="cash_title" destination="B4m-TV-xNi" id="Eke-n4-MFg"/>
+                <outlet property="create_time" destination="xHx-iN-Iuy" id="84c-DY-If9"/>
+                <outlet property="daozhang_img" destination="srY-ek-g7A" id="jCP-ll-4Zn"/>
+                <outlet property="pay_money_View" destination="OZm-O2-3ht" id="pmK-GD-ryM"/>
+                <outlet property="pay_money_img" destination="uNN-5h-o7M" id="ggx-uC-UI5"/>
+                <outlet property="pay_money_view_height" destination="bgr-en-OE8" id="KnM-N8-mQ2"/>
+                <outlet property="pingtai_img" destination="OOt-ug-nxp" id="wFm-9o-ehR"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
