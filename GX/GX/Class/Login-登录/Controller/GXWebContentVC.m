@@ -8,6 +8,8 @@
 
 #import "GXWebContentVC.h"
 #import <WebKit/WebKit.h>
+#import "NSURL+Expand.h"
+#import "GXOrderDetailVC.h"
 
 @interface GXWebContentVC ()<WKNavigationDelegate,WKUIDelegate>
 @property (nonatomic, strong) WKWebView     *webView;
@@ -138,7 +140,19 @@
     }];
 }
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
-    decisionHandler(WKNavigationActionPolicyAllow);
+    NSString *urlStr = navigationAction.request.URL.absoluteString;
+    //guaxuan://h5_to_native?goods_id=1
+    if ([urlStr hasPrefix:@"guaxuan://"]) {
+        NSDictionary *paramer = [navigationAction.request.URL paramerWithURL];
+        if (paramer && paramer[@"goods_id"]) {
+            GXOrderDetailVC *dvc = [GXOrderDetailVC new];
+            dvc.oid = [NSString stringWithFormat:@"%@",paramer[@"goods_id"]];
+            [self.navigationController pushViewController:dvc animated:YES];
+        }
+        decisionHandler(WKNavigationActionPolicyCancel);
+    }else{
+        decisionHandler(WKNavigationActionPolicyAllow);
+    }
 }
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error
 {

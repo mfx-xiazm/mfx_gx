@@ -331,7 +331,7 @@ static NSString *const MyIdeaPhotoCell = @"MyIdeaPhotoCell";
     parameters[@"refund_goods_num"] = self.refundNum.text;
     parameters[@"refund_amount"] = self.refund_price.text;
     parameters[@"refund_desc"] = [self.remark hasText]?self.remark.text:@"";
-    if (imageUrls) {
+    if (imageUrls) {guaxuan://h5_to_native?goods_id=1
         parameters[@"img_srcs"] = [imageUrls componentsJoinedByString:@","];//评价图片多个用逗号隔开
     }else{
         parameters[@"img_srcs"] = @"";//评价图片多个用逗号隔开

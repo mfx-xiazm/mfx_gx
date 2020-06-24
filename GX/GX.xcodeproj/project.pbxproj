@@ -33,6 +33,7 @@
 		49628BCF24A307400030FCB0 /* GXMyOrderFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 49628BCE24A307400030FCB0 /* GXMyOrderFooter.m */; };
 		49628BD124A3074A0030FCB0 /* GXMyOrderFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49628BD024A3074A0030FCB0 /* GXMyOrderFooter.xib */; };
 		49628BD424A335D00030FCB0 /* GXApplyRefund.m in Sources */ = {isa = PBXBuildFile; fileRef = 49628BD324A335D00030FCB0 /* GXApplyRefund.m */; };
+		49628BD724A34AFC0030FCB0 /* NSURL+Expand.m in Sources */ = {isa = PBXBuildFile; fileRef = 49628BD524A34AFC0030FCB0 /* NSURL+Expand.m */; };
 		4968E20024A03E7A00D74915 /* GXGiftGoods.m in Sources */ = {isa = PBXBuildFile; fileRef = 4968E1FF24A03E7A00D74915 /* GXGiftGoods.m */; };
 		4968E20324A0C79400D74915 /* GXShowProof.m in Sources */ = {isa = PBXBuildFile; fileRef = 4968E20224A0C79400D74915 /* GXShowProof.m */; };
 		496C01D924A1DCBC004A9D22 /* GXPreSales.m in Sources */ = {isa = PBXBuildFile; fileRef = 496C01D824A1DCBC004A9D22 /* GXPreSales.m */; };
@@ -572,6 +573,8 @@
 		49628BD024A3074A0030FCB0 /* GXMyOrderFooter.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXMyOrderFooter.xib; sourceTree = "<group>"; };
 		49628BD224A335CF0030FCB0 /* GXApplyRefund.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXApplyRefund.h; sourceTree = "<group>"; };
 		49628BD324A335D00030FCB0 /* GXApplyRefund.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXApplyRefund.m; sourceTree = "<group>"; };
+		49628BD524A34AFC0030FCB0 /* NSURL+Expand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+Expand.m"; sourceTree = "<group>"; };
+		49628BD624A34AFC0030FCB0 /* NSURL+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+Expand.h"; sourceTree = "<group>"; };
 		4968E1FE24A03E7A00D74915 /* GXGiftGoods.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXGiftGoods.h; sourceTree = "<group>"; };
 		4968E1FF24A03E7A00D74915 /* GXGiftGoods.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXGiftGoods.m; sourceTree = "<group>"; };
 		4968E20124A0C79400D74915 /* GXShowProof.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXShowProof.h; sourceTree = "<group>"; };
@@ -2480,6 +2483,8 @@
 		90C0B32E2340CD7100A8C55B /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				49628BD624A34AFC0030FCB0 /* NSURL+Expand.h */,
+				49628BD524A34AFC0030FCB0 /* NSURL+Expand.m */,
 				90C0B32F2340CD7100A8C55B /* HXNetworkTool.h */,
 				90C0B3312340CD7100A8C55B /* HXNetworkTool.m */,
 				90C0B3302340CD7100A8C55B /* HXNetworkCache.h */,
@@ -3867,6 +3872,7 @@
 				90E57EE22346276D00F49834 /* GXChooseClassHeader.m in Sources */,
 				9081071D23498668005466C0 /* GXMySetVC.m in Sources */,
 				90C0B2E02340B74B00A8C55B /* main.m in Sources */,
+				49628BD724A34AFC0030FCB0 /* NSURL+Expand.m in Sources */,
 				90C0B3E12340CD7200A8C55B /* SGQRCodeScanView.m in Sources */,
 				90C0B3ED2340CD7200A8C55B /* UIView+WZLBadge.m in Sources */,
 				9096CC2423696C9300D213DD /* GXBrandDetail.m in Sources */,
