@@ -100,32 +100,11 @@
                     <rect key="frame" x="0.0" y="130" width="414" height="150"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6eX-gH-TPC">
-                            <rect key="frame" x="10" y="10" width="236.5" height="130"/>
+                            <rect key="frame" x="10" y="10" width="238" height="130"/>
                             <attributedString key="attributedText">
-                                <fragment content="订单编号：">
-                                    <attributes>
-                                        <color key="NSColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <font key="NSFont" size="13" name=".PingFangSC-Regular"/>
-                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5" tighteningFactorForTruncation="0.0"/>
-                                    </attributes>
-                                </fragment>
                                 <fragment>
-                                    <string key="content">3000245631035416541530
-</string>
-                                    <attributes>
-                                        <color key="NSColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <font key="NSFont" metaFont="system"/>
-                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5" tighteningFactorForTruncation="0.0"/>
-                                    </attributes>
-                                </fragment>
-                                <fragment content="下单时间：">
-                                    <attributes>
-                                        <color key="NSColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <font key="NSFont" size="13" name=".PingFangSC-Regular"/>
-                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5" tighteningFactorForTruncation="0.0"/>
-                                    </attributes>
-                                </fragment>
-                                <fragment content="2019-08-28 15:30:54 ">
+                                    <string key="content">订单编号：3000245631035416541530
+下单时间：2019-08-28 15:30:54 </string>
                                     <attributes>
                                         <color key="NSColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <font key="NSFont" metaFont="system"/>
@@ -179,40 +158,12 @@ Cg
                                         <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                     </attributes>
                                 </fragment>
-                                <fragment content="物流单号：">
-                                    <attributes>
-                                        <color key="NSColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <font key="NSFont" size="13" name=".PingFangSC-Regular"/>
-                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5" tighteningFactorForTruncation="0.0"/>
-                                    </attributes>
-                                </fragment>
                                 <fragment>
-                                    <string key="content">HPC4876366
-</string>
+                                    <string key="content">物流单号：HPC4876366
+推广店员：王老板（00681519）</string>
                                     <attributes>
                                         <color key="NSColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <font key="NSFont" metaFont="system"/>
-                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5" tighteningFactorForTruncation="0.0"/>
-                                    </attributes>
-                                </fragment>
-                                <fragment content="推广店员：王老板（">
-                                    <attributes>
-                                        <color key="NSColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <font key="NSFont" size="13" name=".PingFangSC-Regular"/>
-                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5" tighteningFactorForTruncation="0.0"/>
-                                    </attributes>
-                                </fragment>
-                                <fragment content="00681519">
-                                    <attributes>
-                                        <color key="NSColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <font key="NSFont" metaFont="system"/>
-                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5" tighteningFactorForTruncation="0.0"/>
-                                    </attributes>
-                                </fragment>
-                                <fragment content="）">
-                                    <attributes>
-                                        <color key="NSColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <font key="NSFont" size="13" name=".PingFangSC-Regular"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5" tighteningFactorForTruncation="0.0"/>
                                     </attributes>
                                 </fragment>
@@ -244,7 +195,7 @@ Cg
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OU6-RY-16o">
-                            <rect key="frame" x="368" y="71" width="36" height="18"/>
+                            <rect key="frame" x="368" y="68" width="36" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="18" id="qvJ-8t-KYf"/>
                             </constraints>
@@ -263,6 +214,9 @@ Cg
                                     <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="logisticsNoCopyClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="YyA-Tb-MVY"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -273,7 +227,7 @@ Cg
                         <constraint firstItem="6eX-gH-TPC" firstAttribute="top" secondItem="e1c-Qt-hzQ" secondAttribute="top" constant="10" id="GB8-CN-HdI"/>
                         <constraint firstItem="AlD-mk-R7t" firstAttribute="top" secondItem="e1c-Qt-hzQ" secondAttribute="top" constant="10" id="hCJ-yY-eEH"/>
                         <constraint firstItem="6eX-gH-TPC" firstAttribute="leading" secondItem="e1c-Qt-hzQ" secondAttribute="leading" constant="10" id="jj7-yb-rHE"/>
-                        <constraint firstItem="OU6-RY-16o" firstAttribute="top" secondItem="AlD-mk-R7t" secondAttribute="bottom" constant="43" id="wuC-VH-aWS"/>
+                        <constraint firstItem="OU6-RY-16o" firstAttribute="top" secondItem="AlD-mk-R7t" secondAttribute="bottom" constant="40" id="wuC-VH-aWS"/>
                     </constraints>
                 </view>
             </subviews>
@@ -296,6 +250,7 @@ Cg
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="goods_num" destination="hOc-DZ-4ED" id="e1m-i0-Atg"/>
+                <outlet property="locitic_copy" destination="OU6-RY-16o" id="yo1-tL-KOI"/>
                 <outlet property="order_coupon_amount" destination="Fbg-HU-Wge" id="VBa-OT-IoL"/>
                 <outlet property="order_desc" destination="6eX-gH-TPC" id="4ws-9n-8tQ"/>
                 <outlet property="order_freight_amount" destination="3Oh-cx-wfb" id="gVt-4N-wGZ"/>

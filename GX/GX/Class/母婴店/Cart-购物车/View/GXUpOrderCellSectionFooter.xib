@@ -141,8 +141,8 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
-                <outlet property="totalAmount" destination="KFr-9n-MXJ" id="kvK-6d-HmE"/>
                 <outlet property="totalFreight" destination="0vx-6n-nge" id="4VU-zL-9Eh"/>
+                <outlet property="totalPrice" destination="KFr-9n-MXJ" id="E5l-Lf-sfI"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="282.58928571428572"/>
         </view>

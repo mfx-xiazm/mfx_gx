@@ -20,16 +20,15 @@
 {
     [super awakeFromNib];
 }
--(void)setOrder:(GXMyOrder *)order
+-(void)setOrderProvider:(GXMyOrderProvider *)orderProvider
 {
-    _order = order;
-    
+    _orderProvider = orderProvider;
+    self.shop_name.text = _orderProvider.shop_name;
 }
--(void)setRefund:(GXMyRefund *)refund
+-(void)setRefundProvider:(GXMyRefundProvider *)refundProvider
 {
-    _refund = refund;
-    
-   
+    _refundProvider = refundProvider;
+    self.shop_name.text = _refundProvider.shop_name;
 }
 -(void)setGiftGoods:(GXGiftGoods *)giftGoods
 {

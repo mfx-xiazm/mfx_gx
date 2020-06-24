@@ -32,13 +32,17 @@
     }else{
         self.order_state.text = _order.status;
         self.order_no.text = [NSString stringWithFormat:@"%@",_order.order_no];
-        /**线下支付审核状态：1待上传打款凭证；2审核通过；3审核驳回。4上传打款凭证审核中；线上支付不需要审核逻辑*/
-        if ([_order.approve_status isEqualToString:@"1"]) {
-            self.out_line_status.hidden = NO;
-            [self.out_line_status setTitle:@"  未打款" forState:UIControlStateNormal];
-        }else if ([_order.approve_status isEqualToString:@"4"]) {
-            self.out_line_status.hidden = NO;
-            [self.out_line_status setTitle:@"  审核中" forState:UIControlStateNormal];
+        if ([_order.pay_type isEqualToString:@"3"]) {//线下付款
+            /**线下支付审核状态：1待上传打款凭证；2审核通过；3审核驳回。4上传打款凭证审核中；线上支付不需要审核逻辑*/
+            if ([_order.approve_status isEqualToString:@"1"]) {
+                self.out_line_status.hidden = NO;
+                [self.out_line_status setTitle:@"  未打款" forState:UIControlStateNormal];
+            }else if ([_order.approve_status isEqualToString:@"4"]) {
+                self.out_line_status.hidden = NO;
+                [self.out_line_status setTitle:@"  审核中" forState:UIControlStateNormal];
+            }else{
+                self.out_line_status.hidden = YES;
+            }
         }else{
             self.out_line_status.hidden = YES;
         }
@@ -48,6 +52,8 @@
 {
     _refund = refund;
     
+    self.out_line_status.hidden = YES;
+
     /** 1等待供应商审核；2等待平台审核；3退款成功；4退款驳回 5供应商同意 6供应商不同意 */
     if (_refund.isRefundDetail) {
         self.order_state.text = @"";

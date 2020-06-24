@@ -10,8 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXMyOrderProvider,GXMyRefund;
 @interface GXRenewMyOrderBigCellHeader : UIView
-
+@property (nonatomic, strong) GXMyOrderProvider *provider;
+@property (nonatomic, strong) GXMyRefund *refund;
 @end
 
 NS_ASSUME_NONNULL_END

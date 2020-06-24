@@ -7,12 +7,27 @@
 //
 
 #import "GXRenewMyOrderBigCellHeader.h"
+#import "GXMyOrder.h"
+#import "GXMyRefund.h"
 
+@interface GXRenewMyOrderBigCellHeader ()
+@property (weak, nonatomic) IBOutlet UILabel *shop_name;
+
+@end
 @implementation GXRenewMyOrderBigCellHeader
 
 -(void)awakeFromNib
 {
     [super awakeFromNib];
 }
-
+-(void)setProvider:(GXMyOrderProvider *)provider
+{
+    _provider = provider;
+    self.shop_name.text = _provider.shop_name;
+}
+-(void)setRefund:(GXMyRefund *)refund
+{
+    _refund = refund;
+    self.shop_name.text = _refund.shop_name;
+}
 @end

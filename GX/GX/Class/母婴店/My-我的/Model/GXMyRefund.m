@@ -11,10 +11,12 @@
 @implementation GXMyRefund
 + (NSDictionary *)modelContainerPropertyGenericClass {
     return @{@"goods":[GYMyRefundGoods class],
+             @"provider":[GXMyRefundProvider class],
              @"address":[GYMyRefundAddress class],
              @"goods_recommend":[GXMyRefundRecommend class]
     };
 }
+
 -(void)setLogistics_no:(NSString *)logistics_no
 {
     if (logistics_no.length) {
@@ -23,6 +25,14 @@
     }else{
         _logistics_no = @"";
     }
+}
+@end
+
+@implementation GXMyRefundProvider
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    return @{
+        @"goods":[GYMyRefundGoods class]
+    };
 }
 @end
 

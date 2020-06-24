@@ -38,15 +38,30 @@ static NSString *const RenewMyOrderCell = @"RenewMyOrderCell";
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GXRenewMyOrderCell class]) bundle:nil] forCellReuseIdentifier:RenewMyOrderCell];
 }
+-(void)setMyOrder:(GXMyOrder *)myOrder
+{
+    _myOrder = myOrder;
+    [self.tableView reloadData];
+}
+-(void)setMyRefund:(GXMyRefund *)myRefund
+{
+    _myRefund = myRefund;
+    [self.tableView reloadData];
+}
 #pragma mark -- UITableView数据源和代理
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    if (self.status !=6) {
+        return self.myOrder.provider.count;
+    }else{
+        return 1;
+    }
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (self.status !=6) {
-        return self.myOrder.goods.count;
+        GXMyOrderProvider *provider = self.myOrder.provider[section];
+        return provider.goods.count;
     }else{
         return 1;
     }
@@ -56,7 +71,8 @@ static NSString *const RenewMyOrderCell = @"RenewMyOrderCell";
     //无色
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (self.status !=6) {
-        GXMyOrderGoods *goods = self.myOrder.goods[indexPath.row];
+        GXMyOrderProvider *provider = self.myOrder.provider[indexPath.section];
+        GXMyOrderGoods *goods = provider.goods[indexPath.row];
         goods.refund_status = self.myOrder.refund_status;
         goods.status = self.myOrder.status;
         cell.goods = goods;
@@ -79,13 +95,12 @@ static NSString *const RenewMyOrderCell = @"RenewMyOrderCell";
 {
     GXRenewMyOrderBigCellHeader *header = [GXRenewMyOrderBigCellHeader loadXibView];
     header.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 40.f);
-//    if (self.status !=6) {
-//        GXMyOrder *order = self.orders[section];
-//        header.order = order;
-//    }else{
-//        GXMyRefund *refund = self.refunds[section];
-//        header.refund = refund;
-//    }
+    if (self.status !=6) {
+        GXMyOrderProvider *provider = self.myOrder.provider[section];
+        header.provider = provider;
+    }else{
+        header.refund = self.myRefund;
+    }
     return header;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section

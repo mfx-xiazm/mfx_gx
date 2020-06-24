@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class GXMyOrderGoods,GXMyOrderRecommend;
+@class GXMyOrderGoods,GXMyOrderRecommend,GXMyOrderProvider;
 @interface GXMyOrder : NSObject
 @property(nonatomic,copy) NSString *oid;
 @property(nonatomic,copy) NSString *order_no;
@@ -40,8 +40,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *reject_reason;
 @property(nonatomic,copy) NSString *order_coupon_amount;
 @property(nonatomic,copy) NSString *total_reduce_amount;
-@property(nonatomic,copy) NSString *provider_no;
 @property(nonatomic,copy) NSString *provider_uid;
+@property(nonatomic,copy) NSString *provider_no;
 @property(nonatomic,copy) NSString *username;
 @property(nonatomic,copy) NSString *saleman_code;
 @property(nonatomic,copy) NSString *driver_phone;
@@ -50,9 +50,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *send_freight_type;
 /* 是详情数据 */
 @property(nonatomic,assign) BOOL isDetailOrder;
-@property(nonatomic,strong) NSArray<GXMyOrderGoods *> *goods;
+@property(nonatomic,strong) NSArray<GXMyOrderProvider *> *provider;
 @property(nonatomic,strong) NSArray<GXMyOrderRecommend *> *goods_recommend;
 
+@end
+
+@interface GXMyOrderProvider : NSObject
+@property(nonatomic,copy) NSString *provider_uid;
+@property(nonatomic,copy) NSString *shop_name;
+@property(nonatomic,copy) NSString *provider_no;
+@property(nonatomic,strong) NSArray<GXMyOrderGoods *> *goods;
 @end
 
 @interface GXMyOrderGoods : NSObject

@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class GYMyRefundGoods,GYMyRefundAddress,GXMyRefundRecommend;
+@class GYMyRefundGoods,GYMyRefundAddress,GXMyRefundRecommend,GXMyRefundProvider;
 @interface GXMyRefund : NSObject
 @property(nonatomic,copy) NSString *refund_id;
 @property(nonatomic,copy) NSString *oid;
@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *specs_attrs;
 @property(nonatomic,copy) NSString *price;
 @property(nonatomic,copy) NSString *control_type;
+@property(nonatomic,copy) NSString *shop_name;
 
 @property(nonatomic,copy) NSString *total_reduce_amount;
 @property(nonatomic,copy) NSString *total_pay_amount;
@@ -57,11 +58,19 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *send_freight_type;
 /* 是退款详情数据 */
 @property(nonatomic,assign) BOOL isRefundDetail;
-@property(nonatomic,strong) NSArray<GYMyRefundGoods *> *goods;
+@property(nonatomic,strong) NSArray<GXMyRefundProvider *> *provider;
+//@property(nonatomic,strong) NSArray<GYMyRefundGoods *> *goods;
 @property(nonatomic,strong) NSArray<GXMyRefundRecommend *> *goods_recommend;
 
 @property(nonatomic,strong) GYMyRefundAddress *address;
 
+@end
+
+@interface GXMyRefundProvider : NSObject
+@property(nonatomic,copy) NSString *provider_uid;
+@property(nonatomic,copy) NSString *shop_name;
+@property(nonatomic,copy) NSString *provider_no;
+@property(nonatomic,strong) NSArray<GYMyRefundGoods *> *goods;
 @end
 
 @interface GYMyRefundGoods : NSObject

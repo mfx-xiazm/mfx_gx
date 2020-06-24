@@ -23,7 +23,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *address_detail;
 @property(nonatomic,assign) BOOL is_default;
 @property(nonatomic,copy) NSString *create_time;
-
 /* 是否选中 */
 @property(nonatomic,assign) BOOL isSelected;
 @end

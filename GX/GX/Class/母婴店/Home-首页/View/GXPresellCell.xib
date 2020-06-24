@@ -114,6 +114,15 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="cover_img" destination="wZ5-4R-Mdf" id="Rpo-i3-cUW"/>
+                <outlet property="flag_img" destination="i2l-ld-IWQ" id="3DS-yR-fov"/>
+                <outlet property="goods_anme" destination="iZu-Y6-N9Q" id="lP1-VF-7Gu"/>
+                <outlet property="handleBtn" destination="cIt-dp-O48" id="ui4-4j-ygU"/>
+                <outlet property="price" destination="J4W-wt-PvW" id="hPV-DZ-1Xl"/>
+                <outlet property="sale_num" destination="4EG-y8-9bd" id="aTh-F2-bJ2"/>
+                <outlet property="time" destination="duD-kv-2uT" id="LCA-FZ-zD8"/>
+            </connections>
             <point key="canvasLocation" x="50.000000000000007" y="113.50446428571428"/>
         </tableViewCell>
     </objects>

@@ -19,6 +19,7 @@
 #import "GXWebContentVC.h"
 #import "GXPayTypeVC.h"
 #import "HXSearchBar.h"
+#import "GXApplyRefundVC.h"
 
 static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
 @interface GXMyOrderChildVC ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
@@ -355,7 +356,11 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
     // 返回这个模型对应的cell高度
     if (self.status !=6) {
         GXMyOrder *order = self.orders[indexPath.section];
-        return order.goods.count*110.f + 40.f;
+        CGFloat cellHeight = 0.f;
+        for (GXMyOrderProvider *provider in order.provider) {
+            cellHeight += 40.f + provider.goods.count*110.f;
+        }
+        return cellHeight;
     }else{
         return 110.f + 40.f;
     }
@@ -451,7 +456,8 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
                     if (![order.refund_status isEqualToString:@"0"] && ![order.refund_status isEqualToString:@"3"] && ![order.refund_status isEqualToString:@"4"]) {
                         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"该订单正在申请退款"];
                     }else{
-                        [strongSelf orderRefundRequest];
+                        GXApplyRefundVC *rvc = [GXApplyRefundVC new];
+                        [strongSelf.navigationController pushViewController:rvc animated:YES];
                     }
                 }
             }else if (index == 2){
@@ -500,7 +506,8 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
                     if (![order.refund_status isEqualToString:@"0"] && ![order.refund_status isEqualToString:@"3"] && ![order.refund_status isEqualToString:@"4"]) {
                         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"该订单正在申请退款"];
                     }else{
-                        [strongSelf orderRefundRequest];
+                        GXApplyRefundVC *rvc = [GXApplyRefundVC new];
+                        [strongSelf.navigationController pushViewController:rvc animated:YES];
                     }
                 }else if ([order.status isEqualToString:@"待收货"]) {
                     //HXLog(@"确认收货");

@@ -10,7 +10,7 @@
 #import "GXConfirmOrder.h"
 
 @interface GXUpOrderCellSectionFooter ()
-@property (weak, nonatomic) IBOutlet UILabel *totalAmount;
+@property (weak, nonatomic) IBOutlet UILabel *totalPrice;
 @property (weak, nonatomic) IBOutlet UILabel *totalFreight;
 @end
 @implementation GXUpOrderCellSectionFooter
@@ -22,7 +22,8 @@
 {
     _orderData = orderData;
 
+    self.totalPrice.text = [NSString stringWithFormat:@"￥%.2f",[_orderData.shopActTotalPrice floatValue]];
     self.totalFreight.text = [NSString stringWithFormat:@"￥%@",_orderData.shopActTotalFreight];
-    self.totalAmount.text = [NSString stringWithFormat:@"￥%.2f",[_orderData.shopActTotalAmount floatValue]];
+
 }
 @end

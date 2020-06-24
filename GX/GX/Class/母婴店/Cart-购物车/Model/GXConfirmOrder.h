@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class GXMyAddress,GXConfirmOrderData,GXConfirmOrderGoods,GXMyCoupon;
+@class GXMyAddress,GXConfirmOrderData,GXConfirmOrderGoods,GXMyCoupon,GXConfirmBrandRebate,GXConfirmGoodsGift;
 @interface GXConfirmOrder : NSObject
 /* 地址 */
 @property(nonatomic,strong) GXMyAddress *_Nullable defaultAddress;
@@ -38,9 +38,39 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *shopActTotalAmount;
 /// 运费的总价格
 @property(nonatomic,copy) NSString *shopActTotalFreight;
+/// 返利
+@property(nonatomic,copy) NSString *shopRebateAmount;
 @property(nonatomic,strong) NSArray<GXConfirmOrderGoods *> *goods;
+@property(nonatomic,strong) NSArray<GXConfirmBrandRebate *> *brand_rebate;
+@property(nonatomic,strong) NSArray<GXConfirmGoodsGift *> *gift_data;
 @property(nonatomic,strong) NSArray<GXMyCoupon *> *shopCouponData;
 @property(nonatomic,strong) GXMyCoupon * _Nullable selectedCoupon;
+
+@end
+
+@interface GXConfirmBrandRebate : NSObject
+@property(nonatomic,copy) NSString *rebate_id;
+@property(nonatomic,copy) NSString *rebate_percent;
+@property(nonatomic,copy) NSString *begin_price;
+@property(nonatomic,copy) NSString *goods_amount;
+@property(nonatomic,copy) NSString *goods_rebate_amount;
+@property(nonatomic,copy) NSString *goods_act_amount;
+@property(nonatomic,copy) NSString *brand_id;
+@property(nonatomic,copy) NSString *brand_name;
+@property(nonatomic,copy) NSString *rebate_goods;
+
+@end
+
+@interface GXConfirmGoodsGift : NSObject
+@property(nonatomic,copy) NSString *goods_gift_rule_id;
+@property(nonatomic,copy) NSString *sale_id;
+@property(nonatomic,copy) NSString *goods_area_id;
+@property(nonatomic,copy) NSString *gift_rule_interval_id;
+@property(nonatomic,copy) NSString *begin_num;
+@property(nonatomic,copy) NSString *gift_num;
+@property(nonatomic,copy) NSString *gift_type;
+@property(nonatomic,copy) NSString *goods_name;
+@property(nonatomic,copy) NSString *sale_goods;
 
 @end
 
@@ -63,6 +93,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *totalPrice;
 @property(nonatomic,copy) NSString *actTotalPrice;
 
+@property(nonatomic,copy) NSString *brand_id;
+@property(nonatomic,copy) NSString *logistics_com_id;
+@property(nonatomic,copy) NSString *goods_area_id;
+@property(nonatomic,copy) NSString *sale_id;
+@property(nonatomic,copy) NSString *is_gift_rule;
+@property(nonatomic,copy) NSString *brand_name;
+@property(nonatomic,copy) NSString *goods_act_amount;
 @end
 
 NS_ASSUME_NONNULL_END

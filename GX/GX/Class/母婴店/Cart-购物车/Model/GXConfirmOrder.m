@@ -25,8 +25,19 @@
 
 + (NSDictionary *)modelContainerPropertyGenericClass {
     return @{@"goods":[GXConfirmOrderGoods class],
-             @"shopCouponData":[GXMyCoupon class]};
+             @"shopCouponData":[GXMyCoupon class],
+             @"brand_rebate":[GXConfirmBrandRebate class],
+             @"gift_data":[GXConfirmGoodsGift class]
+    };
 }
+
+@end
+
+@implementation GXConfirmBrandRebate
+
+@end
+
+@implementation GXConfirmGoodsGift
 
 @end
 

@@ -10,7 +10,7 @@
 
 @implementation GXMyOrder
 + (NSDictionary *)modelContainerPropertyGenericClass {
-    return @{@"goods":[GXMyOrderGoods class],
+    return @{ @"provider":[GXMyOrderProvider class],
              @"goods_recommend":[GXMyOrderRecommend class]
              };
 }
@@ -22,6 +22,14 @@
     }else{
         _logistics_no = @"";
     }
+}
+@end
+
+@implementation GXMyOrderProvider
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    return @{
+             @"goods":[GXMyOrderGoods class]
+             };
 }
 @end
 

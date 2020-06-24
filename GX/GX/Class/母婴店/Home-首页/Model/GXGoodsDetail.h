@@ -12,6 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class GXGoodsDetailAdv,GXGoodsDetailParam,GXGoodsDetailSpec,GXGoodsDetailSubSpec,GXGoodsMaterial,GXGoodsMaterialLayout,GXGoodsComment,GXGoodsCommentLayout,GXGoodsLogisticst,GXGoodsDetailSku,GXGoodsRush,GXGoodsRecommend,GXGoodsGiftRule,GXGoodsRebate;
 @interface GXGoodsDetail : NSObject
+@property(nonatomic,copy) NSString *presell_id;
+@property(nonatomic,copy) NSString *sell_status;
+@property(nonatomic,copy) NSString *begin_time;
+@property(nonatomic,copy) NSString *end_time;
 @property(nonatomic,copy) NSString *goods_id;
 @property(nonatomic,copy) NSString *control_type;
 @property(nonatomic,copy) NSString *goods_name;
@@ -39,6 +43,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *collected;
 @property(nonatomic,copy) NSString *is_join;
 @property(nonatomic,copy) NSString *evaCount;
+/// 倒计时秒数
+@property (nonatomic, assign) NSInteger count;
 /** 购买的数量 */
 @property(nonatomic,assign) NSInteger buyNum;
 @property(nonatomic,strong) NSArray<GXGoodsRecommend *> *goods_recommend;
