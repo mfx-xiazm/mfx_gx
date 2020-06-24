@@ -10,8 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^refundCall)(void);
 @interface GXApplyRefundVC : HXBaseViewController
-
+@property (nonatomic, copy) NSString *oid;
+@property (nonatomic, copy) refundCall refundCall;
 @end
 
 NS_ASSUME_NONNULL_END

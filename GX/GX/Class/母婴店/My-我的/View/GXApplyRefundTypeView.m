@@ -12,7 +12,7 @@
 static NSString *const ApplyRefundTypeCell = @"ApplyRefundTypeCell";
 @interface GXApplyRefundTypeView ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
+@property (nonatomic, copy) NSString *currentTitle;
 @end
 
 @implementation GXApplyRefundTypeView
@@ -42,15 +42,36 @@ static NSString *const ApplyRefundTypeCell = @"ApplyRefundTypeCell";
     [super layoutSubviews];
     [self bezierPathByRoundingCorners:UIRectCornerTopLeft|UIRectCornerTopRight cornerRadii:CGSizeMake(15, 15)];
 }
+- (IBAction)sureClicked:(UIButton *)sender {
+    if (self.currentTitle.length) {
+        self.showTextField.text = self.currentTitle;
+    }
+    if (self.selectCall) {
+        self.selectCall();
+    }
+}
+
+-(void)setShowTextField:(UITextField *)showTextField
+{
+    _showTextField = showTextField;
+    self.currentTitle = _showTextField.text;
+}
+-(void)setDataSource:(NSArray *)dataSource
+{
+    _dataSource = dataSource;
+    [self.tableView reloadData];
+}
 #pragma mark -- UITableView数据源和代理
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return self.dataSource.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     GXApplyRefundTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:ApplyRefundTypeCell forIndexPath:indexPath];
     //无色
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.showTxt.text = self.dataSource[indexPath.row];
+    cell.selectImg.image = [cell.showTxt.text isEqualToString:self.currentTitle]?HXGetImage(@"协议选择"):HXGetImage(@"协议未选");
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -60,6 +81,7 @@ static NSString *const ApplyRefundTypeCell = @"ApplyRefundTypeCell";
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    self.currentTitle = self.dataSource[indexPath.row];
+    [tableView reloadData];
 }
 @end

@@ -9,6 +9,9 @@
 #import "GXRebateView.h"
 #import "GXGoodsDetail.h"
 #import "GXCartData.h"
+#import "GXConfirmOrder.h"
+#import "GXMyOrder.h"
+#import "GXMyRefund.h"
 
 @interface GXRebateView ()
 @property (weak, nonatomic) IBOutlet UILabel *rebateTxt;
@@ -48,6 +51,60 @@
             [rebateStr appendFormat:@"，%@",[NSString stringWithFormat:@"满%@返%@%%",rebateObj.begin_price,rebateObj.percent]];
         }else{
             [rebateStr appendFormat:@"%@",[NSString stringWithFormat:@"满%@返%@%%",rebateObj.begin_price,rebateObj.percent]];
+        }
+    }
+
+    if (rebateStr.length) {
+        [self.rebateTxt setTextWithLineSpace:10 withString:rebateStr withFont:[UIFont systemFontOfSize:13]];
+    }else{
+        self.rebateTxt.text = @"无";
+    }
+}
+-(void)setBrand_rebate:(NSArray<GXConfirmBrandRebate *> *)brand_rebate
+{
+    _brand_rebate = brand_rebate;
+    NSMutableString *rebateStr = [NSMutableString string];
+    for (GXConfirmBrandRebate *rebateObj in _brand_rebate) {
+        if (rebateStr.length) {
+            [rebateStr appendFormat:@"，%@",[NSString stringWithFormat:@"%@满%@返%@%%",rebateObj.rebate_goods,rebateObj.begin_price,rebateObj.rebate_percent]];
+        }else{
+            [rebateStr appendFormat:@"%@",[NSString stringWithFormat:@"%@满%@返%@%%",rebateObj.rebate_goods,rebateObj.begin_price,rebateObj.rebate_percent]];
+        }
+    }
+
+    if (rebateStr.length) {
+        [self.rebateTxt setTextWithLineSpace:10 withString:rebateStr withFont:[UIFont systemFontOfSize:13]];
+    }else{
+        self.rebateTxt.text = @"无";
+    }
+}
+-(void)setOrder_rebate:(NSArray<GXMyOrderRebate *> *)order_rebate
+{
+    _order_rebate = order_rebate;
+    NSMutableString *rebateStr = [NSMutableString string];
+    for (GXMyOrderRebate *rebateObj in _order_rebate) {
+        if (rebateStr.length) {
+            [rebateStr appendFormat:@"，%@",[NSString stringWithFormat:@"%@满%@返%@%%",rebateObj.rebate_goods,rebateObj.begin_price,rebateObj.rebate_percent]];
+        }else{
+            [rebateStr appendFormat:@"%@",[NSString stringWithFormat:@"%@满%@返%@%%",rebateObj.rebate_goods,rebateObj.begin_price,rebateObj.rebate_percent]];
+        }
+    }
+
+    if (rebateStr.length) {
+        [self.rebateTxt setTextWithLineSpace:10 withString:rebateStr withFont:[UIFont systemFontOfSize:13]];
+    }else{
+        self.rebateTxt.text = @"无";
+    }
+}
+-(void)setRefund_rebate:(NSArray<GXMyRefundRebate *> *)refund_rebate
+{
+    _refund_rebate = refund_rebate;
+    NSMutableString *rebateStr = [NSMutableString string];
+    for (GXMyRefundRebate *rebateObj in _refund_rebate) {
+        if (rebateStr.length) {
+            [rebateStr appendFormat:@"，%@",[NSString stringWithFormat:@"%@满%@返%@%%",rebateObj.rebate_goods,rebateObj.begin_price,rebateObj.rebate_percent]];
+        }else{
+            [rebateStr appendFormat:@"%@",[NSString stringWithFormat:@"%@满%@返%@%%",rebateObj.rebate_goods,rebateObj.begin_price,rebateObj.rebate_percent]];
         }
     }
 

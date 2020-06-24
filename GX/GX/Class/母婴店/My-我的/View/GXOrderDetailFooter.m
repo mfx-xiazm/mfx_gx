@@ -15,7 +15,6 @@
 @interface GXOrderDetailFooter ()
 @property(nonatomic,weak) IBOutlet UILabel *order_freight_amount;
 @property(nonatomic,weak) IBOutlet UILabel *order_coupon_amount;
-@property(nonatomic,weak) IBOutlet UILabel *order_price_amount;
 @property(nonatomic,weak) IBOutlet UILabel *pay_amount;
 @property (weak, nonatomic) IBOutlet UILabel *order_desc;
 @property (weak, nonatomic) IBOutlet UILabel *goods_num;
@@ -35,7 +34,6 @@
    
     self.order_freight_amount.text = [NSString stringWithFormat:@"￥%@",_orderDetail.order_freight_amount];
     self.order_coupon_amount.text = [NSString stringWithFormat:@"-￥%@",_orderDetail.total_reduce_amount];
-    self.order_price_amount.text = [NSString stringWithFormat:@"￥%@",_orderDetail.total_pay_amount];
     self.pay_amount.text = [NSString stringWithFormat:@"￥%@",_orderDetail.pay_amount];
     NSInteger goods_num = 0;
     for (GXMyOrderProvider *provider in _orderDetail.provider) {
@@ -97,7 +95,6 @@
     
     self.order_freight_amount.text = [NSString stringWithFormat:@"￥%@",_refundDetail.order_freight_amount];
     self.order_coupon_amount.text = [NSString stringWithFormat:@"-￥%@",_refundDetail.total_reduce_amount];
-    self.order_price_amount.text = [NSString stringWithFormat:@"￥%@",_refundDetail.total_pay_amount];
     self.pay_amount.text = [NSString stringWithFormat:@"￥%@",_refundDetail.pay_amount];
     
     NSMutableString *infoStr = [NSMutableString string];

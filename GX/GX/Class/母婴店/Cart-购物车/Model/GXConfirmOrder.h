@@ -32,14 +32,18 @@ NS_ASSUME_NONNULL_BEGIN
 @interface GXConfirmOrderData : NSObject
 @property(nonatomic,copy) NSString *provider_uid;
 @property(nonatomic,copy) NSString *shop_name;
-/// 未加运费的不含商家优惠的并且减去了平台会员权益的总价格
+/// 店铺所有商品价格—优惠
 @property(nonatomic,copy) NSString *shopActTotalPrice;
-/// 加了运费的不含商家优惠的总价格
+/// 店铺所有商品价格—优惠+运费
 @property(nonatomic,copy) NSString *shopActTotalAmount;
-/// 运费的总价格
+/// 店铺所有商品的运费
 @property(nonatomic,copy) NSString *shopActTotalFreight;
-/// 返利
+/// 店铺所有商品的初始价格（没有计算运费和其他优惠）
+@property(nonatomic,copy) NSString *shopTotalPrice;
+/// 店铺所有商品的返利
 @property(nonatomic,copy) NSString *shopRebateAmount;
+/// 备注
+@property(nonatomic,copy) NSString *shopGoodsRemark;
 @property(nonatomic,strong) NSArray<GXConfirmOrderGoods *> *goods;
 @property(nonatomic,strong) NSArray<GXConfirmBrandRebate *> *brand_rebate;
 @property(nonatomic,strong) NSArray<GXConfirmGoodsGift *> *gift_data;

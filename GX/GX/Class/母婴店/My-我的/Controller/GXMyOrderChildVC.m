@@ -218,31 +218,6 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
     }];
 }
-/** 申请退款 */
--(void)orderRefundRequest
-{
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    parameters[@"oid"] = self.currentOrder.oid;
-    
-    hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"admin/orderRefund" parameters:parameters success:^(id responseObject) {
-        hx_strongify(weakSelf);
-        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if ([strongSelf.currentOrder.provider_uid  isEqualToString:@"0"]) {
-                    strongSelf.currentOrder.refund_status = @"2";
-                }else{
-                    strongSelf.currentOrder.refund_status = @"1";
-                }
-                [strongSelf.tableView reloadData];
-            });
-        }else{
-            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
-        }
-    } failure:^(NSError *error) {
-        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
-    }];
-}
 /** 确认收货 */
 -(void)confirmReceiveGoodRequest
 {
@@ -457,6 +432,15 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
                         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"该订单正在申请退款"];
                     }else{
                         GXApplyRefundVC *rvc = [GXApplyRefundVC new];
+                        rvc.oid = order.oid;
+                        rvc.refundCall = ^{
+                            if ([order.provider_uid  isEqualToString:@"0"]) {
+                                order.refund_status = @"2";
+                            }else{
+                                order.refund_status = @"1";
+                            }
+                            [tableView reloadData];
+                        };
                         [strongSelf.navigationController pushViewController:rvc animated:YES];
                     }
                 }
@@ -507,6 +491,15 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
                         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"该订单正在申请退款"];
                     }else{
                         GXApplyRefundVC *rvc = [GXApplyRefundVC new];
+                        rvc.oid = order.oid;
+                        rvc.refundCall = ^{
+                            if ([order.provider_uid  isEqualToString:@"0"]) {
+                                order.refund_status = @"2";
+                            }else{
+                                order.refund_status = @"1";
+                            }
+                            [tableView reloadData];
+                        };
                         [strongSelf.navigationController pushViewController:rvc animated:YES];
                     }
                 }else if ([order.status isEqualToString:@"待收货"]) {

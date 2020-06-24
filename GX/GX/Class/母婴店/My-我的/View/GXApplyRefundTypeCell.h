@@ -11,6 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface GXApplyRefundTypeCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *showTxt;
+@property (weak, nonatomic) IBOutlet UIImageView *selectImg;
 
 @end
 

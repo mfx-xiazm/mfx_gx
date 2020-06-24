@@ -253,9 +253,9 @@ static NSString *const UpOrderCell = @"UpOrderCell";
         for (GXConfirmOrderData *orderData in self.confirmOrder.goodsData) {
             for (GXConfirmOrderGoods *orderGood in orderData.goods) {
                 if (skuDatas.length == 1) {
-                    [skuDatas appendFormat:@"{\"sku_id\":\"%@\",\"cart_num\":\"%@\",\"freight_template_id\":\"%@\"}",orderGood.sku_id,orderGood.cart_num,orderGood.freight_template_id];
+                    [skuDatas appendFormat:@"{\"sku_id\":\"%@\",\"cart_num\":\"%@\",\"freight_template_id\":\"%@\",\"order_desc\":\"%@\"}",orderGood.sku_id,orderGood.cart_num,orderGood.freight_template_id,orderData.shopGoodsRemark?orderData.shopGoodsRemark:@""];
                 }else{
-                    [skuDatas appendFormat:@",{\"sku_id\":\"%@\",\"cart_num\":\"%@\",\"freight_template_id\":\"%@\"}",orderGood.sku_id,orderGood.cart_num,orderGood.freight_template_id];
+                    [skuDatas appendFormat:@",{\"sku_id\":\"%@\",\"cart_num\":\"%@\",\"freight_template_id\":\"%@\",\"order_desc\":\"%@\"}",orderGood.sku_id,orderGood.cart_num,orderGood.freight_template_id,orderData.shopGoodsRemark?orderData.shopGoodsRemark:@""];
                 }
             }
         }
@@ -271,6 +271,7 @@ static NSString *const UpOrderCell = @"UpOrderCell";
         parameters[@"goods_num"] = self.goods_num;//直接购买商品的数量
         parameters[@"specs_attrs"] = orderGood.specs_attrs;//直接购买商品规格
         parameters[@"freight_template_id"] = orderGood.freight_template_id;//物流公司id
+        parameters[@"order_desc"] = (orderData.shopGoodsRemark && orderData.shopGoodsRemark.length)?orderData.shopGoodsRemark:@"";
         NSMutableString *coupon_ids = [NSMutableString string];
         
         for (GXConfirmOrderData *orderData in self.confirmOrder.goodsData) {

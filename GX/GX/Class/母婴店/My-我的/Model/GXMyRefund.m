@@ -31,8 +31,24 @@
 @implementation GXMyRefundProvider
 + (NSDictionary *)modelContainerPropertyGenericClass {
     return @{
-        @"goods":[GYMyRefundGoods class]
+        @"goods":[GYMyRefundGoods class],
+        @"brand_rebate":[GXMyRefundRebate class]
     };
+}
+@end
+
+@implementation GXMyRefundRebate
+// 当 JSON 转为 Model 完成后，该方法会被调用。
+// 你可以在这里对数据进行校验，如果校验不通过，可以返回 NO，则该 Model 会被忽略。
+// 你也可以在这里做一些自动转换不能完成的工作。
+- (BOOL)modelCustomTransformFromDictionary:(NSDictionary *)dic {
+    if (dic[@"order_brand_rebate"]) {
+        _rebate_percent = [NSString stringWithFormat:@"%@",dic[@"order_brand_rebate"]];
+    }
+    if (dic[@"order_brand_amount"]) {
+        _goods_rebate_amount = [NSString stringWithFormat:@"%@",dic[@"order_brand_amount"]];
+    }
+    return YES;
 }
 @end
 

@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class GYMyRefundGoods,GYMyRefundAddress,GXMyRefundRecommend,GXMyRefundProvider;
+@class GYMyRefundGoods,GYMyRefundAddress,GXMyRefundRecommend,GXMyRefundProvider,GXMyRefundRebate;
 @interface GXMyRefund : NSObject
 @property(nonatomic,copy) NSString *refund_id;
 @property(nonatomic,copy) NSString *oid;
@@ -70,7 +70,30 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *provider_uid;
 @property(nonatomic,copy) NSString *shop_name;
 @property(nonatomic,copy) NSString *provider_no;
+/// 店铺所有商品价格—优惠
+@property(nonatomic,copy) NSString *shopActTotalPrice;
+/// 店铺所有商品价格—优惠+运费
+@property(nonatomic,copy) NSString *shopActTotalAmount;
+/// 店铺所有商品的运费
+@property(nonatomic,copy) NSString *shopActTotalFreight;
+/// 店铺所有商品的初始价格（没有计算运费和其他优惠）
+@property(nonatomic,copy) NSString *shopTotalPrice;
+/// 店铺所有商品的返利
+@property(nonatomic,copy) NSString *shopRebateAmount;
 @property(nonatomic,strong) NSArray<GYMyRefundGoods *> *goods;
+@property(nonatomic,strong) NSArray<GXMyRefundRebate *> *brand_rebate;
+@end
+
+@interface GXMyRefundRebate : NSObject
+@property(nonatomic,copy) NSString *rebate_id;
+@property(nonatomic,copy) NSString *rebate_percent;
+@property(nonatomic,copy) NSString *begin_price;
+@property(nonatomic,copy) NSString *goods_amount;
+@property(nonatomic,copy) NSString *goods_rebate_amount;
+@property(nonatomic,copy) NSString *goods_act_amount;
+@property(nonatomic,copy) NSString *brand_id;
+@property(nonatomic,copy) NSString *brand_name;
+@property(nonatomic,copy) NSString *rebate_goods;
 @end
 
 @interface GYMyRefundGoods : NSObject
@@ -83,6 +106,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *freight_amount;
 @property(nonatomic,copy) NSString *price_amount;
 @property(nonatomic,copy) NSString *control_type;
+@property(nonatomic,copy) NSString *order_goods_desc;
 
 @end
 

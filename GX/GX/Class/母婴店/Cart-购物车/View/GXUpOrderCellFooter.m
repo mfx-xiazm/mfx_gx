@@ -10,8 +10,9 @@
 #import "GXConfirmOrder.h"
 #import "GXMyCoupon.h"
 
-@interface GXUpOrderCellFooter ()
+@interface GXUpOrderCellFooter ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *couponAmount;
+@property (weak, nonatomic) IBOutlet UITextField *remark;
 @property (weak, nonatomic) IBOutlet UILabel *goodsNum;
 @property (weak, nonatomic) IBOutlet UIView *couponView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *couponViewHeight;
@@ -22,6 +23,15 @@
 -(void)awakeFromNib
 {
     [super awakeFromNib];
+    self.remark.delegate = self;
+}
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if ([textField hasText]) {
+        _orderData.shopGoodsRemark = textField.text;
+    }else{
+        _orderData.shopGoodsRemark = @"";
+    }
 }
 - (IBAction)couponClicked:(UIButton *)sender {
     if (self.couponCall) {
@@ -48,9 +58,10 @@
             self.couponAmount.text = [NSString stringWithFormat:@"-￥%@",_orderData.selectedCoupon.coupon_amount];
         }else{
            self.payAmount.text = [NSString stringWithFormat:@"￥%.2f",[_orderData.shopActTotalAmount floatValue]];
-           self.couponAmount.text = @"";
+           self.couponAmount.text = @"￥0.00";
         }
     }
+    self.remark.text = _orderData.shopGoodsRemark;
     self.goodsNum.text = [NSString stringWithFormat:@"共%lu件商品",(unsigned long)_orderData.goods.count];
 }
 @end

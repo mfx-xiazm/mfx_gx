@@ -30,6 +30,9 @@
 		49565F442488F9D900C9D43E /* libUMSPosPayOnly.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49565F412488F9D900C9D43E /* libUMSPosPayOnly.a */; };
 		49565F452488F9D900C9D43E /* PosPay_Resource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 49565F422488F9D900C9D43E /* PosPay_Resource.bundle */; };
 		49565F462488F9D900C9D43E /* UMSSecKeyboardLibResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 49565F432488F9D900C9D43E /* UMSSecKeyboardLibResource.bundle */; };
+		49628BCF24A307400030FCB0 /* GXMyOrderFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 49628BCE24A307400030FCB0 /* GXMyOrderFooter.m */; };
+		49628BD124A3074A0030FCB0 /* GXMyOrderFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49628BD024A3074A0030FCB0 /* GXMyOrderFooter.xib */; };
+		49628BD424A335D00030FCB0 /* GXApplyRefund.m in Sources */ = {isa = PBXBuildFile; fileRef = 49628BD324A335D00030FCB0 /* GXApplyRefund.m */; };
 		4968E20024A03E7A00D74915 /* GXGiftGoods.m in Sources */ = {isa = PBXBuildFile; fileRef = 4968E1FF24A03E7A00D74915 /* GXGiftGoods.m */; };
 		4968E20324A0C79400D74915 /* GXShowProof.m in Sources */ = {isa = PBXBuildFile; fileRef = 4968E20224A0C79400D74915 /* GXShowProof.m */; };
 		496C01D924A1DCBC004A9D22 /* GXPreSales.m in Sources */ = {isa = PBXBuildFile; fileRef = 496C01D824A1DCBC004A9D22 /* GXPreSales.m */; };
@@ -564,6 +567,11 @@
 		49565F412488F9D900C9D43E /* libUMSPosPayOnly.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMSPosPayOnly.a; sourceTree = "<group>"; };
 		49565F422488F9D900C9D43E /* PosPay_Resource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = PosPay_Resource.bundle; sourceTree = "<group>"; };
 		49565F432488F9D900C9D43E /* UMSSecKeyboardLibResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UMSSecKeyboardLibResource.bundle; sourceTree = "<group>"; };
+		49628BCD24A307400030FCB0 /* GXMyOrderFooter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXMyOrderFooter.h; sourceTree = "<group>"; };
+		49628BCE24A307400030FCB0 /* GXMyOrderFooter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXMyOrderFooter.m; sourceTree = "<group>"; };
+		49628BD024A3074A0030FCB0 /* GXMyOrderFooter.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXMyOrderFooter.xib; sourceTree = "<group>"; };
+		49628BD224A335CF0030FCB0 /* GXApplyRefund.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXApplyRefund.h; sourceTree = "<group>"; };
+		49628BD324A335D00030FCB0 /* GXApplyRefund.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXApplyRefund.m; sourceTree = "<group>"; };
 		4968E1FE24A03E7A00D74915 /* GXGiftGoods.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXGiftGoods.h; sourceTree = "<group>"; };
 		4968E1FF24A03E7A00D74915 /* GXGiftGoods.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXGiftGoods.m; sourceTree = "<group>"; };
 		4968E20124A0C79400D74915 /* GXShowProof.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXShowProof.h; sourceTree = "<group>"; };
@@ -2099,6 +2107,9 @@
 				9094F55E234A073700106699 /* GXMyOrderHeader.h */,
 				9094F55F234A073700106699 /* GXMyOrderHeader.m */,
 				9094F561234A073D00106699 /* GXMyOrderHeader.xib */,
+				49628BCD24A307400030FCB0 /* GXMyOrderFooter.h */,
+				49628BCE24A307400030FCB0 /* GXMyOrderFooter.m */,
+				49628BD024A3074A0030FCB0 /* GXMyOrderFooter.xib */,
 				9094F56D234A0AAB00106699 /* GXOrderDetailHeader.h */,
 				9094F56E234A0AAB00106699 /* GXOrderDetailHeader.m */,
 				9094F570234A0AB400106699 /* GXOrderDetailHeader.xib */,
@@ -3083,6 +3094,8 @@
 				4968E1FF24A03E7A00D74915 /* GXGiftGoods.m */,
 				4968E20124A0C79400D74915 /* GXShowProof.h */,
 				4968E20224A0C79400D74915 /* GXShowProof.m */,
+				49628BD224A335CF0030FCB0 /* GXApplyRefund.h */,
+				49628BD324A335D00030FCB0 /* GXApplyRefund.m */,
 			);
 			name = "我的订单";
 			sourceTree = "<group>";
@@ -3639,6 +3652,7 @@
 				497AEBF3247E19B300E0FACB /* GXStoreHeader.xib in Resources */,
 				90FCDF502349C96500729A97 /* GXReportVC.xib in Resources */,
 				49A63AD8249718C200BCC8C8 /* GXRenewCartCell.xib in Resources */,
+				49628BD124A3074A0030FCB0 /* GXMyOrderFooter.xib in Resources */,
 				90FCDF122349949D00729A97 /* GXMyBusinessVC.xib in Resources */,
 				90E57F3323471B3900F49834 /* GXChooseValidAddressView.xib in Resources */,
 				4914C4A72499BCB400EEBB8C /* GXPresellCell.xib in Resources */,
@@ -3927,6 +3941,7 @@
 				9069739B23444E8600D8A8FF /* SPPickerView.m in Sources */,
 				904F4A73234893C60056AF49 /* GXChooseCouponVC.m in Sources */,
 				90C0B45E2340DD1300A8C55B /* AppDelegate+MSPushService.m in Sources */,
+				49628BD424A335D00030FCB0 /* GXApplyRefund.m in Sources */,
 				9099EE6D2367D2510088D80C /* GXHomeData.m in Sources */,
 				906973D923449B5400D8A8FF /* GXHomeSectionBgReusableView.m in Sources */,
 				906973BB2344781A00D8A8FF /* GXShopGoodsCell.m in Sources */,
@@ -4025,6 +4040,7 @@
 				90C0B3E42340CD7200A8C55B /* UIView+LYExtension.m in Sources */,
 				906974062344D27F00D8A8FF /* GXStoreGoodsListHeader.m in Sources */,
 				9094F5352349DFFB00106699 /* GXMemberRankCell.m in Sources */,
+				49628BCF24A307400030FCB0 /* GXMyOrderFooter.m in Sources */,
 				9024133D2366B8A30069DDCA /* GXCatalogItem.m in Sources */,
 				909A77F4236AC91500562435 /* GXCategoryGoods.m in Sources */,
 				90C0B3BA2340CD7200A8C55B /* UINavigationBar+ChangeColor.m in Sources */,

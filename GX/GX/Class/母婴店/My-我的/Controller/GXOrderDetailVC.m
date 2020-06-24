@@ -23,7 +23,7 @@
 #import "GXPayTypeVC.h"
 #import "GXPayResultVC.h"
 #import "GXGoodsDetailVC.h"
-#import "GXUpOrderCellSectionFooter.h"
+#import "GXMyOrderFooter.h"
 #import "GXShopGoodsCell.h"
 #import <ZLCollectionViewVerticalLayout.h>
 #import "GXHomeSectionHeader.h"
@@ -458,28 +458,6 @@ static NSString *const HomeSectionHeader = @"HomeSectionHeader";
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
     }];
 }
-/** 申请退款 */
--(void)orderRefundRequest
-{
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    parameters[@"oid"] = self.oid;
-    
-    hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"admin/orderRefund" parameters:parameters success:^(id responseObject) {
-        hx_strongify(weakSelf);
-        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
-            strongSelf.refund_id = [NSString stringWithFormat:@"%@",responseObject[@"data"]];
-            if (strongSelf.orderHandleCall) {
-                strongSelf.orderHandleCall(2);
-            }
-            [strongSelf getOrderInfoRequest];
-        }else{
-            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
-        }
-    } failure:^(NSError *error) {
-        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
-    }];
-}
 /** 确认收货 */
 -(void)confirmReceiveGoodRequest
 {
@@ -546,6 +524,14 @@ static NSString *const HomeSectionHeader = @"HomeSectionHeader";
                     return;
                 }
                 GXApplyRefundVC *rvc = [GXApplyRefundVC new];
+                rvc.oid = self.oid;
+                hx_weakify(self);
+                rvc.refundCall = ^{
+                    hx_strongify(weakSelf);
+                    if (strongSelf.orderHandleCall) {
+                        strongSelf.orderHandleCall(2);
+                    }
+                };
                 [self.navigationController pushViewController:rvc animated:YES];
             }
         }else if (sender.tag == 2){
@@ -604,6 +590,14 @@ static NSString *const HomeSectionHeader = @"HomeSectionHeader";
                             return;
                         }
                         GXApplyRefundVC *rvc = [GXApplyRefundVC new];
+                        rvc.oid = self.oid;
+                        hx_weakify(self);
+                        rvc.refundCall = ^{
+                            hx_strongify(weakSelf);
+                            if (strongSelf.orderHandleCall) {
+                                strongSelf.orderHandleCall(2);
+                            }
+                        };
                         [self.navigationController pushViewController:rvc animated:YES];
                     }else if ([self.orderDetail.approve_status isEqualToString:@"3"]) {
                         //HXLog(@"无操作");
@@ -640,6 +634,14 @@ static NSString *const HomeSectionHeader = @"HomeSectionHeader";
                         return;
                     }
                     GXApplyRefundVC *rvc = [GXApplyRefundVC new];
+                    rvc.oid = self.oid;
+                    hx_weakify(self);
+                    rvc.refundCall = ^{
+                        hx_strongify(weakSelf);
+                        if (strongSelf.orderHandleCall) {
+                            strongSelf.orderHandleCall(2);
+                        }
+                    };
                     [self.navigationController pushViewController:rvc animated:YES];
                 }
             }else if ([self.orderDetail.status isEqualToString:@"待收货"]) {
@@ -800,13 +802,13 @@ static NSString *const HomeSectionHeader = @"HomeSectionHeader";
         if (section != self.refundDetail.provider.count) {//不是最后一组
             return 160.f;
         }else{//最后一组
-            return (self.refundDetail.logistics_com_name && self.refundDetail.logistics_com_name.length)?280:250;
+            return (self.refundDetail.logistics_com_name && self.refundDetail.logistics_com_name.length)?250:(self.refundDetail.username && self.refundDetail.username.length)?220:200;
         }
     }else{
         if (section != self.orderDetail.provider.count) {//不是最后一组
             return 160.f;
         }else{//最后一组
-            return (self.orderDetail.logistics_com_name && self.orderDetail.logistics_com_name.length)?280:250;
+            return (self.orderDetail.logistics_com_name && self.orderDetail.logistics_com_name.length)?250:(self.orderDetail.username && self.orderDetail.username.length)?220:200;
         }
     }
 }
@@ -814,32 +816,28 @@ static NSString *const HomeSectionHeader = @"HomeSectionHeader";
 {
     if (self.refund_id && self.refund_id.length) {//根据实际情况数量要加1，利用最后一组的footer展示优惠信息和物流信息
         if (section != self.refundDetail.provider.count) {//不是最后一组
-            GXUpOrderCellSectionFooter *footer = [GXUpOrderCellSectionFooter loadXibView];
+            GXMyOrderFooter *footer = [GXMyOrderFooter loadXibView];
             footer.hxn_size = CGSizeMake(tableView.hxn_width, 160.f);
+            GXMyRefundProvider *provider = self.refundDetail.provider[section];
+            footer.refundProvider = provider;
             return footer;
         }else{//最后一组
             GXOrderDetailFooter *footer = [GXOrderDetailFooter loadXibView];
             footer.refundDetail = self.refundDetail;
-            if (self.refundDetail.logistics_com_name && self.refundDetail.logistics_com_name.length) {
-                footer.hxn_size = CGSizeMake(tableView.hxn_width, 280.f);
-            }else{
-                footer.hxn_size = CGSizeMake(tableView.hxn_width, 250.f);
-            }
+            footer.hxn_size = (self.refundDetail.logistics_com_name && self.refundDetail.logistics_com_name.length)?CGSizeMake(tableView.hxn_width, 250.f):(self.refundDetail.username && self.refundDetail.username.length)?CGSizeMake(tableView.hxn_width, 220.f):CGSizeMake(tableView.hxn_width, 200.f);
             return footer;
         }
     }else{
         if (section != self.orderDetail.provider.count) {//不是最后一组
-            GXUpOrderCellSectionFooter *footer = [GXUpOrderCellSectionFooter loadXibView];
+            GXMyOrderFooter *footer = [GXMyOrderFooter loadXibView];
             footer.hxn_size = CGSizeMake(tableView.hxn_width, 160.f);
+            GXMyOrderProvider *provider = self.orderDetail.provider[section];
+            footer.orderProvider = provider;
             return footer;
         }else{//最后一组
             GXOrderDetailFooter *footer = [GXOrderDetailFooter loadXibView];
             footer.orderDetail = self.orderDetail;
-            if (self.orderDetail.logistics_com_name && self.orderDetail.logistics_com_name.length) {
-                footer.hxn_size = CGSizeMake(tableView.hxn_width, 280.f);
-            }else{
-                footer.hxn_size = CGSizeMake(tableView.hxn_width, 250.f);
-            }
+            footer.hxn_size = (self.orderDetail.logistics_com_name && self.orderDetail.logistics_com_name.length)?CGSizeMake(tableView.hxn_width, 250.f):(self.orderDetail.username && self.orderDetail.username.length)?CGSizeMake(tableView.hxn_width, 220.f):CGSizeMake(tableView.hxn_width, 200.f);
             return footer;
         }
     }

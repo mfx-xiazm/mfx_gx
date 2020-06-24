@@ -34,6 +34,9 @@
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zzc-If-0PS">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="40"/>
+                            <connections>
+                                <action selector="couponClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="TB9-Vq-7Do"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -60,9 +63,9 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iHd-J2-GKf">
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="备注" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iHd-J2-GKf">
                             <rect key="frame" x="47" y="0.0" width="355" height="40"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                     </subviews>
@@ -131,6 +134,7 @@
                 <outlet property="couponViewHeight" destination="opp-IY-cO7" id="lW4-9z-Fvo"/>
                 <outlet property="goodsNum" destination="MyI-Gm-GE0" id="vnO-KF-FsM"/>
                 <outlet property="payAmount" destination="Ydn-rA-gAP" id="BfZ-zp-wXf"/>
+                <outlet property="remark" destination="iHd-J2-GKf" id="xXX-YH-LP2"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="260.82589285714283"/>
         </view>

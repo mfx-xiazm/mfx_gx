@@ -33,10 +33,10 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eX4-CC-ecx">
                             <rect key="frame" x="12" y="0.0" width="390" height="50"/>
                             <color key="backgroundColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <inset key="titleEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
-                            <state key="normal" title="关闭">
+                            <state key="normal" title="确定">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <userDefinedRuntimeAttributes>
@@ -44,6 +44,9 @@
                                     <real key="value" value="25"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="sureClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="hZw-Q8-4Eh"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -73,6 +76,7 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="tableView" destination="Mzd-B6-2FA" id="CD9-ec-nf8"/>
+                <outlet property="typeTitle" destination="gRV-wG-rbd" id="Eex-Mk-Fit"/>
             </connections>
             <point key="canvasLocation" x="-75" y="289"/>
         </view>

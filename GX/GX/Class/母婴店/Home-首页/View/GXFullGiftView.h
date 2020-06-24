@@ -10,11 +10,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class GXGoodsGiftRule,GXCartGoodsGift;
+@class GXGoodsGiftRule,GXCartGoodsGift,GXConfirmGoodsGift;
 typedef void(^closeClickedCall)(void);
 @interface GXFullGiftView : UIView
 @property(nonatomic,strong) NSArray<GXGoodsGiftRule *> *gift_rule;
 @property(nonatomic,strong) NSArray<GXCartGoodsGift *> *cart_gift_rule;
+@property(nonatomic,strong) NSArray<GXConfirmGoodsGift *> *gift_data;
 @property (nonatomic, copy) closeClickedCall closeClickedCall;
 @end
 

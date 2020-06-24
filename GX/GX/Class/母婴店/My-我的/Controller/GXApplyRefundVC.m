@@ -14,12 +14,25 @@
 #import "GXMyIdeaPhotoCell.h"
 #import "GXApplyRefundTypeView.h"
 #import <zhPopupController.h>
+#import "GXApplyRefund.h"
 
 static NSString *const MyIdeaPhotoCell = @"MyIdeaPhotoCell";
 @interface GXApplyRefundVC ()<UICollectionViewDelegate,UICollectionViewDataSource,ZLCollectionViewBaseFlowLayoutDelegate>
+@property (weak, nonatomic) IBOutlet UIImageView *coverImg;
+@property (weak, nonatomic) IBOutlet UILabel *goods_name;
+@property (weak, nonatomic) IBOutlet UILabel *goods_strc;
+@property (weak, nonatomic) IBOutlet UILabel *refund_price;
+@property (weak, nonatomic) IBOutlet UILabel *refundNum;
+@property (weak, nonatomic) IBOutlet UIView *refundNumView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *refundContentViewHeight;
+@property (weak, nonatomic) IBOutlet UIButton *submitBtn;
 @property (weak, nonatomic) IBOutlet HXPlaceholderTextView *remark;
 @property (weak, nonatomic) IBOutlet UICollectionView *photoCollectionView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *photoViewHeight;
+@property (weak, nonatomic) IBOutlet UITextField *refund_type;
+@property (weak, nonatomic) IBOutlet UITextField *goods_type;
+@property (weak, nonatomic) IBOutlet UITextField *reasion_type;
+
 /** 已选择的数组 */
 @property (nonatomic,strong) NSMutableArray *selectedAssets;
 /** 已选择的数组 */
@@ -31,6 +44,8 @@ static NSString *const MyIdeaPhotoCell = @"MyIdeaPhotoCell";
 /** 模型数组 */
 @property (nonatomic,strong) NSMutableArray *showData;
 @property (nonatomic, strong) zhPopupController *typePopVC;
+
+@property (nonatomic, strong) GXApplyRefund *applyRefund;
 @end
 
 @implementation GXApplyRefundVC
@@ -40,6 +55,29 @@ static NSString *const MyIdeaPhotoCell = @"MyIdeaPhotoCell";
     [self.navigationItem setTitle:@"售后退款"];
     self.remark.placeholder = @"请输入退款说明";
     [self setUpCollectionView];
+    [self startShimmer];
+    [self getRefundReasonRequest];
+    
+    hx_weakify(self);
+    [self.submitBtn BindingBtnJudgeBlock:^BOOL{
+        hx_strongify(weakSelf);
+        if (![strongSelf.refund_type hasText]) {
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请选择售后类型"];
+            return NO;
+        }
+        if (![strongSelf.goods_type hasText]) {
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请选择货物状态"];
+            return NO;
+        }
+        if (![strongSelf.reasion_type hasText]) {
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请选择退款原因"];
+            return NO;
+        }
+        return YES;
+    } ActionBlock:^(UIButton * _Nullable button) {
+        hx_strongify(weakSelf);
+        [strongSelf submitClicked:button];
+    }];
 }
 -(NSMutableArray *)showData
 {
@@ -175,6 +213,148 @@ static NSString *const MyIdeaPhotoCell = @"MyIdeaPhotoCell";
         weakSelf.photoViewHeight.constant = weakSelf.photoCollectionView.contentSize.height;
     });
 }
+-(void)getRefundReasonRequest
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"oid"] = self.oid;
+    
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getRefundReason" parameters:parameters success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            strongSelf.applyRefund = [GXApplyRefund yy_modelWithDictionary:responseObject[@"data"]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [strongSelf showGoodsInfo];
+            });
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
+}
+-(void)showGoodsInfo
+{
+    self.refundContentViewHeight.constant = 200.f;
+    self.refundNumView.hidden = YES;
+
+    [self.coverImg sd_setImageWithURL:[NSURL URLWithString:self.applyRefund.cover_img]];
+    [self.goods_name setTextWithLineSpace:5.f withString:(self.applyRefund.goods_name)?self.applyRefund.goods_name:@"" withFont:[UIFont systemFontOfSize:13]];
+    self.goods_strc.text = (self.applyRefund.specs_attrs && self.applyRefund.specs_attrs.length)?[NSString stringWithFormat:@" %@ ",self.applyRefund.specs_attrs]:@"";
+
+    self.refundNum.text = self.applyRefund.goods_num;
+    self.refund_price.text = [NSString stringWithFormat:@"%.2f",[self.applyRefund.pay_amount floatValue] - [self.applyRefund.order_freight_amount floatValue]];
+}
+- (IBAction)chooseTypeClicked:(UIButton *)sender {
+    GXApplyRefundTypeView *typeView = [GXApplyRefundTypeView loadXibView];
+    typeView.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 400.f);
+    if (sender.tag == 1) {
+        typeView.typeTitle.text = @"售后类型";
+        typeView.showTextField = self.refund_type;
+        typeView.dataSource = @[@"我要退款（无需退货）",@"我要退款退货"];
+    }else if (sender.tag == 2) {
+        typeView.typeTitle.text = @"货物状态";
+        typeView.showTextField = self.goods_type;
+        typeView.dataSource = @[@"已收到货",@"未收到货"];
+    }else{
+        typeView.typeTitle.text = @"退款原因";
+        typeView.showTextField = self.reasion_type;
+        NSMutableArray *datas = [NSMutableArray array];
+        for (GXApplyRefundReason *reason in self.applyRefund.orderReason) {
+            [datas addObject:reason.set_val2];
+        }
+        typeView.dataSource = datas;
+    }
+    hx_weakify(self);
+    typeView.selectCall = ^{
+        hx_strongify(weakSelf);
+        [strongSelf.typePopVC dismiss];
+        if (sender.tag == 1) {
+            if ([strongSelf.refund_type.text isEqualToString:@"我要退款退货"]) {
+                self.refundContentViewHeight.constant = 250.f;
+                self.refundNumView.hidden = NO;
+            }else{
+                self.refundContentViewHeight.constant = 200.f;
+                self.refundNumView.hidden = YES;
+            }
+        }
+    };
+    self.typePopVC = [[zhPopupController alloc] initWithView:typeView size:typeView.bounds.size];
+    self.typePopVC.layoutType = zhPopupLayoutTypeBottom;
+    [self.typePopVC show];
+}
+- (IBAction)numChangeClicked:(UIButton *)sender {
+    if (sender.tag) {// +
+        if ([self.refundNum.text integerValue] + 1 > [self.applyRefund.goods_num integerValue]) {
+            return;
+        }
+        self.refundNum.text = [NSString stringWithFormat:@"%zd",[self.refundNum.text integerValue] + 1];
+    }else{// -
+        if ([self.refundNum.text integerValue] - 1 < 1) {
+            return;
+        }
+        self.refundNum.text = [NSString stringWithFormat:@"%zd",[self.refundNum.text integerValue] - 1];
+    }
+   CGFloat price = [self.applyRefund.pay_amount floatValue] - [self.applyRefund.order_freight_amount floatValue];
+   self.refund_price.text = [NSString stringWithFormat:@"%.2f",price/[self.applyRefund.goods_num integerValue]*[self.refundNum.text integerValue]];
+}
+- (void)submitClicked:(UIButton *)sender {
+    hx_weakify(self);
+    if (self.showData.count > 1) {
+        if (self.isSelect6) {
+            [self runUpLoadImages:self.showData completedCall:^(NSMutableArray *result) {
+                hx_strongify(weakSelf);
+                [strongSelf submitUpPayImgRequest:sender imageUrls:result];
+            }];
+        }else{
+            NSMutableArray *tempImgs = [NSMutableArray arrayWithArray:self.showData];
+            [tempImgs removeLastObject];
+            [self runUpLoadImages:tempImgs completedCall:^(NSMutableArray *result) {
+                hx_strongify(weakSelf);
+                [strongSelf submitUpPayImgRequest:sender imageUrls:result];
+            }];
+        }
+    }else{
+        [self submitUpPayImgRequest:sender imageUrls:nil];
+    }
+}
+-(void)submitUpPayImgRequest:(UIButton *)btn imageUrls:(NSArray *)imageUrls
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"oid"] = self.oid;
+    parameters[@"refund_type"] = [self.refund_type.text isEqualToString:@"我要退款退货"]?@"退货退款":@"仅退款";
+    parameters[@"goods_status"] = [self.goods_type.text isEqualToString:@"已收到货"]?@"1":@"2";
+    parameters[@"reason"] = self.reasion_type.text;
+    parameters[@"refund_goods_num"] = self.refundNum.text;
+    parameters[@"refund_amount"] = self.refund_price.text;
+    parameters[@"refund_desc"] = [self.remark hasText]?self.remark.text:@"";
+    if (imageUrls) {
+        parameters[@"img_srcs"] = [imageUrls componentsJoinedByString:@","];//评价图片多个用逗号隔开
+    }else{
+        parameters[@"img_srcs"] = @"";//评价图片多个用逗号隔开
+    }
+    
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/orderRefund" parameters:parameters success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        [btn stopLoading:@"提交" image:nil textColor:nil backgroundColor:nil];
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+            if (strongSelf.refundCall) {
+                strongSelf.refundCall();
+            }
+            [strongSelf.navigationController popViewControllerAnimated:YES];
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [btn stopLoading:@"提交" image:nil textColor:nil backgroundColor:nil];
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
+}
 /**
  *  图片批量上传方法
  */
@@ -289,16 +469,6 @@ static NSString *const MyIdeaPhotoCell = @"MyIdeaPhotoCell";
 }
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     return  UIEdgeInsetsMake(10, 10, 10, 10);
-}
-
-- (IBAction)chooseTypeClicked:(UIButton *)sender {
-    GXApplyRefundTypeView *typeView = [GXApplyRefundTypeView loadXibView];
-    typeView.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 400.f);
-    
-    
-    self.typePopVC = [[zhPopupController alloc] initWithView:typeView size:typeView.bounds.size];
-    self.typePopVC.layoutType = zhPopupLayoutTypeBottom;
-    [self.typePopVC show];
 }
 
 
