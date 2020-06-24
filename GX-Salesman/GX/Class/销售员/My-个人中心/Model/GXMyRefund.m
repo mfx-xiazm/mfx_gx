@@ -14,6 +14,15 @@
              @"address":[GYMyRefundAddress class]
              };
 }
+-(void)setLogistics_no:(NSString *)logistics_no
+{
+    if (logistics_no.length) {
+        _logistics_nos = [logistics_no componentsSeparatedByString:@","];
+        _logistics_no = _logistics_nos.firstObject;
+    }else{
+        _logistics_no = @"";
+    }
+}
 @end
 
 @implementation GYMyRefundGoods

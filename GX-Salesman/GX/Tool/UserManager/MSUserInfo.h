@@ -16,7 +16,8 @@
 /** 1 母婴店 2供应商 3销售员 */
 @property (nonatomic,copy) NSString *utype;
 @property (nonatomic,copy) NSString *approve_time;
-
+/** 1 平台合伙人 2省区经理 3区域经理 4业务主管 */
+@property (nonatomic,copy) NSString *post_id;
 @property (nonatomic,assign) NSInteger is_register;
 /** '1入驻申请 2入驻提交(提交之后后台审核成功就直接进入第三步没有成功还是第二步 然后显示审核失败原因) 3签约(银行认证) 4签约(打款) 5签约(实名认证)) */
 @property (nonatomic,assign) NSInteger step;

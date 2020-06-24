@@ -11,6 +11,7 @@
 #import <JXCategoryTitleView.h>
 #import <JXCategoryIndicatorLineView.h>
 #import "HXSearchBar.h"
+#import "ZJPickerView.h"
 
 @interface GXSalerOrderManageVC ()<JXCategoryViewDelegate,UIScrollViewDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet JXCategoryTitleView *categoryView;
@@ -21,6 +22,8 @@
 @property(nonatomic,strong) HXSearchBar *searchBar;
 /* 消息 */
 @property(nonatomic,strong) SPButton *msgBtn;
+/* 订单筛选状态 */
+@property (nonatomic, copy) NSString *status;
 @end
 
 @implementation GXSalerOrderManageVC
@@ -53,6 +56,17 @@
         _childVCs = vcs;
     }
     return _childVCs;
+}
+-(void)setStatus:(NSString *)status
+{
+    if (![_status isEqualToString:status]) {
+        _status = status;
+        GXSalerOrderManageChildVC *mvc = (GXSalerOrderManageChildVC *)self.childVCs.firstObject;
+        mvc.status = status;
+        
+        GXSalerOrderManageChildVC *mvc1 = (GXSalerOrderManageChildVC *)self.childVCs.lastObject;
+        mvc1.status = status;
+    }
 }
 -(void)setUpNavBar
 {
@@ -114,16 +128,46 @@
     return YES;
 }
 -(void)filterClicked
-{
-    HXLog(@"筛选");
+{    
+    // 1.Custom propery（自定义属性）
+    NSDictionary *propertyDict = @{
+        ZJPickerViewPropertyCanceBtnTitleKey : @"取消",
+        ZJPickerViewPropertySureBtnTitleKey  : @"确定",
+        ZJPickerViewPropertyTipLabelTextKey  : (self.status && self.status.length)?self.status:@"订单状态", // 提示内容
+        ZJPickerViewPropertyCanceBtnTitleColorKey : UIColorFromRGB(0x999999),
+        ZJPickerViewPropertySureBtnTitleColorKey : HXControlBg,
+        ZJPickerViewPropertyTipLabelTextColorKey :
+            UIColorFromRGB(0x131D2D),
+        ZJPickerViewPropertyLineViewBackgroundColorKey : UIColorFromRGB(0xF2F2F2),
+        ZJPickerViewPropertyCanceBtnTitleFontKey : [UIFont systemFontOfSize:13.0f],
+        ZJPickerViewPropertySureBtnTitleFontKey : [UIFont systemFontOfSize:13.0f],
+        ZJPickerViewPropertyTipLabelTextFontKey : [UIFont systemFontOfSize:13.0f],
+        ZJPickerViewPropertyPickerViewHeightKey : @260.0f,
+        ZJPickerViewPropertyOneComponentRowHeightKey : @40.0f,
+        ZJPickerViewPropertySelectRowTitleAttrKey : @{NSForegroundColorAttributeName : HXControlBg, NSFontAttributeName : [UIFont systemFontOfSize:15.0f]},
+        ZJPickerViewPropertyUnSelectRowTitleAttrKey : @{NSForegroundColorAttributeName : UIColorFromRGB(0x999999), NSFontAttributeName : [UIFont systemFontOfSize:15.0f]},
+        ZJPickerViewPropertySelectRowLineBackgroundColorKey : UIColorFromRGB(0xF2F2F2),
+        ZJPickerViewPropertyIsTouchBackgroundHideKey : @YES,
+        ZJPickerViewPropertyIsShowSelectContentKey : @YES,
+        ZJPickerViewPropertyIsScrollToSelectedRowKey: @YES,
+        ZJPickerViewPropertyIsAnimationShowKey : @YES};
+    
+    // 2.Show（显示）
+    hx_weakify(self);
+    [ZJPickerView zj_showWithDataList:@[@"全部",@"待发货",@"待收货",@"待评价",@"已完成"] propertyDict:propertyDict completion:^(NSString *selectContent) {
+        hx_strongify(weakSelf);
+        NSArray *results = [selectContent componentsSeparatedByString:@"|"];
+        if ([results.firstObject isEqualToString:@"全部"]) {
+            strongSelf.status = @"";
+        }else{
+            strongSelf.status = results.firstObject;
+        }
+    }];
 }
 #pragma mark -- JXCategoryViewDelegate
 // 滚动和点击选中
 - (void)categoryView:(JXCategoryBaseView *)categoryView didSelectedItemAtIndex:(NSInteger)index
 {
-    // 处理侧滑手势
-    //self.navigationController.interactivePopGestureRecognizer.enabled = (index == 0);
-    
     if (self.childVCs.count <= index) {return;}
     
     UIViewController *targetViewController = self.childVCs[index];

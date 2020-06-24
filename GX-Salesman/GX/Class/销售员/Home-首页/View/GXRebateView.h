@@ -10,8 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXGoodsRebate;
+typedef void(^closeClickedCall)(void);
 @interface GXRebateView : UIView
-
+@property(nonatomic,strong) NSArray<GXGoodsRebate *> *rebate;
+@property (nonatomic, copy) closeClickedCall closeClickedCall;
 @end
 
 NS_ASSUME_NONNULL_END

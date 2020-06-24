@@ -53,7 +53,7 @@ static NSString *const MyIdeaPhotoCell = @"MyIdeaPhotoCell";
     parameters[@"oid"] = self.oid;//订单id
     
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getUpPayImg" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"index/getUpPayImg" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         [strongSelf stopShimmer];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {

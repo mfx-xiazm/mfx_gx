@@ -53,8 +53,23 @@
                                 <color key="textColor" red="0.92549019610000005" green="0.078431372550000003" blue="0.1764705882" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="销量：1241" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4EG-y8-9bd">
-                                <rect key="frame" x="280" y="82" width="63" height="14.5"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cIt-dp-O48">
+                                <rect key="frame" x="273" y="76" width="70" height="24"/>
+                                <color key="backgroundColor" red="1" green="0.62352941179999999" blue="0.031372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="5Qd-lq-KmY"/>
+                                    <constraint firstAttribute="height" constant="24" id="eCz-TO-VAF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <state key="normal" title="立即购买"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layerBoderCorner">
+                                        <real key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="销量：1241" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4EG-y8-9bd">
+                                <rect key="frame" x="280" y="53.5" width="63" height="14.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -70,8 +85,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="wZ5-4R-Mdf" firstAttribute="top" secondItem="0IX-5h-VRs" secondAttribute="top" constant="10" id="388-j2-qfl"/>
+                            <constraint firstAttribute="trailing" secondItem="cIt-dp-O48" secondAttribute="trailing" constant="10" id="3AJ-fD-7DB"/>
                             <constraint firstItem="i2l-ld-IWQ" firstAttribute="top" secondItem="wZ5-4R-Mdf" secondAttribute="top" constant="5" id="5yf-mw-etP"/>
                             <constraint firstItem="J4W-wt-PvW" firstAttribute="leading" secondItem="wZ5-4R-Mdf" secondAttribute="trailing" constant="10" id="68i-A3-z6d"/>
+                            <constraint firstAttribute="bottom" secondItem="cIt-dp-O48" secondAttribute="bottom" constant="10" id="8Az-64-JnH"/>
                             <constraint firstItem="wZ5-4R-Mdf" firstAttribute="leading" secondItem="0IX-5h-VRs" secondAttribute="leading" constant="10" id="Fgg-8r-v1C"/>
                             <constraint firstItem="J4W-wt-PvW" firstAttribute="top" secondItem="duD-kv-2uT" secondAttribute="bottom" constant="10" id="Gae-vf-8eq"/>
                             <constraint firstItem="i2l-ld-IWQ" firstAttribute="leading" secondItem="wZ5-4R-Mdf" secondAttribute="leading" constant="5" id="PHH-6F-3eW"/>
@@ -80,9 +97,9 @@
                             <constraint firstAttribute="trailing" secondItem="iZu-Y6-N9Q" secondAttribute="trailing" constant="10" id="YGp-eF-j8F"/>
                             <constraint firstItem="iZu-Y6-N9Q" firstAttribute="leading" secondItem="wZ5-4R-Mdf" secondAttribute="trailing" constant="10" id="ZMS-8m-Jhy"/>
                             <constraint firstItem="duD-kv-2uT" firstAttribute="leading" secondItem="wZ5-4R-Mdf" secondAttribute="trailing" constant="10" id="f2e-r4-84C"/>
-                            <constraint firstItem="4EG-y8-9bd" firstAttribute="centerY" secondItem="J4W-wt-PvW" secondAttribute="centerY" id="fUj-1U-huY"/>
                             <constraint firstAttribute="bottom" secondItem="J4W-wt-PvW" secondAttribute="bottom" constant="10" id="gDz-nz-6gQ"/>
                             <constraint firstAttribute="bottom" secondItem="wZ5-4R-Mdf" secondAttribute="bottom" constant="10" id="hAu-zz-jWO"/>
+                            <constraint firstItem="4EG-y8-9bd" firstAttribute="centerY" secondItem="duD-kv-2uT" secondAttribute="centerY" id="pCS-qq-YUS"/>
                             <constraint firstAttribute="trailing" secondItem="L6e-vq-sNm" secondAttribute="trailing" constant="10" id="uN6-eX-cHc"/>
                             <constraint firstAttribute="trailing" secondItem="4EG-y8-9bd" secondAttribute="trailing" constant="10" id="vQY-Fu-hDT"/>
                             <constraint firstItem="iZu-Y6-N9Q" firstAttribute="top" secondItem="0IX-5h-VRs" secondAttribute="top" constant="10" id="xT3-Cx-DFX"/>
@@ -97,6 +114,15 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="cover_img" destination="wZ5-4R-Mdf" id="Rpo-i3-cUW"/>
+                <outlet property="flag_img" destination="i2l-ld-IWQ" id="3DS-yR-fov"/>
+                <outlet property="goods_anme" destination="iZu-Y6-N9Q" id="lP1-VF-7Gu"/>
+                <outlet property="handleBtn" destination="cIt-dp-O48" id="ui4-4j-ygU"/>
+                <outlet property="price" destination="J4W-wt-PvW" id="hPV-DZ-1Xl"/>
+                <outlet property="sale_num" destination="4EG-y8-9bd" id="aTh-F2-bJ2"/>
+                <outlet property="time" destination="duD-kv-2uT" id="LCA-FZ-zD8"/>
+            </connections>
             <point key="canvasLocation" x="50.000000000000007" y="113.50446428571428"/>
         </tableViewCell>
     </objects>

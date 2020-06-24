@@ -10,8 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXSalerOrder;
 @interface GXRenewMyOrderBigCellHeader : UIView
-
+/* 销售员订单 */
+@property (nonatomic, strong) GXSalerOrder *salerOrder;
 @end
 
 NS_ASSUME_NONNULL_END

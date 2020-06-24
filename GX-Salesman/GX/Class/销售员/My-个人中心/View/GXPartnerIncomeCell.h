@@ -10,8 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXPartnerIncome;
 @interface GXPartnerIncomeCell : UITableViewCell
-
+@property (nonatomic, strong) GXPartnerIncome *income;
 @end
 
 NS_ASSUME_NONNULL_END

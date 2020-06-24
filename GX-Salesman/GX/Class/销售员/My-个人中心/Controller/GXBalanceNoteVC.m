@@ -23,6 +23,12 @@ static NSString *const AccountManageCell = @"AccountManageCell";
 @property(nonatomic,assign) NSInteger pagenum;
 /** 订单列表 */
 @property(nonatomic,strong) NSMutableArray *logs;
+/** 1支出 2收入 */
+@property (nonatomic, copy) NSString *finance_type;
+/** 开始时间 */
+@property (nonatomic, copy) NSString *start_time;
+/** 结束时间 */
+@property (nonatomic, copy) NSString *end_time;
 @end
 
 @implementation GXBalanceNoteVC
@@ -99,7 +105,6 @@ static NSString *const AccountManageCell = @"AccountManageCell";
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GXAccountManageCell class]) bundle:nil] forCellReuseIdentifier:AccountManageCell];
-    
     hx_weakify(self);
     [self.tableView zx_setEmptyView:[GYEmptyView class] isFull:YES clickedBlock:^(UIButton * _Nullable btn) {
         [weakSelf startShimmer];
@@ -137,6 +142,9 @@ static NSString *const AccountManageCell = @"AccountManageCell";
 -(void)getFinanceLogRequest:(BOOL)isRefresh
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"finance_type"] = self.finance_type?:@"";//筛选类型 1支出 2收入
+    parameters[@"start_time"] = self.start_time?:@"";//时间筛选 开始时间
+    parameters[@"end_time"] = self.end_time?:@"";//时间筛选 结束时间
     if (isRefresh) {
         parameters[@"page"] = @(1);//第几页
     }else{
@@ -241,8 +249,8 @@ static NSString *const AccountManageCell = @"AccountManageCell";
 - (NSArray *)menu:(WMZDropDownMenu *)menu dataForRowAtDropIndexPath:(WMZDropIndexPath *)dropIndexPath{
       if (dropIndexPath.section == 0){
           
-          if (dropIndexPath.row == 0) return @[@{@"name":@"收入",@"ID":@"1",@"otherData":@"cash_status"},@{@"name":@"支出",@"ID":@"2",@"otherData":@"cash_status"}];
-          if (dropIndexPath.row == 1) return @[@{@"config":@{@"lowPlaceholder":@"起始",@"highPlaceholder":@"终止",@"isShowPicker":@(YES)},@"otherData":@"sign_time"}];
+          if (dropIndexPath.row == 0) return @[@{@"name":@"收入",@"ID":@"2",@"otherData":@"finance_type"},@{@"name":@"支出",@"ID":@"1",@"otherData":@"finance_type"}];
+          if (dropIndexPath.row == 1) return @[@{@"config":@{@"lowPlaceholder":@"起始",@"highPlaceholder":@"终止",@"isShowPicker":@(YES)},@"otherData":@"finance_time"}];
       }
       return @[];
 }
@@ -353,7 +361,7 @@ static NSString *const AccountManageCell = @"AccountManageCell";
             WMZDropTree *tree = model;
             tree.lowPlaceholder = tree.config[@"lowPlaceholder"]?:tree.lowPlaceholder;
             tree.highPlaceholder = tree.config[@"highPlaceholder"]?:tree.highPlaceholder;
-            cell.isShowPicker = tree.config[@"isShowPicker"];
+            cell.isShowPicker = tree.config[@"isShowPicker"]?YES:NO;
             cell.lowText.placeholder =  tree.lowPlaceholder;
             cell.highText.placeholder = tree.highPlaceholder;
             
@@ -437,20 +445,23 @@ static NSString *const AccountManageCell = @"AccountManageCell";
 {
     [menu removeFromSuperview];
     
-//    self.contract_status = nil;//
-//    self.sign_time_min = nil;//
-//    self.sign_time_max =  nil;//
-//
-//    for (WMZDropTree *tree in selectData) {
-//        NSString *orKey = (NSString *)tree.otherData;
-//        if ([orKey isEqualToString:@"contract_status"]) {
-//            self.contract_status = tree.name;
-//        }else if ([orKey isEqualToString:@"sign_time"]) {
-//            self.sign_time_min = tree.rangeArr.count>1?tree.rangeArr[0]:@"";
-//            self.sign_time_max = tree.rangeArr.count>1?tree.rangeArr[1]:@"";
-//        }
-//    }
-//
-//    [self getContractListDataRequest:YES];
+    /** 1支出 2收入 */
+    self.finance_type = nil;//
+    /** 开始时间 */
+    self.start_time = nil;//
+    /** 结束时间 */
+    self.end_time =  nil;//
+
+    for (WMZDropTree *tree in selectData) {
+        NSString *orKey = (NSString *)tree.otherData;
+        if ([orKey isEqualToString:@"finance_type"]) {
+            self.finance_type = tree.ID;
+        }else if ([orKey isEqualToString:@"finance_time"]) {
+            self.start_time = tree.rangeArr.count>1?tree.rangeArr[0]:@"";
+            self.end_time = tree.rangeArr.count>1?tree.rangeArr[1]:@"";
+        }
+    }
+
+    [self getFinanceLogRequest:YES];
 }
 @end

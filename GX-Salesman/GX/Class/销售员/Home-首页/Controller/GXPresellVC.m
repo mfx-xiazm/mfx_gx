@@ -45,7 +45,6 @@ static const CGFloat JXheightForHeaderInSection = 50;
         _pagerView.mainTableView.gestureDelegate = self;
         _pagerView.mainTableView.bounces = NO;
         _pagerView.pinSectionHeaderVerticalOffset = self.HXNavBarHeight;//调整悬停位置
-//        _pagerView.hidden = YES;
     }
     return _pagerView;
 }
@@ -155,6 +154,7 @@ static const CGFloat JXheightForHeaderInSection = 50;
 - (id<JXPagerViewListViewDelegate>)pagerView:(JXPagerView *)pagerView initListAtIndex:(NSInteger)index
 {
     GXPresellChildVC *hvc = [GXPresellChildVC new];
+    hvc.seaType = index+1;
     return hvc;
 }
 
@@ -172,5 +172,9 @@ static const CGFloat JXheightForHeaderInSection = 50;
         return NO;
     }
     return [gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]] && [otherGestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]];
+}
+-(void)dealloc
+{
+    HXLog(@"预售销毁");
 }
 @end

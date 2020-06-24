@@ -20,10 +20,17 @@
 #import "GXSalerOrderManageVC.h"
 
 @interface GXSalerMyVC ()
+@property (weak, nonatomic) IBOutlet UIImageView *post_img;
 @property (weak, nonatomic) IBOutlet UILabel *userName;
 @property (weak, nonatomic) IBOutlet UILabel *phone;
 @property (weak, nonatomic) IBOutlet UILabel *balance;
-@property (weak, nonatomic) IBOutlet UILabel *cash_balance;
+@property (weak, nonatomic) IBOutlet UILabel *cashable_balance;
+@property (weak, nonatomic) IBOutlet UILabel *user_performance;
+@property (weak, nonatomic) IBOutlet UILabel *recommendProvider;
+@property (weak, nonatomic) IBOutlet UILabel *recommendSale;
+@property (weak, nonatomic) IBOutlet UIView *banlanceView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *banlanceViewHeight;
+
 /* 账户信息 */
 @property(nonatomic,strong) NSDictionary *accountData;
 /* 提现天数 */
@@ -38,12 +45,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavbar];
+    if ([[MSUserManager sharedInstance].curUserInfo.post_id isEqualToString:@"1"]) {
+        self.banlanceView.hidden = YES;
+        self.banlanceViewHeight.constant = 50.f;
+    }else{
+        self.banlanceView.hidden = NO;
+        self.banlanceViewHeight.constant = 220.f;
+    }
     [self getMemberRequest];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self getUserBalanceRequest];
+    if (![[MSUserManager sharedInstance].curUserInfo.post_id isEqualToString:@"1"]) {
+        [self getUserBalanceRequest];
+    }
 }
 -(void)setUpNavbar
 {
@@ -128,6 +144,10 @@
     [self.navigationController pushViewController:pvc animated:YES];
 }
 - (IBAction)myTeamClicked:(UIButton *)sender {
+    if ([[MSUserManager sharedInstance].curUserInfo.post_id isEqualToString:@"4"]) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"业务员没有团队"];
+        return;
+    }
     GXMyTeamVC *tvc = [GXMyTeamVC new];
     [self.navigationController pushViewController:tvc animated:YES];
 }
@@ -166,7 +186,10 @@
             }
             dispatch_async(dispatch_get_main_queue(), ^{
                 strongSelf.balance.text = [NSString stringWithFormat:@"%@元",responseObject[@"data"][@"balance"]];
-                strongSelf.cash_balance.text = [NSString stringWithFormat:@"%@元",responseObject[@"data"][@"cashable_balance"]];
+                strongSelf.cashable_balance.text = [NSString stringWithFormat:@"%@元",responseObject[@"data"][@"cashable_balance"]];
+                strongSelf.user_performance.text = [NSString stringWithFormat:@"%@元",responseObject[@"data"][@"user_performance"]];
+                strongSelf.recommendProvider.text = [NSString stringWithFormat:@"%@元",responseObject[@"data"][@"recommendProvider"]];
+                strongSelf.recommendSale.text = [NSString stringWithFormat:@"%@元",responseObject[@"data"][@"recommendSale"]];
             });
         }else{
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
@@ -182,5 +205,16 @@
     
     self.shareCode = [NSString stringWithFormat:@"%@",result[@"share_code"]];
     self.register_url = [NSString stringWithFormat:@"%@",result[@"register_url"]];
+    
+    NSInteger post_id = [result[@"post_id"] integerValue];
+    if (post_id == 1) {
+        self.post_img.image = HXGetImage(@"平台合伙人");
+    }else if (post_id == 2) {
+        self.post_img.image = HXGetImage(@"省区经理");
+    }else if (post_id == 3) {
+        self.post_img.image = HXGetImage(@"区域经理");
+    }else {
+        self.post_img.image = HXGetImage(@"业务主管");
+    }
 }
 @end

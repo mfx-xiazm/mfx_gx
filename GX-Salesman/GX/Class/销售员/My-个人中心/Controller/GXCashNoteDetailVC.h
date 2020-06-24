@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface GXCashNoteDetailVC : HXBaseViewController
-
+@property (nonatomic, copy) NSString *finance_apply_id;
 @end
 
 NS_ASSUME_NONNULL_END

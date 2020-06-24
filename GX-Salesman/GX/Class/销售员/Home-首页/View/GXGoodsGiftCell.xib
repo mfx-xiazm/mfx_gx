@@ -20,11 +20,41 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sx5-q7-E74">
                         <rect key="frame" x="0.0" y="0.0" width="392" height="45"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商品搭赠" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VO3-CU-ZVE">
-                                <rect key="frame" x="12" y="14.5" width="53.5" height="16"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="商品搭赠" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VO3-CU-ZVE">
+                                <rect key="frame" x="12" y="14.5" width="179.5" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  买3赠1  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MhQ-JG-uSg">
+                                <rect key="frame" x="201.5" y="12.5" width="47.5" height="20"/>
+                                <color key="backgroundColor" red="1" green="0.90980392160000001" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="hPz-e9-X02"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" red="1" green="0.54117647059999996" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layerBoderCorner">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  买3赠1  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GKa-wI-MDU">
+                                <rect key="frame" x="259" y="12.5" width="47.5" height="20"/>
+                                <color key="backgroundColor" red="1" green="0.90980392160000001" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="9vH-Nm-hn2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" red="1" green="0.54117647059999996" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layerBoderCorner">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  买3赠1  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7LD-Kt-LtG">
                                 <rect key="frame" x="316.5" y="12.5" width="47.5" height="20"/>
@@ -51,36 +81,6 @@
                                     <constraint firstAttribute="height" constant="1" id="ozT-oX-XS9"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  买3赠1  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GKa-wI-MDU">
-                                <rect key="frame" x="259" y="12.5" width="47.5" height="20"/>
-                                <color key="backgroundColor" red="1" green="0.90980392160000001" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="9vH-Nm-hn2"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                <color key="textColor" red="1" green="0.54117647059999996" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layerBoderCorner">
-                                        <real key="value" value="2"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  买3赠1  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MhQ-JG-uSg">
-                                <rect key="frame" x="201.5" y="12.5" width="47.5" height="20"/>
-                                <color key="backgroundColor" red="1" green="0.90980392160000001" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="hPz-e9-X02"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                <color key="textColor" red="1" green="0.54117647059999996" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layerBoderCorner">
-                                        <real key="value" value="2"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -90,6 +90,7 @@
                             <constraint firstItem="zij-C7-PCh" firstAttribute="centerY" secondItem="Sx5-q7-E74" secondAttribute="centerY" id="LeB-eN-w91"/>
                             <constraint firstAttribute="bottom" secondItem="pv4-Qm-xkk" secondAttribute="bottom" id="QU1-X9-4oH"/>
                             <constraint firstItem="7LD-Kt-LtG" firstAttribute="leading" secondItem="GKa-wI-MDU" secondAttribute="trailing" constant="10" id="T4d-Pn-wZ6"/>
+                            <constraint firstItem="MhQ-JG-uSg" firstAttribute="leading" secondItem="VO3-CU-ZVE" secondAttribute="trailing" constant="10" id="ZPi-Yg-xUN"/>
                             <constraint firstItem="VO3-CU-ZVE" firstAttribute="centerY" secondItem="Sx5-q7-E74" secondAttribute="centerY" id="d9w-Xb-Z0q"/>
                             <constraint firstItem="GKa-wI-MDU" firstAttribute="centerY" secondItem="Sx5-q7-E74" secondAttribute="centerY" id="dyk-pz-tx2"/>
                             <constraint firstItem="VO3-CU-ZVE" firstAttribute="leading" secondItem="Sx5-q7-E74" secondAttribute="leading" constant="12" id="j2M-qA-Ota"/>
@@ -108,6 +109,12 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="name" destination="VO3-CU-ZVE" id="qNI-Ko-vxI"/>
+                <outletCollection property="ruleLabels" destination="MhQ-JG-uSg" id="bef-mY-89v"/>
+                <outletCollection property="ruleLabels" destination="GKa-wI-MDU" id="1uB-4y-yvp"/>
+                <outletCollection property="ruleLabels" destination="7LD-Kt-LtG" id="WQA-ZV-Pjp"/>
+            </connections>
             <point key="canvasLocation" x="72.463768115942031" y="98.772321428571431"/>
         </tableViewCell>
     </objects>

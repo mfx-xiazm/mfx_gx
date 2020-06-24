@@ -159,6 +159,11 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="a_mount" destination="Ky2-fk-l8f" id="RwY-pv-oOo"/>
+                <outlet property="b_mount" destination="eol-QN-Uil" id="QN2-L0-Q7h"/>
+                <outlet property="shop_name" destination="PXv-xR-g3L" id="pIa-DW-qw7"/>
+            </connections>
             <point key="canvasLocation" x="40.579710144927539" y="90.736607142857139"/>
         </tableViewCell>
     </objects>

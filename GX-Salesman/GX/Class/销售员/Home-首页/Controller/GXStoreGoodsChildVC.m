@@ -169,7 +169,6 @@ static NSString *const StoreGoodsListHeader = @"StoreGoodsListHeader";
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"provider_uid"] = self.provider_uid;
-    parameters[@"catalog_id"] = @"25";
     if (isRefresh) {
         parameters[@"page"] = @(1);//第几页
     }else{

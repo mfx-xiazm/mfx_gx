@@ -23,17 +23,17 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f71-MT-xwg">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lRe-rc-nIF">
                     <rect key="frame" x="0.0" y="50" width="434" height="266"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3kv-Hk-FG3">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TeU-rf-TML">
                             <rect key="frame" x="0.0" y="0.0" width="434" height="117.5"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="品牌返利" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zrA-hF-qwe">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="品牌返利" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wLR-rd-7ai">
                                     <rect key="frame" x="20" y="5" width="55" height="20"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="55" id="TOg-XX-A3b"/>
-                                        <constraint firstAttribute="height" constant="20" id="vQz-tA-rrm"/>
+                                        <constraint firstAttribute="height" constant="20" id="6LW-EJ-stt"/>
+                                        <constraint firstAttribute="width" constant="55" id="KmA-PM-dKi"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                     <color key="textColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -50,7 +50,7 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="InB-k3-z45">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gF6-jl-VWb">
                                     <rect key="frame" x="90" y="5" width="324" height="92.5"/>
                                     <attributedString key="attributedText">
                                         <fragment content="满500返20%，满500返20%，满500返20%，满500返20%，满500返20%，满500返20%，满500返20%，满500返20%，满500返20%，满500返20%，满500返20%">
@@ -66,21 +66,21 @@
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             <constraints>
-                                <constraint firstItem="InB-k3-z45" firstAttribute="leading" secondItem="zrA-hF-qwe" secondAttribute="trailing" constant="15" id="97C-Rx-PBM"/>
-                                <constraint firstItem="InB-k3-z45" firstAttribute="top" secondItem="3kv-Hk-FG3" secondAttribute="top" constant="5" id="KNd-ka-5ft"/>
-                                <constraint firstItem="zrA-hF-qwe" firstAttribute="top" secondItem="3kv-Hk-FG3" secondAttribute="top" constant="5" id="fPJ-DS-MN0"/>
-                                <constraint firstItem="zrA-hF-qwe" firstAttribute="leading" secondItem="3kv-Hk-FG3" secondAttribute="leading" constant="20" id="gnt-pR-o4A"/>
-                                <constraint firstAttribute="trailing" secondItem="InB-k3-z45" secondAttribute="trailing" constant="20" id="pZ0-8c-LFR"/>
-                                <constraint firstAttribute="bottom" secondItem="InB-k3-z45" secondAttribute="bottom" constant="20" id="rAJ-uy-iWu"/>
+                                <constraint firstAttribute="trailing" secondItem="gF6-jl-VWb" secondAttribute="trailing" constant="20" id="1vn-aL-mtq"/>
+                                <constraint firstAttribute="bottom" secondItem="gF6-jl-VWb" secondAttribute="bottom" constant="20" id="Byx-WW-6nG"/>
+                                <constraint firstItem="wLR-rd-7ai" firstAttribute="top" secondItem="TeU-rf-TML" secondAttribute="top" constant="5" id="F4K-Nx-GPv"/>
+                                <constraint firstItem="wLR-rd-7ai" firstAttribute="leading" secondItem="TeU-rf-TML" secondAttribute="leading" constant="20" id="Wsx-Ha-xfZ"/>
+                                <constraint firstItem="gF6-jl-VWb" firstAttribute="leading" secondItem="wLR-rd-7ai" secondAttribute="trailing" constant="15" id="kJJ-pW-NBg"/>
+                                <constraint firstItem="gF6-jl-VWb" firstAttribute="top" secondItem="TeU-rf-TML" secondAttribute="top" constant="5" id="xyr-Ti-Bf1"/>
                             </constraints>
                         </view>
                     </subviews>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="3kv-Hk-FG3" secondAttribute="bottom" id="Ceu-8Y-x0P"/>
-                        <constraint firstItem="3kv-Hk-FG3" firstAttribute="width" secondItem="f71-MT-xwg" secondAttribute="width" id="LsV-5J-gci"/>
-                        <constraint firstAttribute="trailing" secondItem="3kv-Hk-FG3" secondAttribute="trailing" id="dnm-pt-rmc"/>
-                        <constraint firstItem="3kv-Hk-FG3" firstAttribute="top" secondItem="f71-MT-xwg" secondAttribute="top" id="pUD-tV-BXA"/>
-                        <constraint firstItem="3kv-Hk-FG3" firstAttribute="leading" secondItem="f71-MT-xwg" secondAttribute="leading" id="yC8-YY-dn5"/>
+                        <constraint firstItem="TeU-rf-TML" firstAttribute="width" secondItem="lRe-rc-nIF" secondAttribute="width" id="2hj-0B-tXU"/>
+                        <constraint firstAttribute="trailing" secondItem="TeU-rf-TML" secondAttribute="trailing" id="6O7-Us-O2G"/>
+                        <constraint firstAttribute="bottom" secondItem="TeU-rf-TML" secondAttribute="bottom" id="GIu-bG-V9B"/>
+                        <constraint firstItem="TeU-rf-TML" firstAttribute="leading" secondItem="lRe-rc-nIF" secondAttribute="leading" id="Mh8-e3-FTj"/>
+                        <constraint firstItem="TeU-rf-TML" firstAttribute="top" secondItem="lRe-rc-nIF" secondAttribute="top" id="eVu-Fs-fMr"/>
                     </constraints>
                 </scrollView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sYq-7K-yQx">
@@ -101,6 +101,9 @@
                             <state key="normal" title="关闭" image="弹框关闭">
                                 <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="closeClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="SRc-XC-LjV"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -118,19 +121,22 @@
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
-                <constraint firstItem="f71-MT-xwg" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="0tS-Au-mg7"/>
                 <constraint firstItem="i07-eE-6Gu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="2Jx-AX-fxL"/>
                 <constraint firstItem="sYq-7K-yQx" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="2pi-d8-oMD"/>
                 <constraint firstAttribute="trailing" secondItem="i07-eE-6Gu" secondAttribute="trailing" id="4VD-Qr-kGA"/>
+                <constraint firstItem="lRe-rc-nIF" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="7co-QG-DOO"/>
+                <constraint firstItem="lRe-rc-nIF" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="80e-IF-DJS"/>
                 <constraint firstItem="sYq-7K-yQx" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Fsd-ry-dtQ"/>
-                <constraint firstItem="sYq-7K-yQx" firstAttribute="top" secondItem="f71-MT-xwg" secondAttribute="bottom" id="J9x-or-75d"/>
-                <constraint firstItem="f71-MT-xwg" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="fZz-jG-Mi0"/>
-                <constraint firstItem="f71-MT-xwg" firstAttribute="top" secondItem="i07-eE-6Gu" secondAttribute="bottom" id="nZN-7D-Bju"/>
+                <constraint firstItem="lRe-rc-nIF" firstAttribute="top" secondItem="i07-eE-6Gu" secondAttribute="bottom" id="MjI-Ve-32H"/>
+                <constraint firstItem="sYq-7K-yQx" firstAttribute="top" secondItem="lRe-rc-nIF" secondAttribute="bottom" id="XH2-Kn-4KQ"/>
                 <constraint firstAttribute="top" secondItem="i07-eE-6Gu" secondAttribute="top" id="oeF-YW-Fd3"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="sYq-7K-yQx" secondAttribute="bottom" id="sDb-v1-WQ2"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="rebateTxt" destination="gF6-jl-VWb" id="LQ3-u0-aVC"/>
+            </connections>
             <point key="canvasLocation" x="91.304347826086968" y="354.91071428571428"/>
         </view>
     </objects>

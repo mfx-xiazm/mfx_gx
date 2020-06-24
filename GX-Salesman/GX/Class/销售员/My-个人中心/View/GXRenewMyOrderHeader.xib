@@ -88,6 +88,7 @@
             <connections>
                 <outlet property="order_no" destination="JTz-V9-00I" id="B8w-9x-O7j"/>
                 <outlet property="order_state" destination="V2I-Io-o5E" id="KY8-el-Zv7"/>
+                <outlet property="out_line_status" destination="cgX-vL-GnZ" id="roS-0L-xBo"/>
             </connections>
             <point key="canvasLocation" x="107.24637681159422" y="189.84375"/>
         </view>

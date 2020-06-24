@@ -36,6 +36,13 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
     [super viewDidLayoutSubviews];
     self.view.hxn_width = HX_SCREEN_WIDTH;
 }
+-(void)setStatus:(NSString *)status
+{
+    if (![_status isEqualToString:status]) {
+        _status = status;
+        [self getOrderDataRequest:YES];
+    }
+}
 -(NSMutableArray *)orders
 {
     if (_orders == nil) {
@@ -90,6 +97,7 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"seaType"] = @(self.dataType);
     parameters[@"seaKey"] = (self.seaKey && self.seaKey.length)?self.seaKey:@"";
+    parameters[@"status"] = (self.status && self.status.length)?self.status:@"";
     if (isRefresh) {
         parameters[@"page"] = @(1);//第几页
     }else{
@@ -154,7 +162,11 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
     cell.cellClickedCall = ^{
         hx_strongify(weakSelf);
         GXOrderDetailVC *dvc = [GXOrderDetailVC new];
-        dvc.oid = salerOrder.oid;
+        if (salerOrder.refund_id && salerOrder.refund_id.length) {
+            dvc.refund_id = salerOrder.refund_id;
+        }else{
+            dvc.oid = salerOrder.oid;
+        }
         [strongSelf.navigationController pushViewController:dvc animated:YES];
     };
     return cell;

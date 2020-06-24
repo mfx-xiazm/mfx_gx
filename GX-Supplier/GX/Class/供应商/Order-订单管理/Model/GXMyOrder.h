@@ -53,6 +53,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *order_status;
 /* 是详情数据 */
 @property(nonatomic,assign) BOOL isDetailOrder;
+@property(nonatomic,copy) NSString *order_brand_rebate;
+@property(nonatomic,copy) NSString *order_brand_amount;
 @property(nonatomic,strong) NSArray<GXMyOrderGoods *> *goods;
 
 @end
@@ -71,6 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *status;
 @property(nonatomic,copy) NSString *freight_amount;
 @property(nonatomic,copy) NSString *totalPrice;
+@property(nonatomic,copy) NSString *order_goods_desc;
 
 @end
 

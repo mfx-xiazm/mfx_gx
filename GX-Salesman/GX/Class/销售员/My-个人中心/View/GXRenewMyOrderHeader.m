@@ -14,6 +14,8 @@
 @interface GXRenewMyOrderHeader ()
 @property (weak, nonatomic) IBOutlet UILabel *order_no;
 @property (weak, nonatomic) IBOutlet UILabel *order_state;
+@property (weak, nonatomic) IBOutlet UIButton *out_line_status;
+
 @end
 
 @implementation GXRenewMyOrderHeader
@@ -61,7 +63,19 @@
 -(void)setSalerOrder:(GXSalerOrder *)salerOrder
 {
     _salerOrder = salerOrder;
-    self.order_state.text = @"";
+    self.order_state.text = _salerOrder.status;
     self.order_no.text = [NSString stringWithFormat:@"%@",_salerOrder.order_no];
+    
+    if ([_salerOrder.status isEqualToString:@"待发货"]) {
+        if ([_salerOrder.order_status isEqualToString:@"1"]) {
+            self.out_line_status.hidden = NO;
+            [self.out_line_status setImage:HXGetImage(@"超时") forState:UIControlStateNormal];
+            [self.out_line_status setTitle:@"  超时未发货" forState:UIControlStateNormal];
+        }else{
+            self.out_line_status.hidden = YES;
+        }
+    }else{
+        self.out_line_status.hidden = YES;
+    }
 }
 @end

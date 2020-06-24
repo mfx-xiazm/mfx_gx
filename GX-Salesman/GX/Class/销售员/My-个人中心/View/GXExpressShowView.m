@@ -12,6 +12,7 @@
 static NSString *const ExpressShowCell = @"ExpressShowCell";
 @interface GXExpressShowView ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
 @end
 @implementation GXExpressShowView
@@ -42,15 +43,34 @@ static NSString *const ExpressShowCell = @"ExpressShowCell";
     [super layoutSubviews];
     [self bezierPathByRoundingCorners:UIRectCornerTopLeft|UIRectCornerTopRight cornerRadii:CGSizeMake(15, 15)];
 }
+-(void)setLogistics_nos:(NSArray *)logistics_nos
+{
+    _logistics_nos = logistics_nos;
+    self.titleLabel.text = @"全部单号";
+    [self.tableView reloadData];
+}
+- (IBAction)closeClicked:(UIButton *)sender {
+    if (self.expressShowCloseClicked) {
+        self.expressShowCloseClicked();
+    }
+}
+
 #pragma mark -- UITableView数据源和代理
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (self.logistics_nos) {
+        return self.logistics_nos.count;
+    }
     return 3;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     GXExpressShowCell *cell = [tableView dequeueReusableCellWithIdentifier:ExpressShowCell forIndexPath:indexPath];
     //无色
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    if (self.logistics_nos) {
+        NSString *logistics_no = self.logistics_nos[indexPath.row];
+        cell.loc_no_str = logistics_no;
+    }
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

@@ -13,11 +13,22 @@
 #import "FCDropMenuCollectionHeader.h"
 #import "FCDropMenuCollectionCell.h"
 #import "FCDropMenuRangeCollectionCell.h"
+#import "GXCashNote.h"
 
 static NSString *const CashNoteCell = @"CashNoteCell";
 @interface GXCashNoteVC ()<UITableViewDelegate,UITableViewDataSource,WMZDropMenuDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) WMZDropDownMenu *menu;
+/** 页码 */
+@property(nonatomic,assign) NSInteger pagenum;
+/** 订单列表 */
+@property(nonatomic,strong) NSMutableArray *logs;
+/** 1提现中 2提现成功  2提现失败*/
+@property (nonatomic, copy) NSString *search_type;
+/** 开始时间 */
+@property (nonatomic, copy) NSString *start_time;
+/** 结束时间 */
+@property (nonatomic, copy) NSString *end_time;
 @end
 
 @implementation GXCashNoteVC
@@ -26,6 +37,16 @@ static NSString *const CashNoteCell = @"CashNoteCell";
     [super viewDidLoad];
     [self setUpNavbar];
     [self setUpTableView];
+    [self setUpRefresh];
+    [self startShimmer];
+    [self getFinanceLogRequest:YES];
+}
+-(NSMutableArray *)logs
+{
+    if (_logs == nil) {
+        _logs = [NSMutableArray array];
+    }
+    return _logs;
 }
 -(WMZDropDownMenu *)menu
 {
@@ -91,6 +112,22 @@ static NSString *const CashNoteCell = @"CashNoteCell";
         [weakSelf getFinanceLogRequest:YES];
     }];
 }
+/** 添加刷新控件 */
+-(void)setUpRefresh
+{
+    hx_weakify(self);
+    self.tableView.mj_header.automaticallyChangeAlpha = YES;
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        hx_strongify(weakSelf);
+        [strongSelf.tableView.mj_footer resetNoMoreData];
+        [strongSelf getFinanceLogRequest:YES];
+    }];
+    //追加尾部刷新
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        hx_strongify(weakSelf);
+        [strongSelf getFinanceLogRequest:NO];
+    }];
+}
 -(void)noteFliterClicked
 {
     // 判断一个view是否为另一个view的子视图
@@ -105,60 +142,64 @@ static NSString *const CashNoteCell = @"CashNoteCell";
 #pragma mark -- 数据请求
 -(void)getFinanceLogRequest:(BOOL)isRefresh
 {
-//    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-//    if (isRefresh) {
-//        parameters[@"page"] = @(1);//第几页
-//    }else{
-//        NSInteger page = self.pagenum+1;
-//        parameters[@"page"] = @(page);//第几页
-//    }
-//
-//    hx_weakify(self);
-//    [HXNetworkTool POST:HXRC_M_URL action:[[MSUserManager sharedInstance].curUserInfo.utype isEqualToString:@"2"]?@"index/getFinanceLog":@"program/getFinanceLog" parameters:parameters success:^(id responseObject) {
-//        hx_strongify(weakSelf);
-//        [strongSelf stopShimmer];
-//        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
-//            if (isRefresh) {
-//                [strongSelf.tableView.mj_header endRefreshing];
-//                strongSelf.pagenum = 1;
-//                [strongSelf.logs removeAllObjects];
-//                NSArray *arrt = [NSArray yy_modelArrayWithClass:[GXFinanceLog class] json:responseObject[@"data"]];
-//                [strongSelf.logs addObjectsFromArray:arrt];
-//            }else{
-//                [strongSelf.tableView.mj_footer endRefreshing];
-//                strongSelf.pagenum ++;
-//
-//                if ([responseObject[@"data"] isKindOfClass:[NSArray class]] && ((NSArray *)responseObject[@"data"]).count){
-//                    NSArray *arrt = [NSArray yy_modelArrayWithClass:[GXFinanceLog class] json:responseObject[@"data"]];
-//                    [strongSelf.logs addObjectsFromArray:arrt];
-//                }else{// 提示没有更多数据
-//                    [strongSelf.tableView.mj_footer endRefreshingWithNoMoreData];
-//                }
-//            }
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                strongSelf.tableView.hidden = NO;
-//                [strongSelf.tableView reloadData];
-//            });
-//        }else{
-//            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
-//        }
-//    } failure:^(NSError *error) {
-//        hx_strongify(weakSelf);
-//        [strongSelf stopShimmer];
-//        [strongSelf.tableView.mj_header endRefreshing];
-//        [strongSelf.tableView.mj_footer endRefreshing];
-//        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
-//    }];
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"search_type"] = self.search_type?:@"";//筛选类型 1支出 2收入
+    parameters[@"start_time"] = self.start_time?:@"";//时间筛选 开始时间
+    parameters[@"end_time"] = self.end_time?:@"";//时间筛选 结束时间
+    if (isRefresh) {
+        parameters[@"page"] = @(1);//第几页
+    }else{
+        NSInteger page = self.pagenum+1;
+        parameters[@"page"] = @(page);//第几页
+    }
+
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"program/getApplyLog" parameters:parameters success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            if (isRefresh) {
+                [strongSelf.tableView.mj_header endRefreshing];
+                strongSelf.pagenum = 1;
+                [strongSelf.logs removeAllObjects];
+                NSArray *arrt = [NSArray yy_modelArrayWithClass:[GXCashNote class] json:responseObject[@"data"]];
+                [strongSelf.logs addObjectsFromArray:arrt];
+            }else{
+                [strongSelf.tableView.mj_footer endRefreshing];
+                strongSelf.pagenum ++;
+
+                if ([responseObject[@"data"] isKindOfClass:[NSArray class]] && ((NSArray *)responseObject[@"data"]).count){
+                    NSArray *arrt = [NSArray yy_modelArrayWithClass:[GXCashNote class] json:responseObject[@"data"]];
+                    [strongSelf.logs addObjectsFromArray:arrt];
+                }else{// 提示没有更多数据
+                    [strongSelf.tableView.mj_footer endRefreshingWithNoMoreData];
+                }
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [strongSelf.tableView reloadData];
+            });
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
+        [strongSelf.tableView.mj_header endRefreshing];
+        [strongSelf.tableView.mj_footer endRefreshing];
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
 }
 #pragma mark -- UITableView数据源和代理
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    return self.logs.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     GXCashNoteCell *cell = [tableView dequeueReusableCellWithIdentifier:CashNoteCell forIndexPath:indexPath];
     //无色
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    GXCashNote *note = self.logs[indexPath.row];
+    cell.note = note;
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -168,6 +209,8 @@ static NSString *const CashNoteCell = @"CashNoteCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     GXCashNoteDetailVC *nvc = [GXCashNoteDetailVC new];
+    GXCashNote *note = self.logs[indexPath.row];
+    nvc.finance_apply_id = note.finance_apply_id;
     [self.navigationController pushViewController:nvc animated:YES];
 }
 #pragma mark -- WMZDropMenuDelegate必须实现的代理
@@ -198,8 +241,8 @@ static NSString *const CashNoteCell = @"CashNoteCell";
 - (NSArray *)menu:(WMZDropDownMenu *)menu dataForRowAtDropIndexPath:(WMZDropIndexPath *)dropIndexPath{
       if (dropIndexPath.section == 0){
           
-          if (dropIndexPath.row == 0) return @[@{@"name":@"提现中",@"ID":@"1",@"otherData":@"cash_status"},@{@"name":@"提现成功",@"ID":@"2",@"otherData":@"cash_status"},@{@"name":@"提现失败",@"ID":@"3",@"otherData":@"cash_status"}];
-          if (dropIndexPath.row == 1) return @[@{@"config":@{@"lowPlaceholder":@"起始",@"highPlaceholder":@"终止",@"isShowPicker":@(YES)},@"otherData":@"sign_time"}];
+          if (dropIndexPath.row == 0) return @[@{@"name":@"提现中",@"ID":@"1",@"otherData":@"search_type"},@{@"name":@"提现成功",@"ID":@"2",@"otherData":@"search_type"},@{@"name":@"提现失败",@"ID":@"3",@"otherData":@"search_type"}];
+          if (dropIndexPath.row == 1) return @[@{@"config":@{@"lowPlaceholder":@"起始",@"highPlaceholder":@"终止",@"isShowPicker":@(YES)},@"otherData":@"note_time"}];
       }
       return @[];
 }
@@ -394,20 +437,20 @@ static NSString *const CashNoteCell = @"CashNoteCell";
 {
     [menu removeFromSuperview];
     
-//    self.contract_status = nil;//
-//    self.sign_time_min = nil;//
-//    self.sign_time_max =  nil;//
-//
-//    for (WMZDropTree *tree in selectData) {
-//        NSString *orKey = (NSString *)tree.otherData;
-//        if ([orKey isEqualToString:@"contract_status"]) {
-//            self.contract_status = tree.name;
-//        }else if ([orKey isEqualToString:@"sign_time"]) {
-//            self.sign_time_min = tree.rangeArr.count>1?tree.rangeArr[0]:@"";
-//            self.sign_time_max = tree.rangeArr.count>1?tree.rangeArr[1]:@"";
-//        }
-//    }
-//
-//    [self getContractListDataRequest:YES];
+    self.search_type = nil;//
+    self.start_time = nil;//
+    self.end_time =  nil;//
+
+    for (WMZDropTree *tree in selectData) {
+        NSString *orKey = (NSString *)tree.otherData;
+        if ([orKey isEqualToString:@"search_type"]) {
+            self.search_type = tree.ID;
+        }else if ([orKey isEqualToString:@"note_time"]) {
+            self.start_time = tree.rangeArr.count>1?tree.rangeArr[0]:@"";
+            self.end_time = tree.rangeArr.count>1?tree.rangeArr[1]:@"";
+        }
+    }
+
+    [self getFinanceLogRequest:YES];
 }
 @end

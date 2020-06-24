@@ -10,8 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^expressShowCloseClicked)(void);
 @interface GXExpressShowView : UIView
-
+@property(nonatomic,copy) NSArray *logistics_nos;
+@property (nonatomic, copy) expressShowCloseClicked expressShowCloseClicked;
 @end
 
 NS_ASSUME_NONNULL_END

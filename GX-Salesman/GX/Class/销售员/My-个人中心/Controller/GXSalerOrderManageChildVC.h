@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface GXSalerOrderManageChildVC : HXBaseViewController
 /* 数据类型 1终端店 2供应商*/
 @property(nonatomic,assign) NSInteger dataType;
+@property (nonatomic, copy) NSString *status;
 /* 关键词 */
 @property(nonatomic,copy) NSString *seaKey;
 @end

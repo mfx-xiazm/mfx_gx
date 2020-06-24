@@ -10,8 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXMyTeam;
 @interface GXMyTeamCell : UITableViewCell
-
+@property (nonatomic, strong) GXMyTeam *team;
 @end
 
 NS_ASSUME_NONNULL_END

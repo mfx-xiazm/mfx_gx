@@ -25,8 +25,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *area_name;
 @property(nonatomic,copy) NSString *address_detail;
 @property(nonatomic,copy) NSString *logistics_com_id;
+// 订单号可能存在多个
 @property(nonatomic,copy) NSString *logistics_no;
+@property(nonatomic,copy) NSArray *logistics_nos;
 @property(nonatomic,copy) NSString *logistics_com_name;
+@property(nonatomic,copy) NSString *send_freight_type;
 @property(nonatomic,copy) NSString *approve_status;
 @property(nonatomic,copy) NSString *approve_time;
 /** 1等待供应商审核；2等待平台审核；3退款成功；4退款驳回 5供应商同意 6供应商不同意 */
@@ -46,6 +49,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *logistics_title;
 /* 是详情数据 */
 @property(nonatomic,assign) BOOL isDetailOrder;
+@property(nonatomic,copy) NSString *shop_name;
+@property(nonatomic,copy) NSString *order_brand_rebate;
+@property(nonatomic,copy) NSString *order_brand_amount;
 @property(nonatomic,strong) NSArray<GXMyOrderGoods *> *goods;
 
 @end
@@ -64,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *status;
 @property(nonatomic,copy) NSString *freight_amount;
 @property(nonatomic,copy) NSString *totalPrice;
-
+@property(nonatomic,copy) NSString *order_goods_desc;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -84,7 +84,7 @@ static NSString *const MarketTrendCell = @"MarketTrendCell";
 -(void)setUpCategoryTitleView
 {
     _categoryView.backgroundColor = [UIColor whiteColor];
-    _categoryView.titles = @[@"美赞成", @"美素佳儿", @"德国爱他美", @"诺优能", @"美赞成", @"美素佳儿"];
+    _categoryView.titles = @[];
     _categoryView.titleFont = [UIFont systemFontOfSize:14 weight:UIFontWeightMedium];
     _categoryView.titleColor = [UIColor blackColor];
     _categoryView.titleSelectedColor = HXControlBg;
@@ -234,6 +234,7 @@ static NSString *const MarketTrendCell = @"MarketTrendCell";
     header.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 40.f);
     GXMarketTrendSeries *series = self.showTrends[section];
     header.series = series;
+    header.bgView.backgroundColor = (self.dataType ==1)?UIColorFromRGB(0xFBDBDE):UIColorFromRGB(0xABD7F4);
     return header;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

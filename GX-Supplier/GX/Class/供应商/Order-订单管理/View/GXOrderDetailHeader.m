@@ -57,7 +57,7 @@
             }
         }else{
             self.order_desc.text = @"您的订单待发货";
-            self.order_tip.text = @"   订单待发货，请耐心等待   ";
+            self.order_tip.text = @"   订单待发货，请在48小时内发货！！！   ";
         }
     }else if ([_orderDetail.status isEqualToString:@"待收货"]) {
         self.order_desc.text = @"您的订单已发货，请耐心等待";

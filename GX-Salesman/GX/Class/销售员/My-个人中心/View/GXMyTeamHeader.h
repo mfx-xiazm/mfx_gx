@@ -10,9 +10,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXMyTeamCount;
 @interface GXMyTeamHeader : UIView
 @property (nonatomic, assign) CGRect imageViewFrame;
 @property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, strong) GXMyTeamCount *teamCount;
+
 @end
 
 NS_ASSUME_NONNULL_END

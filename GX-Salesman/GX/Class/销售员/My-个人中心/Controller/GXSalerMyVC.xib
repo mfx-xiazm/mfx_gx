@@ -11,9 +11,15 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GXSalerMyVC">
             <connections>
                 <outlet property="balance" destination="2mo-FR-RMb" id="0Sp-XP-3bR"/>
-                <outlet property="cash_balance" destination="Q61-oS-8I8" id="dkh-m1-qWk"/>
+                <outlet property="banlanceView" destination="MpN-jN-Qgc" id="oeB-4G-9wV"/>
+                <outlet property="banlanceViewHeight" destination="r6q-JN-DT3" id="i8v-Y0-cIx"/>
+                <outlet property="cashable_balance" destination="Q61-oS-8I8" id="Xbx-Sx-Rlt"/>
                 <outlet property="phone" destination="Yn0-Hf-84a" id="N8d-2P-qqW"/>
+                <outlet property="post_img" destination="diw-VQ-6MU" id="LtU-GJ-cTA"/>
+                <outlet property="recommendProvider" destination="NRc-m7-Qxi" id="S0E-Qt-PT6"/>
+                <outlet property="recommendSale" destination="KlB-Mh-fR7" id="qFa-gc-qMj"/>
                 <outlet property="userName" destination="jnJ-eb-Jg2" id="qhF-qd-g8Z"/>
+                <outlet property="user_performance" destination="GVI-Ek-cIC" id="RO7-Vp-2rx"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

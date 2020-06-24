@@ -7,14 +7,26 @@
 //
 
 #import "GXMyTeamCell.h"
+#import "GXMyTeam.h"
 
+@interface GXMyTeamCell ()
+@property (weak, nonatomic) IBOutlet UILabel *name;
+@property (weak, nonatomic) IBOutlet UILabel *total;
+@property (weak, nonatomic) IBOutlet UILabel *post_name;
+@end
 @implementation GXMyTeamCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
 }
-
+-(void)setTeam:(GXMyTeam *)team
+{
+    _team = team;
+    self.name.text = [NSString stringWithFormat:@"%@ %@",_team.username,_team.phone];
+    self.total.text = _team.total;
+    self.post_name.text = _team.post_name;
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

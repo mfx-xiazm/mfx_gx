@@ -312,16 +312,23 @@ static NSString * const kDividedSymbol = @","; // divided symbol
     // click sure
     if (sender.tag == 1) {
         NSMutableString *selectString = [[NSMutableString alloc] init];
+        NSMutableString *selectRowStr = [[NSMutableString alloc] init];
+
         for (NSUInteger i = 0; i < self.component; i++) {
-            [selectString appendString:[self pickerView:self.pickerView titleForRow:[self.pickerView selectedRowInComponent:i] forComponent:i]];
+            NSInteger selectRow = [self.pickerView selectedRowInComponent:i];
+
+            [selectString appendString:[self pickerView:self.pickerView titleForRow:selectRow forComponent:i]];
+            [selectRowStr appendString:[NSString stringWithFormat:@"%zd",selectRow]];
+
             if (i != self.component - 1) { // 多行用 "," 分割
                 [selectString appendString:self.dividedSymbol];
+                [selectRowStr appendString:self.dividedSymbol];
             }
         }
         
         // completion callback
         if (self.completion) {
-           self.completion(selectString);
+           self.completion([NSString stringWithFormat:@"%@|%@",selectString,selectRowStr]);
         }
     }
 }

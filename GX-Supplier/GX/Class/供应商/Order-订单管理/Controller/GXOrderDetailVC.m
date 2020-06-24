@@ -147,6 +147,8 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
     //供应商或者销售员
     if (self.refund_id && self.refund_id.length) {
         if ([self.refundDetail.refund_status isEqualToString:@"4"] || [self.refundDetail.refund_status isEqualToString:@"6"]) {
+            self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 50.f, 0);
+            
             self.handleView.hidden = NO;
             self.handleViewHeight.constant = 50.f;
             
@@ -159,6 +161,8 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
             self.thirdHandleBtn.layer.borderColor = [UIColor blackColor].CGColor;
             [self.thirdHandleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         }else{
+            self.tableView.contentInset = UIEdgeInsetsZero;
+            
             self.handleView.hidden = YES;
             self.handleViewHeight.constant = 0.f;
             self.firstHandleBtn.hidden = YES;
@@ -187,6 +191,8 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
                 /**线下支付审核状态：1待上传打款凭证；2审核通过；3审核驳回。4上传打款凭证审核中；线上支付不需要审核逻辑*/
                 // 判断是否已上传打款凭证
                 if ([self.orderDetail.approve_status isEqualToString:@"4"]) {
+                    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 50.f, 0);
+
                     // 已经上传打款凭证
                     self.handleView.hidden = NO;
                     self.handleViewHeight.constant = 50.f;
@@ -200,6 +206,7 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
                     self.thirdHandleBtn.layer.borderColor = [UIColor clearColor].CGColor;
                     [self.thirdHandleBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
                 }else{
+                    self.tableView.contentInset = UIEdgeInsetsZero;
                     // 未上传打款凭证
                     self.handleView.hidden = YES;
                     self.handleViewHeight.constant = 0.f;
@@ -208,6 +215,7 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
                     self.thirdHandleBtn.hidden = YES;
                 }
             }else {
+                self.tableView.contentInset = UIEdgeInsetsZero;
                 self.handleView.hidden = YES;
                 self.handleViewHeight.constant = 0.f;
                 self.firstHandleBtn.hidden = YES;
@@ -215,6 +223,7 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
                 self.thirdHandleBtn.hidden = YES;
             }
         }else{
+            self.tableView.contentInset = UIEdgeInsetsZero;
             self.handleView.hidden = YES;
             self.handleViewHeight.constant = 0.f;
             self.firstHandleBtn.hidden = YES;
@@ -325,9 +334,9 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
         return 160.f;
     }else{//最后一组
         if (self.refund_id && self.refund_id.length) {
-            return (self.refundDetail.logistics_com_name && self.refundDetail.logistics_com_name.length)?280:250;
+            return (self.refundDetail.logistics_com_name && self.refundDetail.logistics_com_name.length)?270:220;
         }else{
-            return (self.orderDetail.logistics_com_name && self.orderDetail.logistics_com_name.length)?280:250;
+            return (self.orderDetail.logistics_com_name && self.orderDetail.logistics_com_name.length)?270:220;
         }
     }
 }
@@ -336,22 +345,27 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
     if (section != 1) {//不是最后一组
         GXUpOrderCellSectionFooter *footer = [GXUpOrderCellSectionFooter loadXibView];
         footer.hxn_size = CGSizeMake(tableView.hxn_width, 160.f);
+        if (self.refund_id && self.refund_id.length) {
+            footer.refundDetail = self.refundDetail;
+        }else{
+            footer.orderDetail = self.orderDetail;
+        }
         return footer;
     }else{//最后一组
         GXOrderDetailFooter *footer = [GXOrderDetailFooter loadXibView];
         if (self.refund_id && self.refund_id.length) {
             footer.refundDetail = self.refundDetail;
             if (self.refundDetail.logistics_com_name && self.refundDetail.logistics_com_name.length) {
-                footer.hxn_size = CGSizeMake(tableView.hxn_width, 280.f);
+                footer.hxn_size = CGSizeMake(tableView.hxn_width, 270.f);
             }else{
-                footer.hxn_size = CGSizeMake(tableView.hxn_width, 250.f);
+                footer.hxn_size = CGSizeMake(tableView.hxn_width, 220.f);
             }
         }else{
             footer.orderDetail = self.orderDetail;
             if (self.orderDetail.logistics_com_name && self.orderDetail.logistics_com_name.length) {
-                footer.hxn_size = CGSizeMake(tableView.hxn_width, 280.f);
+                footer.hxn_size = CGSizeMake(tableView.hxn_width, 270.f);
             }else{
-                footer.hxn_size = CGSizeMake(tableView.hxn_width, 250.f);
+                footer.hxn_size = CGSizeMake(tableView.hxn_width, 220.f);
             }
         }
         hx_weakify(self);

@@ -62,14 +62,14 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Q5-XR-Qpn">
                             <rect key="frame" x="138" y="0.0" width="138" height="44"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="品牌" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fw5-QO-nYw">
-                                    <rect key="frame" x="54.5" y="13.5" width="29" height="17"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="全部品牌" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fw5-QO-nYw">
+                                    <rect key="frame" x="40.5" y="13.5" width="57.5" height="17"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <color key="textColor" red="0.074509803920000006" green="0.1137254902" blue="0.1764705882" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="下" translatesAutoresizingMaskIntoConstraints="NO" id="e1p-oh-DLG">
-                                    <rect key="frame" x="88.5" y="20" width="6.5" height="4.5"/>
+                                    <rect key="frame" x="103" y="20" width="6.5" height="4.5"/>
                                 </imageView>
                                 <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rkr-7e-ZYK">
                                     <rect key="frame" x="0.0" y="0.0" width="138" height="44"/>

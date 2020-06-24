@@ -57,6 +57,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *shop_name;
 /* 是退款详情数据 */
 @property(nonatomic,assign) BOOL isRefundDetail;
+@property(nonatomic,copy) NSString *order_brand_rebate;
+@property(nonatomic,copy) NSString *order_brand_amount;
 @property(nonatomic,strong) NSArray<GYMyRefundGoods *> *goods;
 
 @property(nonatomic,strong) GYMyRefundAddress *address;
@@ -73,6 +75,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *freight_amount;
 @property(nonatomic,copy) NSString *price_amount;
 @property(nonatomic,copy) NSString *control_type;
+@property(nonatomic,copy) NSString *order_goods_desc;
 
 @end
 

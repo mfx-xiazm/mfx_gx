@@ -11,7 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface GXExpressShowCell : UITableViewCell
-
+@property (weak, nonatomic) IBOutlet UILabel *loc_no;
+@property (nonatomic, strong) NSString *loc_no_str;
 @end
 
 NS_ASSUME_NONNULL_END

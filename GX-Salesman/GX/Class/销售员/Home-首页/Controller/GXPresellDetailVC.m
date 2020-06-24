@@ -36,15 +36,13 @@
 
 static NSString *const GoodsInfoCell = @"GoodsInfoCell";
 static NSString *const GoodsGiftCell = @"GoodsGiftCell";
-@interface GXPresellDetailVC ()<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,GXGoodsMaterialCellDelegate,GXGoodsCommentCellDelegate>
+@interface GXPresellDetailVC ()<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,GXGoodsMaterialCellDelegate,GXGoodsCommentCellDelegate,XQCarouselDelegate>
 @property (weak, nonatomic) IBOutlet UIView *cyclePagerView;
 @property (weak, nonatomic) IBOutlet UILabel *shop_name;
-@property (weak, nonatomic) IBOutlet UILabel *price;
 @property (weak, nonatomic) IBOutlet UILabel *market_price;
 @property (weak, nonatomic) IBOutlet UILabel *cale_num;
 @property (weak, nonatomic) IBOutlet UILabel *notice;
 @property (weak, nonatomic) IBOutlet UILabel *rush_price;
-@property (weak, nonatomic) IBOutlet UILabel *rush_market_price;
 @property (weak, nonatomic) IBOutlet UILabel *rush_time;
 /** 倒计时 */
 @property (nonatomic,strong) XTimer *timer;
@@ -156,10 +154,6 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GXGoodsGiftCell class]) bundle:nil] forCellReuseIdentifier:GoodsGiftCell];
 }
 #pragma mark -- 点击事件
--(void)cartClicked
-{
-    
-}
 -(void)shareClicked
 {
     HXLog(@"分享");
@@ -181,40 +175,14 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
         HXLog(@"佣金提成");
     }
 }
--(void)showBannerPic:(NSInteger)index
-{
-    NSMutableArray *items = [NSMutableArray array];
-    for (int i = 0; i < self.goodsDetail.good_adv.count; i++) {
-        GXGoodsDetailAdv *adv = self.goodsDetail.good_adv[i];
-
-        NSMutableDictionary *temp = [NSMutableDictionary dictionary];
-        temp[ZLPreviewPhotoObj] = [adv.adv_img hasPrefix:@"http"]?[NSURL URLWithString:adv.adv_img]:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HXRC_URL_HEADER,adv.adv_img]];
-        temp[ZLPreviewPhotoTyp] = @(ZLPreviewPhotoTypeURLImage);
-        [items addObject:temp];
-    }
-
-    ZLPhotoActionSheet *actionSheet = [[ZLPhotoActionSheet alloc] init];
-    /**
-     导航条颜色
-     */
-    actionSheet.configuration.navBarColor = [UIColor clearColor];
-    /**
-     底部工具栏按钮 可交互 状态标题颜色
-     */
-    actionSheet.configuration.statusBarStyle = UIStatusBarStyleLightContent;
-    actionSheet.sender = self;
-    [actionSheet previewPhotos:items index:index hideToolBar:YES complete:^(NSArray * _Nonnull photos) {
-
-    }];
-}
 #pragma mark -- 接口请求
 -(void)getGoodDetailRequest
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    parameters[@"goods_id"] = self.goods_id;
+    parameters[@"pre_sale_id"] = self.pre_sale_id;
     
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"program/getGoodDetail" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"program/getPreSaleDetail" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         [strongSelf stopShimmer];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
@@ -251,14 +219,33 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
     for (GXGoodsDetailAdv *adv in self.goodsDetail.good_adv) {
         [bannerImgs addObject:adv.adv_img];
     }
-    [bannerImgs insertObject:@"http://tb-video.bdstatic.com/tieba-smallvideo-transcode/20985849_722f981a5ce0fc6d2a5a4f40cb0327a5_3.mp4" atIndex:0];
-    
     XQCarousel *carousel = [XQCarousel scrollViewFrame:self.cyclePagerView.bounds imageStringGroup:bannerImgs];
+    carousel.delegate = self;
     [self.cyclePagerView addSubview:carousel];
+    
+    // 处理倒计时和底部显示
+    if ([self.goodsDetail.min_price floatValue] == [self.goodsDetail.max_price floatValue]) {
+        self.rush_price.text = [NSString stringWithFormat:@"￥%@",self.goodsDetail.min_price];
+    }else{
+        self.rush_price.text = [NSString stringWithFormat:@"￥%@-￥%@",self.goodsDetail.min_price,self.goodsDetail.max_price];
+    }
+    /** 1未开始，2进行中；3已结束； */
+    if ([self.goodsDetail.sell_status isEqualToString:@"1"]) {
+        [self countTimeDown];
+        if (!self.timer) {
+            self.timer = [XTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(countTimeDown) userInfo:nil repeats:YES];
+        }
+    }else if ([self.goodsDetail.sell_status isEqualToString:@"2"]) {
+        [self countTimeDown];
+        if (!self.timer) {
+            self.timer = [XTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(countTimeDown) userInfo:nil repeats:YES];
+        }
+    }else{
+        self.rush_time.text = @"已结束";
+    }
     
     [self.shop_name setTextWithLineSpace:5.f withString:_goodsDetail.goods_name withFont:[UIFont systemFontOfSize:15]];
     
-    self.price.text = @"";
     self.market_price.text = [NSString stringWithFormat:@"建议价:￥%@",_goodsDetail.suggest_price];
     self.cale_num.text = [NSString stringWithFormat:@"销量：%@",_goodsDetail.sale_num];
         
@@ -281,7 +268,6 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
     
     NSString *h5 = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"><style>img{width:100%%; height:auto;}body{margin:0 14px;}</style></head><body>%@</body></html>",self.goodsDetail.goods_desc];
     [self.webView loadHTMLString:h5 baseURL:[NSURL URLWithString:HXRC_URL_HEADER]];
-    
 }
 -(void)shareNumRequest:(NSString *)material_id
 {
@@ -301,34 +287,80 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
 #pragma mark -- 倒计时
 -(void)countTimeDown
 {
-    if (self.goodsDetail.rush.countDown >0) {
-        if ((self.goodsDetail.rush.countDown/3600)/24) {
-            NSString *str_day = [NSString stringWithFormat:@"%02ld",(self.goodsDetail.rush.countDown/3600)/24];
-            NSString *str_hour = [NSString stringWithFormat:@"%02ld",self.goodsDetail.rush.countDown/3600%24];
-            NSString *str_minute = [NSString stringWithFormat:@"%02ld",(self.goodsDetail.rush.countDown%(60*60))/60];
-            NSString *str_second = [NSString stringWithFormat:@"%02ld",self.goodsDetail.rush.countDown%60];
+    if (self.goodsDetail.count >0) {
+        if ((self.goodsDetail.count/3600)/24) {
+            NSString *str_day = [NSString stringWithFormat:@"%02ld",(self.goodsDetail.count/3600)/24];
+            NSString *str_hour = [NSString stringWithFormat:@"%02ld",self.goodsDetail.count/3600%24];
+            NSString *str_minute = [NSString stringWithFormat:@"%02ld",(self.goodsDetail.count%(60*60))/60];
+            NSString *str_second = [NSString stringWithFormat:@"%02ld",self.goodsDetail.count%60];
             NSString *format_time = [NSString stringWithFormat:@"%@天%@:%@:%@",str_day,str_hour,str_minute,str_second];
             //设置文字显示 根据自己需求设置
-            self.rush_time.text = [NSString stringWithFormat:@"距结束 %@",format_time];
+            if ([self.goodsDetail.sell_status isEqualToString:@"1"]) {
+                self.rush_time.text = [NSString stringWithFormat:@"距开始 %@",format_time];
+            }else if ([self.goodsDetail.sell_status isEqualToString:@"2"]) {
+                self.rush_time.text = [NSString stringWithFormat:@"距结束 %@",format_time];
+            }else{
+                self.rush_time.text = @"已结束";
+            }
         }else{
-            NSString *str_hour = [NSString stringWithFormat:@"%02ld",self.goodsDetail.rush.countDown/3600%24];
-            NSString *str_minute = [NSString stringWithFormat:@"%02ld",(self.goodsDetail.rush.countDown%(60*60))/60];
-            NSString *str_second = [NSString stringWithFormat:@"%02ld",self.goodsDetail.rush.countDown%60];
+            NSString *str_hour = [NSString stringWithFormat:@"%02ld",self.goodsDetail.count/3600%24];
+            NSString *str_minute = [NSString stringWithFormat:@"%02ld",(self.goodsDetail.count%(60*60))/60];
+            NSString *str_second = [NSString stringWithFormat:@"%02ld",self.goodsDetail.count%60];
             NSString *format_time = [NSString stringWithFormat:@"%@:%@:%@",str_hour,str_minute,str_second];
             //设置文字显示 根据自己需求设置
-            self.rush_time.text = [NSString stringWithFormat:@"距结束 %@",format_time];
+            if ([self.goodsDetail.sell_status isEqualToString:@"1"]) {
+                self.rush_time.text = [NSString stringWithFormat:@"距开始 %@",format_time];
+            }else if ([self.goodsDetail.sell_status isEqualToString:@"2"]) {
+                self.rush_time.text = [NSString stringWithFormat:@"距结束 %@",format_time];
+            }else{
+                self.rush_time.text = @"已结束";
+            }
         }
         
-        self.goodsDetail.rush.countDown -= 1;
+        self.goodsDetail.count -= 1;
     }else{
         // 移除倒计时，发出通知并刷新页面
-        self.goodsDetail.rush.countDown = 0;
-        [self.timer invalidate];
-        self.timer = nil;
-        
+        self.goodsDetail.count = 0;
+        if ([self.goodsDetail.sell_status isEqualToString:@"1"]) {
+            self.goodsDetail.sell_status = @"2";
+        }else if ([self.goodsDetail.sell_status isEqualToString:@"2"]) {
+            self.goodsDetail.sell_status = @"3";
+            [self.timer invalidate];
+            self.timer = nil;
+        }
         // 倒计时结束，刷新页面
-        [self getGoodDetailRequest];
+        [self handleGoodsDetailData];
     }
+}
+#pragma mark -- XQCarousel代理
+-(void)XQCarouselDidClickedImageView:(XQCarousel *)carousel imageViewIndex:(NSInteger)imageViewIndex
+{
+    NSMutableArray *items = [NSMutableArray array];
+    for (int i = 0; i < self.goodsDetail.good_adv.count; i++) {
+        GXGoodsDetailAdv *adv = self.goodsDetail.good_adv[i];
+        if ([adv.adv_type isEqualToString:@"1"]) {// 图片类型
+            NSMutableDictionary *temp = [NSMutableDictionary dictionary];
+            temp[ZLPreviewPhotoObj] = [adv.adv_img hasPrefix:@"http"]?[NSURL URLWithString:adv.adv_img]:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HXRC_URL_HEADER,adv.adv_img]];
+            temp[ZLPreviewPhotoTyp] = @(ZLPreviewPhotoTypeURLImage);
+            [items addObject:temp];
+        }else{
+            imageViewIndex -= 1;// 如果存在视频类型，因为图片占第一位，图片的下标比正常情况会错位1
+        }
+    }
+    
+    ZLPhotoActionSheet *actionSheet = [[ZLPhotoActionSheet alloc] init];
+    /**
+     导航条颜色
+     */
+    actionSheet.configuration.navBarColor = [UIColor clearColor];
+    /**
+     底部工具栏按钮 可交互 状态标题颜色
+     */
+    actionSheet.configuration.statusBarStyle = UIStatusBarStyleLightContent;
+    actionSheet.sender = self;
+    [actionSheet previewPhotos:items index:imageViewIndex hideToolBar:YES complete:^(NSArray * _Nonnull photos) {
+        
+    }];
 }
 #pragma mark -- 事件监听
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -380,7 +412,13 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0) {
-        return 2;
+        if ((self.goodsDetail.gift_rule && self.goodsDetail.gift_rule.count) && (self.goodsDetail.rebate && self.goodsDetail.rebate.count)) {
+            return 2;
+        }else if ((self.goodsDetail.gift_rule && self.goodsDetail.gift_rule.count) || (self.goodsDetail.rebate && self.goodsDetail.rebate.count)) {
+            return 1;
+        }else{
+            return 0;
+        }
     }else if (section == 1) {
         return self.goodsDetail.materialLayout.count;
     }else if (section == 2) {
@@ -409,6 +447,17 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
     if (indexPath.section == 0) {
         GXGoodsGiftCell *cell = [tableView dequeueReusableCellWithIdentifier:GoodsGiftCell forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        if ((self.goodsDetail.gift_rule && self.goodsDetail.gift_rule.count) && (self.goodsDetail.rebate && self.goodsDetail.rebate.count)) {
+            if (indexPath.row == 0) {
+                cell.gift_rule = self.goodsDetail.gift_rule;
+            }else{
+                cell.rebate = self.goodsDetail.rebate;
+            }
+        }else if ((self.goodsDetail.gift_rule && self.goodsDetail.gift_rule.count)) {
+            cell.gift_rule = self.goodsDetail.gift_rule;
+        }else if (self.goodsDetail.rebate && self.goodsDetail.rebate.count) {
+            cell.rebate = self.goodsDetail.rebate;
+        }
         return cell;
     }else if (indexPath.section == 1) {
         GXGoodsMaterialCell * cell = [GXGoodsMaterialCell cellWithTableView:tableView];
@@ -449,7 +498,11 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     if (section == 0) {
-        return 10.f;
+        if ((self.goodsDetail.gift_rule && self.goodsDetail.gift_rule.count) || (self.goodsDetail.rebate && self.goodsDetail.rebate.count)){
+            return 10.f;
+        }else{
+            return CGFLOAT_MIN;
+        }
     }else if (section == 1) {
         return self.goodsDetail.materialLayout.count?10.f:CGFLOAT_MIN;
     }else if (section == 2) {
@@ -511,18 +564,52 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        if (indexPath.row == 0) {
-            GXRebateView *rebateView = [GXRebateView loadXibView];
-            rebateView.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 400.f);
-            
-            self.sharePopVC = [[zhPopupController alloc] initWithView:rebateView size:rebateView.bounds.size];
-            self.sharePopVC.layoutType = zhPopupLayoutTypeBottom;
-            [self.sharePopVC show];
-        }else{
+        hx_weakify(self);
+        if ((self.goodsDetail.gift_rule && self.goodsDetail.gift_rule.count) && (self.goodsDetail.rebate && self.goodsDetail.rebate.count)) {
+            if (indexPath.row == 0) {
+                GXFullGiftView *giftView = [GXFullGiftView loadXibView];
+                giftView.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 300.f);
+                giftView.gift_rule = self.goodsDetail.gift_rule;
+                giftView.closeClickedCall = ^{
+                    hx_strongify(weakSelf);
+                    [strongSelf.sharePopVC dismiss];
+                };
+                self.sharePopVC = [[zhPopupController alloc] initWithView:giftView size:giftView.bounds.size];
+                self.sharePopVC.layoutType = zhPopupLayoutTypeBottom;
+                [self.sharePopVC show];
+                
+            }else{
+                GXRebateView *rebateView = [GXRebateView loadXibView];
+                rebateView.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 400.f);
+                rebateView.rebate = self.goodsDetail.rebate;
+                rebateView.closeClickedCall = ^{
+                    hx_strongify(weakSelf);
+                    [strongSelf.sharePopVC dismiss];
+                };
+                self.sharePopVC = [[zhPopupController alloc] initWithView:rebateView size:rebateView.bounds.size];
+                self.sharePopVC.layoutType = zhPopupLayoutTypeBottom;
+                [self.sharePopVC show];
+            }
+        }else if ((self.goodsDetail.gift_rule && self.goodsDetail.gift_rule.count)) {
             GXFullGiftView *giftView = [GXFullGiftView loadXibView];
             giftView.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 300.f);
-            
+            giftView.gift_rule = self.goodsDetail.gift_rule;
+            giftView.closeClickedCall = ^{
+                hx_strongify(weakSelf);
+                [strongSelf.sharePopVC dismiss];
+            };
             self.sharePopVC = [[zhPopupController alloc] initWithView:giftView size:giftView.bounds.size];
+            self.sharePopVC.layoutType = zhPopupLayoutTypeBottom;
+            [self.sharePopVC show];
+        }else if (self.goodsDetail.rebate && self.goodsDetail.rebate.count) {
+            GXRebateView *rebateView = [GXRebateView loadXibView];
+            rebateView.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 400.f);
+            rebateView.rebate = self.goodsDetail.rebate;
+            rebateView.closeClickedCall = ^{
+                hx_strongify(weakSelf);
+                [strongSelf.sharePopVC dismiss];
+            };
+            self.sharePopVC = [[zhPopupController alloc] initWithView:rebateView size:rebateView.bounds.size];
             self.sharePopVC.layoutType = zhPopupLayoutTypeBottom;
             [self.sharePopVC show];
         }

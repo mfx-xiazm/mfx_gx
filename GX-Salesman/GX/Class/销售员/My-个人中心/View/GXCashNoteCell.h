@@ -10,8 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXCashNote;
 @interface GXCashNoteCell : UITableViewCell
-
+@property (nonatomic, strong) GXCashNote *note;
 @end
 
 NS_ASSUME_NONNULL_END

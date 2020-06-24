@@ -7,12 +7,21 @@
 //
 
 #import "GXRenewMyOrderBigCellHeader.h"
+#import "GXSalerOrder.h"
 
+@interface GXRenewMyOrderBigCellHeader ()
+@property (weak, nonatomic) IBOutlet UILabel *shop_name;
+
+@end
 @implementation GXRenewMyOrderBigCellHeader
 
 -(void)awakeFromNib
 {
     [super awakeFromNib];
 }
-
+-(void)setSalerOrder:(GXSalerOrder *)salerOrder
+{
+    _salerOrder = salerOrder;
+    self.shop_name.text = _salerOrder.shop_name;
+}
 @end

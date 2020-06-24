@@ -89,6 +89,12 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="apply_amount" destination="HMn-wc-cmT" id="6cQ-pt-XZg"/>
+                <outlet property="apply_status" destination="nCG-bG-Bsk" id="cHG-GK-Fc0"/>
+                <outlet property="approve_time" destination="aEN-8W-2Pr" id="ZFU-uY-rvq"/>
+                <outlet property="titleTxt" destination="mgs-qg-sOM" id="ALB-Pb-ocW"/>
+            </connections>
             <point key="canvasLocation" x="239.13043478260872" y="69.642857142857139"/>
         </tableViewCell>
     </objects>

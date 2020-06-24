@@ -90,7 +90,7 @@ static NSString *const RenewMyOrderCell = @"RenewMyOrderCell";
     GXRenewMyOrderBigCellHeader *header = [GXRenewMyOrderBigCellHeader loadXibView];
     header.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 40.f);
     if (self.salerOrder) {
-        
+        header.salerOrder = self.salerOrder;
     }else{
         //    if (self.status !=5) {
         //        GXMyOrder *order = self.orders[section];

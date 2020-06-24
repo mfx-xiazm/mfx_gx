@@ -9,11 +9,20 @@
 #import "GXPresellChildVC.h"
 #import "GXPresellCell.h"
 #import "GXPresellDetailVC.h"
+#import "GXPreSales.h"
+#import "OYCountDownManager.h"
 
 static NSString *const PresellCell = @"PresellCell";
+static NSString *const GXPresellSource1 = @"GXPresellSource1";
+static NSString *const GXPresellSource2 = @"GXPresellSource2";
+
 @interface GXPresellChildVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, copy) void(^scrollCallback)(UIScrollView *scrollView);
+/** 页码 */
+@property(nonatomic,assign) NSInteger pagenum;
+/** 列表 */
+@property(nonatomic,strong) NSMutableArray *preSales;
 @end
 
 @implementation GXPresellChildVC
@@ -21,6 +30,13 @@ static NSString *const PresellCell = @"PresellCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpTableView];
+    [self setUpRefresh];
+    [self startShimmer];
+    // 启动倒计时管理
+    [kCountDownManager start];
+    // 增加倒计时源
+    [kCountDownManager addSourceWithIdentifier:(self.seaType == 1)?GXPresellSource1:GXPresellSource2];
+    [self getPreSaleDataRequest:YES];
 }
 #pragma mark -- 视图相关
 -(void)setUpTableView
@@ -50,42 +66,100 @@ static NSString *const PresellCell = @"PresellCell";
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GXPresellCell class]) bundle:nil] forCellReuseIdentifier:PresellCell];
     
-//    hx_weakify(self);
-//    [self.tableView zx_setEmptyView:[GYEmptyView class] isFull:YES clickedBlock:^(UIButton * _Nullable btn) {
-//        [weakSelf startShimmer];
-//        [weakSelf getMessageDataRequest:YES];
-//    }];
+    hx_weakify(self);
+    [self.tableView zx_setEmptyView:[GYEmptyView class] isFull:YES clickedBlock:^(UIButton * _Nullable btn) {
+        [weakSelf startShimmer];
+        [weakSelf getPreSaleDataRequest:YES];
+    }];
 }
 /** 添加刷新控件 */
 -(void)setUpRefresh
 {
     hx_weakify(self);
-    self.tableView.mj_header.automaticallyChangeAlpha = YES;
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        hx_strongify(weakSelf);
-        [strongSelf.tableView.mj_footer resetNoMoreData];
-        [strongSelf getMessageDataRequest:YES];
-    }];
+//    self.tableView.mj_header.automaticallyChangeAlpha = YES;
+//    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+//        hx_strongify(weakSelf);
+//        [strongSelf.tableView.mj_footer resetNoMoreData];
+//        [strongSelf getPreSaleDataRequest:YES];
+//    }];
     //追加尾部刷新
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         hx_strongify(weakSelf);
-        [strongSelf getMessageDataRequest:NO];
+        [strongSelf getPreSaleDataRequest:NO];
     }];
 }
 #pragma mark -- 数据请求
--(void)getMessageDataRequest:(BOOL)isRefresh
+-(void)getPreSaleDataRequest:(BOOL)isRefresh
 {
-    
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"seaType"] = @(self.seaType);
+    if (isRefresh) {
+        parameters[@"page"] = @(1);//第几页
+    }else{
+        NSInteger page = self.pagenum+1;
+        parameters[@"page"] = @(page);//第几页
+    }
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"program/getPreSaleData" parameters:parameters success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            if (isRefresh) {
+                [strongSelf.tableView.mj_header endRefreshing];
+                strongSelf.pagenum = 1;
+                
+                [strongSelf.preSales removeAllObjects];
+                NSArray *arrt = [NSArray yy_modelArrayWithClass:[GXPreSales class] json:responseObject[@"data"]];
+                [strongSelf.preSales addObjectsFromArray:arrt];
+            }else{
+                [strongSelf.tableView.mj_footer endRefreshing];
+                strongSelf.pagenum ++;
+                
+                if ([responseObject[@"data"] isKindOfClass:[NSArray class]] && ((NSArray *)responseObject[@"data"]).count){
+                    NSArray *arrt = [NSArray yy_modelArrayWithClass:[GXPreSales class] json:responseObject[@"data"]];
+                    [strongSelf.preSales addObjectsFromArray:arrt];
+                }else{// 提示没有更多数据
+                    [strongSelf.tableView.mj_footer endRefreshingWithNoMoreData];
+                }
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // 调用reload
+                [kCountDownManager reloadSourceWithIdentifier:(self.seaType == 1)?GXPresellSource1:GXPresellSource2];
+                [strongSelf.tableView reloadData];
+            });
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
+        [strongSelf.tableView.mj_header endRefreshing];
+        [strongSelf.tableView.mj_footer endRefreshing];
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
 }
+#pragma mark -- UITableView数据源和代理
 #pragma mark -- UITableView数据源和代理
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 8;
+    return self.preSales.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     GXPresellCell *cell = [tableView dequeueReusableCellWithIdentifier:PresellCell forIndexPath:indexPath];
     //无色
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    GXPreSales *preSale = self.preSales[indexPath.row];
+    preSale.countDownSource = (self.seaType == 1)?GXPresellSource1:GXPresellSource2;
+    cell.preSale = preSale;
+    [cell setCountDownZero:^(GXPreSales *preSale) {
+        // 回调
+        if (!preSale.timeOut) {
+            HXLog(@"倒计时--%@--时间到了", preSale.goods_name);
+        }
+        // 标志
+        preSale.timeOut = YES;
+        [tableView reloadData];
+    }];
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -95,8 +169,10 @@ static NSString *const PresellCell = @"PresellCell";
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    GXPreSales *preSale = self.preSales[indexPath.row];
     GXPresellDetailVC *dvc = [GXPresellDetailVC new];
-    dvc.goods_id = @"577";
+    dvc.pre_sale_id = preSale.presell_id;
+    dvc.goods_id = preSale.goods_id;
     [self.navigationController pushViewController:dvc animated:YES];
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -136,4 +212,10 @@ static NSString *const PresellCell = @"PresellCell";
     self.scrollCallback = callback;
 }
 
+-(void)dealloc
+{
+    HXLog(@"预售列表销毁");
+    [kCountDownManager removeSourceWithIdentifier:(self.seaType == 1)?GXPresellSource1:GXPresellSource2];
+    [kCountDownManager invalidate];
+}
 @end
