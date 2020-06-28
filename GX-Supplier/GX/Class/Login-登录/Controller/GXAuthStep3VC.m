@@ -59,7 +59,7 @@
     parameters[@"payment"] = self.payment.text;//打款金额
 
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"admin/platformPayment" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"index/platformPayment" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         [btn stopLoading:@"提交" image:nil textColor:nil backgroundColor:nil];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {

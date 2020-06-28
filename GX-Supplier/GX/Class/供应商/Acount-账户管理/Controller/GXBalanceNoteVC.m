@@ -14,6 +14,7 @@
 #import "FCDropMenuCollectionHeader.h"
 #import "FCDropMenuCollectionCell.h"
 #import "FCDropMenuRangeCollectionCell.h"
+#import "GXCashNoteDetailVC.h"
 
 static NSString *const AccountManageCell = @"AccountManageCell";
 @interface GXBalanceNoteVC ()<UITableViewDelegate,UITableViewDataSource,WMZDropMenuDelegate>
@@ -205,7 +206,7 @@ static NSString *const AccountManageCell = @"AccountManageCell";
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     GXFinanceLog *log = self.logs[indexPath.row];
-    if (log.finance_log_type <= 5) {
+    if (log.finance_log_type <= 5 || log.finance_log_type >= 30) {
         return 35.f+60.f+10.f;
     }else{
         return 60.f+10.f;
@@ -215,10 +216,17 @@ static NSString *const AccountManageCell = @"AccountManageCell";
 {
     GXFinanceLog *log = self.logs[indexPath.row];
 
-    if (log.finance_log_type <= 5) {
+    if (log.finance_log_type <= 5 || log.finance_log_type >= 30) {
         GXOrderDetailVC *dvc = [GXOrderDetailVC new];
         dvc.oid = log.orderInfo.oid;
         [self.navigationController pushViewController:dvc animated:YES];
+    }else{
+        if ([log.ref_id isEqualToString:@"0"]) {
+            return;
+        }
+        GXCashNoteDetailVC *nvc = [GXCashNoteDetailVC new];
+        nvc.finance_apply_id = log.ref_id;
+        [self.navigationController pushViewController:nvc animated:YES];
     }
 }
 #pragma mark -- WMZDropMenuDelegate必须实现的代理

@@ -89,7 +89,7 @@
         action = @"admin/getNoticeDetail";
         parameters[@"notice_id"] = self.notice_id;
     }else if (self.requestType == 4) {
-        action = @"admin/aboutUs";
+        action = @"index/aboutUs";
     }else if (self.requestType == 5) {
         action = @"admin/saleStandard";
     }else if (self.requestType == 6) {

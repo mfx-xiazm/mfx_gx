@@ -30,6 +30,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *recommendSale;
 @property (weak, nonatomic) IBOutlet UIView *banlanceView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *banlanceViewHeight;
+@property (weak, nonatomic) IBOutlet UIButton *codeBtn;
 
 /* 账户信息 */
 @property(nonatomic,strong) NSDictionary *accountData;
@@ -46,9 +47,13 @@
     [super viewDidLoad];
     [self setUpNavbar];
     if ([[MSUserManager sharedInstance].curUserInfo.post_id isEqualToString:@"1"]) {
+        self.codeBtn.hidden = YES;
+        
         self.banlanceView.hidden = YES;
         self.banlanceViewHeight.constant = 50.f;
     }else{
+        self.codeBtn.hidden = NO;
+        
         self.banlanceView.hidden = NO;
         self.banlanceViewHeight.constant = 220.f;
     }

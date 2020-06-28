@@ -104,7 +104,7 @@ static NSString *const MessageCell = @"MessageCell";
         parameters[@"page"] = @(page);//第几页
     }
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:[[MSUserManager sharedInstance].curUserInfo.utype isEqualToString:@"3"]?@"program/getMessageData":@"admin/getMessageData" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"index/getMessageData" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         [strongSelf stopShimmer];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
@@ -145,7 +145,7 @@ static NSString *const MessageCell = @"MessageCell";
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"msg_id"] = msg_id;
-    [HXNetworkTool POST:HXRC_M_URL action:[[MSUserManager sharedInstance].curUserInfo.utype isEqualToString:@"3"]?@"program/readMsg":@"admin/readMsg" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"index/readMsg" parameters:parameters success:^(id responseObject) {
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             
         }else{

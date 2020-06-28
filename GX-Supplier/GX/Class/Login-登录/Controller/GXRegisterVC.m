@@ -99,7 +99,7 @@
     parameters[@"share_code"] = [self.shareCode hasText]?self.shareCode.text:@"";
     
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"admin/supplierRegister" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"index/supplierRegister" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         [sender stopLoading:@"注册" image:nil textColor:nil backgroundColor:nil];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {

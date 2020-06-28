@@ -33,6 +33,7 @@
 #import "GXFullGiftView.h"
 #import "zhAlertView.h"
 #import "XQCarousel.h"
+#import "GXChargesRateView.h"
 
 static NSString *const GoodsInfoCell = @"GoodsInfoCell";
 static NSString *const GoodsGiftCell = @"GoodsGiftCell";
@@ -169,11 +170,23 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
     [self.navigationController pushViewController:pvc animated:YES];
 }
 - (IBAction)toolBtnClicked:(UIButton *)sender {
+    GXChargesRateView *rateView = [GXChargesRateView loadXibView];
+    rateView.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 300.f);
     if (sender.tag == 1) {
-        HXLog(@"推荐奖励");
+        rateView.rate_title.text = @"推荐奖励";
+        rateView.recommend = self.goodsDetail.recommend;
     }else{
-        HXLog(@"佣金提成");
+        rateView.rate_title.text = @"佣金提成比例";
+        rateView.commission = self.goodsDetail.commission;
     }
+    hx_weakify(self);
+    rateView.rateCloseCall = ^{
+        hx_strongify(weakSelf);
+        [strongSelf.sharePopVC dismiss];
+    };
+    self.sharePopVC = [[zhPopupController alloc] initWithView:rateView size:rateView.bounds.size];
+    self.sharePopVC.layoutType = zhPopupLayoutTypeBottom;
+    [self.sharePopVC show];
 }
 #pragma mark -- 接口请求
 -(void)getGoodDetailRequest

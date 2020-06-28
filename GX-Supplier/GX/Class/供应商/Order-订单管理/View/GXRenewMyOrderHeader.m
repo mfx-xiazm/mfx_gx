@@ -66,6 +66,15 @@
                     self.out_line_status.hidden = YES;
                 }
             }
+        }else if ([_order.status isEqualToString:@"待收货"]) {
+            // 0 无异常订单 1异常订单(超时未发货);2超时已发货
+            if ([_order.order_status isEqualToString:@"2"]) {
+                self.out_line_status.hidden = NO;
+                [self.out_line_status setImage:HXGetImage(@"超时") forState:UIControlStateNormal];
+                [self.out_line_status setTitle:@"  超时已发货" forState:UIControlStateNormal];
+            }else{
+                self.out_line_status.hidden = YES;
+            }
         }else{
             self.out_line_status.hidden = YES;
         }

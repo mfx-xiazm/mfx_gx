@@ -105,16 +105,9 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
     }else{
         parameters[@"oid"] = self.oid;
     }
-    NSString *action = nil;
-    if ([[MSUserManager sharedInstance].curUserInfo.utype isEqualToString:@"1"]) {//母婴店
-        action = (self.refund_id && self.refund_id.length)?@"admin/orderRefundInfo":@"admin/getOrderInfo";
-    }else if ([[MSUserManager sharedInstance].curUserInfo.utype isEqualToString:@"2"]) {//供应商
-        action = (self.refund_id && self.refund_id.length)?@"index/orderRefundInfo":@"index/getOrderInfo";
-    }else{
-        action = @"program/getOrderInfo";
-    }
+    
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:action parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:(self.refund_id && self.refund_id.length)?@"index/orderRefundInfo":@"index/getOrderInfo" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         [strongSelf stopShimmer];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {

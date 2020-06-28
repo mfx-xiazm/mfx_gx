@@ -58,7 +58,7 @@
 }
 -(void)handleNoteDetailData
 {
-    self.cash_title.text = [NSString stringWithFormat:@"余额提现-到%@(%@)",_cashNote.bank_name,[_cashNote.card_no substringFromIndex:_cashNote.card_no.length-4]];
+    self.cash_title.text = [NSString stringWithFormat:@"余额提现-到%@(%@)",_cashNote.bank_name,(_cashNote.card_no.length>4)?[_cashNote.card_no substringFromIndex:_cashNote.card_no.length-4]:_cashNote.card_no];
     self.apply_amount.text = [NSString stringWithFormat:@"+￥%@",_cashNote.apply_amount];
     
     // 1待审核；2已通过；3未通过

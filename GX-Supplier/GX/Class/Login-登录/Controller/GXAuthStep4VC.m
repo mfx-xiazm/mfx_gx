@@ -78,7 +78,7 @@
     parameters[@"token"] = self.token;//用户验证
 
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"admin/supplierInfo" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"index/supplierInfo" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         [strongSelf stopShimmer];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
@@ -108,7 +108,7 @@
     parameters[@"card_back_img"] = self.card_back_url;//反面照
 
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"admin/realAuthentication" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"index/realAuthentication" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         [btn stopLoading:@"确定" image:nil textColor:nil backgroundColor:nil];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {

@@ -77,7 +77,7 @@
     parameters[@"account_phone"] = self.account_phone.text;//预留银行手机号
 
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"admin/supplierAuthentication" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"index/supplierAuthentication" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         [btn stopLoading:@"提交" image:nil textColor:nil backgroundColor:nil];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {

@@ -32,6 +32,7 @@
     [super viewDidLoad];
     [self setUpNavBar];
     [self setUpCategoryView];
+    [self getOrderNum];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -66,6 +67,8 @@
         
         GXSalerOrderManageChildVC *mvc1 = (GXSalerOrderManageChildVC *)self.childVCs.lastObject;
         mvc1.status = status;
+        
+        [self getOrderNum];
     }
 }
 -(void)setUpNavBar
@@ -125,6 +128,7 @@
     }else{
         targetViewController.seaKey = @"";
     }
+    [self getOrderNum];
     return YES;
 }
 -(void)filterClicked
@@ -177,5 +181,27 @@
     targetViewController.view.frame = CGRectMake(HX_SCREEN_WIDTH * index, 0, HX_SCREEN_WIDTH, self.scrollView.hxn_height);
     
     [self.scrollView addSubview:targetViewController.view];
+}
+#pragma mark -- 接口
+-(void)getOrderNum
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"seaKey"] = [self.searchBar hasText]?self.searchBar.text:@"";
+    parameters[@"status"] = (self.status && self.status.length)?self.status:@"";
+    
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"program/getOrderNum" parameters:@{} success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                strongSelf.categoryView.titles = @[[NSString stringWithFormat:@"终端店(%@)",responseObject[@"data"][@"shopNum"]], [NSString stringWithFormat:@"供应商(%@)",responseObject[@"data"][@"providerNum"]]];
+                [strongSelf.categoryView reloadData];
+            });
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
 }
 @end

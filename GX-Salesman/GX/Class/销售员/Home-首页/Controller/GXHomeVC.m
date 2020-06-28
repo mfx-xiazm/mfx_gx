@@ -234,7 +234,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
     alert.updateClickedCall = ^(NSInteger index) {
         hx_strongify(weakSelf);
         if (index == 1) {// 强制更新不消失
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/cn/app/id1493878138?mt=8"]];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/cn/app/id1521112168?mt=8"]];
         }else{// 不强制更新消失
             [strongSelf.updatePopVC dismiss];
         }

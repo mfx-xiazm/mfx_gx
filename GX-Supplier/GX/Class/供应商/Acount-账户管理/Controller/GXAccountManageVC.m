@@ -17,6 +17,7 @@
 #import "GXMySetVC.h"
 #import "GXMyHeader.h"
 #import "GXBalanceNoteVC.h"
+#import "GXCashNoteDetailVC.h"
 
 static NSString *const AccountManageCell = @"AccountManageCell";
 @interface GXAccountManageVC ()<UITableViewDelegate,UITableViewDataSource>
@@ -42,7 +43,6 @@ static NSString *const AccountManageCell = @"AccountManageCell";
     [super viewDidLoad];
     [self setUpNavbar];
     [self setUpTableView];
-    [self startShimmer];
     [self getMemberRequest];
     [self getFinanceLogRequest:YES];
 }
@@ -126,7 +126,7 @@ static NSString *const AccountManageCell = @"AccountManageCell";
 -(void)getMemberRequest
 {
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getMineData" parameters:@{} success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"index/getMineData" parameters:@{} success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             strongSelf.mineData = [GXMineData yy_modelWithDictionary:responseObject[@"data"]];
@@ -270,7 +270,7 @@ static NSString *const AccountManageCell = @"AccountManageCell";
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     GXFinanceLog *log = self.logs[indexPath.row];
-    if (log.finance_log_type <= 5) {
+    if (log.finance_log_type <= 5 || log.finance_log_type >= 30) {
         return 35.f+60.f+10.f;
     }else{
         return 60.f+10.f;
@@ -280,10 +280,17 @@ static NSString *const AccountManageCell = @"AccountManageCell";
 {
     GXFinanceLog *log = self.logs[indexPath.row];
 
-    if (log.finance_log_type <= 5) {
+    if (log.finance_log_type <= 5 || log.finance_log_type >= 30) {
         GXOrderDetailVC *dvc = [GXOrderDetailVC new];
         dvc.oid = log.orderInfo.oid;
         [self.navigationController pushViewController:dvc animated:YES];
+    }else{
+        if ([log.ref_id isEqualToString:@"0"]) {
+            return;
+        }
+        GXCashNoteDetailVC *nvc = [GXCashNoteDetailVC new];
+        nvc.finance_apply_id = log.ref_id;
+        [self.navigationController pushViewController:nvc animated:YES];
     }
 }
 @end

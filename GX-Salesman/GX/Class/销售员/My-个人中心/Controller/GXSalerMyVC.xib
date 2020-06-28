@@ -14,6 +14,7 @@
                 <outlet property="banlanceView" destination="MpN-jN-Qgc" id="oeB-4G-9wV"/>
                 <outlet property="banlanceViewHeight" destination="r6q-JN-DT3" id="i8v-Y0-cIx"/>
                 <outlet property="cashable_balance" destination="Q61-oS-8I8" id="Xbx-Sx-Rlt"/>
+                <outlet property="codeBtn" destination="Yv8-Av-QyV" id="u3H-l1-gyA"/>
                 <outlet property="phone" destination="Yn0-Hf-84a" id="N8d-2P-qqW"/>
                 <outlet property="post_img" destination="diw-VQ-6MU" id="LtU-GJ-cTA"/>
                 <outlet property="recommendProvider" destination="NRc-m7-Qxi" id="S0E-Qt-PT6"/>
@@ -53,17 +54,17 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="金口优乐母婴店" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jnJ-eb-Jg2">
-                                            <rect key="frame" x="75" y="115" width="128.5" height="21.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="业务员" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jnJ-eb-Jg2">
+                                            <rect key="frame" x="75" y="115" width="55.5" height="21.5"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="平台合伙人" translatesAutoresizingMaskIntoConstraints="NO" id="diw-VQ-6MU">
-                                            <rect key="frame" x="213.5" y="118.5" width="49" height="15"/>
+                                            <rect key="frame" x="140.5" y="118.5" width="49" height="15"/>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13865562343" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yn0-Hf-84a">
-                                            <rect key="frame" x="75" y="148" width="96" height="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yn0-Hf-84a">
+                                            <rect key="frame" x="75" y="148" width="4" height="17"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>

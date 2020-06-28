@@ -119,7 +119,7 @@
     parameters[@"seaType"] = self.seaType;//查询类型 1查询资质信息 2查询食品经营许可证
 
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"admin/naturalData" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"index/naturalData" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             strongSelf.result = [NSMutableDictionary dictionaryWithDictionary:responseObject[@"data"]];
@@ -250,7 +250,7 @@
 }
 -(void)upImageRequestWithImage:(UIImage *)image completedCall:(void(^)(NSString * imageUrl,NSString * imagePath))completedCall
 {
-    [HXNetworkTool uploadImagesWithURL:HXRC_M_URL action:@"admin/uploadFile" parameters:@{} name:@"file" images:@[image] fileNames:nil imageScale:0.8 imageType:@"png" progress:nil success:^(id responseObject) {
+    [HXNetworkTool uploadImagesWithURL:HXRC_M_URL action:@"index/uploadFile" parameters:@{} name:@"file" images:@[image] fileNames:nil imageScale:0.8 imageType:@"png" progress:nil success:^(id responseObject) {
         if ([[responseObject objectForKey:@"status"] integerValue] == 1) {
             completedCall(responseObject[@"data"][@"path"],responseObject[@"data"][@"imgPath"]);
         }else{
@@ -265,7 +265,7 @@
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"food_license_img"] = food_license_img;
 
-    [HXNetworkTool POST:HXRC_M_URL action:@"admin/updateFoodLicenseImg" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"index/updateFoodLicenseImg" parameters:parameters success:^(id responseObject) {
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
         }else{

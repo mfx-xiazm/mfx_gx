@@ -187,7 +187,7 @@
 }
 -(void)upImageRequestWithImage:(UIImage *)image completedCall:(void(^)(NSString * imageUrl,NSString * imagePath))completedCall
 {
-    [HXNetworkTool uploadImagesWithURL:HXRC_M_URL action:@"admin/uploadFile" parameters:@{} name:@"file" images:@[image] fileNames:nil imageScale:0.8 imageType:@"png" progress:nil success:^(id responseObject) {
+    [HXNetworkTool uploadImagesWithURL:HXRC_M_URL action:@"index/uploadFile" parameters:@{} name:@"file" images:@[image] fileNames:nil imageScale:0.8 imageType:@"png" progress:nil success:^(id responseObject) {
         if ([[responseObject objectForKey:@"status"] integerValue] == 1) {
             completedCall(responseObject[@"data"][@"path"],responseObject[@"data"][@"imgPath"]);
         }else{

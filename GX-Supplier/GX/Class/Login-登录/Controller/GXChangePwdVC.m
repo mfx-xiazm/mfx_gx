@@ -99,7 +99,7 @@
     parameters[@"utype"] = @"2";
     
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:(self.dataType ==1)?@"admin/forgetPassword":@"admin/editPassword" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:(self.dataType ==1)?@"index/forgetPassword":@"index/editPassword" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         [btn stopLoading:@"确定" image:nil textColor:nil backgroundColor:nil];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {

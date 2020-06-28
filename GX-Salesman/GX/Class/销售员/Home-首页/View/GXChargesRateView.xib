@@ -407,6 +407,9 @@
                             <state key="normal" title="关闭" image="弹框关闭">
                                 <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="rateCloseClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="PTh-DC-75h"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -437,6 +440,19 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="platform" destination="Ln0-We-9GX" id="9fA-W7-XXr"/>
+                <outlet property="platformRewardView" destination="5Rn-s0-bfV" id="4em-Tb-X2R"/>
+                <outlet property="provider" destination="2kk-oi-554" id="0mm-kX-E8a"/>
+                <outlet property="rate1" destination="aRp-T0-hDy" id="3rN-DZ-eB9"/>
+                <outlet property="rate2" destination="RWR-yS-vTs" id="5Um-Xv-KHC"/>
+                <outlet property="rate3" destination="SaM-BH-4OV" id="B27-I7-dgM"/>
+                <outlet property="rate_title" destination="KwV-jr-d6f" id="6WN-FP-KHz"/>
+                <outlet property="recommendRewardView" destination="hgq-yv-V3l" id="mGQ-UY-SCb"/>
+                <outlet property="recommend_provider" destination="Mei-m7-v12" id="jtA-GB-YyX"/>
+                <outlet property="recommend_sale" destination="Og8-Zd-WsE" id="YAb-pY-OKN"/>
+                <outlet property="saleManCommissionRewardView" destination="rLa-4I-HiK" id="2Kb-IV-izW"/>
+            </connections>
             <point key="canvasLocation" x="244.92753623188409" y="198.54910714285714"/>
         </view>
     </objects>

@@ -63,7 +63,23 @@
 -(void)setSalerOrder:(GXSalerOrder *)salerOrder
 {
     _salerOrder = salerOrder;
-    self.order_state.text = _salerOrder.status;
+    if (_salerOrder.refund_id && _salerOrder.refund_id.length) {
+        if ([_salerOrder.refund_status isEqualToString:@"1"]) {
+            self.order_state.text = @"等待供应商审核";
+        }else if ([_salerOrder.refund_status isEqualToString:@"2"]){
+            self.order_state.text = @"等待平台审核";
+        }else if ([_salerOrder.refund_status isEqualToString:@"3"]){
+            self.order_state.text = @"退款成功";
+        }else if ([_salerOrder.refund_status isEqualToString:@"4"]){
+            self.order_state.text = @"退款驳回";
+        }else if ([_salerOrder.refund_status isEqualToString:@"5"]){
+            self.order_state.text = @"供应商同意";
+        }else{
+            self.order_state.text = @"供应商不同意";
+        }
+    }else{
+        self.order_state.text = _salerOrder.status;
+    }
     self.order_no.text = [NSString stringWithFormat:@"%@",_salerOrder.order_no];
     
     if ([_salerOrder.status isEqualToString:@"待发货"]) {
@@ -71,6 +87,14 @@
             self.out_line_status.hidden = NO;
             [self.out_line_status setImage:HXGetImage(@"超时") forState:UIControlStateNormal];
             [self.out_line_status setTitle:@"  超时未发货" forState:UIControlStateNormal];
+        }else{
+            self.out_line_status.hidden = YES;
+        }
+    }else if ([_salerOrder.status isEqualToString:@"待收货"]) {
+        if ([_salerOrder.order_status isEqualToString:@"2"]) {
+            self.out_line_status.hidden = NO;
+            [self.out_line_status setImage:HXGetImage(@"超时") forState:UIControlStateNormal];
+            [self.out_line_status setTitle:@"  超时已发货" forState:UIControlStateNormal];
         }else{
             self.out_line_status.hidden = YES;
         }

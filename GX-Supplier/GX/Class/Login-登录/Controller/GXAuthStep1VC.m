@@ -248,7 +248,7 @@
     parameters[@"memo"] = [self.memo hasText]?self.memo.text:@"";//备注
 
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"admin/supplierSettledIn" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"index/supplierSettledIn" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         [btn stopLoading:@"确定" image:nil textColor:nil backgroundColor:nil];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
@@ -299,7 +299,7 @@
         strongSelf.region.regions = [NSArray yy_modelArrayWithClass:[GXRegion class] json:responseObject[@"data"]];
     });
 //    hx_weakify(self);
-//    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getAreaData" parameters:@{} success:^(id responseObject) {
+//    [HXNetworkTool POST:HXRC_M_URL action:@"index/getAreaData" parameters:@{} success:^(id responseObject) {
 //        hx_strongify(weakSelf);
 //        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
 //            strongSelf.region = [[GXSelectRegion alloc] init];
@@ -325,7 +325,7 @@
     parameters[@"token"] = self.token;//用户验证
 
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"admin/supplierResetRegister" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"index/supplierResetRegister" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             dispatch_async(dispatch_get_main_queue(), ^{

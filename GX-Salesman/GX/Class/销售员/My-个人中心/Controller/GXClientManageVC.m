@@ -24,6 +24,7 @@
     [super viewDidLoad];
     [self.navigationItem setTitle:@"客户管理"];
     [self setUpCategoryView];
+    [self getCustomerOrderCount];
 }
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -90,5 +91,22 @@
     targetViewController.view.frame = CGRectMake(HX_SCREEN_WIDTH * index, 0, HX_SCREEN_WIDTH, self.scrollView.hxn_height);
     
     [self.scrollView addSubview:targetViewController.view];
+}
+-(void)getCustomerOrderCount
+{
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"program/getCustomerCount" parameters:@{} success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                strongSelf.categoryView.titles = @[[NSString stringWithFormat:@"终端店(%@)",responseObject[@"data"][@"shop_count"]], [NSString stringWithFormat:@"供应商(%@)",responseObject[@"data"][@"provider_count"]]];
+                [strongSelf.categoryView reloadData];
+            });
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
 }
 @end

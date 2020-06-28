@@ -39,14 +39,7 @@
     if (_log.finance_log_type <= 5) {
         self.desc.text = _log.orderInfo.goods_name;
 
-        /*
-         if ([[MSUserManager sharedInstance].curUserInfo.utype isEqualToString:@"2"]) {
-         self.type.text = @"订单收入";
-         }else{
-         self.type.text = @"订单佣金";
-         }
-         */
-        // 0 终端门店订单的提成佣金;1平台订单收入；2供应商订单收入 3供应商订单的平台抽佣；4推荐供应商的奖励佣金；5终端门店订单的提成佣金
+        // 0 终端门店订单的提成佣金;1平台订单收入；2供应商订单收入 3供应商订单的平台抽佣；4推荐供应商的奖励佣金；5终端门店订单的提成佣金 6 提现申请驳回  20提现申请提交扣除提现金额 30 供应商订单收货时因销售员下级推荐母婴店的抽成； 31 供应商订单收货时因销售员下级的下级推荐母婴店的抽成； 32供应商订单因推荐业务员的抽成
         if (_log.finance_log_type == 0) {
             self.type.text = @"平台订单的提成佣金";
         }else if (_log.finance_log_type == 1) {
@@ -71,13 +64,28 @@
         self.left_amount.textColor = UIColorFromRGB(0xCCCCCC);
         self.left_amount.text = _log.create_time;
         self.amount.text = [NSString stringWithFormat:@"%@",_log.amount];
-    }else{
+    }else if (_log.finance_log_type == 20) {
         self.desc.text = @"余额提现";
         
         self.type.text = @"余额提现";
         self.left_amount.textColor = UIColorFromRGB(0xCCCCCC);
         self.left_amount.text = _log.create_time;
         self.amount.text = [NSString stringWithFormat:@"%@",_log.amount];
+    }else {
+        self.desc.text = _log.orderInfo.goods_name;
+
+        // 0 终端门店订单的提成佣金;1平台订单收入；2供应商订单收入 3供应商订单的平台抽佣；4推荐供应商的奖励佣金；5终端门店订单的提成佣金 6 提现申请驳回  20提现申请提交扣除提现金额 30 供应商订单收货时因销售员下级推荐母婴店的抽成； 31 供应商订单收货时因销售员下级的下级推荐母婴店的抽成； 32供应商订单因推荐业务员的抽成
+        if (_log.finance_log_type == 30) {
+            self.type.text = @"供应商订单推荐母婴店抽成";
+        }else if (_log.finance_log_type == 31) {
+            self.type.text = @"供应商订单推荐母婴店抽成";
+        }else{
+            self.type.text = @"供应商订单推荐业务员抽成";
+        }
+        
+        self.left_amount.textColor = HXControlBg;
+        self.left_amount.text = [NSString stringWithFormat:@"￥%@",_log.orderInfo.pay_amount];
+        self.amount.text = [NSString stringWithFormat:@"+%@",_log.amount];
     }
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

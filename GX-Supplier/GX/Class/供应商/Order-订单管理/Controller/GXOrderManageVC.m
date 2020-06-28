@@ -15,6 +15,8 @@
 #import "GXMySetVC.h"
 #import "UIView+WZLBadge.h"
 #import "GXGiftGoodsVC.h"
+#import "SZUpdateView.h"
+#import <zhPopupController.h>
 
 @interface GXOrderManageVC ()<JXCategoryViewDelegate,UIScrollViewDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet JXCategoryTitleView *categoryView;
@@ -33,6 +35,7 @@
     [super viewDidLoad];
     [self setUpNavBar];
     [self setUpCategoryView];
+    [self updateVersionRequest];//版本升级
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -163,7 +166,7 @@
 -(void)getHomeUnReadMsg
 {
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getHomeMsg" parameters:@{} success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"index/getHomeMsg" parameters:@{} success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             if ([responseObject[@"data"] boolValue]) {
@@ -177,5 +180,50 @@
     } failure:^(NSError *error) {
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
     }];
+}
+-(void)updateVersionRequest
+{
+    hx_weakify(self);
+    NSString *key = @"CFBundleShortVersionString";
+    // 当前软件的版本号（从Info.plist中获得）
+    NSString *currentVersion = [NSBundle mainBundle].infoDictionary[key];
+    
+    [HXNetworkTool POST:HXRC_M_URL action:@"index/isNewVersions" parameters:@{@"sys":@"2",@"versions":currentVersion} success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        if([[responseObject objectForKey:@"status"] boolValue]) {
+            if ([responseObject[@"data"] isKindOfClass:[NSDictionary class]]) {
+                [strongSelf updateAlert:responseObject[@"data"]];
+            }
+        }else{
+            //[JMNotifyView showNotify:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        //[JMNotifyView showNotify:error.localizedDescription];
+    }];
+}
+-(void)updateAlert:(NSDictionary *)dict
+{
+    // 删除数据
+    SZUpdateView *alert = [SZUpdateView loadXibView];
+    alert.hxn_width = HX_SCREEN_WIDTH - 30*2;
+    alert.hxn_height = (HX_SCREEN_WIDTH - 30*2) *130/300.0 + 240;
+    if ([dict[@"must_type"] integerValue] == 1) {
+        alert.closeBtn.hidden = YES;
+    }else{
+        alert.closeBtn.hidden = NO;
+    }
+    alert.versionTxt.text = [NSString stringWithFormat:@"发现新版本V%@",dict[@"app_version"]];
+    alert.updateText.text = dict[@"update_content"];
+    hx_weakify(self);
+    alert.updateClickedCall = ^(NSInteger index) {
+        hx_strongify(weakSelf);
+        if (index == 1) {// 强制更新不消失
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/cn/app/id1521112044?mt=8"]];
+        }else{// 不强制更新消失
+            [strongSelf.zh_popupController dismissWithDuration:0.25 springAnimated:NO];
+        }
+    };
+    self.zh_popupController = [[zhPopupController alloc] init];
+    [self.zh_popupController presentContentView:nil duration:0.25 springAnimated:NO];
 }
 @end

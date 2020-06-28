@@ -25,7 +25,7 @@
 -(void)setNote:(GXCashNote *)note
 {
     _note = note;
-    self.titleTxt.text = [NSString stringWithFormat:@"余额提现-到%@(%@)",_note.bank_name,[_note.card_no substringFromIndex:_note.card_no.length-4]];
+    self.titleTxt.text = [NSString stringWithFormat:@"余额提现-到%@(%@)",_note.bank_name,(_note.card_no.length>4)?[_note.card_no substringFromIndex:_note.card_no.length-4]:_note.card_no];
     self.apply_amount.text = [NSString stringWithFormat:@"+￥%@",_note.apply_amount];
     self.approve_time.text = _note.create_time;
     

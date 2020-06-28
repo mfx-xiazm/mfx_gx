@@ -60,7 +60,7 @@
     parameters[@"utype"] = @"2";
     
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"admin/editPhone" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"index/editPhone" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         [btn stopLoading:@"确定修改" image:nil textColor:nil backgroundColor:nil];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {

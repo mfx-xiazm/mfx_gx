@@ -10,8 +10,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GXRecommendReward,GXCommissionReward;
+typedef void(^rateCloseCall)(void);
 @interface GXChargesRateView : UIView
-
+@property (weak, nonatomic) IBOutlet UILabel *rate_title;
+@property (nonatomic, copy) rateCloseCall rateCloseCall;
+@property(nonatomic,strong) GXRecommendReward *recommend;
+@property(nonatomic,strong) GXCommissionReward *commission;
 @end
 
 NS_ASSUME_NONNULL_END

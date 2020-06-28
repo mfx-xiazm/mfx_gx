@@ -24,7 +24,8 @@
         self.returnKeyType = UIReturnKeySearch;
         self.textAlignment = NSTextAlignmentLeft;
         self.tintColor = HXControlBg;
-
+        self.keyboardAppearance = UIKeyboardAppearanceLight;
+        
         UIImageView *searchIcon = [[UIImageView alloc] init];
         searchIcon.image = [UIImage imageNamed:@"搜索"];
         searchIcon.hxn_width = 26;

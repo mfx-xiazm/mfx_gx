@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class GXGoodsDetailAdv,GXGoodsDetailParam,GXGoodsDetailSpec,GXGoodsDetailSubSpec,GXGoodsMaterial,GXGoodsMaterialLayout,GXGoodsComment,GXGoodsCommentLayout,GXGoodsLogisticst,GXGoodsDetailSku,GXGoodsRush,GXGoodsRecommend,GXGoodsGiftRule,GXGoodsRebate;
+@class GXGoodsDetailAdv,GXGoodsDetailParam,GXGoodsDetailSpec,GXGoodsDetailSubSpec,GXGoodsMaterial,GXGoodsMaterialLayout,GXGoodsComment,GXGoodsCommentLayout,GXGoodsLogisticst,GXGoodsDetailSku,GXGoodsRush,GXGoodsRecommend,GXGoodsGiftRule,GXGoodsRebate,GXRecommendReward,GXCommissionReward;
 @interface GXGoodsDetail : NSObject
 @property(nonatomic,copy) NSString *presell_id;
 @property(nonatomic,copy) NSString *sell_status;
@@ -63,6 +63,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong) GXGoodsLogisticst * _Nullable selectLogisticst;
 /* 规格数据信息 */
 @property(nonatomic,strong) GXGoodsDetailSku *sku;
+
+@property(nonatomic,strong) GXRecommendReward *recommend;
+
+@property(nonatomic,strong) GXCommissionReward *commission;
 @end
 
 @interface GXGoodsDetailAdv : NSObject
@@ -111,6 +115,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface GXRecommendReward : NSObject
+@property(nonatomic,copy) NSString *recommend_sale;
+@property(nonatomic,copy) NSString *recommend_provider;
+@end
+
+@interface GXCommissionReward : NSObject
+@property(nonatomic,copy) NSString *platform;
+@property(nonatomic,copy) NSString *provider;
+@property(nonatomic,copy) NSString *rate1;
+@property(nonatomic,copy) NSString *rate2;
+@property(nonatomic,copy) NSString *rate3;
+
+@end
 
 @interface GXGoodsLogisticst : NSObject
 @property(nonatomic,copy) NSString *freight_type;

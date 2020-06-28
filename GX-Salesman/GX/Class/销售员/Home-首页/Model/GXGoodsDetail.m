@@ -22,7 +22,9 @@
              @"logistics":[GXGoodsLogisticst class],
              @"goods_recommend":[GXGoodsRecommend class],
              @"gift_rule":[GXGoodsGiftRule class],
-             @"rebate":[GXGoodsRebate class]
+             @"rebate":[GXGoodsRebate class],
+             @"recommend":[GXRecommendReward class],
+             @"commission":[GXCommissionReward class]
              };
 }
 
@@ -130,6 +132,14 @@
     return @{@"logistic":[GXGoodsLogisticst class]
              };
 }
+@end
+
+@implementation GXRecommendReward
+
+@end
+
+@implementation GXCommissionReward
+
 @end
 
 @implementation GXGoodsLogisticst
