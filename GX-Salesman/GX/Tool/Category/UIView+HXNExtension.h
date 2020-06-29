@@ -54,4 +54,6 @@
 @property (nonatomic,assign)IBInspectable CGFloat shadowRadius;// 阴影的圆角
 @property (nonatomic,assign)IBInspectable CGFloat shadowOpacity;// 阴影透明度，默认0
 @property (nonatomic,assign)IBInspectable CGSize shadowOffset;// 阴影偏移量
+
+- (UIImage*)imageWithUIView;
 @end

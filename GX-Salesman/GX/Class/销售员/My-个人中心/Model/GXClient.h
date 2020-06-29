@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *provider_no;
 @property(nonatomic,copy) NSString *town_id;
 @property(nonatomic,copy) NSString *shop_address;
-
+@property(nonatomic,copy) NSString *create_time;
 @end
 
 NS_ASSUME_NONNULL_END

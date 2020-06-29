@@ -42,9 +42,9 @@
             }else{
                 self.refundStatus.hidden = NO;
                 if ([_goods.refund_status isEqualToString:@"1"]) {
-                    self.refundStatus.text = @"等待供应商审核";
+                    self.refundStatus.text = @"退款中，等待供应商审核";
                 }else if ([_goods.refund_status isEqualToString:@"2"]){
-                    self.refundStatus.text = @"等待平台审核";
+                    self.refundStatus.text = @"退款中，等待平台审核";
                 }else if ([_goods.refund_status isEqualToString:@"3"]){
                     self.refundStatus.text = @"退款成功";
                 }else if ([_goods.refund_status isEqualToString:@"4"]){

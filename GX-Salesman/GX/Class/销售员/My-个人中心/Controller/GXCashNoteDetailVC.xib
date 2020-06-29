@@ -17,6 +17,7 @@
                 <outlet property="cash_title" destination="B4m-TV-xNi" id="Eke-n4-MFg"/>
                 <outlet property="create_time" destination="xHx-iN-Iuy" id="84c-DY-If9"/>
                 <outlet property="daozhang_img" destination="srY-ek-g7A" id="jCP-ll-4Zn"/>
+                <outlet property="faqi_img" destination="Wkn-2G-Sfh" id="Wtk-wo-0hH"/>
                 <outlet property="pay_money_View" destination="OZm-O2-3ht" id="pmK-GD-ryM"/>
                 <outlet property="pay_money_img" destination="uNN-5h-o7M" id="ggx-uC-UI5"/>
                 <outlet property="pay_money_view_height" destination="bgr-en-OE8" id="KnM-N8-mQ2"/>

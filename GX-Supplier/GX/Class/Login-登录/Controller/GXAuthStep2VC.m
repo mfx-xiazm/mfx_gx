@@ -47,6 +47,10 @@
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请输入银行账号"];
             return NO;
         }
+        if (![strongSelf.account_code.text checkCardNo]) {
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"银行账号有误"];
+            return NO;
+        }
         if (![strongSelf.account_dot hasText]) {
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请输入开户网点"];
             return NO;

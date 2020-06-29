@@ -208,4 +208,14 @@
 {
     return self.layer.shadowOffset;
 }
+
+//view转成image
+- (UIImage*)imageWithUIView{
+    UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0.0);//原图
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    [self.layer renderInContext:ctx];
+    UIImage* tImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return tImage;
+}
 @end

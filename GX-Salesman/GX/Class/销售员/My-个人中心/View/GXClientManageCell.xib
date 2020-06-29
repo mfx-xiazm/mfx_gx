@@ -20,13 +20,13 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ysl-PT-zqE">
                         <rect key="frame" x="10" y="5" width="341" height="80"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="终端店或供应商客户名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="82y-zl-Ehp">
-                                <rect key="frame" x="15" y="18" width="157.5" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="终端店或供应商客户名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="82y-zl-Ehp">
+                                <rect key="frame" x="15" y="18" width="231" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2020.05.22" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o89-Lg-Lr0">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="2020.05.22" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o89-Lg-Lr0">
                                 <rect key="frame" x="256" y="18.5" width="70" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -45,6 +45,7 @@
                             <constraint firstItem="vA4-h8-PH4" firstAttribute="leading" secondItem="Ysl-PT-zqE" secondAttribute="leading" constant="12" id="TUC-DV-GQJ"/>
                             <constraint firstItem="82y-zl-Ehp" firstAttribute="top" secondItem="Ysl-PT-zqE" secondAttribute="top" constant="18" id="Y2u-a3-jGg"/>
                             <constraint firstAttribute="bottom" secondItem="vA4-h8-PH4" secondAttribute="bottom" constant="18" id="b07-um-8b9"/>
+                            <constraint firstItem="o89-Lg-Lr0" firstAttribute="leading" secondItem="82y-zl-Ehp" secondAttribute="trailing" constant="10" id="i0o-rB-TS8"/>
                             <constraint firstItem="82y-zl-Ehp" firstAttribute="leading" secondItem="Ysl-PT-zqE" secondAttribute="leading" constant="15" id="jkn-1I-2ax"/>
                             <constraint firstItem="o89-Lg-Lr0" firstAttribute="centerY" secondItem="82y-zl-Ehp" secondAttribute="centerY" id="uo0-7d-cac"/>
                         </constraints>
@@ -76,6 +77,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
+                <outlet property="create_time" destination="o89-Lg-Lr0" id="C9u-de-arc"/>
                 <outlet property="phone" destination="vA4-h8-PH4" id="l1o-Zw-IQL"/>
                 <outlet property="shop_name" destination="82y-zl-Ehp" id="Ix5-8j-ag3"/>
             </connections>

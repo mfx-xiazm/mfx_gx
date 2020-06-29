@@ -30,9 +30,14 @@
     self.saveComletedCall = comletedCall;
         
     for (int i = 0; i <imageArrs.count; i++) {
-        NSData *data = [NSData dataWithContentsOfURL:[NSURL  URLWithString:imageArrs[i]]];
-        UIImage *image = [UIImage imageWithData:data]; // 取得图片
-        [self.listOfDownLoadImageArr addObject:image];
+        id target = imageArrs[i];
+        if ([target isKindOfClass:[UIImage class]]) {
+            [self.listOfDownLoadImageArr addObject:target];
+        }else{
+            NSData *data = [NSData dataWithContentsOfURL:[NSURL  URLWithString:imageArrs[i]]];
+            UIImage *image = [UIImage imageWithData:data]; // 取得图片
+            [self.listOfDownLoadImageArr addObject:image];
+        }
     }
     
     PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
@@ -106,7 +111,6 @@
         if (assetCollection) {
             // 已有相册
             assetCollectionChangeRequest = [PHAssetCollectionChangeRequest changeRequestForAssetCollection:assetCollection];
-            
         } else {
             // 1.创建自定义相册
             assetCollectionChangeRequest = [PHAssetCollectionChangeRequest creationRequestForAssetCollectionWithTitle:app_Name];
@@ -125,8 +129,8 @@
         } else {
             // [SVProgressHUD showSuccessWithStatus:@"保存成功"];
             [self.listOfDownLoadImageArr removeObjectAtIndex:0];
+            [self CWWSavePhotos];
         }
-        [self CWWSavePhotos];
     }];
     
 }

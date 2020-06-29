@@ -36,6 +36,20 @@
     self.imageView.frame = self.bounds;
     [self insertSubview:self.imageView atIndex:0];
     self.imageViewFrame = self.imageView.frame;
+    
+    if ([[MSUserManager sharedInstance].curUserInfo.post_id isEqualToString:@"1"]) {
+        self.countView.hidden = NO;
+        self.countView1.hidden = YES;
+        self.countView2.hidden = YES;
+    }else if ([[MSUserManager sharedInstance].curUserInfo.post_id isEqualToString:@"2"]) {
+        self.countView.hidden = YES;
+        self.countView1.hidden = NO;
+        self.countView2.hidden = YES;
+    }else{
+        self.countView.hidden = YES;
+        self.countView1.hidden = YES;
+        self.countView2.hidden = NO;
+    }
 }
 -(void)setTeamCount:(GXMyTeamCount *)teamCount
 {

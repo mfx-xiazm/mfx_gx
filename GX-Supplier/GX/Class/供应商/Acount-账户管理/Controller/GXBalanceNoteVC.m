@@ -216,7 +216,7 @@ static NSString *const AccountManageCell = @"AccountManageCell";
 {
     GXFinanceLog *log = self.logs[indexPath.row];
 
-    if (log.finance_log_type <= 5 || log.finance_log_type >= 30) {
+    if (log.finance_log_type <= 5 || (log.finance_log_type >= 30 && log.finance_log_type <= 32) || log.finance_log_type >= 40) {
         GXOrderDetailVC *dvc = [GXOrderDetailVC new];
         dvc.oid = log.orderInfo.oid;
         [self.navigationController pushViewController:dvc animated:YES];

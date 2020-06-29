@@ -116,11 +116,11 @@
     _refundDetail = refundDetail;
     /* 1等待供应商审核 2等待平台审核 3退款成功 4退款驳回 5供应商同意 6供应商不同意*/
     if ([_refundDetail.refund_status isEqualToString:@"1"]) {
-        self.order_status.text = @"等待供应商审核";
+        self.order_status.text = @"退款中，等待供应商审核";
         self.order_desc.hidden = YES;
 
     }else if ([_refundDetail.refund_status isEqualToString:@"2"]){
-        self.order_status.text = @"等待平台审核";
+        self.order_status.text = @"退款中，等待平台审核";
         self.order_desc.hidden = YES;
 
     }else if ([_refundDetail.refund_status isEqualToString:@"3"]){
@@ -186,9 +186,9 @@
     }else{
         self.order_no.text = [NSString stringWithFormat:@"%@",_refundDetail.order_no];
         if ([_refundDetail.refund_status isEqualToString:@"1"]) {
-            self.order_state.text = @"等待供应商审核";
+            self.order_state.text = @"退款中，等待供应商审核";
         }else if ([_refundDetail.refund_status isEqualToString:@"2"]){
-            self.order_state.text = @"等待平台审核";
+            self.order_state.text = @"退款中，等待平台审核";
         }else if ([_refundDetail.refund_status isEqualToString:@"3"]){
             self.order_state.text = @"退款成功";
         }else if ([_refundDetail.refund_status isEqualToString:@"4"]){

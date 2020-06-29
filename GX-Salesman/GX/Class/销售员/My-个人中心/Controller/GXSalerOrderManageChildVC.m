@@ -50,6 +50,13 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
     }
     return _orders;
 }
+-(void)setSeaKey:(NSString *)seaKey
+{
+    if (![_seaKey isEqualToString:seaKey]) {
+        _seaKey = seaKey;
+        [self getOrderDataRequest:YES];
+    }
+}
 -(void)setUpTableView
 {
     self.tableView.rowHeight = 0;

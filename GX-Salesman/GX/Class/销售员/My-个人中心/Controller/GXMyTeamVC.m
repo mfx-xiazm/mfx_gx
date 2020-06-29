@@ -38,7 +38,7 @@ static NSString *const MyTeamCell = @"MyTeamCell";
     [self setUpNavbar];
     [self setUpTableView];
     [self setUpRefresh];
-    [self startShimmer];
+//    [self startShimmer];
     [self getTeamDataCount];
     [self getTeamDataRequest:YES];
 }
@@ -150,13 +150,13 @@ static NSString *const MyTeamCell = @"MyTeamCell";
 #pragma mark -- 点击事件
 -(void)filterClicked
 {
-    NSMutableArray *showData = nil;
+    NSMutableArray *showData = [NSMutableArray array];
     if (self.teamCount.areas && self.teamCount.areas.count) {
         for (GXMyTeamArea *area in self.teamCount.areas) {
             [showData addObject:area.area_alias];
         }
     }else{
-        showData = [NSMutableArray arrayWithArray:self.district_arr];
+        [showData addObjectsFromArray:self.district_arr];
     }
     // 1.Custom propery（自定义属性）
     NSDictionary *propertyDict = @{

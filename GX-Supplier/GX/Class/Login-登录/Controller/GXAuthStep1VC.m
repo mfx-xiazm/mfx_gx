@@ -134,6 +134,10 @@
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请填写身份证号"];
             return NO;
         }
+        if (![strongSelf.card_id.text judgeIdentityStringValid]) {
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"身份证号有误"];
+            return NO;
+        }
         if (![strongSelf.credit_code hasText]) {
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请填写统一社会信用代码"];
             return NO;

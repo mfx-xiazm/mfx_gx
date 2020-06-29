@@ -23,6 +23,7 @@
         self.clearButtonMode = UITextFieldViewModeWhileEditing;
         self.returnKeyType = UIReturnKeySearch;
         self.textAlignment = NSTextAlignmentLeft;
+        self.textColor = UIColorFromRGB(0x1A1A1A);
         self.tintColor = HXControlBg;
         self.keyboardAppearance = UIKeyboardAppearanceLight;
         

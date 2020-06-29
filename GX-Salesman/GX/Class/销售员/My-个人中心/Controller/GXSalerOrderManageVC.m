@@ -122,11 +122,12 @@
 #pragma mark -- 点击事件
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    GXSalerOrderManageChildVC *targetViewController = (GXSalerOrderManageChildVC *)self.childVCs[self.categoryView.selectedIndex];
-    if ([textField hasText]) {
-        targetViewController.seaKey = textField.text;
-    }else{
-        targetViewController.seaKey = @"";
+    for (GXSalerOrderManageChildVC *targetViewController in self.childVCs) {
+        if ([textField hasText]) {
+            targetViewController.seaKey = textField.text;
+        }else{
+            targetViewController.seaKey = @"";
+        }
     }
     [self getOrderNum];
     return YES;
@@ -173,7 +174,7 @@
 - (void)categoryView:(JXCategoryBaseView *)categoryView didSelectedItemAtIndex:(NSInteger)index
 {
     if (self.childVCs.count <= index) {return;}
-    
+ 
     UIViewController *targetViewController = self.childVCs[index];
     // 如果已经加载过，就不再加载
     if ([targetViewController isViewLoaded]) return;
@@ -190,7 +191,7 @@
     parameters[@"status"] = (self.status && self.status.length)?self.status:@"";
     
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"program/getOrderNum" parameters:@{} success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"program/getOrderNum" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             dispatch_async(dispatch_get_main_queue(), ^{

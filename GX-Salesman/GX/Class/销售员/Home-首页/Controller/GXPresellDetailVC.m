@@ -96,10 +96,6 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
 #pragma mark -- 视图相关
 -(void)setUpNavBar
 {
-    self.hbd_barAlpha = 0.2;
-    self.hbd_barStyle = UIBarStyleBlack;
-    self.hbd_tintColor = [UIColor whiteColor];
-    
     [self.navigationItem setTitle:nil];
     
     UIButton *share = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -116,12 +112,12 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
     
     UIButton *material = [UIButton buttonWithType:UIButtonTypeCustom];
     [material setTitle:@"卖货素材" forState:UIControlStateNormal];
-    [material setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [material setTitleColor:HXControlBg forState:UIControlStateNormal];
     material.titleLabel.font = [UIFont systemFontOfSize:12];
     material.hxn_size = CGSizeMake(70, 22);
     material.layer.cornerRadius = material.hxn_height/2.0;
     material.layer.masksToBounds = YES;
-    material.backgroundColor = HXRGBAColor(0, 0, 0, 0.3);
+    material.backgroundColor = [UIColor whiteColor];
     [material addTarget:self action:@selector(materialClicked) forControlEvents:UIControlEventTouchUpInside];
     self.materialBtn = material;
     UIBarButtonItem *materialItem = [[UIBarButtonItem alloc] initWithCustomView:material];
@@ -376,24 +372,6 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
     }];
 }
 #pragma mark -- 事件监听
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    // CGFloat headerHeight = CGRectGetHeight(self.header.frame);
-    CGFloat headerHeight = HX_SCREEN_WIDTH;
-    CGFloat progress = scrollView.contentOffset.y;
-    CGFloat gradientProgress = MIN(1, MAX(0, progress  / headerHeight));
-    gradientProgress = gradientProgress * gradientProgress * gradientProgress * gradientProgress;
-    if (gradientProgress < 0.1) {
-        [self.materialBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        self.materialBtn.backgroundColor = HXRGBAColor(0, 0, 0, 0.3);
-    } else {
-        [self.materialBtn setTitleColor:HXControlBg forState:UIControlStateNormal];
-        self.materialBtn.backgroundColor = HXRGBAColor(255, 255, 255, 1);
-    }
-    if (gradientProgress>0.2) {
-        self.hbd_barAlpha = gradientProgress;
-    }
-    [self hbd_setNeedsUpdateNavigationBar];
-}
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
 {
     if ([keyPath isEqualToString:@"contentSize"]) {

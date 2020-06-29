@@ -11,6 +11,7 @@
 
 @interface GXClientManageCell ()
 @property (weak, nonatomic) IBOutlet UILabel *shop_name;
+@property (weak, nonatomic) IBOutlet UILabel *create_time;
 @property (weak, nonatomic) IBOutlet UILabel *phone;
 
 @end
@@ -25,6 +26,7 @@
     _client = client;
     self.shop_name.text = _client.shop_name;
     self.phone.text = _client.phone;
+    self.create_time.text = _client.create_time;
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

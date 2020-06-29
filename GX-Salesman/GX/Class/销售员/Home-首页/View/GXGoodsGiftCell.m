@@ -49,7 +49,7 @@
         UILabel *ruleL = self.ruleLabels[i];
         if ((i+1) <= _rebate.count) {
             GXGoodsRebate *rebate = _rebate[i];
-            ruleL.text = [NSString stringWithFormat:@"  满%@返%@%%  ",rebate.begin_price,rebate.percent];
+            ruleL.text = [NSString stringWithFormat:@"  满%@元返%@%%  ",rebate.begin_price,rebate.percent];
             ruleL.textColor = UIColorFromRGB(0xFF001D);
             ruleL.backgroundColor = HXRGBAColor(234,74,92,0.2);
         }else{

@@ -92,9 +92,9 @@
     }else{
         self.order_no.text = [NSString stringWithFormat:@"%@",_refund.order_no];
         if ([_refund.refund_status isEqualToString:@"1"]) {
-            self.order_state.text = @"等待供应商审核";
+            self.order_state.text = @"退款中，等待供应商审核";
         }else if ([_refund.refund_status isEqualToString:@"2"]){
-            self.order_state.text = @"等待平台审核";
+            self.order_state.text = @"退款中，等待平台审核";
         }else if ([_refund.refund_status isEqualToString:@"3"]){
             self.order_state.text = @"退款成功";
         }else if ([_refund.refund_status isEqualToString:@"4"]){

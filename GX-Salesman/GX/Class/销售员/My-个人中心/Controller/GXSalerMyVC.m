@@ -31,6 +31,8 @@
 @property (weak, nonatomic) IBOutlet UIView *banlanceView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *banlanceViewHeight;
 @property (weak, nonatomic) IBOutlet UIButton *codeBtn;
+@property (weak, nonatomic) IBOutlet UIView *salemanView;
+@property (weak, nonatomic) IBOutlet UIView *managerView;
 
 /* 账户信息 */
 @property(nonatomic,strong) NSDictionary *accountData;
@@ -56,6 +58,13 @@
         
         self.banlanceView.hidden = NO;
         self.banlanceViewHeight.constant = 220.f;
+    }
+    if ([[MSUserManager sharedInstance].curUserInfo.post_id isEqualToString:@"4"]) {
+        self.salemanView.hidden = NO;
+        self.managerView.hidden = YES;
+    }else{
+        self.salemanView.hidden = YES;
+        self.managerView.hidden = NO;
     }
     [self getMemberRequest];
 }

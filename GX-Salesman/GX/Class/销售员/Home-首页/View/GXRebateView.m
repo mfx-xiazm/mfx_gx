@@ -26,9 +26,9 @@
     NSMutableString *rebateStr = [NSMutableString string];
     for (GXGoodsRebate *rebateObj in _rebate) {
         if (rebateStr.length) {
-            [rebateStr appendFormat:@"，%@",[NSString stringWithFormat:@"满%@返%@%%",rebateObj.begin_price,rebateObj.percent]];
+            [rebateStr appendFormat:@"，%@",[NSString stringWithFormat:@"满%@元返%@%%",rebateObj.begin_price,rebateObj.percent]];
         }else{
-            [rebateStr appendFormat:@"%@",[NSString stringWithFormat:@"满%@返%@%%",rebateObj.begin_price,rebateObj.percent]];
+            [rebateStr appendFormat:@"%@",[NSString stringWithFormat:@"满%@元返%@%%",rebateObj.begin_price,rebateObj.percent]];
         }
     }
 

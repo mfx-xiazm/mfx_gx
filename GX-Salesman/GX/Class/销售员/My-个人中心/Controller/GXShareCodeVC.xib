@@ -12,6 +12,7 @@
             <connections>
                 <outlet property="shareCodeImg" destination="FbC-UZ-OSQ" id="nfm-HV-dlm"/>
                 <outlet property="shareCodeLabel" destination="mZE-uF-tb5" id="pyv-gH-cab"/>
+                <outlet property="shareCodeView" destination="TGz-pT-bJ6" id="NDc-Nn-Zgb"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -66,6 +67,9 @@
                     <state key="normal" title="保存二维码" backgroundImage="提现背景">
                         <color key="titleColor" red="0.1019607843" green="0.1019607843" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
+                    <connections>
+                        <action selector="saveBtnClicked:" destination="-1" eventType="touchUpInside" id="Y3l-g6-6N6"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
