@@ -14,6 +14,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *order_no;
 @property (weak, nonatomic) IBOutlet UILabel *order_state;
 @property (weak, nonatomic) IBOutlet UIButton *out_line_status;
+@property (weak, nonatomic) IBOutlet UILabel *create_time;
+
 @end
 
 @implementation GXRenewMyOrderHeader
@@ -25,6 +27,7 @@
 -(void)setOrder:(GXMyOrder *)order
 {
     _order = order;
+    self.create_time.text = _order.create_time;
     if (_order.isDetailOrder) {
         self.order_state.text = @"";
         self.order_no.text = [NSString stringWithFormat:@"%@",_order.provider_no];
@@ -53,7 +56,8 @@
     _refund = refund;
     
     self.out_line_status.hidden = YES;
-
+    self.create_time.text = _refund.create_time;
+    
     /** 1等待供应商审核；2等待平台审核；3退款成功；4退款驳回 5供应商同意 6供应商不同意 */
     if (_refund.isRefundDetail) {
         self.order_state.text = @"";
@@ -61,9 +65,9 @@
     }else{
         self.order_no.text = [NSString stringWithFormat:@"%@",_refund.order_no];
         if ([_refund.refund_status isEqualToString:@"1"]) {
-            self.order_state.text = @"等待供应商审核";
+            self.order_state.text = @"退款中，等待供应商审核";
         }else if ([_refund.refund_status isEqualToString:@"2"]){
-            self.order_state.text = @"等待平台审核";
+            self.order_state.text = @"退款中，等待平台审核";
         }else if ([_refund.refund_status isEqualToString:@"3"]){
             self.order_state.text = @"退款成功";
         }else if ([_refund.refund_status isEqualToString:@"4"]){

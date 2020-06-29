@@ -8,13 +8,9 @@
 
 #import "GXSaveImageToPHAsset.h"
 #import <Photos/Photos.h>
-#import "zhAlertView.h"
-#import <zhPopupController.h>
 
 @interface GXSaveImageToPHAsset()
 @property (nonatomic, strong) NSMutableArray *listOfDownLoadImageArr;
-/* 提示框 */
-@property (nonatomic, strong) zhPopupController *alertPopVC;
 @end
 
 @implementation GXSaveImageToPHAsset
@@ -106,7 +102,6 @@
         if (assetCollection) {
             // 已有相册
             assetCollectionChangeRequest = [PHAssetCollectionChangeRequest changeRequestForAssetCollection:assetCollection];
-            
         } else {
             // 1.创建自定义相册
             assetCollectionChangeRequest = [PHAssetCollectionChangeRequest creationRequestForAssetCollectionWithTitle:app_Name];

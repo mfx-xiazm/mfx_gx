@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,6 +16,7 @@
                 <outlet property="offLineView" destination="kOH-3F-h0e" id="AJG-ZW-Lwh"/>
                 <outlet property="payAmount" destination="2OB-Yw-ePi" id="SoV-ie-prj"/>
                 <outlet property="payType" destination="MsV-sl-mvS" id="91I-3G-jgB"/>
+                <outlet property="subbank_name" destination="nff-Pw-56u" id="nef-fO-hWG"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -109,7 +110,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kOH-3F-h0e">
-                    <rect key="frame" x="0.0" y="214" width="414" height="114"/>
+                    <rect key="frame" x="0.0" y="214" width="414" height="140"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="开户名称" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F0n-j3-Kpv">
                             <rect key="frame" x="10" y="10" width="70" height="16"/>
@@ -141,8 +142,23 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="开户账号" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xaf-ZK-cdz">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="开户网点" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H6x-he-e8z">
                             <rect key="frame" x="10" y="62" width="70" height="16"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="70" id="OgS-dN-ACB"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="13"/>
+                            <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="西湖支行" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nff-Pw-56u">
+                            <rect key="frame" x="80" y="62" width="53.5" height="16"/>
+                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="13"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="开户账号" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xaf-ZK-cdz">
+                            <rect key="frame" x="10" y="88" width="70" height="16"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="70" id="lh9-JK-6mm"/>
                             </constraints>
@@ -151,13 +167,13 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="98001870588800283006" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t4s-hX-rNb">
-                            <rect key="frame" x="80" y="62" width="160" height="16"/>
+                            <rect key="frame" x="80" y="88" width="160" height="16"/>
                             <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="13"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="该账号为呱选银行账号，请放心转账！" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v2s-xe-MDG">
-                            <rect key="frame" x="80" y="88" width="324" height="16"/>
+                            <rect key="frame" x="80" y="114" width="324" height="16"/>
                             <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="13"/>
                             <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -165,21 +181,25 @@
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
-                        <constraint firstItem="xaf-ZK-cdz" firstAttribute="top" secondItem="piR-iT-MJG" secondAttribute="bottom" constant="10" id="4v4-Ng-A8O"/>
-                        <constraint firstItem="t4s-hX-rNb" firstAttribute="top" secondItem="qin-UK-S0p" secondAttribute="bottom" constant="10" id="Ah3-ZK-kYM"/>
+                        <constraint firstItem="H6x-he-e8z" firstAttribute="top" secondItem="piR-iT-MJG" secondAttribute="bottom" constant="10" id="5gz-ua-Sfd"/>
                         <constraint firstItem="v2s-xe-MDG" firstAttribute="leading" secondItem="xaf-ZK-cdz" secondAttribute="trailing" id="Aqh-Vl-BzT"/>
                         <constraint firstItem="qin-UK-S0p" firstAttribute="leading" secondItem="piR-iT-MJG" secondAttribute="trailing" id="BLW-U2-4w7"/>
+                        <constraint firstItem="nff-Pw-56u" firstAttribute="leading" secondItem="H6x-he-e8z" secondAttribute="trailing" id="CYY-LQ-Aa3"/>
                         <constraint firstItem="piR-iT-MJG" firstAttribute="leading" secondItem="kOH-3F-h0e" secondAttribute="leading" constant="10" id="GAU-yQ-v0j"/>
                         <constraint firstItem="piR-iT-MJG" firstAttribute="top" secondItem="F0n-j3-Kpv" secondAttribute="bottom" constant="10" id="LDJ-Ut-PcN"/>
                         <constraint firstItem="dc3-LA-KkM" firstAttribute="top" secondItem="kOH-3F-h0e" secondAttribute="top" constant="10" id="OpO-A7-e7e"/>
+                        <constraint firstItem="xaf-ZK-cdz" firstAttribute="top" secondItem="H6x-he-e8z" secondAttribute="bottom" constant="10" id="QGZ-0r-YYR"/>
                         <constraint firstItem="v2s-xe-MDG" firstAttribute="top" secondItem="t4s-hX-rNb" secondAttribute="bottom" constant="10" id="Rn0-CN-3YS"/>
+                        <constraint firstItem="t4s-hX-rNb" firstAttribute="top" secondItem="nff-Pw-56u" secondAttribute="bottom" constant="10" id="Smc-CH-wem"/>
                         <constraint firstItem="dc3-LA-KkM" firstAttribute="leading" secondItem="F0n-j3-Kpv" secondAttribute="trailing" id="Wpw-ZM-3jU"/>
                         <constraint firstAttribute="bottom" secondItem="v2s-xe-MDG" secondAttribute="bottom" constant="10" id="ZDu-u1-tdi"/>
                         <constraint firstItem="qin-UK-S0p" firstAttribute="top" secondItem="dc3-LA-KkM" secondAttribute="bottom" constant="10" id="aMi-B3-YKc"/>
+                        <constraint firstItem="H6x-he-e8z" firstAttribute="leading" secondItem="kOH-3F-h0e" secondAttribute="leading" constant="10" id="c1d-c3-MhV"/>
                         <constraint firstItem="t4s-hX-rNb" firstAttribute="leading" secondItem="xaf-ZK-cdz" secondAttribute="trailing" id="d2L-Oj-MnX"/>
                         <constraint firstAttribute="trailing" secondItem="v2s-xe-MDG" secondAttribute="trailing" constant="10" id="gNK-bl-87M"/>
                         <constraint firstItem="F0n-j3-Kpv" firstAttribute="top" secondItem="kOH-3F-h0e" secondAttribute="top" constant="10" id="oaq-oP-pAF"/>
                         <constraint firstItem="xaf-ZK-cdz" firstAttribute="leading" secondItem="kOH-3F-h0e" secondAttribute="leading" constant="10" id="opl-Es-pSW"/>
+                        <constraint firstItem="nff-Pw-56u" firstAttribute="top" secondItem="qin-UK-S0p" secondAttribute="bottom" constant="10" id="p5Z-HP-nmd"/>
                         <constraint firstItem="F0n-j3-Kpv" firstAttribute="leading" secondItem="kOH-3F-h0e" secondAttribute="leading" constant="10" id="ugf-H3-m8v"/>
                     </constraints>
                 </view>

@@ -68,6 +68,12 @@
                                 <action selector="numChangeClicked:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="Hd8-aE-xZh"/>
                             </connections>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="此规格限购5份" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="94i-dG-sXl">
+                            <rect key="frame" x="145" y="21.5" width="81" height="14.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" red="1" green="0.54117647059999996" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -79,6 +85,8 @@
                         <constraint firstItem="R6f-vJ-1Ar" firstAttribute="centerY" secondItem="drJ-dG-wQj" secondAttribute="centerY" id="l80-b0-1FE"/>
                         <constraint firstItem="e9u-M5-nMC" firstAttribute="centerY" secondItem="drJ-dG-wQj" secondAttribute="centerY" id="mWv-Ct-Kol"/>
                         <constraint firstItem="e0U-qO-zcK" firstAttribute="centerY" secondItem="drJ-dG-wQj" secondAttribute="centerY" id="t3R-pN-gEY"/>
+                        <constraint firstItem="94i-dG-sXl" firstAttribute="centerY" secondItem="drJ-dG-wQj" secondAttribute="centerY" id="ulV-gA-tO1"/>
+                        <constraint firstItem="e9u-M5-nMC" firstAttribute="leading" secondItem="94i-dG-sXl" secondAttribute="trailing" constant="5" id="z6b-JN-Q3D"/>
                     </constraints>
                 </view>
             </subviews>
@@ -95,6 +103,7 @@
             </constraints>
             <connections>
                 <outlet property="buy_num" destination="0MV-xq-EOi" id="8z8-4s-VMl"/>
+                <outlet property="limit_txt" destination="94i-dG-sXl" id="6F2-Rf-3r4"/>
                 <outlet property="numView" destination="drJ-dG-wQj" id="ilA-NK-L4E"/>
                 <outlet property="shop_code" destination="Wew-D4-Dkp" id="19c-gk-oGy"/>
                 <outlet property="storeCodeView" destination="tnz-ri-efk" id="ESa-RT-5xQ"/>

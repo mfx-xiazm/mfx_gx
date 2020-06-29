@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *payAmount;
 @property (weak, nonatomic) IBOutlet UILabel *account_name;
 @property (weak, nonatomic) IBOutlet UILabel *bank_name;
+@property (weak, nonatomic) IBOutlet UILabel *subbank_name;
 @property (weak, nonatomic) IBOutlet UILabel *bank_no;
 @property (weak, nonatomic) IBOutlet UIView *offLineView;
 /** vc控制器 */
@@ -49,6 +50,7 @@
         self.offLineView.hidden = NO;
         self.account_name.text = self.orderPay.account_data.set_val2;
         self.bank_name.text = self.orderPay.account_data.set_val4;
+        self.subbank_name.text = self.orderPay.account_data.set_val5;
         self.bank_no.text = self.orderPay.account_data.set_val3;
     }else{
         [self.payType setColorAttributedText:[NSString stringWithFormat:@"支付方式：银联支付"] andChangeStr:@"银联支付" andColor:HXControlBg];

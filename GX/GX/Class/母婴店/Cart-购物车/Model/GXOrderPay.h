@@ -31,6 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *set_val2;
 @property(nonatomic,copy) NSString *set_val3;
 @property(nonatomic,copy) NSString *set_val4;
+@property(nonatomic,copy) NSString *set_val5;
 
 @end
 NS_ASSUME_NONNULL_END

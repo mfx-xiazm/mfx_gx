@@ -106,7 +106,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *city_id;
 @property(nonatomic,copy) NSString *district_id;
 @property(nonatomic,copy) NSString *town_id;
-
+@property (nonatomic, assign) NSInteger limit_num;
 @property(nonatomic,strong) NSArray<GXGoodsLogisticst *> *logistic;
 
 @end

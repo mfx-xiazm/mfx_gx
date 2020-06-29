@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *level_id;
 @property(nonatomic,copy) NSString *level_name;
 @property(nonatomic,copy) NSString *platform_tel;
-
+@property(nonatomic,copy) NSString *act_pic;
 @end
 
 NS_ASSUME_NONNULL_END

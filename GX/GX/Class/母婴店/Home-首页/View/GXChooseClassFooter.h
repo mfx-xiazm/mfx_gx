@@ -17,6 +17,8 @@ typedef void(^buyNumCall)(NSInteger num);
 @property (weak, nonatomic) IBOutlet UILabel *shop_code;
 /* 库存 */
 @property(nonatomic,assign) NSInteger stock_num;
+/* 限购 */
+@property (nonatomic, assign) NSInteger limit_num;
 @property (weak, nonatomic) IBOutlet UITextField *buy_num;
 /* 点击 */
 @property(nonatomic,copy) buyNumCall buyNumCall;

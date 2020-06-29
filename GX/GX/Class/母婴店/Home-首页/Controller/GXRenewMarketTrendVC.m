@@ -68,6 +68,8 @@ static const CGFloat GXheightForHeaderInSection = 220.f;
     if (_header == nil) {
         _header = [GXRenewMarketTrendHeader loadXibView];
         _header.frame = CGRectMake(0,0, HX_SCREEN_WIDTH, GXheightForHeaderInSection);
+        _header.imageView.image = self.selectIndex?HXGetImage(@"行情-纸尿裤"):HXGetImage(@"行情-奶粉");
+        _header.topImg.image = self.selectIndex?HXGetImage(@"顶部图蓝色"):HXGetImage(@"顶部图");
     }
     return _header;
 }

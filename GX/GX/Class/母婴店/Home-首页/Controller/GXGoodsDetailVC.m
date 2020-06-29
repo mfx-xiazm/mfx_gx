@@ -94,6 +94,8 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
 @property (nonatomic, strong) zhPopupController *classPopVC;
 /* 分享弹框 */
 @property (nonatomic, strong) zhPopupController *sharePopVC;
+/* 轮播图 */
+@property (nonatomic, strong) XQCarousel *carousel;
 @end
 
 @implementation GXGoodsDetailVC
@@ -112,6 +114,18 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
     self.materialBtn.layer.cornerRadius = self.materialBtn.hxn_height/2.0;
     self.applyBtn.layer.cornerRadius = self.applyBtn.hxn_height/2.0;
     self.webView.frame = self.webContentView.bounds;
+}
+-(XQCarousel *)carousel
+{
+    if (!_carousel) {
+        NSMutableArray *bannerImgs = [NSMutableArray array];
+        for (GXGoodsDetailAdv *adv in self.goodsDetail.good_adv) {
+            [bannerImgs addObject:adv.adv_img];
+        }
+        _carousel = [XQCarousel scrollViewFrame:self.cyclePagerView.bounds imageStringGroup:bannerImgs];
+        _carousel.delegate = self;
+    }
+    return _carousel;
 }
 -(GXChooseClassView *)chooseClassView
 {
@@ -143,10 +157,6 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
 #pragma mark -- 视图相关
 -(void)setUpNavBar
 {
-    self.hbd_barAlpha = 0.2;
-    self.hbd_barStyle = UIBarStyleBlack;
-    self.hbd_tintColor = [UIColor whiteColor];
-    
     [self.navigationItem setTitle:nil];
     
     UIButton *cart = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -154,29 +164,27 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
     [cart setImage:HXGetImage(@"购物车白") forState:UIControlStateNormal];
     [cart addTarget:self action:@selector(cartClicked) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *cartItem = [[UIBarButtonItem alloc] initWithCustomView:cart];
-
-    //    UIBarButtonItem *shareItem = [UIBarButtonItem itemWithTarget:self action:@selector(shareClicked) image:HXGetImage(@"分享白色")];
     
     UIButton *material = [UIButton buttonWithType:UIButtonTypeCustom];
     [material setTitle:@"卖货素材" forState:UIControlStateNormal];
-    [material setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [material setTitleColor:HXControlBg forState:UIControlStateNormal];
     material.titleLabel.font = [UIFont systemFontOfSize:12];
     material.hxn_size = CGSizeMake(70, 22);
     material.layer.cornerRadius = material.hxn_height/2.0;
     material.layer.masksToBounds = YES;
-    material.backgroundColor = HXRGBAColor(0, 0, 0, 0.3);
+    material.backgroundColor = [UIColor whiteColor];
     [material addTarget:self action:@selector(materialClicked) forControlEvents:UIControlEventTouchUpInside];
     self.materialBtn = material;
     UIBarButtonItem *materialItem = [[UIBarButtonItem alloc] initWithCustomView:material];
     
     UIButton *apply = [UIButton buttonWithType:UIButtonTypeCustom];
     [apply setTitle:@"我要供货" forState:UIControlStateNormal];
-    [apply setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [apply setTitleColor:HXControlBg forState:UIControlStateNormal];
     apply.titleLabel.font = [UIFont systemFontOfSize:12];
     apply.hxn_size = CGSizeMake(70, 22);
     apply.layer.cornerRadius = apply.hxn_height/2.0;
     apply.layer.masksToBounds = YES;
-    apply.backgroundColor = HXRGBAColor(0, 0, 0, 0.3);
+    apply.backgroundColor = [UIColor whiteColor];
     self.applyBtn = apply;
     [apply addTarget:self action:@selector(applyClicked) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *applyItem = [[UIBarButtonItem alloc] initWithCustomView:apply];
@@ -227,10 +235,6 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
 {
     GXCartVC *cvc = [GXCartVC new];
     [self.navigationController pushViewController:cvc animated:YES];
-}
--(void)shareClicked
-{
-    HXLog(@"分享");
 }
 -(void)materialClicked
 {
@@ -346,13 +350,7 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
 }
 -(void)handleGoodsDetailData
 {
-    NSMutableArray *bannerImgs = [NSMutableArray array];
-    for (GXGoodsDetailAdv *adv in self.goodsDetail.good_adv) {
-        [bannerImgs addObject:adv.adv_img];
-    }
-    XQCarousel *carousel = [XQCarousel scrollViewFrame:self.cyclePagerView.bounds imageStringGroup:bannerImgs];
-    carousel.delegate = self;
-    [self.cyclePagerView addSubview:carousel];
+    [self.cyclePagerView addSubview:self.carousel];
     
     [self.shop_name setTextWithLineSpace:5.f withString:_goodsDetail.goods_name withFont:[UIFont systemFontOfSize:15]];
     if ([self.goodsDetail.rushbuy isEqualToString:@"1"]) {//抢购商品
@@ -586,30 +584,6 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
         // 倒计时结束，刷新页面
         [self getGoodDetailRequest];
     }
-}
-#pragma mark -- 事件监听
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    
-    // CGFloat headerHeight = CGRectGetHeight(self.header.frame);
-    CGFloat headerHeight = HX_SCREEN_WIDTH;
-    CGFloat progress = scrollView.contentOffset.y;
-    CGFloat gradientProgress = MIN(1, MAX(0, progress  / headerHeight));
-    gradientProgress = gradientProgress * gradientProgress * gradientProgress * gradientProgress;
-    if (gradientProgress < 0.1) {
-        [self.materialBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        self.materialBtn.backgroundColor = HXRGBAColor(0, 0, 0, 0.3);
-        [self.applyBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        self.applyBtn.backgroundColor = HXRGBAColor(0, 0, 0, 0.3);
-    } else {
-        [self.materialBtn setTitleColor:HXControlBg forState:UIControlStateNormal];
-        self.materialBtn.backgroundColor = HXRGBAColor(255, 255, 255, 1);
-        [self.applyBtn setTitleColor:HXControlBg forState:UIControlStateNormal];
-        self.applyBtn.backgroundColor = HXRGBAColor(255, 255, 255, 1);
-    }
-    if (gradientProgress>0.2) {
-        self.hbd_barAlpha = gradientProgress;
-    }
-    [self hbd_setNeedsUpdateNavigationBar];
 }
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
 {

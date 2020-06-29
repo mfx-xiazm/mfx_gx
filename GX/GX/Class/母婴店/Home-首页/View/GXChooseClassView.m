@@ -43,6 +43,13 @@ static NSString *const ChooseClassFooter = @"ChooseClassFooter";
 }
 - (IBAction)goodHandleClicked:(UIButton *)sender {
     if (sender.tag) {
+        if (_goodsDetail.sku.limit_num != -1 && _goodsDetail.sku.limit_num != 0) {
+            if (self.goodsDetail.buyNum > _goodsDetail.sku.limit_num) {
+                [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[NSString stringWithFormat:@"此规格限购%zd份",_goodsDetail.sku.limit_num]];
+                return;
+            }
+        }
+        
         if ([_goodsDetail.sku.stock isEqualToString:@"0"]) {
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"商品库存为0"];
             return;
@@ -124,6 +131,7 @@ static NSString *const ChooseClassFooter = @"ChooseClassFooter";
                 sku.price = strongSelf.goodsDetail.min_price;
                 sku.stock = @"0";
                 sku.logistic = @[];
+                sku.limit_num = -1;//不限购
                 strongSelf.goodsDetail.sku = sku;
                 // 清除选择的快递
                 strongSelf.goodsDetail.selectLogisticst = nil;
@@ -250,6 +258,7 @@ static NSString *const ChooseClassFooter = @"ChooseClassFooter";
                 footer.numView.hidden = NO;
                 footer.storeCodeView.hidden = YES;
                 footer.stock_num = [self.goodsDetail.sku.stock integerValue];
+                footer.limit_num = self.goodsDetail.sku.limit_num;
                 footer.buy_num.text = [NSString stringWithFormat:@"%zd",self.goodsDetail.buyNum];
                 hx_weakify(self);
                 footer.buyNumCall = ^(NSInteger num) {

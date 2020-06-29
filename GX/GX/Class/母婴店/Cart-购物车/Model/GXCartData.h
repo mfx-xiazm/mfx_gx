@@ -56,5 +56,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *cover_img;
 @property(nonatomic,copy) NSString *price;
 @property(nonatomic,copy) NSString *stock;
+@property(nonatomic,assign) NSInteger limit_num;
 @end
 NS_ASSUME_NONNULL_END

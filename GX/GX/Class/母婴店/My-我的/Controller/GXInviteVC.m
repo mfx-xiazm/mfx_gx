@@ -13,6 +13,7 @@
 #import <zhPopupController.h>
 
 @interface GXInviteVC ()
+@property (weak, nonatomic) IBOutlet UIImageView *share_bg_img;
 @property (weak, nonatomic) IBOutlet UIImageView *code_img;
 @property (weak, nonatomic) IBOutlet UILabel *share_code;
 @property (weak, nonatomic) IBOutlet UILabel *relu_txt;
@@ -27,6 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationItem setTitle:@"邀请有礼"];
+    [self.share_bg_img sd_setImageWithURL:[NSURL URLWithString:self.bg_url] placeholderImage:HXGetImage(@"邀请背景")];
     [self startShimmer];
     [self getInviteDataRequest];
 }

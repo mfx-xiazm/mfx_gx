@@ -162,8 +162,9 @@ static NSArray *_filtrationCacheKey;
     if ([MSUserManager sharedInstance].isLogined) {
         if (parameters) {
             NSMutableDictionary *tempParameters = [NSMutableDictionary dictionaryWithDictionary:parameters];
+            tempParameters[@"uid"] = [MSUserManager sharedInstance].curUserInfo.uid;
+            tempParameters[@"utype"] = [MSUserManager sharedInstance].curUserInfo.utype;
             tempParameters[@"token"] = [MSUserManager sharedInstance].curUserInfo.token;
-//            tempParameters[@"token"] = @"8F05642CBDF499466D6013B4311205F6";
             parameters = tempParameters;
         }
     }

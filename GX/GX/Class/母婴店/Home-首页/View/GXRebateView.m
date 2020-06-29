@@ -30,9 +30,9 @@
     NSMutableString *rebateStr = [NSMutableString string];
     for (GXGoodsRebate *rebateObj in _rebate) {
         if (rebateStr.length) {
-            [rebateStr appendFormat:@"，%@",[NSString stringWithFormat:@"满%@返%@%%",rebateObj.begin_price,rebateObj.percent]];
+            [rebateStr appendFormat:@"，%@",[NSString stringWithFormat:@"满%@元返%@%%",rebateObj.begin_price,rebateObj.percent]];
         }else{
-            [rebateStr appendFormat:@"%@",[NSString stringWithFormat:@"满%@返%@%%",rebateObj.begin_price,rebateObj.percent]];
+            [rebateStr appendFormat:@"%@",[NSString stringWithFormat:@"满%@元返%@%%",rebateObj.begin_price,rebateObj.percent]];
         }
     }
 
@@ -48,9 +48,9 @@
     NSMutableString *rebateStr = [NSMutableString string];
     for (GXCartGoodsRebate *rebateObj in _cart_rebate) {
         if (rebateStr.length) {
-            [rebateStr appendFormat:@"，%@",[NSString stringWithFormat:@"满%@返%@%%",rebateObj.begin_price,rebateObj.percent]];
+            [rebateStr appendFormat:@"，%@",[NSString stringWithFormat:@"满%@元返%@%%",rebateObj.begin_price,rebateObj.percent]];
         }else{
-            [rebateStr appendFormat:@"%@",[NSString stringWithFormat:@"满%@返%@%%",rebateObj.begin_price,rebateObj.percent]];
+            [rebateStr appendFormat:@"%@",[NSString stringWithFormat:@"满%@元返%@%%",rebateObj.begin_price,rebateObj.percent]];
         }
     }
 
@@ -66,9 +66,9 @@
     NSMutableString *rebateStr = [NSMutableString string];
     for (GXConfirmBrandRebate *rebateObj in _brand_rebate) {
         if (rebateStr.length) {
-            [rebateStr appendFormat:@"，%@",[NSString stringWithFormat:@"%@满%@返%@%%",rebateObj.rebate_goods,rebateObj.begin_price,rebateObj.rebate_percent]];
+            [rebateStr appendFormat:@"，%@",[NSString stringWithFormat:@"%@满%@元返%@%%",rebateObj.rebate_goods,rebateObj.begin_price,rebateObj.rebate_percent]];
         }else{
-            [rebateStr appendFormat:@"%@",[NSString stringWithFormat:@"%@满%@返%@%%",rebateObj.rebate_goods,rebateObj.begin_price,rebateObj.rebate_percent]];
+            [rebateStr appendFormat:@"%@",[NSString stringWithFormat:@"%@满%@元返%@%%",rebateObj.rebate_goods,rebateObj.begin_price,rebateObj.rebate_percent]];
         }
     }
 
@@ -84,9 +84,9 @@
     NSMutableString *rebateStr = [NSMutableString string];
     for (GXMyOrderRebate *rebateObj in _order_rebate) {
         if (rebateStr.length) {
-            [rebateStr appendFormat:@"，%@",[NSString stringWithFormat:@"%@满%@返%@%%",rebateObj.rebate_goods,rebateObj.begin_price,rebateObj.rebate_percent]];
+            [rebateStr appendFormat:@"，%@",[NSString stringWithFormat:@"%@满%@元返%@%%",rebateObj.rebate_goods,rebateObj.begin_price,rebateObj.rebate_percent]];
         }else{
-            [rebateStr appendFormat:@"%@",[NSString stringWithFormat:@"%@满%@返%@%%",rebateObj.rebate_goods,rebateObj.begin_price,rebateObj.rebate_percent]];
+            [rebateStr appendFormat:@"%@",[NSString stringWithFormat:@"%@满%@元返%@%%",rebateObj.rebate_goods,rebateObj.begin_price,rebateObj.rebate_percent]];
         }
     }
 
@@ -102,9 +102,9 @@
     NSMutableString *rebateStr = [NSMutableString string];
     for (GXMyRefundRebate *rebateObj in _refund_rebate) {
         if (rebateStr.length) {
-            [rebateStr appendFormat:@"，%@",[NSString stringWithFormat:@"%@满%@返%@%%",rebateObj.rebate_goods,rebateObj.begin_price,rebateObj.rebate_percent]];
+            [rebateStr appendFormat:@"，%@",[NSString stringWithFormat:@"%@满%@元返%@%%",rebateObj.rebate_goods,rebateObj.begin_price,rebateObj.rebate_percent]];
         }else{
-            [rebateStr appendFormat:@"%@",[NSString stringWithFormat:@"%@满%@返%@%%",rebateObj.rebate_goods,rebateObj.begin_price,rebateObj.rebate_percent]];
+            [rebateStr appendFormat:@"%@",[NSString stringWithFormat:@"%@满%@元返%@%%",rebateObj.rebate_goods,rebateObj.begin_price,rebateObj.rebate_percent]];
         }
     }
 

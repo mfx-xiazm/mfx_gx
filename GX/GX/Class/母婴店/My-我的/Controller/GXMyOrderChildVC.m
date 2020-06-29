@@ -342,12 +342,12 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 44.f;
+    return 84.f;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     GXRenewMyOrderHeader *header = [GXRenewMyOrderHeader loadXibView];
-    header.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 44.f);
+    header.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 84.f);
     if (self.status !=6) {
         GXMyOrder *order = self.orders[section];
         header.order = order;
@@ -369,17 +369,11 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
                     }else{
                         return 50.f;
                     }
-                }else if ([order.status isEqualToString:@"已完成"] || [order.status isEqualToString:@"已取消"]) {
-                    return 50.f;
                 }else{
                     return 110.f;
                 }
             }else{// 线上付款
-                if ([order.status isEqualToString:@"已完成"] || [order.status isEqualToString:@"已取消"]) {
-                    return 50.f;
-                }else{
-                    return 110.f;
-                }
+                return 110.f;
             }
         }else{
             return CGFLOAT_MIN;
@@ -390,7 +384,7 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    /** 待付款 - 取消订单、立即付款  待发货 - 申请退款[线下审核未通过 - 无]  待收货 - 申请退款、查看物流、确认收货  待评价 - 评价  已完成/退款列表 - 无*/
+    /** 待付款 - 取消订单、立即付款  待发货 - 申请退款[线下审核未通过 - 无]  待收货 - 申请退款、查看物流、确认收货  待评价 - 评价  已完成/已取消 - 删除订单*/
     GXRenewMyOrderFooter *footer = [GXRenewMyOrderFooter loadXibView];
     if (self.status !=6) {// 不是退款售后
         GXMyOrder *order = self.orders[section];
@@ -403,21 +397,13 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
                     footer.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 50.f);
                     footer.handleView.hidden = YES;
                 }
-            }else if ([order.status isEqualToString:@"已完成"] || [order.status isEqualToString:@"已取消"]) {
-                footer.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 50.f);
-                footer.handleView.hidden = YES;
             }else{
                 footer.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 110.f);
                 footer.handleView.hidden = NO;
             }
         }else{// 线上付款
-            if ([order.status isEqualToString:@"已完成"] || [order.status isEqualToString:@"已取消"]) {
-                footer.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 50.f);
-                footer.handleView.hidden = YES;
-            }else{
-                footer.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 110.f);
-                footer.handleView.hidden = NO;
-            }
+            footer.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 110.f);
+            footer.handleView.hidden = NO;
         }
         footer.order = order;
         hx_weakify(self);
@@ -473,6 +459,19 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
                     }else{
                         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请联系快递公司"];
                     }
+                }else {
+                    //HXLog(@"售后退款"); isRefund 为1
+                    GXApplyRefundVC *rvc = [GXApplyRefundVC new];
+                    rvc.oid = order.oid;
+                    rvc.refundCall = ^{
+                        if ([order.provider_uid  isEqualToString:@"0"]) {
+                            order.refund_status = @"2";
+                        }else{
+                            order.refund_status = @"1";
+                        }
+                        [tableView reloadData];
+                    };
+                    [strongSelf.navigationController pushViewController:rvc animated:YES];
                 }
             }else{
                 if ([order.status isEqualToString:@"待付款"]) {

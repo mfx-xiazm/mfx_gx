@@ -29,6 +29,11 @@
     if (![textField hasText] || [textField.text integerValue] == 0) {
         textField.text = @"1";
     }
+    if (_goods.limit_num != -1 && _goods.limit_num != 0) {//限购
+        if ([textField.text integerValue] > _goods.limit_num) {
+            textField.text = [NSString stringWithFormat:@"%ld",(long)_goods.limit_num];
+        }
+    }
     if ([textField.text integerValue] > [_goods.stock integerValue]) {
         textField.text = [NSString stringWithFormat:@"%ld",(long)[_goods.stock integerValue]];
     }
@@ -61,6 +66,12 @@
 }
 - (IBAction)numChangeClicked:(UIButton *)sender {
     if (sender.tag) {// +
+        if (_goods.limit_num != -1 && _goods.limit_num != 0) {//限购
+            if ([self.cart_num.text integerValue] + 1 > _goods.limit_num) {
+                [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[NSString stringWithFormat:@"限购%zd份",_goods.limit_num]];
+                return;
+            }
+        }
         if ([self.cart_num.text integerValue] + 1 > [_goods.stock integerValue]) {
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"库存不足"];
             return;

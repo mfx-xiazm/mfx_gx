@@ -85,7 +85,7 @@ static NSString *const MarketTrendCell = @"MarketTrendCell";
 -(void)setUpCategoryTitleView
 {
     _categoryView.backgroundColor = [UIColor whiteColor];
-    _categoryView.titles = @[@"美赞成", @"美素佳儿", @"德国爱他美", @"诺优能", @"美赞成", @"美素佳儿"];
+    //_categoryView.titles = @[@"美赞成", @"美素佳儿", @"德国爱他美", @"诺优能", @"美赞成", @"美素佳儿"];
     _categoryView.titleFont = [UIFont systemFontOfSize:14 weight:UIFontWeightMedium];
     _categoryView.titleColor = [UIColor blackColor];
     _categoryView.titleSelectedColor = HXControlBg;

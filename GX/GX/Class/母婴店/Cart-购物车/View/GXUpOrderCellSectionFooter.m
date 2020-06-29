@@ -56,7 +56,7 @@
     
     if (_orderData.brand_rebate && _orderData.brand_rebate.count) {
         GXConfirmBrandRebate *rebate = _orderData.brand_rebate.firstObject;
-        self.rebateText.text = [NSString stringWithFormat:@"满%@返%@%%",rebate.begin_price,rebate.rebate_percent];
+        self.rebateText.text = [NSString stringWithFormat:@"满%@元返%@%%",rebate.begin_price,rebate.rebate_percent];
         self.rebateAmount.text = [NSString stringWithFormat:@"-￥%.2f",_orderData.shopRebateAmount?[_orderData.shopRebateAmount floatValue]:0];
     }else{
         self.rebateText.text = @"";

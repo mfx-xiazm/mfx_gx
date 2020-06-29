@@ -41,6 +41,7 @@
 #import "zhAlertView.h"
 #import "XQCarousel.h"
 #import "GXGoodsDetailVC.h"
+#import "GXShareCodeView.h"
 
 static NSString *const HomeSectionHeader = @"HomeSectionHeader";
 static NSString *const ShopGoodsCell = @"ShopGoodsCell";
@@ -90,7 +91,8 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
 @property (nonatomic, strong) zhPopupController *classPopVC;
 /* 分享弹框 */
 @property (nonatomic, strong) zhPopupController *sharePopVC;
-
+/* 轮播 */
+@property (nonatomic, strong) XQCarousel *carousel;
 @end
 
 @implementation GXPresellDetailVC
@@ -109,6 +111,18 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
     self.materialBtn.layer.cornerRadius = self.materialBtn.hxn_height/2.0;
     self.applyBtn.layer.cornerRadius = self.applyBtn.hxn_height/2.0;
     self.webView.frame = self.webContentView.bounds;
+}
+-(XQCarousel *)carousel
+{
+    if (!_carousel) {
+        NSMutableArray *bannerImgs = [NSMutableArray array];
+        for (GXGoodsDetailAdv *adv in self.goodsDetail.good_adv) {
+            [bannerImgs addObject:adv.adv_img];
+        }
+        _carousel = [XQCarousel scrollViewFrame:self.cyclePagerView.bounds imageStringGroup:bannerImgs];
+        _carousel.delegate = self;
+    }
+    return _carousel;
 }
 -(GXChooseClassView *)chooseClassView
 {
@@ -140,10 +154,6 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
 #pragma mark -- 视图相关
 -(void)setUpNavBar
 {
-    self.hbd_barAlpha = 0.2;
-    self.hbd_barStyle = UIBarStyleBlack;
-    self.hbd_tintColor = [UIColor whiteColor];
-    
     [self.navigationItem setTitle:nil];
     
     UIButton *cart = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -160,24 +170,24 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
     
     UIButton *material = [UIButton buttonWithType:UIButtonTypeCustom];
     [material setTitle:@"卖货素材" forState:UIControlStateNormal];
-    [material setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [material setTitleColor:HXControlBg forState:UIControlStateNormal];
     material.titleLabel.font = [UIFont systemFontOfSize:12];
     material.hxn_size = CGSizeMake(70, 22);
     material.layer.cornerRadius = material.hxn_height/2.0;
     material.layer.masksToBounds = YES;
-    material.backgroundColor = HXRGBAColor(0, 0, 0, 0.3);
+    material.backgroundColor = [UIColor whiteColor];
     [material addTarget:self action:@selector(materialClicked) forControlEvents:UIControlEventTouchUpInside];
     self.materialBtn = material;
     UIBarButtonItem *materialItem = [[UIBarButtonItem alloc] initWithCustomView:material];
     
     UIButton *apply = [UIButton buttonWithType:UIButtonTypeCustom];
     [apply setTitle:@"我要供货" forState:UIControlStateNormal];
-    [apply setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [apply setTitleColor:HXControlBg forState:UIControlStateNormal];
     apply.titleLabel.font = [UIFont systemFontOfSize:12];
     apply.hxn_size = CGSizeMake(70, 22);
     apply.layer.cornerRadius = apply.hxn_height/2.0;
     apply.layer.masksToBounds = YES;
-    apply.backgroundColor = HXRGBAColor(0, 0, 0, 0.3);
+    apply.backgroundColor = [UIColor whiteColor];
     self.applyBtn = apply;
     [apply addTarget:self action:@selector(applyClicked) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *applyItem = [[UIBarButtonItem alloc] initWithCustomView:apply];
@@ -231,7 +241,21 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
 }
 -(void)shareClicked
 {
-    HXLog(@"分享");
+    GXShareCodeView *share  = [GXShareCodeView loadXibView];
+    share.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 180.f);
+    hx_weakify(self);
+    share.shareTypeCall = ^(NSInteger index) {
+        hx_strongify(weakSelf);
+        [strongSelf.sharePopVC dismissWithDuration:0.25 completion:nil];
+        if (index == 1) {
+            [strongSelf shareWebToPlatformType:UMSocialPlatformType_WechatTimeLine];
+        }else{
+            [strongSelf shareWebToPlatformType:UMSocialPlatformType_WechatSession];
+        }
+    };
+    self.sharePopVC = [[zhPopupController alloc] initWithView:share size:share.bounds.size];
+    self.sharePopVC.layoutType = zhPopupLayoutTypeBottom;
+    [self.sharePopVC show];
 }
 -(void)materialClicked
 {
@@ -329,7 +353,6 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
                 [strongSelf handleGoodsDetailData];
             });
         }else{
-            
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
         }
     } failure:^(NSError *error) {
@@ -340,13 +363,7 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
 }
 -(void)handleGoodsDetailData
 {
-    NSMutableArray *bannerImgs = [NSMutableArray array];
-    for (GXGoodsDetailAdv *adv in self.goodsDetail.good_adv) {
-        [bannerImgs addObject:adv.adv_img];
-    }
-    XQCarousel *carousel = [XQCarousel scrollViewFrame:self.cyclePagerView.bounds imageStringGroup:bannerImgs];
-    carousel.delegate = self;
-    [self.cyclePagerView addSubview:carousel];
+    [self.cyclePagerView addSubview:self.carousel];
     
     // 处理倒计时和底部显示
     if ([self.goodsDetail.min_price floatValue] == [self.goodsDetail.max_price floatValue]) {
@@ -367,6 +384,11 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
         }
     }else{
         self.rush_time.text = @"已结束";
+        self.buttom_rush_time.text = @"已结束";
+        if (self.timer) {
+            [self.timer invalidate];
+            self.timer = nil;
+        }
     }
     
     [self.shop_name setTextWithLineSpace:5.f withString:_goodsDetail.goods_name withFont:[UIFont systemFontOfSize:15]];
@@ -560,6 +582,27 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
         [self handleGoodsDetailData];
     }
 }
+- (void)shareWebToPlatformType:(UMSocialPlatformType)platformType
+{
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+
+    //创建图片内容对象
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"呱选-好品预售" descr:self.goodsDetail.goods_name thumImage:HXGetImage(@"Icon-share")];
+    //如果有缩略图，则设置缩略图
+    shareObject.webpageUrl = [NSString stringWithFormat:@"%@webRegister/page/dynamic.html?pre_sale_id=%@&is_join=%@",HXRC_URL_HEADER,self.pre_sale_id,self.goodsDetail.is_join];
+    //分享消息对象设置分享内容对象
+    messageObject.shareObject = shareObject;
+
+    //调用分享接口
+    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+        if (error) {
+            NSLog(@"************Share fail with error %@*********",error);
+        }else{
+            NSLog(@"response data is %@",data);
+        }
+    }];
+}
 #pragma mark -- XQCarousel代理
 -(void)XQCarouselDidClickedImageView:(XQCarousel *)carousel imageViewIndex:(NSInteger)imageViewIndex
 {
@@ -591,28 +634,6 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
     }];
 }
 #pragma mark -- 事件监听
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    // CGFloat headerHeight = CGRectGetHeight(self.header.frame);
-    CGFloat headerHeight = HX_SCREEN_WIDTH;
-    CGFloat progress = scrollView.contentOffset.y;
-    CGFloat gradientProgress = MIN(1, MAX(0, progress  / headerHeight));
-    gradientProgress = gradientProgress * gradientProgress * gradientProgress * gradientProgress;
-    if (gradientProgress < 0.1) {
-        [self.materialBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        self.materialBtn.backgroundColor = HXRGBAColor(0, 0, 0, 0.3);
-        [self.applyBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        self.applyBtn.backgroundColor = HXRGBAColor(0, 0, 0, 0.3);
-    } else {
-        [self.materialBtn setTitleColor:HXControlBg forState:UIControlStateNormal];
-        self.materialBtn.backgroundColor = HXRGBAColor(255, 255, 255, 1);
-        [self.applyBtn setTitleColor:HXControlBg forState:UIControlStateNormal];
-        self.applyBtn.backgroundColor = HXRGBAColor(255, 255, 255, 1);
-    }
-    if (gradientProgress>0.2) {
-        self.hbd_barAlpha = gradientProgress;
-    }
-    [self hbd_setNeedsUpdateNavigationBar];
-}
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
 {
     if ([keyPath isEqualToString:@"contentSize"]) {

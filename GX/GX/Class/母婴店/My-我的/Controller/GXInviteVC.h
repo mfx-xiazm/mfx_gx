@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface GXInviteVC : HXBaseViewController
-
+@property (nonatomic, copy) NSString *bg_url;
 @end
 
 NS_ASSUME_NONNULL_END

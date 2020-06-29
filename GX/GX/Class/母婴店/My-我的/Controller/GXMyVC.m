@@ -204,6 +204,7 @@
 - (IBAction)myOtherBtnClicked:(UIButton *)sender {
     if (sender.tag == 0) {
         GXInviteVC *ivc = [GXInviteVC new];
+        ivc.bg_url = self.mineData.act_pic;
         [self.navigationController pushViewController:ivc animated:YES];
     }else if (sender.tag == 1){
         GXMyAddressVC *avc = [GXMyAddressVC new];

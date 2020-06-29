@@ -12,6 +12,7 @@
             <connections>
                 <outlet property="code_img" destination="4BE-w3-obU" id="JpH-7W-7WP"/>
                 <outlet property="relu_txt" destination="ROx-Mq-Jwo" id="tjv-Kw-d36"/>
+                <outlet property="share_bg_img" destination="R0d-Pt-z9J" id="4f6-Dk-FLH"/>
                 <outlet property="share_code" destination="4pd-Su-3gs" id="Zo2-6U-rm8"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -27,7 +28,7 @@
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7cJ-aD-7aN">
                     <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Ih-L0-aAs">
+                        <view clipsSubviews="YES" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Ih-L0-aAs">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="677.5"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="邀请有礼-1" translatesAutoresizingMaskIntoConstraints="NO" id="3pT-lm-DZw">

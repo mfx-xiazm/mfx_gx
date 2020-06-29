@@ -47,7 +47,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S4W-dt-NZA">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="812"/>
+                    <rect key="frame" x="0.0" y="44" width="414" height="768"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bIb-J0-wtg">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="1070.5"/>
@@ -543,7 +543,7 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="S4W-dt-NZA" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="1Yk-hC-ynj"/>
+                <constraint firstItem="S4W-dt-NZA" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="1Yk-hC-ynj"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="S4W-dt-NZA" secondAttribute="trailing" id="2Gb-Ab-8i8"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="DAn-sc-4Wd" secondAttribute="bottom" id="3dU-Mg-C2f"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="DAn-sc-4Wd" secondAttribute="trailing" id="5c1-OZ-mvx"/>

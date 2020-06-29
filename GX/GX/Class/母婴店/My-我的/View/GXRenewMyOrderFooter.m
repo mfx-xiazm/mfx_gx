@@ -89,7 +89,6 @@
         [self.thirdHandleBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }else if ([_order.status isEqualToString:@"待评价"]) {
         self.firstHandleBtn.hidden = YES;
-        self.secondHandleBtn.hidden = YES;
         
         self.thirdHandleBtn.hidden = NO;
         [self.thirdHandleBtn setTitle:@"评价" forState:UIControlStateNormal];
@@ -97,15 +96,33 @@
         self.thirdHandleBtn.layer.borderColor = [UIColor clearColor].CGColor;
         [self.thirdHandleBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         
+        if ([_order.isRefund isEqualToString:@"1"]) {//可以售后退款
+            self.secondHandleBtn.hidden = NO;
+            [self.secondHandleBtn setTitle:@"售后退款" forState:UIControlStateNormal];
+            self.secondHandleBtn.backgroundColor = [UIColor whiteColor];
+            self.secondHandleBtn.layer.borderColor = [UIColor blackColor].CGColor;
+            [self.secondHandleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        }else{// 不可以售后退款
+            self.secondHandleBtn.hidden = YES;
+        }
     }else{
         self.firstHandleBtn.hidden = YES;
-        self.secondHandleBtn.hidden = YES;
         
         self.thirdHandleBtn.hidden = NO;
         [self.thirdHandleBtn setTitle:@"删除订单" forState:UIControlStateNormal];
         self.thirdHandleBtn.backgroundColor = [UIColor whiteColor];
         self.thirdHandleBtn.layer.borderColor = [UIColor blackColor].CGColor;
         [self.thirdHandleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        
+        if ([_order.isRefund isEqualToString:@"1"]) {//可以售后退款
+            self.secondHandleBtn.hidden = NO;
+            [self.secondHandleBtn setTitle:@"售后退款" forState:UIControlStateNormal];
+            self.secondHandleBtn.backgroundColor = [UIColor whiteColor];
+            self.secondHandleBtn.layer.borderColor = [UIColor blackColor].CGColor;
+            [self.secondHandleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        }else{// 不可以售后退款
+            self.secondHandleBtn.hidden = YES;
+        }
     }
 }
 -(void)setRefund:(GXMyRefund *)refund

@@ -84,9 +84,7 @@
         self.locitic_copy.hidden = YES;
     }
     [infoStr appendFormat:@"%@",[NSString stringWithFormat:@"\n发货商家：%@",_orderDetail.provider_no]];
-    if (_orderDetail.username && _orderDetail.username.length) {
-        [infoStr appendFormat:@"\n推广店员：%@（%@）",_orderDetail.username,_orderDetail.saleman_code];
-    }
+    
     [self.order_desc setTextWithLineSpace:10.f withString:infoStr withFont:[UIFont systemFontOfSize:13]];
 }
 -(void)setRefundDetail:(GXMyRefund *)refundDetail
@@ -140,9 +138,7 @@
         self.locitic_copy.hidden = YES;
     }
     [infoStr appendFormat:@"%@",[NSString stringWithFormat:@"\n发货商家：%@",_refundDetail.provider_no]];
-    if (_refundDetail.username && _refundDetail.username.length) {
-        [infoStr appendFormat:@"\n推广店员：%@（%@）",_refundDetail.username,_refundDetail.saleman_code];
-    }
+   
     [self.order_desc setTextWithLineSpace:10.f withString:infoStr withFont:[UIFont systemFontOfSize:13]];
 }
 - (IBAction)orderNoCopy:(id)sender {
