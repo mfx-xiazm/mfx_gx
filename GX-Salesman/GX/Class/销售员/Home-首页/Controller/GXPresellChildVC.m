@@ -38,6 +38,13 @@ static NSString *const GXPresellSource2 = @"GXPresellSource2";
     [kCountDownManager addSourceWithIdentifier:(self.seaType == 1)?GXPresellSource1:GXPresellSource2];
     [self getPreSaleDataRequest:YES];
 }
+-(NSMutableArray *)preSales
+{
+    if(!_preSales){
+        _preSales = [NSMutableArray array];
+    }
+    return _preSales;
+}
 #pragma mark -- 视图相关
 -(void)setUpTableView
 {
@@ -138,7 +145,6 @@ static NSString *const GXPresellSource2 = @"GXPresellSource2";
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
     }];
 }
-#pragma mark -- UITableView数据源和代理
 #pragma mark -- UITableView数据源和代理
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {

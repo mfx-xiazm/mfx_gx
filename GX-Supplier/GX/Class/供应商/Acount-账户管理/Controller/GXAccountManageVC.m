@@ -227,7 +227,7 @@ static NSString *const AccountManageCell = @"AccountManageCell";
 }
 -(void)cashNoticeClicked:(UIButton *)sender
 {
-    zhAlertView *alert = [[zhAlertView alloc] initWithTitle:@"提现说明" message:[NSString stringWithFormat:@"订单确认收货后，%@天后才能申请提现",self.cashable_day] constantWidth:HX_SCREEN_WIDTH - 50*2];
+    zhAlertView *alert = [[zhAlertView alloc] initWithTitle:@"提现说明" message:[NSString stringWithFormat:@"订单发货之后%@天后才能申请提现",self.cashable_day] constantWidth:HX_SCREEN_WIDTH - 50*2];
     hx_weakify(self);
     zhAlertButton *okButton = [zhAlertButton buttonWithTitle:@"我知道了" handler:^(zhAlertButton * _Nonnull button) {
         hx_strongify(weakSelf);

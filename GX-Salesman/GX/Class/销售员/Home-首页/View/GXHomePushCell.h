@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong) GYHomeBanner *banner;
 /* 控区控价 */
 @property(nonatomic,strong) GYHomeRegional *regional;
-/* 通货行情 */
+/* 通货专区 */
 @property(nonatomic,strong) GYHomeMarketTrend *marketTrend;
 /* 品牌 */
 @property(nonatomic,strong) GYHomeBrand *brand;

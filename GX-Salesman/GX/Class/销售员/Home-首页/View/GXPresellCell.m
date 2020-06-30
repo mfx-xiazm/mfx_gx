@@ -16,7 +16,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *time;
 @property (weak, nonatomic) IBOutlet UILabel *sale_num;
 @property (weak, nonatomic) IBOutlet UILabel *price;
-@property (weak, nonatomic) IBOutlet UIButton *handleBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *cover_img;
 
 @end
@@ -54,24 +53,15 @@
         self.flag_img.hidden = NO;
         self.flag_img.image = HXGetImage(@"即将开始_1");
         self.sale_num.hidden = YES;
-        [self.handleBtn setTitle:@"即将开始" forState:UIControlStateNormal];
-        [self.handleBtn setTitleColor:UIColorFromRGB(0xFF8A00) forState:UIControlStateNormal];
-        [self.handleBtn setBackgroundColor:UIColorFromRGB(0xEEEEEE)];
     }else if ([_preSale.sell_status isEqualToString:@"2"]) {
         self.flag_img.hidden = NO;
         self.flag_img.image = HXGetImage(@"火热预售");
         self.sale_num.hidden = NO;
         self.sale_num.text = [NSString stringWithFormat:@"销量：%@",_preSale.sell_num];
-        [self.handleBtn setTitle:@"立即购买" forState:UIControlStateNormal];
-        [self.handleBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [self.handleBtn setBackgroundColor:UIColorFromRGB(0xFF8A00)];
     }else{
         self.flag_img.hidden = YES;
         self.sale_num.hidden = NO;
         self.sale_num.text = [NSString stringWithFormat:@"销量：%@",_preSale.sell_num];
-        [self.handleBtn setTitle:@"已结束" forState:UIControlStateNormal];
-        [self.handleBtn setTitleColor:UIColorFromRGB(0xFF8A00) forState:UIControlStateNormal];
-        [self.handleBtn setBackgroundColor:UIColorFromRGB(0xEEEEEE)];
     }
     self.goods_anme.text = _preSale.goods_name;
     if ([_preSale.control_type isEqualToString:@"1"]) {

@@ -213,8 +213,10 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
                 [strongSelf handleGoodsDetailData];
             });
         }else{
-            
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+            if ([[responseObject objectForKey:@"message"] containsString:@"下架"]) {
+                [strongSelf.navigationController popViewControllerAnimated:YES];
+            }
         }
     } failure:^(NSError *error) {
         hx_strongify(weakSelf);
