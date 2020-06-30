@@ -41,9 +41,9 @@
             }
         }else{// 其他
             if (contentTxt.length) {
-                [contentTxt appendFormat:@"，%@",[NSString stringWithFormat:@"买%@搭赠%@%@个",gift.begin_num,gift.goods_name,gift.gift_num]];
+                [contentTxt appendFormat:@"，%@",[NSString stringWithFormat:@"买%@搭赠%@%@",gift.begin_num,gift.gift_num,gift.goods_name]];
             }else{
-                [contentTxt appendFormat:@"%@",[NSString stringWithFormat:@"买%@搭赠%@%@个",gift.begin_num,gift.goods_name,gift.gift_num]];
+                [contentTxt appendFormat:@"%@",[NSString stringWithFormat:@"买%@搭赠%@%@",gift.begin_num,gift.gift_num,gift.goods_name]];
             }
         }
     }

@@ -41,9 +41,9 @@
             }
         }else{// 其他
             if (qita.length) {
-                [qita appendFormat:@"\n%@",[NSString stringWithFormat:@"买%@搭赠%@%@个",rule.begin_num,rule.goods_name,rule.gift_num]];
+                [qita appendFormat:@"\n%@",[NSString stringWithFormat:@"买%@搭赠%@%@",rule.begin_num,rule.gift_num,rule.goods_name]];
             }else{
-                [qita appendFormat:@"%@",[NSString stringWithFormat:@"买%@搭赠%@%@个",rule.begin_num,rule.goods_name,rule.gift_num]];
+                [qita appendFormat:@"%@",[NSString stringWithFormat:@"买%@搭赠%@%@",rule.begin_num,rule.gift_num,rule.goods_name]];
             }
         }
     }
@@ -73,9 +73,9 @@
             }
         }else{// 其他
             if (qita.length) {
-                [qita appendFormat:@"\n%@",[NSString stringWithFormat:@"买%@搭赠%@%@个",rule.begin_num,rule.goods_name,rule.gift_num]];
+                [qita appendFormat:@"\n%@",[NSString stringWithFormat:@"买%@搭赠%@%@",rule.begin_num,rule.gift_num,rule.goods_name]];
             }else{
-                [qita appendFormat:@"%@",[NSString stringWithFormat:@"买%@搭赠%@%@个",rule.begin_num,rule.goods_name,rule.gift_num]];
+                [qita appendFormat:@"%@",[NSString stringWithFormat:@"买%@搭赠%@%@",rule.begin_num,rule.gift_num,rule.goods_name]];
             }
         }
     }
@@ -105,9 +105,9 @@
             }
         }else{// 其他
             if (qita.length) {
-                [qita appendFormat:@"\n%@",[NSString stringWithFormat:@"%@买%@搭赠%@%@个",rule.sale_goods,rule.begin_num,rule.goods_name,rule.gift_num]];
+                [qita appendFormat:@"\n%@",[NSString stringWithFormat:@"%@买%@搭赠%@%@",rule.sale_goods,rule.begin_num,rule.gift_num,rule.goods_name]];
             }else{
-                [qita appendFormat:@"%@",[NSString stringWithFormat:@"%@买%@搭赠%@%@个",rule.sale_goods,rule.begin_num,rule.goods_name,rule.gift_num]];
+                [qita appendFormat:@"%@",[NSString stringWithFormat:@"%@买%@搭赠%@%@",rule.sale_goods,rule.begin_num,rule.gift_num,rule.goods_name]];
             }
         }
     }

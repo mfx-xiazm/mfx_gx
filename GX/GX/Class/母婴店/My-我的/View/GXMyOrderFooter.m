@@ -36,7 +36,7 @@
     
     if (_orderProvider.brand_rebate && _orderProvider.brand_rebate.count) {
         GXMyOrderRebate *rebate = _orderProvider.brand_rebate.firstObject;
-        self.rebateText.text = [NSString stringWithFormat:@"返利%@%%",rebate.rebate_percent];
+        self.rebateText.text = [rebate.rebate_percent floatValue]?[NSString stringWithFormat:@"返利%@%%",rebate.rebate_percent]:@"";
         self.rebateAmount.text = [NSString stringWithFormat:@"-￥%.2f",_orderProvider.shopRebateAmount?[_orderProvider.shopRebateAmount floatValue]:0];
     }else{
         self.rebateText.text = @"";
@@ -55,7 +55,7 @@
     
     if (_refundProvider.brand_rebate && _refundProvider.brand_rebate.count) {
         GXMyRefundRebate *rebate = _refundProvider.brand_rebate.firstObject;
-        self.rebateText.text = [NSString stringWithFormat:@"返利%@%%",rebate.rebate_percent];
+        self.rebateText.text = [rebate.rebate_percent floatValue]?[NSString stringWithFormat:@"返利%@%%",rebate.rebate_percent]:@"";
         self.rebateAmount.text = [NSString stringWithFormat:@"-￥%.2f",_refundProvider.shopRebateAmount?[_refundProvider.shopRebateAmount floatValue]:0];
     }else{
         self.rebateText.text = @"";

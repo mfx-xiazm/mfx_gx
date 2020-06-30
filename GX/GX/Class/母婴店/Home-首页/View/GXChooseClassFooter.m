@@ -41,6 +41,8 @@
     
     if (_limit_num != -1 && _limit_num != 0) {//限购
         self.limit_txt.text = [NSString stringWithFormat:@"此规格限购%zd份",_limit_num];
+    }else{
+        self.limit_txt.text = @"";
     }
 }
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string

@@ -110,7 +110,7 @@ static NSString *const ChooseClassFooter = @"ChooseClassFooter";
     parameters[@"spec_attr_ids"] = spec_attr_ids;
 
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getSkuDetail" parameters:parameters success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:(self.goodsDetail.presell_id && self.goodsDetail.presell_id.length)?@"admin/getPreSkuDetail":@"admin/getSkuDetail" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             if ([responseObject[@"data"] isKindOfClass:[NSDictionary class]]) {

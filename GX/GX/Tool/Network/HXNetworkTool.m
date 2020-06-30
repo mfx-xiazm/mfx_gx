@@ -197,7 +197,7 @@ static NSArray *_filtrationCacheKey;
         }else{
             success ? success(responseObject) : nil;
             //对数据进行异步缓存
-            responseCache!=nil ? [HXNetworkCache setHttpCache:responseObject URL:URL parameters:parameters filtrationCacheKey:_filtrationCacheKey] : nil;
+            responseCache!=nil ? [HXNetworkCache setHttpCache:responseObject URL:appendUrl parameters:parameters filtrationCacheKey:_filtrationCacheKey] : nil;
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

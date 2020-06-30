@@ -56,7 +56,7 @@
 {
     self.code_img.image = [SGQRCodeObtain generateQRCodeWithData:result[@"register_url"] size:self.code_img.hxn_width];
     self.share_code.text = [NSString stringWithFormat:@"我的邀请码：%@",result[@"share_code"]];
-    [self.relu_txt setTextWithLineSpace:5.f withString:result[@"act_rule"] withFont:[UIFont systemFontOfSize:13]];
+    [self.relu_txt setTextWithLineSpace:5.f withString:[NSString stringWithFormat:@"规则：\n%@",result[@"act_rule"]] withFont:[UIFont systemFontOfSize:13]];
 }
 - (IBAction)inviteClicked:(UIButton *)sender {
     GXShareCodeView *share  = [GXShareCodeView loadXibView];

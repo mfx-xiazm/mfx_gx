@@ -57,6 +57,8 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
 @property(nonatomic,strong) GXHomeData *homeData;
 /* 更新弹框 */
 @property (nonatomic, strong) zhPopupController *updatePopVC;
+/** 页码 */
+@property(nonatomic,assign) NSInteger pagenum;
 @end
 
 @implementation GXHomeVC
@@ -68,7 +70,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
     [self setUpCollectionView];
     [self setUpRefresh];
     [self startShimmer];
-    [self getHomeDataRequest];
+    [self getHomeDataRequest:YES];
     [self updateVersionRequest];//版本升级
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -125,7 +127,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
     hx_weakify(self);
     [self.collectionView zx_setEmptyView:[GYEmptyView class] isFull:YES clickedBlock:^(UIButton * _Nullable btn) {
         [weakSelf startShimmer];
-        [weakSelf getHomeDataRequest];
+        [weakSelf getHomeDataRequest:YES];
     }]; 
 }
 /** 添加刷新控件 */
@@ -136,7 +138,12 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         hx_strongify(weakSelf);
         [strongSelf.collectionView.mj_footer resetNoMoreData];
-        [strongSelf getHomeDataRequest];
+        [strongSelf getHomeDataRequest:YES];
+    }];
+    //追加尾部刷新
+    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        hx_strongify(weakSelf);
+        [strongSelf getHomeDataRequest:NO];
     }];
 }
 #pragma mark -- 点击事件
@@ -170,22 +177,46 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
     }];
 }
--(void)getHomeDataRequest
+-(void)getHomeDataRequest:(BOOL)isRefresh
 {
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    if (isRefresh) {
+        parameters[@"page"] = @(1);//第几页
+    }else{
+        NSInteger page = self.pagenum+1;
+        parameters[@"page"] = @(page);//第几页
+    }
+    
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getHomeData" parameters:@{} success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getHomeData" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         [strongSelf stopShimmer];
-        [strongSelf.collectionView.mj_header endRefreshing];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
-            strongSelf.homeData = [GXHomeData yy_modelWithDictionary:responseObject[@"data"]];
-            NSArray *tempArr = @[@{@"cate_name":@"精选好店",@"image_name":@"精选好店"},
-                                 @{@"cate_name":@"品牌优选",@"image_name":@"品牌优选"},
-                                 @{@"cate_name":@"控区控价",@"image_name":@"控区控价"},
-                                 @{@"cate_name":@"预售专区",@"image_name":@"促销神器"},
-                                 @{@"cate_name":@"卖货素材",@"image_name":@"卖货素材"}
-                                 ];
-            strongSelf.homeData.homeTopCate = [NSArray yy_modelArrayWithClass:[GYHomeTopCate class] json:tempArr];
+            if (isRefresh) {
+                [strongSelf.collectionView.mj_header endRefreshing];
+                strongSelf.pagenum = 1;
+                
+                strongSelf.homeData = [GXHomeData yy_modelWithDictionary:responseObject[@"data"]];
+                NSArray *tempArr = @[@{@"cate_name":@"精选好店",@"image_name":@"精选好店"},
+                                     @{@"cate_name":@"品牌优选",@"image_name":@"品牌优选"},
+                                     @{@"cate_name":@"控区控价",@"image_name":@"控区控价"},
+                                     @{@"cate_name":@"预售专区",@"image_name":@"促销神器"},
+                                     @{@"cate_name":@"卖货素材",@"image_name":@"卖货素材"}
+                                     ];
+                strongSelf.homeData.homeTopCate = [NSArray yy_modelArrayWithClass:[GYHomeTopCate class] json:tempArr];
+            }else{
+                [strongSelf.collectionView.mj_footer endRefreshing];
+                strongSelf.pagenum ++;
+                
+                if ([responseObject[@"data"][@"home_recommend_goods"] isKindOfClass:[NSArray class]] && ((NSArray *)responseObject[@"data"][@"home_recommend_goods"]).count){
+                    NSArray *arrt = [NSArray yy_modelArrayWithClass:[GYHomePushGoods class] json:responseObject[@"data"][@"home_recommend_goods"]];
+                    NSMutableArray *tempArr = [NSMutableArray arrayWithArray:strongSelf.homeData.home_recommend_goods];
+                    [tempArr addObjectsFromArray:arrt];
+                    strongSelf.homeData.home_recommend_goods = tempArr;
+                }else{// 提示没有更多数据
+                    [strongSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
+                }
+            }
             dispatch_async(dispatch_get_main_queue(), ^{
                 strongSelf.collectionView.hidden = NO;
                 [strongSelf.collectionView reloadData];
@@ -197,6 +228,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
         hx_strongify(weakSelf);
         [strongSelf stopShimmer];
         [strongSelf.collectionView.mj_header endRefreshing];
+        [strongSelf.collectionView.mj_footer endRefreshing];
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
     }];
 }
@@ -257,7 +289,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
         return self.homeData.home_rushbuy.count;
     }else if (section == 2) {//控区控价
         return self.homeData.home_control_price_brand.count;
-    }else if (section == 3) {//通货行情
+    }else if (section == 3) {//通货专区
         return self.homeData.currency_img.count;
     }else if (section == 4) {//品牌优选
         return self.homeData.home_brand_goods.count;
@@ -274,7 +306,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
         return FillLayout;//填充式布局
     }else if (section == 2) {//控区控价
         return ClosedLayout;
-    }else if (section == 3) {//通货行情
+    }else if (section == 3) {//通货专区
         return ClosedLayout;
     }else if (section == 4) {//品牌优选
         return ClosedLayout;
@@ -292,7 +324,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
         return 0;//这个区间为填充式布局
     }else if (section == 2) {//控区控价
         return 1;
-    }else if (section == 3) {//通货行情
+    }else if (section == 3) {//通货专区
         return 2;
     }else if (section == 4) {//品牌优选
         return 3;
@@ -333,7 +365,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
         GYHomeRegional *regional = self.homeData.home_control_price_brand[indexPath.item];
         cell.regional = regional;
         return cell;
-    }else if (indexPath.section == 3) {//通货行情
+    }else if (indexPath.section == 3) {//通货专区
         GXHomePushCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:HomePushCell forIndexPath:indexPath];
         GYHomeMarketTrend *marketTrend = self.homeData.currency_img[indexPath.item];
         cell.marketTrend = marketTrend;
@@ -419,10 +451,10 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
                     header.moreTitle.textColor = [UIColor lightGrayColor];
                     header.moreImg.image = HXGetImage(@"更多灰色");
                     header.titleImg.image = HXGetImage(@"控区控价_1");
-                }else if (indexPath.section == 3) {//通货行情
+                }else if (indexPath.section == 3) {//通货专区
                     header.moreTitle.textColor = [UIColor lightGrayColor];
                     header.moreImg.image = HXGetImage(@"更多灰色");
-                    header.titleImg.image = HXGetImage(@"通货行情");
+                    header.titleImg.image = HXGetImage(@"通货专区");
                 }else if (indexPath.section == 4) {//品牌优选
                     header.moreTitle.textColor = [UIColor lightGrayColor];
                     header.moreImg.image = HXGetImage(@"更多灰色");
@@ -441,7 +473,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
                     }else if (indexPath.section == 2) {//控区控价
                         GXBrandPartnerVC *pvc = [GXBrandPartnerVC new];
                         [strongSelf.navigationController pushViewController:pvc animated:YES];
-                    }else if (indexPath.section == 3) {//通货行情
+                    }else if (indexPath.section == 3) {//通货专区
                         GXRenewMarketTrendVC *tvc = [GXRenewMarketTrendVC new];
                         tvc.selectIndex = 0;
                         [strongSelf.navigationController pushViewController:tvc animated:YES];
@@ -492,7 +524,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
         GYHomeRegional *regional = self.homeData.home_control_price_brand[indexPath.item];
         dvc.brand_id = regional.ref_id;
         [self.navigationController pushViewController:dvc animated:YES];
-    }else if (indexPath.section == 3) {//通货行情
+    }else if (indexPath.section == 3) {//通货专区
         GXRenewMarketTrendVC *tvc = [GXRenewMarketTrendVC new];
         tvc.selectIndex = indexPath.item;
         [self.navigationController pushViewController:tvc animated:YES];
@@ -532,7 +564,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
         CGFloat width = HX_SCREEN_WIDTH-20*2.0;
         CGFloat height = 100.f;
         return CGSizeMake(width, height);
-    }else if (indexPath.section == 3) {//通货行情
+    }else if (indexPath.section == 3) {//通货专区
         CGFloat width = (HX_SCREEN_WIDTH-20*2.0-10.0)/2.0;
         CGFloat height = width;
         return CGSizeMake(width, height);
@@ -557,7 +589,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
         return 0.f;//这个区间为填充式布局
     }else if (section == 2) {//控区控价
         return 10.f;
-    }else if (section == 3) {//通货行情
+    }else if (section == 3) {//通货专区
         return 0.f;
     }else if (section == 4) {//品牌优选
         return 0.f;
@@ -574,7 +606,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
         return 0.f;//这个区间为填充式布局
     }else if (section == 2) {//控区控价
         return 0.f;
-    }else if (section == 3) {//通货行情
+    }else if (section == 3) {//通货专区
         return 10.f;
     }else if (section == 4) {//品牌优选
         return 10.f;
@@ -591,7 +623,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
         return  UIEdgeInsetsMake(0.f, 20.f, 10, 20.f);//这个区间为填充式布局
     }else if (section == 2) {//控区控价
         return  UIEdgeInsetsMake(10.f, 20.f, 10.f, 20.f);
-    }else if (section == 3) {//通货行情
+    }else if (section == 3) {//通货专区
         return  UIEdgeInsetsMake(10.f, 20.f, 10.f, 20.f);
     }else if (section == 4) {//品牌优选
         return  UIEdgeInsetsMake(10.f, 20.f, 10.f, 20.f);

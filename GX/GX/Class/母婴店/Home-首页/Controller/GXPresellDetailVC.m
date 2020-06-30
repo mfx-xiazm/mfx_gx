@@ -354,6 +354,9 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
             });
         }else{
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+            if ([[responseObject objectForKey:@"message"] containsString:@"下架"]) {
+                [strongSelf.navigationController popViewControllerAnimated:YES];
+            }
         }
     } failure:^(NSError *error) {
         hx_strongify(weakSelf);
@@ -364,7 +367,7 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
 -(void)handleGoodsDetailData
 {
     [self.cyclePagerView addSubview:self.carousel];
-    
+        
     // 处理倒计时和底部显示
     if ([self.goodsDetail.min_price floatValue] == [self.goodsDetail.max_price floatValue]) {
         self.rush_price.text = [NSString stringWithFormat:@"￥%@",self.goodsDetail.min_price];
