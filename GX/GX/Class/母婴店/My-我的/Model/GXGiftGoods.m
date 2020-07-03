@@ -9,5 +9,13 @@
 #import "GXGiftGoods.h"
 
 @implementation GXGiftGoods
-
+-(void)setOrder_no:(NSString *)order_no
+{
+   if (order_no.length) {
+       _order_nos = [order_no componentsSeparatedByString:@","];
+       _order_no = _order_nos.firstObject;
+   }else{
+       _order_no = @"";
+   }
+}
 @end

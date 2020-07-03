@@ -16,6 +16,8 @@
 #import "GXMyAddressVC.h"
 #import "GXMyCoupon.h"
 #import "GXMyAddress.h"
+#import "zhAlertView.h"
+#import <zhPopupController.h>
 
 static NSString *const UpOrderCell = @"UpOrderCell";
 
@@ -29,7 +31,8 @@ static NSString *const UpOrderCell = @"UpOrderCell";
 @property(nonatomic,strong) GXUpOrderFooter *footer;
 /* 订单 */
 @property(nonatomic,strong) GXConfirmOrder *confirmOrder;
-
+/* 弹框 */
+@property (nonatomic, strong) zhPopupController *alertPopVC;
 @end
 
 @implementation GXUpOrderVC
@@ -196,14 +199,13 @@ static NSString *const UpOrderCell = @"UpOrderCell";
         [strongSelf stopShimmer];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             strongSelf.confirmOrder = [GXConfirmOrder yy_modelWithDictionary:responseObject[@"data"]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                strongSelf.tableView.hidden = NO;
+                [strongSelf handleConfirmOrderData];
+            });
         }else{
-            strongSelf.confirmOrder.defaultAddress = nil;
-            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+            [strongSelf showAddressAlert:[responseObject objectForKey:@"message"]];
         }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            strongSelf.tableView.hidden = NO;
-            [strongSelf handleConfirmOrderData];
-        });
     } failure:^(NSError *error) {
         hx_strongify(weakSelf);
         [strongSelf stopShimmer];
@@ -236,6 +238,20 @@ static NSString *const UpOrderCell = @"UpOrderCell";
     }else{
         self.total_pay_orice.text = [NSString stringWithFormat:@"￥%.2f",[self.confirmOrder.actTotalPayAmount floatValue]-shopCouponAmount];
     }
+}
+-(void)showAddressAlert:(NSString *)msg
+{
+    zhAlertView *alert = [[zhAlertView alloc] initWithTitle:@"提示" message:msg constantWidth:HX_SCREEN_WIDTH - 50*2];
+    hx_weakify(self);
+    zhAlertButton *okButton = [zhAlertButton buttonWithTitle:@"我知道了" handler:^(zhAlertButton * _Nonnull button) {
+        hx_strongify(weakSelf);
+        [strongSelf.alertPopVC dismiss];
+    }];
+    okButton.lineColor = UIColorFromRGB(0xDDDDDD);
+    [okButton setTitleColor:HXControlBg forState:UIControlStateNormal];
+    [alert addAction:okButton];
+    self.alertPopVC = [[zhPopupController alloc] initWithView:alert size:alert.bounds.size];
+    [self.alertPopVC show];
 }
 #pragma mark -- 点击事件
 - (IBAction)upOrderClicked:(UIButton *)sender {

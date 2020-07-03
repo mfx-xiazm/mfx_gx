@@ -33,6 +33,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, copy) NSString *shop_user_phone;
 @property (nonatomic, copy) NSString *send_freight_type;
+@property (nonatomic, copy) NSString *order_no;
+@property (nonatomic, strong) NSArray *order_nos;//拆弹可能存在做个订单号
+
 @end
 
 NS_ASSUME_NONNULL_END

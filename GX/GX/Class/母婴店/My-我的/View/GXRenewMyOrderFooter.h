@@ -17,10 +17,6 @@ typedef void(^orderHandleCall)(NSInteger index);
 @property(nonatomic,strong) GXMyOrder *order;
 /* 退款 */
 @property(nonatomic,strong) GXMyRefund *refund;
-/* 订单 */
-@property(nonatomic,strong) GXMyOrder *pOrder;
-/* 退款 */
-@property(nonatomic,strong) GXMyRefund *pRefund;
 /* 操作 */
 @property(nonatomic,copy) orderHandleCall orderHandleCall;
 @end

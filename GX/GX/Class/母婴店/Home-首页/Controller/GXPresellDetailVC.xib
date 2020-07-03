@@ -336,11 +336,35 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </view>
-                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AgR-b0-36b">
+                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BPh-Lh-GHV">
                             <rect key="frame" x="160" y="5" width="245" height="40"/>
                             <subviews>
-                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GTF-gt-cZU">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IqF-jz-Nwf">
                                     <rect key="frame" x="0.0" y="0.0" width="245" height="40"/>
+                                    <color key="backgroundColor" red="1" green="0.54117647059999996" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="IqF-jz-Nwf" secondAttribute="trailing" id="S3c-I6-gSV"/>
+                                <constraint firstItem="IqF-jz-Nwf" firstAttribute="leading" secondItem="BPh-Lh-GHV" secondAttribute="leading" id="Uto-Ba-bcf"/>
+                                <constraint firstItem="IqF-jz-Nwf" firstAttribute="top" secondItem="BPh-Lh-GHV" secondAttribute="top" id="bP6-nG-tt5"/>
+                                <constraint firstAttribute="bottom" secondItem="IqF-jz-Nwf" secondAttribute="bottom" id="twE-lf-9za"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layerBoderCorner">
+                                    <real key="value" value="20"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AgR-b0-36b">
+                            <rect key="frame" x="80" y="5" width="325" height="40"/>
+                            <subviews>
+                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GTF-gt-cZU">
+                                    <rect key="frame" x="0.0" y="0.0" width="325" height="40"/>
                                     <color key="backgroundColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <state key="normal" title="申请加盟">
@@ -369,30 +393,6 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </view>
-                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BPh-Lh-GHV">
-                            <rect key="frame" x="160" y="5" width="245" height="40"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IqF-jz-Nwf">
-                                    <rect key="frame" x="0.0" y="0.0" width="245" height="40"/>
-                                    <color key="backgroundColor" red="1" green="0.54117647059999996" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                            <constraints>
-                                <constraint firstAttribute="trailing" secondItem="IqF-jz-Nwf" secondAttribute="trailing" id="S3c-I6-gSV"/>
-                                <constraint firstItem="IqF-jz-Nwf" firstAttribute="leading" secondItem="BPh-Lh-GHV" secondAttribute="leading" id="Uto-Ba-bcf"/>
-                                <constraint firstItem="IqF-jz-Nwf" firstAttribute="top" secondItem="BPh-Lh-GHV" secondAttribute="top" id="bP6-nG-tt5"/>
-                                <constraint firstAttribute="bottom" secondItem="IqF-jz-Nwf" secondAttribute="bottom" id="twE-lf-9za"/>
-                            </constraints>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="layerBoderCorner">
-                                    <real key="value" value="20"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                        </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qlc-UG-q4T" userLabel="分割线">
                             <rect key="frame" x="0.0" y="0.0" width="415" height="1"/>
                             <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
@@ -408,12 +408,12 @@
                         <constraint firstItem="Qlc-UG-q4T" firstAttribute="leading" secondItem="VVd-Oh-DTE" secondAttribute="leading" id="CFM-of-mSi"/>
                         <constraint firstItem="Bdh-dX-wWz" firstAttribute="top" secondItem="VVd-Oh-DTE" secondAttribute="top" id="DYi-6h-bsm"/>
                         <constraint firstAttribute="bottom" secondItem="Bdh-dX-wWz" secondAttribute="bottom" id="GCA-m3-QnV"/>
+                        <constraint firstItem="AgR-b0-36b" firstAttribute="leading" secondItem="Bdh-dX-wWz" secondAttribute="trailing" id="HdV-4F-xjx"/>
                         <constraint firstItem="D6h-at-knE" firstAttribute="top" secondItem="VVd-Oh-DTE" secondAttribute="top" constant="5" id="I7W-e5-P2z"/>
                         <constraint firstItem="D6h-at-knE" firstAttribute="leading" secondItem="tLk-8e-0Xd" secondAttribute="trailing" id="JUX-s7-nIQ"/>
                         <constraint firstAttribute="bottom" secondItem="AgR-b0-36b" secondAttribute="bottom" constant="5" id="PuX-Xa-Q23"/>
                         <constraint firstAttribute="trailing" secondItem="Qlc-UG-q4T" secondAttribute="trailing" id="Yd7-X3-VXh"/>
                         <constraint firstAttribute="height" constant="50" id="bgD-J3-gMn"/>
-                        <constraint firstItem="AgR-b0-36b" firstAttribute="leading" secondItem="tLk-8e-0Xd" secondAttribute="trailing" id="dWV-1E-6ND"/>
                         <constraint firstItem="BPh-Lh-GHV" firstAttribute="leading" secondItem="tLk-8e-0Xd" secondAttribute="trailing" id="f3G-3r-x1p"/>
                         <constraint firstAttribute="bottom" secondItem="BPh-Lh-GHV" secondAttribute="bottom" constant="5" id="fw5-T6-BeA"/>
                         <constraint firstAttribute="trailing" secondItem="BPh-Lh-GHV" secondAttribute="trailing" constant="10" id="iBy-ni-nWs"/>

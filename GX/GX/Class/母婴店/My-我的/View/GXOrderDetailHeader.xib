@@ -164,12 +164,16 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="订单状态" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FhI-2g-gbX">
-                            <rect key="frame" x="348" y="12" width="54" height="16"/>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZVW-Ry-ZUW">
+                            <rect key="frame" x="324" y="6" width="80" height="28"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <color key="textColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                            <state key="normal" title="查看赠品订单">
+                                <color key="titleColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="lookGiftOrder:" destination="iN0-l3-epB" eventType="touchUpInside" id="eZ0-YO-stQ"/>
+                            </connections>
+                        </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F2F-x1-CSb" userLabel="分割线">
                             <rect key="frame" x="10" y="39" width="394" height="1"/>
                             <color key="backgroundColor" red="0.96470588239999999" green="0.96862745100000003" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -180,14 +184,14 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstItem="ZVW-Ry-ZUW" firstAttribute="centerY" secondItem="nPg-oh-82D" secondAttribute="centerY" id="Ahp-IP-wDS"/>
                         <constraint firstAttribute="height" constant="40" id="F6h-4H-K3k"/>
                         <constraint firstAttribute="bottom" secondItem="F2F-x1-CSb" secondAttribute="bottom" id="IFx-4M-cNK"/>
+                        <constraint firstAttribute="trailing" secondItem="ZVW-Ry-ZUW" secondAttribute="trailing" constant="10" id="Il4-0W-0Dn"/>
                         <constraint firstAttribute="trailing" secondItem="F2F-x1-CSb" secondAttribute="trailing" constant="10" id="dMB-w2-esd"/>
                         <constraint firstItem="F2F-x1-CSb" firstAttribute="leading" secondItem="nPg-oh-82D" secondAttribute="leading" constant="10" id="fTD-mN-oY0"/>
                         <constraint firstItem="2vP-0v-FeI" firstAttribute="centerY" secondItem="nPg-oh-82D" secondAttribute="centerY" id="h98-9K-3Bc"/>
-                        <constraint firstAttribute="trailing" secondItem="FhI-2g-gbX" secondAttribute="trailing" constant="12" id="hnQ-Nz-XyI"/>
                         <constraint firstItem="2vP-0v-FeI" firstAttribute="leading" secondItem="nPg-oh-82D" secondAttribute="leading" constant="12" id="lqO-fG-Hvt"/>
-                        <constraint firstItem="FhI-2g-gbX" firstAttribute="centerY" secondItem="nPg-oh-82D" secondAttribute="centerY" id="xMN-tw-QkZ"/>
                     </constraints>
                 </view>
             </subviews>
@@ -208,11 +212,11 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="gift_order" destination="ZVW-Ry-ZUW" id="J6Q-bi-Rq7"/>
                 <outlet property="logistics_name" destination="GsQ-qZ-ypX" id="q6i-jk-CWi"/>
                 <outlet property="logistics_no" destination="AnS-F5-fY5" id="XSx-qj-Shy"/>
                 <outlet property="order_desc" destination="uLK-ip-jhR" id="zHW-1z-qb0"/>
                 <outlet property="order_no" destination="2vP-0v-FeI" id="pSj-Ds-Ady"/>
-                <outlet property="order_state" destination="FhI-2g-gbX" id="IZi-mg-Cym"/>
                 <outlet property="order_status" destination="4XL-fy-6V6" id="yt2-jw-IpC"/>
                 <outlet property="order_tip" destination="YSW-va-XqS" id="MmU-L7-R8C"/>
                 <outlet property="receive_address" destination="bmJ-7p-Bwo" id="E89-Rt-M02"/>

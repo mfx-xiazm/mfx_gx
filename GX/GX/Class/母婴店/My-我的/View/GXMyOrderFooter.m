@@ -31,16 +31,16 @@
 {
     _orderProvider = orderProvider;
     
-    self.totalPrice.text = [NSString stringWithFormat:@"￥%.2f",[_orderProvider.shopTotalPrice floatValue]];
-    self.totalFreight.text = [NSString stringWithFormat:@"￥%.2f",[_orderProvider.shopActTotalFreight floatValue]];
+    self.totalPrice.text = [NSString stringWithFormat:@"%.2f",[_orderProvider.shopTotalPrice floatValue]];
+    self.totalFreight.text = [NSString stringWithFormat:@"%.2f",[_orderProvider.shopActTotalFreight floatValue]];
     
     if (_orderProvider.brand_rebate && _orderProvider.brand_rebate.count) {
         GXMyOrderRebate *rebate = _orderProvider.brand_rebate.firstObject;
         self.rebateText.text = [rebate.rebate_percent floatValue]?[NSString stringWithFormat:@"返利%@%%",rebate.rebate_percent]:@"";
-        self.rebateAmount.text = [NSString stringWithFormat:@"-￥%.2f",_orderProvider.shopRebateAmount?[_orderProvider.shopRebateAmount floatValue]:0];
+        self.rebateAmount.text = [NSString stringWithFormat:@"-%.2f",_orderProvider.shopRebateAmount?[_orderProvider.shopRebateAmount floatValue]:0];
     }else{
         self.rebateText.text = @"";
-        self.rebateAmount.text = @"￥0.00";
+        self.rebateAmount.text = @"0.00";
     }
     
     GXMyOrderGoods *goods = _orderProvider.goods.firstObject;
@@ -50,16 +50,16 @@
 {
     _refundProvider = refundProvider;
     
-    self.totalPrice.text = [NSString stringWithFormat:@"￥%.2f",[_refundProvider.shopTotalPrice floatValue]];
-    self.totalFreight.text = [NSString stringWithFormat:@"￥%.2f",[_refundProvider.shopActTotalFreight floatValue]];
+    self.totalPrice.text = [NSString stringWithFormat:@"%.2f",[_refundProvider.shopTotalPrice floatValue]];
+    self.totalFreight.text = [NSString stringWithFormat:@"%.2f",[_refundProvider.shopActTotalFreight floatValue]];
     
     if (_refundProvider.brand_rebate && _refundProvider.brand_rebate.count) {
         GXMyRefundRebate *rebate = _refundProvider.brand_rebate.firstObject;
         self.rebateText.text = [rebate.rebate_percent floatValue]?[NSString stringWithFormat:@"返利%@%%",rebate.rebate_percent]:@"";
-        self.rebateAmount.text = [NSString stringWithFormat:@"-￥%.2f",_refundProvider.shopRebateAmount?[_refundProvider.shopRebateAmount floatValue]:0];
+        self.rebateAmount.text = [NSString stringWithFormat:@"-%.2f",_refundProvider.shopRebateAmount?[_refundProvider.shopRebateAmount floatValue]:0];
     }else{
         self.rebateText.text = @"";
-        self.rebateAmount.text = @"￥0.00";
+        self.rebateAmount.text = @"0.00";
     }
     
     GYMyRefundGoods *goods = _refundProvider.goods.firstObject;

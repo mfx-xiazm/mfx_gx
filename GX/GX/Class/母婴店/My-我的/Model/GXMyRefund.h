@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *price;
 @property(nonatomic,copy) NSString *control_type;
 @property(nonatomic,copy) NSString *shop_name;
-
+@property(nonatomic,copy) NSString *gift_order_id;
 @property(nonatomic,copy) NSString *total_reduce_amount;
 @property(nonatomic,copy) NSString *total_pay_amount;
 @property(nonatomic,copy) NSString *pay_type;
@@ -56,6 +56,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *username;
 @property(nonatomic,copy) NSString *saleman_code;
 @property(nonatomic,copy) NSString *send_freight_type;
+@property(nonatomic,copy) NSString *return_num;
+@property(nonatomic,copy) NSString *return_amount;
 /* 是退款详情数据 */
 @property(nonatomic,assign) BOOL isRefundDetail;
 @property(nonatomic,strong) NSArray<GXMyRefundProvider *> *provider;

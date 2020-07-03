@@ -20,6 +20,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *goods_num;
 @property (weak, nonatomic) IBOutlet UIButton *locitic_copy;
 @property (nonatomic, strong) zhPopupController *alertPopVC;
+@property (weak, nonatomic) IBOutlet UILabel *return_num;
+@property (weak, nonatomic) IBOutlet UILabel *return_amount;
+
 @end
 @implementation GXOrderDetailFooter
 
@@ -32,8 +35,8 @@
 {
     _orderDetail = orderDetail;
    
-    self.order_freight_amount.text = [NSString stringWithFormat:@"￥%@",_orderDetail.order_freight_amount];
-    self.order_coupon_amount.text = [NSString stringWithFormat:@"-￥%@",_orderDetail.total_reduce_amount];
+    self.order_freight_amount.text = [NSString stringWithFormat:@"%@",_orderDetail.order_freight_amount];
+    self.order_coupon_amount.text = [NSString stringWithFormat:@"-%@",_orderDetail.total_reduce_amount];
     self.pay_amount.text = [NSString stringWithFormat:@"￥%@",_orderDetail.pay_amount];
     NSInteger goods_num = 0;
     for (GXMyOrderProvider *provider in _orderDetail.provider) {
@@ -53,7 +56,7 @@
             [self.locitic_copy setTitle:@"  复制  " forState:UIControlStateNormal];
         }
         if ([_orderDetail.send_freight_type isEqualToString:@"1"]) {
-            [infoStr appendFormat:@"\n快递公司：%@",_orderDetail.logistics_com_name];
+            //[infoStr appendFormat:@"\n快递公司：%@",_orderDetail.logistics_com_name];
             if (_orderDetail.logistics_no && _orderDetail.logistics_no.length) {
                 [infoStr appendFormat:@"\n快递单号：%@",_orderDetail.logistics_no];
             }else if (_orderDetail.driver_phone && _orderDetail.driver_phone.length) {
@@ -62,7 +65,7 @@
                 
             }
         }else if ([_orderDetail.send_freight_type isEqualToString:@"2"]) {
-            [infoStr appendFormat:@"\n快运公司：%@",_orderDetail.logistics_com_name];
+            //[infoStr appendFormat:@"\n快运公司：%@",_orderDetail.logistics_com_name];
             if (_orderDetail.logistics_no && _orderDetail.logistics_no.length) {
                 [infoStr appendFormat:@"\n快运单号：%@",_orderDetail.logistics_no];
             }else if (_orderDetail.driver_phone && _orderDetail.driver_phone.length) {
@@ -71,7 +74,7 @@
                 
             }
         }else {
-            [infoStr appendFormat:@"\n物流公司：%@",_orderDetail.logistics_com_name];
+            //[infoStr appendFormat:@"\n物流公司：%@",_orderDetail.logistics_com_name];
             if (_orderDetail.logistics_no && _orderDetail.logistics_no.length) {
                 [infoStr appendFormat:@"\n物流单号：%@",_orderDetail.logistics_no];
             }else if (_orderDetail.driver_phone && _orderDetail.driver_phone.length) {
@@ -91,10 +94,19 @@
 {
     _refundDetail = refundDetail;
     
-    self.order_freight_amount.text = [NSString stringWithFormat:@"￥%@",_refundDetail.order_freight_amount];
-    self.order_coupon_amount.text = [NSString stringWithFormat:@"-￥%@",_refundDetail.total_reduce_amount];
+    self.order_freight_amount.text = [NSString stringWithFormat:@"%@",_refundDetail.order_freight_amount];
+    self.order_coupon_amount.text = [NSString stringWithFormat:@"-%@",_refundDetail.total_reduce_amount];
     self.pay_amount.text = [NSString stringWithFormat:@"￥%@",_refundDetail.pay_amount];
     
+    NSInteger goods_num = 0;
+    for (GXMyRefundProvider *provider in _refundDetail.provider) {
+        goods_num += provider.goods.count;
+    }
+    self.goods_num.text = [NSString stringWithFormat:@"共%zd件商品",goods_num];
+    
+    self.return_num.text = [NSString stringWithFormat:@"x%@",_refundDetail.return_num];
+    self.return_amount.text = [NSString stringWithFormat:@"￥%@",_refundDetail.return_amount];
+
     NSMutableString *infoStr = [NSMutableString string];
     [infoStr appendFormat:@"%@",[NSString stringWithFormat:@"订单编号：%@\n下单时间：%@",_refundDetail.order_no,_refundDetail.create_time]];
 
@@ -107,7 +119,7 @@
             [self.locitic_copy setTitle:@"  复制  " forState:UIControlStateNormal];
         }
         if ([_refundDetail.send_freight_type isEqualToString:@"1"]) {
-            [infoStr appendFormat:@"\n快递公司：%@",_refundDetail.logistics_com_name];
+            //[infoStr appendFormat:@"\n快递公司：%@",_refundDetail.logistics_com_name];
             if (_refundDetail.logistics_no && _refundDetail.logistics_no.length) {
                 [infoStr appendFormat:@"\n快递单号：%@",_refundDetail.logistics_no];
             }else if (_refundDetail.driver_phone && _refundDetail.driver_phone.length) {
@@ -116,7 +128,7 @@
                 
             }
         }else if ([_refundDetail.send_freight_type isEqualToString:@"2"]) {
-            [infoStr appendFormat:@"\n快运公司：%@",_refundDetail.logistics_com_name];
+            //[infoStr appendFormat:@"\n快运公司：%@",_refundDetail.logistics_com_name];
             if (_refundDetail.logistics_no && _refundDetail.logistics_no.length) {
                 [infoStr appendFormat:@"\n快运单号：%@",_refundDetail.logistics_no];
             }else if (_refundDetail.driver_phone && _refundDetail.driver_phone.length) {
@@ -125,7 +137,7 @@
                 
             }
         }else {
-            [infoStr appendFormat:@"\n物流公司：%@",_refundDetail.logistics_com_name];
+            //[infoStr appendFormat:@"\n物流公司：%@",_refundDetail.logistics_com_name];
             if (_refundDetail.logistics_no && _refundDetail.logistics_no.length) {
                 [infoStr appendFormat:@"\n物流单号：%@",_refundDetail.logistics_no];
             }else if (_refundDetail.driver_phone && _refundDetail.driver_phone.length) {

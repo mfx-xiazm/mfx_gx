@@ -431,26 +431,41 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
         self.normal_collect.selected = YES;
     }
     
-    /** 1未开始，2进行中；3已结束 */
-    if ([self.goodsDetail.sell_status isEqualToString:@"1"]) {
-        self.normal_tool.hidden = YES;
-        self.apply_tool.hidden = YES;
-        self.rush_tool.hidden = NO;
-    }else if ([self.goodsDetail.sell_status isEqualToString:@"2"]) {
-        if ([self.goodsDetail.control_type isEqualToString:@"1"]) {// 常规
-           self.normal_tool.hidden = NO;
-           self.apply_tool.hidden = YES;
-           self.rush_tool.hidden = YES;
-        }else{// 控区控价
-            if ([self.goodsDetail.is_join isEqualToString:@"1"]) {//已加盟，和常规商品一样
+    if ([self.goodsDetail.control_type isEqualToString:@"1"]) {// 常规
+        /** 1未开始，2进行中；3已结束 */
+        if ([self.goodsDetail.sell_status isEqualToString:@"1"]) {
+            self.normal_tool.hidden = YES;
+            self.apply_tool.hidden = YES;
+            self.rush_tool.hidden = NO;
+        }else if ([self.goodsDetail.sell_status isEqualToString:@"2"]) {
+            self.normal_tool.hidden = NO;
+            self.apply_tool.hidden = YES;
+            self.rush_tool.hidden = YES;
+        }else{
+            self.normal_tool.hidden = YES;
+            self.apply_tool.hidden = YES;
+            self.rush_tool.hidden = NO;
+        }
+    }else{// 控区控价
+        if ([self.goodsDetail.is_join isEqualToString:@"1"]) {//已加盟，和常规商品一样
+            /** 1未开始，2进行中；3已结束 */
+            if ([self.goodsDetail.sell_status isEqualToString:@"1"]) {
+                self.normal_tool.hidden = YES;
+                self.apply_tool.hidden = YES;
+                self.rush_tool.hidden = NO;
+            }else if ([self.goodsDetail.sell_status isEqualToString:@"2"]) {
                 self.normal_tool.hidden = NO;
                 self.apply_tool.hidden = YES;
                 self.rush_tool.hidden = YES;
-            }else{// 未加盟
+            }else{
                 self.normal_tool.hidden = YES;
-                self.apply_tool.hidden = NO;
-                self.rush_tool.hidden = YES;
+                self.apply_tool.hidden = YES;
+                self.rush_tool.hidden = NO;
             }
+        }else{// 未加盟
+            self.normal_tool.hidden = YES;
+            self.apply_tool.hidden = NO;
+            self.rush_tool.hidden = YES;
         }
     }
 }

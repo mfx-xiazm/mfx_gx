@@ -49,6 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *logistics_title;
 @property(nonatomic,copy) NSString *send_freight_type;
 @property(nonatomic,copy) NSString *isRefund;
+@property(nonatomic,copy) NSString *gift_order_id;
 /* 是详情数据 */
 @property(nonatomic,assign) BOOL isDetailOrder;
 @property(nonatomic,strong) NSArray<GXMyOrderProvider *> *provider;

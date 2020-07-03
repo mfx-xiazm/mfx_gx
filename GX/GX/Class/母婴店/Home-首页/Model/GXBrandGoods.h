@@ -19,6 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *suggest_price;
 @property(nonatomic,copy) NSString *min_price;
 @property(nonatomic,copy) NSString *max_price;
+@property(nonatomic,copy) NSString *brand_id;
+@property(nonatomic,copy) NSString *pre_sale_id;// 不为0为预售
+
 @end
 
 NS_ASSUME_NONNULL_END

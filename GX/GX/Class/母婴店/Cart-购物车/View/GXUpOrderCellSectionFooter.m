@@ -29,8 +29,8 @@
 {
     _orderData = orderData;
 
-    self.totalPrice.text = [NSString stringWithFormat:@"￥%.2f",[_orderData.shopTotalPrice floatValue]];
-    self.totalFreight.text = [NSString stringWithFormat:@"￥%.2f",[_orderData.shopActTotalFreight floatValue]];
+    self.totalPrice.text = [NSString stringWithFormat:@"%.2f",[_orderData.shopTotalPrice floatValue]];
+    self.totalFreight.text = [NSString stringWithFormat:@"%.2f",[_orderData.shopActTotalFreight floatValue]];
 
     if (_orderData.gift_data && _orderData.gift_data.count) {
         NSMutableString *giftTxt = [NSMutableString string];
@@ -57,10 +57,10 @@
     if (_orderData.brand_rebate && _orderData.brand_rebate.count) {
         GXConfirmBrandRebate *rebate = _orderData.brand_rebate.firstObject;
         self.rebateText.text = [NSString stringWithFormat:@"满%@元返%@%%",rebate.begin_price,rebate.rebate_percent];
-        self.rebateAmount.text = [NSString stringWithFormat:@"-￥%.2f",_orderData.shopRebateAmount?[_orderData.shopRebateAmount floatValue]:0];
+        self.rebateAmount.text = [NSString stringWithFormat:@"-%.2f",_orderData.shopRebateAmount?[_orderData.shopRebateAmount floatValue]:0];
     }else{
         self.rebateText.text = @"";
-        self.rebateAmount.text = @"￥0.00";
+        self.rebateAmount.text = @"0.00";
     }
 }
 - (IBAction)giftRebateClicked:(UIButton *)sender {

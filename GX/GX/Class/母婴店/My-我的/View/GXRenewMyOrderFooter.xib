@@ -19,6 +19,18 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xdf-ai-mYn">
                     <rect key="frame" x="10" y="0.0" width="394" height="50"/>
                     <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="退款金额：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IHt-b1-KU5">
+                            <rect key="frame" x="157" y="17" width="67" height="16"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥99.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ye-f8-kAb">
+                            <rect key="frame" x="224" y="15.5" width="41.5" height="19.5"/>
+                            <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
+                            <color key="textColor" red="0.92549019610000005" green="0.078431372550000003" blue="0.1764705882" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥99.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lFx-0t-FcM">
                             <rect key="frame" x="342.5" y="15.5" width="41.5" height="19.5"/>
                             <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
@@ -34,11 +46,15 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstItem="xxy-xu-GDG" firstAttribute="leading" secondItem="9ye-f8-kAb" secondAttribute="trailing" constant="10" id="9tm-if-Lk8"/>
                         <constraint firstItem="lFx-0t-FcM" firstAttribute="centerY" secondItem="xdf-ai-mYn" secondAttribute="centerY" id="NTi-Xn-Yf4"/>
                         <constraint firstAttribute="trailing" secondItem="lFx-0t-FcM" secondAttribute="trailing" constant="10" id="Oc6-rl-TZk"/>
+                        <constraint firstItem="9ye-f8-kAb" firstAttribute="centerY" secondItem="xxy-xu-GDG" secondAttribute="centerY" id="WSL-zv-yLq"/>
+                        <constraint firstItem="IHt-b1-KU5" firstAttribute="centerY" secondItem="9ye-f8-kAb" secondAttribute="centerY" id="dhz-nV-j6X"/>
                         <constraint firstAttribute="height" constant="50" id="eGs-1O-wUk"/>
                         <constraint firstItem="lFx-0t-FcM" firstAttribute="leading" secondItem="xxy-xu-GDG" secondAttribute="trailing" id="fjG-6d-DH7"/>
                         <constraint firstItem="xxy-xu-GDG" firstAttribute="centerY" secondItem="xdf-ai-mYn" secondAttribute="centerY" id="ngl-OJ-OR2"/>
+                        <constraint firstItem="9ye-f8-kAb" firstAttribute="leading" secondItem="IHt-b1-KU5" secondAttribute="trailing" id="rqO-AG-VPU"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SSd-Ee-sRh">
@@ -152,6 +168,8 @@
                 <outlet property="secondHandleBtn" destination="2XS-lg-qQE" id="GbK-7B-QkL"/>
                 <outlet property="thirdHandleBtn" destination="xle-Mf-uUl" id="Xbm-HP-A32"/>
                 <outlet property="total_price" destination="lFx-0t-FcM" id="gwY-zn-tVK"/>
+                <outlet property="tuiAmount" destination="9ye-f8-kAb" id="FUr-0y-P3J"/>
+                <outlet property="tuiLabel" destination="IHt-b1-KU5" id="G6j-uE-jQt"/>
             </connections>
             <point key="canvasLocation" x="140.57971014492756" y="663.95089285714278"/>
         </view>

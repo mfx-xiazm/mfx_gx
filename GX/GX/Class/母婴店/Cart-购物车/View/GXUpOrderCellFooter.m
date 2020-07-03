@@ -56,9 +56,16 @@
         if (_orderData.selectedCoupon) {// 存在优惠
             self.payAmount.text = [NSString stringWithFormat:@"￥%.2f",[_orderData.shopActTotalAmount floatValue] - [_orderData.selectedCoupon.coupon_amount floatValue]];
             self.couponAmount.text = [NSString stringWithFormat:@"-￥%@",_orderData.selectedCoupon.coupon_amount];
+            self.couponAmount.textColor = UIColorFromRGB(0xEC142D);
         }else{
            self.payAmount.text = [NSString stringWithFormat:@"￥%.2f",[_orderData.shopActTotalAmount floatValue]];
-           self.couponAmount.text = @"￥0.00";
+            if (_orderData.shopCouponData && _orderData.shopCouponData.count) {
+                self.couponAmount.text = @"可用优惠券";
+                self.couponAmount.textColor = UIColorFromRGB(0xEC142D);
+            }else{
+                self.couponAmount.text = @"无可用优惠券";
+                self.couponAmount.textColor = [UIColor lightGrayColor];
+            }
         }
     }
     self.remark.text = _orderData.shopGoodsRemark;

@@ -30,6 +30,7 @@
 #import "GXUpMoneyProofVC.h"
 #import "GXShowMoneyProofVC.h"
 #import "GXApplyRefundVC.h"
+#import "GXGiftGoodsDetailVC.h"
 
 static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
 static NSString *const ShopGoodsCell = @"ShopGoodsCell";
@@ -68,7 +69,7 @@ static NSString *const HomeSectionHeader = @"HomeSectionHeader";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.navigationItem setTitle:@"订单详情"];
+    [self.navigationItem setTitle:(self.refund_id && self.refund_id.length)?@"退款详情":@"订单详情"];
     hx_weakify(self);
     [self.navigationController.viewControllers enumerateObjectsUsingBlock:^(__kindof UIViewController * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj isKindOfClass:[GXUpOrderVC class]] || [obj isKindOfClass:[GXPayTypeVC class]] || [obj isKindOfClass:[GXPayResultVC class]]) {
@@ -228,6 +229,13 @@ static NSString *const HomeSectionHeader = @"HomeSectionHeader";
                 cvc.url = strongSelf.refundDetail.url;
                 [strongSelf.navigationController pushViewController:cvc animated:YES];
             };
+            self.header.lookGiftOrderCall = ^{
+                hx_strongify(weakSelf);
+                //HXLog(@"赠品订单");
+                GXGiftGoodsDetailVC *gvc = [GXGiftGoodsDetailVC new];
+                gvc.gift_order_id = strongSelf.refundDetail.gift_order_id;
+                [strongSelf.navigationController pushViewController:gvc animated:YES];
+            };
             
             if (self.refundDetail.address) {
                 self.footer.refundDetail = self.refundDetail;// 退款地址
@@ -383,6 +391,13 @@ static NSString *const HomeSectionHeader = @"HomeSectionHeader";
                 cvc.url = strongSelf.orderDetail.url;
                 [strongSelf.navigationController pushViewController:cvc animated:YES];
             };
+            self.header.lookGiftOrderCall = ^{
+                hx_strongify(weakSelf);
+                //HXLog(@"赠品订单");
+                GXGiftGoodsDetailVC *gvc = [GXGiftGoodsDetailVC new];
+                gvc.gift_order_id = strongSelf.orderDetail.gift_order_id;
+                [strongSelf.navigationController pushViewController:gvc animated:YES];
+            };
         }
     }else {//供应商或者销售员
         if (self.refund_id && self.refund_id.length) {
@@ -417,6 +432,13 @@ static NSString *const HomeSectionHeader = @"HomeSectionHeader";
                 cvc.url = strongSelf.refundDetail.url;
                 [strongSelf.navigationController pushViewController:cvc animated:YES];
             };
+            self.header.lookGiftOrderCall = ^{
+                hx_strongify(weakSelf);
+                //HXLog(@"赠品订单");
+                GXGiftGoodsDetailVC *gvc = [GXGiftGoodsDetailVC new];
+                gvc.gift_order_id = strongSelf.refundDetail.gift_order_id;
+                [strongSelf.navigationController pushViewController:gvc animated:YES];
+            };
             if (self.refundDetail.address) {
                 self.footer.refundDetail = self.refundDetail;// 退款地址
                 self.tableView.tableFooterView = self.footer;
@@ -438,6 +460,13 @@ static NSString *const HomeSectionHeader = @"HomeSectionHeader";
                 cvc.isNeedRequest = NO;
                 cvc.url = strongSelf.orderDetail.url;
                 [strongSelf.navigationController pushViewController:cvc animated:YES];
+            };
+            self.header.lookGiftOrderCall = ^{
+                hx_strongify(weakSelf);
+                //HXLog(@"赠品订单");
+                GXGiftGoodsDetailVC *gvc = [GXGiftGoodsDetailVC new];
+                gvc.gift_order_id = strongSelf.orderDetail.gift_order_id;
+                [strongSelf.navigationController pushViewController:gvc animated:YES];
             };
         }
     }
@@ -831,13 +860,13 @@ static NSString *const HomeSectionHeader = @"HomeSectionHeader";
         if (section != self.refundDetail.provider.count) {//不是最后一组
             return 160.f;
         }else{//最后一组
-            return (self.refundDetail.logistics_com_name && self.refundDetail.logistics_com_name.length)?250:200;
+            return (self.refundDetail.logistics_com_name && self.refundDetail.logistics_com_name.length)?215.f+85.f:190.f+85.f;
         }
     }else{
         if (section != self.orderDetail.provider.count) {//不是最后一组
             return 160.f;
         }else{//最后一组
-            return (self.orderDetail.logistics_com_name && self.orderDetail.logistics_com_name.length)?250:200;
+            return (self.orderDetail.logistics_com_name && self.orderDetail.logistics_com_name.length)?215:190;
         }
     }
 }
@@ -853,7 +882,7 @@ static NSString *const HomeSectionHeader = @"HomeSectionHeader";
         }else{//最后一组
             GXOrderDetailFooter *footer = [GXOrderDetailFooter loadXibView];
             footer.refundDetail = self.refundDetail;
-            footer.hxn_size = (self.refundDetail.logistics_com_name && self.refundDetail.logistics_com_name.length)?CGSizeMake(tableView.hxn_width, 250.f):CGSizeMake(tableView.hxn_width, 200.f);
+            footer.hxn_size = (self.refundDetail.logistics_com_name && self.refundDetail.logistics_com_name.length)?CGSizeMake(tableView.hxn_width, 215.f):CGSizeMake(tableView.hxn_width, 190.f);
             return footer;
         }
     }else{
@@ -866,7 +895,7 @@ static NSString *const HomeSectionHeader = @"HomeSectionHeader";
         }else{//最后一组
             GXOrderDetailFooter *footer = [GXOrderDetailFooter loadXibView];
             footer.orderDetail = self.orderDetail;
-            footer.hxn_size = (self.orderDetail.logistics_com_name && self.orderDetail.logistics_com_name.length)?CGSizeMake(tableView.hxn_width, 250.f):CGSizeMake(tableView.hxn_width, 200.f);
+            footer.hxn_size = (self.orderDetail.logistics_com_name && self.orderDetail.logistics_com_name.length)?CGSizeMake(tableView.hxn_width, 215.f+85.f):CGSizeMake(tableView.hxn_width, 190.f+85.f);
             return footer;
         }
     }

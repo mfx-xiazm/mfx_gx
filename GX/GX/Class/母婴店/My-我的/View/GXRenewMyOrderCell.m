@@ -69,7 +69,7 @@
     [self.goods_title setTextWithLineSpace:5.f withString:(_refund.goods_name)?_refund.goods_name:@"" withFont:[UIFont systemFontOfSize:13]];
     self.price.text = [NSString stringWithFormat:@"￥%@",_refund.price];
     self.goods_spec.text = (_refund.specs_attrs&&_refund.specs_attrs.length)?[NSString stringWithFormat:@" %@ ",_refund.specs_attrs]:@"";
-    self.goods_num.text = [NSString stringWithFormat:@"x%@",_refund.goods_num];
+    self.goods_num.text = [NSString stringWithFormat:@"购买x%@ 退款x%@",_refund.goods_num,_refund.return_num];
 }
 -(void)setRefundGoods:(GYMyRefundGoods *)refundGoods
 {

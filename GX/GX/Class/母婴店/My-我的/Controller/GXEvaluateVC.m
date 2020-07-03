@@ -51,6 +51,7 @@ static NSString *const MyIdeaPhotoCell = @"MyIdeaPhotoCell";
     [self.navigationItem setTitle:@"评价"];
     
     self.remarkText = [[HXPlaceholderTextView alloc] initWithFrame:self.remarkTextView.bounds];
+    self.remarkText.backgroundColor = UIColorFromRGB(0xF3F3F3);
     self.remarkText.placeholder = @"请输入评价内容";
     [self.remarkTextView addSubview:self.remarkText];
     
