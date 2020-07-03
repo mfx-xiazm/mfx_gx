@@ -72,6 +72,7 @@ static NSString *const RenewMyOrderCell = @"RenewMyOrderCell";
         cell.goods = goods;
     }else{
         GYMyRefundGoods *refund = self.myRefund.goods[indexPath.row];
+        cell.return_num = self.myRefund.return_num;
         cell.refundGoods = refund;
     }
     return cell;

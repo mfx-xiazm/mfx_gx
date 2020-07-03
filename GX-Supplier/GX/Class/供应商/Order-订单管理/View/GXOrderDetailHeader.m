@@ -20,7 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *receiver;
 @property (weak, nonatomic) IBOutlet UILabel *receive_address;
 @property (weak, nonatomic) IBOutlet UILabel *order_no;
-@property (weak, nonatomic) IBOutlet UILabel *order_state;
+@property (weak, nonatomic) IBOutlet UIButton *gift_order;
 @end
 @implementation GXOrderDetailHeader
 
@@ -115,13 +115,8 @@
     self.receiver.text = [NSString stringWithFormat:@"%@  %@",_orderDetail.receiver,_orderDetail.receiver_phone];
     self.receive_address.text = [NSString stringWithFormat:@"%@%@",_orderDetail.area_name,_orderDetail.address_detail];
     
-    if (_orderDetail.isDetailOrder) {
-        self.order_state.text = @"";
-        self.order_no.text = [NSString stringWithFormat:@"%@",_orderDetail.provider_no];
-    }else{
-        self.order_state.text = _orderDetail.status;
-        self.order_no.text = [NSString stringWithFormat:@"%@",_orderDetail.order_no];
-    }
+    self.gift_order.hidden = (_orderDetail.gift_order_id && _orderDetail.gift_order_id.length)?NO:YES;
+    self.order_no.text = [NSString stringWithFormat:@"%@",_orderDetail.provider_no];
 }
 -(void)setRefundDetail:(GXMyRefund *)refundDetail
 {
@@ -191,26 +186,8 @@
     self.receiver.text = [NSString stringWithFormat:@"%@  %@",_refundDetail.receiver,_refundDetail.receiver_phone];
     self.receive_address.text = [NSString stringWithFormat:@"%@%@",_refundDetail.area_name,_refundDetail.address_detail];
     
-    /** 1等待供应商审核；2等待平台审核；3退款成功；4退款驳回 5供应商同意 6供应商不同意 */
-    if (_refundDetail.isRefundDetail) {
-        self.order_state.text = @"";
-        self.order_no.text = [NSString stringWithFormat:@"%@",_refundDetail.provider_no];
-    }else{
-        self.order_no.text = [NSString stringWithFormat:@"%@",_refundDetail.order_no];
-        if ([_refundDetail.refund_status isEqualToString:@"1"]) {
-            self.order_state.text = @"退款中，等待供应商审核";
-        }else if ([_refundDetail.refund_status isEqualToString:@"2"]){
-            self.order_state.text = @"退款中，等待平台审核";
-        }else if ([_refundDetail.refund_status isEqualToString:@"3"]){
-            self.order_state.text = @"退款成功";
-        }else if ([_refundDetail.refund_status isEqualToString:@"4"]){
-            self.order_state.text = @"退款驳回";
-        }else if ([_refundDetail.refund_status isEqualToString:@"5"]){
-            self.order_state.text = @"供应商同意";
-        }else{
-            self.order_state.text = @"供应商不同意";
-        }
-    }
+    self.gift_order.hidden = (_refundDetail.gift_order_id &&_refundDetail.gift_order_id.length)?NO:YES;
+    self.order_no.text = [NSString stringWithFormat:@"%@",_refundDetail.provider_no];
 }
 - (IBAction)lookLogisClicked:(UIButton *)sender {
     if (self.refundDetail) {
@@ -300,7 +277,13 @@
     self.receiver.text = [NSString stringWithFormat:@"%@  %@",_giftGoods.receiver,_giftGoods.receiver_phone];
     self.receive_address.text = [NSString stringWithFormat:@"%@%@",_giftGoods.area_name,_giftGoods.address_detail];
     
-    self.order_state.text = @"";
+    self.gift_order.hidden = YES;
     self.order_no.text = [NSString stringWithFormat:@"%@",_giftGoods.provider_no];
 }
+- (IBAction)lookGiftOrder:(UIButton *)sender {
+    if (self.lookGiftOrderCall) {
+        self.lookGiftOrderCall();
+    }
+}
+
 @end

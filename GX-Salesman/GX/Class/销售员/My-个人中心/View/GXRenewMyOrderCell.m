@@ -90,7 +90,11 @@
     [self.goods_title setTextWithLineSpace:5.f withString:_salerOrder.goods_name?_salerOrder.goods_name:@"" withFont:[UIFont systemFontOfSize:13]];
     self.price.text = [NSString stringWithFormat:@"￥%@",_salerOrder.price];
     self.goods_spec.text = (_salerOrder.specs_attrs&&_salerOrder.specs_attrs.length)?[NSString stringWithFormat:@" %@ ",_salerOrder.specs_attrs]:@"";
-    self.goods_num.text = [NSString stringWithFormat:@"x%@",_salerOrder.goods_num];
+    if (_salerOrder.refund_id && _salerOrder.refund_id.length) {
+        self.goods_num.text = [NSString stringWithFormat:@"购买x%@ 退款x%@",_salerOrder.goods_num,_salerOrder.return_num];
+    }else{
+        self.goods_num.text = [NSString stringWithFormat:@"x%@",_salerOrder.goods_num];
+    }
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

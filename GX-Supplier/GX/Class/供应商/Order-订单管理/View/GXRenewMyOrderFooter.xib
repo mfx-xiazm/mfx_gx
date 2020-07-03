@@ -19,8 +19,14 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xdf-ai-mYn">
                     <rect key="frame" x="10" y="0.0" width="394" height="50"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥99.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lFx-0t-FcM">
-                            <rect key="frame" x="342.5" y="15.5" width="41.5" height="19.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="退款金额：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v9o-Ay-l8E">
+                            <rect key="frame" x="157" y="17" width="67" height="16"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥99.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ch5-ij-Ac8">
+                            <rect key="frame" x="224" y="15.5" width="41.5" height="19.5"/>
                             <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
                             <color key="textColor" red="0.92549019610000005" green="0.078431372550000003" blue="0.1764705882" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -31,11 +37,21 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥99.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lFx-0t-FcM">
+                            <rect key="frame" x="342.5" y="15.5" width="41.5" height="19.5"/>
+                            <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
+                            <color key="textColor" red="0.92549019610000005" green="0.078431372550000003" blue="0.1764705882" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstItem="xxy-xu-GDG" firstAttribute="leading" secondItem="Ch5-ij-Ac8" secondAttribute="trailing" constant="10" id="3xD-i1-Uba"/>
+                        <constraint firstItem="Ch5-ij-Ac8" firstAttribute="leading" secondItem="v9o-Ay-l8E" secondAttribute="trailing" id="H9o-ex-l1n"/>
+                        <constraint firstItem="v9o-Ay-l8E" firstAttribute="centerY" secondItem="xdf-ai-mYn" secondAttribute="centerY" id="M7y-0M-cnJ"/>
                         <constraint firstItem="lFx-0t-FcM" firstAttribute="centerY" secondItem="xdf-ai-mYn" secondAttribute="centerY" id="NTi-Xn-Yf4"/>
                         <constraint firstAttribute="trailing" secondItem="lFx-0t-FcM" secondAttribute="trailing" constant="10" id="Oc6-rl-TZk"/>
+                        <constraint firstItem="Ch5-ij-Ac8" firstAttribute="centerY" secondItem="xdf-ai-mYn" secondAttribute="centerY" id="RxM-o4-NQx"/>
                         <constraint firstAttribute="height" constant="50" id="eGs-1O-wUk"/>
                         <constraint firstItem="lFx-0t-FcM" firstAttribute="leading" secondItem="xxy-xu-GDG" secondAttribute="trailing" id="fjG-6d-DH7"/>
                         <constraint firstItem="xxy-xu-GDG" firstAttribute="centerY" secondItem="xdf-ai-mYn" secondAttribute="centerY" id="ngl-OJ-OR2"/>
@@ -143,6 +159,8 @@
                 <outlet property="secondHandleBtn" destination="2XS-lg-qQE" id="GbK-7B-QkL"/>
                 <outlet property="thirdHandleBtn" destination="xle-Mf-uUl" id="Xbm-HP-A32"/>
                 <outlet property="total_price" destination="lFx-0t-FcM" id="gwY-zn-tVK"/>
+                <outlet property="tuiAmount" destination="Ch5-ij-Ac8" id="mXJ-0g-epL"/>
+                <outlet property="tuiLabel" destination="v9o-Ay-l8E" id="uUh-XB-mFM"/>
             </connections>
             <point key="canvasLocation" x="140.57971014492756" y="663.95089285714278"/>
         </view>

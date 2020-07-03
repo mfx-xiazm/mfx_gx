@@ -13,6 +13,7 @@
 #import "GXGoodsDetailVC.h"
 #import "GXBrandDetail.h"
 #import "GXBrandGoods.h"
+#import "GXPresellDetailVC.h"
 
 static NSString *const ShopGoodsCell = @"ShopGoodsCell";
 static NSString *const BrandDetailHeader = @"BrandDetailHeader";
@@ -217,11 +218,25 @@ static NSString *const BrandDetailHeader = @"BrandDetailHeader";
     return cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    GXGoodsDetailVC *dvc = [GXGoodsDetailVC new];
     GXBrandGoods *brandGoods = self.goods[indexPath.item];
-    dvc.isBrandPush = YES;
-    dvc.goods_id = brandGoods.goods_id;
-    [self.navigationController pushViewController:dvc animated:YES];
+    if (brandGoods.pre_sale_id) {
+        if ([brandGoods.pre_sale_id isEqualToString:@"0"]) {//不是预售
+            GXGoodsDetailVC *dvc = [GXGoodsDetailVC new];
+            dvc.isBrandPush = YES;
+            dvc.goods_id = brandGoods.goods_id;
+            [self.navigationController pushViewController:dvc animated:YES];
+        }else{
+            GXPresellDetailVC *dvc = [GXPresellDetailVC new];
+            dvc.pre_sale_id = brandGoods.pre_sale_id;
+            dvc.goods_id = brandGoods.goods_id;
+            [self.navigationController pushViewController:dvc animated:YES];
+        }
+    }else{
+        GXGoodsDetailVC *dvc = [GXGoodsDetailVC new];
+        dvc.isBrandPush = YES;
+        dvc.goods_id = brandGoods.goods_id;
+        [self.navigationController pushViewController:dvc animated:YES];
+    }
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat width = (HX_SCREEN_WIDTH-10*3)/2.0;

@@ -79,6 +79,7 @@
     self.price.text = [NSString stringWithFormat:@"￥%@",_refundGoods.price];
     self.goods_spec.text = (_refundGoods.specs_attrs&&_refundGoods.specs_attrs.length)?[NSString stringWithFormat:@" %@ ",_refundGoods.specs_attrs]:@"";
     self.goods_num.text = [NSString stringWithFormat:@"x%@",_refundGoods.goods_num];
+    self.goods_num.text = [NSString stringWithFormat:@"购买x%@ 退款x%@",_refundGoods.goods_num,_return_num];
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

@@ -26,6 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *shop_name;
 @property(nonatomic,copy) NSString *refund_id;
 @property(nonatomic,copy) NSString *refund_status;
+@property(nonatomic,copy) NSString *return_num;
+@property(nonatomic,copy) NSString *return_amount;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -42,8 +42,8 @@
     self.saleManCommissionRewardView.hidden = YES;
     self.recommendRewardView.hidden = NO;
 
-    self.recommend_sale.text = [NSString stringWithFormat:@"%@%%",_recommend.recommend_sale];
-    self.recommend_provider.text = [NSString stringWithFormat:@"%@%%",_recommend.recommend_provider];
+    self.recommend_sale.text = (_recommend.recommend_sale && _recommend.recommend_sale.length)?[NSString stringWithFormat:@"%@%%",_recommend.recommend_sale]:@"-";
+    self.recommend_provider.text = (_recommend.recommend_provider && _recommend.recommend_provider.length)?[NSString stringWithFormat:@"%@%%",_recommend.recommend_provider]:@"-";
 }
 -(void)setCommission:(GXCommissionReward *)commission
 {

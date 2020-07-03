@@ -206,7 +206,7 @@ static NSString *const AccountManageCell = @"AccountManageCell";
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     GXFinanceLog *log = self.logs[indexPath.row];
-    if (log.finance_log_type <= 5 || log.finance_log_type >= 30) {
+    if (log.finance_log_type <= 5 || (log.finance_log_type >= 30 && log.finance_log_type <= 32) || log.finance_log_type >= 40) {
         return 35.f+60.f+10.f;
     }else{
         return 60.f+10.f;

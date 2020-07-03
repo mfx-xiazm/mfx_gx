@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *firstHandleBtn;
 @property (weak, nonatomic) IBOutlet UIButton *secondHandleBtn;
 @property (weak, nonatomic) IBOutlet UIButton *thirdHandleBtn;
+@property (weak, nonatomic) IBOutlet UILabel *tuiLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tuiAmount;
 @end
 @implementation GXRenewMyOrderFooter
 
@@ -25,11 +27,17 @@
 -(void)setPOrder:(GXMyOrder *)pOrder
 {
     _pOrder = pOrder;
+    self.tuiLabel.hidden = YES;
+    self.tuiAmount.hidden = YES;
     self.total_price.text = [NSString stringWithFormat:@"￥%@",_pOrder.pay_amount];
 }
 -(void)setPRefund:(GXMyRefund *)pRefund
 {
     _pRefund = pRefund;
+    self.tuiLabel.hidden = NO;
+    self.tuiAmount.hidden = NO;
+    
+    self.tuiAmount.text = [NSString stringWithFormat:@"￥%@",_pRefund.return_amount];
     self.total_price.text = [NSString stringWithFormat:@"￥%@",_pRefund.pay_amount];
 }
 - (IBAction)orderHandleClicked:(UIButton *)sender {

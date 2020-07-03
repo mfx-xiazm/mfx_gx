@@ -230,9 +230,9 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
         return 160.f;
     }else{//最后一组
         if (self.refund_id && self.refund_id.length) {
-            return (self.refundDetail.logistics_com_name && self.refundDetail.logistics_com_name.length)?270:220;
+            return (self.refundDetail.logistics_com_name && self.refundDetail.logistics_com_name.length)?240+87.f:215+87.f;
         }else{
-            return (self.orderDetail.logistics_com_name && self.orderDetail.logistics_com_name.length)?270:220;
+            return (self.orderDetail.logistics_com_name && self.orderDetail.logistics_com_name.length)?240:215;
         }
     }
 }
@@ -252,16 +252,16 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
         if (self.refund_id && self.refund_id.length) {
             footer.refundDetail = self.refundDetail;
             if (self.refundDetail.logistics_com_name && self.refundDetail.logistics_com_name.length) {
-                footer.hxn_size = CGSizeMake(tableView.hxn_width, 270.f);
+                footer.hxn_size = CGSizeMake(tableView.hxn_width, 240.f+87.f);
             }else{
-                footer.hxn_size = CGSizeMake(tableView.hxn_width, 220.f);
+                footer.hxn_size = CGSizeMake(tableView.hxn_width, 215.f+87.f);
             }
         }else{
             footer.orderDetail = self.orderDetail;
             if (self.orderDetail.logistics_com_name && self.orderDetail.logistics_com_name.length) {
-                footer.hxn_size = CGSizeMake(tableView.hxn_width, 270.f);
+                footer.hxn_size = CGSizeMake(tableView.hxn_width, 240.f);
             }else{
-                footer.hxn_size = CGSizeMake(tableView.hxn_width, 220.f);
+                footer.hxn_size = CGSizeMake(tableView.hxn_width, 215.f);
             }
         }
         hx_weakify(self);

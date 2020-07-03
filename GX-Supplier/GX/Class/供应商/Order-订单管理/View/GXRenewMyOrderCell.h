@@ -17,6 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong) GYMyRefundGoods *refundGoods;
 /* 退款 */
 @property(nonatomic,strong) GXMyRefund *refund;
+/* 退款数量 */
+@property(nonatomic,copy) NSString *return_num;
+/* 退款金额 */
+@property(nonatomic,copy) NSString *return_amount;
 /* 提交订单商品 */
 @property(nonatomic,strong) GXConfirmOrderGoods *upGoods;
 @end

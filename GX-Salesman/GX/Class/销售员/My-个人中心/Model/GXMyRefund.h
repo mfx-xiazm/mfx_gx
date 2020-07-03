@@ -54,6 +54,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *provider_no;
 @property(nonatomic,copy) NSString *username;
 @property(nonatomic,copy) NSString *saleman_code;
+@property(nonatomic,copy) NSString *return_num;
+@property(nonatomic,copy) NSString *return_amount;
 /* 是退款详情数据 */
 @property(nonatomic,assign) BOOL isRefundDetail;
 @property(nonatomic,copy) NSString *shop_name;

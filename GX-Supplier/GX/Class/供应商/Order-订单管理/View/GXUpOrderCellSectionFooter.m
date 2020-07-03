@@ -26,15 +26,15 @@
 -(void)setOrderDetail:(GXMyOrder *)orderDetail
 {
     _orderDetail = orderDetail;
-    self.totalPrice.text = [NSString stringWithFormat:@"￥%@",_orderDetail.order_price_amount];
-    self.totalFreight.text = [NSString stringWithFormat:@"￥%@",_orderDetail.order_freight_amount];
+    self.totalPrice.text = [NSString stringWithFormat:@"%@",_orderDetail.order_price_amount];
+    self.totalFreight.text = [NSString stringWithFormat:@"%@",_orderDetail.order_freight_amount];
     
     if (_orderDetail.order_brand_rebate && _orderDetail.order_brand_rebate.length) {
         self.rebateTxt.text = [NSString stringWithFormat:@"返利%@%%",_orderDetail.order_brand_rebate];
-        self.rebate.text = [NSString stringWithFormat:@"-￥%@",_orderDetail.order_brand_amount];
+        self.rebate.text = [NSString stringWithFormat:@"-%@",_orderDetail.order_brand_amount];
     }else{
         self.rebateTxt.text = @"";
-        self.rebate.text = @"￥0.00";
+        self.rebate.text = @"0.00";
     }
     GXMyOrderGoods *goods = _orderDetail.goods.firstObject;
     if (goods.order_goods_desc && goods.order_goods_desc.length) {
@@ -47,15 +47,15 @@
 {
     _refundDetail = refundDetail;
     
-    self.totalPrice.text = [NSString stringWithFormat:@"￥%@",_refundDetail.order_price_amount];
-    self.totalFreight.text = [NSString stringWithFormat:@"￥%@",_refundDetail.order_freight_amount];
+    self.totalPrice.text = [NSString stringWithFormat:@"%@",_refundDetail.order_price_amount];
+    self.totalFreight.text = [NSString stringWithFormat:@"%@",_refundDetail.order_freight_amount];
     
     if (_refundDetail.order_brand_rebate && _refundDetail.order_brand_rebate.length) {
         self.rebateTxt.text = [NSString stringWithFormat:@"返利%@%%",_refundDetail.order_brand_rebate];
-        self.rebate.text = [NSString stringWithFormat:@"-￥%@",_refundDetail.order_brand_amount];
+        self.rebate.text = [NSString stringWithFormat:@"-%@",_refundDetail.order_brand_amount];
     }else{
         self.rebateTxt.text = @"";
-        self.rebate.text = @"￥0.00";
+        self.rebate.text = @"0.00";
     }
     GYMyRefundGoods *goods = _refundDetail.goods.firstObject;
     if (goods.order_goods_desc && goods.order_goods_desc.length) {

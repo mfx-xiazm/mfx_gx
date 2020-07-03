@@ -15,6 +15,7 @@
 #import "GXWebContentVC.h"
 #import "zhAlertView.h"
 #import <zhPopupController.h>
+#import "GXExpressShowView.h"
 
 static NSString *const GiftGoodsCell = @"GiftGoodsCell";
 @interface GXGiftGoodsDetailVC ()<UITableViewDelegate,UITableViewDataSource>
@@ -117,6 +118,18 @@ static NSString *const GiftGoodsCell = @"GiftGoodsCell";
     };
     
     self.footer.giftGoods = self.giftGoods;
+    self.footer.giftOrderNoCall = ^{
+        hx_strongify(weakSelf);
+        GXExpressShowView *show = [GXExpressShowView loadXibView];
+        show.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 300.f);
+        show.logistics_nos = strongSelf.giftGoods.order_nos;
+        show.expressShowCloseClicked = ^{
+            [strongSelf.zh_popupController dismiss];
+        };
+        strongSelf.zh_popupController = [[zhPopupController alloc] init];
+        strongSelf.zh_popupController.layoutType = zhPopupLayoutTypeBottom;
+        [strongSelf.zh_popupController presentContentView:nil duration:0.25 springAnimated:NO];
+    };
    
     [self.tableView reloadData];
 }

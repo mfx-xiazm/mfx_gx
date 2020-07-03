@@ -20,6 +20,7 @@
 #import "GXUpOrderCellSectionFooter.h"
 #import "GXShowMoneyProofVC.h"
 #import "GXExpressShowView.h"
+#import "GXGiftGoodsDetailVC.h"
 
 static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
 @interface GXOrderDetailVC ()<UITableViewDelegate,UITableViewDataSource>
@@ -48,7 +49,7 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.navigationItem setTitle:@"订单详情"];
+    [self.navigationItem setTitle:(self.refund_id && self.refund_id.length)?@"退款详情":@"订单详情"];
     [self setUpTableView];
     [self startShimmer];
     [self getOrderInfoRequest];
@@ -174,6 +175,13 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
             cvc.url = strongSelf.refundDetail.url;
             [strongSelf.navigationController pushViewController:cvc animated:YES];
         };
+        self.header.lookGiftOrderCall = ^{
+            hx_strongify(weakSelf);
+            //HXLog(@"赠品订单");
+            GXGiftGoodsDetailVC *gvc = [GXGiftGoodsDetailVC new];
+            gvc.gift_order_id = strongSelf.refundDetail.gift_order_id;
+            [strongSelf.navigationController pushViewController:gvc animated:YES];
+        };
         if (self.refundDetail.address) {
             self.footer.refundDetail = self.refundDetail;// 退款地址
             self.tableView.tableFooterView = self.footer;
@@ -234,6 +242,13 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
             cvc.isNeedRequest = NO;
             cvc.url = strongSelf.orderDetail.url;
             [strongSelf.navigationController pushViewController:cvc animated:YES];
+        };
+        self.header.lookGiftOrderCall = ^{
+            hx_strongify(weakSelf);
+            //HXLog(@"赠品订单");
+            GXGiftGoodsDetailVC *gvc = [GXGiftGoodsDetailVC new];
+            gvc.gift_order_id = strongSelf.orderDetail.gift_order_id;
+            [strongSelf.navigationController pushViewController:gvc animated:YES];
         };
     }
     
@@ -327,9 +342,9 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
         return 160.f;
     }else{//最后一组
         if (self.refund_id && self.refund_id.length) {
-            return (self.refundDetail.logistics_com_name && self.refundDetail.logistics_com_name.length)?270:220;
+            return (self.refundDetail.logistics_com_name && self.refundDetail.logistics_com_name.length)?240+85.f:220+85.f;
         }else{
-            return (self.orderDetail.logistics_com_name && self.orderDetail.logistics_com_name.length)?270:220;
+            return (self.orderDetail.logistics_com_name && self.orderDetail.logistics_com_name.length)?240:220;
         }
     }
 }
@@ -349,14 +364,14 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
         if (self.refund_id && self.refund_id.length) {
             footer.refundDetail = self.refundDetail;
             if (self.refundDetail.logistics_com_name && self.refundDetail.logistics_com_name.length) {
-                footer.hxn_size = CGSizeMake(tableView.hxn_width, 270.f);
+                footer.hxn_size = CGSizeMake(tableView.hxn_width, 240.f+85.f);
             }else{
-                footer.hxn_size = CGSizeMake(tableView.hxn_width, 220.f);
+                footer.hxn_size = CGSizeMake(tableView.hxn_width, 220.f+85.f);
             }
         }else{
             footer.orderDetail = self.orderDetail;
             if (self.orderDetail.logistics_com_name && self.orderDetail.logistics_com_name.length) {
-                footer.hxn_size = CGSizeMake(tableView.hxn_width, 270.f);
+                footer.hxn_size = CGSizeMake(tableView.hxn_width, 240.f);
             }else{
                 footer.hxn_size = CGSizeMake(tableView.hxn_width, 220.f);
             }

@@ -51,6 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *shop_name;
 /**0 无异常订单 1异常订单(超时未发货);2超时已发货*/
 @property(nonatomic,copy) NSString *order_status;
+@property(nonatomic,copy) NSString *gift_order_id;
 /* 是详情数据 */
 @property(nonatomic,assign) BOOL isDetailOrder;
 @property(nonatomic,copy) NSString *order_brand_rebate;

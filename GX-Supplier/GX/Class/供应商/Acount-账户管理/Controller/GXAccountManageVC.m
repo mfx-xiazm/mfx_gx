@@ -227,7 +227,7 @@ static NSString *const AccountManageCell = @"AccountManageCell";
 }
 -(void)cashNoticeClicked:(UIButton *)sender
 {
-    zhAlertView *alert = [[zhAlertView alloc] initWithTitle:@"提现说明" message:[NSString stringWithFormat:@"订单发货之后%@天后才能申请提现",self.cashable_day] constantWidth:HX_SCREEN_WIDTH - 50*2];
+    zhAlertView *alert = [[zhAlertView alloc] initWithTitle:@"提现说明" message:[NSString stringWithFormat:@"订单发货(即输入物流单号)之日起%@天后，可申请提现！",self.cashable_day] constantWidth:HX_SCREEN_WIDTH - 50*2];
     hx_weakify(self);
     zhAlertButton *okButton = [zhAlertButton buttonWithTitle:@"我知道了" handler:^(zhAlertButton * _Nonnull button) {
         hx_strongify(weakSelf);
@@ -270,7 +270,7 @@ static NSString *const AccountManageCell = @"AccountManageCell";
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     GXFinanceLog *log = self.logs[indexPath.row];
-    if (log.finance_log_type <= 5 || log.finance_log_type >= 30) {
+    if (log.finance_log_type <= 5 || (log.finance_log_type >= 30 && log.finance_log_type <= 32) || log.finance_log_type >= 40) {
         return 35.f+60.f+10.f;
     }else{
         return 60.f+10.f;

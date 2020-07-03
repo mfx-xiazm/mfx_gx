@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *firstHandleBtn;
 @property (weak, nonatomic) IBOutlet UIButton *secondHandleBtn;
 @property (weak, nonatomic) IBOutlet UIButton *thirdHandleBtn;
+@property (weak, nonatomic) IBOutlet UILabel *tuiLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tuiAmount;
 @end
 @implementation GXRenewMyOrderFooter
 
@@ -27,6 +29,8 @@
 -(void)setOrder:(GXMyOrder *)order
 {
     _order = order;
+    self.tuiLabel.hidden = YES;
+    self.tuiAmount.hidden = YES;
     /** 待付款 - 取消订单、立即付款  待发货 - 申请退款[线下审核未通过 - 无]  待收货 - 申请退款、查看物流、确认收货  待评价 - 评价  已完成/退款列表 - 无*/
     self.total_price.text = [NSString stringWithFormat:@"￥%@",_order.pay_amount];
     if ([_order.status isEqualToString:@"待付款"]) {
@@ -108,21 +112,37 @@
 -(void)setRefund:(GXMyRefund *)refund
 {
     _refund = refund;
+    self.tuiLabel.hidden = YES;
+    self.tuiAmount.hidden = YES;
     self.total_price.text = [NSString stringWithFormat:@"￥%@",_refund.pay_amount];
 }
 -(void)setPOrder:(GXMyOrder *)pOrder
 {
     _pOrder = pOrder;
+    self.tuiLabel.hidden = YES;
+    self.tuiAmount.hidden = YES;
     self.total_price.text = [NSString stringWithFormat:@"￥%@",_pOrder.pay_amount];
 }
 -(void)setPRefund:(GXMyRefund *)pRefund
 {
     _pRefund = pRefund;
+    self.tuiLabel.hidden = YES;
+    self.tuiAmount.hidden = YES;
     self.total_price.text = [NSString stringWithFormat:@"￥%@",_pRefund.pay_amount];
 }
 -(void)setSalerOrder:(GXSalerOrder *)salerOrder
 {
     _salerOrder = salerOrder;
+    if (_salerOrder.refund_id && _salerOrder.refund_id.length) {
+        self.tuiLabel.hidden = NO;
+        self.tuiAmount.hidden = NO;
+        
+        self.tuiAmount.text = [NSString stringWithFormat:@"￥%@",_salerOrder.return_amount];
+    }else{
+        self.tuiLabel.hidden = YES;
+        self.tuiAmount.hidden = YES;
+    }
+    
     self.total_price.text = [NSString stringWithFormat:@"￥%@",_salerOrder.pay_amount];
 }
 - (IBAction)orderHandleClicked:(UIButton *)sender {
