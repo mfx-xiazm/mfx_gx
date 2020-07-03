@@ -61,14 +61,14 @@
         self.saleManCommissionRewardView.hidden = NO;
         self.recommendRewardView.hidden = YES;
         
-        self.rate3.text = [NSString stringWithFormat:@"%@%%",_commission.rate3];
+        self.rate3.text = (_commission.rate3 && _commission.rate3.length)?[NSString stringWithFormat:@"%@%%",_commission.rate3]:@"-";
         
         if ([[MSUserManager sharedInstance].curUserInfo.post_id isEqualToString:@"2"]) {
-            self.rate1.text = [NSString stringWithFormat:@"%@%%",_commission.rate1];
-            self.rate2.text = [NSString stringWithFormat:@"%@%%",_commission.rate2];
+            self.rate1.text = (_commission.rate1 && _commission.rate1.length)?[NSString stringWithFormat:@"%@%%",_commission.rate1]:@"-";
+            self.rate2.text = (_commission.rate2 && _commission.rate2.length)?[NSString stringWithFormat:@"%@%%",_commission.rate2]:@"-";
         }else if ([[MSUserManager sharedInstance].curUserInfo.post_id isEqualToString:@"3"]) {
             self.rate1.text = @"-";
-            self.rate2.text = [NSString stringWithFormat:@"%@%%",_commission.rate2];
+            self.rate2.text = (_commission.rate2 && _commission.rate2.length)?[NSString stringWithFormat:@"%@%%",_commission.rate2]:@"-";
         }else{
             self.rate1.text = @"-";
             self.rate2.text = @"-";

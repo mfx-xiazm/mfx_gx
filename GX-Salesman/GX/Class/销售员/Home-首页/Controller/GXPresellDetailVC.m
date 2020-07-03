@@ -34,6 +34,7 @@
 #import "zhAlertView.h"
 #import "XQCarousel.h"
 #import "GXChargesRateView.h"
+#import "GXShareCodeView.h"
 
 static NSString *const GoodsInfoCell = @"GoodsInfoCell";
 static NSString *const GoodsGiftCell = @"GoodsGiftCell";
@@ -153,7 +154,21 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
 #pragma mark -- 点击事件
 -(void)shareClicked
 {
-    HXLog(@"分享");
+    GXShareCodeView *share  = [GXShareCodeView loadXibView];
+    share.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 180.f);
+    hx_weakify(self);
+    share.shareTypeCall = ^(NSInteger index) {
+        hx_strongify(weakSelf);
+        [strongSelf.sharePopVC dismissWithDuration:0.25 completion:nil];
+        if (index == 1) {
+            [strongSelf shareWebToPlatformType:UMSocialPlatformType_WechatTimeLine];
+        }else{
+            [strongSelf shareWebToPlatformType:UMSocialPlatformType_WechatSession];
+        }
+    };
+    self.sharePopVC = [[zhPopupController alloc] initWithView:share size:share.bounds.size];
+    self.sharePopVC.layoutType = zhPopupLayoutTypeBottom;
+    [self.sharePopVC show];
 }
 -(void)materialClicked
 {
@@ -183,6 +198,27 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
     self.sharePopVC = [[zhPopupController alloc] initWithView:rateView size:rateView.bounds.size];
     self.sharePopVC.layoutType = zhPopupLayoutTypeBottom;
     [self.sharePopVC show];
+}
+- (void)shareWebToPlatformType:(UMSocialPlatformType)platformType
+{
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+
+    //创建图片内容对象
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"呱选-好品预售" descr:self.goodsDetail.goods_name thumImage:HXGetImage(@"Icon-share")];
+    //如果有缩略图，则设置缩略图
+    shareObject.webpageUrl = [NSString stringWithFormat:@"%@webRegister/page/dynamic.html?pre_sale_id=%@&is_join=%@",HXRC_URL_HEADER,self.pre_sale_id,self.goodsDetail.is_join];
+    //分享消息对象设置分享内容对象
+    messageObject.shareObject = shareObject;
+
+    //调用分享接口
+    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+        if (error) {
+            NSLog(@"************Share fail with error %@*********",error);
+        }else{
+            NSLog(@"response data is %@",data);
+        }
+    }];
 }
 #pragma mark -- 接口请求
 -(void)getGoodDetailRequest

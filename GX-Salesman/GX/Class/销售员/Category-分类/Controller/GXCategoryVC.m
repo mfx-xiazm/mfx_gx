@@ -198,7 +198,7 @@ static NSString *const SmallCateHeaderView = @"SmallCateHeaderView";
             if (![control isEqualToString:@"1"]) {
                 NSMutableArray *temp = [NSMutableArray arrayWithArray:cateItems];
                 GXCatalogItem *cate = [GXCatalogItem new];
-                cate.catalog_id = @"";
+                cate.catalog_id = catalog_id;// 一级分类id
                 cate.catalog_name = @"全部";
                 cate.catalog_img = [NSString stringWithFormat:@"%@all.png",HXRC_URL_HEADER];
                 [temp insertObject:cate atIndex:0];

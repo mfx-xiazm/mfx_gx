@@ -31,7 +31,7 @@
 -(void)setStoreInfo:(GXStore *)storeInfo
 {
     _storeInfo = storeInfo;
-    [self.shop_front_img sd_setImageWithURL:[NSURL URLWithString:_storeInfo.shop_front_img]];
+    [self.shop_front_img sd_setImageWithURL:[NSURL URLWithString:_storeInfo.shop_front_img] placeholderImage:HXGetImage(@"Icon-share")];
     self.shop_name.text = _storeInfo.shop_name;
     self.evl_level.text = [NSString stringWithFormat:@"综合评分：%@",_storeInfo.evl_level];
 }

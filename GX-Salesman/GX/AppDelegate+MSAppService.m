@@ -11,11 +11,23 @@
 #import "HXGuideViewController.h"
 #import "HXNavigationController.h"
 #import "GXLoginVC.h"
+#import <UMShare/UMShare.h>
+#import <UMCommon/UMCommon.h>
+
 @implementation AppDelegate (MSAppService)
 
 #pragma mark ————— 初始化服务 —————
 -(void)initService{
-
+    /* ————— 友盟 初始化 ————— */
+    [[UMSocialManager defaultManager] openLog:NO];
+    [UMConfigure initWithAppkey:HXUMengKey channel:@"App Store"];
+    
+    [self configUSharePlatforms];
+}
+-(void)configUSharePlatforms
+{
+    /* 设置微信的appKey和appSecret */
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:HXWXKey appSecret:HXWXSecret redirectURL:@"http://mobile.umeng.com/social"];
 }
 #pragma mark ————— 初始化window —————
 -(void)initWindow{

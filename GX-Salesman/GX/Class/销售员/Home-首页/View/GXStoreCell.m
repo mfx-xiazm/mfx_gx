@@ -33,7 +33,7 @@ static NSString *const StoreCouponCell = @"StoreCouponCell";
 {
     _store = store;
     
-    [self.shop_front_img sd_setImageWithURL:[NSURL URLWithString:_store.shop_front_img]];
+    [self.shop_front_img sd_setImageWithURL:[NSURL URLWithString:_store.shop_front_img] placeholderImage:HXGetImage(@"Icon-share")];
     self.shop_name.text = _store.shop_name;
     self.shop_coupon_desc.text = _store.shop_desc;
     if (_store.goods.count) {

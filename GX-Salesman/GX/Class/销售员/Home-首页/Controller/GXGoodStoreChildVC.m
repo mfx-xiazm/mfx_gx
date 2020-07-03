@@ -262,7 +262,12 @@ static NSString *const StoreCell = @"StoreCell";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // 返回这个模型对应的cell高度
-    return 5.f + 60.f + (HX_SCREEN_WIDTH-10.f*6)/3.0 + 10.f + 5.f;
+    GXStore *store = self.stores[indexPath.row];
+    if (store.coupons && store.coupons.count) {
+        return 5.f + 60.f + 60.f + (HX_SCREEN_WIDTH-10.f*6)/3.0 + 10.f + 5.f;
+    }else{
+        return 5.f + 60.f + (HX_SCREEN_WIDTH-10.f*6)/3.0 + 10.f + 5.f;
+    }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
