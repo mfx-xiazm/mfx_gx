@@ -81,7 +81,7 @@
 }
 -(void)handleStoreInfo
 {
-    [self.shop_front_img sd_setImageWithURL:[NSURL URLWithString:self.storeDetail.shop_front_img]];
+    [self.shop_front_img sd_setImageWithURL:[NSURL URLWithString:self.storeDetail.shop_front_img] placeholderImage:HXGetImage(@"Icon-share")];
     self.shop_name.text = self.storeDetail.shop_name;
     self.evl_level.text = [NSString stringWithFormat:@"综合评分：%@",self.storeDetail.evl_level];
     [self.store_level setTextWithLineSpace:5.f withString:[NSString stringWithFormat:@"描述相符：%@\n发货速度：%@\n响应速度：%@",self.storeDetail.desc_level,self.storeDetail.deliver_level,self.storeDetail.answer_level] withFont:[UIFont systemFontOfSize:13]];
