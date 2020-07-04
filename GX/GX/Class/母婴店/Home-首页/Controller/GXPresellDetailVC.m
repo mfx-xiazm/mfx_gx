@@ -273,6 +273,7 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
 - (IBAction)sankPriceClicked:(SPButton *)sender {
     GXSankPriceVC *pvc = [GXSankPriceVC new];
     pvc.goods_id = self.goods_id;
+    pvc.sale_type = @"2";
     [self.navigationController pushViewController:pvc animated:YES];
 }
 

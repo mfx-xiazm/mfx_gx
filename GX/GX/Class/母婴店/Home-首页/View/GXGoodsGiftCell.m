@@ -31,7 +31,7 @@
             if ([rule.gift_type isEqualToString:@"1"]) {//本品
                 ruleL.text = [NSString stringWithFormat:@"  买%@赠%@  ",rule.begin_num,rule.gift_num];
             }else{
-                ruleL.text = [NSString stringWithFormat:@"  买%@搭赠%@%@个 ",rule.begin_num,rule.gift_num,rule.goods_name];
+                ruleL.text = [NSString stringWithFormat:@"  买%@搭赠%@%@ ",rule.begin_num,rule.gift_num,rule.goods_name];
             }
             ruleL.textColor = UIColorFromRGB(0xFF8A00);
             ruleL.backgroundColor = UIColorFromRGB(0xFFE8CC);

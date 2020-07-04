@@ -166,6 +166,7 @@ static NSString *const SankPriceCell = @"SankPriceCell";
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"goods_id"] = self.goods_id;//商品id
+    parameters[@"sale_type"] = self.sale_type;//1普通类型 2.预售类型
     if (self.address_id && self.address_id.length) {
         parameters[@"address_id"] = self.address_id;
     }
