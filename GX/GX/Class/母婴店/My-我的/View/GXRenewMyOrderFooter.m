@@ -136,7 +136,7 @@
     self.tuiLabel.hidden = NO;
     self.tuiAmount.hidden = NO;
     
-    self.tuiAmount.text = [NSString stringWithFormat:@"￥%@",_refund.return_amount];
+    self.tuiAmount.text = [NSString stringWithFormat:@"￥%@",(_refund.return_amount && _refund.return_amount.length)?_refund.return_amount:_refund.pay_amount];
     
     self.total_price.text = [NSString stringWithFormat:@"￥%@",_refund.pay_amount];
 }

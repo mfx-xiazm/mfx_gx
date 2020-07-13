@@ -22,6 +22,7 @@
 -(void)setBanner:(GYHomeBanner *)banner
 {
     _banner = banner;
+    self.contentImage.layer.cornerRadius = 0.f;
     [self.contentImage sd_setImageWithURL:[NSURL URLWithString:_banner.adv_img]];
 }
 -(void)setRegional:(GYHomeRegional *)regional

@@ -103,6 +103,7 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavBar];
+    self.contentScrollView.hidden = YES;
     [self setUpTableView];
     [self setUpCollectionView];
     [self startShimmer];
@@ -411,21 +412,18 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
         self.notice.text = @"";
     }
 
+    NSString *h5 = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"><style>img{width:100%%; height:auto;}body{margin:0 14px;}</style></head><body>%@</body></html>",self.goodsDetail.goods_desc];
+    [self.webView loadHTMLString:h5 baseURL:[NSURL URLWithString:HXRC_URL_HEADER]];
+    
     [self.tableView reloadData];
+    [self.collectionView reloadData];
+    
     hx_weakify(self);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         hx_strongify(weakSelf);
         strongSelf.tableViewHeight.constant = strongSelf.tableView.contentSize.height;
-    });
-    
-    NSString *h5 = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"><style>img{width:100%%; height:auto;}body{margin:0 14px;}</style></head><body>%@</body></html>",self.goodsDetail.goods_desc];
-    [self.webView loadHTMLString:h5 baseURL:[NSURL URLWithString:HXRC_URL_HEADER]];
-    
-    
-    [self.collectionView reloadData];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        hx_strongify(weakSelf);
         strongSelf.collectionViewHeight.constant = strongSelf.collectionView.contentSize.height;
+        strongSelf.contentScrollView.hidden = NO;
     });
     
     if ([self.goodsDetail.control_type isEqualToString:@"1"]) {// 常规

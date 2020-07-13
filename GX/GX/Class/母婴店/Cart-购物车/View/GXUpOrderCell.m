@@ -19,13 +19,15 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) GXUpOrderCellHeader *header;
 @property (nonatomic, strong) GXUpOrderCellFooter *footer;
+@property (nonatomic, strong) NSMutableDictionary *cellHightDict;
 @end
 @implementation GXUpOrderCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    self.tableView.rowHeight = 0;
+    self.tableView.estimatedRowHeight = 110;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedSectionHeaderHeight = 0;
     self.tableView.estimatedSectionFooterHeight = 0;
     
@@ -45,11 +47,17 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
     self.tableView.tableHeaderView = self.header;
     self.tableView.tableFooterView = self.footer;
 }
+- (NSMutableDictionary *)cellHightDict {
+    if (!_cellHightDict) {
+        _cellHightDict = [NSMutableDictionary new];
+    }
+    return _cellHightDict;
+}
 -(void)layoutSubviews
 {
     [super layoutSubviews];
     self.header.frame = CGRectMake(0, 0, self.tableView.hxn_width, 40.f);
-    self.footer.frame = CGRectMake(0, 0, self.tableView.hxn_width, 120.f);
+    self.footer.hxn_size = CGSizeMake(self.tableView.hxn_width, 120.f);
 }
 -(GXUpOrderCellHeader *)header
 {
@@ -87,8 +95,9 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
     self.footer.orderData = _orderData;
     
     hx_weakify(self);
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [weakSelf.tableView reloadData];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.02 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        hx_strongify(weakSelf);
+        [strongSelf.tableView reloadData];
     });
 }
 #pragma mark -- UITableView数据源和代理
@@ -108,6 +117,17 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
 {
     // 返回这个模型对应的cell高度
     return 110.f;
+}
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.cellHightDict setObject:@(110) forKey:[NSString stringWithFormat:@"%@%ld",@"upOrderCell", (long)indexPath.row]];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    CGFloat height = [[self.cellHightDict objectForKey:[NSString stringWithFormat:@"%@%ld",@"upOrderCell",  (long)indexPath.row]] floatValue];
+    if (height == 0) {
+        return 110;
+    }
+    return height;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {

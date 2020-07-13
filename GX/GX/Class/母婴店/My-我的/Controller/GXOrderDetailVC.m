@@ -37,6 +37,7 @@ static NSString *const ShopGoodsCell = @"ShopGoodsCell";
 static NSString *const HomeSectionHeader = @"HomeSectionHeader";
 
 @interface GXOrderDetailVC ()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource,ZLCollectionViewBaseFlowLayoutDelegate>
+@property (weak, nonatomic) IBOutlet UIScrollView *contentScrollView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewHeight;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -78,6 +79,7 @@ static NSString *const HomeSectionHeader = @"HomeSectionHeader";
         }
     }];
     [self.navigationController setViewControllers:self.controllers];
+    self.contentScrollView.hidden = YES;
     [self setUpTableView];
     [self setUpCollectionView];
     [self startShimmer];
@@ -188,8 +190,6 @@ static NSString *const HomeSectionHeader = @"HomeSectionHeader";
 }
 -(void)handleOrderDetailData
 {
-    self.tableView.hidden = NO;
-    
     if (self.refund_id && self.refund_id.length) {
         self.refundDetail.isRefundDetail = YES;
     }else{
@@ -478,9 +478,9 @@ static NSString *const HomeSectionHeader = @"HomeSectionHeader";
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         weakSelf.tableViewHeight.constant = weakSelf.tableView.contentSize.height;
         weakSelf.collectionViewHeight.constant = weakSelf.collectionView.contentSize.height;
+        weakSelf.contentScrollView.hidden = NO;
     });
     [self.view layoutIfNeeded];
-    
 }
 #pragma mark -- 业务逻辑
 /** 取消订单 */
@@ -890,6 +890,7 @@ static NSString *const HomeSectionHeader = @"HomeSectionHeader";
             GXMyOrderFooter *footer = [GXMyOrderFooter loadXibView];
             footer.hxn_size = CGSizeMake(tableView.hxn_width, 160.f);
             GXMyOrderProvider *provider = self.orderDetail.provider[section];
+            footer.orderStatus = self.orderDetail.status;
             footer.orderProvider = provider;
             return footer;
         }else{//最后一组

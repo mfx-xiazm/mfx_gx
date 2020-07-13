@@ -114,6 +114,7 @@ static NSString *const UpOrderCell = @"UpOrderCell";
 #pragma mark -- 视图相关
 -(void)setUpTableView
 {
+    self.tableView.hidden = YES;
     // 针对 11.0 以上的iOS系统进行处理
     if (@available(iOS 11.0, *)) {
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentAutomatic;
@@ -122,7 +123,7 @@ static NSString *const UpOrderCell = @"UpOrderCell";
         // 不要自动调整inset
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
-    self.tableView.rowHeight = 0;
+    self.tableView.estimatedRowHeight = 0;
     self.tableView.estimatedSectionHeaderHeight = 0;
     self.tableView.estimatedSectionFooterHeight = 0;
     
@@ -163,7 +164,6 @@ static NSString *const UpOrderCell = @"UpOrderCell";
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             strongSelf.confirmOrder = [GXConfirmOrder yy_modelWithDictionary:responseObject[@"data"]];
             dispatch_async(dispatch_get_main_queue(), ^{
-                strongSelf.tableView.hidden = NO;
                 [strongSelf handleConfirmOrderData];
             });
         }else{
@@ -200,7 +200,6 @@ static NSString *const UpOrderCell = @"UpOrderCell";
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             strongSelf.confirmOrder = [GXConfirmOrder yy_modelWithDictionary:responseObject[@"data"]];
             dispatch_async(dispatch_get_main_queue(), ^{
-                strongSelf.tableView.hidden = NO;
                 [strongSelf handleConfirmOrderData];
             });
         }else{
@@ -226,6 +225,11 @@ static NSString *const UpOrderCell = @"UpOrderCell";
     
     [self.tableView reloadData];
     
+    hx_weakify(self);
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        hx_strongify(weakSelf);
+        strongSelf.tableView.hidden = NO;
+    });
     // actTotalPayAmount - 平台优惠券 - 各个商家的优惠券
     CGFloat shopCouponAmount = 0;
     for (GXConfirmOrderData *orderData in self.confirmOrder.goodsData) {
@@ -288,26 +292,26 @@ static NSString *const UpOrderCell = @"UpOrderCell";
         parameters[@"specs_attrs"] = orderGood.specs_attrs;//直接购买商品规格
         parameters[@"freight_template_id"] = orderGood.freight_template_id;//物流公司id
         parameters[@"order_desc"] = (orderData.shopGoodsRemark && orderData.shopGoodsRemark.length)?orderData.shopGoodsRemark:@"";
-        NSMutableString *coupon_ids = [NSMutableString string];
-        
-        for (GXConfirmOrderData *orderData in self.confirmOrder.goodsData) {
-            if (orderData.selectedCoupon) {
-                if (coupon_ids.length) {
-                    [coupon_ids appendFormat:@",%@",orderData.selectedCoupon.coupon_id];
-                }else{
-                    [coupon_ids appendFormat:@"%@",orderData.selectedCoupon.coupon_id];
-                }
-            }
-        }
-        if (self.confirmOrder.selectedPlatformCoupon) {
-            if (coupon_ids.length) {
-                [coupon_ids appendFormat:@",%@",self.confirmOrder.selectedPlatformCoupon.coupon_id];
-            }else{
-                [coupon_ids appendFormat:@"%@",self.confirmOrder.selectedPlatformCoupon.coupon_id];
-            }
-        }
-        parameters[@"coupon_ids"] = coupon_ids;//用户选择的可使用的优惠券的id(包括平台或者店铺的)
     }
+    NSMutableString *coupon_ids = [NSMutableString string];
+    
+    for (GXConfirmOrderData *orderData in self.confirmOrder.goodsData) {
+        if (orderData.selectedCoupon) {
+            if (coupon_ids.length) {
+                [coupon_ids appendFormat:@",%@",orderData.selectedCoupon.coupon_id];
+            }else{
+                [coupon_ids appendFormat:@"%@",orderData.selectedCoupon.coupon_id];
+            }
+        }
+    }
+    if (self.confirmOrder.selectedPlatformCoupon) {
+        if (coupon_ids.length) {
+            [coupon_ids appendFormat:@",%@",self.confirmOrder.selectedPlatformCoupon.coupon_id];
+        }else{
+            [coupon_ids appendFormat:@"%@",self.confirmOrder.selectedPlatformCoupon.coupon_id];
+        }
+    }
+    parameters[@"coupon_ids"] = coupon_ids;//用户选择的可使用的优惠券的id(包括平台或者店铺的)
 
     hx_weakify(self);
     [HXNetworkTool POST:HXRC_M_URL action:self.isCartPush?@"admin/saveOrder":@"admin/saveOrderData" parameters:parameters success:^(id responseObject) {

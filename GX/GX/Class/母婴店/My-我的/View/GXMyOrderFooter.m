@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *totalFreight;
 @property (weak, nonatomic) IBOutlet UILabel *rebateAmount;
 @property (weak, nonatomic) IBOutlet UILabel *rebateText;
+@property (weak, nonatomic) IBOutlet UIImageView *rebateArrow;
 @property (weak, nonatomic) IBOutlet UILabel *orderDesc;
 @property (nonatomic, strong) zhPopupController *sharePopVC;
 
@@ -43,6 +44,12 @@
         self.rebateAmount.text = @"0.00";
     }
     
+    if ([_orderStatus isEqualToString:@"待付款"]) {
+        self.rebateArrow.hidden = NO;
+    }else{
+        self.rebateArrow.hidden = YES;
+    }
+    
     GXMyOrderGoods *goods = _orderProvider.goods.firstObject;
     self.orderDesc.text = (goods.order_goods_desc && goods.order_goods_desc.length)?goods.order_goods_desc:@"无";
 }
@@ -61,6 +68,7 @@
         self.rebateText.text = @"";
         self.rebateAmount.text = @"0.00";
     }
+    self.rebateArrow.hidden = YES;
     
     GYMyRefundGoods *goods = _refundProvider.goods.firstObject;
     self.orderDesc.text = (goods.order_goods_desc && goods.order_goods_desc.length)?goods.order_goods_desc:@"无";
@@ -68,6 +76,9 @@
 - (IBAction)giftRebateClicked:(UIButton *)sender {
     hx_weakify(self);
     if (_orderProvider) {
+        if (![_orderStatus isEqualToString:@"待付款"]) {
+            return;
+        }
         if (_orderProvider.brand_rebate && _orderProvider.brand_rebate.count) {
             GXRebateView *rebateView = [GXRebateView loadXibView];
             rebateView.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 400.f);
@@ -81,18 +92,18 @@
             [self.sharePopVC show];
         }
     }else{
-        if (_refundProvider.brand_rebate && _refundProvider.brand_rebate.count) {
-            GXRebateView *rebateView = [GXRebateView loadXibView];
-            rebateView.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 400.f);
-            rebateView.refund_rebate = _refundProvider.brand_rebate;
-            rebateView.closeClickedCall = ^{
-                hx_strongify(weakSelf);
-                [strongSelf.sharePopVC dismiss];
-            };
-            self.sharePopVC = [[zhPopupController alloc] initWithView:rebateView size:rebateView.bounds.size];
-            self.sharePopVC.layoutType = zhPopupLayoutTypeBottom;
-            [self.sharePopVC show];
-        }
+//        if (_refundProvider.brand_rebate && _refundProvider.brand_rebate.count) {
+//            GXRebateView *rebateView = [GXRebateView loadXibView];
+//            rebateView.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 400.f);
+//            rebateView.refund_rebate = _refundProvider.brand_rebate;
+//            rebateView.closeClickedCall = ^{
+//                hx_strongify(weakSelf);
+//                [strongSelf.sharePopVC dismiss];
+//            };
+//            self.sharePopVC = [[zhPopupController alloc] initWithView:rebateView size:rebateView.bounds.size];
+//            self.sharePopVC.layoutType = zhPopupLayoutTypeBottom;
+//            [self.sharePopVC show];
+//        }
     }
 }
 @end

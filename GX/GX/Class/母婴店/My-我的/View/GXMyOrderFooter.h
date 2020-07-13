@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class GXMyOrderProvider,GXMyRefundProvider;
 @interface GXMyOrderFooter : UIView
+/* 订单状态 */
+@property(nonatomic,strong) NSString *orderStatus;
 /* 订单 */
 @property(nonatomic,strong) GXMyOrderProvider *orderProvider;
 /* 退款 */
