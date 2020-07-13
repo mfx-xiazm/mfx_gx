@@ -231,6 +231,8 @@
 		49730B6D249E0D6500F4C439 /* GXCategoryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 49730B5E249E0D6500F4C439 /* GXCategoryVC.m */; };
 		49730B6E249E0D6500F4C439 /* GXCategoryGoods.m in Sources */ = {isa = PBXBuildFile; fileRef = 49730B60249E0D6500F4C439 /* GXCategoryGoods.m */; };
 		4975FD162493263F00E5AEF2 /* UICKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 4975FD132493263F00E5AEF2 /* UICKeyChainStore.m */; };
+		4980820624BBECA600DB17AE /* GXRegisterVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4980820324BBECA600DB17AE /* GXRegisterVC.xib */; };
+		4980820724BBECA600DB17AE /* GXRegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4980820524BBECA600DB17AE /* GXRegisterVC.m */; };
 		4982897D249C92BC0064B4C1 /* GXShareCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4982897B249C92BC0064B4C1 /* GXShareCodeVC.m */; };
 		4982897E249C92BC0064B4C1 /* GXShareCodeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4982897C249C92BC0064B4C1 /* GXShareCodeVC.xib */; };
 		49828988249C9B090064B4C1 /* FCDropMenuRangeCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49828980249C9B040064B4C1 /* FCDropMenuRangeCollectionCell.m */; };
@@ -768,6 +770,9 @@
 		49730B61249E0D6500F4C439 /* GXCategoryGoods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXCategoryGoods.h; sourceTree = "<group>"; };
 		4975FD132493263F00E5AEF2 /* UICKeyChainStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICKeyChainStore.m; sourceTree = "<group>"; };
 		4975FD142493263F00E5AEF2 /* UICKeyChainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICKeyChainStore.h; sourceTree = "<group>"; };
+		4980820324BBECA600DB17AE /* GXRegisterVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXRegisterVC.xib; sourceTree = "<group>"; };
+		4980820424BBECA600DB17AE /* GXRegisterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXRegisterVC.h; sourceTree = "<group>"; };
+		4980820524BBECA600DB17AE /* GXRegisterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXRegisterVC.m; sourceTree = "<group>"; };
 		4982897A249C92BC0064B4C1 /* GXShareCodeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXShareCodeVC.h; sourceTree = "<group>"; };
 		4982897B249C92BC0064B4C1 /* GXShareCodeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXShareCodeVC.m; sourceTree = "<group>"; };
 		4982897C249C92BC0064B4C1 /* GXShareCodeVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXShareCodeVC.xib; sourceTree = "<group>"; };
@@ -1528,8 +1533,8 @@
 		494E1B1A249DB8870062B655 /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
-				494E16C2249DA20C0062B655 /* GXHomeBannerHeader.m */,
 				494E1709249DA20C0062B655 /* GXHomeBannerHeader.h */,
+				494E16C2249DA20C0062B655 /* GXHomeBannerHeader.m */,
 				494E1720249DA20C0062B655 /* GXHomeBannerHeader.xib */,
 				494E1701249DA20C0062B655 /* GXHomeSectionHeader.h */,
 				494E16CE249DA20C0062B655 /* GXHomeSectionHeader.m */,
@@ -1867,8 +1872,8 @@
 		4975FD122493263F00E5AEF2 /* UICKeyChainStore */ = {
 			isa = PBXGroup;
 			children = (
-				4975FD132493263F00E5AEF2 /* UICKeyChainStore.m */,
 				4975FD142493263F00E5AEF2 /* UICKeyChainStore.h */,
+				4975FD132493263F00E5AEF2 /* UICKeyChainStore.m */,
 			);
 			path = UICKeyChainStore;
 			sourceTree = "<group>";
@@ -2665,6 +2670,9 @@
 				90E7C8FA23418E1000D46E19 /* GXLoginVC.h */,
 				90E7C8FB23418E1000D46E19 /* GXLoginVC.m */,
 				90E7C8FC23418E1000D46E19 /* GXLoginVC.xib */,
+				4980820424BBECA600DB17AE /* GXRegisterVC.h */,
+				4980820524BBECA600DB17AE /* GXRegisterVC.m */,
+				4980820324BBECA600DB17AE /* GXRegisterVC.xib */,
 				90E7C8FF2341934100D46E19 /* GXChangePwdVC.h */,
 				90E7C9002341934100D46E19 /* GXChangePwdVC.m */,
 				90E7C9012341934100D46E19 /* GXChangePwdVC.xib */,
@@ -2831,6 +2839,7 @@
 				4994C4A0248100E400A9A239 /* GXOrderDetailVC.xib in Resources */,
 				494E1863249DA20E0062B655 /* GXStoreMsgVC.xib in Resources */,
 				4994C4B52481017A00A9A239 /* GXExpressDetailCell.xib in Resources */,
+				4980820624BBECA600DB17AE /* GXRegisterVC.xib in Resources */,
 				494E1855249DA20E0062B655 /* GXGoodStoreChildVC.xib in Resources */,
 				494E1866249DA20E0062B655 /* GXMessageVC.xib in Resources */,
 				494E1867249DA20E0062B655 /* GXRenewMarketTrendVC.xib in Resources */,
@@ -3153,6 +3162,7 @@
 				494E187F249DA20E0062B655 /* GXGoodsDetail.m in Sources */,
 				494E1899249DA20E0062B655 /* GXShareView.m in Sources */,
 				494E1930249DA20F0062B655 /* GXTryApplyVC.m in Sources */,
+				4980820724BBECA600DB17AE /* GXRegisterVC.m in Sources */,
 				494E193A249DA20F0062B655 /* GXTryGoods.m in Sources */,
 				498289CA249CAB8A0064B4C1 /* GXMyTeamCell.m in Sources */,
 				90BB98D1234DB3B500444ACC /* GXSalerOrderManageVC.m in Sources */,
@@ -3428,7 +3438,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 9AB2U8YRYY;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/GX/GXPrefixHeader.pch";
@@ -3439,9 +3449,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = guaxuanxsy.mfxapp.com;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mfxapp.guanxuanxs;
 				PRODUCT_NAME = "呱选销售版";
-				PROVISIONING_PROFILE_SPECIFIER = dev_guaxuanxsy.mfxapp.com.0605;
+				PROVISIONING_PROFILE_SPECIFIER = dev_com.mfxapp.guanxuanxs;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -3453,7 +3463,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 9AB2U8YRYY;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/GX/GXPrefixHeader.pch";
@@ -3464,9 +3474,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = guaxuanxsy.mfxapp.com;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mfxapp.guanxuanxs;
 				PRODUCT_NAME = "呱选销售版";
-				PROVISIONING_PROFILE_SPECIFIER = dev_guaxuanxsy.mfxapp.com.0605;
+				PROVISIONING_PROFILE_SPECIFIER = dev_com.mfxapp.guanxuanxs;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

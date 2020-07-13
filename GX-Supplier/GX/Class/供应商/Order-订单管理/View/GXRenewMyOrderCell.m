@@ -37,23 +37,19 @@
         if ([_goods.refund_status isEqualToString:@"0"]) {
             self.refundStatus.hidden = YES;
         }else{
-            if ([_goods.status isEqualToString:@"待评价"] || [_goods.status isEqualToString:@"已完成"]) {
-                self.refundStatus.hidden = YES;
+            self.refundStatus.hidden = NO;
+            if ([_goods.refund_status isEqualToString:@"1"]) {
+                self.refundStatus.text = @"退款中，等待供应商审核";
+            }else if ([_goods.refund_status isEqualToString:@"2"]){
+                self.refundStatus.text = @"退款中，等待平台审核";
+            }else if ([_goods.refund_status isEqualToString:@"3"]){
+                self.refundStatus.text = @"退款成功";
+            }else if ([_goods.refund_status isEqualToString:@"4"]){
+                self.refundStatus.text = @"退款驳回";
+            }else if ([_goods.refund_status isEqualToString:@"5"]){
+                self.refundStatus.text = @"供应商同意";
             }else{
-                self.refundStatus.hidden = NO;
-                if ([_goods.refund_status isEqualToString:@"1"]) {
-                    self.refundStatus.text = @"退款中，等待供应商审核";
-                }else if ([_goods.refund_status isEqualToString:@"2"]){
-                    self.refundStatus.text = @"退款中，等待平台审核";
-                }else if ([_goods.refund_status isEqualToString:@"3"]){
-                    self.refundStatus.text = @"退款成功";
-                }else if ([_goods.refund_status isEqualToString:@"4"]){
-                    self.refundStatus.text = @"退款驳回";
-                }else if ([_goods.refund_status isEqualToString:@"5"]){
-                    self.refundStatus.text = @"供应商同意";
-                }else{
-                    self.refundStatus.text = @"供应商不同意";
-                }
+                self.refundStatus.text = @"供应商不同意";
             }
         }
     }else{
@@ -79,7 +75,7 @@
     self.price.text = [NSString stringWithFormat:@"￥%@",_refundGoods.price];
     self.goods_spec.text = (_refundGoods.specs_attrs&&_refundGoods.specs_attrs.length)?[NSString stringWithFormat:@" %@ ",_refundGoods.specs_attrs]:@"";
     self.goods_num.text = [NSString stringWithFormat:@"x%@",_refundGoods.goods_num];
-    self.goods_num.text = [NSString stringWithFormat:@"购买x%@ 退款x%@",_refundGoods.goods_num,_return_num];
+    self.goods_num.text = [NSString stringWithFormat:@"购买x%@ 退款x%@",_refundGoods.goods_num,(_return_num && _return_num.length)?_return_num:_refundGoods.goods_num];
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

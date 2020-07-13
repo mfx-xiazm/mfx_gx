@@ -127,22 +127,20 @@ static NSArray *_filtrationCacheKey;
     //读取缓存
     responseCache!=nil ? responseCache([HXNetworkCache httpCacheForURL:appendUrl parameters:parameters filtrationCacheKey:_filtrationCacheKey]) : nil;
     
-    NSURLSessionTask *sessionTask = [_sessionManager GET:appendUrl parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+    NSURLSessionTask *sessionTask = [_sessionManager GET:appendUrl parameters:parameters headers:nil progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
         if (_isOpenLog) {HXLog(@"responseObject = %@",responseObject);}
         [[self allSessionTask] removeObject:task];
         success ? success(responseObject) : nil;
         //对数据进行异步缓存
         responseCache!=nil ? [HXNetworkCache setHttpCache:responseObject URL:URL parameters:parameters filtrationCacheKey:_filtrationCacheKey] : nil;
-        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
         if (_isOpenLog) {HXLog(@"error = %@",error);}
         [[self allSessionTask] removeObject:task];
         failure ? failure(error) : nil;
     }];
+    
     // 添加sessionTask到数组
     sessionTask ? [[self allSessionTask] addObject:sessionTask] : nil ;
     
@@ -173,7 +171,7 @@ static NSArray *_filtrationCacheKey;
     //读取缓存
     responseCache!=nil ? responseCache([HXNetworkCache httpCacheForURL:appendUrl parameters:parameters filtrationCacheKey:_filtrationCacheKey]) : nil;
     
-    NSURLSessionTask *sessionTask = [_sessionManager POST:appendUrl parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+    NSURLSessionTask *sessionTask = [_sessionManager POST:appendUrl parameters:parameters headers:nil progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
@@ -222,7 +220,7 @@ static NSArray *_filtrationCacheKey;
                                 success:(HXHttpRequestSuccess)success
                                 failure:(HXHttpRequestFailed)failure {
     
-    NSURLSessionTask *sessionTask = [_sessionManager POST:URL parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    NSURLSessionTask *sessionTask = [_sessionManager POST:URL parameters:parameters headers:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         NSError *error = nil;
         [formData appendPartWithFileURL:[NSURL URLWithString:filePath] name:name error:&error];
         (failure && error) ? failure(error) : nil;
@@ -265,7 +263,7 @@ static NSArray *_filtrationCacheKey;
     
     NSString *appendUrl =  action?[NSString stringWithFormat:@"%@%@",URL,action]:URL;
     
-    NSURLSessionTask *sessionTask = [_sessionManager POST:appendUrl parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    NSURLSessionTask *sessionTask = [_sessionManager POST:appendUrl parameters:parameters headers:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         
         for (NSUInteger i = 0; i < images.count; i++) {
             // 图片经过等比压缩后得到的二进制文件

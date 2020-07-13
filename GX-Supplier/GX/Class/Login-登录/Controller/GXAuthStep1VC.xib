@@ -115,28 +115,41 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MJm-74-IHW">
                                     <rect key="frame" x="0.0" y="100" width="414" height="50"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="供货类型" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FN9-ne-yoF">
-                                            <rect key="frame" x="0.0" y="16.5" width="80" height="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FN9-ne-yoF">
+                                            <rect key="frame" x="0.0" y="16.5" width="85" height="17"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="80" id="Jvu-AN-xRj"/>
+                                                <constraint firstAttribute="width" constant="85" id="Jvu-AN-xRj"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <nil key="textColor"/>
+                                            <attributedString key="attributedText">
+                                                <fragment content="*">
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.91764999999999997" green="0.29020000000000001" blue="0.36077999999999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                        <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                    </attributes>
+                                                </fragment>
+                                                <fragment content="供货类型">
+                                                    <attributes>
+                                                        <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XQ4-49-DMN">
-                                            <rect key="frame" x="80" y="5" width="322" height="40"/>
+                                            <rect key="frame" x="85" y="5" width="317" height="40"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请选择" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="lu5-FI-ZoI">
-                                                    <rect key="frame" x="10" y="0.0" width="284" height="40"/>
+                                                    <rect key="frame" x="10" y="0.0" width="279" height="40"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_kh_down" translatesAutoresizingMaskIntoConstraints="NO" id="NeH-T7-e5K">
-                                                    <rect key="frame" x="294" y="11" width="18" height="18"/>
+                                                    <rect key="frame" x="289" y="11" width="18" height="18"/>
                                                 </imageView>
                                                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ays-Zb-IY0">
-                                                    <rect key="frame" x="0.0" y="0.0" width="322" height="40"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="317" height="40"/>
                                                     <connections>
                                                         <action selector="yewuClicked:" destination="-1" eventType="touchUpInside" id="FtG-hP-ww0"/>
                                                     </connections>
@@ -239,19 +252,19 @@
                                     <rect key="frame" x="0.0" y="250" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="对接人" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nKO-D5-SLy">
-                                            <rect key="frame" x="0.0" y="16.5" width="80" height="17"/>
+                                            <rect key="frame" x="0.0" y="16.5" width="85" height="17"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="80" id="XSB-je-jz4"/>
+                                                <constraint firstAttribute="width" constant="85" id="XSB-je-jz4"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gGd-4F-3IF">
-                                            <rect key="frame" x="80" y="5" width="322" height="40"/>
+                                            <rect key="frame" x="85" y="5" width="317" height="40"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入对接人姓名" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="jp6-gh-8X3">
-                                                    <rect key="frame" x="10" y="0.0" width="300" height="40"/>
+                                                    <rect key="frame" x="10" y="0.0" width="295" height="40"/>
                                                     <color key="tintColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -291,28 +304,41 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="adJ-Rf-X5i">
                                     <rect key="frame" x="0.0" y="300" width="414" height="50"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="供应商类型" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iqd-oR-FPX">
-                                            <rect key="frame" x="0.0" y="16.5" width="80" height="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iqd-oR-FPX">
+                                            <rect key="frame" x="0.0" y="17" width="85" height="16.5"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="80" id="IE1-iY-E3J"/>
+                                                <constraint firstAttribute="width" constant="85" id="IE1-iY-E3J"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <nil key="textColor"/>
+                                            <attributedString key="attributedText">
+                                                <fragment content="*">
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.91764999999999997" green="0.29020000000000001" blue="0.36077999999999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                        <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                    </attributes>
+                                                </fragment>
+                                                <fragment content="供应商类型">
+                                                    <attributes>
+                                                        <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pc3-Yp-Mkg">
-                                            <rect key="frame" x="80" y="5" width="322" height="40"/>
+                                            <rect key="frame" x="85" y="5" width="317" height="40"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请选择" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="q6i-Bc-psj">
-                                                    <rect key="frame" x="10" y="0.0" width="284" height="40"/>
+                                                    <rect key="frame" x="10" y="0.0" width="279" height="40"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_kh_down" translatesAutoresizingMaskIntoConstraints="NO" id="qNj-5G-3yd">
-                                                    <rect key="frame" x="294" y="11" width="18" height="18"/>
+                                                    <rect key="frame" x="289" y="11" width="18" height="18"/>
                                                 </imageView>
                                                 <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Thv-Kn-Ib8">
-                                                    <rect key="frame" x="0.0" y="0.0" width="322" height="40"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="317" height="40"/>
                                                     <connections>
                                                         <action selector="yewuClicked:" destination="-1" eventType="touchUpInside" id="HYA-C6-Z7n"/>
                                                     </connections>
@@ -358,28 +384,41 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8jk-S8-2Tj">
                                     <rect key="frame" x="0.0" y="350" width="414" height="50"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="经营类目" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LlW-sj-E9u">
-                                            <rect key="frame" x="0.0" y="16.5" width="80" height="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LlW-sj-E9u">
+                                            <rect key="frame" x="0.0" y="16.5" width="85" height="17"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="80" id="U0e-Qw-v3x"/>
+                                                <constraint firstAttribute="width" constant="85" id="U0e-Qw-v3x"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <nil key="textColor"/>
+                                            <attributedString key="attributedText">
+                                                <fragment content="*">
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.91764999999999997" green="0.29020000000000001" blue="0.36077999999999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                        <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                    </attributes>
+                                                </fragment>
+                                                <fragment content="经营类目">
+                                                    <attributes>
+                                                        <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O3e-VK-hfA">
-                                            <rect key="frame" x="80" y="5" width="322" height="40"/>
+                                            <rect key="frame" x="85" y="5" width="317" height="40"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请选择" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="045-M6-msU">
-                                                    <rect key="frame" x="10" y="0.0" width="284" height="40"/>
+                                                    <rect key="frame" x="10" y="0.0" width="279" height="40"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_kh_down" translatesAutoresizingMaskIntoConstraints="NO" id="rIX-et-YEW">
-                                                    <rect key="frame" x="294" y="11" width="18" height="18"/>
+                                                    <rect key="frame" x="289" y="11" width="18" height="18"/>
                                                 </imageView>
                                                 <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d7X-Su-emG">
-                                                    <rect key="frame" x="0.0" y="0.0" width="322" height="40"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="317" height="40"/>
                                                     <connections>
                                                         <action selector="yewuClicked:" destination="-1" eventType="touchUpInside" id="HDb-1b-tkK"/>
                                                     </connections>
@@ -452,20 +491,33 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="snd-MR-u4i">
                                     <rect key="frame" x="0.0" y="454" width="414" height="50"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="公司名称" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Vf-k4-PPB">
-                                            <rect key="frame" x="0.0" y="16.5" width="80" height="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Vf-k4-PPB">
+                                            <rect key="frame" x="0.0" y="16.5" width="85" height="17"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="80" id="uXq-Ei-Bym"/>
+                                                <constraint firstAttribute="width" constant="85" id="uXq-Ei-Bym"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <nil key="textColor"/>
+                                            <attributedString key="attributedText">
+                                                <fragment content="*">
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.91764999999999997" green="0.29020000000000001" blue="0.36077999999999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                        <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                    </attributes>
+                                                </fragment>
+                                                <fragment content="公司名称">
+                                                    <attributes>
+                                                        <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OJZ-YB-C1Y">
-                                            <rect key="frame" x="80" y="5" width="322" height="40"/>
+                                            <rect key="frame" x="85" y="5" width="317" height="40"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入公司名称" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="aU0-jp-XOm">
-                                                    <rect key="frame" x="10" y="0.0" width="300" height="40"/>
+                                                    <rect key="frame" x="10" y="0.0" width="295" height="40"/>
                                                     <color key="tintColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -505,20 +557,33 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OzA-L4-vNh">
                                     <rect key="frame" x="0.0" y="504" width="414" height="50"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="法人姓名" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fzh-Bx-OHh">
-                                            <rect key="frame" x="0.0" y="16.5" width="80" height="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fzh-Bx-OHh">
+                                            <rect key="frame" x="0.0" y="16.5" width="85" height="17"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="80" id="fIz-dh-BZC"/>
+                                                <constraint firstAttribute="width" constant="85" id="fIz-dh-BZC"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <nil key="textColor"/>
+                                            <attributedString key="attributedText">
+                                                <fragment content="*">
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.91764999999999997" green="0.29020000000000001" blue="0.36077999999999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                        <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                    </attributes>
+                                                </fragment>
+                                                <fragment content="法人姓名">
+                                                    <attributes>
+                                                        <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XJO-SQ-Ajs">
-                                            <rect key="frame" x="80" y="5" width="322" height="40"/>
+                                            <rect key="frame" x="85" y="5" width="317" height="40"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入法人姓名" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="FZg-fj-zin">
-                                                    <rect key="frame" x="10" y="0.0" width="300" height="40"/>
+                                                    <rect key="frame" x="10" y="0.0" width="295" height="40"/>
                                                     <color key="tintColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -558,20 +623,33 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dix-Oy-tmq">
                                     <rect key="frame" x="0.0" y="554" width="414" height="50"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="身份证号" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ca9-Jx-XdX">
-                                            <rect key="frame" x="0.0" y="16.5" width="80" height="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ca9-Jx-XdX">
+                                            <rect key="frame" x="0.0" y="16.5" width="85" height="17"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="80" id="z6s-yK-orA"/>
+                                                <constraint firstAttribute="width" constant="85" id="z6s-yK-orA"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <nil key="textColor"/>
+                                            <attributedString key="attributedText">
+                                                <fragment content="*">
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.91764999999999997" green="0.29020000000000001" blue="0.36077999999999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                        <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                    </attributes>
+                                                </fragment>
+                                                <fragment content="身份证号">
+                                                    <attributes>
+                                                        <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4OH-X5-ib1">
-                                            <rect key="frame" x="80" y="5" width="322" height="40"/>
+                                            <rect key="frame" x="85" y="5" width="317" height="40"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入身份证号" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="BK0-70-9S3">
-                                                    <rect key="frame" x="10" y="0.0" width="300" height="40"/>
+                                                    <rect key="frame" x="10" y="0.0" width="295" height="40"/>
                                                     <color key="tintColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -611,20 +689,52 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="az8-bI-6a9">
                                     <rect key="frame" x="0.0" y="604" width="414" height="50"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="统一社会 信用代码" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n39-4R-wzG">
-                                            <rect key="frame" x="0.0" y="8.5" width="80" height="33.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n39-4R-wzG">
+                                            <rect key="frame" x="0.0" y="8.5" width="85" height="33"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="80" id="0Ri-d6-oc6"/>
+                                                <constraint firstAttribute="width" constant="85" id="0Ri-d6-oc6"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <nil key="textColor"/>
+                                            <attributedString key="attributedText">
+                                                <fragment content="*">
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.91764999999999997" green="0.29020000000000001" blue="0.36077999999999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                        <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                    </attributes>
+                                                </fragment>
+                                                <fragment content="统一社会">
+                                                    <attributes>
+                                                        <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                    </attributes>
+                                                </fragment>
+                                                <fragment content=" ">
+                                                    <attributes>
+                                                        <font key="NSFont" metaFont="menu" size="14"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                    </attributes>
+                                                </fragment>
+                                                <fragment content="*">
+                                                    <attributes>
+                                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                    </attributes>
+                                                </fragment>
+                                                <fragment content="信用代码">
+                                                    <attributes>
+                                                        <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W4v-cz-86G">
-                                            <rect key="frame" x="80" y="5" width="322" height="40"/>
+                                            <rect key="frame" x="85" y="5" width="317" height="40"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入统一社会信用代码" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="jkQ-KG-pc2">
-                                                    <rect key="frame" x="10" y="0.0" width="300" height="40"/>
+                                                    <rect key="frame" x="10" y="0.0" width="295" height="40"/>
                                                     <color key="tintColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -664,20 +774,33 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wam-Zv-wZ8">
                                     <rect key="frame" x="0.0" y="654" width="414" height="50"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="店铺名称" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="433-it-x12">
-                                            <rect key="frame" x="0.0" y="16.5" width="80" height="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="433-it-x12">
+                                            <rect key="frame" x="0.0" y="16.5" width="85" height="17"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="80" id="IXj-qW-68k"/>
+                                                <constraint firstAttribute="width" constant="85" id="IXj-qW-68k"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <nil key="textColor"/>
+                                            <attributedString key="attributedText">
+                                                <fragment content="*">
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.91764999999999997" green="0.29020000000000001" blue="0.36077999999999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                        <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                    </attributes>
+                                                </fragment>
+                                                <fragment content="店铺名称">
+                                                    <attributes>
+                                                        <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YP2-PN-m7d">
-                                            <rect key="frame" x="80" y="5" width="322" height="40"/>
+                                            <rect key="frame" x="85" y="5" width="317" height="40"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入店铺名称" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="auZ-zN-a6m">
-                                                    <rect key="frame" x="10" y="0.0" width="300" height="40"/>
+                                                    <rect key="frame" x="10" y="0.0" width="295" height="40"/>
                                                     <color key="tintColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -781,28 +904,41 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TOp-7s-us0">
                                     <rect key="frame" x="0.0" y="704" width="414" height="50"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="所在地区" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gNG-7D-2xU">
-                                            <rect key="frame" x="0.0" y="16.5" width="80" height="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gNG-7D-2xU">
+                                            <rect key="frame" x="0.0" y="16.5" width="85" height="17"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="80" id="cPX-Zx-C9f"/>
+                                                <constraint firstAttribute="width" constant="85" id="cPX-Zx-C9f"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <nil key="textColor"/>
+                                            <attributedString key="attributedText">
+                                                <fragment content="*">
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.91764999999999997" green="0.29020000000000001" blue="0.36077999999999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                        <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                    </attributes>
+                                                </fragment>
+                                                <fragment content="所在地区">
+                                                    <attributes>
+                                                        <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BZh-hS-qpz">
-                                            <rect key="frame" x="80" y="5" width="322" height="40"/>
+                                            <rect key="frame" x="85" y="5" width="317" height="40"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请选择所在地区" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="TPm-oQ-5ou">
-                                                    <rect key="frame" x="10" y="0.0" width="284" height="40"/>
+                                                    <rect key="frame" x="10" y="0.0" width="279" height="40"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_kh_down" translatesAutoresizingMaskIntoConstraints="NO" id="0xg-4k-VgT">
-                                                    <rect key="frame" x="294" y="11" width="18" height="18"/>
+                                                    <rect key="frame" x="289" y="11" width="18" height="18"/>
                                                 </imageView>
                                                 <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rlh-lj-FeI">
-                                                    <rect key="frame" x="0.0" y="0.0" width="322" height="40"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="317" height="40"/>
                                                     <connections>
                                                         <action selector="yewuClicked:" destination="-1" eventType="touchUpInside" id="jsE-nW-O4x"/>
                                                     </connections>
@@ -848,20 +984,33 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gi5-cy-3AJ">
                                     <rect key="frame" x="0.0" y="754" width="414" height="50"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="详细地址" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XgS-d7-6ai">
-                                            <rect key="frame" x="0.0" y="16.5" width="80" height="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XgS-d7-6ai">
+                                            <rect key="frame" x="0.0" y="16.5" width="85" height="17"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="80" id="YUi-9A-zcy"/>
+                                                <constraint firstAttribute="width" constant="85" id="YUi-9A-zcy"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <nil key="textColor"/>
+                                            <attributedString key="attributedText">
+                                                <fragment content="*">
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.91764999999999997" green="0.29020000000000001" blue="0.36077999999999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                        <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                    </attributes>
+                                                </fragment>
+                                                <fragment content="详细地址">
+                                                    <attributes>
+                                                        <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kdv-lA-b5L">
-                                            <rect key="frame" x="80" y="5" width="322" height="40"/>
+                                            <rect key="frame" x="85" y="5" width="317" height="40"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="如街道、门牌号、小区、楼栋号、单元室等" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="NiG-ET-9Jw">
-                                                    <rect key="frame" x="10" y="0.0" width="300" height="40"/>
+                                                    <rect key="frame" x="10" y="0.0" width="295" height="40"/>
                                                     <color key="tintColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -901,20 +1050,33 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EkN-DJ-qxL">
                                     <rect key="frame" x="0.0" y="804" width="414" height="50"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="年营业额" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aNN-2K-MXQ">
-                                            <rect key="frame" x="0.0" y="16.5" width="80" height="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aNN-2K-MXQ">
+                                            <rect key="frame" x="0.0" y="16.5" width="85" height="17"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="80" id="T3o-Tj-Cig"/>
+                                                <constraint firstAttribute="width" constant="85" id="T3o-Tj-Cig"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <nil key="textColor"/>
+                                            <attributedString key="attributedText">
+                                                <fragment content="*">
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.91764999999999997" green="0.29020000000000001" blue="0.36077999999999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                        <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                    </attributes>
+                                                </fragment>
+                                                <fragment content="年营业额">
+                                                    <attributes>
+                                                        <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bcP-sl-7KR">
-                                            <rect key="frame" x="80" y="5" width="322" height="40"/>
+                                            <rect key="frame" x="85" y="5" width="317" height="40"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入年营业额（万）" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="xCK-vC-k6D">
-                                                    <rect key="frame" x="10" y="0.0" width="300" height="40"/>
+                                                    <rect key="frame" x="10" y="0.0" width="295" height="40"/>
                                                     <color key="tintColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -954,17 +1116,30 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hsy-a8-JEC">
                                     <rect key="frame" x="0.0" y="854" width="414" height="180"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上传资质" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3xc-0Z-kVF">
-                                            <rect key="frame" x="0.0" y="16.5" width="80" height="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3xc-0Z-kVF">
+                                            <rect key="frame" x="0.0" y="16.5" width="85" height="17"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="80" id="13R-Sa-N6l"/>
+                                                <constraint firstAttribute="width" constant="85" id="13R-Sa-N6l"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <nil key="textColor"/>
+                                            <attributedString key="attributedText">
+                                                <fragment content="*">
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.91764999999999997" green="0.29020000000000001" blue="0.36077999999999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                        <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                    </attributes>
+                                                </fragment>
+                                                <fragment content="上传资质">
+                                                    <attributes>
+                                                        <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hlY-WY-xip">
-                                            <rect key="frame" x="80" y="5" width="80" height="80"/>
+                                            <rect key="frame" x="85" y="5" width="80" height="80"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="营业执照" translatesAutoresizingMaskIntoConstraints="NO" id="vhv-aq-iV0">
                                                     <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
@@ -991,7 +1166,7 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="haZ-4o-tde">
-                                            <rect key="frame" x="170" y="5" width="80" height="80"/>
+                                            <rect key="frame" x="175" y="5" width="80" height="80"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="门店正面照" translatesAutoresizingMaskIntoConstraints="NO" id="ONf-OM-ZG6">
                                                     <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
@@ -1018,7 +1193,7 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0TV-3a-u9M">
-                                            <rect key="frame" x="260" y="5" width="80" height="80"/>
+                                            <rect key="frame" x="265" y="5" width="80" height="80"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="门店内部照" translatesAutoresizingMaskIntoConstraints="NO" id="Oqh-35-eLH">
                                                     <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
@@ -1045,7 +1220,7 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yxg-RQ-Qo5">
-                                            <rect key="frame" x="80" y="95" width="80" height="80"/>
+                                            <rect key="frame" x="85" y="95" width="80" height="80"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="食品经营许可证" translatesAutoresizingMaskIntoConstraints="NO" id="wDF-Pa-WP7">
                                                     <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
@@ -1091,19 +1266,19 @@
                                     <rect key="frame" x="0.0" y="1044" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="职务" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="btM-qP-moH">
-                                            <rect key="frame" x="0.0" y="16.5" width="80" height="17"/>
+                                            <rect key="frame" x="0.0" y="16.5" width="85" height="17"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="80" id="yYb-BI-RGG"/>
+                                                <constraint firstAttribute="width" constant="85" id="yYb-BI-RGG"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ph8-Nn-VXJ">
-                                            <rect key="frame" x="80" y="5" width="322" height="40"/>
+                                            <rect key="frame" x="85" y="5" width="317" height="40"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入职务" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="tXR-MW-6D7">
-                                                    <rect key="frame" x="10" y="0.0" width="300" height="40"/>
+                                                    <rect key="frame" x="10" y="0.0" width="295" height="40"/>
                                                     <color key="tintColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -1144,19 +1319,19 @@
                                     <rect key="frame" x="0.0" y="1094" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="微信号" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B3f-eh-C1a">
-                                            <rect key="frame" x="0.0" y="16.5" width="80" height="17"/>
+                                            <rect key="frame" x="0.0" y="16.5" width="85" height="17"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="80" id="6IW-9d-MQw"/>
+                                                <constraint firstAttribute="width" constant="85" id="6IW-9d-MQw"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DZY-a3-hyq">
-                                            <rect key="frame" x="80" y="5" width="322" height="40"/>
+                                            <rect key="frame" x="85" y="5" width="317" height="40"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入微信号" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Lhj-xw-Gzg">
-                                                    <rect key="frame" x="10" y="0.0" width="300" height="40"/>
+                                                    <rect key="frame" x="10" y="0.0" width="295" height="40"/>
                                                     <color key="tintColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -1197,19 +1372,19 @@
                                     <rect key="frame" x="0.0" y="1144" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="备注" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3su-Bm-9Jj">
-                                            <rect key="frame" x="0.0" y="16.5" width="80" height="17"/>
+                                            <rect key="frame" x="0.0" y="16.5" width="85" height="17"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="80" id="v7S-Qg-MDV"/>
+                                                <constraint firstAttribute="width" constant="85" id="v7S-Qg-MDV"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iwm-NW-Cmh">
-                                            <rect key="frame" x="80" y="5" width="322" height="40"/>
+                                            <rect key="frame" x="85" y="5" width="317" height="40"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入备注" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="70n-qY-UzB">
-                                                    <rect key="frame" x="10" y="0.0" width="300" height="40"/>
+                                                    <rect key="frame" x="10" y="0.0" width="295" height="40"/>
                                                     <color key="tintColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -1293,7 +1468,7 @@
                                             </state>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="layerBoderCorner">
-                                                    <real key="value" value="6"/>
+                                                    <real key="value" value="22"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </button>

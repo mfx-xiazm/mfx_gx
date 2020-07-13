@@ -137,7 +137,7 @@
         self.tuiLabel.hidden = NO;
         self.tuiAmount.hidden = NO;
         
-        self.tuiAmount.text = [NSString stringWithFormat:@"￥%@",_salerOrder.return_amount];
+        self.tuiAmount.text = [NSString stringWithFormat:@"￥%@",(_salerOrder.return_amount && _salerOrder.return_amount.length)?_salerOrder.return_amount:_salerOrder.pay_amount];
     }else{
         self.tuiLabel.hidden = YES;
         self.tuiAmount.hidden = YES;

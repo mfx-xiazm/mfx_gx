@@ -13,6 +13,7 @@
                 <outlet property="loginBtn" destination="HrR-4o-0Bq" id="UF5-od-2nO"/>
                 <outlet property="phone" destination="CnZ-hH-uqy" id="MYt-iD-ZQi"/>
                 <outlet property="pwd" destination="ae6-0P-WWk" id="46v-nG-jtF"/>
+                <outlet property="registerBtn" destination="XeF-Sj-VLF" id="OcK-8z-t8r"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -133,6 +134,28 @@
                                         <constraint firstItem="Dae-Qa-0EO" firstAttribute="leading" secondItem="n0f-Sf-6Jg" secondAttribute="leading" id="mxL-WP-hFz"/>
                                     </constraints>
                                 </view>
+                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XeF-Sj-VLF">
+                                    <rect key="frame" x="15" y="397" width="138" height="30"/>
+                                    <state key="normal">
+                                        <attributedString key="attributedTitle">
+                                            <fragment content="没有账号？">
+                                                <attributes>
+                                                    <color key="NSColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <font key="NSFont" metaFont="system" size="15"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="立即注册">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.91764705882352937" green="0.29019607843137252" blue="0.36078431372549019" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <font key="NSFont" metaFont="system" size="15"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                    </state>
+                                    <connections>
+                                        <action selector="registerClicked:" destination="-1" eventType="touchUpInside" id="RfA-ns-i7A"/>
+                                    </connections>
+                                </button>
                                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HrR-4o-0Bq">
                                     <rect key="frame" x="15" y="437" width="384" height="44"/>
                                     <color key="backgroundColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -163,9 +186,11 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="NV8-w8-08f" firstAttribute="centerX" secondItem="8WX-sO-aD9" secondAttribute="centerX" id="HwE-Wi-0aa"/>
+                                <constraint firstItem="HrR-4o-0Bq" firstAttribute="top" secondItem="XeF-Sj-VLF" secondAttribute="bottom" constant="10" id="IIp-KB-2jg"/>
                                 <constraint firstItem="HrR-4o-0Bq" firstAttribute="leading" secondItem="8WX-sO-aD9" secondAttribute="leading" constant="15" id="Lz1-E6-QKT"/>
                                 <constraint firstItem="n0f-Sf-6Jg" firstAttribute="leading" secondItem="8WX-sO-aD9" secondAttribute="leading" constant="30" id="RBw-Oz-nfL"/>
                                 <constraint firstItem="zxo-0t-Kai" firstAttribute="top" secondItem="HrR-4o-0Bq" secondAttribute="bottom" constant="10" id="SU5-rR-Pkr"/>
+                                <constraint firstItem="XeF-Sj-VLF" firstAttribute="leading" secondItem="HrR-4o-0Bq" secondAttribute="leading" id="YjC-aQ-MBz"/>
                                 <constraint firstAttribute="trailing" secondItem="HrR-4o-0Bq" secondAttribute="trailing" constant="15" id="am1-0f-hz8"/>
                                 <constraint firstItem="buo-xU-q0v" firstAttribute="leading" secondItem="8WX-sO-aD9" secondAttribute="leading" constant="30" id="ftJ-fz-2c8"/>
                                 <constraint firstItem="NV8-w8-08f" firstAttribute="top" secondItem="8WX-sO-aD9" secondAttribute="top" constant="34" id="hTz-Kx-fGK"/>

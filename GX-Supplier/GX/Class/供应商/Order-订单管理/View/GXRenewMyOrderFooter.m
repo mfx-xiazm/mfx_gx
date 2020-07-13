@@ -37,7 +37,7 @@
     self.tuiLabel.hidden = NO;
     self.tuiAmount.hidden = NO;
     
-    self.tuiAmount.text = [NSString stringWithFormat:@"￥%@",_pRefund.return_amount];
+    self.tuiAmount.text = [NSString stringWithFormat:@"￥%@",(_pRefund.return_amount && _pRefund.return_amount.length)?_pRefund.return_amount:_pRefund.pay_amount];
     self.total_price.text = [NSString stringWithFormat:@"￥%@",_pRefund.pay_amount];
 }
 - (IBAction)orderHandleClicked:(UIButton *)sender {

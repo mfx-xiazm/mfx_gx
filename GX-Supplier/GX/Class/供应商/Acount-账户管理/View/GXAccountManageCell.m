@@ -46,9 +46,9 @@
         }else if (_log.finance_log_type == 3) {
             self.type.text = @"供应商订单的平台抽佣";
         }else if (_log.finance_log_type == 4) {
-            self.type.text = @"供应商订单推荐供应商佣金";
+            self.type.text = _log.finance_log_desc;
         }else{
-            self.type.text = @"供应商订单推荐母婴店佣金";
+            self.type.text = _log.finance_log_desc;
         }
         
         self.left_amount.textColor = HXControlBg;
@@ -79,13 +79,15 @@
         
         self.desc.text = _log.orderInfo.goods_name;
 
+        //        省级合伙人下单的佣金。区域合伙人下单的佣金。县级合伙人下单的佣金，介绍业务员下单的佣金，介绍供应商下单的佣金
+        //        4                 5                 30                31                32
         // 0 终端门店订单的提成佣金;1平台订单收入；2供应商订单收入 3供应商订单的平台抽佣；4推荐供应商的奖励佣金；5终端门店订单的提成佣金 6 提现申请驳回  20提现申请提交扣除提现金额 30 供应商订单收货时因销售员下级推荐母婴店的抽成； 31 供应商订单收货时因销售员下级的下级推荐母婴店的抽成； 32供应商订单因推荐业务员的抽成 40退货后供应商的扣减；41退货后平台抽佣的扣减；42退货后推荐供应商的业务员的扣减；43退后后推荐母婴店的业务员扣减；44退货后推荐母婴店的业务员的上级的扣减；45退后后推荐母婴店的业务员的上级的上级的扣减；46退后后推荐母婴店的业务员的推荐人(业务员)的扣减
         if (_log.finance_log_type == 30) {
-            self.type.text = @"销售员下级推荐佣金";
+            self.type.text = _log.finance_log_desc;
         }else if (_log.finance_log_type == 31) {
-            self.type.text = @"销售员下级的下级推荐佣金";
+            self.type.text = _log.finance_log_desc;
         }else{
-            self.type.text = @"推荐业务员的佣金";
+            self.type.text = _log.finance_log_desc;
         }
         
         self.left_amount.textColor = HXControlBg;
@@ -100,20 +102,21 @@
 
         // 0 终端门店订单的提成佣金;1平台订单收入；2供应商订单收入 3供应商订单的平台抽佣；4推荐供应商的奖励佣金；5终端门店订单的提成佣金 6 提现申请驳回  20提现申请提交扣除提现金额 30 供应商订单收货时因销售员下级推荐母婴店的抽成； 31 供应商订单收货时因销售员下级的下级推荐母婴店的抽成； 32供应商订单因推荐业务员的抽成 40退货后供应商的扣减；41退货后平台抽佣的扣减；42退货后推荐供应商的业务员的扣减；43退后后推荐母婴店的业务员扣减；44退货后推荐母婴店的业务员的上级的扣减；45退后后推荐母婴店的业务员的上级的上级的扣减；46退后后推荐母婴店的业务员的推荐人(业务员)的扣减
         if (_log.finance_log_type == 40) {
-            self.type.text = @"退货后供应商的扣减";
+            self.type.text = @"退款后供应商的扣减";
         }else if (_log.finance_log_type == 41) {
-            self.type.text = @"退货后平台扣减";
+            self.type.text = @"退款后平台扣减";
         }else if (_log.finance_log_type == 42) {
-            self.type.text = @"退货后推荐供应商的业务员的扣减";
+            self.type.text = @"退款后介绍供应商下单的扣减";
         }else if (_log.finance_log_type == 43) {
-            self.type.text = @"退货后推荐母婴店的业务员扣减";
+            self.type.text = @"退款后介绍母婴店下单的扣减";
         }else if (_log.finance_log_type == 44) {
-            self.type.text = @"退货后推荐母婴店的业务员的上级的扣减";
+            self.type.text = @"退款后因(县级或区域)合伙人下单的上级的扣减";
         }else if (_log.finance_log_type == 45) {
-            self.type.text = @"退货后推荐母婴店的业务员的上级的上级的扣减";
+            self.type.text = @"退款后县级合伙人下单的扣减";
         }else {
-            self.type.text = @"退货后推荐母婴店的业务员的推荐人(业务员)的扣减";
+            self.type.text = @"退款后介绍业务员下单的的扣减";
         }
+
 
         self.left_amount.textColor = HXControlBg;
         self.left_amount.text = [NSString stringWithFormat:@"￥%@",_log.orderInfo.pay_amount];

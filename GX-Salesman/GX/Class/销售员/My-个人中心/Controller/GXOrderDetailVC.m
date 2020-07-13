@@ -145,8 +145,8 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
             self.tableView.tableFooterView = self.footer;
         }
     }else{
+        self.header.orderDetail = self.orderDetail;
         if ([self.orderDetail.status isEqualToString:@"待发货"]) {
-            self.header.orderDetail = self.orderDetail;
             hx_weakify(self);
             self.header.lookLogisCall = ^{
                 hx_strongify(weakSelf);

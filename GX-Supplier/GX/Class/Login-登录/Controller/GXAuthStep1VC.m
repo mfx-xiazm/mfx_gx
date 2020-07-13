@@ -108,12 +108,12 @@
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请选择供货类型"];
             return NO;
         }
-        if (strongSelf.contectTureBtn.isSelected) {
-            if (![strongSelf.cg_name hasText]) {
-                [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请输入对接人姓名"];
-                return NO;
-            }
-        }
+//        if (strongSelf.contectTureBtn.isSelected) {
+//            if (![strongSelf.cg_name hasText]) {
+//                [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请输入对接人姓名"];
+//                return NO;
+//            }
+//        }
         if (![strongSelf.provider_type hasText]) {
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请选择供应商类型"];
             return NO;
@@ -174,14 +174,14 @@
 //            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请上传门店内部照"];
 //            return NO;
 //        }
-        if (![strongSelf.postion hasText]) {
-            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请填写职务"];
-            return NO;
-        }
-        if (![strongSelf.wx_code hasText]) {
-            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请填写微信号"];
-            return NO;
-        }
+//        if (![strongSelf.postion hasText]) {
+//            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请填写职务"];
+//            return NO;
+//        }
+//        if (![strongSelf.wx_code hasText]) {
+//            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请填写微信号"];
+//            return NO;
+//        }
         if (!strongSelf.agree_btn.isSelected) {
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请阅读勾选注册协议"];
             return NO;
@@ -226,11 +226,7 @@
     parameters[@"token"] = self.token;//用户验证
     parameters[@"control_type"] = self.control_type_id;//应商的供应商品类型
     parameters[@"provider_type_id"] = self.selectProviderType.provider_type_id;//供应商本身的类型
-    if (self.contectTureBtn.isSelected) {
-        parameters[@"cg_name"] = self.cg_name.text;//对接采购者姓名
-    }else{
-        parameters[@"cg_name"] = @"";//对接采购者姓名
-    }
+    parameters[@"cg_name"] = [self.cg_name hasText]?self.cg_name.text:@"";//对接采购者姓名
     parameters[@"catalogs"] = self.catalog_id;//经营类目 多个catalog_id间用逗号隔开
     
     parameters[@"company"] = self.company.text;//公司名称
@@ -247,8 +243,8 @@
     parameters[@"shop_inside_img"] = (self.shop_inside_url && self.shop_inside_url.length)?self.shop_inside_url:@"";//门店内部照
     parameters[@"food_license_img"] = (self.food_license_url && self.food_license_url.length)?self.food_license_url:@"";//食品经营许可证
     
-    parameters[@"postion"] = self.postion.text;//职务
-    parameters[@"wx_code"] = self.wx_code.text;//微信号
+    parameters[@"postion"] = [self.postion hasText]?self.postion.text:@"";//职务
+    parameters[@"wx_code"] = [self.wx_code hasText]?self.wx_code.text:@"";//微信号
     parameters[@"memo"] = [self.memo hasText]?self.memo.text:@"";//备注
 
     hx_weakify(self);

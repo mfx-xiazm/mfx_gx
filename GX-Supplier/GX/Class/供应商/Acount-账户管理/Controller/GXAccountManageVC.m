@@ -49,7 +49,9 @@ static NSString *const AccountManageCell = @"AccountManageCell";
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self getUserBalanceRequest];
+    if (self.accountData) {
+        [self getFinanceLogRequest:YES];
+    }
 }
 -(void)viewDidLayoutSubviews
 {

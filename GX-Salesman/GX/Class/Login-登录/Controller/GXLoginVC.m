@@ -11,11 +11,13 @@
 #import "GXChangePwdVC.h"
 #import "UITextField+GYExpand.h"
 #import "UICKeyChainStore.h"
+#import "GXRegisterVC.h"
 
 @interface GXLoginVC ()
 @property (weak, nonatomic) IBOutlet UITextField *phone;
 @property (weak, nonatomic) IBOutlet UITextField *pwd;
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
+@property (weak, nonatomic) IBOutlet UIButton *registerBtn;
 @end
 
 @implementation GXLoginVC
@@ -23,6 +25,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationItem setTitle:@"登录"];
+    
+    NSInteger isRegister = [[NSUserDefaults standardUserDefaults] integerForKey:@"isRegister"];
+    if (isRegister) {
+        self.registerBtn.hidden = NO;
+    }else{
+        self.registerBtn.hidden = YES;
+    }
     
     UICKeyChainStore *keychain = [UICKeyChainStore keyChainStoreWithService:@"guaxuanxsy.mfxapp.com"];
     NSString *phone = [keychain stringForKey:@"phone"];
@@ -60,6 +69,29 @@
     } ActionBlock:^(UIButton * _Nullable button) {
         hx_strongify(weakSelf);
         [strongSelf loginClicked:button];
+    }];
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self getIsRegisterRequest];
+}
+-(void)getIsRegisterRequest
+{
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"program/isRegister" parameters:@{} success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            [[NSUserDefaults standardUserDefaults] setInteger:[responseObject[@"data"] integerValue] forKey:@"isRegister"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            if ([responseObject[@"data"] integerValue] == 1) {
+                strongSelf.registerBtn.hidden = NO;
+            }else{
+                strongSelf.registerBtn.hidden = YES;
+            }
+        }
+    } failure:^(NSError *error) {
+
     }];
 }
 - (void)loginClicked:(UIButton *)sender {
@@ -108,5 +140,9 @@
     GXChangePwdVC *pvc = [GXChangePwdVC new];
     pvc.dataType = 1;
     [self.navigationController pushViewController:pvc animated:YES];
+}
+- (IBAction)registerClicked:(UIButton *)sender {
+    GXRegisterVC *avc = [GXRegisterVC new];
+    [self.navigationController pushViewController:avc animated:YES];
 }
 @end

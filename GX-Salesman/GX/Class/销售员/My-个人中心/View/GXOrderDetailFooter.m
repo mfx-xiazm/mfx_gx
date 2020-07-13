@@ -96,8 +96,9 @@
     self.pay_amount.text = [NSString stringWithFormat:@"￥%@",_refundDetail.pay_amount];
     self.goods_num.text = [NSString stringWithFormat:@"共%zd件商品",_refundDetail.goods.count];
     
-    self.return_num.text = [NSString stringWithFormat:@"x%@",_refundDetail.return_num];
-    self.return_amount.text = [NSString stringWithFormat:@"￥%@",_refundDetail.return_amount];
+    GYMyRefundGoods *goods = _refundDetail.goods.firstObject;
+    self.return_num.text = [NSString stringWithFormat:@"x%@",(_refundDetail.return_num && _refundDetail.return_num.length)?_refundDetail.return_num:goods.goods_num];
+    self.return_amount.text = [NSString stringWithFormat:@"￥%@",(_refundDetail.return_amount && _refundDetail.return_amount.length)?_refundDetail.return_amount:_refundDetail.pay_amount];
     
     NSMutableString *infoStr = [NSMutableString string];
     [infoStr appendFormat:@"%@",[NSString stringWithFormat:@"订单编号：%@\n下单时间：%@",_refundDetail.order_no,_refundDetail.create_time]];
