@@ -18,10 +18,12 @@
                 <outlet property="create_time" destination="xHx-iN-Iuy" id="84c-DY-If9"/>
                 <outlet property="daozhang_img" destination="srY-ek-g7A" id="jCP-ll-4Zn"/>
                 <outlet property="faqi_img" destination="Wkn-2G-Sfh" id="Wtk-wo-0hH"/>
+                <outlet property="faqi_line" destination="7iL-Z0-iFW" id="dgS-iD-AYf"/>
                 <outlet property="pay_money_View" destination="OZm-O2-3ht" id="pmK-GD-ryM"/>
                 <outlet property="pay_money_img" destination="uNN-5h-o7M" id="ggx-uC-UI5"/>
                 <outlet property="pay_money_view_height" destination="bgr-en-OE8" id="KnM-N8-mQ2"/>
                 <outlet property="pingtai_img" destination="OOt-ug-nxp" id="wFm-9o-ehR"/>
+                <outlet property="pingtai_line" destination="FcM-mW-Trr" id="83x-4O-ROa"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

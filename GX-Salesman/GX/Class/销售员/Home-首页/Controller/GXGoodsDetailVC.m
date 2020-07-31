@@ -274,7 +274,7 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
             self.market_price.text = [NSString stringWithFormat:@"建议价:￥%@",_goodsDetail.suggest_price];
         }else{
             self.price.text = [NSString stringWithFormat:@"￥%@  ",_goodsDetail.min_price];
-            self.market_price.text = @"";
+            self.market_price.text = [NSString stringWithFormat:@"建议价:￥%@",_goodsDetail.suggest_price];
         }
     }
     self.cale_num.text = [NSString stringWithFormat:@"销量：%@",_goodsDetail.sale_num];

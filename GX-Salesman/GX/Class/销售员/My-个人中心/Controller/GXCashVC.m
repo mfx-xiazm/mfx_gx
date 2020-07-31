@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *bank_name;
 @property (weak, nonatomic) IBOutlet UITextField *sub_bank_name;
 @property (weak, nonatomic) IBOutlet UITextField *card_no;
+@property (weak, nonatomic) IBOutlet UITextField *bank_no;
 @property (weak, nonatomic) IBOutlet UITextField *apply_amount;
 @property (weak, nonatomic) IBOutlet UIButton *sureBtn;
 @property (weak, nonatomic) IBOutlet UILabel *ableLabel;
@@ -55,6 +56,10 @@
         }
         if (![strongSelf.sub_bank_name hasText]) {
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请输入开户网点"];
+            return NO;
+        }
+        if (![strongSelf.bank_no hasText]) {
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请输入开户行号"];
             return NO;
         }
         if (![strongSelf.apply_amount hasText]) {
@@ -96,6 +101,7 @@
     parameters[@"bank_name"] = self.bank_name.text;
     parameters[@"sub_bank_name"] = self.sub_bank_name.text;
     parameters[@"card_no"] = self.card_no.text;
+    parameters[@"bank_no"] = self.bank_no.text;
     parameters[@"apply_amount"] = self.apply_amount.text;
     
     hx_weakify(self);

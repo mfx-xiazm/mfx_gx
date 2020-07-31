@@ -116,22 +116,23 @@
                                     <rect key="frame" x="0.0" y="100" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FN9-ne-yoF">
-                                            <rect key="frame" x="0.0" y="16.5" width="85" height="17"/>
+                                            <rect key="frame" x="0.0" y="15" width="85" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="85" id="Jvu-AN-xRj"/>
                                             </constraints>
                                             <attributedString key="attributedText">
                                                 <fragment content="*">
                                                     <attributes>
-                                                        <color key="NSColor" red="0.91764999999999997" green="0.29020000000000001" blue="0.36077999999999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                        <color key="NSColor" red="0.91764705882352937" green="0.29019607843137252" blue="0.36078431372549019" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <font key="NSFont" size="14" name="HelveticaNeue"/>
-                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                     </attributes>
                                                 </fragment>
                                                 <fragment content="供货类型">
                                                     <attributes>
-                                                        <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
-                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                        <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                        <font key="NSFont" size="14" name="PingFangSC-Regular"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                     </attributes>
                                                 </fragment>
                                             </attributedString>
@@ -305,21 +306,22 @@
                                     <rect key="frame" x="0.0" y="300" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iqd-oR-FPX">
-                                            <rect key="frame" x="0.0" y="17" width="85" height="16.5"/>
+                                            <rect key="frame" x="0.0" y="15" width="85" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="85" id="IE1-iY-E3J"/>
                                             </constraints>
                                             <attributedString key="attributedText">
                                                 <fragment content="*">
                                                     <attributes>
-                                                        <color key="NSColor" red="0.91764999999999997" green="0.29020000000000001" blue="0.36077999999999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                        <color key="NSColor" red="0.91764999999999997" green="0.29020000000000001" blue="0.36077999999999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <font key="NSFont" size="14" name="HelveticaNeue"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                     </attributes>
                                                 </fragment>
                                                 <fragment content="供应商类型">
                                                     <attributes>
-                                                        <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                                        <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                        <font key="NSFont" size="14" name="PingFangSC-Regular"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                     </attributes>
                                                 </fragment>
@@ -385,21 +387,22 @@
                                     <rect key="frame" x="0.0" y="350" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LlW-sj-E9u">
-                                            <rect key="frame" x="0.0" y="16.5" width="85" height="17"/>
+                                            <rect key="frame" x="0.0" y="15" width="85" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="85" id="U0e-Qw-v3x"/>
                                             </constraints>
                                             <attributedString key="attributedText">
                                                 <fragment content="*">
                                                     <attributes>
-                                                        <color key="NSColor" red="0.91764999999999997" green="0.29020000000000001" blue="0.36077999999999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                        <color key="NSColor" red="0.91764999999999997" green="0.29020000000000001" blue="0.36077999999999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <font key="NSFont" size="14" name="HelveticaNeue"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                     </attributes>
                                                 </fragment>
                                                 <fragment content="经营类目">
                                                     <attributes>
-                                                        <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                                        <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                        <font key="NSFont" size="14" name="PingFangSC-Regular"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                     </attributes>
                                                 </fragment>
@@ -492,21 +495,22 @@
                                     <rect key="frame" x="0.0" y="454" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Vf-k4-PPB">
-                                            <rect key="frame" x="0.0" y="16.5" width="85" height="17"/>
+                                            <rect key="frame" x="0.0" y="15" width="85" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="85" id="uXq-Ei-Bym"/>
                                             </constraints>
                                             <attributedString key="attributedText">
                                                 <fragment content="*">
                                                     <attributes>
-                                                        <color key="NSColor" red="0.91764999999999997" green="0.29020000000000001" blue="0.36077999999999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                        <color key="NSColor" red="0.91764999999999997" green="0.29020000000000001" blue="0.36077999999999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <font key="NSFont" size="14" name="HelveticaNeue"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                     </attributes>
                                                 </fragment>
                                                 <fragment content="公司名称">
                                                     <attributes>
-                                                        <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                                        <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                        <font key="NSFont" size="14" name="PingFangSC-Regular"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                     </attributes>
                                                 </fragment>
@@ -558,21 +562,22 @@
                                     <rect key="frame" x="0.0" y="504" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fzh-Bx-OHh">
-                                            <rect key="frame" x="0.0" y="16.5" width="85" height="17"/>
+                                            <rect key="frame" x="0.0" y="15" width="85" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="85" id="fIz-dh-BZC"/>
                                             </constraints>
                                             <attributedString key="attributedText">
                                                 <fragment content="*">
                                                     <attributes>
-                                                        <color key="NSColor" red="0.91764999999999997" green="0.29020000000000001" blue="0.36077999999999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                        <color key="NSColor" red="0.91764999999999997" green="0.29020000000000001" blue="0.36077999999999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <font key="NSFont" size="14" name="HelveticaNeue"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                     </attributes>
                                                 </fragment>
                                                 <fragment content="法人姓名">
                                                     <attributes>
-                                                        <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                                        <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                        <font key="NSFont" size="14" name="PingFangSC-Regular"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                     </attributes>
                                                 </fragment>
@@ -624,21 +629,22 @@
                                     <rect key="frame" x="0.0" y="554" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ca9-Jx-XdX">
-                                            <rect key="frame" x="0.0" y="16.5" width="85" height="17"/>
+                                            <rect key="frame" x="0.0" y="15" width="85" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="85" id="z6s-yK-orA"/>
                                             </constraints>
                                             <attributedString key="attributedText">
                                                 <fragment content="*">
                                                     <attributes>
-                                                        <color key="NSColor" red="0.91764999999999997" green="0.29020000000000001" blue="0.36077999999999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                        <color key="NSColor" red="0.91764999999999997" green="0.29020000000000001" blue="0.36077999999999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <font key="NSFont" size="14" name="HelveticaNeue"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                     </attributes>
                                                 </fragment>
                                                 <fragment content="身份证号">
                                                     <attributes>
-                                                        <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                                        <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                        <font key="NSFont" size="14" name="PingFangSC-Regular"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                     </attributes>
                                                 </fragment>
@@ -690,40 +696,36 @@
                                     <rect key="frame" x="0.0" y="604" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n39-4R-wzG">
-                                            <rect key="frame" x="0.0" y="8.5" width="85" height="33"/>
+                                            <rect key="frame" x="0.0" y="5.5" width="85" height="39.5"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="85" id="0Ri-d6-oc6"/>
                                             </constraints>
                                             <attributedString key="attributedText">
                                                 <fragment content="*">
                                                     <attributes>
-                                                        <color key="NSColor" red="0.91764999999999997" green="0.29020000000000001" blue="0.36077999999999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                        <color key="NSColor" red="0.91764999999999997" green="0.29020000000000001" blue="0.36077999999999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <font key="NSFont" size="14" name="HelveticaNeue"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                     </attributes>
                                                 </fragment>
-                                                <fragment content="统一社会">
+                                                <fragment content="统一社会 ">
                                                     <attributes>
-                                                        <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
-                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                                    </attributes>
-                                                </fragment>
-                                                <fragment content=" ">
-                                                    <attributes>
-                                                        <font key="NSFont" metaFont="menu" size="14"/>
+                                                        <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                        <font key="NSFont" size="14" name="PingFangSC-Regular"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                     </attributes>
                                                 </fragment>
                                                 <fragment content="*">
                                                     <attributes>
-                                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <font key="NSFont" size="14" name="HelveticaNeue"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                     </attributes>
                                                 </fragment>
                                                 <fragment content="信用代码">
                                                     <attributes>
-                                                        <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                                        <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                        <font key="NSFont" size="14" name="PingFangSC-Regular"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                     </attributes>
                                                 </fragment>
@@ -775,21 +777,22 @@
                                     <rect key="frame" x="0.0" y="654" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="433-it-x12">
-                                            <rect key="frame" x="0.0" y="16.5" width="85" height="17"/>
+                                            <rect key="frame" x="0.0" y="15" width="85" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="85" id="IXj-qW-68k"/>
                                             </constraints>
                                             <attributedString key="attributedText">
                                                 <fragment content="*">
                                                     <attributes>
-                                                        <color key="NSColor" red="0.91764999999999997" green="0.29020000000000001" blue="0.36077999999999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                        <color key="NSColor" red="0.91764999999999997" green="0.29020000000000001" blue="0.36077999999999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <font key="NSFont" size="14" name="HelveticaNeue"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                     </attributes>
                                                 </fragment>
                                                 <fragment content="店铺名称">
                                                     <attributes>
-                                                        <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                                        <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                        <font key="NSFont" size="14" name="PingFangSC-Regular"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                     </attributes>
                                                 </fragment>
@@ -905,21 +908,22 @@
                                     <rect key="frame" x="0.0" y="704" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gNG-7D-2xU">
-                                            <rect key="frame" x="0.0" y="16.5" width="85" height="17"/>
+                                            <rect key="frame" x="0.0" y="15" width="85" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="85" id="cPX-Zx-C9f"/>
                                             </constraints>
                                             <attributedString key="attributedText">
                                                 <fragment content="*">
                                                     <attributes>
-                                                        <color key="NSColor" red="0.91764999999999997" green="0.29020000000000001" blue="0.36077999999999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                        <color key="NSColor" red="0.91764999999999997" green="0.29020000000000001" blue="0.36077999999999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <font key="NSFont" size="14" name="HelveticaNeue"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                     </attributes>
                                                 </fragment>
                                                 <fragment content="所在地区">
                                                     <attributes>
-                                                        <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                                        <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                        <font key="NSFont" size="14" name="PingFangSC-Regular"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                     </attributes>
                                                 </fragment>
@@ -985,21 +989,22 @@
                                     <rect key="frame" x="0.0" y="754" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XgS-d7-6ai">
-                                            <rect key="frame" x="0.0" y="16.5" width="85" height="17"/>
+                                            <rect key="frame" x="0.0" y="15" width="85" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="85" id="YUi-9A-zcy"/>
                                             </constraints>
                                             <attributedString key="attributedText">
                                                 <fragment content="*">
                                                     <attributes>
-                                                        <color key="NSColor" red="0.91764999999999997" green="0.29020000000000001" blue="0.36077999999999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                        <color key="NSColor" red="0.91764999999999997" green="0.29020000000000001" blue="0.36077999999999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <font key="NSFont" size="14" name="HelveticaNeue"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                     </attributes>
                                                 </fragment>
                                                 <fragment content="详细地址">
                                                     <attributes>
-                                                        <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                                        <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                        <font key="NSFont" size="14" name="PingFangSC-Regular"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                     </attributes>
                                                 </fragment>
@@ -1051,21 +1056,22 @@
                                     <rect key="frame" x="0.0" y="804" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aNN-2K-MXQ">
-                                            <rect key="frame" x="0.0" y="16.5" width="85" height="17"/>
+                                            <rect key="frame" x="0.0" y="15" width="85" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="85" id="T3o-Tj-Cig"/>
                                             </constraints>
                                             <attributedString key="attributedText">
                                                 <fragment content="*">
                                                     <attributes>
-                                                        <color key="NSColor" red="0.91764999999999997" green="0.29020000000000001" blue="0.36077999999999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                        <color key="NSColor" red="0.91764999999999997" green="0.29020000000000001" blue="0.36077999999999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <font key="NSFont" size="14" name="HelveticaNeue"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                     </attributes>
                                                 </fragment>
                                                 <fragment content="年营业额">
                                                     <attributes>
-                                                        <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                                        <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                        <font key="NSFont" size="14" name="PingFangSC-Regular"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                     </attributes>
                                                 </fragment>
@@ -1117,21 +1123,22 @@
                                     <rect key="frame" x="0.0" y="854" width="414" height="180"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3xc-0Z-kVF">
-                                            <rect key="frame" x="0.0" y="16.5" width="85" height="17"/>
+                                            <rect key="frame" x="0.0" y="16.5" width="85" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="85" id="13R-Sa-N6l"/>
                                             </constraints>
                                             <attributedString key="attributedText">
                                                 <fragment content="*">
                                                     <attributes>
-                                                        <color key="NSColor" red="0.91764999999999997" green="0.29020000000000001" blue="0.36077999999999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                        <color key="NSColor" red="0.91764999999999997" green="0.29020000000000001" blue="0.36077999999999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <font key="NSFont" size="14" name="HelveticaNeue"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                     </attributes>
                                                 </fragment>
                                                 <fragment content="上传资质">
                                                     <attributes>
-                                                        <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                                        <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                        <font key="NSFont" size="14" name="PingFangSC-Regular"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                     </attributes>
                                                 </fragment>

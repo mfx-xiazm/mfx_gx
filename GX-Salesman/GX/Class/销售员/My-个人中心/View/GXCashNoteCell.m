@@ -29,10 +29,9 @@
     self.apply_amount.text = [NSString stringWithFormat:@"+￥%@",_note.apply_amount];
     self.approve_time.text = _note.create_time;
     
-    // 1待审核；2已通过；3未通过，驳回 4已审核 5已打款
-    if ([_note.apply_status isEqualToString:@"1"] || [_note.apply_status isEqualToString:@"2"] || [_note.apply_status isEqualToString:@"4"]) {
+    if ([_note.apply_status isEqualToString:@"1"] || [_note.apply_status isEqualToString:@"4"]) {
         self.apply_status.text = @"提现中";
-    }else if ([_note.apply_status isEqualToString:@"5"]) {
+    }else if ([_note.apply_status isEqualToString:@"2"] || [_note.apply_status isEqualToString:@"5"]) {
         self.apply_status.text = @"提现成功";
     }else{
         self.apply_status.text = @"提现失败";
