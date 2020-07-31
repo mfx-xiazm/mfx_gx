@@ -70,7 +70,8 @@ static NSString *const ChooseClassFooter = @"ChooseClassFooter";
     
     [self.cover_img sd_setImageWithURL:[NSURL URLWithString:_goodsDetail.cover_img]];
     if ([_goodsDetail.control_type isEqualToString:@"2"]) {
-        self.market_price.hidden = YES;
+        self.market_price.hidden = NO;
+        [self.market_price setLabelUnderline:[NSString stringWithFormat:@"建议价:￥%@",_goodsDetail.suggest_price]];
     }else{
         self.market_price.hidden = NO;
         [self.market_price setLabelUnderline:[NSString stringWithFormat:@"建议价:￥%@",_goodsDetail.suggest_price]];

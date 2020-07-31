@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -47,7 +47,7 @@
                                             <attributedString key="attributedText">
                                                 <fragment content="活动名称超乎你想像的优秀活动名称超乎你想像的优秀活动名称超乎你想像的优秀">
                                                     <attributes>
-                                                        <font key="NSFont" size="13" name=".PingFangSC-Regular"/>
+                                                        <font key="NSFont" metaFont="system"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5" tighteningFactorForTruncation="0.0"/>
                                                     </attributes>
                                                 </fragment>
@@ -100,6 +100,27 @@
                                             <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="立即采购" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s5E-Qo-xYK">
+                                            <rect key="frame" x="302" y="45" width="80" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="80" id="CiE-nR-a26"/>
+                                                <constraint firstAttribute="height" constant="20" id="SCr-CV-yJ2"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="boderColor">
+                                                    <color key="value" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layerBoderCorner">
+                                                    <real key="value" value="10"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layerBoderWidth">
+                                                    <real key="value" value="1"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XaH-Gt-dbp" userLabel="分割线">
                                             <rect key="frame" x="10" y="109" width="374" height="1"/>
                                             <color key="backgroundColor" red="0.96470588239999999" green="0.96862745100000003" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -127,6 +148,8 @@
                                         <constraint firstItem="CgR-FS-29C" firstAttribute="top" secondItem="QK5-MB-fst" secondAttribute="top" constant="10" id="UwO-49-PZB"/>
                                         <constraint firstItem="XaH-Gt-dbp" firstAttribute="top" secondItem="3B4-IY-Oq6" secondAttribute="bottom" id="YBS-Mn-ti3"/>
                                         <constraint firstAttribute="bottom" secondItem="CgR-FS-29C" secondAttribute="bottom" constant="10" id="bie-9P-uzn"/>
+                                        <constraint firstItem="s5E-Qo-xYK" firstAttribute="centerY" secondItem="QK5-MB-fst" secondAttribute="centerY" id="dhG-zl-lAK"/>
+                                        <constraint firstAttribute="trailing" secondItem="s5E-Qo-xYK" secondAttribute="trailing" constant="12" id="gBX-rh-pX5"/>
                                         <constraint firstAttribute="trailing" secondItem="XaH-Gt-dbp" secondAttribute="trailing" constant="10" id="gyz-FW-5R1"/>
                                         <constraint firstItem="CgR-FS-29C" firstAttribute="leading" secondItem="QK5-MB-fst" secondAttribute="leading" constant="10" id="nIE-FT-gtz"/>
                                         <constraint firstItem="3B4-IY-Oq6" firstAttribute="top" secondItem="QK5-MB-fst" secondAttribute="top" id="nZj-xL-664"/>

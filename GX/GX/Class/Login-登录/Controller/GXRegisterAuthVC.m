@@ -16,6 +16,8 @@
 #import "GXRegion.h"
 #import "GXSelectRegion.h"
 #import "GXWebContentVC.h"
+#import "zhAlertView.h"
+#import <zhPopupController.h>
 
 static NSString *const RegisterAuthCell = @"RegisterAuthCell";
 @interface GXRegisterAuthVC ()<UITableViewDelegate,UITableViewDataSource>
@@ -34,6 +36,8 @@ static NSString *const RegisterAuthCell = @"RegisterAuthCell";
 @property(nonatomic,strong) GXSelectRegion *region;
 /* 协议勾选 */
 @property(nonatomic,weak) UIButton *agreeBtn;
+/* 弹框 */
+@property (nonatomic, strong) zhPopupController *alertPopVC;
 @end
 
 @implementation GXRegisterAuthVC
@@ -256,6 +260,7 @@ static NSString *const RegisterAuthCell = @"RegisterAuthCell";
 -(void)submitStoreRequest
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"username"] = self.username;//姓名
     parameters[@"phone"] = self.phone;//手机号
     parameters[@"pwd"] = self.pwd;//密码
     parameters[@"share_code"] = self.inviteCode;//邀请码
@@ -290,9 +295,8 @@ static NSString *const RegisterAuthCell = @"RegisterAuthCell";
     [HXNetworkTool POST:HXRC_M_URL action:@"admin/register" parameters:parameters success:^(id responseObject) {
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
-            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [strongSelf.navigationController popToRootViewControllerAnimated:YES];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [strongSelf showNoticeAlert:[responseObject objectForKey:@"message"]];
             });
         }else{
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
@@ -300,6 +304,22 @@ static NSString *const RegisterAuthCell = @"RegisterAuthCell";
     } failure:^(NSError *error) {
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
     }];
+}
+-(void)showNoticeAlert:(NSString *)msg
+{
+    zhAlertView *alert = [[zhAlertView alloc] initWithTitle:@"提示" message:msg constantWidth:HX_SCREEN_WIDTH - 50*2];
+    hx_weakify(self);
+    zhAlertButton *okButton = [zhAlertButton buttonWithTitle:@"我知道了" handler:^(zhAlertButton * _Nonnull button) {
+        hx_strongify(weakSelf);
+        [strongSelf.alertPopVC dismiss];
+        [strongSelf.navigationController popToRootViewControllerAnimated:YES];
+    }];
+    okButton.lineColor = UIColorFromRGB(0xDDDDDD);
+    [okButton setTitleColor:UIColorFromRGB(0x1A1A1A) forState:UIControlStateNormal];
+    [alert addAction:okButton];
+    self.alertPopVC = [[zhPopupController alloc] initWithView:alert size:alert.bounds.size];
+    self.alertPopVC.dismissOnMaskTouched = NO;
+    [self.alertPopVC show];
 }
 #pragma mark -- UITableView数据源和代理
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

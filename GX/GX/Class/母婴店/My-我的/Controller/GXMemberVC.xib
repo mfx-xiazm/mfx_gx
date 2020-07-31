@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -38,19 +36,25 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="170"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="金口优乐母婴店" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LDb-I6-778">
-                                            <rect key="frame" x="142.5" y="25" width="129" height="22"/>
+                                            <rect key="frame" x="142.5" y="20" width="129" height="22"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已消费￥3813" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AQn-30-pGF">
-                                            <rect key="frame" x="158.5" y="55" width="97" height="18"/>
+                                            <rect key="frame" x="158.5" y="47" width="97" height="18"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                             <color key="textColor" red="1" green="0.62352941179999999" blue="0.031372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="还需消费￥3813升级" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RKG-TE-QAB">
-                                            <rect key="frame" x="135.5" y="78" width="143" height="18"/>
+                                            <rect key="frame" x="135.5" y="70" width="143" height="18"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                            <color key="textColor" red="1" green="0.62352941179999999" blue="0.031372549020000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="会员折扣截止2020年12月31日前有效" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TCr-fa-vmc">
+                                            <rect key="frame" x="80.5" y="93" width="253.5" height="18"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                             <color key="textColor" red="1" green="0.62352941179999999" blue="0.031372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -58,10 +62,12 @@
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstItem="AQn-30-pGF" firstAttribute="top" secondItem="LDb-I6-778" secondAttribute="bottom" constant="8" id="2EU-If-yaX"/>
+                                        <constraint firstItem="AQn-30-pGF" firstAttribute="top" secondItem="LDb-I6-778" secondAttribute="bottom" constant="5" id="2EU-If-yaX"/>
+                                        <constraint firstItem="TCr-fa-vmc" firstAttribute="top" secondItem="RKG-TE-QAB" secondAttribute="bottom" constant="5" id="72K-1M-2Vc"/>
                                         <constraint firstItem="5Ee-Iu-7sN" firstAttribute="leading" secondItem="Qce-aL-XOy" secondAttribute="leading" id="8Qb-zJ-3c1"/>
                                         <constraint firstAttribute="bottom" secondItem="5Ee-Iu-7sN" secondAttribute="bottom" id="BcZ-dt-ivU"/>
-                                        <constraint firstItem="LDb-I6-778" firstAttribute="top" secondItem="Qce-aL-XOy" secondAttribute="top" constant="25" id="Okg-sl-6CM"/>
+                                        <constraint firstItem="TCr-fa-vmc" firstAttribute="centerX" secondItem="Qce-aL-XOy" secondAttribute="centerX" id="NDc-7i-DwA"/>
+                                        <constraint firstItem="LDb-I6-778" firstAttribute="top" secondItem="Qce-aL-XOy" secondAttribute="top" constant="20" id="Okg-sl-6CM"/>
                                         <constraint firstAttribute="trailing" secondItem="5Ee-Iu-7sN" secondAttribute="trailing" id="h9m-cp-Vod"/>
                                         <constraint firstItem="5Ee-Iu-7sN" firstAttribute="top" secondItem="Qce-aL-XOy" secondAttribute="top" id="mRX-pm-X21"/>
                                         <constraint firstItem="RKG-TE-QAB" firstAttribute="centerX" secondItem="Qce-aL-XOy" secondAttribute="centerX" id="mXD-Rj-v1s"/>
