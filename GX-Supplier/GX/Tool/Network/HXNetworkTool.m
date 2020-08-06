@@ -280,6 +280,7 @@ static NSArray *_filtrationCacheKey;
                                         name:name
                                     fileName:fileNames ? NSStringFormat(@"%@.%@",fileNames[i],imageType?:@"png") : imageFileName
                                     mimeType:NSStringFormat(@"image/%@",imageType ?: @"png")];
+            [formData appendPartWithFormData:[@"1" dataUsingEncoding:NSUTF8StringEncoding] name:@"upload_type"];
         }
         
     } progress:^(NSProgress * _Nonnull uploadProgress) {

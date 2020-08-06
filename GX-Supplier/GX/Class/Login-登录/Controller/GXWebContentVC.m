@@ -11,7 +11,8 @@
 
 @interface GXWebContentVC ()<WKNavigationDelegate,WKUIDelegate>
 @property (nonatomic, strong) WKWebView     *webView;
-
+/* 网页加载进度视图 */
+@property (nonatomic, strong) UIProgressView *progressView;
 @end
 
 @implementation GXWebContentVC
@@ -28,7 +29,9 @@
     }
     
     [self.view addSubview:self.webView];
-    
+    [self.view addSubview:self.progressView];
+    [self.webView addObserver:self forKeyPath:NSStringFromSelector(@selector(estimatedProgress)) options:0 context:nil];
+
     [self startShimmer];
     
     if (self.navTitle) {
@@ -46,6 +49,15 @@
             [self.webView loadHTMLString:h5 baseURL:nil];
         }
     }
+}
+- (UIProgressView *)progressView
+{
+    if (!_progressView){
+        _progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0, 1, HX_SCREEN_WIDTH, 2)];
+        _progressView.tintColor = [UIColor blueColor];
+        _progressView.trackTintColor = [UIColor clearColor];
+    }
+    return _progressView;
 }
 -(void)viewDidLayoutSubviews
 {
@@ -204,7 +216,19 @@
 #pragma mark KVO的监听代理
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     //网页title
-    if ([keyPath isEqualToString:@"title"]) {
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(estimatedProgress))]) {
+        if (object == self.webView) {
+            self.progressView.progress = _webView.estimatedProgress;
+            if (_webView.estimatedProgress >= 1.0f) {
+                hx_weakify(self);
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    weakSelf.progressView.progress = 0;
+                });
+            }
+        }else{
+            [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+        }
+    }else if ([keyPath isEqualToString:@"title"]) {
         if (object == self.webView) {
             [self.navigationItem setTitle:self.webView.title];
         }else{
@@ -220,6 +244,7 @@
     if (!self.navTitle) {
         [self.webView removeObserver:self forKeyPath:@"title"];
     }
+    [self.webView removeObserver:self forKeyPath:NSStringFromSelector(@selector(estimatedProgress))];
 }
 
 

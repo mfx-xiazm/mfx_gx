@@ -22,7 +22,7 @@
 
 
 #define MAXYEAR 2099
-#define MINYEAR 2000
+#define MINYEAR 1900
 
 typedef void(^doneBlock)(NSDate *);
 
