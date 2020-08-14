@@ -33,14 +33,23 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="759"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eq5-oO-YwC" userLabel="分割线">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="10"/>
-                                    <color key="backgroundColor" red="0.96470588239999999" green="0.96862745100000003" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="30"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="※银行卡信息需与提供给银联的一致" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZSJ-x7-q64">
+                                            <rect key="frame" x="15" y="7.5" width="192" height="15"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="10" id="snd-Xo-36c"/>
+                                        <constraint firstItem="ZSJ-x7-q64" firstAttribute="leading" secondItem="eq5-oO-YwC" secondAttribute="leading" constant="15" id="3eQ-4t-h6z"/>
+                                        <constraint firstItem="ZSJ-x7-q64" firstAttribute="centerY" secondItem="eq5-oO-YwC" secondAttribute="centerY" id="KCn-M6-POH"/>
+                                        <constraint firstAttribute="height" constant="30" id="snd-Xo-36c"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xCx-nZ-6B7">
-                                    <rect key="frame" x="0.0" y="10" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="30" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="持卡人" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y0X-a2-ztN">
                                             <rect key="frame" x="15" y="16" width="80" height="18"/>
@@ -82,14 +91,14 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l2n-h6-iMd" userLabel="分割线">
-                                    <rect key="frame" x="0.0" y="60" width="414" height="10"/>
+                                    <rect key="frame" x="0.0" y="80" width="414" height="10"/>
                                     <color key="backgroundColor" red="0.96470588239999999" green="0.96862745100000003" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="10" id="wnO-NH-xyt"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="78P-d7-EjP">
-                                    <rect key="frame" x="0.0" y="70" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="90" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="银行卡号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="akg-eN-27o">
                                             <rect key="frame" x="15" y="16" width="80" height="18"/>
@@ -136,14 +145,14 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o7V-4d-WuC" userLabel="分割线">
-                                    <rect key="frame" x="0.0" y="120" width="414" height="10"/>
+                                    <rect key="frame" x="0.0" y="140" width="414" height="10"/>
                                     <color key="backgroundColor" red="0.96470588239999999" green="0.96862745100000003" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="10" id="UrO-bh-8Dt"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2pw-St-NM5">
-                                    <rect key="frame" x="0.0" y="130" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="150" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="银行名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n89-JO-jL0">
                                             <rect key="frame" x="15" y="16" width="80" height="18"/>
@@ -185,14 +194,14 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YHv-E8-ZbY" userLabel="分割线">
-                                    <rect key="frame" x="0.0" y="180" width="414" height="10"/>
+                                    <rect key="frame" x="0.0" y="200" width="414" height="10"/>
                                     <color key="backgroundColor" red="0.96470588239999999" green="0.96862745100000003" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="10" id="Em0-Em-JKZ"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ogZ-iW-Y45">
-                                    <rect key="frame" x="0.0" y="190" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="210" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="开户网点" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ICH-jV-5kU">
                                             <rect key="frame" x="15" y="16" width="80" height="18"/>
@@ -234,14 +243,14 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CoS-5y-FDO" userLabel="分割线">
-                                    <rect key="frame" x="0.0" y="240" width="414" height="10"/>
+                                    <rect key="frame" x="0.0" y="260" width="414" height="10"/>
                                     <color key="backgroundColor" red="0.96470588239999999" green="0.96862745100000003" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="10" id="djA-wj-cYs"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mbS-Lr-3NT">
-                                    <rect key="frame" x="0.0" y="250" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="270" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="开户行号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ct-Ww-ZQ8">
                                             <rect key="frame" x="15" y="16" width="80" height="18"/>
@@ -283,14 +292,14 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FMm-r7-Osq" userLabel="分割线">
-                                    <rect key="frame" x="0.0" y="300" width="414" height="10"/>
+                                    <rect key="frame" x="0.0" y="320" width="414" height="10"/>
                                     <color key="backgroundColor" red="0.96470588239999999" green="0.96862745100000003" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="10" id="W3r-UR-DUz"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S3a-T2-GDG">
-                                    <rect key="frame" x="0.0" y="310" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="330" width="414" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="提现金额" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JkC-lh-6Xv">
                                             <rect key="frame" x="15" y="16" width="80" height="18"/>
@@ -332,14 +341,14 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4oG-nf-T17" userLabel="分割线">
-                                    <rect key="frame" x="0.0" y="360" width="414" height="10"/>
+                                    <rect key="frame" x="0.0" y="380" width="414" height="10"/>
                                     <color key="backgroundColor" red="0.96470588239999999" green="0.96862745100000003" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="10" id="c3G-uY-XUN"/>
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="可提现金额：268" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wzb-ka-4p6">
-                                    <rect key="frame" x="15" y="380" width="104" height="16"/>
+                                    <rect key="frame" x="15" y="400" width="104" height="16"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>

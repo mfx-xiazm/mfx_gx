@@ -68,6 +68,7 @@
      if ([_cashNote.apply_status isEqualToString:@"1"]) {
         self.faqi_img.image = HXGetImage(@"当前进度");
         self.faqi_line.backgroundColor = UIColorFromRGB(0xCCCCCC);
+        self.create_time.text = _cashNote.create_time;
         self.pingtai_img.image = HXGetImage(@"灰色进度");
         self.pingtai_line.backgroundColor = UIColorFromRGB(0xCCCCCC);
         self.daozhang_img.image = HXGetImage(@"灰色进度");
@@ -76,6 +77,7 @@
         self.approve_time.text = @"";
     }else if ([_cashNote.apply_status isEqualToString:@"2"] || [_cashNote.apply_status isEqualToString:@"5"]) {
        self.faqi_img.image = HXGetImage(@"进度");
+       self.create_time.text = _cashNote.create_time;
        self.pingtai_img.image = HXGetImage(@"进度");
        self.daozhang_img.image = HXGetImage(@"当前进度");
        self.apply_status.text = @"提现成功";
@@ -83,6 +85,7 @@
        self.approve_time.text = _cashNote.approve_time;
     }else if ([_cashNote.apply_status isEqualToString:@"3"]){
         self.faqi_img.image = HXGetImage(@"进度");
+        self.create_time.text = _cashNote.create_time;
         self.pingtai_img.image = HXGetImage(@"进度");
         self.daozhang_img.image = HXGetImage(@"进度失败");
         self.apply_status.text = @"提现失败";
@@ -90,6 +93,7 @@
         self.approve_time.text = _cashNote.reject_reason;
     }else {
         self.faqi_img.image = HXGetImage(@"进度");
+        self.create_time.text = _cashNote.create_time;
         self.pingtai_img.image = HXGetImage(@"当前进度");
         self.pingtai_line.backgroundColor = UIColorFromRGB(0xCCCCCC);
         self.daozhang_img.image = HXGetImage(@"灰色进度");

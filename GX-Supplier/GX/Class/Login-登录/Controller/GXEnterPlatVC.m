@@ -123,7 +123,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.navigationItem setTitle:@"入驻"];
+    [self.navigationItem setTitle:@"银联数据库留档"];
  
     hx_weakify(self);
     [self.sureBtn BindingBtnJudgeBlock:^BOOL{

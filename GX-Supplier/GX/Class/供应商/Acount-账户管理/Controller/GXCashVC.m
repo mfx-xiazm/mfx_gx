@@ -46,10 +46,10 @@
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请输入银行卡号"];
             return NO;
         }
-        if (![strongSelf.card_no.text checkCardNo]) {
-            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"银行卡号有误"];
-            return NO;
-        }
+//        if (![strongSelf.card_no.text checkCardNo]) {
+//            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"银行卡号有误"];
+//            return NO;
+//        }
         if (![strongSelf.bank_name hasText]) {
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请输入银行名称"];
             return NO;
