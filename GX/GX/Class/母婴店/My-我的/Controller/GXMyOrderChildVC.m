@@ -364,10 +364,11 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
             GXMyOrder *order = self.orders[section];
             if ([order.pay_type isEqualToString:@"3"]) {//线下付款
                 if ([order.status isEqualToString:@"待发货"]) {
+                    /**线下支付审核状态：1待上传打款凭证；2审核通过；3审核驳回。4上传打款凭证审核中；线上支付不需要审核逻辑*/
                     if ([order.approve_status isEqualToString:@"2"]) {//订单审核通过
-                        return 110.f;
+                        return 110.f;// 可操作售后退款
                     }else{
-                        return 50.f;
+                        return 110.f;// 可操作取消订单
                     }
                 }else{
                     return 110.f;
@@ -390,12 +391,12 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
         GXMyOrder *order = self.orders[section];
         if ([order.pay_type isEqualToString:@"3"]) {//线下付款
             if ([order.status isEqualToString:@"待发货"]) {
-                if ([order.approve_status isEqualToString:@"2"]) {//订单审核通过
+                if ([order.approve_status isEqualToString:@"2"]) {//订单审核通过 可操作售后退款
                     footer.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 110.f);
                     footer.handleView.hidden = NO;
                 }else{
-                    footer.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 50.f);
-                    footer.handleView.hidden = YES;
+                    footer.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 110.f); // 可操作取消订单
+                    footer.handleView.hidden = NO;
                 }
             }else{
                 footer.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 110.f);
@@ -485,21 +486,40 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
                     };
                     [strongSelf.navigationController pushViewController:pvc animated:YES];
                 }else if ([order.status isEqualToString:@"待发货"]) {
-                    //HXLog(@"申请退款");
-                    if (![order.refund_status isEqualToString:@"0"] && ![order.refund_status isEqualToString:@"3"] && ![order.refund_status isEqualToString:@"4"]) {
-                        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"该订单正在申请退款"];
-                    }else{
-                        GXApplyRefundVC *rvc = [GXApplyRefundVC new];
-                        rvc.oid = order.oid;
-                        rvc.refundCall = ^{
-                            if ([order.provider_uid  isEqualToString:@"0"]) {
-                                order.refund_status = @"2";
-                            }else{
-                                order.refund_status = @"1";
-                            }
-                            [tableView reloadData];
-                        };
-                        [strongSelf.navigationController pushViewController:rvc animated:YES];
+                    if ([order.pay_type isEqualToString:@"3"]) {//线下付款
+                        //HXLog(@"取消订单");
+                        zhAlertView *alert = [[zhAlertView alloc] initWithTitle:@"提示" message:@"确定要取消订单吗？" constantWidth:HX_SCREEN_WIDTH - 50*2];
+                        zhAlertButton *cancelButton = [zhAlertButton buttonWithTitle:@"取消" handler:^(zhAlertButton * _Nonnull button) {
+                            [strongSelf.alertPopVC dismiss];
+                        }];
+                        zhAlertButton *okButton = [zhAlertButton buttonWithTitle:@"确认" handler:^(zhAlertButton * _Nonnull button) {
+                            [strongSelf.alertPopVC dismiss];
+                            [strongSelf cancelOrderRequest];
+                        }];
+                        cancelButton.lineColor = UIColorFromRGB(0xDDDDDD);
+                        [cancelButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
+                        okButton.lineColor = UIColorFromRGB(0xDDDDDD);
+                        [okButton setTitleColor:HXControlBg forState:UIControlStateNormal];
+                        [alert adjoinWithLeftAction:cancelButton rightAction:okButton];
+                        strongSelf.alertPopVC = [[zhPopupController alloc] initWithView:alert size:alert.bounds.size];
+                        [strongSelf.alertPopVC show];
+                    }else {
+                        //HXLog(@"申请退款");
+                        if (![order.refund_status isEqualToString:@"0"] && ![order.refund_status isEqualToString:@"3"] && ![order.refund_status isEqualToString:@"4"]) {
+                            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"该订单正在申请退款"];
+                        }else{
+                            GXApplyRefundVC *rvc = [GXApplyRefundVC new];
+                            rvc.oid = order.oid;
+                            rvc.refundCall = ^{
+                                if ([order.provider_uid  isEqualToString:@"0"]) {
+                                    order.refund_status = @"2";
+                                }else{
+                                    order.refund_status = @"1";
+                                }
+                                [tableView reloadData];
+                            };
+                            [strongSelf.navigationController pushViewController:rvc animated:YES];
+                        }
                     }
                 }else if ([order.status isEqualToString:@"待收货"]) {
                     //HXLog(@"确认收货");

@@ -62,8 +62,14 @@
             }else{
                 self.firstHandleBtn.hidden = YES;
                 self.secondHandleBtn.hidden = YES;
-                self.thirdHandleBtn.hidden = YES;
+
+                self.thirdHandleBtn.hidden = NO;
+                [self.thirdHandleBtn setTitle:@"取消订单" forState:UIControlStateNormal];
+                self.thirdHandleBtn.backgroundColor = [UIColor whiteColor];
+                self.thirdHandleBtn.layer.borderColor = [UIColor blackColor].CGColor;
+                [self.thirdHandleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             }
+                               
         }else{
             self.firstHandleBtn.hidden = YES;
             self.secondHandleBtn.hidden = YES;

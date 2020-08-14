@@ -13,7 +13,10 @@
     return @{ @"orderReason":[GXApplyRefundReason class]
              };
 }
-
+-(NSString *)enable_refund_num
+{
+    return [NSString stringWithFormat:@"%d",_goods_num - _refund_num];
+}
 @end
 
 @implementation GXApplyRefundReason

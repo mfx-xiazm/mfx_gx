@@ -245,8 +245,8 @@ static NSString *const MyIdeaPhotoCell = @"MyIdeaPhotoCell";
     [self.goods_name setTextWithLineSpace:5.f withString:(self.applyRefund.goods_name)?self.applyRefund.goods_name:@"" withFont:[UIFont systemFontOfSize:13]];
     self.goods_strc.text = (self.applyRefund.specs_attrs && self.applyRefund.specs_attrs.length)?[NSString stringWithFormat:@" %@ ",self.applyRefund.specs_attrs]:@"";
 
-    self.refundNum.text = self.applyRefund.goods_num;
-    self.refund_price.text = [NSString stringWithFormat:@"%.2f",[self.applyRefund.pay_amount floatValue] - [self.applyRefund.order_freight_amount floatValue]];
+    self.refundNum.text = self.applyRefund.enable_refund_num;
+    self.refund_price.text = [NSString stringWithFormat:@"%.2f",[self.applyRefund.pay_amount floatValue]];
 }
 - (IBAction)chooseTypeClicked:(UIButton *)sender {
     GXApplyRefundTypeView *typeView = [GXApplyRefundTypeView loadXibView];
@@ -288,18 +288,18 @@ static NSString *const MyIdeaPhotoCell = @"MyIdeaPhotoCell";
 }
 - (IBAction)numChangeClicked:(UIButton *)sender {
     if (sender.tag) {// +
-        if ([self.refundNum.text integerValue] + 1 > [self.applyRefund.goods_num integerValue]) {
+        if ([self.refundNum.text integerValue] + 1 > [self.applyRefund.enable_refund_num integerValue]) {
             return;
         }
-        self.refundNum.text = [NSString stringWithFormat:@"%zd",[self.refundNum.text integerValue] + 1];
+        self.refundNum.text = [NSString stringWithFormat:@"%ld",[self.refundNum.text integerValue] + 1];
     }else{// -
         if ([self.refundNum.text integerValue] - 1 < 1) {
             return;
         }
-        self.refundNum.text = [NSString stringWithFormat:@"%zd",[self.refundNum.text integerValue] - 1];
+        self.refundNum.text = [NSString stringWithFormat:@"%ld",[self.refundNum.text integerValue] - 1];
     }
-   CGFloat price = [self.applyRefund.pay_amount floatValue] - [self.applyRefund.order_freight_amount floatValue];
-   self.refund_price.text = [NSString stringWithFormat:@"%.2f",price/[self.applyRefund.goods_num integerValue]*[self.refundNum.text integerValue]];
+   CGFloat price = [self.applyRefund.pay_amount floatValue];
+   self.refund_price.text = [NSString stringWithFormat:@"%.2f",price/[self.applyRefund.enable_refund_num integerValue]*[self.refundNum.text integerValue]];
 }
 - (void)submitClicked:(UIButton *)sender {
     hx_weakify(self);
