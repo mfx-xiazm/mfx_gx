@@ -69,7 +69,6 @@
                 self.thirdHandleBtn.layer.borderColor = [UIColor blackColor].CGColor;
                 [self.thirdHandleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             }
-                               
         }else{
             self.firstHandleBtn.hidden = YES;
             self.secondHandleBtn.hidden = YES;

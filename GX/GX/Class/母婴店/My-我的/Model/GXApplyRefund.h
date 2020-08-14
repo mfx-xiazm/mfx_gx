@@ -12,7 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class GXApplyRefundReason;
 @interface GXApplyRefund : NSObject
-@property(nonatomic,copy) NSString *order_num;
 @property(nonatomic,assign) NSInteger goods_num;
 @property(nonatomic,assign) NSInteger refund_num;
 @property(nonatomic,copy) NSString *enable_refund_num;//可退数量

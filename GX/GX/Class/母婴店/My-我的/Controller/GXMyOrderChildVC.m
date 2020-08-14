@@ -487,22 +487,41 @@ static NSString *const UpOrderGoodsCell = @"UpOrderGoodsCell";
                     [strongSelf.navigationController pushViewController:pvc animated:YES];
                 }else if ([order.status isEqualToString:@"待发货"]) {
                     if ([order.pay_type isEqualToString:@"3"]) {//线下付款
-                        //HXLog(@"取消订单");
-                        zhAlertView *alert = [[zhAlertView alloc] initWithTitle:@"提示" message:@"确定要取消订单吗？" constantWidth:HX_SCREEN_WIDTH - 50*2];
-                        zhAlertButton *cancelButton = [zhAlertButton buttonWithTitle:@"取消" handler:^(zhAlertButton * _Nonnull button) {
-                            [strongSelf.alertPopVC dismiss];
-                        }];
-                        zhAlertButton *okButton = [zhAlertButton buttonWithTitle:@"确认" handler:^(zhAlertButton * _Nonnull button) {
-                            [strongSelf.alertPopVC dismiss];
-                            [strongSelf cancelOrderRequest];
-                        }];
-                        cancelButton.lineColor = UIColorFromRGB(0xDDDDDD);
-                        [cancelButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
-                        okButton.lineColor = UIColorFromRGB(0xDDDDDD);
-                        [okButton setTitleColor:HXControlBg forState:UIControlStateNormal];
-                        [alert adjoinWithLeftAction:cancelButton rightAction:okButton];
-                        strongSelf.alertPopVC = [[zhPopupController alloc] initWithView:alert size:alert.bounds.size];
-                        [strongSelf.alertPopVC show];
+                        if ([order.approve_status isEqualToString:@"2"]) {//订单审核通过
+                            //HXLog(@"申请退款");
+                            if (![order.refund_status isEqualToString:@"0"] && ![order.refund_status isEqualToString:@"3"] && ![order.refund_status isEqualToString:@"4"]) {
+                                [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"该订单正在申请退款"];
+                            }else{
+                                GXApplyRefundVC *rvc = [GXApplyRefundVC new];
+                                rvc.oid = order.oid;
+                                rvc.refundCall = ^{
+                                    if ([order.provider_uid  isEqualToString:@"0"]) {
+                                        order.refund_status = @"2";
+                                    }else{
+                                        order.refund_status = @"1";
+                                    }
+                                    [tableView reloadData];
+                                };
+                                [strongSelf.navigationController pushViewController:rvc animated:YES];
+                            }
+                        }else{
+                           //HXLog(@"取消订单");
+                            zhAlertView *alert = [[zhAlertView alloc] initWithTitle:@"提示" message:@"确定要取消订单吗？" constantWidth:HX_SCREEN_WIDTH - 50*2];
+                            zhAlertButton *cancelButton = [zhAlertButton buttonWithTitle:@"取消" handler:^(zhAlertButton * _Nonnull button) {
+                                [strongSelf.alertPopVC dismiss];
+                            }];
+                            zhAlertButton *okButton = [zhAlertButton buttonWithTitle:@"确认" handler:^(zhAlertButton * _Nonnull button) {
+                                [strongSelf.alertPopVC dismiss];
+                                [strongSelf cancelOrderRequest];
+                            }];
+                            cancelButton.lineColor = UIColorFromRGB(0xDDDDDD);
+                            [cancelButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
+                            okButton.lineColor = UIColorFromRGB(0xDDDDDD);
+                            [okButton setTitleColor:HXControlBg forState:UIControlStateNormal];
+                            [alert adjoinWithLeftAction:cancelButton rightAction:okButton];
+                            strongSelf.alertPopVC = [[zhPopupController alloc] initWithView:alert size:alert.bounds.size];
+                            [strongSelf.alertPopVC show];
+                        }
                     }else {
                         //HXLog(@"申请退款");
                         if (![order.refund_status isEqualToString:@"0"] && ![order.refund_status isEqualToString:@"3"] && ![order.refund_status isEqualToString:@"4"]) {
