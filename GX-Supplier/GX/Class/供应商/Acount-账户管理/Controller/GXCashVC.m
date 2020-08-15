@@ -38,30 +38,30 @@
     hx_weakify(self);
     [self.sureBtn BindingBtnJudgeBlock:^BOOL{
         hx_strongify(weakSelf);
-        if (![strongSelf.card_owner hasText]) {
-            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请输入持卡人姓名"];
-            return NO;
-        }
-        if (![strongSelf.card_no hasText]) {
-            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请输入银行卡号"];
-            return NO;
-        }
+//        if (![strongSelf.card_owner hasText]) {
+//            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请输入持卡人姓名"];
+//            return NO;
+//        }
+//        if (![strongSelf.card_no hasText]) {
+//            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请输入银行卡号"];
+//            return NO;
+//        }
 //        if (![strongSelf.card_no.text checkCardNo]) {
 //            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"银行卡号有误"];
 //            return NO;
 //        }
-        if (![strongSelf.bank_name hasText]) {
-            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请输入银行名称"];
-            return NO;
-        }
-        if (![strongSelf.sub_bank_name hasText]) {
-            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请输入开户网点"];
-            return NO;
-        }
-        if (![strongSelf.bank_no hasText]) {
-            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请输入开户行号"];
-            return NO;
-        }
+//        if (![strongSelf.bank_name hasText]) {
+//            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请输入银行名称"];
+//            return NO;
+//        }
+//        if (![strongSelf.sub_bank_name hasText]) {
+//            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请输入开户网点"];
+//            return NO;
+//        }
+//        if (![strongSelf.bank_no hasText]) {
+//            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请输入开户行号"];
+//            return NO;
+//        }
         if (![strongSelf.apply_amount hasText]) {
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请输入提现金额"];
             return NO;
@@ -75,6 +75,8 @@
         hx_strongify(weakSelf);
         [strongSelf applyCashRequest:button];
     }];
+    [self startShimmer];
+    [self getBankDataRequest];
 }
 -(void)cardNoChanged:(UITextField *)card
 {
@@ -93,6 +95,29 @@
 {
     GXCashNoteVC *nvc = [GXCashNoteVC new];
     [self.navigationController pushViewController:nvc animated:YES];
+}
+-(void)getBankDataRequest
+{
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"index/getProviderBankData" parameters:@{} success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                strongSelf.card_owner.text = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"card_owner"]];
+                strongSelf.bank_name.text = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"bank_name"]];
+                strongSelf.sub_bank_name.text = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"sub_bank_name"]];
+                strongSelf.card_no.text = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"card_no"]];
+                strongSelf.bank_no.text = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"bank_no"]];
+            });
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        hx_strongify(weakSelf);
+        [strongSelf stopShimmer];
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
 }
 -(void)applyCashRequest:(UIButton *)btn
 {
