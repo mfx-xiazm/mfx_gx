@@ -132,7 +132,7 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
 {
     if (_chooseClassView == nil) {
         _chooseClassView = [GXChooseClassView loadXibView];
-        _chooseClassView.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 420);
+        _chooseClassView.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 560);
     }
     return _chooseClassView;
 }
@@ -231,35 +231,12 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([GXShopGoodsCell class]) bundle:nil] forCellWithReuseIdentifier:ShopGoodsCell];
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([GXHomeSectionHeader class]) bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HomeSectionHeader];
 }
-#pragma mark -- 点击事件
--(void)cartClicked
+-(void)showClassSkuView:(UIButton *)sender
 {
-    GXCartVC *cvc = [GXCartVC new];
-    [self.navigationController pushViewController:cvc animated:YES];
-}
--(void)materialClicked
-{
-    GXSaleMaterialVC *mvc = [GXSaleMaterialVC new];
-    [self.navigationController pushViewController:mvc animated:YES];
-}
--(void)applyClicked
-{
-    GXApplySupplyVC *wvc = [GXApplySupplyVC new];
-    [self.navigationController pushViewController:wvc animated:YES];
-}
-- (IBAction)addCollectClicked:(SPButton *)sender {
-    [self setCollectGoodsRequest];
-}
-
-- (IBAction)sankPriceClicked:(SPButton *)sender {
-    GXSankPriceVC *pvc = [GXSankPriceVC new];
-    pvc.goods_id = self.goods_id;
-    pvc.sale_type = @"1";
-    [self.navigationController pushViewController:pvc animated:YES];
-}
-
-- (IBAction)buyGoodsClicked:(UIButton *)sender {
-    
+    if (!self.goodsDetail.enableSkus.count) {
+        return;
+    }
+        
     self.chooseClassView.goodsDetail = self.goodsDetail;
     hx_weakify(self);
     self.chooseClassView.goodsHandleCall = ^(NSInteger type) {
@@ -300,6 +277,45 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
         }
     };
     [self.classPopVC showInView:self.view.window completion:nil];
+}
+#pragma mark -- 点击事件
+-(void)cartClicked
+{
+    GXCartVC *cvc = [GXCartVC new];
+    [self.navigationController pushViewController:cvc animated:YES];
+}
+-(void)materialClicked
+{
+    GXSaleMaterialVC *mvc = [GXSaleMaterialVC new];
+    [self.navigationController pushViewController:mvc animated:YES];
+}
+-(void)applyClicked
+{
+    GXApplySupplyVC *wvc = [GXApplySupplyVC new];
+    [self.navigationController pushViewController:wvc animated:YES];
+}
+- (IBAction)addCollectClicked:(SPButton *)sender {
+    [self setCollectGoodsRequest];
+}
+
+- (IBAction)sankPriceClicked:(SPButton *)sender {
+    GXSankPriceVC *pvc = [GXSankPriceVC new];
+    pvc.goods_id = self.goods_id;
+    pvc.sale_type = @"1";
+    [self.navigationController pushViewController:pvc animated:YES];
+}
+
+- (IBAction)buyGoodsClicked:(UIButton *)sender {
+    
+    if (!self.goodsDetail.enableSkus) {
+        hx_weakify(self);
+        [self getGoodsSpecRequestCall:^{
+            hx_strongify(weakSelf);
+            [strongSelf showClassSkuView:sender];
+        }];
+    }else{
+        [self showClassSkuView:sender];
+    }
 }
 - (IBAction)applyJoinClicked:(UIButton *)sender {
     if (self.isBrandPush) {
@@ -383,7 +399,7 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
             self.rush_time.text = @"已结束";
         }
         self.price.text = @"";
-        self.market_price.text = [NSString stringWithFormat:@"建议价:￥%@",_goodsDetail.suggest_price];
+        self.market_price.text = [NSString stringWithFormat:@"建议零售价:￥%@",_goodsDetail.suggest_price];
     }else{//不抢购商品
         self.rushView.hidden = YES;
         self.rushViewHeight.constant = 0.f;
@@ -394,10 +410,10 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
             }else{
                 self.price.text = [NSString stringWithFormat:@"￥%@-￥%@",_goodsDetail.min_price,_goodsDetail.max_price];
             }
-            self.market_price.text = [NSString stringWithFormat:@"建议价:￥%@",_goodsDetail.suggest_price];
+            self.market_price.text = [NSString stringWithFormat:@"建议零售价:￥%@",_goodsDetail.suggest_price];
         }else{
             self.price.text = [NSString stringWithFormat:@"￥%@  ",_goodsDetail.min_price];
-            self.market_price.text = [NSString stringWithFormat:@"建议价:￥%@",_goodsDetail.suggest_price];
+            self.market_price.text = [NSString stringWithFormat:@"建议零售价:￥%@",_goodsDetail.suggest_price];
         }
     }
     self.cale_num.text = [NSString stringWithFormat:@"销量：%@",_goodsDetail.sale_num];
@@ -551,6 +567,29 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
         }
     } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
+}
+-(void)getGoodsSpecRequestCall:(void(^)(void))completedCall
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"goods_id"] = self.goods_id;
+    
+    hx_weakify(self);
+    [MBProgressHUD showOnlyLoadToView:nil];
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getGoodsSpec" parameters:parameters success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        [MBProgressHUD hideHUD];
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            strongSelf.goodsDetail.enableSkus = [NSArray yy_modelArrayWithClass:[GXGoodsDetailSku class] json:responseObject[@"data"]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completedCall();
+            });
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD hideHUD];
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
     }];
 }

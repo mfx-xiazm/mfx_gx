@@ -12,17 +12,20 @@
 #import "GXChooseClassHeader.h"
 #import "GXChooseClassFooter.h"
 #import "GXGoodsDetail.h"
+#import "ORSKUDataFilter.h"
 
 static NSString *const RunCategoryCell = @"RunCategoryCell";
 static NSString *const ChooseClassHeader = @"ChooseClassHeader";
 static NSString *const ChooseClassFooter = @"ChooseClassFooter";
 
-@interface GXChooseClassView ()<UICollectionViewDelegate,UICollectionViewDataSource,ZLCollectionViewBaseFlowLayoutDelegate>
+@interface GXChooseClassView ()<UICollectionViewDelegate,UICollectionViewDataSource,ZLCollectionViewBaseFlowLayoutDelegate,ORSKUDataFilterDataSource>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIImageView *cover_img;
 @property (weak, nonatomic) IBOutlet UILabel *price;
 @property (weak, nonatomic) IBOutlet UILabel *market_price;
 @property (weak, nonatomic) IBOutlet UILabel *stock_num;
+
+@property (nonatomic, strong) ORSKUDataFilter *filter;
 @end
 @implementation GXChooseClassView
 
@@ -40,9 +43,16 @@ static NSString *const ChooseClassFooter = @"ChooseClassFooter";
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([GXRunCategoryCell class]) bundle:nil] forCellWithReuseIdentifier:RunCategoryCell];
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([GXChooseClassHeader class]) bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:ChooseClassHeader];
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([GXChooseClassFooter class]) bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:ChooseClassFooter];
+    
+     _filter = [[ORSKUDataFilter alloc] initWithDataSource:self];
 }
 - (IBAction)goodHandleClicked:(UIButton *)sender {
     if (sender.tag) {
+        if (!_filter.currentResult) {
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请选择商品属性"];
+            return;
+        }
+        
         if (_goodsDetail.sku.limit_num != -1 && _goodsDetail.sku.limit_num != 0) {
             if (self.goodsDetail.buyNum > _goodsDetail.sku.limit_num) {
                 [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[NSString stringWithFormat:@"此规格限购%zd份",_goodsDetail.sku.limit_num]];
@@ -71,30 +81,30 @@ static NSString *const ChooseClassFooter = @"ChooseClassFooter";
     [self.cover_img sd_setImageWithURL:[NSURL URLWithString:_goodsDetail.cover_img]];
     if ([_goodsDetail.control_type isEqualToString:@"2"]) {
         self.market_price.hidden = NO;
-        [self.market_price setLabelUnderline:[NSString stringWithFormat:@"建议价:￥%@",_goodsDetail.suggest_price]];
+        self.market_price.text = [NSString stringWithFormat:@"建议零售价:￥%@",_goodsDetail.suggest_price];
     }else{
         self.market_price.hidden = NO;
-        [self.market_price setLabelUnderline:[NSString stringWithFormat:@"建议价:￥%@",_goodsDetail.suggest_price]];
+        self.market_price.text = [NSString stringWithFormat:@"建议零售价:￥%@",_goodsDetail.suggest_price];
     }
     
     if (_goodsDetail.spec && _goodsDetail.spec.count) {
         if (_goodsDetail.sku) {
             self.price.text = [NSString stringWithFormat:@"￥%@",_goodsDetail.sku.price];
             self.stock_num.text = [NSString stringWithFormat:@"库存：%@",_goodsDetail.sku.stock];
-            [self.collectionView reloadData];
         }else{
-            for (GXGoodsDetailSpec *spec in _goodsDetail.spec) {
-                if (!spec.selectSpec) {// 如果未选择就默认第一个
-                    GXGoodsDetailSubSpec *subSpec = spec.spec_val.firstObject;
-                    subSpec.isSelected = YES;
-                    spec.selectSpec = subSpec;
-                }
+            self.stock_num.text = @"";
+            if ([_goodsDetail.min_price floatValue] == [_goodsDetail.max_price floatValue]) {
+                self.price.text = [NSString stringWithFormat:@"￥%@",_goodsDetail.min_price];
+            }else{
+                self.price.text = [NSString stringWithFormat:@"￥%@-￥%@",_goodsDetail.min_price,_goodsDetail.max_price];
             }
-            [self getShopStockRequest];
         }
-    }else{
-        [self.collectionView reloadData];
     }
+    
+    //当数据更新的时候 需要reloadData
+    [_filter reloadData];
+    [self.collectionView reloadData];
+    //更新UI显示
 }
 -(void)getShopStockRequest
 {
@@ -181,6 +191,22 @@ static NSString *const ChooseClassFooter = @"ChooseClassFooter";
             GXGoodsDetailSpec *spec = self.goodsDetail.spec[indexPath.section];
             GXGoodsDetailSubSpec *subSpec = spec.spec_val[indexPath.row];
             cell.subSpec = subSpec;
+            
+            if ([_filter.availableIndexPathsSet containsObject:indexPath]) {
+                cell.contentText.textColor = UIColorFromRGB(0x1A1A1A);
+                cell.contentText.backgroundColor = [UIColor whiteColor];
+                cell.contentText.layer.borderColor = UIColorFromRGB(0x1A1A1A).CGColor;
+            }else {
+                cell.contentText.textColor = UIColorFromRGB(0x999999);
+                cell.contentText.backgroundColor = [UIColor whiteColor];
+                cell.contentText.layer.borderColor = UIColorFromRGB(0x999999).CGColor;
+            }
+            
+            if ([_filter.selectedIndexPaths containsObject:indexPath]) {
+                cell.contentText.textColor = [UIColor whiteColor];
+                cell.contentText.backgroundColor = HXControlBg;
+                cell.contentText.layer.borderColor = [UIColor clearColor].CGColor;
+            }
         }else{
             GXGoodsLogisticst *logisticst = self.goodsDetail.sku.logistic[indexPath.row];
             cell.logisticst = logisticst;
@@ -194,6 +220,16 @@ static NSString *const ChooseClassFooter = @"ChooseClassFooter";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (self.goodsDetail.spec && self.goodsDetail.spec.count) {
         if (indexPath.section <= self.goodsDetail.spec.count-1) {
+            
+            [_filter didSelectedPropertyWithIndexPath:indexPath];
+
+            if (![_filter.availableIndexPathsSet containsObject:indexPath]) {
+                //不可选
+                return;
+            }
+
+            self.goodsDetail.buyNum = 1;// 每次调整sku就将购买数量置为1
+            
             GXGoodsDetailSpec *spec = self.goodsDetail.spec[indexPath.section];
             spec.selectSpec.isSelected = NO;
             
@@ -202,7 +238,14 @@ static NSString *const ChooseClassFooter = @"ChooseClassFooter";
             
             spec.selectSpec = subSpec;
             
-            [self getShopStockRequest];
+            GXGoodsDetailSku *resultSku = (GXGoodsDetailSku *)_filter.currentResult;
+            
+            if (resultSku != nil) {// 如果选择了一条完整的sku,就请求库存、价格和配送方式
+                [self getShopStockRequest];
+            }else{// 如果不是一条完整的sku,就重置上次的配送方式
+                self.goodsDetail.sku = nil;
+                self.goodsDetail.selectLogisticst = nil;
+            }
         }else{
             GXGoodsLogisticst *logisticst = self.goodsDetail.sku.logistic[indexPath.row];
             self.goodsDetail.selectLogisticst.isSelected = NO;
@@ -246,10 +289,10 @@ static NSString *const ChooseClassFooter = @"ChooseClassFooter";
                 GXGoodsDetailSpec *spec = self.goodsDetail.spec[indexPath.section];
                 header.titleLabel.text = spec.specs_name;
             }else{
-                header.titleLabel.text = self.goodsDetail.sku.logistic.count?@"快递":@"";
+                header.titleLabel.text = self.goodsDetail.sku.logistic.count?@"配送方式":@"";
             }
         }else{
-            header.titleLabel.text = self.goodsDetail.sku.logistic.count?@"快递":@"";;
+            header.titleLabel.text = self.goodsDetail.sku.logistic.count?@"配送方式":@"";;
         }
         return header;
     }else{
@@ -258,8 +301,8 @@ static NSString *const ChooseClassFooter = @"ChooseClassFooter";
             if (indexPath.section == self.goodsDetail.spec.count-1) {
                 footer.numView.hidden = NO;
                 footer.storeCodeView.hidden = YES;
-                footer.stock_num = [self.goodsDetail.sku.stock integerValue];
-                footer.limit_num = self.goodsDetail.sku.limit_num;
+                footer.stock_num = self.goodsDetail.sku ? [self.goodsDetail.sku.stock integerValue]:200;// 如果未选择出一条sku，就默认库存200
+                footer.limit_num = self.goodsDetail.sku ? self.goodsDetail.sku.limit_num:0;// 如果未选择出一条sku，就默认0不限购
                 footer.buy_num.text = [NSString stringWithFormat:@"%zd",self.goodsDetail.buyNum];
                 hx_weakify(self);
                 footer.buyNumCall = ^(NSInteger num) {
@@ -270,7 +313,8 @@ static NSString *const ChooseClassFooter = @"ChooseClassFooter";
             }else if (indexPath.section == self.goodsDetail.spec.count){
                 footer.numView.hidden = YES;
                 footer.storeCodeView.hidden = NO;
-                footer.shop_code.text = [NSString stringWithFormat:@"发货商家：%@",self.goodsDetail.sku.provider_no];
+                footer.shop_code.textColor = UIColorFromRGB(0x1A1A1A);
+                footer.shop_code.text = self.goodsDetail.sku.provider_no?[NSString stringWithFormat:@"发货商家：%@",self.goodsDetail.sku.provider_no]:@"";
                 return footer;
             }else{
                 return nil;
@@ -278,7 +322,8 @@ static NSString *const ChooseClassFooter = @"ChooseClassFooter";
         }else{
             footer.numView.hidden = YES;
             footer.storeCodeView.hidden = NO;
-            footer.shop_code.text = [NSString stringWithFormat:@"发货商家：%@",self.goodsDetail.sku.provider_no];
+            footer.shop_code.textColor = UIColorFromRGB(0x1A1A1A);
+            footer.shop_code.text = self.goodsDetail.sku.provider_no?[NSString stringWithFormat:@"发货商家：%@",self.goodsDetail.sku.provider_no]:@"";
             return footer;
         }
     }
@@ -288,23 +333,46 @@ static NSString *const ChooseClassFooter = @"ChooseClassFooter";
         if (indexPath.section <= self.goodsDetail.spec.count-1) {
             GXGoodsDetailSpec *spec = self.goodsDetail.spec[indexPath.section];
             GXGoodsDetailSubSpec *subSpec = spec.spec_val[indexPath.row];
-            return CGSizeMake([subSpec.attr_name boundingRectWithSize:CGSizeMake(1000000, 30) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:14]} context:nil].size.width + 20, 30);
+            return CGSizeMake([subSpec.attr_name boundingRectWithSize:CGSizeMake(1000000, 30) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:14]} context:nil].size.width + 24, 30);
         }else{
             GXGoodsLogisticst *logisticst = self.goodsDetail.sku.logistic[indexPath.row];
-            return CGSizeMake([logisticst.freight_type boundingRectWithSize:CGSizeMake(1000000, 30) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:14]} context:nil].size.width + 20, 30);
+            return CGSizeMake([logisticst.freight_type boundingRectWithSize:CGSizeMake(1000000, 30) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:14]} context:nil].size.width + 24, 30);
         }
     }else{
         GXGoodsLogisticst *logisticst = self.goodsDetail.sku.logistic[indexPath.row];
-        return CGSizeMake([logisticst.freight_type boundingRectWithSize:CGSizeMake(1000000, 30) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:14]} context:nil].size.width + 20, 30);
+        return CGSizeMake([logisticst.freight_type boundingRectWithSize:CGSizeMake(1000000, 30) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:14]} context:nil].size.width + 24, 30);
     }
 }
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     return 15.f;
 }
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
-    return 10.f;
+    return 15.f;
 }
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     return  UIEdgeInsetsMake(10, 10, 10, 10);
+}
+#pragma mark -- ORSKUDataFilterDataSource
+- (NSInteger)numberOfSectionsForPropertiesInFilter:(ORSKUDataFilter *)filter {
+    return self.goodsDetail.spec.count;
+}
+
+- (NSArray *)filter:(ORSKUDataFilter *)filter propertiesInSection:(NSInteger)section {
+    GXGoodsDetailSpec *spec = self.goodsDetail.spec[section];
+    return spec.attr_ids;
+}
+
+- (NSInteger)numberOfConditionsInFilter:(ORSKUDataFilter *)filter {
+    return self.goodsDetail.enableSkus.count;
+}
+
+- (NSArray *)filter:(ORSKUDataFilter *)filter conditionForRow:(NSInteger)row {
+    GXGoodsDetailSku *enableSku = self.goodsDetail.enableSkus[row];
+    return [enableSku.spec_attr_ids componentsSeparatedByString:@","];
+}
+
+- (id)filter:(ORSKUDataFilter *)filter resultOfConditionForRow:(NSInteger)row {
+    GXGoodsDetailSku *enableSku = self.goodsDetail.enableSkus[row];
+    return enableSku;
 }
 @end

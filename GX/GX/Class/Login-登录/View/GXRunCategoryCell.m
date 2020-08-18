@@ -84,16 +84,7 @@
     _subSpec = subSpec;
     
     self.contentText.text = _subSpec.attr_name;
-    
-    if (_subSpec.isSelected) {
-        self.contentText.textColor = [UIColor whiteColor];
-        self.contentText.backgroundColor = HXControlBg;
-        self.contentText.layer.borderColor = [UIColor clearColor].CGColor;
-    }else{
-        self.contentText.textColor = [UIColor blackColor];
-        self.contentText.backgroundColor = [UIColor whiteColor];
-        self.contentText.layer.borderColor = [UIColor blackColor].CGColor;
-    }
+    self.contentText.layer.cornerRadius = 15.f;
 }
 -(void)setLogisticst:(GXGoodsLogisticst *)logisticst
 {

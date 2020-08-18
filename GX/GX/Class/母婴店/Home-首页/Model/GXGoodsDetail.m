@@ -119,6 +119,17 @@
     return @{@"spec_val":[GXGoodsDetailSubSpec class]
              };
 }
+-(NSArray<NSString *> *)attr_ids
+{
+    if (!_spec_val.count) {
+        return @[];
+    }
+    NSMutableArray *temp = [NSMutableArray array];
+    for (GXGoodsDetailSubSpec *spec in _spec_val) {
+        [temp addObject:spec.attr_id];
+    }
+    return [NSArray arrayWithArray:temp];
+}
 @end
 
 @implementation GXGoodsDetailSubSpec

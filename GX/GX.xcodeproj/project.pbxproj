@@ -23,6 +23,7 @@
 		4914C4A02499AAB700EEBB8C /* GXPresellHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 4914C49F2499AAB700EEBB8C /* GXPresellHeader.m */; };
 		4914C4A62499BCB400EEBB8C /* GXPresellCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4914C4A42499BCB400EEBB8C /* GXPresellCell.m */; };
 		4914C4A72499BCB400EEBB8C /* GXPresellCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4914C4A52499BCB400EEBB8C /* GXPresellCell.xib */; };
+		4928242124EBAC5D0090BE38 /* ORSKUDataFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4928241F24EBAC5C0090BE38 /* ORSKUDataFilter.m */; };
 		494CC50824849F9A0032B553 /* libPaymentControl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 494CC50724849F9A0032B553 /* libPaymentControl.a */; };
 		494CC50A24849FC40032B553 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 494CC50924849FC40032B553 /* CFNetwork.framework */; };
 		494CC50C2484A0250032B553 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 494CC50B2484A0250032B553 /* SystemConfiguration.framework */; };
@@ -554,6 +555,8 @@
 		4914C4A32499BCB400EEBB8C /* GXPresellCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXPresellCell.h; sourceTree = "<group>"; };
 		4914C4A42499BCB400EEBB8C /* GXPresellCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXPresellCell.m; sourceTree = "<group>"; };
 		4914C4A52499BCB400EEBB8C /* GXPresellCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXPresellCell.xib; sourceTree = "<group>"; };
+		4928241F24EBAC5C0090BE38 /* ORSKUDataFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORSKUDataFilter.m; sourceTree = "<group>"; };
+		4928242024EBAC5D0090BE38 /* ORSKUDataFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORSKUDataFilter.h; sourceTree = "<group>"; };
 		494CC50624849F9A0032B553 /* UPPaymentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPPaymentControl.h; sourceTree = "<group>"; };
 		494CC50724849F9A0032B553 /* libPaymentControl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPaymentControl.a; sourceTree = "<group>"; };
 		494CC50924849FC40032B553 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -1426,6 +1429,15 @@
 				4914C4A52499BCB400EEBB8C /* GXPresellCell.xib */,
 			);
 			name = "预售专区";
+			sourceTree = "<group>";
+		};
+		4928241E24EBAC510090BE38 /* SKUDataFilter */ = {
+			isa = PBXGroup;
+			children = (
+				4928242024EBAC5D0090BE38 /* ORSKUDataFilter.h */,
+				4928241F24EBAC5C0090BE38 /* ORSKUDataFilter.m */,
+			);
+			path = SKUDataFilter;
 			sourceTree = "<group>";
 		};
 		494CC50524849F9A0032B553 /* UPPaymentControl */ = {
@@ -2425,6 +2437,7 @@
 		90C0B3122340CD7100A8C55B /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				4928241E24EBAC510090BE38 /* SKUDataFilter */,
 				496C01DA24A1E69D004A9D22 /* OYCountDownManager */,
 				903D60DC237D4156000231CC /* NativeShareManger */,
 				90C0B3132340CD7100A8C55B /* Category */,
@@ -4051,6 +4064,7 @@
 				909A77F4236AC91500562435 /* GXCategoryGoods.m in Sources */,
 				90C0B3BA2340CD7200A8C55B /* UINavigationBar+ChangeColor.m in Sources */,
 				4977449F2498E82300DBA753 /* GXExpressShowCell.m in Sources */,
+				4928242124EBAC5D0090BE38 /* ORSKUDataFilter.m in Sources */,
 				90C0B3E02340CD7200A8C55B /* SGQRCodeObtain.m in Sources */,
 				904F4A4E234880BA0056AF49 /* GXGetCouponView.m in Sources */,
 				90E57F222346F51600F49834 /* GXSankPriceSectionFooter.m in Sources */,
@@ -4241,8 +4255,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "GX/呱选母婴店.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = 9AB2U8YRYY;
 				ENABLE_BITCODE = NO;
@@ -4266,7 +4280,7 @@
 				MARKETING_VERSION = 1.3.4;
 				PRODUCT_BUNDLE_IDENTIFIER = guaxuan.mfxapp.com;
 				PRODUCT_NAME = "呱选母婴店";
-				PROVISIONING_PROFILE_SPECIFIER = dev_guaxuan.mfxapp.com_0605;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -4277,8 +4291,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "GX/呱选母婴店.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = 9AB2U8YRYY;
 				ENABLE_BITCODE = NO;
@@ -4302,7 +4316,7 @@
 				MARKETING_VERSION = 1.3.4;
 				PRODUCT_BUNDLE_IDENTIFIER = guaxuan.mfxapp.com;
 				PRODUCT_NAME = "呱选母婴店";
-				PROVISIONING_PROFILE_SPECIFIER = dev_guaxuan.mfxapp.com_0605;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

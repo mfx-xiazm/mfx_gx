@@ -130,7 +130,7 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
 {
     if (_chooseClassView == nil) {
         _chooseClassView = [GXChooseClassView loadXibView];
-        _chooseClassView.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 420);
+        _chooseClassView.hxn_size = CGSizeMake(HX_SCREEN_WIDTH, 560);
     }
     return _chooseClassView;
 }
@@ -235,6 +235,53 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([GXShopGoodsCell class]) bundle:nil] forCellWithReuseIdentifier:ShopGoodsCell];
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([GXHomeSectionHeader class]) bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HomeSectionHeader];
 }
+-(void)showClassSkuView:(UIButton *)sender
+{
+    if (!self.goodsDetail.enableSkus.count) {
+        return;
+    }
+    
+    self.chooseClassView.goodsDetail = self.goodsDetail;
+    hx_weakify(self);
+    self.chooseClassView.goodsHandleCall = ^(NSInteger type) {
+        hx_strongify(weakSelf);
+        [strongSelf.classPopVC dismissWithDuration:0.25 completion:nil];
+        if (type) {
+            // 1加入购物车 2立即购买
+            if (sender.tag == 1) {
+                 [strongSelf addOrderCartRequest];
+            }else{
+                GXUpOrderVC *ovc = [GXUpOrderVC new];
+                ovc.goods_id = strongSelf.goods_id;//商品id
+                ovc.goods_num = [NSString stringWithFormat:@"%ld",(long)strongSelf.goodsDetail.buyNum];//商品数量
+                NSMutableString *specs_attrs = [NSMutableString string];
+                if (strongSelf.goodsDetail.spec && strongSelf.goodsDetail.spec.count) {
+                    for (GXGoodsDetailSpec *spec in strongSelf.goodsDetail.spec) {
+                        if (specs_attrs.length) {
+                            [specs_attrs appendFormat:@",%@",spec.selectSpec.attr_name];
+                        }else{
+                            [specs_attrs appendFormat:@"%@",spec.selectSpec.attr_name];
+                        }
+                    }
+                }
+                if (specs_attrs.length) {
+                    if (strongSelf.goodsDetail.selectLogisticst.freight_type && strongSelf.goodsDetail.selectLogisticst.freight_type.length) {
+                        [specs_attrs appendFormat:@",%@",strongSelf.goodsDetail.selectLogisticst.freight_type];
+                    }
+                }else{
+                    if (strongSelf.goodsDetail.selectLogisticst.freight_type && strongSelf.goodsDetail.selectLogisticst.freight_type.length) {
+                        [specs_attrs appendFormat:@"%@",strongSelf.goodsDetail.selectLogisticst.freight_type];
+                    }
+                }
+                ovc.specs_attrs = specs_attrs;//商品规格
+                ovc.sku_id = strongSelf.goodsDetail.sku.sku_id;
+                ovc.freight_template_id = strongSelf.goodsDetail.selectLogisticst.freight_template_id;
+                [strongSelf.navigationController pushViewController:ovc animated:YES];
+            }
+        }
+    };
+    [self.classPopVC showInView:self.view.window completion:nil];
+}
 #pragma mark -- 点击事件
 -(void)cartClicked
 {
@@ -281,46 +328,15 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
 
 - (IBAction)buyGoodsClicked:(UIButton *)sender {
     
-    self.chooseClassView.goodsDetail = self.goodsDetail;
-    hx_weakify(self);
-    self.chooseClassView.goodsHandleCall = ^(NSInteger type) {
-        hx_strongify(weakSelf);
-        [strongSelf.classPopVC dismissWithDuration:0.25 completion:nil];
-        if (type) {
-            // 1加入购物车 2立即购买
-            if (sender.tag == 1) {
-                 [strongSelf addOrderCartRequest];
-            }else{
-                GXUpOrderVC *ovc = [GXUpOrderVC new];
-                ovc.goods_id = strongSelf.goods_id;//商品id
-                ovc.goods_num = [NSString stringWithFormat:@"%ld",(long)strongSelf.goodsDetail.buyNum];//商品数量
-                NSMutableString *specs_attrs = [NSMutableString string];
-                if (strongSelf.goodsDetail.spec && strongSelf.goodsDetail.spec.count) {
-                    for (GXGoodsDetailSpec *spec in strongSelf.goodsDetail.spec) {
-                        if (specs_attrs.length) {
-                            [specs_attrs appendFormat:@",%@",spec.selectSpec.attr_name];
-                        }else{
-                            [specs_attrs appendFormat:@"%@",spec.selectSpec.attr_name];
-                        }
-                    }
-                }
-                if (specs_attrs.length) {
-                    if (strongSelf.goodsDetail.selectLogisticst.freight_type && strongSelf.goodsDetail.selectLogisticst.freight_type.length) {
-                        [specs_attrs appendFormat:@",%@",strongSelf.goodsDetail.selectLogisticst.freight_type];
-                    }
-                }else{
-                    if (strongSelf.goodsDetail.selectLogisticst.freight_type && strongSelf.goodsDetail.selectLogisticst.freight_type.length) {
-                        [specs_attrs appendFormat:@"%@",strongSelf.goodsDetail.selectLogisticst.freight_type];
-                    }
-                }
-                ovc.specs_attrs = specs_attrs;//商品规格
-                ovc.sku_id = strongSelf.goodsDetail.sku.sku_id;
-                ovc.freight_template_id = strongSelf.goodsDetail.selectLogisticst.freight_template_id;
-                [strongSelf.navigationController pushViewController:ovc animated:YES];
-            }
-        }
-    };
-    [self.classPopVC showInView:self.view.window completion:nil];
+    if (!self.goodsDetail.enableSkus) {
+        hx_weakify(self);
+        [self getGoodsSpecRequestCall:^{
+            hx_strongify(weakSelf);
+            [strongSelf showClassSkuView:sender];
+        }];
+    }else{
+        [self showClassSkuView:sender];
+    }
 }
 - (IBAction)applyJoinClicked:(UIButton *)sender {
     GXBrandDetailVC *bvc = [GXBrandDetailVC new];
@@ -400,7 +416,7 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
     [self.shop_name setTextWithLineSpace:5.f withString:_goodsDetail.goods_name withFont:[UIFont systemFontOfSize:15]];
     
     self.price.text = @"";
-    self.market_price.text = [NSString stringWithFormat:@"建议价:￥%@",_goodsDetail.suggest_price];
+    self.market_price.text = [NSString stringWithFormat:@"建议零售价:￥%@",_goodsDetail.suggest_price];
     self.cale_num.text = [NSString stringWithFormat:@"销量：%@",_goodsDetail.sale_num];
         
     if (self.goodsDetail.important_notice && self.goodsDetail.important_notice.length) {// 有重要通知
@@ -542,6 +558,29 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
         }
     } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
+}
+-(void)getGoodsSpecRequestCall:(void(^)(void))completedCall
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"goods_id"] = self.goods_id;
+    
+    hx_weakify(self);
+    [MBProgressHUD showOnlyLoadToView:nil];
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getGoodsSpec" parameters:parameters success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        [MBProgressHUD hideHUD];
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            strongSelf.goodsDetail.enableSkus = [NSArray yy_modelArrayWithClass:[GXGoodsDetailSku class] json:responseObject[@"data"]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completedCall();
+            });
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD hideHUD];
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
     }];
 }

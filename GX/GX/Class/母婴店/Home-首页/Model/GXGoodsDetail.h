@@ -59,10 +59,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong) NSArray<GXGoodsCommentLayout *> *evaLayout;
 @property(nonatomic,strong) GXGoodsRush *rush;
 @property(nonatomic,strong) NSArray<GXGoodsLogisticst *> *logistics;
+@property(nonatomic,strong) NSArray<GXGoodsDetailSku *> *enableSkus;
 /* 选中的分区的那个快递 */
 @property(nonatomic,strong) GXGoodsLogisticst * _Nullable selectLogisticst;
 /* 规格数据信息 */
-@property(nonatomic,strong) GXGoodsDetailSku *sku;
+@property(nonatomic,strong) GXGoodsDetailSku * _Nullable sku;
 @end
 
 @interface GXGoodsDetailAdv : NSObject
@@ -83,6 +84,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *specs_id;
 @property(nonatomic,copy) NSString *specs_name;
 @property(nonatomic,strong) NSArray<GXGoodsDetailSubSpec *> *spec_val;
+@property(nonatomic,strong) NSArray<NSString *> *attr_ids;
 /* 选中的改分区的那个规格 */
 @property(nonatomic,strong) GXGoodsDetailSubSpec *selectSpec;
 @end
@@ -100,6 +102,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *price;
 @property(nonatomic,copy) NSString *stock;
 @property(nonatomic,copy) NSString *control_type;
+@property(nonatomic,copy) NSString *spec_attr_ids;
 @property(nonatomic,copy) NSString *sale_id;
 @property(nonatomic,copy) NSString *is_contry;
 @property(nonatomic,copy) NSString *province_id;
