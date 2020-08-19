@@ -107,6 +107,7 @@
 		49E251BD249B5C0200EB1FEF /* XQCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E251B7249B5C0200EB1FEF /* XQCarousel.m */; };
 		49E251BE249B5C0200EB1FEF /* VideoMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E251B9249B5C0200EB1FEF /* VideoMaskView.m */; };
 		49E251BF249B5C0200EB1FEF /* XQVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E251BB249B5C0200EB1FEF /* XQVideoView.m */; };
+		49E2825C24ECBD1600141B04 /* GXSpecBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E2825B24ECBD1600141B04 /* GXSpecBtn.m */; };
 		49E4BAAE2499E5B00038461D /* GXPresellDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E4BAAC2499E5B00038461D /* GXPresellDetailVC.m */; };
 		49E4BAAF2499E5B00038461D /* GXPresellDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49E4BAAD2499E5B00038461D /* GXPresellDetailVC.xib */; };
 		49E4BAB8249A07300038461D /* GXRenewMarketTrendChildVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E4BAB6249A072F0038461D /* GXRenewMarketTrendChildVC.m */; };
@@ -695,6 +696,8 @@
 		49E251BA249B5C0200EB1FEF /* XQCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XQCarousel.h; sourceTree = "<group>"; };
 		49E251BB249B5C0200EB1FEF /* XQVideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XQVideoView.m; sourceTree = "<group>"; };
 		49E251BC249B5C0200EB1FEF /* VideoMaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoMaskView.h; sourceTree = "<group>"; };
+		49E2825A24ECBD1600141B04 /* GXSpecBtn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXSpecBtn.h; sourceTree = "<group>"; };
+		49E2825B24ECBD1600141B04 /* GXSpecBtn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXSpecBtn.m; sourceTree = "<group>"; };
 		49E4BAAB2499E5B00038461D /* GXPresellDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXPresellDetailVC.h; sourceTree = "<group>"; };
 		49E4BAAC2499E5B00038461D /* GXPresellDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXPresellDetailVC.m; sourceTree = "<group>"; };
 		49E4BAAD2499E5B00038461D /* GXPresellDetailVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GXPresellDetailVC.xib; sourceTree = "<group>"; };
@@ -1881,6 +1884,8 @@
 				49053CA5249241EC004B4A62 /* GXRebateView.h */,
 				49053CA6249241EC004B4A62 /* GXRebateView.m */,
 				49053CA8249241F4004B4A62 /* GXRebateView.xib */,
+				49E2825A24ECBD1600141B04 /* GXSpecBtn.h */,
+				49E2825B24ECBD1600141B04 /* GXSpecBtn.m */,
 			);
 			name = "商品详情";
 			sourceTree = "<group>";
@@ -3892,6 +3897,7 @@
 				902E88DD234746E400EFD0DF /* GXBigCateCell.m in Sources */,
 				90C0B2D22340B74900A8C55B /* AppDelegate.m in Sources */,
 				905B3DF3234597DC00282515 /* GXGoodsMaterialCell.m in Sources */,
+				49E2825C24ECBD1600141B04 /* GXSpecBtn.m in Sources */,
 				9099EE7F23682D5F0088D80C /* GXMessage.m in Sources */,
 				90C0B44C2340DA5700A8C55B /* GXRegionalVC.m in Sources */,
 				902413432366C24D0069DDCA /* GXRegisterAddStoreFooter.m in Sources */,

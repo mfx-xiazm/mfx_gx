@@ -87,9 +87,29 @@
                         </collectionView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GQc-51-BQg">
                             <rect key="frame" x="0.0" y="387" width="414" height="50"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已选" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2k2-kM-cxQ">
+                                    <rect key="frame" x="0.0" y="16.5" width="50" height="17"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="50" id="5sp-o9-scT"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" red="0.1019607843" green="0.1019607843" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JqQ-lD-l7Y">
+                                    <rect key="frame" x="50" y="0.0" width="364" height="50"/>
+                                </scrollView>
+                            </subviews>
                             <color key="backgroundColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="0.1016450264084507" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
+                                <constraint firstItem="2k2-kM-cxQ" firstAttribute="centerY" secondItem="GQc-51-BQg" secondAttribute="centerY" id="GWg-Pn-kWH"/>
                                 <constraint firstAttribute="height" constant="50" id="ImU-M9-wQd"/>
+                                <constraint firstItem="JqQ-lD-l7Y" firstAttribute="top" secondItem="GQc-51-BQg" secondAttribute="top" id="loW-zu-chz"/>
+                                <constraint firstItem="JqQ-lD-l7Y" firstAttribute="leading" secondItem="2k2-kM-cxQ" secondAttribute="trailing" id="nHa-jl-NsL"/>
+                                <constraint firstItem="2k2-kM-cxQ" firstAttribute="leading" secondItem="GQc-51-BQg" secondAttribute="leading" id="u8j-KA-sGq"/>
+                                <constraint firstAttribute="trailing" secondItem="JqQ-lD-l7Y" secondAttribute="trailing" id="x4F-bf-fTP"/>
+                                <constraint firstAttribute="bottom" secondItem="JqQ-lD-l7Y" secondAttribute="bottom" id="xfW-YE-Ppl"/>
                             </constraints>
                         </view>
                         <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vhV-VZ-SiV">
@@ -147,6 +167,8 @@
                 <outlet property="cover_img" destination="O0z-XJ-Cdw" id="cX0-yL-hTc"/>
                 <outlet property="market_price" destination="Asb-fM-iMH" id="AeE-fG-n1q"/>
                 <outlet property="price" destination="diD-Sc-2Y8" id="BYh-o4-fQC"/>
+                <outlet property="selectTagView" destination="JqQ-lD-l7Y" id="rnv-14-ZCd"/>
+                <outlet property="selectView" destination="GQc-51-BQg" id="ED9-h5-acW"/>
                 <outlet property="stock_num" destination="lso-3E-gfB" id="5CF-VO-LFE"/>
             </connections>
             <point key="canvasLocation" x="17" y="383"/>

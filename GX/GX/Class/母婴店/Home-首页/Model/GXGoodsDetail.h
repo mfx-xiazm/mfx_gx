@@ -86,12 +86,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong) NSArray<GXGoodsDetailSubSpec *> *spec_val;
 @property(nonatomic,strong) NSArray<NSString *> *attr_ids;
 /* 选中的改分区的那个规格 */
-@property(nonatomic,strong) GXGoodsDetailSubSpec *selectSpec;
+@property(nonatomic,strong) GXGoodsDetailSubSpec * _Nullable selectSpec;
 @end
 
 @interface GXGoodsDetailSubSpec : NSObject
 @property(nonatomic,copy) NSString *attr_id;
 @property(nonatomic,copy) NSString *attr_name;
+@property (nonatomic, copy) NSIndexPath *indexPath;
 /* 是否选中 */
 @property(nonatomic,assign) BOOL isSelected;
 @end
@@ -119,6 +120,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *freight_type;
 @property(nonatomic,copy) NSString *freight_template_name;
 @property(nonatomic,copy) NSString *freight_template_id;
+@property (nonatomic, copy) NSIndexPath *indexPath;
 /* 是否选中 */
 @property(nonatomic,assign) BOOL isSelected;
 @end

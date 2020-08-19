@@ -35,6 +35,12 @@
                                 <color key="textColor" red="0.92549019610000005" green="0.078431372550000003" blue="0.1764705882" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2019.02/6罐装" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QP1-5P-VHh">
+                                <rect key="frame" x="115" y="31.5" width="95" height="13.5"/>
+                                <fontDescription key="fontDescription" name=".PingFangSC-Regular" family=".PingFang SC" pointSize="12"/>
+                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PTM-VS-d7A">
                                 <rect key="frame" x="215" y="12.5" width="130" height="30"/>
                                 <subviews>
@@ -76,12 +82,6 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2019.02/6罐装" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QP1-5P-VHh">
-                                <rect key="frame" x="115" y="31.5" width="72.5" height="13.5"/>
-                                <fontDescription key="fontDescription" name=".PingFangSC-Regular" family=".PingFang SC" pointSize="12"/>
-                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -89,6 +89,7 @@
                             <constraint firstItem="BAS-PS-Kxt" firstAttribute="top" secondItem="yeF-OY-Tq1" secondAttribute="top" constant="10" id="NYG-Ud-6Ip"/>
                             <constraint firstItem="QP1-5P-VHh" firstAttribute="leading" secondItem="BAS-PS-Kxt" secondAttribute="trailing" constant="5" id="UaC-jG-voe"/>
                             <constraint firstItem="PTM-VS-d7A" firstAttribute="centerY" secondItem="yeF-OY-Tq1" secondAttribute="centerY" id="ZJy-FN-JCa"/>
+                            <constraint firstItem="PTM-VS-d7A" firstAttribute="leading" secondItem="QP1-5P-VHh" secondAttribute="trailing" constant="5" id="ce7-hS-PeB"/>
                             <constraint firstAttribute="bottom" secondItem="QP1-5P-VHh" secondAttribute="bottom" constant="10" id="eyd-R7-FPf"/>
                             <constraint firstItem="GRg-qF-AOo" firstAttribute="leading" secondItem="BAS-PS-Kxt" secondAttribute="trailing" constant="5" id="k43-gH-Deb"/>
                             <constraint firstAttribute="trailing" secondItem="PTM-VS-d7A" secondAttribute="trailing" constant="10" id="lW6-2u-BVk"/>

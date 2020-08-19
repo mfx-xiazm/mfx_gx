@@ -90,8 +90,8 @@
 {
     _logisticst = logisticst;
     
+    self.contentText.layer.cornerRadius = 15.f;
     self.contentText.text = _logisticst.freight_type;
-    
     if (_logisticst.isSelected) {
         self.contentText.textColor = [UIColor whiteColor];
         self.contentText.backgroundColor = HXControlBg;
