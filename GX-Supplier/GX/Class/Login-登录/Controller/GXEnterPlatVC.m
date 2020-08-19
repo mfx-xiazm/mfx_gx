@@ -757,7 +757,6 @@
     }];
 }
 /**
- document_type：document_name
  0001    法人身份证
  0011    身份证反面
  0002    商户营业执照（个人商户或企业商户必传）
@@ -778,9 +777,6 @@
  0019  第三方证明
  0020 其他小微商户证明材料（0016-0020小微商户必传其一）
  0021 经营商品照片(小微商户必传)
- 
- file_path：
- file_size
  */
 -(void)getSignDataRequest:(NSString *)seaType base64:(NSString *)base64 completedCall:(void(^)(NSDictionary* imageDict))completedCall
 {

@@ -260,7 +260,7 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
             self.rush_time.text = @"已结束";
         }
         self.price.text = @"";
-        self.market_price.text = [NSString stringWithFormat:@"建议价:￥%@",_goodsDetail.suggest_price];
+        self.market_price.text = [NSString stringWithFormat:@"建议零售价:￥%@",_goodsDetail.suggest_price];
     }else{//不抢购商品
         self.rushView.hidden = YES;
         self.rushViewHeight.constant = 0.f;
@@ -271,10 +271,10 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
             }else{
                 self.price.text = [NSString stringWithFormat:@"￥%@-￥%@",_goodsDetail.min_price,_goodsDetail.max_price];
             }
-            self.market_price.text = [NSString stringWithFormat:@"建议价:￥%@",_goodsDetail.suggest_price];
+            self.market_price.text = [NSString stringWithFormat:@"建议零售价:￥%@",_goodsDetail.suggest_price];
         }else{
             self.price.text = [NSString stringWithFormat:@"￥%@  ",_goodsDetail.min_price];
-            self.market_price.text = [NSString stringWithFormat:@"建议价:￥%@",_goodsDetail.suggest_price];
+            self.market_price.text = [NSString stringWithFormat:@"建议零售价:￥%@",_goodsDetail.suggest_price];
         }
     }
     self.cale_num.text = [NSString stringWithFormat:@"销量：%@",_goodsDetail.sale_num];

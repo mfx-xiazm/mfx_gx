@@ -99,7 +99,7 @@
 -(void)getBankDataRequest
 {
     hx_weakify(self);
-    [HXNetworkTool POST:HXRC_M_URL action:@"index/getSaleBankData" parameters:@{} success:^(id responseObject) {
+    [HXNetworkTool POST:HXRC_M_URL action:@"program/getSaleBankData" parameters:@{} success:^(id responseObject) {
         hx_strongify(weakSelf);
         [strongSelf stopShimmer];
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {

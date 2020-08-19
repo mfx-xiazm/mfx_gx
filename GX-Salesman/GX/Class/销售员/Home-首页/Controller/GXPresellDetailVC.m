@@ -294,7 +294,7 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
     
     [self.shop_name setTextWithLineSpace:5.f withString:_goodsDetail.goods_name withFont:[UIFont systemFontOfSize:15]];
     
-    self.market_price.text = [NSString stringWithFormat:@"建议价:￥%@",_goodsDetail.suggest_price];
+    self.market_price.text = [NSString stringWithFormat:@"建议零售价:￥%@",_goodsDetail.suggest_price];
     self.cale_num.text = [NSString stringWithFormat:@"销量：%@",_goodsDetail.sale_num];
         
     if (self.goodsDetail.important_notice && self.goodsDetail.important_notice.length) {// 有重要通知
