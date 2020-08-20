@@ -120,10 +120,10 @@
 }
 
 - (IBAction)chooseAdressClicked:(UIButton *)sender {
-    if (!self.region || !self.region.regions.count) {
+    if (!self.mainStore.region || !self.mainStore.region.regions.count) {
         return;
     }
-    self.addressView.region = self.region;
+    self.addressView.region = self.mainStore.region;
     [self.addressPopVC show];
 }
 

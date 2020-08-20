@@ -21,8 +21,6 @@ typedef void(^storeTypeCall)(void);
 @property(nonatomic,strong) NSArray *catalogItem;
 /* 主门店 */
 @property(nonatomic,strong) GXRegisterStore *mainStore;
-/* 所有地区 */
-@property(nonatomic,strong) GXSelectRegion *region;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -101,23 +101,31 @@ static NSString *const ChooseClassFooter = @"ChooseClassFooter";
     }
     
     if (_goodsDetail.spec && _goodsDetail.spec.count) {
-        if (_goodsDetail.sku) {
-            self.price.text = [NSString stringWithFormat:@"￥%@",_goodsDetail.sku.price];
-            self.stock_num.text = [NSString stringWithFormat:@"库存：%@",_goodsDetail.sku.stock];
-        }else{
-            self.stock_num.text = @"";
-            if ([_goodsDetail.min_price floatValue] == [_goodsDetail.max_price floatValue]) {
-                self.price.text = [NSString stringWithFormat:@"￥%@",_goodsDetail.min_price];
-            }else{
-                self.price.text = [NSString stringWithFormat:@"￥%@-￥%@",_goodsDetail.min_price,_goodsDetail.max_price];
-            }
-        }
+        [self initGoodsPriceStock];
     }
     if (!_filter) {
         //当数据更新的时候 需要reloadData
         [self.filter reloadData];
     }
     [self.collectionView reloadData];
+}
+-(void)initGoodsPriceStock
+{
+    if (_goodsDetail.sku) {
+        self.price.text = [NSString stringWithFormat:@"￥%@",_goodsDetail.sku.price];
+        self.stock_num.text = [NSString stringWithFormat:@"库存：%@",_goodsDetail.sku.stock];
+    }else{
+        self.stock_num.text = @"";
+        if ([_goodsDetail.control_type isEqualToString:@"1"]) {
+            if ([_goodsDetail.min_price floatValue] == [_goodsDetail.max_price floatValue]) {
+                self.price.text = [NSString stringWithFormat:@"￥%@",_goodsDetail.min_price];
+            }else{
+                self.price.text = [NSString stringWithFormat:@"￥%@-￥%@",_goodsDetail.min_price,_goodsDetail.max_price];
+            }
+        }else{
+            self.price.text = [NSString stringWithFormat:@"￥%@  ",_goodsDetail.min_price];
+        }
+    }
 }
 -(void)getShopStockRequest
 {
@@ -310,6 +318,7 @@ static NSString *const ChooseClassFooter = @"ChooseClassFooter";
             }else{// 如果不是一条完整的sku,就重置上次的配送方式
                 self.goodsDetail.sku = nil;
                 self.goodsDetail.selectLogisticst = nil;
+                [self initGoodsPriceStock];
                 [self updateSelectView];
             }
         }else{

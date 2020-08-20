@@ -73,7 +73,7 @@
         self.district_id = _address.district_id;
         self.town_id = _address.town_id;
     }
-    [self getAllAreaRequest];
+    self.region = [[GXSelectRegion alloc] init];
     
     [self.sureBtn BindingBtnJudgeBlock:^BOOL{
         hx_strongify(weakSelf);
@@ -138,42 +138,50 @@
 
 - (IBAction)regionClicked:(UIButton *)sender {
     if (!self.region || !self.region.regions.count) {
-        return;
+        hx_weakify(self);
+        [self getRegionRequest:^{
+            hx_strongify(weakSelf);
+            [strongSelf showAddressView];
+        }];
+    }else{
+        [self showAddressView];
     }
     [self.view endEditing:YES];
-
+}
+-(void)showAddressView
+{
     self.addressView.region = self.region;
     [self.addressPopVC show];
 }
-
--(void)getAllAreaRequest
+-(void)getRegionRequest:(void(^)(void))completedCall
 {
-    hx_weakify(self);
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        hx_strongify(weakSelf);
-        
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"areaData" ofType:@"txt"];
-        NSString *districtStr = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
-        
-        if (districtStr == nil) {
-            return;
-        }
-        NSData *jsonData = [districtStr dataUsingEncoding:NSUTF8StringEncoding];
-        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
-        strongSelf.region = [[GXSelectRegion alloc] init];
-        strongSelf.region.regions = [NSArray yy_modelArrayWithClass:[GXRegion class] json:responseObject[@"data"]];
-    });
-//    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getAreaData" parameters:@{} success:^(id responseObject) {
+//    hx_weakify(self);
+//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
 //        hx_strongify(weakSelf);
-//        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
-//            strongSelf.region = [[GXSelectRegion alloc] init];
-//            strongSelf.region.regions = [NSArray yy_modelArrayWithClass:[GXRegion class] json:responseObject[@"data"]];
-//        }else{
-//            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+//
+//        NSString *path = [[NSBundle mainBundle] pathForResource:@"areaData" ofType:@"txt"];
+//        NSString *districtStr = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
+//
+//        if (districtStr == nil) {
+//            return;
 //        }
-//    } failure:^(NSError *error) {
-//        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
-//    }];
+//        NSData *jsonData = [districtStr dataUsingEncoding:NSUTF8StringEncoding];
+//        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
+//        strongSelf.region = [[GXSelectRegion alloc] init];
+//        strongSelf.region.regions = [NSArray yy_modelArrayWithClass:[GXRegion class] json:responseObject[@"data"]];
+//    });
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getAllProvince" parameters:@{} success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            strongSelf.region.regions = [NSArray yy_modelArrayWithClass:[GXRegion class] json:responseObject[@"data"]];
+            completedCall();
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
 }
 -(void)saveAddressRequest:(UIButton *)btn
 {

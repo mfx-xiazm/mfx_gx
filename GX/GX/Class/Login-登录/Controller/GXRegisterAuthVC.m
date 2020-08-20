@@ -47,8 +47,9 @@ static NSString *const RegisterAuthCell = @"RegisterAuthCell";
     [self.navigationItem setTitle:@"注册验证"];
     self.mainStore = [[GXRegisterStore alloc] init];
     [self setUpTableView];
+    self.region = [[GXSelectRegion alloc] init];
+    [self getRegionRequest];
     [self getCatalogItemRequest];
-    [self getAllAreaRequest];
 }
 -(void)viewDidLayoutSubviews
 {
@@ -149,41 +150,35 @@ static NSString *const RegisterAuthCell = @"RegisterAuthCell";
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
     }];
 }
--(void)getAllAreaRequest
+-(void)getRegionRequest
 {
-    hx_weakify(self);
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        hx_strongify(weakSelf);
-        
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"areaData" ofType:@"txt"];
-        NSString *districtStr = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
-        
-        if (districtStr == nil) {
-            return ;
-        }
-        NSData *jsonData = [districtStr dataUsingEncoding:NSUTF8StringEncoding];
-        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
-        strongSelf.region = [[GXSelectRegion alloc] init];
-        strongSelf.region.regions = [NSArray yy_modelArrayWithClass:[GXRegion class] json:responseObject[@"data"]];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            strongSelf.header.region = strongSelf.region;
-        });
-    });
 //    hx_weakify(self);
-//    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getAreaData" parameters:@{} success:^(id responseObject) {
+//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
 //        hx_strongify(weakSelf);
-//        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
-//            strongSelf.region = [[GXSelectRegion alloc] init];
-//            strongSelf.region.regions = [NSArray yy_modelArrayWithClass:[GXRegion class] json:responseObject[@"data"]];
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                strongSelf.header.region = strongSelf.region;
-//            });
-//        }else{
-//            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+//
+//        NSString *path = [[NSBundle mainBundle] pathForResource:@"areaData" ofType:@"txt"];
+//        NSString *districtStr = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
+//
+//        if (districtStr == nil) {
+//            return;
 //        }
-//    } failure:^(NSError *error) {
-//        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
-//    }];
+//        NSData *jsonData = [districtStr dataUsingEncoding:NSUTF8StringEncoding];
+//        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
+//        strongSelf.region = [[GXSelectRegion alloc] init];
+//        strongSelf.region.regions = [NSArray yy_modelArrayWithClass:[GXRegion class] json:responseObject[@"data"]];
+//    });
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"admin/getAllProvince" parameters:@{} success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            strongSelf.region.regions = [NSArray yy_modelArrayWithClass:[GXRegion class] json:responseObject[@"data"]];
+            strongSelf.mainStore.region = strongSelf.region;
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
 }
 -(void)checkDataValidity
 {
@@ -372,7 +367,7 @@ static NSString *const RegisterAuthCell = @"RegisterAuthCell";
         hx_weakify(self);
         footer.addStoreCall = ^{
             hx_strongify(weakSelf);
-            if (strongSelf.region) {
+            if (strongSelf.region && strongSelf.region.regions.count) {
                 GXRegisterStore *store = [GXRegisterStore new];
                 GXSelectRegion *region = [[GXSelectRegion alloc] init];
                 region.regions = strongSelf.region.regions;
