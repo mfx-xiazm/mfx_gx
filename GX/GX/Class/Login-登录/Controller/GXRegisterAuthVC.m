@@ -287,7 +287,9 @@ static NSString *const RegisterAuthCell = @"RegisterAuthCell";
     }
 
     hx_weakify(self);
+    [MBProgressHUD showOnlyLoadToView:nil];
     [HXNetworkTool POST:HXRC_M_URL action:@"admin/register" parameters:parameters success:^(id responseObject) {
+        [MBProgressHUD hideHUD];
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -297,6 +299,7 @@ static NSString *const RegisterAuthCell = @"RegisterAuthCell";
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
         }
     } failure:^(NSError *error) {
+        [MBProgressHUD hideHUD];
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
     }];
 }

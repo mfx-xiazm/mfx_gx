@@ -102,6 +102,7 @@
 }
 #pragma mark -- 点击事件
 - (IBAction)chooseStoreTypeClicked:(UIButton *)sender {
+    [self endEditing:YES];
     FSActionSheet *as = [[FSActionSheet alloc] initWithTitle:@"门店类型" delegate:nil cancelButtonTitle:@"取消" highlightedButtonTitle:nil otherButtonTitles:@[@"单门店",@"连锁店"]];
     hx_weakify(self);
     [as showWithSelectedCompletion:^(NSInteger selectedIndex) {
@@ -120,6 +121,7 @@
 }
 
 - (IBAction)chooseAdressClicked:(UIButton *)sender {
+    [self endEditing:YES];
     if (!self.mainStore.region || !self.mainStore.region.regions.count) {
         return;
     }
@@ -128,7 +130,7 @@
 }
 
 - (IBAction)chooseCateClicked:(UIButton *)sender {
-    
+    [self endEditing:YES];
     self.cateItemView.catalogItem = self.catalogItem;
     hx_weakify(self);
     self.cateItemView.runCateCall = ^(NSInteger index) {
@@ -157,7 +159,7 @@
     [self.catePopVC show];
 }
 - (IBAction)chooseImgClicked:(UIButton *)sender {
-    
+    [self endEditing:YES];
     self.selectBtn = sender;
     
     FSActionSheet *as = [[FSActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:@"取消" highlightedButtonTitle:nil otherButtonTitles:@[@"拍照",@"从手机相册选择"]];

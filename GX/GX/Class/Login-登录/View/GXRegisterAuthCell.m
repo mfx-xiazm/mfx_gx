@@ -89,11 +89,12 @@
     return _addressPopVC;
 }
 - (IBAction)chooseAdressClicked:(UIButton *)sender {
-   
+    [self endEditing:YES];
     self.addressView.region = self.store.region;
     [self.addressPopVC show];
 }
 - (IBAction)chooseImgClicked:(UIButton *)sender {
+    [self endEditing:YES];
     FSActionSheet *as = [[FSActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:@"取消" highlightedButtonTitle:nil otherButtonTitles:@[@"拍照",@"从手机相册选择"]];
     hx_weakify(self);
     [as showWithSelectedCompletion:^(NSInteger selectedIndex) {
