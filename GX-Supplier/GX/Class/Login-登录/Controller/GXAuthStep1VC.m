@@ -98,7 +98,7 @@
         self.auth_view.hidden = YES;
         self.apply_view.hidden = NO;
         [self getCatalogItemRequest];
-        [self getAllAreaRequest];
+        self.region = [[GXSelectRegion alloc] init];
     }
     
     hx_weakify(self);
@@ -187,8 +187,8 @@
             return NO;
         }
         return YES;
-    } ActionBlock:^(UIButton * _Nullable button) {        hx_strongify(weakSelf);
-
+    } ActionBlock:^(UIButton * _Nullable button) {
+        hx_strongify(weakSelf);
         [strongSelf submitRegisterRequest:button];
     }];
 }
@@ -217,6 +217,13 @@
         _cateItemView.hxn_size = CGSizeMake(HX_SCREEN_WIDTH-30*2, 260);
     }
     return _cateItemView;
+}
+-(void)showAddressView
+{
+    self.addressView.region = self.region;
+    self.zh_popupController = [[zhPopupController alloc] init];
+    self.zh_popupController.layoutType = zhPopupLayoutTypeBottom;
+    [self.zh_popupController presentContentView:self.addressView duration:0.25 springAnimated:NO];
 }
 #pragma mark -- 业务接口
 -(void)submitRegisterRequest:(UIButton *)btn
@@ -281,35 +288,38 @@
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
     }];
 }
--(void)getAllAreaRequest
+-(void)getRegionRequest:(void(^)(void))completedCall
 {
-    hx_weakify(self);
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        hx_strongify(weakSelf);
-        
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"areaData" ofType:@"txt"];
-        NSString *districtStr = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
-        
-        if (districtStr == nil) {
-            return ;
-        }
-        NSData *jsonData = [districtStr dataUsingEncoding:NSUTF8StringEncoding];
-        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
-        strongSelf.region = [[GXSelectRegion alloc] init];
-        strongSelf.region.regions = [NSArray yy_modelArrayWithClass:[GXRegion class] json:responseObject[@"data"]];
-    });
 //    hx_weakify(self);
-//    [HXNetworkTool POST:HXRC_M_URL action:@"index/getAreaData" parameters:@{} success:^(id responseObject) {
+//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
 //        hx_strongify(weakSelf);
-//        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
-//            strongSelf.region = [[GXSelectRegion alloc] init];
-//            strongSelf.region.regions = [NSArray yy_modelArrayWithClass:[GXRegion class] json:responseObject[@"data"]];
-//        }else{
-//            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+//
+//        NSString *path = [[NSBundle mainBundle] pathForResource:@"areaData" ofType:@"txt"];
+//        NSString *districtStr = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
+//
+//        if (districtStr == nil) {
+//            return ;
 //        }
-//    } failure:^(NSError *error) {
-//        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
-//    }];
+//        NSData *jsonData = [districtStr dataUsingEncoding:NSUTF8StringEncoding];
+//        NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
+//        strongSelf.region = [[GXSelectRegion alloc] init];
+//        strongSelf.region.regions = [NSArray yy_modelArrayWithClass:[GXRegion class] json:responseObject[@"data"]];
+//    });
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"area_id"] = @"0";
+    
+    hx_weakify(self);
+    [HXNetworkTool POST:HXRC_M_URL action:@"index/getAllChildArea" parameters:parameters success:^(id responseObject) {
+        hx_strongify(weakSelf);
+        if([[responseObject objectForKey:@"status"] integerValue] == 1) {
+            strongSelf.region.regions = [NSArray yy_modelArrayWithClass:[GXRegion class] json:responseObject[@"data"]];
+            completedCall();
+        }else{
+            [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
+    }];
 }
 #pragma mark -- 点击事件
 - (IBAction)signNoticeClicked:(UIButton *)sender {
@@ -333,7 +343,7 @@
                 strongSelf.reSubmitBtn.hidden = YES;
                 strongSelf.apply_view.hidden = NO;
                 [strongSelf getCatalogItemRequest];
-                [strongSelf getAllAreaRequest];
+                strongSelf.region = [[GXSelectRegion alloc] init];
             });
         }else{
             [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:[responseObject objectForKey:@"message"]];
@@ -421,12 +431,15 @@
         [datepicker show];
     }else{
         if (!self.region || !self.region.regions.count) {
-            return;
+            hx_weakify(self);
+            [self getRegionRequest:^{
+                hx_strongify(weakSelf);
+                [strongSelf showAddressView];
+            }];
+        }else{
+            [self showAddressView];
         }
-        self.addressView.region = self.region;
-        self.zh_popupController = [[zhPopupController alloc] init];
-        self.zh_popupController.layoutType = zhPopupLayoutTypeBottom;
-        [self.zh_popupController presentContentView:self.addressView duration:0.25 springAnimated:NO];
+        [self.view endEditing:YES];
     }
 }
 - (IBAction)chooseImgClicked:(UIButton *)sender {

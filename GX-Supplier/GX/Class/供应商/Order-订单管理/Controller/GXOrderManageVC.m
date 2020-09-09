@@ -224,6 +224,7 @@
         }
     };
     self.zh_popupController = [[zhPopupController alloc] init];
-    [self.zh_popupController presentContentView:nil duration:0.25 springAnimated:NO];
+    self.zh_popupController.dismissOnMaskTouched = NO;
+    [self.zh_popupController presentContentView:alert duration:0.25 springAnimated:NO];
 }
 @end

@@ -272,6 +272,7 @@ static NSString *const HomeBannerHeader = @"HomeBannerHeader";
         }
     };
     self.updatePopVC = [[zhPopupController alloc] initWithView:alert size:alert.bounds.size];
+    self.updatePopVC.dismissOnMaskTouched = NO;
     [self.updatePopVC show];
 }
 #pragma mark -- UICollectionView 数据源和代理
