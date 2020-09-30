@@ -62,14 +62,10 @@ static NSString *const UpOrderCell = @"UpOrderCell";
             avc.getAddressCall = ^(GXMyAddress * _Nonnull address) {
                 if (strongSelf.confirmOrder.defaultAddress) {
                     if (![address.address_id isEqualToString:strongSelf.confirmOrder.defaultAddress.address_id]) {
-                        strongSelf.confirmOrder.defaultAddress = address;
-                        [strongSelf checkGoodsAreaRequest];//请求接口
-                    }else{
-                        strongSelf.confirmOrder.defaultAddress = address;
+                        [strongSelf checkGoodsAreaRequest:address.address_id];//请求接口
                     }
                 }else{
-                    strongSelf.confirmOrder.defaultAddress = address;
-                    [strongSelf checkGoodsAreaRequest];//请求接口
+                    [strongSelf checkGoodsAreaRequest:address.address_id];//请求接口
                 }
             };
             [strongSelf.navigationController pushViewController:avc animated:YES];
@@ -175,10 +171,10 @@ static NSString *const UpOrderCell = @"UpOrderCell";
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
     }];
 }
--(void)checkGoodsAreaRequest
+-(void)checkGoodsAreaRequest:(NSString *)address_id
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    parameters[@"address_id"] = self.confirmOrder.defaultAddress.address_id;//选择的收货地址id
+    parameters[@"address_id"] = address_id;//选择的收货地址id
     NSMutableString *skuDatas = [NSMutableString string];
     [skuDatas appendString:@"["];
     for (GXConfirmOrderData *orderData in self.confirmOrder.goodsData) {

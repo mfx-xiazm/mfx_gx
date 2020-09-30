@@ -97,7 +97,7 @@ static NSString *const RegisterAuthCell = @"RegisterAuthCell";
         };
         _footer.submitStoreCall = ^(UIButton * _Nonnull btn) {
             hx_strongify(weakSelf);
-            [strongSelf checkDataValidity];
+            [strongSelf checkDataValidity:btn];
         };
     }
     return _footer;
@@ -180,7 +180,7 @@ static NSString *const RegisterAuthCell = @"RegisterAuthCell";
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
     }];
 }
--(void)checkDataValidity
+-(void)checkDataValidity:(UIButton *)btn
 {
     if (!self.mainStore.shop_type.length) {
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请选择门店类型"];
@@ -250,9 +250,9 @@ static NSString *const RegisterAuthCell = @"RegisterAuthCell";
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:@"请阅读勾选注册协议"];
         return;
     }
-    [self submitStoreRequest];
+    [self submitStoreRequest:btn];
 }
--(void)submitStoreRequest
+-(void)submitStoreRequest:(UIButton *)btn
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"username"] = self.username;//姓名
@@ -271,7 +271,7 @@ static NSString *const RegisterAuthCell = @"RegisterAuthCell";
     parameters[@"food_license_img"] = (self.mainStore.food_license_img && self.mainStore.food_license_img.length)?self.mainStore.food_license_img:@"";//食品经营许可证
     parameters[@"town_id"] = self.mainStore.town_id;//店铺所属镇
     parameters[@"catalogs"] = self.mainStore.catalogs;//经营类目 多个catalog_id间用逗号隔开
-    if ([self.mainStore.shop_type isEqualToString:@"2"]) {
+    if ([self.mainStore.shop_type isEqualToString:@"2"]) {// 连锁
         NSMutableArray *userShops = [NSMutableArray array];
         for (GXRegisterStore *store in self.stores) {
             NSMutableDictionary *dict = [NSMutableDictionary dictionary];
@@ -282,14 +282,16 @@ static NSString *const RegisterAuthCell = @"RegisterAuthCell";
             [userShops addObject:dict];
         }
         parameters[@"userShops"] = [userShops yy_modelToJSONString];//多门店店铺 参数为二维数组
-    }else{
+    }else{// 单门店
         parameters[@"userShops"] = @"";//多门店店铺 参数为二维数组
     }
 
     hx_weakify(self);
     [MBProgressHUD showOnlyLoadToView:nil];
+    btn.userInteractionEnabled = NO;
     [HXNetworkTool POST:HXRC_M_URL action:@"admin/register" parameters:parameters success:^(id responseObject) {
         [MBProgressHUD hideHUD];
+        btn.userInteractionEnabled = YES;
         hx_strongify(weakSelf);
         if([[responseObject objectForKey:@"status"] integerValue] == 1) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -300,6 +302,7 @@ static NSString *const RegisterAuthCell = @"RegisterAuthCell";
         }
     } failure:^(NSError *error) {
         [MBProgressHUD hideHUD];
+        btn.userInteractionEnabled = YES;
         [MBProgressHUD showTitleToView:nil postion:NHHUDPostionCenten title:error.localizedDescription];
     }];
 }
