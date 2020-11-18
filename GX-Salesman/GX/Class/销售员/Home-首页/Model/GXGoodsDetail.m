@@ -24,7 +24,8 @@
              @"gift_rule":[GXGoodsGiftRule class],
              @"rebate":[GXGoodsRebate class],
              @"recommend":[GXRecommendReward class],
-             @"commission":[GXCommissionReward class]
+             @"commission":[GXCommissionReward class],
+             @"provider_customer":[GXGoodsCustomer class]
              };
 }
 
@@ -207,5 +208,9 @@
 @end
 
 @implementation GXGoodsRebate
+
+@end
+
+@implementation GXGoodsCustomer
 
 @end

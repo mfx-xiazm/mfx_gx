@@ -248,6 +248,7 @@ static NSString *const StoreGoodsListHeader = @"StoreGoodsListHeader";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     GXGoodsDetailVC *dvc = [GXGoodsDetailVC new];
     GXStoreGoods *storeGoods = self.storeGoods[indexPath.item];
+    dvc.provider_uid = self.provider_uid;
     dvc.goods_id = storeGoods.goods_id;
     [self.navigationController pushViewController:dvc animated:YES];
 }

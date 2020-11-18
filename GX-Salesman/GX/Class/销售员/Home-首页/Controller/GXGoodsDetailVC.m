@@ -71,6 +71,12 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
 @property (nonatomic,strong) GXGoodsMaterialLayout *shareModel;
 /* 分享弹框 */
 @property (nonatomic, strong) zhPopupController *sharePopVC;
+/* 客服 */
+@property (nonatomic, strong) UIBarButtonItem *customerItem;
+/* 价格排序 */
+@property (nonatomic, strong) UIBarButtonItem *sankItem;
+/* 卖货素材 */
+@property (nonatomic, strong) UIBarButtonItem *materialItem;
 @end
 
 @implementation GXGoodsDetailVC
@@ -103,11 +109,17 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
 {
     [self.navigationItem setTitle:nil];
     
-    UIButton *cart = [UIButton buttonWithType:UIButtonTypeCustom];
-    cart.hxn_size = CGSizeMake(40, 40);
-    [cart setImage:HXGetImage(@"按价格排序白色") forState:UIControlStateNormal];
-    [cart addTarget:self action:@selector(sankPriceClicked:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *cartItem = [[UIBarButtonItem alloc] initWithCustomView:cart];
+    UIButton *customer = [UIButton buttonWithType:UIButtonTypeCustom];
+    customer.hxn_size = CGSizeMake(40, 40);
+    [customer setImage:HXGetImage(@"客服") forState:UIControlStateNormal];
+    [customer addTarget:self action:@selector(customerClicked:) forControlEvents:UIControlEventTouchUpInside];
+    self.customerItem = [[UIBarButtonItem alloc] initWithCustomView:customer];
+    
+    UIButton *sank = [UIButton buttonWithType:UIButtonTypeCustom];
+    sank.hxn_size = CGSizeMake(40, 40);
+    [sank setImage:HXGetImage(@"按价格排序白色") forState:UIControlStateNormal];
+    [sank addTarget:self action:@selector(sankPriceClicked:) forControlEvents:UIControlEventTouchUpInside];
+    self.sankItem = [[UIBarButtonItem alloc] initWithCustomView:sank];
     
     UIButton *material = [UIButton buttonWithType:UIButtonTypeCustom];
     [material setTitle:@"卖货素材" forState:UIControlStateNormal];
@@ -119,9 +131,7 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
     material.backgroundColor = [UIColor whiteColor];
     [material addTarget:self action:@selector(materialClicked) forControlEvents:UIControlEventTouchUpInside];
     self.materialBtn = material;
-    UIBarButtonItem *materialItem = [[UIBarButtonItem alloc] initWithCustomView:material];
-    
-    self.navigationItem.rightBarButtonItems = @[cartItem,materialItem];
+    self.materialItem = [[UIBarButtonItem alloc] initWithCustomView:material];
 }
 - (void)setUpTableView
 {
@@ -151,6 +161,24 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
 }
 
 #pragma mark -- 点击事件
+- (void)customerClicked:(UIButton *)sender {
+    GXWebContentVC *wvc = [GXWebContentVC new];
+    wvc.isNeedRequest = NO;
+    wvc.url = [NSString stringWithFormat:@"https://ykf-webchat.7moor.com/wapchat.html?accessId=16f29a20-28bd-11eb-b145-57f963a2e61c&fromUrl=%@&urlTitle=%@&language=ZHCN&otherParams={\"agent\":\"%@\",\"peerId\":\"%@\",\"nickName\":\"%@\",\"cardInfo\":{\"left\":{\"url\": \"%@\"},\"right1\": {\"text\": \"%@\",\"color\": \"#595959\",\"fontSize\": 12},\"right2\": {\"text\": \" \",\"color\": \"#595959\",\"fontSize\": 12},\"right3\": {\"text\": \"%@\",\"color\": \"#ff6b6b\",\"fontSize\": 14}}}&clientId=saleman_%@&customField={\"userName\":\"%@\",\"userId\":\"%@\",\"userPhone\":\"%@\"}",
+               self.goodsDetail.provider_customer.fromUrl,
+               self.goodsDetail.provider_customer.urlTitle,
+               self.goodsDetail.provider_customer.agent,
+               self.goodsDetail.provider_customer.peerId,
+               [MSUserManager sharedInstance].curUserInfo.username,
+               self.goodsDetail.cover_img,
+               self.shop_name.text,
+               self.rushView.isHidden?self.price.text:self.rush_price.text,
+               [MSUserManager sharedInstance].curUserInfo.uid,
+               [MSUserManager sharedInstance].curUserInfo.username,
+               [MSUserManager sharedInstance].curUserInfo.uid,
+               [MSUserManager sharedInstance].curUserInfo.phone];
+    [self.navigationController pushViewController:wvc animated:YES];
+}
 -(void)materialClicked
 {
     GXSaleMaterialVC *mvc = [GXSaleMaterialVC new];
@@ -186,6 +214,9 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"goods_id"] = self.goods_id;
+    if (self.provider_uid) {
+        parameters[@"provider_uid"] = self.provider_uid;// 所属店铺id,从精选好店进入传
+    }
     if (self.rushbuy_id) {
         parameters[@"rushbuy_id"] = self.rushbuy_id;//爆款抢购id 常规商品和控区控价商品无该字段 则不需要传
     }
@@ -298,6 +329,12 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
     
     NSString *h5 = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"><style>img{width:100%%; height:auto;}body{margin:0 14px;}</style></head><body>%@</body></html>",self.goodsDetail.goods_desc];
     [self.webView loadHTMLString:h5 baseURL:[NSURL URLWithString:HXRC_URL_HEADER]];
+    
+    if (self.goodsDetail.provider_customer && self.goodsDetail.provider_customer.peerId.length) {
+        self.navigationItem.rightBarButtonItems = @[self.customerItem,self.sankItem,self.materialItem];
+    }else{
+        self.navigationItem.rightBarButtonItems = @[self.sankItem,self.materialItem];
+    }
 }
 -(void)shareNumRequest:(NSString *)material_id
 {

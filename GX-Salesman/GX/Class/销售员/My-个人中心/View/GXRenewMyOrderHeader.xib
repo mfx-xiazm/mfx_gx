@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -29,7 +29,7 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cgX-vL-GnZ">
+                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cgX-vL-GnZ">
                                     <rect key="frame" x="149.5" y="20" width="56.5" height="15"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <state key="normal" title="  未打款" image="打款记录">
@@ -37,7 +37,7 @@
                                     </state>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="订单状态" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V2I-Io-o5E">
-                                    <rect key="frame" x="149.5" y="19.5" width="246.5" height="16"/>
+                                    <rect key="frame" x="216" y="19.5" width="180" height="16"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                     <color key="textColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
@@ -51,7 +51,7 @@
                                 <constraint firstItem="cgX-vL-GnZ" firstAttribute="leading" secondItem="JTz-V9-00I" secondAttribute="trailing" constant="10" id="d1g-uJ-at5"/>
                                 <constraint firstAttribute="trailing" secondItem="V2I-Io-o5E" secondAttribute="trailing" constant="18" id="gbl-xc-Dgy"/>
                                 <constraint firstItem="V2I-Io-o5E" firstAttribute="centerY" secondItem="DJ9-i9-Va3" secondAttribute="centerY" constant="5" id="mF6-ak-T4I"/>
-                                <constraint firstItem="V2I-Io-o5E" firstAttribute="leading" secondItem="JTz-V9-00I" secondAttribute="trailing" constant="10" id="r97-SU-jRY"/>
+                                <constraint firstItem="V2I-Io-o5E" firstAttribute="leading" secondItem="cgX-vL-GnZ" secondAttribute="trailing" constant="10" id="sYf-Lf-ApZ"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A4C-IV-8Ea" userLabel="分割线">
