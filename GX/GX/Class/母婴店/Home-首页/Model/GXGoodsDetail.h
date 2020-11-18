@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class GXGoodsDetailAdv,GXGoodsDetailParam,GXGoodsDetailSpec,GXGoodsDetailSubSpec,GXGoodsMaterial,GXGoodsMaterialLayout,GXGoodsComment,GXGoodsCommentLayout,GXGoodsLogisticst,GXGoodsDetailSku,GXGoodsRush,GXGoodsRecommend,GXGoodsGiftRule,GXGoodsRebate;
+@class GXGoodsDetailAdv,GXGoodsDetailParam,GXGoodsDetailSpec,GXGoodsDetailSubSpec,GXGoodsMaterial,GXGoodsMaterialLayout,GXGoodsComment,GXGoodsCommentLayout,GXGoodsLogisticst,GXGoodsDetailSku,GXGoodsRush,GXGoodsRecommend,GXGoodsGiftRule,GXGoodsRebate,GXGoodsCustomer;
 @interface GXGoodsDetail : NSObject
 @property(nonatomic,copy) NSString *presell_id;
 @property(nonatomic,copy) NSString *sell_status;
@@ -64,6 +64,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong) GXGoodsLogisticst * _Nullable selectLogisticst;
 /* 规格数据信息 */
 @property(nonatomic,strong) GXGoodsDetailSku * _Nullable sku;
+
+@property(nonatomic,strong) GXGoodsCustomer * _Nullable provider_customer;
 @end
 
 @interface GXGoodsDetailAdv : NSObject
@@ -165,6 +167,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *begin_price;
 @property(nonatomic,copy) NSString *percent;
 @end
+
+@interface GXGoodsCustomer : NSObject
+@property(nonatomic,copy) NSString *fromUrl;
+@property(nonatomic,copy) NSString *urlTitle;
+@property(nonatomic,copy) NSString *agent;
+@property(nonatomic,copy) NSString *peerId;
+
+@end
+
 
 
 NS_ASSUME_NONNULL_END

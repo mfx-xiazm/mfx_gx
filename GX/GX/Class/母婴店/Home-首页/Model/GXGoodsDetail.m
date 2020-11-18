@@ -22,7 +22,8 @@
              @"logistics":[GXGoodsLogisticst class],
              @"goods_recommend":[GXGoodsRecommend class],
              @"gift_rule":[GXGoodsGiftRule class],
-             @"rebate":[GXGoodsRebate class]
+             @"rebate":[GXGoodsRebate class],
+             @"provider_customer":[GXGoodsCustomer class]
              };
 }
 
@@ -210,3 +211,8 @@
 @implementation GXGoodsRebate
 
 @end
+
+@implementation GXGoodsCustomer
+
+@end
+

@@ -71,10 +71,13 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewHeight;
 @property (weak, nonatomic) IBOutlet UIView *normal_tool;
+@property (weak, nonatomic) IBOutlet SPButton *normal_customer_btn;
 @property (weak, nonatomic) IBOutlet UIButton *normal_buy_btn;
 @property (weak, nonatomic) IBOutlet UIButton *normal_add_btn;
 @property (weak, nonatomic) IBOutlet UIView *try_tool;
 @property (weak, nonatomic) IBOutlet UIView *control_tool;
+@property (weak, nonatomic) IBOutlet SPButton *control_customer_btn;
+
 @property (weak, nonatomic) IBOutlet SPButton *normal_collect;
 @property (weak, nonatomic) IBOutlet SPButton *try_collect;
 @property (weak, nonatomic) IBOutlet SPButton *control_collect;
@@ -326,11 +329,33 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
         [self.navigationController pushViewController:bvc animated:YES];
     }
 }
+- (IBAction)customerBtnClicked:(UIButton *)sender {
+    GXWebContentVC *wvc = [GXWebContentVC new];
+    wvc.isNeedRequest = NO;
+    wvc.url = [NSString stringWithFormat:@"https://ykf-webchat.7moor.com/wapchat.html?accessId=16f29a20-28bd-11eb-b145-57f963a2e61c&fromUrl=%@&urlTitle=%@&language=ZHCN&otherParams={\"agent\":\"%@\",\"peerId\":\"%@\",\"nickName\":\"%@\",\"cardInfo\":{\"left\":{\"url\": \"%@\"},\"right1\": {\"text\": \"%@\",\"color\": \"#595959\",\"fontSize\": 12},\"right2\": {\"text\": \" \",\"color\": \"#595959\",\"fontSize\": 12},\"right3\": {\"text\": \"%@\",\"color\": \"#ff6b6b\",\"fontSize\": 14}}}&clientId=shop_%@&customField={\"userName\":\"%@\",\"userId\":\"%@\",\"userPhone\":\"%@\"}",
+               self.goodsDetail.provider_customer.fromUrl,
+               self.goodsDetail.provider_customer.urlTitle,
+               self.goodsDetail.provider_customer.agent,
+               self.goodsDetail.provider_customer.peerId,
+               [MSUserManager sharedInstance].curUserInfo.username,
+               self.goodsDetail.cover_img,
+               self.shop_name.text,
+               self.rushView.isHidden?self.price.text:self.rush_price.text,
+               [MSUserManager sharedInstance].curUserInfo.uid,
+               [MSUserManager sharedInstance].curUserInfo.username,
+               [MSUserManager sharedInstance].curUserInfo.uid,
+               [MSUserManager sharedInstance].curUserInfo.phone];
+    [self.navigationController pushViewController:wvc animated:YES];
+}
+
 #pragma mark -- 接口请求
 -(void)getGoodDetailRequest
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"goods_id"] = self.goods_id;
+    if (self.provider_uid) {
+        parameters[@"provider_uid"] = self.provider_uid;// 所属店铺id,从精选好店进入传
+    }
     if (self.rushbuy_id) {
         parameters[@"rushbuy_id"] = self.rushbuy_id;//爆款抢购id 常规商品和控区控价商品无该字段 则不需要传
     }
@@ -489,6 +514,13 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
                 }
             }
         }
+    }
+    if (self.goodsDetail.provider_customer && self.goodsDetail.provider_customer.peerId.length) {
+        self.normal_customer_btn.hidden = NO;
+        self.control_customer_btn.hidden = NO;
+    }else{
+        self.normal_customer_btn.hidden = YES;
+        self.control_customer_btn.hidden = YES;
     }
 }
 -(void)setCollectGoodsRequest

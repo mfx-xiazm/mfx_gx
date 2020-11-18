@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -15,12 +15,14 @@
                 <outlet property="collectionViewHeight" destination="2FD-VR-6NL" id="Xco-te-c8P"/>
                 <outlet property="contentScrollView" destination="S4W-dt-NZA" id="wYY-FD-eZl"/>
                 <outlet property="control_collect" destination="vXM-dJ-jsV" id="amA-tf-aYB"/>
+                <outlet property="control_customer_btn" destination="oYB-dH-zBF" id="RRv-Lj-WZP"/>
                 <outlet property="control_tool" destination="dci-xu-NWx" id="ONG-L6-XLd"/>
                 <outlet property="cyclePagerView" destination="JWp-5t-8uR" id="8bV-qq-XQR"/>
                 <outlet property="market_price" destination="XU5-V3-F1V" id="lWi-7R-cOZ"/>
                 <outlet property="normal_add_btn" destination="KkW-ND-l8c" id="Z7t-rP-Oot"/>
                 <outlet property="normal_buy_btn" destination="4KB-xH-ESk" id="cz0-xG-iPc"/>
                 <outlet property="normal_collect" destination="Oms-L0-DOk" id="vTe-8s-mwG"/>
+                <outlet property="normal_customer_btn" destination="c4U-U5-V4n" id="Nig-Kg-ief"/>
                 <outlet property="normal_tool" destination="DAn-sc-4Wd" id="Nfo-u4-aNO"/>
                 <outlet property="notice" destination="WMo-kI-qfY" id="tmq-Gs-lSN"/>
                 <outlet property="noticeView" destination="dfS-qO-Gi4" id="3IF-Br-mNL"/>
@@ -50,7 +52,7 @@
                     <rect key="frame" x="0.0" y="44" width="414" height="768"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bIb-J0-wtg">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="1070.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="1078"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JWp-5t-8uR">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
@@ -69,13 +71,13 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥174.00-￥229.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8LC-aH-Pfe">
-                                            <rect key="frame" x="52" y="10" width="134.5" height="18"/>
+                                            <rect key="frame" x="52" y="10" width="147" height="20"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥174.00-￥229.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sDg-Cz-Yiy">
-                                            <rect key="frame" x="52" y="35.5" width="107.5" height="14.5"/>
+                                            <rect key="frame" x="52" y="34" width="117.5" height="16"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
@@ -106,10 +108,10 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v7b-zX-qTs">
-                                    <rect key="frame" x="0.0" y="474" width="414" height="132.5"/>
+                                    <rect key="frame" x="0.0" y="474" width="414" height="140"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jD5-sa-q0R">
-                                            <rect key="frame" x="12" y="12" width="390" height="41"/>
+                                            <rect key="frame" x="12" y="12" width="390" height="45"/>
                                             <attributedString key="attributedText">
                                                 <fragment content="商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称">
                                                     <attributes>
@@ -122,34 +124,34 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥174.00-￥229.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EwZ-LO-Q3K">
-                                            <rect key="frame" x="12" y="63" width="134.5" height="18"/>
+                                            <rect key="frame" x="12" y="67" width="147" height="20"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                             <color key="textColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="建议价￥229.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XU5-V3-F1V">
-                                            <rect key="frame" x="161.5" y="64" width="96" height="16"/>
+                                            <rect key="frame" x="174" y="68.5" width="105.5" height="17.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="销量：1598" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GsQ-vZ-jne">
-                                            <rect key="frame" x="331.5" y="64" width="70.5" height="16"/>
+                                            <rect key="frame" x="324.5" y="68.5" width="77.5" height="17.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dfS-qO-Gi4">
-                                            <rect key="frame" x="12" y="90" width="390" height="30.5"/>
+                                            <rect key="frame" x="12" y="96" width="390" height="32"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="说明" translatesAutoresizingMaskIntoConstraints="NO" id="uJV-eE-aRw">
-                                                    <rect key="frame" x="10" y="4" width="19" height="23"/>
+                                                    <rect key="frame" x="10" y="4.5" width="19" height="23"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="19" id="WJK-uM-Bkm"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="重要通知：尺寸180*130" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WMo-kI-qfY">
-                                                    <rect key="frame" x="34" y="8" width="356" height="14.5"/>
+                                                    <rect key="frame" x="34" y="8" width="356" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="1" green="0.62352941179999999" blue="0.031372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -189,14 +191,14 @@
                                     </constraints>
                                 </view>
                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ifW-S2-zdL">
-                                    <rect key="frame" x="0.0" y="616.5" width="414" height="128"/>
+                                    <rect key="frame" x="0.0" y="624" width="414" height="128"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="128" id="Uhk-u3-1Co"/>
                                     </constraints>
                                 </tableView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZyR-nK-4z9">
-                                    <rect key="frame" x="0.0" y="744.5" width="414" height="60"/>
+                                    <rect key="frame" x="0.0" y="752" width="414" height="60"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="商品描述" translatesAutoresizingMaskIntoConstraints="NO" id="NrX-aL-6MQ">
                                             <rect key="frame" x="127" y="5.5" width="160" height="49"/>
@@ -210,14 +212,14 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1uU-MT-Cg4">
-                                    <rect key="frame" x="0.0" y="804.5" width="414" height="128"/>
+                                    <rect key="frame" x="0.0" y="812" width="414" height="128"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="128" id="E6g-aN-ZH0"/>
                                     </constraints>
                                 </view>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="vow-48-KNV">
-                                    <rect key="frame" x="0.0" y="942.5" width="414" height="128"/>
+                                    <rect key="frame" x="0.0" y="950" width="414" height="128"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="128" id="2FD-VR-6NL"/>
@@ -271,56 +273,82 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DAn-sc-4Wd">
                     <rect key="frame" x="0.0" y="812" width="414" height="50"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oms-L0-DOk" customClass="SPButton">
-                            <rect key="frame" x="0.0" y="0.0" width="80" height="50"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="80" id="v0D-41-cqY"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <state key="normal" title="加入清单" image="收藏">
-                                <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <state key="selected" title="已加入" image="星星 (1)">
-                                <color key="titleColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
-                            </state>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="imagePosition">
-                                    <integer key="value" value="2"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="number" keyPath="imageTitleSpace">
-                                    <real key="value" value="2"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="addCollectClicked:" destination="-1" eventType="touchUpInside" id="4bu-tk-kSn"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6vh-Lg-bqs" customClass="SPButton">
-                            <rect key="frame" x="80" y="0.0" width="80" height="50"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="80" id="ucz-xd-O9M"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <state key="normal" title="价格排序" image="价格">
-                                <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="imagePosition">
-                                    <integer key="value" value="2"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="number" keyPath="imageTitleSpace">
-                                    <real key="value" value="2"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="sankPriceClicked:" destination="-1" eventType="touchUpInside" id="FSy-I5-6iC"/>
-                            </connections>
-                        </button>
+                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yAb-9g-tPU">
+                            <rect key="frame" x="0.0" y="0.0" width="190" height="50"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c4U-U5-V4n" customClass="SPButton">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="50" id="8o7-h2-rdU"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <state key="normal" title="询单" image="客服">
+                                        <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="imagePosition">
+                                            <integer key="value" value="2"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="imageTitleSpace">
+                                            <real key="value" value="2"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="customerBtnClicked:" destination="-1" eventType="touchUpInside" id="wyn-A8-zMB"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oms-L0-DOk" customClass="SPButton">
+                                    <rect key="frame" x="50" y="0.0" width="70" height="50"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="70" id="v0D-41-cqY"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <state key="normal" title="加入清单" image="收藏">
+                                        <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                    <state key="selected" title="已加入" image="星星 (1)">
+                                        <color key="titleColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="imagePosition">
+                                            <integer key="value" value="2"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="imageTitleSpace">
+                                            <real key="value" value="2"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="addCollectClicked:" destination="-1" eventType="touchUpInside" id="4bu-tk-kSn"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6vh-Lg-bqs" customClass="SPButton">
+                                    <rect key="frame" x="120" y="0.0" width="70" height="50"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="70" id="ucz-xd-O9M"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <state key="normal" title="价格排序" image="价格">
+                                        <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="imagePosition">
+                                            <integer key="value" value="2"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="imageTitleSpace">
+                                            <real key="value" value="2"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="sankPriceClicked:" destination="-1" eventType="touchUpInside" id="FSy-I5-6iC"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F8W-GM-L8Y">
-                            <rect key="frame" x="160" y="5" width="244" height="40"/>
+                            <rect key="frame" x="190" y="5" width="214" height="40"/>
                             <subviews>
                                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KkW-ND-l8c">
-                                    <rect key="frame" x="0.0" y="0.0" width="122" height="40"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="107" height="40"/>
                                     <color key="backgroundColor" red="1" green="0.54117647058823526" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <state key="normal" title="加入购物车"/>
@@ -329,7 +357,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4KB-xH-ESk">
-                                    <rect key="frame" x="122" y="0.0" width="122" height="40"/>
+                                    <rect key="frame" x="107" y="0.0" width="107" height="40"/>
                                     <color key="backgroundColor" red="1" green="0.30196078431372547" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <state key="normal" title="立即购买">
@@ -367,51 +395,74 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="6vh-Lg-bqs" firstAttribute="top" secondItem="DAn-sc-4Wd" secondAttribute="top" id="0Bq-N5-2Br"/>
-                        <constraint firstAttribute="bottom" secondItem="6vh-Lg-bqs" secondAttribute="bottom" id="5Df-Mi-Xao"/>
-                        <constraint firstItem="Oms-L0-DOk" firstAttribute="top" secondItem="DAn-sc-4Wd" secondAttribute="top" id="5va-aB-dxM"/>
-                        <constraint firstItem="Oms-L0-DOk" firstAttribute="leading" secondItem="DAn-sc-4Wd" secondAttribute="leading" id="DMY-b4-oZY"/>
+                        <constraint firstAttribute="bottom" secondItem="yAb-9g-tPU" secondAttribute="bottom" id="7wt-ld-SuA"/>
                         <constraint firstItem="F8W-GM-L8Y" firstAttribute="top" secondItem="DAn-sc-4Wd" secondAttribute="top" constant="5" id="DWo-K9-57p"/>
                         <constraint firstItem="44U-1k-ecR" firstAttribute="leading" secondItem="DAn-sc-4Wd" secondAttribute="leading" id="Jx9-lS-Puw"/>
-                        <constraint firstItem="6vh-Lg-bqs" firstAttribute="leading" secondItem="Oms-L0-DOk" secondAttribute="trailing" id="KoH-QG-1YA"/>
-                        <constraint firstItem="F8W-GM-L8Y" firstAttribute="leading" secondItem="6vh-Lg-bqs" secondAttribute="trailing" id="Kz9-Rz-oZp"/>
                         <constraint firstAttribute="height" constant="50" id="NZU-P9-0P6"/>
+                        <constraint firstItem="yAb-9g-tPU" firstAttribute="top" secondItem="DAn-sc-4Wd" secondAttribute="top" id="RbZ-yc-HnA"/>
                         <constraint firstAttribute="trailing" secondItem="44U-1k-ecR" secondAttribute="trailing" id="SAY-ek-Mzb"/>
                         <constraint firstAttribute="bottom" secondItem="F8W-GM-L8Y" secondAttribute="bottom" constant="5" id="XcM-UC-Kh6"/>
+                        <constraint firstItem="F8W-GM-L8Y" firstAttribute="leading" secondItem="yAb-9g-tPU" secondAttribute="trailing" id="gKd-oz-d1X"/>
                         <constraint firstItem="44U-1k-ecR" firstAttribute="top" secondItem="DAn-sc-4Wd" secondAttribute="top" id="hu7-GZ-br5"/>
+                        <constraint firstItem="yAb-9g-tPU" firstAttribute="leading" secondItem="DAn-sc-4Wd" secondAttribute="leading" id="oSZ-KN-6kV"/>
                         <constraint firstAttribute="trailing" secondItem="F8W-GM-L8Y" secondAttribute="trailing" constant="10" id="uwu-HF-AM4"/>
-                        <constraint firstAttribute="bottom" secondItem="Oms-L0-DOk" secondAttribute="bottom" id="wOd-yb-4i6"/>
                     </constraints>
                 </view>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dci-xu-NWx">
                     <rect key="frame" x="0.0" y="812" width="414" height="50"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vXM-dJ-jsV" customClass="SPButton">
-                            <rect key="frame" x="0.0" y="1" width="80" height="49"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="80" id="WlF-p8-3IZ"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <state key="normal" title="加入清单" image="收藏">
-                                <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <state key="selected" title="已加入" image="星星 (1)">
-                                <color key="titleColor" red="0.91764705882352937" green="0.29019607843137252" blue="0.36078431372549019" alpha="1" colorSpace="calibratedRGB"/>
-                            </state>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="imagePosition">
-                                    <integer key="value" value="2"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="number" keyPath="imageTitleSpace">
-                                    <real key="value" value="2"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="addCollectClicked:" destination="-1" eventType="touchUpInside" id="7KD-wd-zUW"/>
-                            </connections>
-                        </button>
+                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ETM-P4-JeW">
+                            <rect key="frame" x="0.0" y="1" width="120" height="49"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oYB-dH-zBF" customClass="SPButton">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="49"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="50" id="NNl-YI-d9O"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <state key="normal" title="询单" image="客服">
+                                        <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="imagePosition">
+                                            <integer key="value" value="2"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="imageTitleSpace">
+                                            <real key="value" value="2"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="customerBtnClicked:" destination="-1" eventType="touchUpInside" id="Kls-0A-T5K"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vXM-dJ-jsV" customClass="SPButton">
+                                    <rect key="frame" x="50" y="0.0" width="70" height="49"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="70" id="WlF-p8-3IZ"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <state key="normal" title="加入清单" image="收藏">
+                                        <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                    <state key="selected" title="已加入" image="星星 (1)">
+                                        <color key="titleColor" red="0.91764705882352937" green="0.29019607843137252" blue="0.36078431372549019" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="imagePosition">
+                                            <integer key="value" value="2"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="imageTitleSpace">
+                                            <real key="value" value="2"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="addCollectClicked:" destination="-1" eventType="touchUpInside" id="7KD-wd-zUW"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zqq-Ve-HZM">
-                            <rect key="frame" x="80" y="5" width="322" height="40"/>
+                            <rect key="frame" x="120" y="5" width="282" height="40"/>
                             <color key="backgroundColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal" title="申请加盟">
@@ -436,14 +487,14 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstItem="ETM-P4-JeW" firstAttribute="top" secondItem="dHo-lm-rwu" secondAttribute="bottom" id="31U-K6-VdM"/>
+                        <constraint firstItem="zqq-Ve-HZM" firstAttribute="leading" secondItem="ETM-P4-JeW" secondAttribute="trailing" id="5jD-o5-K84"/>
+                        <constraint firstItem="ETM-P4-JeW" firstAttribute="leading" secondItem="dci-xu-NWx" secondAttribute="leading" id="Ae6-21-AQJ"/>
                         <constraint firstAttribute="trailing" secondItem="dHo-lm-rwu" secondAttribute="trailing" id="Cva-Z3-aaC"/>
-                        <constraint firstItem="zqq-Ve-HZM" firstAttribute="leading" secondItem="vXM-dJ-jsV" secondAttribute="trailing" id="GP5-ZP-KHB"/>
                         <constraint firstAttribute="bottom" secondItem="zqq-Ve-HZM" secondAttribute="bottom" constant="5" id="OaD-MT-eHr"/>
                         <constraint firstItem="zqq-Ve-HZM" firstAttribute="top" secondItem="dci-xu-NWx" secondAttribute="top" constant="5" id="Urd-0L-0gx"/>
-                        <constraint firstAttribute="bottom" secondItem="vXM-dJ-jsV" secondAttribute="bottom" id="WFF-rG-qlo"/>
                         <constraint firstAttribute="trailing" secondItem="zqq-Ve-HZM" secondAttribute="trailing" constant="12" id="aoy-pL-aK0"/>
-                        <constraint firstItem="vXM-dJ-jsV" firstAttribute="leading" secondItem="dci-xu-NWx" secondAttribute="leading" id="e1X-f4-GRt"/>
-                        <constraint firstItem="vXM-dJ-jsV" firstAttribute="top" secondItem="dHo-lm-rwu" secondAttribute="bottom" id="gRD-IP-tvs"/>
+                        <constraint firstAttribute="bottom" secondItem="ETM-P4-JeW" secondAttribute="bottom" id="dzg-be-fxC"/>
                         <constraint firstItem="dHo-lm-rwu" firstAttribute="leading" secondItem="dci-xu-NWx" secondAttribute="leading" id="lJs-4J-9Hw"/>
                         <constraint firstItem="dHo-lm-rwu" firstAttribute="top" secondItem="dci-xu-NWx" secondAttribute="top" id="qQL-P9-Ucx"/>
                         <constraint firstAttribute="height" constant="50" id="vTk-u9-Vjf"/>
@@ -453,9 +504,9 @@
                     <rect key="frame" x="0.0" y="812" width="414" height="50"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H0M-YK-XG5" customClass="SPButton">
-                            <rect key="frame" x="0.0" y="1" width="80" height="49"/>
+                            <rect key="frame" x="0.0" y="1" width="70" height="49"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="80" id="HP4-Hd-lqo"/>
+                                <constraint firstAttribute="width" constant="70" id="HP4-Hd-lqo"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <state key="normal" title="加入清单" image="收藏">
@@ -477,10 +528,10 @@
                             </connections>
                         </button>
                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Fa-i6-Wjp">
-                            <rect key="frame" x="80" y="5" width="322" height="40"/>
+                            <rect key="frame" x="70" y="5" width="332" height="40"/>
                             <subviews>
                                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hcV-jP-pNV">
-                                    <rect key="frame" x="0.0" y="0.0" width="161" height="40"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="166" height="40"/>
                                     <color key="backgroundColor" red="1" green="0.62352941179999999" blue="0.031372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <state key="normal" title="加入购物车"/>
@@ -489,7 +540,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GSD-BI-NNX">
-                                    <rect key="frame" x="161" y="0.0" width="161" height="40"/>
+                                    <rect key="frame" x="166" y="0.0" width="166" height="40"/>
                                     <color key="backgroundColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <state key="normal" title="立即购买">
@@ -564,6 +615,7 @@
     <resources>
         <image name="价格" width="17" height="17"/>
         <image name="商品描述" width="160" height="49"/>
+        <image name="客服" width="18" height="18"/>
         <image name="收藏" width="19" height="18"/>
         <image name="星星 (1)" width="19" height="19"/>
         <image name="爆款抢购_top" width="33.5" height="37"/>

@@ -76,6 +76,8 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
 @property (weak, nonatomic) IBOutlet UIView *rush_tool;
 @property (weak, nonatomic) IBOutlet UILabel *buttom_rush_time;
 @property (weak, nonatomic) IBOutlet SPButton *normal_collect;
+@property (weak, nonatomic) IBOutlet SPButton *normal_customer_btn;
+
 /* 卖货素材 */
 @property(nonatomic,weak) UIButton *materialBtn;
 /* 我要供货 */
@@ -343,6 +345,24 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
     bvc.brand_id = self.goodsDetail.brand_id;
     [self.navigationController pushViewController:bvc animated:YES];
 }
+- (IBAction)customerBtnClicked:(UIButton *)sender {
+    GXWebContentVC *wvc = [GXWebContentVC new];
+    wvc.isNeedRequest = NO;
+    wvc.url = [NSString stringWithFormat:@"https://ykf-webchat.7moor.com/wapchat.html?accessId=16f29a20-28bd-11eb-b145-57f963a2e61c&fromUrl=%@&urlTitle=%@&language=ZHCN&otherParams={\"agent\":\"%@\",\"peerId\":\"%@\",\"nickName\":\"%@\",\"cardInfo\":{\"left\":{\"url\": \"%@\"},\"right1\": {\"text\": \"%@\",\"color\": \"#595959\",\"fontSize\": 12},\"right2\": {\"text\": \" \",\"color\": \"#595959\",\"fontSize\": 12},\"right3\": {\"text\": \"%@\",\"color\": \"#ff6b6b\",\"fontSize\": 14}}}&clientId=shop_%@&customField={\"userName\":\"%@\",\"userId\":\"%@\",\"userPhone\":\"%@\"}",
+               self.goodsDetail.provider_customer.fromUrl,
+               self.goodsDetail.provider_customer.urlTitle,
+               self.goodsDetail.provider_customer.agent,
+               self.goodsDetail.provider_customer.peerId,
+               [MSUserManager sharedInstance].curUserInfo.username,
+               self.goodsDetail.cover_img,
+               self.shop_name.text,
+               self.rush_price.text,
+               [MSUserManager sharedInstance].curUserInfo.uid,
+               [MSUserManager sharedInstance].curUserInfo.username,
+               [MSUserManager sharedInstance].curUserInfo.uid,
+               [MSUserManager sharedInstance].curUserInfo.phone];
+    [self.navigationController pushViewController:wvc animated:YES];
+}
 #pragma mark -- 接口请求
 -(void)getGoodDetailRequest
 {
@@ -482,6 +502,12 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
             self.apply_tool.hidden = NO;
             self.rush_tool.hidden = YES;
         }
+    }
+    
+    if (self.goodsDetail.provider_customer && self.goodsDetail.provider_customer.peerId.length) {
+        self.normal_customer_btn.hidden = NO;
+    }else{
+        self.normal_customer_btn.hidden = YES;
     }
 }
 -(void)setCollectGoodsRequest

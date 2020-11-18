@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -29,15 +29,15 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cgX-vL-GnZ">
+                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cgX-vL-GnZ">
                                     <rect key="frame" x="149.5" y="19.5" width="49.5" height="15"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <state key="normal" title="未打款" image="打款记录">
                                         <color key="titleColor" red="1" green="0.54117647059999996" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="订单状态" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V2I-Io-o5E">
-                                    <rect key="frame" x="342" y="19" width="54" height="16"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="订单状态" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V2I-Io-o5E">
+                                    <rect key="frame" x="209" y="19" width="187" height="16"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                     <color key="textColor" red="0.91764705879999997" green="0.2901960784" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
@@ -51,6 +51,7 @@
                                 <constraint firstItem="cgX-vL-GnZ" firstAttribute="centerY" secondItem="DJ9-i9-Va3" secondAttribute="centerY" constant="5" id="UfF-v7-Vo5"/>
                                 <constraint firstItem="cgX-vL-GnZ" firstAttribute="leading" secondItem="JTz-V9-00I" secondAttribute="trailing" constant="10" id="d1g-uJ-at5"/>
                                 <constraint firstAttribute="trailing" secondItem="V2I-Io-o5E" secondAttribute="trailing" constant="18" id="gbl-xc-Dgy"/>
+                                <constraint firstItem="V2I-Io-o5E" firstAttribute="leading" secondItem="cgX-vL-GnZ" secondAttribute="trailing" constant="10" id="jX9-eH-Ao3"/>
                                 <constraint firstItem="V2I-Io-o5E" firstAttribute="centerY" secondItem="DJ9-i9-Va3" secondAttribute="centerY" constant="5" id="mF6-ak-T4I"/>
                             </constraints>
                         </view>

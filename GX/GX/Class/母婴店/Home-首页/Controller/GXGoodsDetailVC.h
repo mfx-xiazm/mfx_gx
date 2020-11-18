@@ -11,6 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface GXGoodsDetailVC : HXBaseViewController
+/* 店铺id */
+@property(nonatomic,copy) NSString *provider_uid;
 /* 商品id */
 @property(nonatomic,copy) NSString *goods_id;
 /* 爆款抢购id 常规商品和控区控价商品无该字段 则不需要传 */

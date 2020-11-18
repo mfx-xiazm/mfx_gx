@@ -246,8 +246,10 @@ static NSString *const StoreGoodsListHeader = @"StoreGoodsListHeader";
     return cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    // 这里是精选好店-商品列表
     GXGoodsDetailVC *dvc = [GXGoodsDetailVC new];
     GXStoreGoods *storeGoods = self.storeGoods[indexPath.item];
+    dvc.provider_uid = self.provider_uid;
     dvc.goods_id = storeGoods.goods_id;
     [self.navigationController pushViewController:dvc animated:YES];
 }
