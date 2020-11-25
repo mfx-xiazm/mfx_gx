@@ -25,6 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *notice_id;
 /** 帮助id  */
 @property(nonatomic,copy) NSString *help_id;
+/** 取消内部一切跳转  */
+@property(nonatomic,assign) BOOL cancelActionPolicy;
 @end
 
 NS_ASSUME_NONNULL_END

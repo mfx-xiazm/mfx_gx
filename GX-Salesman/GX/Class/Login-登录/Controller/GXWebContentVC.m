@@ -138,7 +138,16 @@
     }];
 }
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
-    decisionHandler(WKNavigationActionPolicyAllow);
+    NSString *urlStr = navigationAction.request.URL.absoluteString;
+    if (self.cancelActionPolicy) {
+        if ([urlStr containsString:@"ykf-webchat.7moor.com"]) {
+            decisionHandler(WKNavigationActionPolicyAllow);
+        }else{
+            decisionHandler(WKNavigationActionPolicyCancel);
+        }
+    }else{
+        decisionHandler(WKNavigationActionPolicyAllow);
+    }
 }
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error
 {

@@ -15,6 +15,7 @@
 #import "GXSearchResultVC.h"
 #import "HXSearchBar.h"
 #import "GXStoreGoodsListHeader.h"
+#import "GXWebContentVC.h"
 
 static NSString *const ShopGoodsCell = @"ShopGoodsCell";
 static NSString *const StoreGoodsListHeader = @"StoreGoodsListHeader";
@@ -28,6 +29,8 @@ static NSString *const StoreGoodsListHeader = @"StoreGoodsListHeader";
 @property(nonatomic,strong) GXStore *storeInfo;
 /* 搜索条 */
 @property(nonatomic,strong) HXSearchBar *searchBar;
+@property (nonatomic, strong) SPButton *customerBtn;
+
 @end
 
 @implementation GXStoreGoodsChildVC
@@ -74,14 +77,28 @@ static NSString *const StoreGoodsListHeader = @"StoreGoodsListHeader";
     
     [self.navigationItem setTitle:nil];
     
-    HXSearchBar *searchBar = [[HXSearchBar alloc] initWithFrame:CGRectMake(0, 0, HX_SCREEN_WIDTH - 55.f, 30.f)];
+    HXSearchBar *searchBar = [[HXSearchBar alloc] initWithFrame:CGRectMake(0, 0, HX_SCREEN_WIDTH - 100.f, 30.f)];
     searchBar.backgroundColor = [UIColor whiteColor];
     searchBar.layer.cornerRadius = 15.f;
     searchBar.layer.masksToBounds = YES;
     searchBar.delegate = self;
     searchBar.placeholder = @"请输入商品名称查询";
     self.searchBar = searchBar;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
+    self.navigationItem.titleView = searchBar;
+    
+    
+    SPButton *customer = [SPButton buttonWithType:UIButtonTypeCustom];
+    customer.hxn_size = CGSizeMake(40, 40);
+    [customer setImage:HXGetImage(@"客服-1") forState:UIControlStateNormal];
+    [customer setTitle:@"询单" forState:UIControlStateNormal];
+    customer.titleLabel.font = [UIFont systemFontOfSize:10];
+    customer.imagePosition = SPButtonImagePositionTop;
+    customer.imageTitleSpace = 2;
+    [customer addTarget:self action:@selector(customerClicked) forControlEvents:UIControlEventTouchUpInside];
+    customer.tintColor = UIColorFromRGB(0x2BA7EC);
+    [customer setTitleColor:UIColor.blackColor forState:UIControlStateNormal];
+    self.customerBtn = customer;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:customer];
 }
 /** 添加刷新控件 */
 -(void)setUpRefresh
@@ -219,14 +236,39 @@ static NSString *const StoreGoodsListHeader = @"StoreGoodsListHeader";
     if (gradientProgress < 0.1) {
         self.hbd_barStyle = UIBarStyleDefault;
         self.hbd_tintColor = UIColor.blackColor;
+        self.customerBtn.tintColor = UIColorFromRGB(0x2BA7EC);
+        [self.customerBtn setTitleColor:UIColor.blackColor forState:UIControlStateNormal];
     } else {
         self.hbd_barStyle = UIBarStyleBlack;
         self.hbd_tintColor = UIColor.whiteColor;
+        self.customerBtn.tintColor = UIColor.whiteColor;
+        [self.customerBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
     }
     self.hbd_barAlpha = gradientProgress;
     [self hbd_setNeedsUpdateNavigationBar];
 }
 #pragma mark -- 点击事件
+-(void)customerClicked
+{
+    if (self.storeInfo.provider_customer && self.storeInfo.provider_customer.peerId.length) {
+        GXWebContentVC *wvc = [GXWebContentVC new];
+        wvc.isNeedRequest = NO;
+        wvc.cancelActionPolicy = YES;
+        wvc.url = [NSString stringWithFormat:@"https://ykf-webchat.7moor.com/wapchat.html?accessId=16f29a20-28bd-11eb-b145-57f963a2e61c&fromUrl=%@&urlTitle=%@&language=ZHCN&otherParams={\"agent\":\"%@\",\"peerId\":\"%@\",\"nickName\":\"%@\"}&clientId=shop_%@&customField={\"userName\":\"%@\",\"userId\":\"%@\",\"userPhone\":\"%@\"}",
+                   self.storeInfo.provider_customer.fromUrl,
+                   self.storeInfo.provider_customer.urlTitle,
+                   self.storeInfo.provider_customer.agent,
+                   self.storeInfo.provider_customer.peerId,
+                   [MSUserManager sharedInstance].curUserInfo.username,
+                   [MSUserManager sharedInstance].curUserInfo.uid,
+                   [MSUserManager sharedInstance].curUserInfo.username,
+                   [MSUserManager sharedInstance].curUserInfo.uid,
+                   [MSUserManager sharedInstance].curUserInfo.phone];
+        [self.navigationController pushViewController:wvc animated:YES];
+    }else{
+        [MBProgressHUD showOnlyTextToView:nil title:@"商家未配置客服"];
+    }
+}
 
 #pragma mark -- UICollectionView 数据源和代理
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
