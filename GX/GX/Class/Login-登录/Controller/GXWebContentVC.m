@@ -142,7 +142,13 @@
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     NSString *urlStr = navigationAction.request.URL.absoluteString;
     //guaxuan://h5_to_native?goods_id=1
-    if ([urlStr hasPrefix:@"guaxuan://"]) {
+    if (self.cancelActionPolicy) {
+        if ([urlStr containsString:@"ykf-webchat.7moor.com"]) {
+            decisionHandler(WKNavigationActionPolicyAllow);
+        }else{
+            decisionHandler(WKNavigationActionPolicyCancel);
+        }
+    }else if ([urlStr hasPrefix:@"guaxuan://"]) {
         NSDictionary *paramer = [navigationAction.request.URL paramerWithURL];
         if (paramer && paramer[@"goods_id"]) {
             GXOrderDetailVC *dvc = [GXOrderDetailVC new];

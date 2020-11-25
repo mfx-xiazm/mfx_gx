@@ -14,7 +14,8 @@
     return @{@"goods":[GXStoreGoods class],
              @"coupons":[GXStoreCoupons class],
              @"coupon":[GXStoreCoupons class],
-             @"catalog":[GXCatalogItem class]
+             @"catalog":[GXCatalogItem class],
+             @"provider_customer":[GXStoreCustomer class]
              };
 }
 @end
@@ -24,5 +25,10 @@
 @end
 
 @implementation GXStoreCoupons
+
+@end
+
+
+@implementation GXStoreCustomer
 
 @end

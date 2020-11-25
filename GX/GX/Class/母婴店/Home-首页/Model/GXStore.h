@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class GXStoreGoods,GXStoreCoupons,GXCatalogItem;
+@class GXStoreGoods,GXStoreCoupons,GXCatalogItem,GXStoreCustomer;
 @interface GXStore : NSObject
 @property(nonatomic,copy) NSString *uid;
 @property(nonatomic,copy) NSString *shop_name;
@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic,strong) NSArray<GXCatalogItem *> *catalog;
 @property(nonatomic,strong) NSArray<GXStoreCoupons *> *coupon;
+@property(nonatomic,strong) GXStoreCustomer * _Nullable provider_customer;
+
 @end
        
 @interface GXStoreGoods : NSObject
@@ -42,6 +44,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *coupon_amount;
 @property(nonatomic,copy) NSString *valid_day;
 @property(nonatomic,copy) NSString *expire_time;
+
+@end
+
+
+@interface GXStoreCustomer : NSObject
+@property(nonatomic,copy) NSString *fromUrl;
+@property(nonatomic,copy) NSString *urlTitle;
+@property(nonatomic,copy) NSString *agent;
+@property(nonatomic,copy) NSString *peerId;
 
 @end
 NS_ASSUME_NONNULL_END
