@@ -84,8 +84,6 @@ static NSString *const StoreGoodsListHeader = @"StoreGoodsListHeader";
     searchBar.delegate = self;
     searchBar.placeholder = @"请输入商品名称查询";
     self.searchBar = searchBar;
-    self.navigationItem.titleView = searchBar;
-    
     
     SPButton *customer = [SPButton buttonWithType:UIButtonTypeCustom];
     customer.hxn_size = CGSizeMake(40, 40);
@@ -98,7 +96,6 @@ static NSString *const StoreGoodsListHeader = @"StoreGoodsListHeader";
     customer.tintColor = UIColorFromRGB(0x2BA7EC);
     [customer setTitleColor:UIColor.blackColor forState:UIControlStateNormal];
     self.customerBtn = customer;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:customer];
 }
 /** 添加刷新控件 */
 -(void)setUpRefresh
@@ -179,6 +176,14 @@ static NSString *const StoreGoodsListHeader = @"StoreGoodsListHeader";
             [strongSelf stopShimmer];
             strongSelf.collectionView.hidden = NO;
             [strongSelf.collectionView reloadData];
+            
+            if (strongSelf.storeInfo.provider_customer) {
+                strongSelf.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.customerBtn];
+                strongSelf.navigationItem.titleView = self.searchBar;
+            }else{
+                strongSelf.searchBar.frame = CGRectMake(0, 0, HX_SCREEN_WIDTH - 60.f, 30.f);
+                strongSelf.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.searchBar];
+            }
         });
     });
 }
@@ -254,7 +259,8 @@ static NSString *const StoreGoodsListHeader = @"StoreGoodsListHeader";
         GXWebContentVC *wvc = [GXWebContentVC new];
         wvc.isNeedRequest = NO;
         wvc.cancelActionPolicy = YES;
-        wvc.url = [NSString stringWithFormat:@"https://ykf-webchat.7moor.com/wapchat.html?accessId=16f29a20-28bd-11eb-b145-57f963a2e61c&fromUrl=%@&urlTitle=%@&language=ZHCN&otherParams={\"agent\":\"%@\",\"peerId\":\"%@\",\"nickName\":\"%@\"}&clientId=shop_%@&customField={\"userName\":\"%@\",\"userId\":\"%@\",\"userPhone\":\"%@\"}",
+        wvc.url = [NSString stringWithFormat:@"https://ykf-webchat.7moor.com/wapchat.html?accessId=%@&fromUrl=%@&urlTitle=%@&language=ZHCN&otherParams={\"agent\":\"%@\",\"peerId\":\"%@\",\"nickName\":\"%@\"}&clientId=gxshop_%@&customField={\"userName\":\"%@\",\"userId\":\"%@\",\"userPhone\":\"%@\"}",
+                   self.storeInfo.provider_customer.accessId,
                    self.storeInfo.provider_customer.fromUrl,
                    self.storeInfo.provider_customer.urlTitle,
                    self.storeInfo.provider_customer.agent,

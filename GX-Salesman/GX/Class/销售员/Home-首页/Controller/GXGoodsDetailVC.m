@@ -166,7 +166,8 @@ static NSString *const GoodsGiftCell = @"GoodsGiftCell";
         GXWebContentVC *wvc = [GXWebContentVC new];
         wvc.isNeedRequest = NO;
         wvc.cancelActionPolicy = YES;
-        wvc.url = [NSString stringWithFormat:@"https://ykf-webchat.7moor.com/wapchat.html?accessId=16f29a20-28bd-11eb-b145-57f963a2e61c&fromUrl=%@&urlTitle=%@&language=ZHCN&otherParams={\"agent\":\"%@\",\"peerId\":\"%@\",\"nickName\":\"%@\",\"cardInfo\":{\"left\":{\"url\": \"%@\"},\"right1\": {\"text\": \"%@\",\"color\": \"#595959\",\"fontSize\": 12},\"right2\": {\"text\": \" \",\"color\": \"#595959\",\"fontSize\": 12},\"right3\": {\"text\": \"%@\",\"color\": \"#ff6b6b\",\"fontSize\": 14}}}&clientId=saleman_%@&customField={\"userName\":\"%@\",\"userId\":\"%@\",\"userPhone\":\"%@\"}",
+        wvc.url = [NSString stringWithFormat:@"https://ykf-webchat.7moor.com/wapchat.html?accessId=%@&fromUrl=%@&urlTitle=%@&language=ZHCN&otherParams={\"agent\":\"%@\",\"peerId\":\"%@\",\"nickName\":\"%@\",\"cardInfo\":{\"left\":{\"url\": \"%@\"},\"right1\": {\"text\": \"%@\",\"color\": \"#595959\",\"fontSize\": 12},\"right2\": {\"text\": \" \",\"color\": \"#595959\",\"fontSize\": 12},\"right3\": {\"text\": \"%@\",\"color\": \"#ff6b6b\",\"fontSize\": 14}}}&clientId=gxsaleman_%@&customField={\"userName\":\"%@\",\"userId\":\"%@\",\"userPhone\":\"%@\"}",
+                   self.goodsDetail.provider_customer.accessId,
                    self.goodsDetail.provider_customer.fromUrl,
                    self.goodsDetail.provider_customer.urlTitle,
                    self.goodsDetail.provider_customer.agent,
