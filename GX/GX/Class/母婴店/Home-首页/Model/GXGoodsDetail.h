@@ -173,7 +173,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *urlTitle;
 @property(nonatomic,copy) NSString *agent;
 @property(nonatomic,copy) NSString *peerId;
-
+@property(nonatomic,copy) NSString *accessId;
 @end
 
 
